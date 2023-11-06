@@ -178,14 +178,14 @@ namespace Beam.Api
         /// This endpoint is deprecated. Use POST route instead.
         /// </remarks>
         /// <exception cref="Beam.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="gameId"> (optional)</param>
         /// <param name="limit"> (optional)</param>
         /// <param name="offset"> (optional)</param>
-        /// <param name="gameId"> (optional)</param>
         /// <param name="filter"> (optional)</param>
         /// <param name="sort"> (optional)</param>
         /// <returns>GetAssetListingsResponse</returns>
         [Obsolete]
-        GetAssetListingsResponse GetListedAssets(decimal? limit, decimal? offset, string? gameId, GetProfileAssetsForGameFilterParameter? filter, GetProfileAssetsForGameSortParameter? sort);
+        GetAssetListingsResponse GetListedAssets(string? gameId, decimal? limit, decimal? offset, GetProfileAssetsForGameFilterParameter? filter, GetProfileAssetsForGameSortParameter? sort);
 
         /// <summary>
         /// Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155)
@@ -194,14 +194,14 @@ namespace Beam.Api
         /// This endpoint is deprecated. Use POST route instead.
         /// </remarks>
         /// <exception cref="Beam.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="gameId"> (optional)</param>
         /// <param name="limit"> (optional)</param>
         /// <param name="offset"> (optional)</param>
-        /// <param name="gameId"> (optional)</param>
         /// <param name="filter"> (optional)</param>
         /// <param name="sort"> (optional)</param>
         /// <returns>ApiResponse of GetAssetListingsResponse</returns>
         [Obsolete]
-        ApiResponse<GetAssetListingsResponse> GetListedAssetsWithHttpInfo(decimal? limit, decimal? offset, string? gameId, GetProfileAssetsForGameFilterParameter? filter, GetProfileAssetsForGameSortParameter? sort);
+        ApiResponse<GetAssetListingsResponse> GetListedAssetsWithHttpInfo(string? gameId, decimal? limit, decimal? offset, GetProfileAssetsForGameFilterParameter? filter, GetProfileAssetsForGameSortParameter? sort);
         /// <summary>
         /// Get all the assets listed by a profile (NFT assets, e.g. ERC721 / ERC1155)
         /// </summary>
@@ -528,15 +528,15 @@ namespace Beam.Api
         /// This endpoint is deprecated. Use POST route instead.
         /// </remarks>
         /// <exception cref="Beam.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="gameId"> (optional)</param>
         /// <param name="limit"> (optional)</param>
         /// <param name="offset"> (optional)</param>
-        /// <param name="gameId"> (optional)</param>
         /// <param name="filter"> (optional)</param>
         /// <param name="sort"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GetAssetListingsResponse</returns>
         [Obsolete]
-        System.Threading.Tasks.Task<GetAssetListingsResponse> GetListedAssetsAsync(decimal? limit, decimal? offset, string? gameId, GetProfileAssetsForGameFilterParameter? filter, GetProfileAssetsForGameSortParameter? sort, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<GetAssetListingsResponse> GetListedAssetsAsync(string? gameId, decimal? limit, decimal? offset, GetProfileAssetsForGameFilterParameter? filter, GetProfileAssetsForGameSortParameter? sort, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155)
@@ -545,15 +545,15 @@ namespace Beam.Api
         /// This endpoint is deprecated. Use POST route instead.
         /// </remarks>
         /// <exception cref="Beam.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="gameId"> (optional)</param>
         /// <param name="limit"> (optional)</param>
         /// <param name="offset"> (optional)</param>
-        /// <param name="gameId"> (optional)</param>
         /// <param name="filter"> (optional)</param>
         /// <param name="sort"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GetAssetListingsResponse)</returns>
         [Obsolete]
-        System.Threading.Tasks.Task<ApiResponse<GetAssetListingsResponse>> GetListedAssetsWithHttpInfoAsync(decimal? limit, decimal? offset, string? gameId, GetProfileAssetsForGameFilterParameter? filter, GetProfileAssetsForGameSortParameter? sort, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<GetAssetListingsResponse>> GetListedAssetsWithHttpInfoAsync(string? gameId, decimal? limit, decimal? offset, GetProfileAssetsForGameFilterParameter? filter, GetProfileAssetsForGameSortParameter? sort, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get all the assets listed by a profile (NFT assets, e.g. ERC721 / ERC1155)
         /// </summary>
@@ -1932,16 +1932,16 @@ namespace Beam.Api
         /// Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155) This endpoint is deprecated. Use POST route instead.
         /// </summary>
         /// <exception cref="Beam.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="gameId"> (optional)</param>
         /// <param name="limit"> (optional)</param>
         /// <param name="offset"> (optional)</param>
-        /// <param name="gameId"> (optional)</param>
         /// <param name="filter"> (optional)</param>
         /// <param name="sort"> (optional)</param>
         /// <returns>GetAssetListingsResponse</returns>
         [Obsolete]
-        public GetAssetListingsResponse GetListedAssets(decimal? limit, decimal? offset, string? gameId, GetProfileAssetsForGameFilterParameter? filter, GetProfileAssetsForGameSortParameter? sort)
+        public GetAssetListingsResponse GetListedAssets(string? gameId, decimal? limit, decimal? offset, GetProfileAssetsForGameFilterParameter? filter, GetProfileAssetsForGameSortParameter? sort)
         {
-            Beam.Client.ApiResponse<GetAssetListingsResponse> localVarResponse = GetListedAssetsWithHttpInfo(limit, offset, gameId, filter, sort);
+            Beam.Client.ApiResponse<GetAssetListingsResponse> localVarResponse = GetListedAssetsWithHttpInfo(gameId, limit, offset, filter, sort);
             return localVarResponse.Data;
         }
 
@@ -1949,14 +1949,14 @@ namespace Beam.Api
         /// Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155) This endpoint is deprecated. Use POST route instead.
         /// </summary>
         /// <exception cref="Beam.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="gameId"> (optional)</param>
         /// <param name="limit"> (optional)</param>
         /// <param name="offset"> (optional)</param>
-        /// <param name="gameId"> (optional)</param>
         /// <param name="filter"> (optional)</param>
         /// <param name="sort"> (optional)</param>
         /// <returns>ApiResponse of GetAssetListingsResponse</returns>
         [Obsolete]
-        public Beam.Client.ApiResponse<GetAssetListingsResponse> GetListedAssetsWithHttpInfo(decimal? limit, decimal? offset, string? gameId, GetProfileAssetsForGameFilterParameter? filter, GetProfileAssetsForGameSortParameter? sort)
+        public Beam.Client.ApiResponse<GetAssetListingsResponse> GetListedAssetsWithHttpInfo(string? gameId, decimal? limit, decimal? offset, GetProfileAssetsForGameFilterParameter? filter, GetProfileAssetsForGameSortParameter? sort)
         {
             Beam.Client.RequestOptions localVarRequestOptions = new Beam.Client.RequestOptions();
 
@@ -2017,17 +2017,17 @@ namespace Beam.Api
         /// Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155) This endpoint is deprecated. Use POST route instead.
         /// </summary>
         /// <exception cref="Beam.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="gameId"> (optional)</param>
         /// <param name="limit"> (optional)</param>
         /// <param name="offset"> (optional)</param>
-        /// <param name="gameId"> (optional)</param>
         /// <param name="filter"> (optional)</param>
         /// <param name="sort"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GetAssetListingsResponse</returns>
         [Obsolete]
-        public async System.Threading.Tasks.Task<GetAssetListingsResponse> GetListedAssetsAsync(decimal? limit, decimal? offset, string? gameId, GetProfileAssetsForGameFilterParameter? filter, GetProfileAssetsForGameSortParameter? sort, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<GetAssetListingsResponse> GetListedAssetsAsync(string? gameId, decimal? limit, decimal? offset, GetProfileAssetsForGameFilterParameter? filter, GetProfileAssetsForGameSortParameter? sort, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            Beam.Client.ApiResponse<GetAssetListingsResponse> localVarResponse = await GetListedAssetsWithHttpInfoAsync(limit, offset, gameId, filter, sort, cancellationToken).ConfigureAwait(false);
+            Beam.Client.ApiResponse<GetAssetListingsResponse> localVarResponse = await GetListedAssetsWithHttpInfoAsync(gameId, limit, offset, filter, sort, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -2035,15 +2035,15 @@ namespace Beam.Api
         /// Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155) This endpoint is deprecated. Use POST route instead.
         /// </summary>
         /// <exception cref="Beam.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="gameId"> (optional)</param>
         /// <param name="limit"> (optional)</param>
         /// <param name="offset"> (optional)</param>
-        /// <param name="gameId"> (optional)</param>
         /// <param name="filter"> (optional)</param>
         /// <param name="sort"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GetAssetListingsResponse)</returns>
         [Obsolete]
-        public async System.Threading.Tasks.Task<Beam.Client.ApiResponse<GetAssetListingsResponse>> GetListedAssetsWithHttpInfoAsync(decimal? limit, decimal? offset, string? gameId, GetProfileAssetsForGameFilterParameter? filter, GetProfileAssetsForGameSortParameter? sort, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Beam.Client.ApiResponse<GetAssetListingsResponse>> GetListedAssetsWithHttpInfoAsync(string? gameId, decimal? limit, decimal? offset, GetProfileAssetsForGameFilterParameter? filter, GetProfileAssetsForGameSortParameter? sort, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
 
             Beam.Client.RequestOptions localVarRequestOptions = new Beam.Client.RequestOptions();
