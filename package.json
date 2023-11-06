@@ -1,0 +1,17 @@
+{
+  "name": "@beam/csharp",
+  "version": "0.2.2-beta",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "csharp": "openapi-generator-cli generate --generator-key csharp"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@actions/core": "^1.10.1",
+    "@biomejs/biome": "^1.1.0",
+    "@openapitools/openapi-generator-cli": "^2.7.0"
+  }
+}
