@@ -147,7 +147,6 @@ All URIs are relative to *http://localhost*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AssetsApi* | [**GetAsset**](docs/AssetsApi.md#getasset) | **GET** /v1/assets/{assetAddress}/{assetId} | Get a single NFT (e.g. ERC721 / ERC1155)
-*AssetsApi* | [**GetAssetSortOptions**](docs/AssetsApi.md#getassetsortoptions) | **GET** /v1/assets/asset-sort-options | Get all the asset sorting optiond (NFT assets, e.g. ERC721 / ERC1155)
 *AssetsApi* | [**GetContractAssets**](docs/AssetsApi.md#getcontractassets) | **GET** /v1/assets/{assetAddress} | Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155)
 *AssetsApi* | [**GetContractAssetsPost**](docs/AssetsApi.md#getcontractassetspost) | **POST** /v1/assets/{assetAddress} | Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155)
 *AssetsApi* | [**GetProfileAssetsForGame**](docs/AssetsApi.md#getprofileassetsforgame) | **GET** /v1/assets/profiles/{entityId} | Get all the assets of a profile (NFT assets, e.g. ERC721 / ERC1155)
@@ -244,7 +243,6 @@ Class | Method | HTTP request | Description
  - [Model.GetAssetResponseOwnershipByAddressesInner](docs/GetAssetResponseOwnershipByAddressesInner.md)
  - [Model.GetAssetResponseOwnershipByAddressesInnerUser](docs/GetAssetResponseOwnershipByAddressesInnerUser.md)
  - [Model.GetAssetResponseOwnershipByAddressesInnerUserProfile](docs/GetAssetResponseOwnershipByAddressesInnerUserProfile.md)
- - [Model.GetAssetSortOptionsResponse](docs/GetAssetSortOptionsResponse.md)
  - [Model.GetAssetsBodyInput](docs/GetAssetsBodyInput.md)
  - [Model.GetAssetsBodyInputFilter](docs/GetAssetsBodyInputFilter.md)
  - [Model.GetAssetsResponse](docs/GetAssetsResponse.md)

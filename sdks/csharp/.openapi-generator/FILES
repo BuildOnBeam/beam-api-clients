@@ -72,7 +72,6 @@ src/Beam/Model/GetAssetResponseListing.cs
 src/Beam/Model/GetAssetResponseOwnershipByAddressesInner.cs
 src/Beam/Model/GetAssetResponseOwnershipByAddressesInnerUser.cs
 src/Beam/Model/GetAssetResponseOwnershipByAddressesInnerUserProfile.cs
-src/Beam/Model/GetAssetSortOptionsResponse.cs
 src/Beam/Model/GetAssetsBodyInput.cs
 src/Beam/Model/GetAssetsBodyInputFilter.cs
 src/Beam/Model/GetAssetsResponse.cs
