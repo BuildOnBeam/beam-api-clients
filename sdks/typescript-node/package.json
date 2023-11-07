@@ -10,10 +10,9 @@
     "./README.md"
   ],
   "scripts": {
-    "generate": "pnpm generate:client",
+    "generate": "pnpm generate:client && pnpm generate:cleanup && pnpm build",
     "generate:client": "ts-node --esm openapi.config.ts",
-    "generate:barrel": "test",
-    "generate:cleanup": "cleanup",
+    "generate:cleanup": "ts-node --esm cleanup-generator-output.ts",
     "build": "tsup --config ./tsup.config.ts"
   },
   "keywords": [],
