@@ -1,8 +1,6 @@
 {
   "name": "@beam/sdk",
   "version": "0.2.2-beta",
-  "description": "",
-  "main": "index.js",
   "scripts": {
     "generate": "pnpm generate:chsarp && pnpm generate:node",
     "generate:csharp": "openapi-generator-cli generate",
