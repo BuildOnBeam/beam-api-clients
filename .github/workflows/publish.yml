@@ -16,20 +16,27 @@ jobs:
   regenerate_sdks:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-java@v3
-        with:
-          java-version: 17
-          distribution: 'zulu'
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
           ref: 'main'
           fetch-tags: 'true'
+  
+      - uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'zulu'
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: 📥 dependency installation
+        uses: ./.github/actions/pnpm-install
 
       - name: Generate fresh models
-        run: |
-          npm install
-          npm run csharp
+        run: pnpm generate
 
       - name: Update main and fast foward tag
         run: |
