@@ -23,12 +23,6 @@
           "nullableReferenceTypes": true,
           "netCoreProjectFile": true
         }
-      },
-      "typescript-node": {
-        "generatorName": "typescript-axios",
-        "output": "./sdks/typescript-node",
-        "inputSpec": "https://api.testnet.onbeam.com/api/game-json",
-        "skipValidateSpec": true
       }
     }
   }
