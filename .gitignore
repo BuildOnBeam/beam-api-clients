@@ -47,4 +47,3 @@ tsconfig.tsbuildinfo
 
 local.sqlite
 local.db
-**/generated

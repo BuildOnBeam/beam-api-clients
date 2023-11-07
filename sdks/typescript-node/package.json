@@ -5,15 +5,16 @@
   "main": "dist/index.js",
   "description": "",
   "private": false,
-  "files": ["dist", "./README.md"],
+  "files": [
+    "dist",
+    "./README.md"
+  ],
   "scripts": {
-    "generate": "ts-node --esm openapi.config.ts",
-    "build": "tsup --config ./tsup.config.ts",
-    "validate:format": "rome format .",
-    "validate:format:fix": "pnpm validate:format --write",
-    "validate:lint": "rome check .",
-    "validate:lint:fix": "pnpm validate:lint --apply-unsafe",
-    "validate:ci": "rome ci ."
+    "generate": "pnpm generate:client",
+    "generate:client": "ts-node --esm openapi.config.ts",
+    "generate:barrel": "test",
+    "generate:cleanup": "cleanup",
+    "build": "tsup --config ./tsup.config.ts"
   },
   "keywords": [],
   "author": "",
@@ -21,7 +22,7 @@
   "devDependencies": {
     "@types/node": "^20.4.2",
     "openapi-typescript-codegen": "^0.25.0",
-    "rome": "^12.1.3",
+    "tiny-replace-files": "^1.0.2",
     "ts-node": "^10.9.1",
     "tsup": "^7.1.0",
     "typescript": "^5.1.6"
