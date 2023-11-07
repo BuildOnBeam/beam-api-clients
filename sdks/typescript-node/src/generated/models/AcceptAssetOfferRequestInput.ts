@@ -9,4 +9,3 @@ export type AcceptAssetOfferRequestInput = {
   sponsor?: boolean;
   policyId?: string;
 };
-

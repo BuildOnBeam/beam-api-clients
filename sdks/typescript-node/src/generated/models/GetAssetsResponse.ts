@@ -17,7 +17,13 @@ export type GetAssetsResponse = {
       entityId?: string;
       quantity: number;
     }>;
-    rarity?: 'Common' | 'ExtremelyRare' | 'Rare' | 'Uncommon' | 'VeryRare' | null;
+    rarity?:
+      | 'Common'
+      | 'ExtremelyRare'
+      | 'Rare'
+      | 'Uncommon'
+      | 'VeryRare'
+      | null;
     rarityScore?: number | null;
     attributes?: Array<{
       type?: string | null;
@@ -34,4 +40,3 @@ export type GetAssetsResponse = {
     offset?: number;
   };
 };
-

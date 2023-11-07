@@ -6,11 +6,10 @@ import type { CreateTransactionRequestInput } from '../models/CreateTransactionR
 import type { GetChainResponse } from '../models/GetChainResponse';
 import type { GetEstimateResponse } from '../models/GetEstimateResponse';
 
-import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+import type { CancelablePromise } from '../core/CancelablePromise';
 
 export class ChainService {
-
   constructor(public readonly httpRequest: BaseHttpRequest) {}
 
   /**
@@ -18,14 +17,12 @@ export class ChainService {
    * @returns GetChainResponse
    * @throws ApiError
    */
-  public chain(
-    chainId?: number,
-  ): CancelablePromise<GetChainResponse> {
+  public chain(chainId?: number): CancelablePromise<GetChainResponse> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v1/chain',
       query: {
-        'chainId': chainId,
+        chainId: chainId,
       },
     });
   }
@@ -45,11 +42,10 @@ export class ChainService {
       method: 'POST',
       url: '/v1/chain/estimate/profiles/{entityId}/transaction',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
-
 }

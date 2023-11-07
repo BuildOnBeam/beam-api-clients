@@ -6,8 +6,19 @@
 export type GetChainCurrenciesResponse = {
   data: Array<{
     decimals: number;
-    currency: 'Avax' | 'Beam' | 'Eth' | 'Matic' | 'Mc' | 'Usdc' | 'Usdt' | 'Wavax' | 'Wbeam' | 'Weth' | 'Wmatic' | 'Wmc';
+    currency:
+      | 'Avax'
+      | 'Beam'
+      | 'Eth'
+      | 'Matic'
+      | 'Mc'
+      | 'Usdc'
+      | 'Usdt'
+      | 'Wavax'
+      | 'Wbeam'
+      | 'Weth'
+      | 'Wmatic'
+      | 'Wmc';
     tokenAddress: string;
   }>;
 };
-

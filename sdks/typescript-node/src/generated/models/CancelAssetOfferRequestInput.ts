@@ -8,4 +8,3 @@ export type CancelAssetOfferRequestInput = {
   sponsor?: boolean;
   policyId?: string;
 };
-

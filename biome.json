@@ -3,8 +3,8 @@
   "files": {
     "ignore": [
       "pnpm-lock.yaml",
-      "openfort.types.generated",
-      "glacier.generated"
+      "./sdks/typescript-node/src/generated/core/request.ts",
+      "./sdks/typescript-node/src/generated/core/NodeHttpRequest.ts"
     ]
   },
   "formatter": {

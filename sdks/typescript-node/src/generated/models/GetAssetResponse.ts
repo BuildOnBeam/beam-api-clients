@@ -96,7 +96,6 @@ export type GetAssetResponse = {
 };
 
 export namespace GetAssetResponse {
-
   export enum network {
     AVALANCHE = 'Avalanche',
     BEAM = 'Beam',
@@ -168,7 +167,4 @@ export namespace GetAssetResponse {
     WMATIC = 'Wmatic',
     WMC = 'Wmc',
   }
-
-
 }
-

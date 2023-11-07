@@ -6,4 +6,3 @@
 export type GenerateSignInCodeRequestInput = {
   callbackUrl: string;
 };
-

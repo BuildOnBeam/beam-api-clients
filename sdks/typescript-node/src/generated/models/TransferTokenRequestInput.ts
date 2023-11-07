@@ -13,4 +13,3 @@ export type TransferTokenRequestInput = {
   policyId?: string;
   chainId?: number;
 };
-

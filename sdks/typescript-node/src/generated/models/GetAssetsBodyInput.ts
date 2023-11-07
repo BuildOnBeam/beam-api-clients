@@ -9,7 +9,9 @@ export type GetAssetsBodyInput = {
       type?: string | null;
       value?: string | null;
     }> | null;
-    sellTypes?: Array<'AscendingAuction' | 'DescendingAuction' | 'FixedPrice' | 'NotForSale'> | null;
+    sellTypes?: Array<
+      'AscendingAuction' | 'DescendingAuction' | 'FixedPrice' | 'NotForSale'
+    > | null;
   };
   sort?: {
     rarityScore?: GetAssetsBodyInput.rarityScore | null;
@@ -25,7 +27,6 @@ export type GetAssetsBodyInput = {
 };
 
 export namespace GetAssetsBodyInput {
-
   export enum rarityScore {
     ASC = 'ASC',
     DESC = 'DESC',
@@ -60,7 +61,4 @@ export namespace GetAssetsBodyInput {
     ASC = 'ASC',
     DESC = 'DESC',
   }
-
-
 }
-

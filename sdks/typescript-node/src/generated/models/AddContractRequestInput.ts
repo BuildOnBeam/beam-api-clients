@@ -20,15 +20,14 @@ export type AddContractRequestInput = {
       type?: string;
       indexed?: boolean;
       internalType?: any;
-      components?: Array<any>;
+      components?: any[];
     }>;
-    outputs?: Array<any>;
+    outputs?: any[];
   }>;
   name: string;
 };
 
 export namespace AddContractRequestInput {
-
   export enum type {
     ERC20 = 'ERC20',
     ERC721 = 'ERC721',
@@ -37,7 +36,4 @@ export namespace AddContractRequestInput {
     UNISWAPV2 = 'UNISWAPV2',
     WETH = 'WETH',
   }
-
-
 }
-

@@ -13,11 +13,10 @@ import type { GetProfileResponse } from '../models/GetProfileResponse';
 import type { UpdateProfileRequestInput } from '../models/UpdateProfileRequestInput';
 import type { UpdateProfileResponse } from '../models/UpdateProfileResponse';
 
-import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+import type { CancelablePromise } from '../core/CancelablePromise';
 
 export class ProfilesService {
-
   constructor(public readonly httpRequest: BaseHttpRequest) {}
 
   /**
@@ -52,8 +51,8 @@ export class ProfilesService {
       method: 'GET',
       url: '/v1/profiles',
       query: {
-        'limit': limit,
-        'offset': offset,
+        limit: limit,
+        offset: offset,
       },
     });
   }
@@ -64,14 +63,12 @@ export class ProfilesService {
    * @returns GetProfileResponse
    * @throws ApiError
    */
-  public getProfile(
-    entityId: string,
-  ): CancelablePromise<GetProfileResponse> {
+  public getProfile(entityId: string): CancelablePromise<GetProfileResponse> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v1/profiles/{entityId}',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
     });
   }
@@ -91,7 +88,7 @@ export class ProfilesService {
       method: 'PATCH',
       url: '/v1/profiles/{entityId}',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -115,7 +112,7 @@ export class ProfilesService {
       method: 'POST',
       url: '/v1/profiles/{entityId}/create-connection-request',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       headers: {
         'x-api-key': xApiKey,
@@ -142,7 +139,7 @@ export class ProfilesService {
       method: 'POST',
       url: '/v1/profiles/{entityId}/create-sign-in-request',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       headers: {
         'x-api-key': xApiKey,
@@ -151,5 +148,4 @@ export class ProfilesService {
       mediaType: 'application/json',
     });
   }
-
 }

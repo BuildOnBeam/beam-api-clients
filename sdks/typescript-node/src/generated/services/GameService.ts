@@ -11,11 +11,10 @@ import type { RemoveContractResponse } from '../models/RemoveContractResponse';
 import type { UpdateGameRequestInput } from '../models/UpdateGameRequestInput';
 import type { UpdateGameResponse } from '../models/UpdateGameResponse';
 
-import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+import type { CancelablePromise } from '../core/CancelablePromise';
 
 export class GameService {
-
   constructor(public readonly httpRequest: BaseHttpRequest) {}
 
   /**
@@ -96,10 +95,9 @@ export class GameService {
       method: 'DELETE',
       url: '/v1/game/contracts/{address}/{chainId}',
       path: {
-        'chainId': chainId,
-        'address': address,
+        chainId: chainId,
+        address: address,
       },
     });
   }
-
 }

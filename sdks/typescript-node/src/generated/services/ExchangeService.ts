@@ -6,11 +6,10 @@ import type { ConvertTokenRequestInput } from '../models/ConvertTokenRequestInpu
 import type { ConvertTokenResponse } from '../models/ConvertTokenResponse';
 import type { GetQuoteResponse } from '../models/GetQuoteResponse';
 
-import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+import type { CancelablePromise } from '../core/CancelablePromise';
 
 export class ExchangeService {
-
   constructor(public readonly httpRequest: BaseHttpRequest) {}
 
   /**
@@ -32,10 +31,10 @@ export class ExchangeService {
       method: 'GET',
       url: '/v1/exchange/quote/input',
       query: {
-        'tokenIn': tokenIn,
-        'tokenOut': tokenOut,
-        'amountOut': amountOut,
-        'chainId': chainId,
+        tokenIn: tokenIn,
+        tokenOut: tokenOut,
+        amountOut: amountOut,
+        chainId: chainId,
       },
     });
   }
@@ -59,10 +58,10 @@ export class ExchangeService {
       method: 'GET',
       url: '/v1/exchange/quote/output',
       query: {
-        'tokenIn': tokenIn,
-        'tokenOut': tokenOut,
-        'amountIn': amountIn,
-        'chainId': chainId,
+        tokenIn: tokenIn,
+        tokenOut: tokenOut,
+        amountIn: amountIn,
+        chainId: chainId,
       },
     });
   }
@@ -82,7 +81,7 @@ export class ExchangeService {
       method: 'POST',
       url: '/v1/exchange/profiles/{entityId}/convert/input',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -104,11 +103,10 @@ export class ExchangeService {
       method: 'POST',
       url: '/v1/exchange/profiles/{entityId}/convert/output',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
-
 }

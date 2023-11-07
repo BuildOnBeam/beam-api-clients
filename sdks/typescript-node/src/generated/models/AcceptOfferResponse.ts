@@ -8,4 +8,3 @@ export type AcceptOfferResponse = {
   transactionHash?: string;
   explorerUrl?: string;
 };
-

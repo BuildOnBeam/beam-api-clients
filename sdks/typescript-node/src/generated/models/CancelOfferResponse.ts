@@ -8,4 +8,3 @@ export type CancelOfferResponse = {
   transactionHash?: string;
   explorerUrl?: string;
 };
-

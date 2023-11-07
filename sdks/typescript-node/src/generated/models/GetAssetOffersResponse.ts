@@ -7,7 +7,19 @@ export type GetAssetOffersResponse = {
   data: Array<{
     orderId: string;
     kind: 'SignedCollectionOrder' | 'SignedSingleOrder';
-    currency: 'Avax' | 'Beam' | 'Eth' | 'Matic' | 'Mc' | 'Usdc' | 'Usdt' | 'Wavax' | 'Wbeam' | 'Weth' | 'Wmatic' | 'Wmc';
+    currency:
+      | 'Avax'
+      | 'Beam'
+      | 'Eth'
+      | 'Matic'
+      | 'Mc'
+      | 'Usdc'
+      | 'Usdt'
+      | 'Wavax'
+      | 'Wbeam'
+      | 'Weth'
+      | 'Wmatic'
+      | 'Wmc';
     quantity: number;
     quantityFilled: number;
     quantityAvailable: number;
@@ -19,4 +31,3 @@ export type GetAssetOffersResponse = {
     endTime: string;
   }>;
 };
-

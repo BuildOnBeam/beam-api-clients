@@ -6,4 +6,3 @@
 export type RemovePolicyResponse = {
   success: boolean;
 };
-

@@ -11,7 +11,6 @@ export type ConvertTokenResponse = {
 };
 
 export namespace ConvertTokenResponse {
-
   export enum status {
     PENDING = 'pending',
     SUCCESS = 'success',
@@ -21,7 +20,4 @@ export namespace ConvertTokenResponse {
     CUSTODIAL = 'custodial',
     SELF_CUSTODIAL = 'self-custodial',
   }
-
-
 }
-

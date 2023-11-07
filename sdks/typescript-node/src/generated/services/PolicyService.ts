@@ -6,11 +6,10 @@ import type { AddPolicyRequestInput } from '../models/AddPolicyRequestInput';
 import type { AddPolicyResponse } from '../models/AddPolicyResponse';
 import type { RemovePolicyResponse } from '../models/RemovePolicyResponse';
 
-import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+import type { CancelablePromise } from '../core/CancelablePromise';
 
 export class PolicyService {
-
   constructor(public readonly httpRequest: BaseHttpRequest) {}
 
   /**
@@ -55,9 +54,8 @@ export class PolicyService {
       method: 'DELETE',
       url: '/v1/policies/{policyId}',
       path: {
-        'policyId': policyId,
+        policyId: policyId,
       },
     });
   }
-
 }

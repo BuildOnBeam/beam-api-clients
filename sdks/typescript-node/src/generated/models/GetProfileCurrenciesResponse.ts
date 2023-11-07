@@ -14,4 +14,3 @@ export type GetProfileCurrenciesResponse = {
     balance: string;
   }>;
 };
-

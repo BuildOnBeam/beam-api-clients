@@ -9,4 +9,3 @@ export type UpdateGameRequestInput = {
   coverImageUrl?: string | null;
   logoImageUrl?: string | null;
 };
-

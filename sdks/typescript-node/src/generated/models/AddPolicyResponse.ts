@@ -12,12 +12,8 @@ export type AddPolicyResponse = {
 };
 
 export namespace AddPolicyResponse {
-
   export enum rateType {
     FIXED = 'Fixed',
     DYNAMIC = 'Dynamic',
   }
-
-
 }
-

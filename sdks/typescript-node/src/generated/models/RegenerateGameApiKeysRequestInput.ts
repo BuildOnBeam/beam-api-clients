@@ -6,4 +6,3 @@
 export type RegenerateGameApiKeysRequestInput = {
   regenerationKey: string;
 };
-

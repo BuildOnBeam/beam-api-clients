@@ -11,7 +11,7 @@ export type UpdateGameResponse = {
   description: string | null;
   coverImageUrl: string | null;
   logoImageUrl: string | null;
-  chainIds: Array<number>;
+  chainIds: number[];
   contracts: Array<{
     type: 'ERC20' | 'ERC721' | 'ERC1155' | 'SEAPORT' | 'UNISWAPV2' | 'WETH';
     id: string;
@@ -38,4 +38,3 @@ export type UpdateGameResponse = {
     amount: string | null;
   }>;
 };
-

@@ -17,7 +17,6 @@ export type SellAssetRequestInput = {
 };
 
 export namespace SellAssetRequestInput {
-
   export enum sellType {
     FIXED_PRICE = 'FixedPrice',
     DESCENDING_AUCTION = 'DescendingAuction',
@@ -39,7 +38,4 @@ export namespace SellAssetRequestInput {
     WMATIC = 'Wmatic',
     WMC = 'Wmc',
   }
-
-
 }
-

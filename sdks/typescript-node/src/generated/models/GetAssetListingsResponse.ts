@@ -30,7 +30,13 @@ export type GetAssetListingsResponse = {
       assetType: string;
       assetAddress: string;
       assetId: string;
-      rarity?: 'Common' | 'ExtremelyRare' | 'Rare' | 'Uncommon' | 'VeryRare' | null;
+      rarity?:
+        | 'Common'
+        | 'ExtremelyRare'
+        | 'Rare'
+        | 'Uncommon'
+        | 'VeryRare'
+        | null;
       rarityScore?: number | null;
       attributes?: Array<{
         type?: string | null;
@@ -48,4 +54,3 @@ export type GetAssetListingsResponse = {
     offset?: number;
   };
 };
-

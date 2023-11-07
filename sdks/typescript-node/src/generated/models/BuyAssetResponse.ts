@@ -8,4 +8,3 @@ export type BuyAssetResponse = {
   transactionHash?: string;
   explorerUrl?: string;
 };
-

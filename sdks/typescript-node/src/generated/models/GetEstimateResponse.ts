@@ -6,4 +6,3 @@
 export type GetEstimateResponse = {
   estimatedGas: string;
 };
-

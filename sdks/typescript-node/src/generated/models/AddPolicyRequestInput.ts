@@ -11,12 +11,8 @@ export type AddPolicyRequestInput = {
 };
 
 export namespace AddPolicyRequestInput {
-
   export enum rateType {
     FIXED = 'Fixed',
     DYNAMIC = 'Dynamic',
   }
-
-
 }
-

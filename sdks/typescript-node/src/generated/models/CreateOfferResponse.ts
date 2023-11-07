@@ -6,4 +6,3 @@
 export type CreateOfferResponse = {
   offerId: string;
 };
-
