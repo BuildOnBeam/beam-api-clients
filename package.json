@@ -1,10 +1,10 @@
 {
-  "name": "@beam/csharp",
+  "name": "@beam/sdk",
   "version": "0.2.2-beta",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "csharp": "openapi-generator-cli generate --generator-key csharp"
+    "generate": "openapi-generator-cli generate"
   },
   "keywords": [],
   "author": "",
