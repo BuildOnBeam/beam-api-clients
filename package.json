@@ -1,6 +1,5 @@
 {
   "name": "@onbeam/sdk",
-  "version": "0.2.2-beta",
   "scripts": {
     "generate": "pnpm generate:csharp && pnpm generate:node",
     "generate:csharp": "openapi-generator-cli generate",

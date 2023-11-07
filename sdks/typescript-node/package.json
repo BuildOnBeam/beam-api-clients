@@ -1,6 +1,5 @@
 {
   "name": "@onbeam/node",
-  "version": "0.5.7-beta",
   "type": "module",
   "main": "dist/index.js",
   "description": "",
