@@ -10,7 +10,7 @@
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
-    "indentSize": 2,
+    "indentWidth": 2,
     "lineWidth": 80
   },
   "linter": {
@@ -18,17 +18,19 @@
     "rules": {
       "recommended": true,
       "complexity": {
+        "noForEach": "off",
+        "noBannedTypes": "off",
         "useLiteralKeys": "off"
       },
       "correctness": {
+        "useExhaustiveDependencies": "error",
         "noUnusedVariables": "error"
       },
       "nursery": {
-        "noBannedTypes": "off",
-        "useExhaustiveDependencies": "error",
         "useGroupedTypeImport": "off"
       },
       "performance": {
+        "noAccumulatingSpread": "off",
         "noDelete": "off"
       },
       "style": {

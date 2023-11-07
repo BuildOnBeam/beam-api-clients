@@ -1,17 +1,11 @@
 {
-  "prisma-smart-formatter.typescript.defaultFormatter": "biomejs.biome",
-  "prisma-smart-formatter.typescriptreact.defaultFormatter": "biomejs.biome",
-  "editor.defaultFormatter": "biomejs.biome",
+  "prisma-smart-formatter.typescript.defaultFormatter": "rome.rome",
+  "prisma-smart-formatter.typescriptreact.defaultFormatter": "vscode.typescript-language-features",
+  "editor.defaultFormatter": "rome.rome",
   "editor.formatOnSave": true,
   "editor.tabSize": 2,
   "json.format.enable": true,
   "editor.codeActionsOnSave": {
-    "source.organizeImports.biome": true
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[xml]": {
-    "editor.defaultFormatter": "fabianlauer.vs-code-xml-format"
+    "source.organizeImports.rome": true
   }
 }
