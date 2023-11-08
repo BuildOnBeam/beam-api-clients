@@ -30,7 +30,7 @@ jobs:
       - name: Use Node.js 20
         uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 18
 
       - name: 📥 dependency installation
         uses: ./.github/actions/pnpm-install
@@ -78,7 +78,7 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 18
           registry-url: 'https://registry.npmjs.org'
 
       - run: pnpm publish --no-git-checks --access public
