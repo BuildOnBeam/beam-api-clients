@@ -46,7 +46,7 @@ jobs:
 
       - name: Update node SDK version
         working-directory: ./sdks/typescript-node
-        run: npm version $VERSION
+        run: npm version $VERSION --allow-same-version --no-git-tag-version
 
       - name: Update main and fast foward tag
         run: |
