@@ -35,8 +35,18 @@ jobs:
       - name: 📥 dependency installation
         uses: ./.github/actions/pnpm-install
 
+      # We need version var before creating release to sync them for all SDKs
+      - name: Set version variable from release tag
+        run: |
+          TAG=${{ github.event.release.tag_name }}
+          echo "VERSION=${TAG#v}" >> $GITHUB_ENV
+
       - name: Generate fresh models
         run: pnpm generate
+
+      - name: Update node SDK version
+        working-directory: ./sdks/typescript-node
+        run: npm version $VERSION
 
       - name: Update main and fast foward tag
         run: |
@@ -55,6 +65,21 @@ jobs:
           git tag -f ${{ github.event.release.tag_name }}
           git push --tags --force
 
+  deploy-npm-package:
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    needs: [regenerate-sdks]
+    steps:
+      - uses: actions/checkout@v4
+        # Setup .npmrc file to publish to npm
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
   create-nuget:
     runs-on: ubuntu-latest
     needs: [regenerate-sdks]
@@ -67,12 +92,6 @@ jobs:
       with:
         dotnet-version: '7'
         dotnet-quality: 'ga'
-
-    # We need version var before creating release
-    - name: Set version from release tag
-      run: |
-        TAG=${{ github.event.release.tag_name }}
-        echo "VERSION=${TAG#v}" >> $GITHUB_ENV
 
     # Create the NuGet package in the folder from the environment variable NUGET_DIRECTORY
     - run: dotnet pack ./sdks/csharp/Beam.sln --output ${{ env.NUGET_DIRECTORY }}
