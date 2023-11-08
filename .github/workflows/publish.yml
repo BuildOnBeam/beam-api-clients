@@ -35,7 +35,6 @@ jobs:
       - name: 📥 dependency installation
         uses: ./.github/actions/pnpm-install
 
-      # We need version var before creating release to sync them for all SDKs
       - name: Set version variable from release tag
         run: |
           TAG=${{ github.event.release.tag_name }}
@@ -99,6 +98,11 @@ jobs:
         with:
           dotnet-version: '7'
           dotnet-quality: 'ga'
+
+      - name: Set version variable from release tag
+        run: |
+          TAG=${{ github.event.release.tag_name }}
+          echo "VERSION=${TAG#v}" >> $GITHUB_ENV
 
       # Create the NuGet package in the folder from the environment variable NUGET_DIRECTORY
       - run: dotnet pack ./sdks/csharp/Beam.sln --output ${{ env.NUGET_DIRECTORY }}
