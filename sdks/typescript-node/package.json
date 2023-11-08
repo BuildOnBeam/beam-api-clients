@@ -30,5 +30,6 @@
   "dependencies": {
     "form-data": "^4.0.0",
     "node-fetch": "^3.3.1"
-  }
+  },
+  "version": "0.5.8-beta"
 }
