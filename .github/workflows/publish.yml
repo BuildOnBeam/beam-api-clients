@@ -69,9 +69,14 @@ jobs:
     if: github.event_name == 'release'
     runs-on: ubuntu-latest
     needs: [regenerate-sdks]
+    working-directory: ./sdks/typescript-node
     steps:
+      - name: 📥 dependency installation
+        uses: ./.github/actions/pnpm-install
+
       - uses: actions/checkout@v4
         # Setup .npmrc file to publish to npm
+
       - uses: actions/setup-node@v3
         with:
           node-version: 20
