@@ -70,6 +70,10 @@ jobs:
     needs: [regenerate-sdks]
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: 'main'
+          fetch-tags: 'true'
 
       - name: 📥 dependency installation
         uses: ./.github/actions/pnpm-install
