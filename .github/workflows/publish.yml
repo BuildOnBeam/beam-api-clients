@@ -27,8 +27,7 @@ jobs:
           java-version: 17
           distribution: 'zulu'
 
-      - name: Use Node.js 20
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 20
 
