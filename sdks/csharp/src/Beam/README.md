@@ -44,6 +44,7 @@ java -jar "<path>/openapi-generator/modules/openapi-generator-cli/target/openapi
 <a id="usage"></a>
 ## Using the library in your project
 
+In case of generic host applications:
 ```cs
 using System;
 using System.Threading.Tasks;
@@ -52,6 +53,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Beam.Api;
 using Beam.Client;
 using Beam.Model;
+using Beam.Extensions;
 
 namespace YourProject
 {
@@ -80,7 +82,8 @@ namespace YourProject
                   // your custom converters if any
               });
 
-              options.AddApiHttpClients(client: client => {
+              options.AddApiHttpClients(
+                client: client => {
                   client.BaseAddress = new Uri("https://api.preview.onbeam.com/");
                 },
                 builder: builder => {
@@ -96,7 +99,67 @@ namespace YourProject
 }
 ```
 
-if you use new single-file
+or if you use new Web App templates:
+
+```cs
+using Beam.Client;
+using Beam.Extensions;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddApi(options =>
+{
+    // the type of token here depends on the api security specifications
+    ApiKeyToken token = new("<your token>", prefix: string.Empty);
+    options.AddTokens(token);
+
+    // optionally choose the method the tokens will be provided with, default is RateLimitProvider
+    options.UseProvider<RateLimitProvider<ApiKeyToken>, ApiKeyToken>();
+
+    options.ConfigureJsonOptions((jsonOptions) =>
+    {
+        // your custom converters if any
+    });
+
+    options.AddApiHttpClients(
+        client: client =>
+        {
+            client.BaseAddress = new Uri("https://api.preview.onbeam.com/");
+        },
+        builder: builder => {
+            builder
+            .AddRetryPolicy(2)
+            .AddTimeoutPolicy(TimeSpan.FromSeconds(5))
+            .AddCircuitBreakerPolicy(10, TimeSpan.FromSeconds(30));
+            // add whatever middleware you prefer
+        }
+    );
+});
+
+// Add other services to the container.
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseAuthorization();
+
+app.MapRazorPages();
+
+app.Run();
+
+```
 
 <a id="questions"></a>
 ## Questions
