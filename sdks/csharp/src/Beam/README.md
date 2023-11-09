@@ -69,7 +69,7 @@ namespace YourProject
           .ConfigureApi((context, options) =>
           {
               // the type of token here depends on the api security specifications
-              ApiKeyToken token = new("<your token>");
+              ApiKeyToken token = new("<your token>", prefix: string.Empty);
               options.AddTokens(token);
 
               // optionally choose the method the tokens will be provided with, default is RateLimitProvider
@@ -80,16 +80,24 @@ namespace YourProject
                   // your custom converters if any
               });
 
-              options.AddApiHttpClients(builder: builder => builder
-                .AddRetryPolicy(2)
-                .AddTimeoutPolicy(TimeSpan.FromSeconds(5))
-                .AddCircuitBreakerPolicy(10, TimeSpan.FromSeconds(30))
-                // add whatever middleware you prefer
+              options.AddApiHttpClients(client: client => {
+                  client.BaseAddress = new Uri("https://api.preview.onbeam.com/");
+                },
+                builder: builder => {
+                  builder
+                  .AddRetryPolicy(2)
+                  .AddTimeoutPolicy(TimeSpan.FromSeconds(5))
+                  .AddCircuitBreakerPolicy(10, TimeSpan.FromSeconds(30));
+                  // add whatever middleware you prefer
+                }
               );
           });
     }
 }
 ```
+
+if you use new single-file
+
 <a id="questions"></a>
 ## Questions
 
@@ -99,7 +107,7 @@ namespace YourProject
   Tokens are provided by a TokenProvider class. The default is RateLimitProvider which will perform client side rate limiting.
   Other providers can be used with the UseProvider method.
 - Does an HttpRequest throw an error when the server response is not Ok?
-  It depends how you made the request. If the return type is ApiResponse<T> no error will be thrown, though the Content property will be null. 
+  It depends how you made the request. If the return type is ApiResponse<T> no error will be thrown, though the Content property will be null.
   StatusCode and ReasonPhrase will contain information about the error.
   If the return type is T, then it will throw. If the return type is TOrDefault, it will return null.
 - How do I validate requests and process responses?
@@ -137,49 +145,49 @@ Authentication schemes defined for the API:
 - appDescription: The Beam game development API is a service to integrate your game with Beam
 
 ## [OpenApi Global properties](https://openapi-generator.tech/docs/globals)
-- generateAliasAsModel: 
-- supportingFiles: 
+- generateAliasAsModel:
+- supportingFiles:
 - models: omitted for brevity
 - apis: omitted for brevity
 - apiDocs: false
 - modelDocs: false
 - apiTests: false
 - modelTests: false
-- withXml: 
+- withXml:
 
 ## [OpenApi Generator Parameters](https://openapi-generator.tech/docs/generators/csharp-netcore)
-- allowUnicodeIdentifiers: 
+- allowUnicodeIdentifiers:
 - apiName: Api
-- caseInsensitiveResponseHeaders: 
+- caseInsensitiveResponseHeaders:
 - conditionalSerialization: false
-- disallowAdditionalPropertiesIfNotPresent: 
+- disallowAdditionalPropertiesIfNotPresent:
 - gitHost: github.com
 - gitRepoId: GIT_REPO_ID
 - gitUserId: GIT_USER_ID
 - hideGenerationTimestamp: true
 - interfacePrefix: I
 - library: generichost
-- licenseId: 
-- modelPropertyNaming: 
+- licenseId:
+- modelPropertyNaming:
 - netCoreProjectFile: true
 - nonPublicApi: false
 - nullableReferenceTypes: false
-- optionalAssemblyInfo: 
+- optionalAssemblyInfo:
 - optionalEmitDefaultValues: false
 - optionalMethodArgument: false
-- optionalProjectFile: 
+- optionalProjectFile:
 - packageAuthors: OpenAPI
 - packageCompany: OpenAPI
 - packageCopyright: No Copyright
 - packageDescription: A library generated from a OpenAPI doc
 - packageGuid: {B9F59C51-AA17-4ECC-8B26-D42311D97287}
 - packageName: Beam
-- packageTags: 
+- packageTags:
 - packageTitle: OpenAPI Library
 - packageVersion: 1.0.0
 - releaseNote: Minor update
 - returnICollection: true
-- sortParamsByRequiredFlag: 
+- sortParamsByRequiredFlag:
 - sourceFolder: src
 - targetFramework: net7.0
 - useCollection: false
