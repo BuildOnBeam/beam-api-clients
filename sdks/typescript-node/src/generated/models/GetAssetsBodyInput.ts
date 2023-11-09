@@ -22,8 +22,8 @@ export type GetAssetsBodyInput = {
     startPriceNumber?: GetAssetsBodyInput.startPriceNumber | null;
     endPriceNumber?: GetAssetsBodyInput.endPriceNumber | null;
   };
-  limit: any;
-  offset: string;
+  limit?: number;
+  offset?: number;
 };
 
 export namespace GetAssetsBodyInput {

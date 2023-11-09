@@ -35,31 +35,16 @@ namespace Beam.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="GetAssetsBodyInput" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
-        protected GetAssetsBodyInput() { }
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GetAssetsBodyInput" /> class.
-        /// </summary>
         /// <param name="filter">filter.</param>
         /// <param name="sort">sort.</param>
-        /// <param name="limit">limit (required).</param>
-        /// <param name="offset">offset (required) (default to &quot;0&quot;).</param>
-        public GetAssetsBodyInput(GetAssetsBodyInputFilter filter = default(GetAssetsBodyInputFilter), GetProfileAssetsForGameSortParameter sort = default(GetProfileAssetsForGameSortParameter), Object limit = default(Object), string offset = @"0")
+        /// <param name="limit">limit (default to 10M).</param>
+        /// <param name="offset">offset (default to 0M).</param>
+        public GetAssetsBodyInput(GetAssetsBodyInputFilter filter = default(GetAssetsBodyInputFilter), GetProfileAssetsForGameSortParameter sort = default(GetProfileAssetsForGameSortParameter), decimal limit = 10M, decimal offset = 0M)
         {
-            // to ensure "limit" is required (not null)
-            if (limit == null)
-            {
-                throw new ArgumentNullException("limit is a required property for GetAssetsBodyInput and cannot be null");
-            }
-            this.Limit = limit;
-            // to ensure "offset" is required (not null)
-            if (offset == null)
-            {
-                throw new ArgumentNullException("offset is a required property for GetAssetsBodyInput and cannot be null");
-            }
-            this.Offset = offset;
             this.Filter = filter;
             this.Sort = sort;
+            this.Limit = limit;
+            this.Offset = offset;
         }
 
         /// <summary>
@@ -77,14 +62,14 @@ namespace Beam.Model
         /// <summary>
         /// Gets or Sets Limit
         /// </summary>
-        [DataMember(Name = "limit", IsRequired = true, EmitDefaultValue = true)]
-        public Object Limit { get; set; }
+        [DataMember(Name = "limit", EmitDefaultValue = false)]
+        public decimal Limit { get; set; }
 
         /// <summary>
         /// Gets or Sets Offset
         /// </summary>
-        [DataMember(Name = "offset", IsRequired = true, EmitDefaultValue = true)]
-        public string Offset { get; set; }
+        [DataMember(Name = "offset", EmitDefaultValue = false)]
+        public decimal Offset { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -145,13 +130,11 @@ namespace Beam.Model
                 ) && 
                 (
                     this.Limit == input.Limit ||
-                    (this.Limit != null &&
-                    this.Limit.Equals(input.Limit))
+                    this.Limit.Equals(input.Limit)
                 ) && 
                 (
                     this.Offset == input.Offset ||
-                    (this.Offset != null &&
-                    this.Offset.Equals(input.Offset))
+                    this.Offset.Equals(input.Offset)
                 );
         }
 
@@ -172,14 +155,8 @@ namespace Beam.Model
                 {
                     hashCode = (hashCode * 59) + this.Sort.GetHashCode();
                 }
-                if (this.Limit != null)
-                {
-                    hashCode = (hashCode * 59) + this.Limit.GetHashCode();
-                }
-                if (this.Offset != null)
-                {
-                    hashCode = (hashCode * 59) + this.Offset.GetHashCode();
-                }
+                hashCode = (hashCode * 59) + this.Limit.GetHashCode();
+                hashCode = (hashCode * 59) + this.Offset.GetHashCode();
                 return hashCode;
             }
         }
@@ -191,6 +168,12 @@ namespace Beam.Model
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // Limit (decimal) maximum
+            if (this.Limit > (decimal)100)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Limit, must be a value less than or equal to 100.", new [] { "Limit" });
+            }
+
             yield break;
         }
     }

@@ -45,7 +45,6 @@ export class MarketplaceService {
    * @deprecated
    * Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155)
    * This endpoint is deprecated. Use POST route instead.
-   * @param gameId
    * @param limit
    * @param offset
    * @param filter
@@ -54,7 +53,6 @@ export class MarketplaceService {
    * @throws ApiError
    */
   public getListedAssets(
-    gameId?: string,
     limit?: number,
     offset?: number,
     filter?: {
@@ -96,9 +94,6 @@ export class MarketplaceService {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v1/marketplace',
-      path: {
-        gameId: gameId,
-      },
       query: {
         limit: limit,
         offset: offset,

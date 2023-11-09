@@ -10,8 +10,8 @@
   ],
   "scripts": {
     "generate": "pnpm generate:client && pnpm generate:cleanup && pnpm generate:barrels && pnpm build",
-    "generate:client": "ts-node --esm openapi.config.ts",
-    "generate:cleanup": "ts-node --esm cleanup-generator-output.ts",
+    "generate:client": "node --experimental-loader=ts-node/esm openapi.config.ts",
+    "generate:cleanup": "node --experimental-loader=ts-node/esm cleanup-generator-output.ts",
     "generate:barrels": "barrelsby -c ./barrelsby.json --delete",
     "build": "tsup --config ./tsup.config.ts"
   },
