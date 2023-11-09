@@ -2,8 +2,10 @@
 
 name: publish
 on:
-  repository_dispatch:
-    types: [sdk-release]
+  workflow_dispatch: # Allow running the workflow manually from the GitHub UI
+  release:
+    types:
+      - published    # Run the workflow when a new GitHub release is published
 
 env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
@@ -34,7 +36,7 @@ jobs:
 
       - name: Set version variable from release tag
         run: |
-          TAG=${{ github.event.client_payload.version }}
+          TAG=${{ github.event.release.tag_name }}
           echo "VERSION=${TAG#v}" >> $GITHUB_ENV
 
       - name: Generate fresh models
