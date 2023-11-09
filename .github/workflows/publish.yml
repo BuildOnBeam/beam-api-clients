@@ -74,15 +74,13 @@ jobs:
           ref: 'main'
           fetch-tags: 'true'
 
-      - name: 📥 dependency installation
-        uses: ./.github/actions/pnpm-install
-
-        # Setup .npmrc file to publish to npm
-
       - uses: actions/setup-node@v3
         with:
           node-version: 20
           registry-url: 'https://registry.npmjs.org'
+
+      - name: 📥 dependency installation
+        uses: ./.github/actions/pnpm-install
 
       - run: pnpm publish --no-git-checks --access public
         working-directory: ./sdks/typescript-node
