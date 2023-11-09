@@ -124,4 +124,3 @@ src/Beam/Model/UpdateGameRequestInput.cs
 src/Beam/Model/UpdateGameResponse.cs
 src/Beam/Model/UpdateProfileRequestInput.cs
 src/Beam/Model/UpdateProfileResponse.cs
-src/Beam/README.md
