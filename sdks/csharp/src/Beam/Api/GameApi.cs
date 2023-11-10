@@ -164,13 +164,13 @@ namespace Beam.Api
     /// <summary>
     /// The <see cref="IGetGameApiResponse"/>
     /// </summary>
-    public interface IGetGameApiResponse : Beam.Client.IApiResponse, ICreated<Beam.Model.GetGameResponse>
+    public interface IGetGameApiResponse : Beam.Client.IApiResponse, IDefault<Beam.Model.GetGameResponse>
     {
         /// <summary>
-        /// Returns true if the response is 201 Created
+        /// Returns true if the response is the default response type
         /// </summary>
         /// <returns></returns>
-        bool IsCreated { get; }
+        bool IsDefault { get; }
     }
 
     /// <summary>
@@ -758,38 +758,38 @@ namespace Beam.Api
             partial void OnCreated(System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
 
             /// <summary>
-            /// Returns true if the response is 201 Created
+            /// Returns true if the response is the default response type
             /// </summary>
             /// <returns></returns>
-            public bool IsCreated => 201 == (int)StatusCode;
+            public bool IsDefault => true;
 
             /// <summary>
-            /// Deserializes the response if the response is 201 Created
+            /// Deserializes the response if the response is 0 Default
             /// </summary>
             /// <returns></returns>
-            public Beam.Model.GetGameResponse Created()
+            public Beam.Model.GetGameResponse Default()
             {
                 // This logic may be modified with the AsModel.mustache template
-                return IsCreated
+                return IsDefault
                     ? System.Text.Json.JsonSerializer.Deserialize<Beam.Model.GetGameResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
             /// <summary>
-            /// Returns true if the response is 201 Created and the deserialized response is not null
+            /// Returns true if the response is 0 Default and the deserialized response is not null
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryCreated([NotNullWhen(true)]out Beam.Model.GetGameResponse result)
+            public bool TryDefault([NotNullWhen(true)]out Beam.Model.GetGameResponse result)
             {
                 result = null;
 
                 try
                 {
-                    result = Created();
+                    result = Default();
                 } catch (Exception e)
                 {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)201);
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)0);
                 }
 
                 return result != null;
