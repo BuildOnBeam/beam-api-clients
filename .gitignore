@@ -11,7 +11,9 @@ coverage
 
 # next.js
 .next/
-out/
+
+# we need this to store customized openapi-generator emplates
+# out/
 build
 
 # misc

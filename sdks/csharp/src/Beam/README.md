@@ -71,7 +71,7 @@ namespace YourProject
           .ConfigureApi((context, services, options) =>
           {
               // the type of token here depends on the api security specifications
-              ApiKeyToken token = new("<your token>", prefix: string.Empty);
+              ApiKeyToken token = new("<your token>");
               options.AddTokens(token);
 
               // optionally choose the method the tokens will be provided with, default is RateLimitProvider

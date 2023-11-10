@@ -1,6 +1,5 @@
 .gitignore
 Beam.sln
-README.md
 appveyor.yml
 docs/scripts/git_push.ps1
 docs/scripts/git_push.sh
