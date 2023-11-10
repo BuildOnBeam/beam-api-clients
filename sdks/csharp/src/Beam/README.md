@@ -176,6 +176,20 @@ app.Run();
 - How do I validate requests and process responses?
   Use the provided On and After methods in the Api class from the namespace Beam.Rest.DefaultApi.
   Or provide your own class by using the generic ConfigureApi method.
+- How do I specify different ApiKeyToken for different ApiClients?
+  You can now use exposed ApiKeyTokenProvider one ach client to set custom ApiKey if needed. That token will only be used for that ApiClient instance.
+  ```cs
+  public class YourService
+  {
+      private readonly IGameApi _gameApi;
+
+      public YourService(IGameApi gameApi)
+      {
+          _gameApi = gameApi;
+          _gameApi.ApiKeyProvider.SetToken(new ApiKeyToken("<your token>"));
+      }
+  }
+  ```
 
 <a id="dependencies"></a>
 ## Dependencies
