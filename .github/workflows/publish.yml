@@ -54,7 +54,7 @@ jobs:
 
           # stage all files and make a release commit
           git add -A
-          git commit -m "[RELEASE] ${{ github.event.release.tag_name }}"
+          git commit --allow-empty -m "[RELEASE] ${{ github.event.release.tag_name }}"
 
           # push release commit to main
           git push
