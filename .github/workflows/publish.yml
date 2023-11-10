@@ -78,6 +78,12 @@ jobs:
         with:
           node-version: 20
           registry-url: 'https://registry.npmjs.org'
+          
+      - name: 📥 dependency installation
+        uses: ./.github/actions/pnpm-install
+
+      - run: ls -a -l
+        working-directory: ./sdks/typescript-node
 
       - run: pnpm publish --no-git-checks --access public
         working-directory: ./sdks/typescript-node
