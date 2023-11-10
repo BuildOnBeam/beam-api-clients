@@ -34,13 +34,13 @@ jobs:
       - name: 📥 dependency installation
         uses: ./.github/actions/pnpm-install
 
+      - name: Generate SDKs
+        run: pnpm generate
+
       - name: Set version variable from release tag
         run: |
           TAG=${{ github.event.release.tag_name }}
           echo "VERSION=${TAG#v}" >> $GITHUB_ENV
-
-      - name: Generate fresh models
-        run: pnpm generate
 
       - name: Update node SDK version
         working-directory: ./sdks/typescript-node
@@ -78,9 +78,6 @@ jobs:
         with:
           node-version: 20
           registry-url: 'https://registry.npmjs.org'
-
-      - name: 📥 dependency installation
-        uses: ./.github/actions/pnpm-install
 
       - run: pnpm publish --no-git-checks --access public
         working-directory: ./sdks/typescript-node
