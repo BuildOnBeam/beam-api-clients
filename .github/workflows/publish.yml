@@ -39,13 +39,6 @@ jobs:
           TAG=${{ github.event.release.tag_name }}
           echo "VERSION=${TAG#v}" >> $GITHUB_ENV
 
-      - name: Generate fresh models
-        run: pnpm generate
-
-      - name: Update node SDK version
-        working-directory: ./sdks/typescript-node
-        run: npm version $VERSION --allow-same-version --no-git-tag-version
-
       - name: Update main and fast foward tag
         run: |
           # set credentials to github-actions so we know it's automated
@@ -63,7 +56,7 @@ jobs:
           git tag -f ${{ github.event.release.tag_name }}
           git push --tags --force
 
-  deploy-npm-package:
+  create-npm-package:
     if: github.event_name == 'release'
     runs-on: ubuntu-latest
     needs: [regenerate-sdks]
@@ -81,6 +74,14 @@ jobs:
 
       - name: 📥 dependency installation
         uses: ./.github/actions/pnpm-install
+
+      - name: Generate SDK
+        working-directory: ./sdks/typescript-node
+        run: pnpm generate
+
+      - name: Update node SDK version
+        working-directory: ./sdks/typescript-node
+        run: npm version $VERSION --allow-same-version --no-git-tag-version
 
       - run: pnpm publish --no-git-checks --access public
         working-directory: ./sdks/typescript-node
