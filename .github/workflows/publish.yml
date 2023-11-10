@@ -82,7 +82,7 @@ jobs:
       - name: 📥 dependency installation
         uses: ./.github/actions/pnpm-install
 
-      - run: ls -a -l
+      - run: pnpm generate
         working-directory: ./sdks/typescript-node
 
       - run: pnpm publish --no-git-checks --access public
