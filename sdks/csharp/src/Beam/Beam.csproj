@@ -25,9 +25,9 @@
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Beam.xml</DocumentationFile>
 
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/Merit-Circle/beam-csharp.git</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Merit-Circle/beam-sdk.git</RepositoryUrl>
 
-    <PackageProjectUrl>https://github.com/Merit-Circle/beam-csharp.git</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/Merit-Circle/beam-sdk.git</PackageProjectUrl>
 
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>

@@ -1,49 +1,28 @@
-# Created with Openapi Generator
+# Beam for C#
 
-<a id="cli"></a>
-## Run the following powershell command to generate the library
+[![license](https://img.shields.io/badge/License-GPLv3-blue)](./LICENSE)
+[![nuget](https://img.shields.io/nuget/v/Beam)](https://www.nuget.org/packages/Beam)
+![npm](https://img.shields.io/npm/v/%40onbeam%2Fnode)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/Merit-Circle/beam-sdk/publish.yml)
 
-```ps1
-$properties = @(
-    'apiName=Api',
-    'targetFramework=net7.0',
-    'validatable=true',
-    'nullableReferenceTypes=false',
-    'hideGenerationTimestamp=true',
-    'packageVersion=1.0.0',
-    'packageAuthors=OpenAPI',
-    'packageCompany=OpenAPI',
-    'packageCopyright=No Copyright',
-    'packageDescription=A library generated from a OpenAPI doc',
-    'packageName=Beam',
-    'packageTags=',
-    'packageTitle=OpenAPI Library'
-) -join ","
 
-$global = @(
-    'apiDocs=false',
-    'modelDocs=false',
-    'apiTests=false',
-    'modelTests=false'
-) -join ","
+---
+The Beam client for the .NET ecosystem provides a type-safe interface for consuming the Beam API. Please note that this client is meant to be used in server side applications, as following these instructions in a client-side environment would expose your API key to all users.
 
-java -jar "<path>/openapi-generator/modules/openapi-generator-cli/target/openapi-generator-cli.jar" generate `
-    -g csharp-netcore `
-    -i <your-swagger-file>.yaml `
-    -o <your-output-folder> `
-    --library generichost `
-    --additional-properties $properties `
-    --global-property $global `
-    --git-host "github.com" `
-    --git-repo-id "GIT_REPO_ID" `
-    --git-user-id "GIT_USER_ID" `
-    --release-note "Minor update"
-    # -t templates
-```
+## Connecting with Beam
+In order to get started with Beam, you will need an API key. The API key for your game will be provided by your partner at Merit Circle.
 
-<a id="usage"></a>
 ## Using the library in your project
+You have to register necessary services in your container. Then all Api Clients can be used easily by injecting into your classes.
 
+### Package reference
+Simply include our Nuget from https://www.nuget.org/packages/Beam in your .csproj file like any other dependency:
+```xml
+<PackageReference Include="Beam" Version="1.0.*" />
+```
+Our deployment pipeline increments **patch** version on every deployment. You can either use concrete version number or use `*` to always use the newest one. We try to limit breaking changes but as this is still new, these might happen.
+
+### DI registration
 In case of generic host applications:
 ```cs
 using System;
@@ -140,35 +119,40 @@ builder.Services.AddApi(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
-
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.UseAuthorization();
-
-app.MapRazorPages();
+(...)
 
 app.Run();
 
 ```
 
+## Usage
+To use Api clients provided by this SDK, simply inject them into your class:
+  ```cs
+  public class MyService
+  {
+      private readonly IGameApi _gameApi;
+
+      public MyService(IGameApi gameApi)
+      {
+          _gameApi = gameApi;
+      }
+
+      public async Task GetMyGame()
+      {
+        var myGame = await _gameApi.GetGameAsync();
+        (...)
+      }
+  }
+  ```
+
 <a id="questions"></a>
 ## Questions
 
 - What about HttpRequest failures and retries?
-  If supportsRetry is enabled, you can configure Polly in the ConfigureClients method.
+  You can configure Polly in the AddApiHttpClients((...), builder: (x) => ...) method.
 - How are tokens used?
   Tokens are provided by a TokenProvider class. The default is RateLimitProvider which will perform client side rate limiting.
-  Other providers can be used with the UseProvider method.
+  Other providers can be used with the UseProvider method, you can implement your own if you don't want to get rate limited as well.
 - Does an HttpRequest throw an error when the server response is not Ok?
   It depends how you made the request. If the return type is ApiResponse<T> no error will be thrown, though the Content property will be null.
   StatusCode and ReasonPhrase will contain information about the error.
@@ -179,25 +163,8 @@ app.Run();
 - How do I specify different ApiKeyToken for different ApiClients?
   You can now use exposed ApiKeyTokenProvider one ach client to set custom ApiKey if needed. That token will only be used for that ApiClient instance.
   ```cs
-  public class YourService
-  {
-      private readonly IGameApi _gameApi;
-
-      public YourService(IGameApi gameApi)
-      {
-          _gameApi = gameApi;
-          _gameApi.ApiKeyProvider.SetToken(new ApiKeyToken("<your token>"));
-      }
-  }
+    _gameApi.ApiKeyProvider.SetToken(new ApiKeyToken("<your token>"));
   ```
-
-<a id="dependencies"></a>
-## Dependencies
-
-- [Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting/) - 5.0.0 or later
-- [Microsoft.Extensions.Http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) - 5.0.0 or later
-- [Microsoft.Extensions.Http.Polly](https://www.nuget.org/packages/Microsoft.Extensions.Http.Polly/) - 5.0.1 or later
-- [System.ComponentModel.Annotations](https://www.nuget.org/packages/System.ComponentModel.Annotations) - 4.7.0 or later
 
 <a id="documentation-for-authorization"></a>
 ## Documentation for Authorization
@@ -212,64 +179,6 @@ Authentication schemes defined for the API:
 - **Location**: HTTP header
 
 
-## Build
-- SDK version: 1.0.0
-- Build package: org.openapitools.codegen.languages.CSharpClientCodegen
-
-## Api Information
-- appName: Beam game development API
-- appVersion: 1.0.0
-- appDescription: The Beam game development API is a service to integrate your game with Beam
-
-## [OpenApi Global properties](https://openapi-generator.tech/docs/globals)
-- generateAliasAsModel:
-- supportingFiles:
-- models: omitted for brevity
-- apis: omitted for brevity
-- apiDocs: false
-- modelDocs: false
-- apiTests: false
-- modelTests: false
-- withXml:
-
-## [OpenApi Generator Parameters](https://openapi-generator.tech/docs/generators/csharp-netcore)
-- allowUnicodeIdentifiers:
-- apiName: Api
-- caseInsensitiveResponseHeaders:
-- conditionalSerialization: false
-- disallowAdditionalPropertiesIfNotPresent:
-- gitHost: github.com
-- gitRepoId: GIT_REPO_ID
-- gitUserId: GIT_USER_ID
-- hideGenerationTimestamp: true
-- interfacePrefix: I
-- library: generichost
-- licenseId:
-- modelPropertyNaming:
-- netCoreProjectFile: true
-- nonPublicApi: false
-- nullableReferenceTypes: false
-- optionalAssemblyInfo:
-- optionalEmitDefaultValues: false
-- optionalMethodArgument: false
-- optionalProjectFile:
-- packageAuthors: OpenAPI
-- packageCompany: OpenAPI
-- packageCopyright: No Copyright
-- packageDescription: A library generated from a OpenAPI doc
-- packageGuid: {B9F59C51-AA17-4ECC-8B26-D42311D97287}
-- packageName: Beam
-- packageTags:
-- packageTitle: OpenAPI Library
-- packageVersion: 1.0.0
-- releaseNote: Minor update
-- returnICollection: true
-- sortParamsByRequiredFlag:
-- sourceFolder: src
-- targetFramework: net7.0
-- useCollection: false
-- useDateTimeOffset: false
-- useOneOfDiscriminatorLookup: false
-- validatable: true
+---
 
 This C# SDK is automatically generated by the [OpenAPI Generator](https://openapi-generator.tech) project.
