@@ -68,7 +68,7 @@ namespace YourProject
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args)
-          .ConfigureApi((context, options) =>
+          .ConfigureApi((context, services, options) =>
           {
               // the type of token here depends on the api security specifications
               ApiKeyToken token = new("<your token>", prefix: string.Empty);
