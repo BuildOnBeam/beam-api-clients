@@ -12,7 +12,7 @@ export type GetAssetsBodyInput = {
     sellTypes?: Array<
       'AscendingAuction' | 'DescendingAuction' | 'FixedPrice' | 'NotForSale'
     > | null;
-  };
+  } | null;
   sort?: {
     rarityScore?: GetAssetsBodyInput.rarityScore | null;
     start?: GetAssetsBodyInput.start | null;
@@ -21,7 +21,7 @@ export type GetAssetsBodyInput = {
     fixedPriceNumber?: GetAssetsBodyInput.fixedPriceNumber | null;
     startPriceNumber?: GetAssetsBodyInput.startPriceNumber | null;
     endPriceNumber?: GetAssetsBodyInput.endPriceNumber | null;
-  };
+  } | null;
   limit?: number;
   offset?: number;
 };

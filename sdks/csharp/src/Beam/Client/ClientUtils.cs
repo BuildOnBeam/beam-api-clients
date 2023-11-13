@@ -132,6 +132,8 @@ namespace Beam.Client
                 return ConvertTokenResponse.TypeEnumToJsonValue(convertTokenResponseTypeEnum);
             if (obj is CreateAssetOfferRequestInput.CurrencyEnum createAssetOfferRequestInputCurrencyEnum)
                 return CreateAssetOfferRequestInput.CurrencyEnumToJsonValue(createAssetOfferRequestInputCurrencyEnum);
+            if (obj is GetAllGasUsageResponseDataInnerDataInnerPolicy.ModelEnum getAllGasUsageResponseDataInnerDataInnerPolicyModelEnum)
+                return GetAllGasUsageResponseDataInnerDataInnerPolicy.ModelEnumToJsonValue(getAllGasUsageResponseDataInnerDataInnerPolicyModelEnum);
             if (obj is GetAssetListingsResponseDataInnerNft.RarityEnum getAssetListingsResponseDataInnerNftRarityEnum)
                 return GetAssetListingsResponseDataInnerNft.RarityEnumToJsonValue(getAssetListingsResponseDataInnerNftRarityEnum);
             if (obj is GetAssetOffersResponseDataInner.CurrencyEnum getAssetOffersResponseDataInnerCurrencyEnum)
@@ -156,6 +158,20 @@ namespace Beam.Client
                 return GetAssetResponseListing.SellTypeEnumToJsonValue(getAssetResponseListingSellTypeEnum);
             if (obj is GetAssetsBodyInputFilter.SellTypesEnum getAssetsBodyInputFilterSellTypesEnum)
                 return GetAssetsBodyInputFilter.SellTypesEnumToJsonValue(getAssetsBodyInputFilterSellTypesEnum);
+            if (obj is GetAssetsBodyInputSort.CreatedAtEnum getAssetsBodyInputSortCreatedAtEnum)
+                return GetAssetsBodyInputSort.CreatedAtEnumToJsonValue(getAssetsBodyInputSortCreatedAtEnum);
+            if (obj is GetAssetsBodyInputSort.EndEnum getAssetsBodyInputSortEndEnum)
+                return GetAssetsBodyInputSort.EndEnumToJsonValue(getAssetsBodyInputSortEndEnum);
+            if (obj is GetAssetsBodyInputSort.EndPriceNumberEnum getAssetsBodyInputSortEndPriceNumberEnum)
+                return GetAssetsBodyInputSort.EndPriceNumberEnumToJsonValue(getAssetsBodyInputSortEndPriceNumberEnum);
+            if (obj is GetAssetsBodyInputSort.FixedPriceNumberEnum getAssetsBodyInputSortFixedPriceNumberEnum)
+                return GetAssetsBodyInputSort.FixedPriceNumberEnumToJsonValue(getAssetsBodyInputSortFixedPriceNumberEnum);
+            if (obj is GetAssetsBodyInputSort.RarityScoreEnum getAssetsBodyInputSortRarityScoreEnum)
+                return GetAssetsBodyInputSort.RarityScoreEnumToJsonValue(getAssetsBodyInputSortRarityScoreEnum);
+            if (obj is GetAssetsBodyInputSort.StartEnum getAssetsBodyInputSortStartEnum)
+                return GetAssetsBodyInputSort.StartEnumToJsonValue(getAssetsBodyInputSortStartEnum);
+            if (obj is GetAssetsBodyInputSort.StartPriceNumberEnum getAssetsBodyInputSortStartPriceNumberEnum)
+                return GetAssetsBodyInputSort.StartPriceNumberEnumToJsonValue(getAssetsBodyInputSortStartPriceNumberEnum);
             if (obj is GetAssetsResponseDataInner.RarityEnum getAssetsResponseDataInnerRarityEnum)
                 return GetAssetsResponseDataInner.RarityEnumToJsonValue(getAssetsResponseDataInnerRarityEnum);
             if (obj is GetChainCurrenciesResponseDataInner.CurrencyEnum getChainCurrenciesResponseDataInnerCurrencyEnum)

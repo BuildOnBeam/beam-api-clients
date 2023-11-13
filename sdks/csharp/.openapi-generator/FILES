@@ -12,6 +12,7 @@ src/Beam/Api/IApi.cs
 src/Beam/Api/MarketplaceApi.cs
 src/Beam/Api/PolicyApi.cs
 src/Beam/Api/ProfilesApi.cs
+src/Beam/Api/ReportingApi.cs
 src/Beam/Api/TransactionsApi.cs
 src/Beam/Client/ApiException.cs
 src/Beam/Client/ApiFactory.cs
@@ -60,6 +61,12 @@ src/Beam/Model/GenerateLinkCodeRequestInput.cs
 src/Beam/Model/GenerateLinkCodeResponse.cs
 src/Beam/Model/GenerateSignInCodeRequestInput.cs
 src/Beam/Model/GenerateSignInCodeResponse.cs
+src/Beam/Model/GetAllGasUsageResponse.cs
+src/Beam/Model/GetAllGasUsageResponseDataInner.cs
+src/Beam/Model/GetAllGasUsageResponseDataInnerDataInner.cs
+src/Beam/Model/GetAllGasUsageResponseDataInnerDataInnerPeriodsInner.cs
+src/Beam/Model/GetAllGasUsageResponseDataInnerDataInnerPolicy.cs
+src/Beam/Model/GetAllGasUsageResponseDataInnerSummary.cs
 src/Beam/Model/GetAllProfilesResponse.cs
 src/Beam/Model/GetAllProfilesResponseDataInner.cs
 src/Beam/Model/GetAllProfilesResponsePagination.cs
@@ -79,6 +86,7 @@ src/Beam/Model/GetAssetResponseOwnershipByAddressesInnerUser.cs
 src/Beam/Model/GetAssetResponseOwnershipByAddressesInnerUserProfile.cs
 src/Beam/Model/GetAssetsBodyInput.cs
 src/Beam/Model/GetAssetsBodyInputFilter.cs
+src/Beam/Model/GetAssetsBodyInputSort.cs
 src/Beam/Model/GetAssetsResponse.cs
 src/Beam/Model/GetAssetsResponseDataInner.cs
 src/Beam/Model/GetAssetsResponseDataInnerAttributesInner.cs
@@ -91,6 +99,7 @@ src/Beam/Model/GetEstimateResponse.cs
 src/Beam/Model/GetGameResponse.cs
 src/Beam/Model/GetGameResponseContractsInner.cs
 src/Beam/Model/GetGameResponsePoliciesInner.cs
+src/Beam/Model/GetGasUsageResponse.cs
 src/Beam/Model/GetProfileAssetsForGameFilterParameter.cs
 src/Beam/Model/GetProfileAssetsForGameFilterParameterAttributesInner.cs
 src/Beam/Model/GetProfileAssetsForGameSortParameter.cs
@@ -106,7 +115,6 @@ src/Beam/Model/GetTransactionsResponseDataInner.cs
 src/Beam/Model/GetTransactionsResponseDataInnerInteractionsInner.cs
 src/Beam/Model/GetTransactionsResponseDataInnerResponse.cs
 src/Beam/Model/GetTransactionsResponseDataInnerResponseLogsInner.cs
-src/Beam/Model/RegenerateGameApiKeysRequestInput.cs
 src/Beam/Model/RegenerateGameApiKeysResponse.cs
 src/Beam/Model/RegenerateGameApiKeysResponseApiKeysInner.cs
 src/Beam/Model/RemoveContractResponse.cs

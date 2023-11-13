@@ -66,6 +66,12 @@ namespace Beam.Client
             _jsonOptions.Converters.Add(new GenerateLinkCodeResponseJsonConverter());
             _jsonOptions.Converters.Add(new GenerateSignInCodeRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new GenerateSignInCodeResponseJsonConverter());
+            _jsonOptions.Converters.Add(new GetAllGasUsageResponseJsonConverter());
+            _jsonOptions.Converters.Add(new GetAllGasUsageResponseDataInnerJsonConverter());
+            _jsonOptions.Converters.Add(new GetAllGasUsageResponseDataInnerDataInnerJsonConverter());
+            _jsonOptions.Converters.Add(new GetAllGasUsageResponseDataInnerDataInnerPeriodsInnerJsonConverter());
+            _jsonOptions.Converters.Add(new GetAllGasUsageResponseDataInnerDataInnerPolicyJsonConverter());
+            _jsonOptions.Converters.Add(new GetAllGasUsageResponseDataInnerSummaryJsonConverter());
             _jsonOptions.Converters.Add(new GetAllProfilesResponseJsonConverter());
             _jsonOptions.Converters.Add(new GetAllProfilesResponseDataInnerJsonConverter());
             _jsonOptions.Converters.Add(new GetAllProfilesResponsePaginationJsonConverter());
@@ -85,6 +91,7 @@ namespace Beam.Client
             _jsonOptions.Converters.Add(new GetAssetResponseOwnershipByAddressesInnerUserProfileJsonConverter());
             _jsonOptions.Converters.Add(new GetAssetsBodyInputJsonConverter());
             _jsonOptions.Converters.Add(new GetAssetsBodyInputFilterJsonConverter());
+            _jsonOptions.Converters.Add(new GetAssetsBodyInputSortJsonConverter());
             _jsonOptions.Converters.Add(new GetAssetsResponseJsonConverter());
             _jsonOptions.Converters.Add(new GetAssetsResponseDataInnerJsonConverter());
             _jsonOptions.Converters.Add(new GetAssetsResponseDataInnerAttributesInnerJsonConverter());
@@ -97,6 +104,7 @@ namespace Beam.Client
             _jsonOptions.Converters.Add(new GetGameResponseJsonConverter());
             _jsonOptions.Converters.Add(new GetGameResponseContractsInnerJsonConverter());
             _jsonOptions.Converters.Add(new GetGameResponsePoliciesInnerJsonConverter());
+            _jsonOptions.Converters.Add(new GetGasUsageResponseJsonConverter());
             _jsonOptions.Converters.Add(new GetProfileAssetsForGameFilterParameterJsonConverter());
             _jsonOptions.Converters.Add(new GetProfileAssetsForGameFilterParameterAttributesInnerJsonConverter());
             _jsonOptions.Converters.Add(new GetProfileAssetsForGameSortParameterJsonConverter());
@@ -112,7 +120,6 @@ namespace Beam.Client
             _jsonOptions.Converters.Add(new GetTransactionsResponseDataInnerInteractionsInnerJsonConverter());
             _jsonOptions.Converters.Add(new GetTransactionsResponseDataInnerResponseJsonConverter());
             _jsonOptions.Converters.Add(new GetTransactionsResponseDataInnerResponseLogsInnerJsonConverter());
-            _jsonOptions.Converters.Add(new RegenerateGameApiKeysRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new RegenerateGameApiKeysResponseJsonConverter());
             _jsonOptions.Converters.Add(new RegenerateGameApiKeysResponseApiKeysInnerJsonConverter());
             _jsonOptions.Converters.Add(new RemoveContractResponseJsonConverter());
@@ -146,6 +153,8 @@ namespace Beam.Client
             _services.AddTransient<IPolicyApi, PolicyApi>();
             _services.AddSingleton<ProfilesApiEvents>();
             _services.AddTransient<IProfilesApi, ProfilesApi>();
+            _services.AddSingleton<ReportingApiEvents>();
+            _services.AddTransient<IReportingApi, ReportingApi>();
             _services.AddSingleton<TransactionsApiEvents>();
             _services.AddTransient<ITransactionsApi, TransactionsApi>();
         }
@@ -172,6 +181,7 @@ namespace Beam.Client
             builders.Add(_services.AddHttpClient<IMarketplaceApi, MarketplaceApi>(client));
             builders.Add(_services.AddHttpClient<IPolicyApi, PolicyApi>(client));
             builders.Add(_services.AddHttpClient<IProfilesApi, ProfilesApi>(client));
+            builders.Add(_services.AddHttpClient<IReportingApi, ReportingApi>(client));
             builders.Add(_services.AddHttpClient<ITransactionsApi, TransactionsApi>(client));
             
             if (builder != null)

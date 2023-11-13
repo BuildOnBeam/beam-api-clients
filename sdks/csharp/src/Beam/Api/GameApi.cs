@@ -78,27 +78,25 @@ namespace Beam.Api
         Task<IGetGameApiResponse> GetGameOrDefaultAsync(System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Regenerate API keys
+        /// Regenerate all your API keys through the provided regenerate key. Note that existing keys will be invalidated immediately
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="regenerateGameApiKeysRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRegenerateApiKeysApiResponse"/>&gt;</returns>
-        Task<IRegenerateApiKeysApiResponse> RegenerateApiKeysAsync(RegenerateGameApiKeysRequestInput regenerateGameApiKeysRequestInput, System.Threading.CancellationToken cancellationToken = default);
+        Task<IRegenerateApiKeysApiResponse> RegenerateApiKeysAsync(System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Regenerate API keys
+        /// Regenerate all your API keys through the provided regenerate key. Note that existing keys will be invalidated immediately
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="regenerateGameApiKeysRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRegenerateApiKeysApiResponse"/>&gt;</returns>
-        Task<IRegenerateApiKeysApiResponse> RegenerateApiKeysOrDefaultAsync(RegenerateGameApiKeysRequestInput regenerateGameApiKeysRequestInput, System.Threading.CancellationToken cancellationToken = default);
+        Task<IRegenerateApiKeysApiResponse> RegenerateApiKeysOrDefaultAsync(System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete a contract from a game
@@ -806,28 +804,14 @@ namespace Beam.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatRegenerateApiKeys(RegenerateGameApiKeysRequestInput regenerateGameApiKeysRequestInput);
-
-        /// <summary>
-        /// Validates the request parameters
-        /// </summary>
-        /// <param name="regenerateGameApiKeysRequestInput"></param>
-        /// <returns></returns>
-        private void ValidateRegenerateApiKeys(RegenerateGameApiKeysRequestInput regenerateGameApiKeysRequestInput)
-        {
-            if (regenerateGameApiKeysRequestInput == null)
-                throw new ArgumentNullException(nameof(regenerateGameApiKeysRequestInput));
-        }
-
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="regenerateGameApiKeysRequestInput"></param>
-        private void AfterRegenerateApiKeysDefaultImplementation(IRegenerateApiKeysApiResponse apiResponseLocalVar, RegenerateGameApiKeysRequestInput regenerateGameApiKeysRequestInput)
+        private void AfterRegenerateApiKeysDefaultImplementation(IRegenerateApiKeysApiResponse apiResponseLocalVar)
         {
             bool suppressDefaultLog = false;
-            AfterRegenerateApiKeys(ref suppressDefaultLog, apiResponseLocalVar, regenerateGameApiKeysRequestInput);
+            AfterRegenerateApiKeys(ref suppressDefaultLog, apiResponseLocalVar);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -837,8 +821,7 @@ namespace Beam.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="regenerateGameApiKeysRequestInput"></param>
-        partial void AfterRegenerateApiKeys(ref bool suppressDefaultLog, IRegenerateApiKeysApiResponse apiResponseLocalVar, RegenerateGameApiKeysRequestInput regenerateGameApiKeysRequestInput);
+        partial void AfterRegenerateApiKeys(ref bool suppressDefaultLog, IRegenerateApiKeysApiResponse apiResponseLocalVar);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -846,11 +829,10 @@ namespace Beam.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="regenerateGameApiKeysRequestInput"></param>
-        private void OnErrorRegenerateApiKeysDefaultImplementation(Exception exception, string pathFormat, string path, RegenerateGameApiKeysRequestInput regenerateGameApiKeysRequestInput)
+        private void OnErrorRegenerateApiKeysDefaultImplementation(Exception exception, string pathFormat, string path)
         {
             bool suppressDefaultLog = false;
-            OnErrorRegenerateApiKeys(ref suppressDefaultLog, exception, pathFormat, path, regenerateGameApiKeysRequestInput);
+            OnErrorRegenerateApiKeys(ref suppressDefaultLog, exception, pathFormat, path);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -862,20 +844,18 @@ namespace Beam.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="regenerateGameApiKeysRequestInput"></param>
-        partial void OnErrorRegenerateApiKeys(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, RegenerateGameApiKeysRequestInput regenerateGameApiKeysRequestInput);
+        partial void OnErrorRegenerateApiKeys(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path);
 
         /// <summary>
-        /// Regenerate API keys 
+        /// Regenerate all your API keys through the provided regenerate key. Note that existing keys will be invalidated immediately 
         /// </summary>
-        /// <param name="regenerateGameApiKeysRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRegenerateApiKeysApiResponse"/>&gt;</returns>
-        public async Task<IRegenerateApiKeysApiResponse> RegenerateApiKeysOrDefaultAsync(RegenerateGameApiKeysRequestInput regenerateGameApiKeysRequestInput, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IRegenerateApiKeysApiResponse> RegenerateApiKeysOrDefaultAsync(System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await RegenerateApiKeysAsync(regenerateGameApiKeysRequestInput, cancellationToken).ConfigureAwait(false);
+                return await RegenerateApiKeysAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -884,32 +864,23 @@ namespace Beam.Api
         }
 
         /// <summary>
-        /// Regenerate API keys 
+        /// Regenerate all your API keys through the provided regenerate key. Note that existing keys will be invalidated immediately 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="regenerateGameApiKeysRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRegenerateApiKeysApiResponse"/>&gt;</returns>
-        public async Task<IRegenerateApiKeysApiResponse> RegenerateApiKeysAsync(RegenerateGameApiKeysRequestInput regenerateGameApiKeysRequestInput, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IRegenerateApiKeysApiResponse> RegenerateApiKeysAsync(System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateRegenerateApiKeys(regenerateGameApiKeysRequestInput);
-
-                FormatRegenerateApiKeys(regenerateGameApiKeysRequestInput);
-
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
                     uriBuilderLocalVar.Host = HttpClient.BaseAddress.Host;
                     uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
                     uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/game/regenerate-api-keys";
-
-                    httpRequestMessageLocalVar.Content = (regenerateGameApiKeysRequestInput as object) is System.IO.Stream stream
-                        ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(regenerateGameApiKeysRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar;
@@ -918,15 +889,6 @@ namespace Beam.Api
                     apiKeyTokenLocalVar.UseInHeader(httpRequestMessageLocalVar, "x-api-key");
 
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
-
-                    string[] contentTypes = new string[] {
-                        "application/json"
-                    };
-
-                    string contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
-
-                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
-                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -949,7 +911,7 @@ namespace Beam.Api
 
                         RegenerateApiKeysApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/game/regenerate-api-keys", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterRegenerateApiKeysDefaultImplementation(apiResponseLocalVar, regenerateGameApiKeysRequestInput);
+                        AfterRegenerateApiKeysDefaultImplementation(apiResponseLocalVar);
 
                         Events.ExecuteOnRegenerateApiKeys(apiResponseLocalVar);
 
@@ -963,7 +925,7 @@ namespace Beam.Api
             }
             catch(Exception e)
             {
-                OnErrorRegenerateApiKeysDefaultImplementation(e, "/v1/game/regenerate-api-keys", uriBuilderLocalVar.Path, regenerateGameApiKeysRequestInput);
+                OnErrorRegenerateApiKeysDefaultImplementation(e, "/v1/game/regenerate-api-keys", uriBuilderLocalVar.Path);
                 Events.ExecuteOnErrorRegenerateApiKeys(e);
                 throw;
             }

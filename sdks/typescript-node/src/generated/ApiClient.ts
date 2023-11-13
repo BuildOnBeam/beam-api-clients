@@ -13,6 +13,7 @@ import { GameService } from './services/GameService';
 import { MarketplaceService } from './services/MarketplaceService';
 import { PolicyService } from './services/PolicyService';
 import { ProfilesService } from './services/ProfilesService';
+import { ReportingService } from './services/ReportingService';
 import { TransactionsService } from './services/TransactionsService';
 
 type HttpRequestConstructor = new (_config: OpenAPIConfig) => BaseHttpRequest;
@@ -25,6 +26,7 @@ export class ApiClient {
   public readonly marketplace: MarketplaceService;
   public readonly policy: PolicyService;
   public readonly profiles: ProfilesService;
+  public readonly reporting: ReportingService;
   public readonly transactions: TransactionsService;
 
   public readonly request: BaseHttpRequest;
@@ -52,6 +54,7 @@ export class ApiClient {
     this.marketplace = new MarketplaceService(this.request);
     this.policy = new PolicyService(this.request);
     this.profiles = new ProfilesService(this.request);
+    this.reporting = new ReportingService(this.request);
     this.transactions = new TransactionsService(this.request);
   }
 }

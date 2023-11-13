@@ -5,7 +5,6 @@
 import type { AddContractRequestInput } from '../models/AddContractRequestInput';
 import type { AddContractResponse } from '../models/AddContractResponse';
 import type { GetGameResponse } from '../models/GetGameResponse';
-import type { RegenerateGameApiKeysRequestInput } from '../models/RegenerateGameApiKeysRequestInput';
 import type { RegenerateGameApiKeysResponse } from '../models/RegenerateGameApiKeysResponse';
 import type { RemoveContractResponse } from '../models/RemoveContractResponse';
 import type { UpdateGameRequestInput } from '../models/UpdateGameRequestInput';
@@ -47,19 +46,14 @@ export class GameService {
   }
 
   /**
-   * Regenerate API keys
-   * @param requestBody
+   * Regenerate all your API keys through the provided regenerate key. Note that existing keys will be invalidated immediately
    * @returns RegenerateGameApiKeysResponse Old keys were revoked and new ones were generated successfully
    * @throws ApiError
    */
-  public regenerateApiKeys(
-    requestBody: RegenerateGameApiKeysRequestInput,
-  ): CancelablePromise<RegenerateGameApiKeysResponse> {
+  public regenerateApiKeys(): CancelablePromise<RegenerateGameApiKeysResponse> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v1/game/regenerate-api-keys',
-      body: requestBody,
-      mediaType: 'application/json',
     });
   }
 

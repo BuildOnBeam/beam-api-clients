@@ -33,6 +33,7 @@ export type { GenerateLinkCodeRequestInput } from './models/GenerateLinkCodeRequ
 export type { GenerateLinkCodeResponse } from './models/GenerateLinkCodeResponse';
 export type { GenerateSignInCodeRequestInput } from './models/GenerateSignInCodeRequestInput';
 export type { GenerateSignInCodeResponse } from './models/GenerateSignInCodeResponse';
+export type { GetAllGasUsageResponse } from './models/GetAllGasUsageResponse';
 export type { GetAllProfilesResponse } from './models/GetAllProfilesResponse';
 export type { GetAssetListingsResponse } from './models/GetAssetListingsResponse';
 export type { GetAssetOffersResponse } from './models/GetAssetOffersResponse';
@@ -43,13 +44,13 @@ export type { GetChainCurrenciesResponse } from './models/GetChainCurrenciesResp
 export type { GetChainResponse } from './models/GetChainResponse';
 export type { GetEstimateResponse } from './models/GetEstimateResponse';
 export type { GetGameResponse } from './models/GetGameResponse';
+export type { GetGasUsageResponse } from './models/GetGasUsageResponse';
 export type { GetProfileCurrenciesResponse } from './models/GetProfileCurrenciesResponse';
 export type { GetProfileNativeCurrencyResponse } from './models/GetProfileNativeCurrencyResponse';
 export type { GetProfileResponse } from './models/GetProfileResponse';
 export type { GetQuoteResponse } from './models/GetQuoteResponse';
 export type { GetTransactionResponse } from './models/GetTransactionResponse';
 export type { GetTransactionsResponse } from './models/GetTransactionsResponse';
-export type { RegenerateGameApiKeysRequestInput } from './models/RegenerateGameApiKeysRequestInput';
 export type { RegenerateGameApiKeysResponse } from './models/RegenerateGameApiKeysResponse';
 export type { RemoveContractResponse } from './models/RemoveContractResponse';
 export type { RemovePolicyResponse } from './models/RemovePolicyResponse';
@@ -72,4 +73,5 @@ export { GameService } from './services/GameService';
 export { MarketplaceService } from './services/MarketplaceService';
 export { PolicyService } from './services/PolicyService';
 export { ProfilesService } from './services/ProfilesService';
+export { ReportingService } from './services/ReportingService';
 export { TransactionsService } from './services/TransactionsService';
