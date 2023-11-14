@@ -70,6 +70,7 @@ export { AssetsService } from './services/AssetsService';
 export { ChainService } from './services/ChainService';
 export { ExchangeService } from './services/ExchangeService';
 export { GameService } from './services/GameService';
+export { HealthService } from './services/HealthService';
 export { MarketplaceService } from './services/MarketplaceService';
 export { PolicyService } from './services/PolicyService';
 export { ProfilesService } from './services/ProfilesService';

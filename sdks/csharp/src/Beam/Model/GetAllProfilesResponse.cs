@@ -33,7 +33,7 @@ namespace Beam.Model
         /// <param name="data">data</param>
         /// <param name="pagination">pagination</param>
         [JsonConstructor]
-        public GetAllProfilesResponse(List<GetAllProfilesResponseDataInner> data, GetAllProfilesResponsePagination pagination)
+        public GetAllProfilesResponse(List<GetAllProfilesResponseDataInner> data, GetAssetsResponsePagination pagination)
         {
             Data = data;
             Pagination = pagination;
@@ -52,7 +52,7 @@ namespace Beam.Model
         /// Gets or Sets Pagination
         /// </summary>
         [JsonPropertyName("pagination")]
-        public GetAllProfilesResponsePagination Pagination { get; set; }
+        public GetAssetsResponsePagination Pagination { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -102,7 +102,7 @@ namespace Beam.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             List<GetAllProfilesResponseDataInner> data = default;
-            GetAllProfilesResponsePagination pagination = default;
+            GetAssetsResponsePagination pagination = default;
 
             while (utf8JsonReader.Read())
             {
@@ -125,7 +125,7 @@ namespace Beam.Model
                             break;
                         case "pagination":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                pagination = JsonSerializer.Deserialize<GetAllProfilesResponsePagination>(ref utf8JsonReader, jsonSerializerOptions);
+                                pagination = JsonSerializer.Deserialize<GetAssetsResponsePagination>(ref utf8JsonReader, jsonSerializerOptions);
                             break;
                         default:
                             break;

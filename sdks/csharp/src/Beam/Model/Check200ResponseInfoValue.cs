@@ -23,36 +23,34 @@ using System.ComponentModel.DataAnnotations;
 namespace Beam.Model
 {
     /// <summary>
-    /// GetTransactionsResponse
+    /// Check200ResponseInfoValue
     /// </summary>
-    public partial class GetTransactionsResponse : IValidatableObject
+    public partial class Check200ResponseInfoValue : Dictionary<String, string>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetTransactionsResponse" /> class.
+        /// Initializes a new instance of the <see cref="Check200ResponseInfoValue" /> class.
         /// </summary>
-        /// <param name="data">data</param>
-        /// <param name="pagination">pagination</param>
+        /// <param name="status">status</param>
         [JsonConstructor]
-        public GetTransactionsResponse(List<GetTransactionsResponseDataInner> data, GetAssetsResponsePagination pagination)
+        public Check200ResponseInfoValue(string status) : base()
         {
-            Data = data;
-            Pagination = pagination;
+            Status = status;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets Data
+        /// Gets or Sets Status
         /// </summary>
-        [JsonPropertyName("data")]
-        public List<GetTransactionsResponseDataInner> Data { get; set; }
+        [JsonPropertyName("status")]
+        public string Status { get; set; }
 
         /// <summary>
-        /// Gets or Sets Pagination
+        /// Gets or Sets additional properties
         /// </summary>
-        [JsonPropertyName("pagination")]
-        public GetAssetsResponsePagination Pagination { get; set; }
+        [JsonExtensionData]
+        public Dictionary<string, JsonElement> AdditionalProperties { get; } = new Dictionary<string, JsonElement>();
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -61,9 +59,10 @@ namespace Beam.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class GetTransactionsResponse {\n");
-            sb.Append("  Data: ").Append(Data).Append("\n");
-            sb.Append("  Pagination: ").Append(Pagination).Append("\n");
+            sb.Append("class Check200ResponseInfoValue {\n");
+            sb.Append("  ").Append(base.ToString()?.Replace("\n", "\n  ")).Append("\n");
+            sb.Append("  Status: ").Append(Status).Append("\n");
+            sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,24 +74,34 @@ namespace Beam.Model
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            return this.BaseValidate(validationContext);
+        }
+
+        /// <summary>
+        /// To validate all properties of the instance
+        /// </summary>
+        /// <param name="validationContext">Validation context</param>
+        /// <returns>Validation Result</returns>
+        protected IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> BaseValidate(ValidationContext validationContext)
+        {
             yield break;
         }
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="GetTransactionsResponse" />
+    /// A Json converter for type <see cref="Check200ResponseInfoValue" />
     /// </summary>
-    public class GetTransactionsResponseJsonConverter : JsonConverter<GetTransactionsResponse>
+    public class Check200ResponseInfoValueJsonConverter : JsonConverter<Check200ResponseInfoValue>
     {
         /// <summary>
-        /// Deserializes json to <see cref="GetTransactionsResponse" />
+        /// Deserializes json to <see cref="Check200ResponseInfoValue" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override GetTransactionsResponse Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override Check200ResponseInfoValue Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -101,8 +110,7 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            List<GetTransactionsResponseDataInner> data = default;
-            GetAssetsResponsePagination pagination = default;
+            string status = default;
 
             while (utf8JsonReader.Read())
             {
@@ -119,13 +127,8 @@ namespace Beam.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "data":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                data = JsonSerializer.Deserialize<List<GetTransactionsResponseDataInner>>(ref utf8JsonReader, jsonSerializerOptions);
-                            break;
-                        case "pagination":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                pagination = JsonSerializer.Deserialize<GetAssetsResponsePagination>(ref utf8JsonReader, jsonSerializerOptions);
+                        case "status":
+                            status = utf8JsonReader.GetString();
                             break;
                         default:
                             break;
@@ -133,43 +136,37 @@ namespace Beam.Model
                 }
             }
 
-            if (data == null)
-                throw new ArgumentNullException(nameof(data), "Property is required for class GetTransactionsResponse.");
+            if (status == null)
+                throw new ArgumentNullException(nameof(status), "Property is required for class Check200ResponseInfoValue.");
 
-            if (pagination == null)
-                throw new ArgumentNullException(nameof(pagination), "Property is required for class GetTransactionsResponse.");
-
-            return new GetTransactionsResponse(data, pagination);
+            return new Check200ResponseInfoValue(status);
         }
 
         /// <summary>
-        /// Serializes a <see cref="GetTransactionsResponse" />
+        /// Serializes a <see cref="Check200ResponseInfoValue" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="getTransactionsResponse"></param>
+        /// <param name="check200ResponseInfoValue"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, GetTransactionsResponse getTransactionsResponse, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, Check200ResponseInfoValue check200ResponseInfoValue, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(ref writer, getTransactionsResponse, jsonSerializerOptions);
+            WriteProperties(ref writer, check200ResponseInfoValue, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="GetTransactionsResponse" />
+        /// Serializes the properties of <see cref="Check200ResponseInfoValue" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="getTransactionsResponse"></param>
+        /// <param name="check200ResponseInfoValue"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(ref Utf8JsonWriter writer, GetTransactionsResponse getTransactionsResponse, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(ref Utf8JsonWriter writer, Check200ResponseInfoValue check200ResponseInfoValue, JsonSerializerOptions jsonSerializerOptions)
         {
-            writer.WritePropertyName("data");
-            JsonSerializer.Serialize(writer, getTransactionsResponse.Data, jsonSerializerOptions);
-            writer.WritePropertyName("pagination");
-            JsonSerializer.Serialize(writer, getTransactionsResponse.Pagination, jsonSerializerOptions);
+            writer.WriteString("status", check200ResponseInfoValue.Status);
         }
     }
 }

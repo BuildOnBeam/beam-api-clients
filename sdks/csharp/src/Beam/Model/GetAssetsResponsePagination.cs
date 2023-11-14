@@ -23,36 +23,44 @@ using System.ComponentModel.DataAnnotations;
 namespace Beam.Model
 {
     /// <summary>
-    /// GetTransactionsResponse
+    /// GetAssetsResponsePagination
     /// </summary>
-    public partial class GetTransactionsResponse : IValidatableObject
+    public partial class GetAssetsResponsePagination : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetTransactionsResponse" /> class.
+        /// Initializes a new instance of the <see cref="GetAssetsResponsePagination" /> class.
         /// </summary>
-        /// <param name="data">data</param>
-        /// <param name="pagination">pagination</param>
+        /// <param name="count">count</param>
+        /// <param name="limit">limit (default to 10M)</param>
+        /// <param name="offset">offset (default to 0M)</param>
         [JsonConstructor]
-        public GetTransactionsResponse(List<GetTransactionsResponseDataInner> data, GetAssetsResponsePagination pagination)
+        public GetAssetsResponsePagination(decimal count, decimal limit = 10M, decimal offset = 0M)
         {
-            Data = data;
-            Pagination = pagination;
+            Count = count;
+            Limit = limit;
+            Offset = offset;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets Data
+        /// Gets or Sets Count
         /// </summary>
-        [JsonPropertyName("data")]
-        public List<GetTransactionsResponseDataInner> Data { get; set; }
+        [JsonPropertyName("count")]
+        public decimal Count { get; set; }
 
         /// <summary>
-        /// Gets or Sets Pagination
+        /// Gets or Sets Limit
         /// </summary>
-        [JsonPropertyName("pagination")]
-        public GetAssetsResponsePagination Pagination { get; set; }
+        [JsonPropertyName("limit")]
+        public decimal Limit { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Offset
+        /// </summary>
+        [JsonPropertyName("offset")]
+        public decimal Offset { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -61,9 +69,10 @@ namespace Beam.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class GetTransactionsResponse {\n");
-            sb.Append("  Data: ").Append(Data).Append("\n");
-            sb.Append("  Pagination: ").Append(Pagination).Append("\n");
+            sb.Append("class GetAssetsResponsePagination {\n");
+            sb.Append("  Count: ").Append(Count).Append("\n");
+            sb.Append("  Limit: ").Append(Limit).Append("\n");
+            sb.Append("  Offset: ").Append(Offset).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -80,19 +89,19 @@ namespace Beam.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="GetTransactionsResponse" />
+    /// A Json converter for type <see cref="GetAssetsResponsePagination" />
     /// </summary>
-    public class GetTransactionsResponseJsonConverter : JsonConverter<GetTransactionsResponse>
+    public class GetAssetsResponsePaginationJsonConverter : JsonConverter<GetAssetsResponsePagination>
     {
         /// <summary>
-        /// Deserializes json to <see cref="GetTransactionsResponse" />
+        /// Deserializes json to <see cref="GetAssetsResponsePagination" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override GetTransactionsResponse Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override GetAssetsResponsePagination Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -101,8 +110,9 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            List<GetTransactionsResponseDataInner> data = default;
-            GetAssetsResponsePagination pagination = default;
+            decimal? count = default;
+            decimal? limit = default;
+            decimal? offset = default;
 
             while (utf8JsonReader.Read())
             {
@@ -119,13 +129,17 @@ namespace Beam.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "data":
+                        case "count":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                data = JsonSerializer.Deserialize<List<GetTransactionsResponseDataInner>>(ref utf8JsonReader, jsonSerializerOptions);
+                                count = utf8JsonReader.GetDecimal();
                             break;
-                        case "pagination":
+                        case "limit":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                pagination = JsonSerializer.Deserialize<GetAssetsResponsePagination>(ref utf8JsonReader, jsonSerializerOptions);
+                                limit = utf8JsonReader.GetDecimal();
+                            break;
+                        case "offset":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                offset = utf8JsonReader.GetDecimal();
                             break;
                         default:
                             break;
@@ -133,43 +147,45 @@ namespace Beam.Model
                 }
             }
 
-            if (data == null)
-                throw new ArgumentNullException(nameof(data), "Property is required for class GetTransactionsResponse.");
+            if (count == null)
+                throw new ArgumentNullException(nameof(count), "Property is required for class GetAssetsResponsePagination.");
 
-            if (pagination == null)
-                throw new ArgumentNullException(nameof(pagination), "Property is required for class GetTransactionsResponse.");
+            if (limit == null)
+                throw new ArgumentNullException(nameof(limit), "Property is required for class GetAssetsResponsePagination.");
 
-            return new GetTransactionsResponse(data, pagination);
+            if (offset == null)
+                throw new ArgumentNullException(nameof(offset), "Property is required for class GetAssetsResponsePagination.");
+
+            return new GetAssetsResponsePagination(count.Value, limit.Value, offset.Value);
         }
 
         /// <summary>
-        /// Serializes a <see cref="GetTransactionsResponse" />
+        /// Serializes a <see cref="GetAssetsResponsePagination" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="getTransactionsResponse"></param>
+        /// <param name="getAssetsResponsePagination"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, GetTransactionsResponse getTransactionsResponse, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, GetAssetsResponsePagination getAssetsResponsePagination, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(ref writer, getTransactionsResponse, jsonSerializerOptions);
+            WriteProperties(ref writer, getAssetsResponsePagination, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="GetTransactionsResponse" />
+        /// Serializes the properties of <see cref="GetAssetsResponsePagination" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="getTransactionsResponse"></param>
+        /// <param name="getAssetsResponsePagination"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(ref Utf8JsonWriter writer, GetTransactionsResponse getTransactionsResponse, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(ref Utf8JsonWriter writer, GetAssetsResponsePagination getAssetsResponsePagination, JsonSerializerOptions jsonSerializerOptions)
         {
-            writer.WritePropertyName("data");
-            JsonSerializer.Serialize(writer, getTransactionsResponse.Data, jsonSerializerOptions);
-            writer.WritePropertyName("pagination");
-            JsonSerializer.Serialize(writer, getTransactionsResponse.Pagination, jsonSerializerOptions);
+            writer.WriteNumber("count", getAssetsResponsePagination.Count);
+            writer.WriteNumber("limit", getAssetsResponsePagination.Limit);
+            writer.WriteNumber("offset", getAssetsResponsePagination.Offset);
         }
     }
 }

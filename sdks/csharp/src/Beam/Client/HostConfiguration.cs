@@ -52,6 +52,9 @@ namespace Beam.Client
             _jsonOptions.Converters.Add(new CancelAssetListingRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new CancelAssetOfferRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new CancelOfferResponseJsonConverter());
+            _jsonOptions.Converters.Add(new Check200ResponseJsonConverter());
+            _jsonOptions.Converters.Add(new Check200ResponseInfoValueJsonConverter());
+            _jsonOptions.Converters.Add(new Check503ResponseJsonConverter());
             _jsonOptions.Converters.Add(new ConvertTokenRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new ConvertTokenResponseJsonConverter());
             _jsonOptions.Converters.Add(new CreateAssetOfferRequestInputJsonConverter());
@@ -74,7 +77,6 @@ namespace Beam.Client
             _jsonOptions.Converters.Add(new GetAllGasUsageResponseDataInnerSummaryJsonConverter());
             _jsonOptions.Converters.Add(new GetAllProfilesResponseJsonConverter());
             _jsonOptions.Converters.Add(new GetAllProfilesResponseDataInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetAllProfilesResponsePaginationJsonConverter());
             _jsonOptions.Converters.Add(new GetAssetListingsResponseJsonConverter());
             _jsonOptions.Converters.Add(new GetAssetListingsResponseDataInnerJsonConverter());
             _jsonOptions.Converters.Add(new GetAssetListingsResponseDataInnerNftJsonConverter());
@@ -96,6 +98,7 @@ namespace Beam.Client
             _jsonOptions.Converters.Add(new GetAssetsResponseDataInnerJsonConverter());
             _jsonOptions.Converters.Add(new GetAssetsResponseDataInnerAttributesInnerJsonConverter());
             _jsonOptions.Converters.Add(new GetAssetsResponseDataInnerOwnersInnerJsonConverter());
+            _jsonOptions.Converters.Add(new GetAssetsResponsePaginationJsonConverter());
             _jsonOptions.Converters.Add(new GetChainCurrenciesResponseJsonConverter());
             _jsonOptions.Converters.Add(new GetChainCurrenciesResponseDataInnerJsonConverter());
             _jsonOptions.Converters.Add(new GetChainResponseJsonConverter());
@@ -147,6 +150,8 @@ namespace Beam.Client
             _services.AddTransient<IExchangeApi, ExchangeApi>();
             _services.AddSingleton<GameApiEvents>();
             _services.AddTransient<IGameApi, GameApi>();
+            _services.AddSingleton<HealthApiEvents>();
+            _services.AddTransient<IHealthApi, HealthApi>();
             _services.AddSingleton<MarketplaceApiEvents>();
             _services.AddTransient<IMarketplaceApi, MarketplaceApi>();
             _services.AddSingleton<PolicyApiEvents>();
@@ -178,6 +183,7 @@ namespace Beam.Client
             builders.Add(_services.AddHttpClient<IChainApi, ChainApi>(client));
             builders.Add(_services.AddHttpClient<IExchangeApi, ExchangeApi>(client));
             builders.Add(_services.AddHttpClient<IGameApi, GameApi>(client));
+            builders.Add(_services.AddHttpClient<IHealthApi, HealthApi>(client));
             builders.Add(_services.AddHttpClient<IMarketplaceApi, MarketplaceApi>(client));
             builders.Add(_services.AddHttpClient<IPolicyApi, PolicyApi>(client));
             builders.Add(_services.AddHttpClient<IProfilesApi, ProfilesApi>(client));

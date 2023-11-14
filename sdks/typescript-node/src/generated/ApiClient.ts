@@ -10,6 +10,7 @@ import { AssetsService } from './services/AssetsService';
 import { ChainService } from './services/ChainService';
 import { ExchangeService } from './services/ExchangeService';
 import { GameService } from './services/GameService';
+import { HealthService } from './services/HealthService';
 import { MarketplaceService } from './services/MarketplaceService';
 import { PolicyService } from './services/PolicyService';
 import { ProfilesService } from './services/ProfilesService';
@@ -23,6 +24,7 @@ export class ApiClient {
   public readonly chain: ChainService;
   public readonly exchange: ExchangeService;
   public readonly game: GameService;
+  public readonly health: HealthService;
   public readonly marketplace: MarketplaceService;
   public readonly policy: PolicyService;
   public readonly profiles: ProfilesService;
@@ -51,6 +53,7 @@ export class ApiClient {
     this.chain = new ChainService(this.request);
     this.exchange = new ExchangeService(this.request);
     this.game = new GameService(this.request);
+    this.health = new HealthService(this.request);
     this.marketplace = new MarketplaceService(this.request);
     this.policy = new PolicyService(this.request);
     this.profiles = new ProfilesService(this.request);
