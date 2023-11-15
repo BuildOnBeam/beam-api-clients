@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -43,14 +44,14 @@ namespace Beam.Model
         /// <param name="royaltyFee">royaltyFee</param>
         /// <param name="sellType">sellType</param>
         /// <param name="sellerAddress">sellerAddress</param>
-        /// <param name="sellerEntityId">sellerEntityId</param>
         /// <param name="endPrice">endPrice</param>
         /// <param name="endTime">endTime</param>
         /// <param name="price">price</param>
+        /// <param name="sellerEntityId">sellerEntityId</param>
         /// <param name="startPrice">startPrice</param>
         /// <param name="startTime">startTime</param>
         [JsonConstructor]
-        public GetAssetListingsResponseDataInner(string contractId, string currency, string expiresAt, string marketplaceId, GetAssetListingsResponseDataInnerNft nft, string orderId, decimal platformFee, decimal quantityAvailable, decimal quantityFilled, decimal quantityListed, decimal royaltyFee, string sellType, string sellerAddress, string sellerEntityId, string endPrice = default, string endTime = default, string price = default, string startPrice = default, string startTime = default)
+        public GetAssetListingsResponseDataInner(string contractId, string currency, string expiresAt, string marketplaceId, GetAssetListingsResponseDataInnerNft nft, string orderId, decimal platformFee, decimal quantityAvailable, decimal quantityFilled, decimal quantityListed, decimal royaltyFee, string sellType, string sellerAddress, string endPrice = default, string endTime = default, string price = default, Option<string> sellerEntityId = default, string startPrice = default, string startTime = default)
         {
             ContractId = contractId;
             Currency = currency;
@@ -65,10 +66,10 @@ namespace Beam.Model
             RoyaltyFee = royaltyFee;
             SellType = sellType;
             SellerAddress = sellerAddress;
-            SellerEntityId = sellerEntityId;
             EndPrice = endPrice;
             EndTime = endTime;
             Price = price;
+            SellerEntityIdOption = sellerEntityId;
             StartPrice = startPrice;
             StartTime = startTime;
             OnCreated();
@@ -155,12 +156,6 @@ namespace Beam.Model
         public string SellerAddress { get; set; }
 
         /// <summary>
-        /// Gets or Sets SellerEntityId
-        /// </summary>
-        [JsonPropertyName("sellerEntityId")]
-        public string SellerEntityId { get; set; }
-
-        /// <summary>
         /// Gets or Sets EndPrice
         /// </summary>
         [JsonPropertyName("endPrice")]
@@ -177,6 +172,19 @@ namespace Beam.Model
         /// </summary>
         [JsonPropertyName("price")]
         public string Price { get; set; }
+
+        /// <summary>
+        /// Used to track the state of SellerEntityId
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> SellerEntityIdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets SellerEntityId
+        /// </summary>
+        [JsonPropertyName("sellerEntityId")]
+        public string SellerEntityId { get { return this. SellerEntityIdOption; } set { this.SellerEntityIdOption = new(value); } }
 
         /// <summary>
         /// Gets or Sets StartPrice
@@ -211,10 +219,10 @@ namespace Beam.Model
             sb.Append("  RoyaltyFee: ").Append(RoyaltyFee).Append("\n");
             sb.Append("  SellType: ").Append(SellType).Append("\n");
             sb.Append("  SellerAddress: ").Append(SellerAddress).Append("\n");
-            sb.Append("  SellerEntityId: ").Append(SellerEntityId).Append("\n");
             sb.Append("  EndPrice: ").Append(EndPrice).Append("\n");
             sb.Append("  EndTime: ").Append(EndTime).Append("\n");
             sb.Append("  Price: ").Append(Price).Append("\n");
+            sb.Append("  SellerEntityId: ").Append(SellerEntityId).Append("\n");
             sb.Append("  StartPrice: ").Append(StartPrice).Append("\n");
             sb.Append("  StartTime: ").Append(StartTime).Append("\n");
             sb.Append("}\n");
@@ -254,25 +262,25 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string contractId = default;
-            string currency = default;
-            string expiresAt = default;
-            string marketplaceId = default;
-            GetAssetListingsResponseDataInnerNft nft = default;
-            string orderId = default;
-            decimal? platformFee = default;
-            decimal? quantityAvailable = default;
-            decimal? quantityFilled = default;
-            decimal? quantityListed = default;
-            decimal? royaltyFee = default;
-            string sellType = default;
-            string sellerAddress = default;
-            string sellerEntityId = default;
-            string endPrice = default;
-            string endTime = default;
-            string price = default;
-            string startPrice = default;
-            string startTime = default;
+            Option<string> contractId = default;
+            Option<string> currency = default;
+            Option<string> expiresAt = default;
+            Option<string> marketplaceId = default;
+            Option<GetAssetListingsResponseDataInnerNft> nft = default;
+            Option<string> orderId = default;
+            Option<decimal?> platformFee = default;
+            Option<decimal?> quantityAvailable = default;
+            Option<decimal?> quantityFilled = default;
+            Option<decimal?> quantityListed = default;
+            Option<decimal?> royaltyFee = default;
+            Option<string> sellType = default;
+            Option<string> sellerAddress = default;
+            Option<string> endPrice = default;
+            Option<string> endTime = default;
+            Option<string> price = default;
+            Option<string> sellerEntityId = default;
+            Option<string> startPrice = default;
+            Option<string> startTime = default;
 
             while (utf8JsonReader.Read())
             {
@@ -290,67 +298,67 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "contractId":
-                            contractId = utf8JsonReader.GetString();
+                            contractId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "currency":
-                            currency = utf8JsonReader.GetString();
+                            currency = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "expiresAt":
-                            expiresAt = utf8JsonReader.GetString();
+                            expiresAt = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "marketplaceId":
-                            marketplaceId = utf8JsonReader.GetString();
+                            marketplaceId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "nft":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                nft = JsonSerializer.Deserialize<GetAssetListingsResponseDataInnerNft>(ref utf8JsonReader, jsonSerializerOptions);
+                                nft = new Option<GetAssetListingsResponseDataInnerNft>(JsonSerializer.Deserialize<GetAssetListingsResponseDataInnerNft>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "orderId":
-                            orderId = utf8JsonReader.GetString();
+                            orderId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "platformFee":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                platformFee = utf8JsonReader.GetDecimal();
+                                platformFee = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "quantityAvailable":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                quantityAvailable = utf8JsonReader.GetDecimal();
+                                quantityAvailable = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "quantityFilled":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                quantityFilled = utf8JsonReader.GetDecimal();
+                                quantityFilled = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "quantityListed":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                quantityListed = utf8JsonReader.GetDecimal();
+                                quantityListed = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "royaltyFee":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                royaltyFee = utf8JsonReader.GetDecimal();
+                                royaltyFee = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "sellType":
-                            sellType = utf8JsonReader.GetString();
+                            sellType = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "sellerAddress":
-                            sellerAddress = utf8JsonReader.GetString();
-                            break;
-                        case "sellerEntityId":
-                            sellerEntityId = utf8JsonReader.GetString();
+                            sellerAddress = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "endPrice":
-                            endPrice = utf8JsonReader.GetString();
+                            endPrice = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "endTime":
-                            endTime = utf8JsonReader.GetString();
+                            endTime = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "price":
-                            price = utf8JsonReader.GetString();
+                            price = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "sellerEntityId":
+                            sellerEntityId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "startPrice":
-                            startPrice = utf8JsonReader.GetString();
+                            startPrice = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "startTime":
-                            startTime = utf8JsonReader.GetString();
+                            startTime = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -358,49 +366,103 @@ namespace Beam.Model
                 }
             }
 
-            if (contractId == null)
-                throw new ArgumentNullException(nameof(contractId), "Property is required for class GetAssetListingsResponseDataInner.");
+            if (!contractId.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetListingsResponseDataInner.", nameof(contractId));
 
-            if (currency == null)
-                throw new ArgumentNullException(nameof(currency), "Property is required for class GetAssetListingsResponseDataInner.");
+            if (!currency.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetListingsResponseDataInner.", nameof(currency));
 
-            if (expiresAt == null)
-                throw new ArgumentNullException(nameof(expiresAt), "Property is required for class GetAssetListingsResponseDataInner.");
+            if (!expiresAt.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetListingsResponseDataInner.", nameof(expiresAt));
 
-            if (marketplaceId == null)
-                throw new ArgumentNullException(nameof(marketplaceId), "Property is required for class GetAssetListingsResponseDataInner.");
+            if (!marketplaceId.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetListingsResponseDataInner.", nameof(marketplaceId));
 
-            if (nft == null)
-                throw new ArgumentNullException(nameof(nft), "Property is required for class GetAssetListingsResponseDataInner.");
+            if (!nft.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetListingsResponseDataInner.", nameof(nft));
 
-            if (orderId == null)
-                throw new ArgumentNullException(nameof(orderId), "Property is required for class GetAssetListingsResponseDataInner.");
+            if (!orderId.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetListingsResponseDataInner.", nameof(orderId));
 
-            if (platformFee == null)
-                throw new ArgumentNullException(nameof(platformFee), "Property is required for class GetAssetListingsResponseDataInner.");
+            if (!platformFee.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetListingsResponseDataInner.", nameof(platformFee));
 
-            if (quantityAvailable == null)
-                throw new ArgumentNullException(nameof(quantityAvailable), "Property is required for class GetAssetListingsResponseDataInner.");
+            if (!quantityAvailable.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetListingsResponseDataInner.", nameof(quantityAvailable));
 
-            if (quantityFilled == null)
-                throw new ArgumentNullException(nameof(quantityFilled), "Property is required for class GetAssetListingsResponseDataInner.");
+            if (!quantityFilled.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetListingsResponseDataInner.", nameof(quantityFilled));
 
-            if (quantityListed == null)
-                throw new ArgumentNullException(nameof(quantityListed), "Property is required for class GetAssetListingsResponseDataInner.");
+            if (!quantityListed.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetListingsResponseDataInner.", nameof(quantityListed));
 
-            if (royaltyFee == null)
-                throw new ArgumentNullException(nameof(royaltyFee), "Property is required for class GetAssetListingsResponseDataInner.");
+            if (!royaltyFee.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetListingsResponseDataInner.", nameof(royaltyFee));
 
-            if (sellType == null)
-                throw new ArgumentNullException(nameof(sellType), "Property is required for class GetAssetListingsResponseDataInner.");
+            if (!sellType.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetListingsResponseDataInner.", nameof(sellType));
 
-            if (sellerAddress == null)
-                throw new ArgumentNullException(nameof(sellerAddress), "Property is required for class GetAssetListingsResponseDataInner.");
+            if (!sellerAddress.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetListingsResponseDataInner.", nameof(sellerAddress));
 
-            if (sellerEntityId == null)
-                throw new ArgumentNullException(nameof(sellerEntityId), "Property is required for class GetAssetListingsResponseDataInner.");
+            if (!endPrice.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetListingsResponseDataInner.", nameof(endPrice));
 
-            return new GetAssetListingsResponseDataInner(contractId, currency, expiresAt, marketplaceId, nft, orderId, platformFee.Value, quantityAvailable.Value, quantityFilled.Value, quantityListed.Value, royaltyFee.Value, sellType, sellerAddress, sellerEntityId, endPrice, endTime, price, startPrice, startTime);
+            if (!endTime.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetListingsResponseDataInner.", nameof(endTime));
+
+            if (!price.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetListingsResponseDataInner.", nameof(price));
+
+            if (!startPrice.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetListingsResponseDataInner.", nameof(startPrice));
+
+            if (!startTime.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetListingsResponseDataInner.", nameof(startTime));
+
+            if (contractId.IsSet && contractId.Value == null)
+                throw new ArgumentNullException(nameof(contractId), "Property is not nullable for class GetAssetListingsResponseDataInner.");
+
+            if (currency.IsSet && currency.Value == null)
+                throw new ArgumentNullException(nameof(currency), "Property is not nullable for class GetAssetListingsResponseDataInner.");
+
+            if (expiresAt.IsSet && expiresAt.Value == null)
+                throw new ArgumentNullException(nameof(expiresAt), "Property is not nullable for class GetAssetListingsResponseDataInner.");
+
+            if (marketplaceId.IsSet && marketplaceId.Value == null)
+                throw new ArgumentNullException(nameof(marketplaceId), "Property is not nullable for class GetAssetListingsResponseDataInner.");
+
+            if (nft.IsSet && nft.Value == null)
+                throw new ArgumentNullException(nameof(nft), "Property is not nullable for class GetAssetListingsResponseDataInner.");
+
+            if (orderId.IsSet && orderId.Value == null)
+                throw new ArgumentNullException(nameof(orderId), "Property is not nullable for class GetAssetListingsResponseDataInner.");
+
+            if (platformFee.IsSet && platformFee.Value == null)
+                throw new ArgumentNullException(nameof(platformFee), "Property is not nullable for class GetAssetListingsResponseDataInner.");
+
+            if (quantityAvailable.IsSet && quantityAvailable.Value == null)
+                throw new ArgumentNullException(nameof(quantityAvailable), "Property is not nullable for class GetAssetListingsResponseDataInner.");
+
+            if (quantityFilled.IsSet && quantityFilled.Value == null)
+                throw new ArgumentNullException(nameof(quantityFilled), "Property is not nullable for class GetAssetListingsResponseDataInner.");
+
+            if (quantityListed.IsSet && quantityListed.Value == null)
+                throw new ArgumentNullException(nameof(quantityListed), "Property is not nullable for class GetAssetListingsResponseDataInner.");
+
+            if (royaltyFee.IsSet && royaltyFee.Value == null)
+                throw new ArgumentNullException(nameof(royaltyFee), "Property is not nullable for class GetAssetListingsResponseDataInner.");
+
+            if (sellType.IsSet && sellType.Value == null)
+                throw new ArgumentNullException(nameof(sellType), "Property is not nullable for class GetAssetListingsResponseDataInner.");
+
+            if (sellerAddress.IsSet && sellerAddress.Value == null)
+                throw new ArgumentNullException(nameof(sellerAddress), "Property is not nullable for class GetAssetListingsResponseDataInner.");
+
+            if (sellerEntityId.IsSet && sellerEntityId.Value == null)
+                throw new ArgumentNullException(nameof(sellerEntityId), "Property is not nullable for class GetAssetListingsResponseDataInner.");
+
+            return new GetAssetListingsResponseDataInner(contractId.Value, currency.Value, expiresAt.Value, marketplaceId.Value, nft.Value, orderId.Value, platformFee.Value.Value, quantityAvailable.Value.Value, quantityFilled.Value.Value, quantityListed.Value.Value, royaltyFee.Value.Value, sellType.Value, sellerAddress.Value, endPrice.Value, endTime.Value, price.Value, sellerEntityId, startPrice.Value, startTime.Value);
         }
 
         /// <summary>
@@ -427,26 +489,86 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetAssetListingsResponseDataInner getAssetListingsResponseDataInner, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (getAssetListingsResponseDataInner.ContractId == null)
+                throw new ArgumentNullException(nameof(getAssetListingsResponseDataInner.ContractId), "Property is required for class GetAssetListingsResponseDataInner.");
+
+            if (getAssetListingsResponseDataInner.Currency == null)
+                throw new ArgumentNullException(nameof(getAssetListingsResponseDataInner.Currency), "Property is required for class GetAssetListingsResponseDataInner.");
+
+            if (getAssetListingsResponseDataInner.ExpiresAt == null)
+                throw new ArgumentNullException(nameof(getAssetListingsResponseDataInner.ExpiresAt), "Property is required for class GetAssetListingsResponseDataInner.");
+
+            if (getAssetListingsResponseDataInner.MarketplaceId == null)
+                throw new ArgumentNullException(nameof(getAssetListingsResponseDataInner.MarketplaceId), "Property is required for class GetAssetListingsResponseDataInner.");
+
+            if (getAssetListingsResponseDataInner.Nft == null)
+                throw new ArgumentNullException(nameof(getAssetListingsResponseDataInner.Nft), "Property is required for class GetAssetListingsResponseDataInner.");
+
+            if (getAssetListingsResponseDataInner.OrderId == null)
+                throw new ArgumentNullException(nameof(getAssetListingsResponseDataInner.OrderId), "Property is required for class GetAssetListingsResponseDataInner.");
+
+            if (getAssetListingsResponseDataInner.SellType == null)
+                throw new ArgumentNullException(nameof(getAssetListingsResponseDataInner.SellType), "Property is required for class GetAssetListingsResponseDataInner.");
+
+            if (getAssetListingsResponseDataInner.SellerAddress == null)
+                throw new ArgumentNullException(nameof(getAssetListingsResponseDataInner.SellerAddress), "Property is required for class GetAssetListingsResponseDataInner.");
+
+            if (getAssetListingsResponseDataInner.SellerEntityIdOption.IsSet && getAssetListingsResponseDataInner.SellerEntityId == null)
+                throw new ArgumentNullException(nameof(getAssetListingsResponseDataInner.SellerEntityId), "Property is required for class GetAssetListingsResponseDataInner.");
+
             writer.WriteString("contractId", getAssetListingsResponseDataInner.ContractId);
+
             writer.WriteString("currency", getAssetListingsResponseDataInner.Currency);
+
             writer.WriteString("expiresAt", getAssetListingsResponseDataInner.ExpiresAt);
+
             writer.WriteString("marketplaceId", getAssetListingsResponseDataInner.MarketplaceId);
+
             writer.WritePropertyName("nft");
             JsonSerializer.Serialize(writer, getAssetListingsResponseDataInner.Nft, jsonSerializerOptions);
             writer.WriteString("orderId", getAssetListingsResponseDataInner.OrderId);
+
             writer.WriteNumber("platformFee", getAssetListingsResponseDataInner.PlatformFee);
+
             writer.WriteNumber("quantityAvailable", getAssetListingsResponseDataInner.QuantityAvailable);
+
             writer.WriteNumber("quantityFilled", getAssetListingsResponseDataInner.QuantityFilled);
+
             writer.WriteNumber("quantityListed", getAssetListingsResponseDataInner.QuantityListed);
+
             writer.WriteNumber("royaltyFee", getAssetListingsResponseDataInner.RoyaltyFee);
+
             writer.WriteString("sellType", getAssetListingsResponseDataInner.SellType);
+
             writer.WriteString("sellerAddress", getAssetListingsResponseDataInner.SellerAddress);
-            writer.WriteString("sellerEntityId", getAssetListingsResponseDataInner.SellerEntityId);
-            writer.WriteString("endPrice", getAssetListingsResponseDataInner.EndPrice);
-            writer.WriteString("endTime", getAssetListingsResponseDataInner.EndTime);
-            writer.WriteString("price", getAssetListingsResponseDataInner.Price);
-            writer.WriteString("startPrice", getAssetListingsResponseDataInner.StartPrice);
-            writer.WriteString("startTime", getAssetListingsResponseDataInner.StartTime);
+
+            if (getAssetListingsResponseDataInner.EndPrice != null)
+                writer.WriteString("endPrice", getAssetListingsResponseDataInner.EndPrice);
+            else
+                writer.WriteNull("endPrice");
+
+            if (getAssetListingsResponseDataInner.EndTime != null)
+                writer.WriteString("endTime", getAssetListingsResponseDataInner.EndTime);
+            else
+                writer.WriteNull("endTime");
+
+            if (getAssetListingsResponseDataInner.Price != null)
+                writer.WriteString("price", getAssetListingsResponseDataInner.Price);
+            else
+                writer.WriteNull("price");
+
+            if (getAssetListingsResponseDataInner.SellerEntityIdOption.IsSet)
+                writer.WriteString("sellerEntityId", getAssetListingsResponseDataInner.SellerEntityId);
+
+            if (getAssetListingsResponseDataInner.StartPrice != null)
+                writer.WriteString("startPrice", getAssetListingsResponseDataInner.StartPrice);
+            else
+                writer.WriteNull("startPrice");
+
+            if (getAssetListingsResponseDataInner.StartTime != null)
+                writer.WriteString("startTime", getAssetListingsResponseDataInner.StartTime);
+            else
+                writer.WriteNull("startTime");
         }
     }
 }

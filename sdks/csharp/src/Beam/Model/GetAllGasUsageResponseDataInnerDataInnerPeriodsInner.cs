@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -137,12 +138,12 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string averageTransactionFee = default;
-            decimal? end = default;
-            decimal? start = default;
-            string totalTransactionFee = default;
-            string totalTransactionFeeInUSD = default;
-            decimal? transactionCount = default;
+            Option<string> averageTransactionFee = default;
+            Option<decimal?> end = default;
+            Option<decimal?> start = default;
+            Option<string> totalTransactionFee = default;
+            Option<string> totalTransactionFeeInUSD = default;
+            Option<decimal?> transactionCount = default;
 
             while (utf8JsonReader.Read())
             {
@@ -160,25 +161,25 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "averageTransactionFee":
-                            averageTransactionFee = utf8JsonReader.GetString();
+                            averageTransactionFee = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "end":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                end = utf8JsonReader.GetDecimal();
+                                end = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "start":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                start = utf8JsonReader.GetDecimal();
+                                start = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "totalTransactionFee":
-                            totalTransactionFee = utf8JsonReader.GetString();
+                            totalTransactionFee = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "totalTransactionFeeInUSD":
-                            totalTransactionFeeInUSD = utf8JsonReader.GetString();
+                            totalTransactionFeeInUSD = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "transactionCount":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                transactionCount = utf8JsonReader.GetDecimal();
+                                transactionCount = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         default:
                             break;
@@ -186,25 +187,43 @@ namespace Beam.Model
                 }
             }
 
-            if (averageTransactionFee == null)
-                throw new ArgumentNullException(nameof(averageTransactionFee), "Property is required for class GetAllGasUsageResponseDataInnerDataInnerPeriodsInner.");
+            if (!averageTransactionFee.IsSet)
+                throw new ArgumentException("Property is required for class GetAllGasUsageResponseDataInnerDataInnerPeriodsInner.", nameof(averageTransactionFee));
 
-            if (end == null)
-                throw new ArgumentNullException(nameof(end), "Property is required for class GetAllGasUsageResponseDataInnerDataInnerPeriodsInner.");
+            if (!end.IsSet)
+                throw new ArgumentException("Property is required for class GetAllGasUsageResponseDataInnerDataInnerPeriodsInner.", nameof(end));
 
-            if (start == null)
-                throw new ArgumentNullException(nameof(start), "Property is required for class GetAllGasUsageResponseDataInnerDataInnerPeriodsInner.");
+            if (!start.IsSet)
+                throw new ArgumentException("Property is required for class GetAllGasUsageResponseDataInnerDataInnerPeriodsInner.", nameof(start));
 
-            if (totalTransactionFee == null)
-                throw new ArgumentNullException(nameof(totalTransactionFee), "Property is required for class GetAllGasUsageResponseDataInnerDataInnerPeriodsInner.");
+            if (!totalTransactionFee.IsSet)
+                throw new ArgumentException("Property is required for class GetAllGasUsageResponseDataInnerDataInnerPeriodsInner.", nameof(totalTransactionFee));
 
-            if (totalTransactionFeeInUSD == null)
-                throw new ArgumentNullException(nameof(totalTransactionFeeInUSD), "Property is required for class GetAllGasUsageResponseDataInnerDataInnerPeriodsInner.");
+            if (!totalTransactionFeeInUSD.IsSet)
+                throw new ArgumentException("Property is required for class GetAllGasUsageResponseDataInnerDataInnerPeriodsInner.", nameof(totalTransactionFeeInUSD));
 
-            if (transactionCount == null)
-                throw new ArgumentNullException(nameof(transactionCount), "Property is required for class GetAllGasUsageResponseDataInnerDataInnerPeriodsInner.");
+            if (!transactionCount.IsSet)
+                throw new ArgumentException("Property is required for class GetAllGasUsageResponseDataInnerDataInnerPeriodsInner.", nameof(transactionCount));
 
-            return new GetAllGasUsageResponseDataInnerDataInnerPeriodsInner(averageTransactionFee, end.Value, start.Value, totalTransactionFee, totalTransactionFeeInUSD, transactionCount.Value);
+            if (averageTransactionFee.IsSet && averageTransactionFee.Value == null)
+                throw new ArgumentNullException(nameof(averageTransactionFee), "Property is not nullable for class GetAllGasUsageResponseDataInnerDataInnerPeriodsInner.");
+
+            if (end.IsSet && end.Value == null)
+                throw new ArgumentNullException(nameof(end), "Property is not nullable for class GetAllGasUsageResponseDataInnerDataInnerPeriodsInner.");
+
+            if (start.IsSet && start.Value == null)
+                throw new ArgumentNullException(nameof(start), "Property is not nullable for class GetAllGasUsageResponseDataInnerDataInnerPeriodsInner.");
+
+            if (totalTransactionFee.IsSet && totalTransactionFee.Value == null)
+                throw new ArgumentNullException(nameof(totalTransactionFee), "Property is not nullable for class GetAllGasUsageResponseDataInnerDataInnerPeriodsInner.");
+
+            if (totalTransactionFeeInUSD.IsSet && totalTransactionFeeInUSD.Value == null)
+                throw new ArgumentNullException(nameof(totalTransactionFeeInUSD), "Property is not nullable for class GetAllGasUsageResponseDataInnerDataInnerPeriodsInner.");
+
+            if (transactionCount.IsSet && transactionCount.Value == null)
+                throw new ArgumentNullException(nameof(transactionCount), "Property is not nullable for class GetAllGasUsageResponseDataInnerDataInnerPeriodsInner.");
+
+            return new GetAllGasUsageResponseDataInnerDataInnerPeriodsInner(averageTransactionFee.Value, end.Value.Value, start.Value.Value, totalTransactionFee.Value, totalTransactionFeeInUSD.Value, transactionCount.Value.Value);
         }
 
         /// <summary>
@@ -231,11 +250,25 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetAllGasUsageResponseDataInnerDataInnerPeriodsInner getAllGasUsageResponseDataInnerDataInnerPeriodsInner, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (getAllGasUsageResponseDataInnerDataInnerPeriodsInner.AverageTransactionFee == null)
+                throw new ArgumentNullException(nameof(getAllGasUsageResponseDataInnerDataInnerPeriodsInner.AverageTransactionFee), "Property is required for class GetAllGasUsageResponseDataInnerDataInnerPeriodsInner.");
+
+            if (getAllGasUsageResponseDataInnerDataInnerPeriodsInner.TotalTransactionFee == null)
+                throw new ArgumentNullException(nameof(getAllGasUsageResponseDataInnerDataInnerPeriodsInner.TotalTransactionFee), "Property is required for class GetAllGasUsageResponseDataInnerDataInnerPeriodsInner.");
+
+            if (getAllGasUsageResponseDataInnerDataInnerPeriodsInner.TotalTransactionFeeInUSD == null)
+                throw new ArgumentNullException(nameof(getAllGasUsageResponseDataInnerDataInnerPeriodsInner.TotalTransactionFeeInUSD), "Property is required for class GetAllGasUsageResponseDataInnerDataInnerPeriodsInner.");
+
             writer.WriteString("averageTransactionFee", getAllGasUsageResponseDataInnerDataInnerPeriodsInner.AverageTransactionFee);
+
             writer.WriteNumber("end", getAllGasUsageResponseDataInnerDataInnerPeriodsInner.End);
+
             writer.WriteNumber("start", getAllGasUsageResponseDataInnerDataInnerPeriodsInner.Start);
+
             writer.WriteString("totalTransactionFee", getAllGasUsageResponseDataInnerDataInnerPeriodsInner.TotalTransactionFee);
+
             writer.WriteString("totalTransactionFeeInUSD", getAllGasUsageResponseDataInnerDataInnerPeriodsInner.TotalTransactionFeeInUSD);
+
             writer.WriteNumber("transactionCount", getAllGasUsageResponseDataInnerDataInnerPeriodsInner.TransactionCount);
         }
     }

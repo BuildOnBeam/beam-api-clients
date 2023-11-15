@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -40,75 +41,138 @@ namespace Beam.Model
         /// <param name="stateMutability">stateMutability</param>
         /// <param name="type">type</param>
         [JsonConstructor]
-        public AddContractRequestInputAbiInner(bool anonymous, bool constant, string gas, List<AddContractRequestInputAbiInnerInputsInner> inputs, string name, List<Object> outputs, bool payable, string stateMutability, string type)
+        public AddContractRequestInputAbiInner(Option<bool?> anonymous = default, Option<bool?> constant = default, Option<string> gas = default, Option<List<AddContractRequestInputAbiInnerInputsInner>> inputs = default, Option<string> name = default, Option<List<Object>> outputs = default, Option<bool?> payable = default, Option<string> stateMutability = default, Option<string> type = default)
         {
-            Anonymous = anonymous;
-            Constant = constant;
-            Gas = gas;
-            Inputs = inputs;
-            Name = name;
-            Outputs = outputs;
-            Payable = payable;
-            StateMutability = stateMutability;
-            Type = type;
+            AnonymousOption = anonymous;
+            ConstantOption = constant;
+            GasOption = gas;
+            InputsOption = inputs;
+            NameOption = name;
+            OutputsOption = outputs;
+            PayableOption = payable;
+            StateMutabilityOption = stateMutability;
+            TypeOption = type;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
+        /// Used to track the state of Anonymous
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> AnonymousOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets Anonymous
         /// </summary>
         [JsonPropertyName("anonymous")]
-        public bool Anonymous { get; set; }
+        public bool? Anonymous { get { return this. AnonymousOption; } set { this.AnonymousOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Constant
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> ConstantOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Constant
         /// </summary>
         [JsonPropertyName("constant")]
-        public bool Constant { get; set; }
+        public bool? Constant { get { return this. ConstantOption; } set { this.ConstantOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Gas
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> GasOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Gas
         /// </summary>
         [JsonPropertyName("gas")]
-        public string Gas { get; set; }
+        public string Gas { get { return this. GasOption; } set { this.GasOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Inputs
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<AddContractRequestInputAbiInnerInputsInner>> InputsOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Inputs
         /// </summary>
         [JsonPropertyName("inputs")]
-        public List<AddContractRequestInputAbiInnerInputsInner> Inputs { get; set; }
+        public List<AddContractRequestInputAbiInnerInputsInner> Inputs { get { return this. InputsOption; } set { this.InputsOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Name
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> NameOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string Name { get { return this. NameOption; } set { this.NameOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Outputs
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<Object>> OutputsOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Outputs
         /// </summary>
         [JsonPropertyName("outputs")]
-        public List<Object> Outputs { get; set; }
+        public List<Object> Outputs { get { return this. OutputsOption; } set { this.OutputsOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Payable
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> PayableOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Payable
         /// </summary>
         [JsonPropertyName("payable")]
-        public bool Payable { get; set; }
+        public bool? Payable { get { return this. PayableOption; } set { this.PayableOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of StateMutability
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> StateMutabilityOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets StateMutability
         /// </summary>
         [JsonPropertyName("stateMutability")]
-        public string StateMutability { get; set; }
+        public string StateMutability { get { return this. StateMutabilityOption; } set { this.StateMutabilityOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Type
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> TypeOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public string Type { get { return this. TypeOption; } set { this.TypeOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -164,15 +228,15 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            bool? anonymous = default;
-            bool? constant = default;
-            string gas = default;
-            List<AddContractRequestInputAbiInnerInputsInner> inputs = default;
-            string name = default;
-            List<Object> outputs = default;
-            bool? payable = default;
-            string stateMutability = default;
-            string type = default;
+            Option<bool?> anonymous = default;
+            Option<bool?> constant = default;
+            Option<string> gas = default;
+            Option<List<AddContractRequestInputAbiInnerInputsInner>> inputs = default;
+            Option<string> name = default;
+            Option<List<Object>> outputs = default;
+            Option<bool?> payable = default;
+            Option<string> stateMutability = default;
+            Option<string> type = default;
 
             while (utf8JsonReader.Read())
             {
@@ -191,35 +255,35 @@ namespace Beam.Model
                     {
                         case "anonymous":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                anonymous = utf8JsonReader.GetBoolean();
+                                anonymous = new Option<bool?>(utf8JsonReader.GetBoolean());
                             break;
                         case "constant":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                constant = utf8JsonReader.GetBoolean();
+                                constant = new Option<bool?>(utf8JsonReader.GetBoolean());
                             break;
                         case "gas":
-                            gas = utf8JsonReader.GetString();
+                            gas = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "inputs":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                inputs = JsonSerializer.Deserialize<List<AddContractRequestInputAbiInnerInputsInner>>(ref utf8JsonReader, jsonSerializerOptions);
+                                inputs = new Option<List<AddContractRequestInputAbiInnerInputsInner>>(JsonSerializer.Deserialize<List<AddContractRequestInputAbiInnerInputsInner>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "name":
-                            name = utf8JsonReader.GetString();
+                            name = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "outputs":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                outputs = JsonSerializer.Deserialize<List<Object>>(ref utf8JsonReader, jsonSerializerOptions);
+                                outputs = new Option<List<Object>>(JsonSerializer.Deserialize<List<Object>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "payable":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                payable = utf8JsonReader.GetBoolean();
+                                payable = new Option<bool?>(utf8JsonReader.GetBoolean());
                             break;
                         case "stateMutability":
-                            stateMutability = utf8JsonReader.GetString();
+                            stateMutability = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "type":
-                            type = utf8JsonReader.GetString();
+                            type = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -227,34 +291,34 @@ namespace Beam.Model
                 }
             }
 
-            if (anonymous == null)
-                throw new ArgumentNullException(nameof(anonymous), "Property is required for class AddContractRequestInputAbiInner.");
+            if (anonymous.IsSet && anonymous.Value == null)
+                throw new ArgumentNullException(nameof(anonymous), "Property is not nullable for class AddContractRequestInputAbiInner.");
 
-            if (constant == null)
-                throw new ArgumentNullException(nameof(constant), "Property is required for class AddContractRequestInputAbiInner.");
+            if (constant.IsSet && constant.Value == null)
+                throw new ArgumentNullException(nameof(constant), "Property is not nullable for class AddContractRequestInputAbiInner.");
 
-            if (gas == null)
-                throw new ArgumentNullException(nameof(gas), "Property is required for class AddContractRequestInputAbiInner.");
+            if (gas.IsSet && gas.Value == null)
+                throw new ArgumentNullException(nameof(gas), "Property is not nullable for class AddContractRequestInputAbiInner.");
 
-            if (inputs == null)
-                throw new ArgumentNullException(nameof(inputs), "Property is required for class AddContractRequestInputAbiInner.");
+            if (inputs.IsSet && inputs.Value == null)
+                throw new ArgumentNullException(nameof(inputs), "Property is not nullable for class AddContractRequestInputAbiInner.");
 
-            if (name == null)
-                throw new ArgumentNullException(nameof(name), "Property is required for class AddContractRequestInputAbiInner.");
+            if (name.IsSet && name.Value == null)
+                throw new ArgumentNullException(nameof(name), "Property is not nullable for class AddContractRequestInputAbiInner.");
 
-            if (outputs == null)
-                throw new ArgumentNullException(nameof(outputs), "Property is required for class AddContractRequestInputAbiInner.");
+            if (outputs.IsSet && outputs.Value == null)
+                throw new ArgumentNullException(nameof(outputs), "Property is not nullable for class AddContractRequestInputAbiInner.");
 
-            if (payable == null)
-                throw new ArgumentNullException(nameof(payable), "Property is required for class AddContractRequestInputAbiInner.");
+            if (payable.IsSet && payable.Value == null)
+                throw new ArgumentNullException(nameof(payable), "Property is not nullable for class AddContractRequestInputAbiInner.");
 
-            if (stateMutability == null)
-                throw new ArgumentNullException(nameof(stateMutability), "Property is required for class AddContractRequestInputAbiInner.");
+            if (stateMutability.IsSet && stateMutability.Value == null)
+                throw new ArgumentNullException(nameof(stateMutability), "Property is not nullable for class AddContractRequestInputAbiInner.");
 
-            if (type == null)
-                throw new ArgumentNullException(nameof(type), "Property is required for class AddContractRequestInputAbiInner.");
+            if (type.IsSet && type.Value == null)
+                throw new ArgumentNullException(nameof(type), "Property is not nullable for class AddContractRequestInputAbiInner.");
 
-            return new AddContractRequestInputAbiInner(anonymous.Value, constant.Value, gas, inputs, name, outputs, payable.Value, stateMutability, type);
+            return new AddContractRequestInputAbiInner(anonymous, constant, gas, inputs, name, outputs, payable, stateMutability, type);
         }
 
         /// <summary>
@@ -281,17 +345,54 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, AddContractRequestInputAbiInner addContractRequestInputAbiInner, JsonSerializerOptions jsonSerializerOptions)
         {
-            writer.WriteBoolean("anonymous", addContractRequestInputAbiInner.Anonymous);
-            writer.WriteBoolean("constant", addContractRequestInputAbiInner.Constant);
-            writer.WriteString("gas", addContractRequestInputAbiInner.Gas);
-            writer.WritePropertyName("inputs");
-            JsonSerializer.Serialize(writer, addContractRequestInputAbiInner.Inputs, jsonSerializerOptions);
-            writer.WriteString("name", addContractRequestInputAbiInner.Name);
-            writer.WritePropertyName("outputs");
-            JsonSerializer.Serialize(writer, addContractRequestInputAbiInner.Outputs, jsonSerializerOptions);
-            writer.WriteBoolean("payable", addContractRequestInputAbiInner.Payable);
-            writer.WriteString("stateMutability", addContractRequestInputAbiInner.StateMutability);
-            writer.WriteString("type", addContractRequestInputAbiInner.Type);
+            if (addContractRequestInputAbiInner.GasOption.IsSet && addContractRequestInputAbiInner.Gas == null)
+                throw new ArgumentNullException(nameof(addContractRequestInputAbiInner.Gas), "Property is required for class AddContractRequestInputAbiInner.");
+
+            if (addContractRequestInputAbiInner.InputsOption.IsSet && addContractRequestInputAbiInner.Inputs == null)
+                throw new ArgumentNullException(nameof(addContractRequestInputAbiInner.Inputs), "Property is required for class AddContractRequestInputAbiInner.");
+
+            if (addContractRequestInputAbiInner.NameOption.IsSet && addContractRequestInputAbiInner.Name == null)
+                throw new ArgumentNullException(nameof(addContractRequestInputAbiInner.Name), "Property is required for class AddContractRequestInputAbiInner.");
+
+            if (addContractRequestInputAbiInner.OutputsOption.IsSet && addContractRequestInputAbiInner.Outputs == null)
+                throw new ArgumentNullException(nameof(addContractRequestInputAbiInner.Outputs), "Property is required for class AddContractRequestInputAbiInner.");
+
+            if (addContractRequestInputAbiInner.StateMutabilityOption.IsSet && addContractRequestInputAbiInner.StateMutability == null)
+                throw new ArgumentNullException(nameof(addContractRequestInputAbiInner.StateMutability), "Property is required for class AddContractRequestInputAbiInner.");
+
+            if (addContractRequestInputAbiInner.TypeOption.IsSet && addContractRequestInputAbiInner.Type == null)
+                throw new ArgumentNullException(nameof(addContractRequestInputAbiInner.Type), "Property is required for class AddContractRequestInputAbiInner.");
+
+            if (addContractRequestInputAbiInner.AnonymousOption.IsSet)
+                writer.WriteBoolean("anonymous", addContractRequestInputAbiInner.AnonymousOption.Value.Value);
+
+            if (addContractRequestInputAbiInner.ConstantOption.IsSet)
+                writer.WriteBoolean("constant", addContractRequestInputAbiInner.ConstantOption.Value.Value);
+
+            if (addContractRequestInputAbiInner.GasOption.IsSet)
+                writer.WriteString("gas", addContractRequestInputAbiInner.Gas);
+
+            if (addContractRequestInputAbiInner.InputsOption.IsSet)
+            {
+                writer.WritePropertyName("inputs");
+                JsonSerializer.Serialize(writer, addContractRequestInputAbiInner.Inputs, jsonSerializerOptions);
+            }
+            if (addContractRequestInputAbiInner.NameOption.IsSet)
+                writer.WriteString("name", addContractRequestInputAbiInner.Name);
+
+            if (addContractRequestInputAbiInner.OutputsOption.IsSet)
+            {
+                writer.WritePropertyName("outputs");
+                JsonSerializer.Serialize(writer, addContractRequestInputAbiInner.Outputs, jsonSerializerOptions);
+            }
+            if (addContractRequestInputAbiInner.PayableOption.IsSet)
+                writer.WriteBoolean("payable", addContractRequestInputAbiInner.PayableOption.Value.Value);
+
+            if (addContractRequestInputAbiInner.StateMutabilityOption.IsSet)
+                writer.WriteString("stateMutability", addContractRequestInputAbiInner.StateMutability);
+
+            if (addContractRequestInputAbiInner.TypeOption.IsSet)
+                writer.WriteString("type", addContractRequestInputAbiInner.Type);
         }
     }
 }

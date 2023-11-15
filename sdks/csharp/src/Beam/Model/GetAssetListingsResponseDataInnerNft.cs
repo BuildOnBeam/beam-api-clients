@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -35,24 +36,24 @@ namespace Beam.Model
         /// <param name="assetType">assetType</param>
         /// <param name="marketplaceId">marketplaceId</param>
         /// <param name="name">name</param>
-        /// <param name="chainId">chainId (default to 13337M)</param>
         /// <param name="attributes">attributes</param>
+        /// <param name="chainId">chainId (default to 13337M)</param>
         /// <param name="imageUrl">imageUrl</param>
         /// <param name="rarity">rarity</param>
         /// <param name="rarityScore">rarityScore</param>
         [JsonConstructor]
-        public GetAssetListingsResponseDataInnerNft(string assetAddress, string assetId, string assetType, string marketplaceId, string name, decimal chainId = 13337M, List<GetAssetsResponseDataInnerAttributesInner> attributes = default, string imageUrl = default, RarityEnum? rarity = default, decimal? rarityScore = default)
+        public GetAssetListingsResponseDataInnerNft(string assetAddress, string assetId, string assetType, string marketplaceId, string name, Option<List<GetAssetsResponseDataInnerAttributesInner>> attributes = default, Option<decimal?> chainId = default, string imageUrl = default, Option<RarityEnum?> rarity = default, Option<decimal?> rarityScore = default)
         {
             AssetAddress = assetAddress;
             AssetId = assetId;
             AssetType = assetType;
             MarketplaceId = marketplaceId;
             Name = name;
-            ChainId = chainId;
-            Attributes = attributes;
+            AttributesOption = attributes;
+            ChainIdOption = chainId;
             ImageUrl = imageUrl;
-            Rarity = rarity;
-            RarityScore = rarityScore;
+            RarityOption = rarity;
+            RarityScoreOption = rarityScore;
             OnCreated();
         }
 
@@ -146,7 +147,7 @@ namespace Beam.Model
         /// <param name="value"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public static string? RarityEnumToJsonValue(RarityEnum? value)
+        public static string RarityEnumToJsonValue(RarityEnum? value)
         {
             if (value == null)
                 return null;
@@ -170,10 +171,17 @@ namespace Beam.Model
         }
 
         /// <summary>
+        /// Used to track the state of Rarity
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<RarityEnum?> RarityOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets Rarity
         /// </summary>
         [JsonPropertyName("rarity")]
-        public RarityEnum? Rarity { get; set; }
+        public RarityEnum? Rarity { get { return this.RarityOption; } set { this.RarityOption = new(value); } }
 
         /// <summary>
         /// Gets or Sets AssetAddress
@@ -206,16 +214,30 @@ namespace Beam.Model
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or Sets ChainId
+        /// Used to track the state of Attributes
         /// </summary>
-        [JsonPropertyName("chainId")]
-        public decimal ChainId { get; set; }
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<GetAssetsResponseDataInnerAttributesInner>> AttributesOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Attributes
         /// </summary>
         [JsonPropertyName("attributes")]
-        public List<GetAssetsResponseDataInnerAttributesInner> Attributes { get; set; }
+        public List<GetAssetsResponseDataInnerAttributesInner> Attributes { get { return this. AttributesOption; } set { this.AttributesOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of ChainId
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<decimal?> ChainIdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ChainId
+        /// </summary>
+        [JsonPropertyName("chainId")]
+        public decimal? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
 
         /// <summary>
         /// Gets or Sets ImageUrl
@@ -224,10 +246,17 @@ namespace Beam.Model
         public string ImageUrl { get; set; }
 
         /// <summary>
+        /// Used to track the state of RarityScore
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<decimal?> RarityScoreOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets RarityScore
         /// </summary>
         [JsonPropertyName("rarityScore")]
-        public decimal? RarityScore { get; set; }
+        public decimal? RarityScore { get { return this. RarityScoreOption; } set { this.RarityScoreOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -242,8 +271,8 @@ namespace Beam.Model
             sb.Append("  AssetType: ").Append(AssetType).Append("\n");
             sb.Append("  MarketplaceId: ").Append(MarketplaceId).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
-            sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  Attributes: ").Append(Attributes).Append("\n");
+            sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  ImageUrl: ").Append(ImageUrl).Append("\n");
             sb.Append("  Rarity: ").Append(Rarity).Append("\n");
             sb.Append("  RarityScore: ").Append(RarityScore).Append("\n");
@@ -284,16 +313,16 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string assetAddress = default;
-            string assetId = default;
-            string assetType = default;
-            string marketplaceId = default;
-            string name = default;
-            decimal? chainId = default;
-            List<GetAssetsResponseDataInnerAttributesInner> attributes = default;
-            string imageUrl = default;
-            GetAssetListingsResponseDataInnerNft.RarityEnum? rarity = default;
-            decimal? rarityScore = default;
+            Option<string> assetAddress = default;
+            Option<string> assetId = default;
+            Option<string> assetType = default;
+            Option<string> marketplaceId = default;
+            Option<string> name = default;
+            Option<List<GetAssetsResponseDataInnerAttributesInner>> attributes = default;
+            Option<decimal?> chainId = default;
+            Option<string> imageUrl = default;
+            Option<GetAssetListingsResponseDataInnerNft.RarityEnum?> rarity = default;
+            Option<decimal?> rarityScore = default;
 
             while (utf8JsonReader.Read())
             {
@@ -311,40 +340,39 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "assetAddress":
-                            assetAddress = utf8JsonReader.GetString();
+                            assetAddress = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "assetId":
-                            assetId = utf8JsonReader.GetString();
+                            assetId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "assetType":
-                            assetType = utf8JsonReader.GetString();
+                            assetType = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "marketplaceId":
-                            marketplaceId = utf8JsonReader.GetString();
+                            marketplaceId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "name":
-                            name = utf8JsonReader.GetString();
-                            break;
-                        case "chainId":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = utf8JsonReader.GetDecimal();
+                            name = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "attributes":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                attributes = JsonSerializer.Deserialize<List<GetAssetsResponseDataInnerAttributesInner>>(ref utf8JsonReader, jsonSerializerOptions);
+                                attributes = new Option<List<GetAssetsResponseDataInnerAttributesInner>>(JsonSerializer.Deserialize<List<GetAssetsResponseDataInnerAttributesInner>>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "chainId":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "imageUrl":
-                            imageUrl = utf8JsonReader.GetString();
+                            imageUrl = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "rarity":
                             string rarityRawValue = utf8JsonReader.GetString();
-                            rarity = rarityRawValue == null
-                                ? null
-                                : GetAssetListingsResponseDataInnerNft.RarityEnumFromStringOrDefault(rarityRawValue);
+                            if (rarityRawValue != null)
+                                rarity = new Option<GetAssetListingsResponseDataInnerNft.RarityEnum?>(GetAssetListingsResponseDataInnerNft.RarityEnumFromStringOrDefault(rarityRawValue));
                             break;
                         case "rarityScore":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                rarityScore = utf8JsonReader.GetDecimal();
+                                rarityScore = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         default:
                             break;
@@ -352,25 +380,43 @@ namespace Beam.Model
                 }
             }
 
-            if (assetAddress == null)
-                throw new ArgumentNullException(nameof(assetAddress), "Property is required for class GetAssetListingsResponseDataInnerNft.");
+            if (!assetAddress.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetListingsResponseDataInnerNft.", nameof(assetAddress));
 
-            if (assetId == null)
-                throw new ArgumentNullException(nameof(assetId), "Property is required for class GetAssetListingsResponseDataInnerNft.");
+            if (!assetId.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetListingsResponseDataInnerNft.", nameof(assetId));
 
-            if (assetType == null)
-                throw new ArgumentNullException(nameof(assetType), "Property is required for class GetAssetListingsResponseDataInnerNft.");
+            if (!assetType.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetListingsResponseDataInnerNft.", nameof(assetType));
 
-            if (marketplaceId == null)
-                throw new ArgumentNullException(nameof(marketplaceId), "Property is required for class GetAssetListingsResponseDataInnerNft.");
+            if (!marketplaceId.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetListingsResponseDataInnerNft.", nameof(marketplaceId));
 
-            if (name == null)
-                throw new ArgumentNullException(nameof(name), "Property is required for class GetAssetListingsResponseDataInnerNft.");
+            if (!name.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetListingsResponseDataInnerNft.", nameof(name));
 
-            if (chainId == null)
-                throw new ArgumentNullException(nameof(chainId), "Property is required for class GetAssetListingsResponseDataInnerNft.");
+            if (!imageUrl.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetListingsResponseDataInnerNft.", nameof(imageUrl));
 
-            return new GetAssetListingsResponseDataInnerNft(assetAddress, assetId, assetType, marketplaceId, name, chainId.Value, attributes, imageUrl, rarity, rarityScore);
+            if (assetAddress.IsSet && assetAddress.Value == null)
+                throw new ArgumentNullException(nameof(assetAddress), "Property is not nullable for class GetAssetListingsResponseDataInnerNft.");
+
+            if (assetId.IsSet && assetId.Value == null)
+                throw new ArgumentNullException(nameof(assetId), "Property is not nullable for class GetAssetListingsResponseDataInnerNft.");
+
+            if (assetType.IsSet && assetType.Value == null)
+                throw new ArgumentNullException(nameof(assetType), "Property is not nullable for class GetAssetListingsResponseDataInnerNft.");
+
+            if (marketplaceId.IsSet && marketplaceId.Value == null)
+                throw new ArgumentNullException(nameof(marketplaceId), "Property is not nullable for class GetAssetListingsResponseDataInnerNft.");
+
+            if (name.IsSet && name.Value == null)
+                throw new ArgumentNullException(nameof(name), "Property is not nullable for class GetAssetListingsResponseDataInnerNft.");
+
+            if (chainId.IsSet && chainId.Value == null)
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class GetAssetListingsResponseDataInnerNft.");
+
+            return new GetAssetListingsResponseDataInnerNft(assetAddress.Value, assetId.Value, assetType.Value, marketplaceId.Value, name.Value, attributes, chainId, imageUrl.Value, rarity, rarityScore);
         }
 
         /// <summary>
@@ -397,26 +443,58 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetAssetListingsResponseDataInnerNft getAssetListingsResponseDataInnerNft, JsonSerializerOptions jsonSerializerOptions)
         {
-            writer.WriteString("assetAddress", getAssetListingsResponseDataInnerNft.AssetAddress);
-            writer.WriteString("assetId", getAssetListingsResponseDataInnerNft.AssetId);
-            writer.WriteString("assetType", getAssetListingsResponseDataInnerNft.AssetType);
-            writer.WriteString("marketplaceId", getAssetListingsResponseDataInnerNft.MarketplaceId);
-            writer.WriteString("name", getAssetListingsResponseDataInnerNft.Name);
-            writer.WriteNumber("chainId", getAssetListingsResponseDataInnerNft.ChainId);
-            writer.WritePropertyName("attributes");
-            JsonSerializer.Serialize(writer, getAssetListingsResponseDataInnerNft.Attributes, jsonSerializerOptions);
-            writer.WriteString("imageUrl", getAssetListingsResponseDataInnerNft.ImageUrl);
+            if (getAssetListingsResponseDataInnerNft.AssetAddress == null)
+                throw new ArgumentNullException(nameof(getAssetListingsResponseDataInnerNft.AssetAddress), "Property is required for class GetAssetListingsResponseDataInnerNft.");
 
-            var rarityRawValue = GetAssetListingsResponseDataInnerNft.RarityEnumToJsonValue(getAssetListingsResponseDataInnerNft.Rarity);
+            if (getAssetListingsResponseDataInnerNft.AssetId == null)
+                throw new ArgumentNullException(nameof(getAssetListingsResponseDataInnerNft.AssetId), "Property is required for class GetAssetListingsResponseDataInnerNft.");
+
+            if (getAssetListingsResponseDataInnerNft.AssetType == null)
+                throw new ArgumentNullException(nameof(getAssetListingsResponseDataInnerNft.AssetType), "Property is required for class GetAssetListingsResponseDataInnerNft.");
+
+            if (getAssetListingsResponseDataInnerNft.MarketplaceId == null)
+                throw new ArgumentNullException(nameof(getAssetListingsResponseDataInnerNft.MarketplaceId), "Property is required for class GetAssetListingsResponseDataInnerNft.");
+
+            if (getAssetListingsResponseDataInnerNft.Name == null)
+                throw new ArgumentNullException(nameof(getAssetListingsResponseDataInnerNft.Name), "Property is required for class GetAssetListingsResponseDataInnerNft.");
+
+            writer.WriteString("assetAddress", getAssetListingsResponseDataInnerNft.AssetAddress);
+
+            writer.WriteString("assetId", getAssetListingsResponseDataInnerNft.AssetId);
+
+            writer.WriteString("assetType", getAssetListingsResponseDataInnerNft.AssetType);
+
+            writer.WriteString("marketplaceId", getAssetListingsResponseDataInnerNft.MarketplaceId);
+
+            writer.WriteString("name", getAssetListingsResponseDataInnerNft.Name);
+
+            if (getAssetListingsResponseDataInnerNft.AttributesOption.IsSet)
+                if (getAssetListingsResponseDataInnerNft.AttributesOption.Value != null)
+                {
+                    writer.WritePropertyName("attributes");
+                    JsonSerializer.Serialize(writer, getAssetListingsResponseDataInnerNft.Attributes, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("attributes");
+            if (getAssetListingsResponseDataInnerNft.ChainIdOption.IsSet)
+                writer.WriteNumber("chainId", getAssetListingsResponseDataInnerNft.ChainIdOption.Value.Value);
+
+            if (getAssetListingsResponseDataInnerNft.ImageUrl != null)
+                writer.WriteString("imageUrl", getAssetListingsResponseDataInnerNft.ImageUrl);
+            else
+                writer.WriteNull("imageUrl");
+
+            var rarityRawValue = GetAssetListingsResponseDataInnerNft.RarityEnumToJsonValue(getAssetListingsResponseDataInnerNft.RarityOption.Value.Value);
             if (rarityRawValue != null)
                 writer.WriteString("rarity", rarityRawValue);
             else
                 writer.WriteNull("rarity");
 
-            if (getAssetListingsResponseDataInnerNft.RarityScore != null)
-                writer.WriteNumber("rarityScore", getAssetListingsResponseDataInnerNft.RarityScore.Value);
-            else
-                writer.WriteNull("rarityScore");
+            if (getAssetListingsResponseDataInnerNft.RarityScoreOption.IsSet)
+                if (getAssetListingsResponseDataInnerNft.RarityScoreOption.Value != null)
+                    writer.WriteNumber("rarityScore", getAssetListingsResponseDataInnerNft.RarityScoreOption.Value.Value);
+                else
+                    writer.WriteNull("rarityScore");
         }
     }
 }

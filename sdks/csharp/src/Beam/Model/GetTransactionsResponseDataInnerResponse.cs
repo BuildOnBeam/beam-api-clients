@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -30,8 +31,9 @@ namespace Beam.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="GetTransactionsResponseDataInnerResponse" /> class.
         /// </summary>
-        /// <param name="blockNumber">blockNumber</param>
         /// <param name="createdAt">createdAt</param>
+        /// <param name="blockNumber">blockNumber</param>
+        /// <param name="error">error</param>
         /// <param name="gasUsed">gasUsed</param>
         /// <param name="l1GasUsed">l1GasUsed</param>
         /// <param name="logs">logs</param>
@@ -39,30 +41,23 @@ namespace Beam.Model
         /// <param name="to">to</param>
         /// <param name="transactionHash">transactionHash</param>
         /// <param name="userOpHash">userOpHash</param>
-        /// <param name="error">error</param>
         [JsonConstructor]
-        public GetTransactionsResponseDataInnerResponse(decimal blockNumber, decimal createdAt, decimal gasUsed, string l1GasUsed, List<GetTransactionsResponseDataInnerResponseLogsInner> logs, decimal status, string to, string transactionHash, string userOpHash, Object error = default)
+        public GetTransactionsResponseDataInnerResponse(decimal createdAt, Option<decimal?> blockNumber = default, Option<Object> error = default, Option<decimal?> gasUsed = default, Option<string> l1GasUsed = default, Option<List<GetTransactionsResponseDataInnerResponseLogsInner>> logs = default, Option<decimal?> status = default, Option<string> to = default, Option<string> transactionHash = default, Option<string> userOpHash = default)
         {
-            BlockNumber = blockNumber;
             CreatedAt = createdAt;
-            GasUsed = gasUsed;
-            L1GasUsed = l1GasUsed;
-            Logs = logs;
-            Status = status;
-            To = to;
-            TransactionHash = transactionHash;
-            UserOpHash = userOpHash;
-            Error = error;
+            BlockNumberOption = blockNumber;
+            ErrorOption = error;
+            GasUsedOption = gasUsed;
+            L1GasUsedOption = l1GasUsed;
+            LogsOption = logs;
+            StatusOption = status;
+            ToOption = to;
+            TransactionHashOption = transactionHash;
+            UserOpHashOption = userOpHash;
             OnCreated();
         }
 
         partial void OnCreated();
-
-        /// <summary>
-        /// Gets or Sets BlockNumber
-        /// </summary>
-        [JsonPropertyName("blockNumber")]
-        public decimal BlockNumber { get; set; }
 
         /// <summary>
         /// Gets or Sets CreatedAt
@@ -71,52 +66,121 @@ namespace Beam.Model
         public decimal CreatedAt { get; set; }
 
         /// <summary>
-        /// Gets or Sets GasUsed
+        /// Used to track the state of BlockNumber
         /// </summary>
-        [JsonPropertyName("gasUsed")]
-        public decimal GasUsed { get; set; }
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<decimal?> BlockNumberOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets L1GasUsed
+        /// Gets or Sets BlockNumber
         /// </summary>
-        [JsonPropertyName("l1GasUsed")]
-        public string L1GasUsed { get; set; }
+        [JsonPropertyName("blockNumber")]
+        public decimal? BlockNumber { get { return this. BlockNumberOption; } set { this.BlockNumberOption = new(value); } }
 
         /// <summary>
-        /// Gets or Sets Logs
+        /// Used to track the state of Error
         /// </summary>
-        [JsonPropertyName("logs")]
-        public List<GetTransactionsResponseDataInnerResponseLogsInner> Logs { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Status
-        /// </summary>
-        [JsonPropertyName("status")]
-        public decimal Status { get; set; }
-
-        /// <summary>
-        /// Gets or Sets To
-        /// </summary>
-        [JsonPropertyName("to")]
-        public string To { get; set; }
-
-        /// <summary>
-        /// Gets or Sets TransactionHash
-        /// </summary>
-        [JsonPropertyName("transactionHash")]
-        public string TransactionHash { get; set; }
-
-        /// <summary>
-        /// Gets or Sets UserOpHash
-        /// </summary>
-        [JsonPropertyName("userOpHash")]
-        public string UserOpHash { get; set; }
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<Object> ErrorOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Error
         /// </summary>
         [JsonPropertyName("error")]
-        public Object Error { get; set; }
+        public Object Error { get { return this. ErrorOption; } set { this.ErrorOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of GasUsed
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<decimal?> GasUsedOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets GasUsed
+        /// </summary>
+        [JsonPropertyName("gasUsed")]
+        public decimal? GasUsed { get { return this. GasUsedOption; } set { this.GasUsedOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of L1GasUsed
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> L1GasUsedOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets L1GasUsed
+        /// </summary>
+        [JsonPropertyName("l1GasUsed")]
+        public string L1GasUsed { get { return this. L1GasUsedOption; } set { this.L1GasUsedOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Logs
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<GetTransactionsResponseDataInnerResponseLogsInner>> LogsOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Logs
+        /// </summary>
+        [JsonPropertyName("logs")]
+        public List<GetTransactionsResponseDataInnerResponseLogsInner> Logs { get { return this. LogsOption; } set { this.LogsOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Status
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<decimal?> StatusOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Status
+        /// </summary>
+        [JsonPropertyName("status")]
+        public decimal? Status { get { return this. StatusOption; } set { this.StatusOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of To
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> ToOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets To
+        /// </summary>
+        [JsonPropertyName("to")]
+        public string To { get { return this. ToOption; } set { this.ToOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of TransactionHash
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> TransactionHashOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets TransactionHash
+        /// </summary>
+        [JsonPropertyName("transactionHash")]
+        public string TransactionHash { get { return this. TransactionHashOption; } set { this.TransactionHashOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of UserOpHash
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> UserOpHashOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets UserOpHash
+        /// </summary>
+        [JsonPropertyName("userOpHash")]
+        public string UserOpHash { get { return this. UserOpHashOption; } set { this.UserOpHashOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -126,8 +190,9 @@ namespace Beam.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class GetTransactionsResponseDataInnerResponse {\n");
-            sb.Append("  BlockNumber: ").Append(BlockNumber).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
+            sb.Append("  BlockNumber: ").Append(BlockNumber).Append("\n");
+            sb.Append("  Error: ").Append(Error).Append("\n");
             sb.Append("  GasUsed: ").Append(GasUsed).Append("\n");
             sb.Append("  L1GasUsed: ").Append(L1GasUsed).Append("\n");
             sb.Append("  Logs: ").Append(Logs).Append("\n");
@@ -135,7 +200,6 @@ namespace Beam.Model
             sb.Append("  To: ").Append(To).Append("\n");
             sb.Append("  TransactionHash: ").Append(TransactionHash).Append("\n");
             sb.Append("  UserOpHash: ").Append(UserOpHash).Append("\n");
-            sb.Append("  Error: ").Append(Error).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -173,16 +237,16 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            decimal? blockNumber = default;
-            decimal? createdAt = default;
-            decimal? gasUsed = default;
-            string l1GasUsed = default;
-            List<GetTransactionsResponseDataInnerResponseLogsInner> logs = default;
-            decimal? status = default;
-            string to = default;
-            string transactionHash = default;
-            string userOpHash = default;
-            Object error = default;
+            Option<decimal?> createdAt = default;
+            Option<decimal?> blockNumber = default;
+            Option<Object> error = default;
+            Option<decimal?> gasUsed = default;
+            Option<string> l1GasUsed = default;
+            Option<List<GetTransactionsResponseDataInnerResponseLogsInner>> logs = default;
+            Option<decimal?> status = default;
+            Option<string> to = default;
+            Option<string> transactionHash = default;
+            Option<string> userOpHash = default;
 
             while (utf8JsonReader.Read())
             {
@@ -199,41 +263,41 @@ namespace Beam.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "blockNumber":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                blockNumber = utf8JsonReader.GetDecimal();
-                            break;
                         case "createdAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                createdAt = utf8JsonReader.GetDecimal();
+                                createdAt = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
-                        case "gasUsed":
+                        case "blockNumber":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                gasUsed = utf8JsonReader.GetDecimal();
-                            break;
-                        case "l1GasUsed":
-                            l1GasUsed = utf8JsonReader.GetString();
-                            break;
-                        case "logs":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                logs = JsonSerializer.Deserialize<List<GetTransactionsResponseDataInnerResponseLogsInner>>(ref utf8JsonReader, jsonSerializerOptions);
-                            break;
-                        case "status":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                status = utf8JsonReader.GetDecimal();
-                            break;
-                        case "to":
-                            to = utf8JsonReader.GetString();
-                            break;
-                        case "transactionHash":
-                            transactionHash = utf8JsonReader.GetString();
-                            break;
-                        case "userOpHash":
-                            userOpHash = utf8JsonReader.GetString();
+                                blockNumber = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "error":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                error = JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions);
+                                error = new Option<Object>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "gasUsed":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                gasUsed = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                            break;
+                        case "l1GasUsed":
+                            l1GasUsed = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "logs":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                logs = new Option<List<GetTransactionsResponseDataInnerResponseLogsInner>>(JsonSerializer.Deserialize<List<GetTransactionsResponseDataInnerResponseLogsInner>>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "status":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                status = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                            break;
+                        case "to":
+                            to = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "transactionHash":
+                            transactionHash = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "userOpHash":
+                            userOpHash = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -241,34 +305,37 @@ namespace Beam.Model
                 }
             }
 
-            if (blockNumber == null)
-                throw new ArgumentNullException(nameof(blockNumber), "Property is required for class GetTransactionsResponseDataInnerResponse.");
+            if (!createdAt.IsSet)
+                throw new ArgumentException("Property is required for class GetTransactionsResponseDataInnerResponse.", nameof(createdAt));
 
-            if (createdAt == null)
-                throw new ArgumentNullException(nameof(createdAt), "Property is required for class GetTransactionsResponseDataInnerResponse.");
+            if (createdAt.IsSet && createdAt.Value == null)
+                throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class GetTransactionsResponseDataInnerResponse.");
 
-            if (gasUsed == null)
-                throw new ArgumentNullException(nameof(gasUsed), "Property is required for class GetTransactionsResponseDataInnerResponse.");
+            if (blockNumber.IsSet && blockNumber.Value == null)
+                throw new ArgumentNullException(nameof(blockNumber), "Property is not nullable for class GetTransactionsResponseDataInnerResponse.");
 
-            if (l1GasUsed == null)
-                throw new ArgumentNullException(nameof(l1GasUsed), "Property is required for class GetTransactionsResponseDataInnerResponse.");
+            if (gasUsed.IsSet && gasUsed.Value == null)
+                throw new ArgumentNullException(nameof(gasUsed), "Property is not nullable for class GetTransactionsResponseDataInnerResponse.");
 
-            if (logs == null)
-                throw new ArgumentNullException(nameof(logs), "Property is required for class GetTransactionsResponseDataInnerResponse.");
+            if (l1GasUsed.IsSet && l1GasUsed.Value == null)
+                throw new ArgumentNullException(nameof(l1GasUsed), "Property is not nullable for class GetTransactionsResponseDataInnerResponse.");
 
-            if (status == null)
-                throw new ArgumentNullException(nameof(status), "Property is required for class GetTransactionsResponseDataInnerResponse.");
+            if (logs.IsSet && logs.Value == null)
+                throw new ArgumentNullException(nameof(logs), "Property is not nullable for class GetTransactionsResponseDataInnerResponse.");
 
-            if (to == null)
-                throw new ArgumentNullException(nameof(to), "Property is required for class GetTransactionsResponseDataInnerResponse.");
+            if (status.IsSet && status.Value == null)
+                throw new ArgumentNullException(nameof(status), "Property is not nullable for class GetTransactionsResponseDataInnerResponse.");
 
-            if (transactionHash == null)
-                throw new ArgumentNullException(nameof(transactionHash), "Property is required for class GetTransactionsResponseDataInnerResponse.");
+            if (to.IsSet && to.Value == null)
+                throw new ArgumentNullException(nameof(to), "Property is not nullable for class GetTransactionsResponseDataInnerResponse.");
 
-            if (userOpHash == null)
-                throw new ArgumentNullException(nameof(userOpHash), "Property is required for class GetTransactionsResponseDataInnerResponse.");
+            if (transactionHash.IsSet && transactionHash.Value == null)
+                throw new ArgumentNullException(nameof(transactionHash), "Property is not nullable for class GetTransactionsResponseDataInnerResponse.");
 
-            return new GetTransactionsResponseDataInnerResponse(blockNumber.Value, createdAt.Value, gasUsed.Value, l1GasUsed, logs, status.Value, to, transactionHash, userOpHash, error);
+            if (userOpHash.IsSet && userOpHash.Value == null)
+                throw new ArgumentNullException(nameof(userOpHash), "Property is not nullable for class GetTransactionsResponseDataInnerResponse.");
+
+            return new GetTransactionsResponseDataInnerResponse(createdAt.Value.Value, blockNumber, error, gasUsed, l1GasUsed, logs, status, to, transactionHash, userOpHash);
         }
 
         /// <summary>
@@ -295,18 +362,56 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetTransactionsResponseDataInnerResponse getTransactionsResponseDataInnerResponse, JsonSerializerOptions jsonSerializerOptions)
         {
-            writer.WriteNumber("blockNumber", getTransactionsResponseDataInnerResponse.BlockNumber);
+            if (getTransactionsResponseDataInnerResponse.L1GasUsedOption.IsSet && getTransactionsResponseDataInnerResponse.L1GasUsed == null)
+                throw new ArgumentNullException(nameof(getTransactionsResponseDataInnerResponse.L1GasUsed), "Property is required for class GetTransactionsResponseDataInnerResponse.");
+
+            if (getTransactionsResponseDataInnerResponse.LogsOption.IsSet && getTransactionsResponseDataInnerResponse.Logs == null)
+                throw new ArgumentNullException(nameof(getTransactionsResponseDataInnerResponse.Logs), "Property is required for class GetTransactionsResponseDataInnerResponse.");
+
+            if (getTransactionsResponseDataInnerResponse.ToOption.IsSet && getTransactionsResponseDataInnerResponse.To == null)
+                throw new ArgumentNullException(nameof(getTransactionsResponseDataInnerResponse.To), "Property is required for class GetTransactionsResponseDataInnerResponse.");
+
+            if (getTransactionsResponseDataInnerResponse.TransactionHashOption.IsSet && getTransactionsResponseDataInnerResponse.TransactionHash == null)
+                throw new ArgumentNullException(nameof(getTransactionsResponseDataInnerResponse.TransactionHash), "Property is required for class GetTransactionsResponseDataInnerResponse.");
+
+            if (getTransactionsResponseDataInnerResponse.UserOpHashOption.IsSet && getTransactionsResponseDataInnerResponse.UserOpHash == null)
+                throw new ArgumentNullException(nameof(getTransactionsResponseDataInnerResponse.UserOpHash), "Property is required for class GetTransactionsResponseDataInnerResponse.");
+
             writer.WriteNumber("createdAt", getTransactionsResponseDataInnerResponse.CreatedAt);
-            writer.WriteNumber("gasUsed", getTransactionsResponseDataInnerResponse.GasUsed);
-            writer.WriteString("l1GasUsed", getTransactionsResponseDataInnerResponse.L1GasUsed);
-            writer.WritePropertyName("logs");
-            JsonSerializer.Serialize(writer, getTransactionsResponseDataInnerResponse.Logs, jsonSerializerOptions);
-            writer.WriteNumber("status", getTransactionsResponseDataInnerResponse.Status);
-            writer.WriteString("to", getTransactionsResponseDataInnerResponse.To);
-            writer.WriteString("transactionHash", getTransactionsResponseDataInnerResponse.TransactionHash);
-            writer.WriteString("userOpHash", getTransactionsResponseDataInnerResponse.UserOpHash);
-            writer.WritePropertyName("error");
-            JsonSerializer.Serialize(writer, getTransactionsResponseDataInnerResponse.Error, jsonSerializerOptions);
+
+            if (getTransactionsResponseDataInnerResponse.BlockNumberOption.IsSet)
+                writer.WriteNumber("blockNumber", getTransactionsResponseDataInnerResponse.BlockNumberOption.Value.Value);
+
+            if (getTransactionsResponseDataInnerResponse.ErrorOption.IsSet)
+                if (getTransactionsResponseDataInnerResponse.ErrorOption.Value != null)
+                {
+                    writer.WritePropertyName("error");
+                    JsonSerializer.Serialize(writer, getTransactionsResponseDataInnerResponse.Error, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("error");
+            if (getTransactionsResponseDataInnerResponse.GasUsedOption.IsSet)
+                writer.WriteNumber("gasUsed", getTransactionsResponseDataInnerResponse.GasUsedOption.Value.Value);
+
+            if (getTransactionsResponseDataInnerResponse.L1GasUsedOption.IsSet)
+                writer.WriteString("l1GasUsed", getTransactionsResponseDataInnerResponse.L1GasUsed);
+
+            if (getTransactionsResponseDataInnerResponse.LogsOption.IsSet)
+            {
+                writer.WritePropertyName("logs");
+                JsonSerializer.Serialize(writer, getTransactionsResponseDataInnerResponse.Logs, jsonSerializerOptions);
+            }
+            if (getTransactionsResponseDataInnerResponse.StatusOption.IsSet)
+                writer.WriteNumber("status", getTransactionsResponseDataInnerResponse.StatusOption.Value.Value);
+
+            if (getTransactionsResponseDataInnerResponse.ToOption.IsSet)
+                writer.WriteString("to", getTransactionsResponseDataInnerResponse.To);
+
+            if (getTransactionsResponseDataInnerResponse.TransactionHashOption.IsSet)
+                writer.WriteString("transactionHash", getTransactionsResponseDataInnerResponse.TransactionHash);
+
+            if (getTransactionsResponseDataInnerResponse.UserOpHashOption.IsSet)
+                writer.WriteString("userOpHash", getTransactionsResponseDataInnerResponse.UserOpHash);
         }
     }
 }

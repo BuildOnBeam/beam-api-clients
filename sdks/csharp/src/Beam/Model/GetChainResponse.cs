@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -110,9 +111,9 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            decimal? blockNumber = default;
-            decimal? chainId = default;
-            GetChainResponseNativeCurrency nativeCurrency = default;
+            Option<decimal?> blockNumber = default;
+            Option<decimal?> chainId = default;
+            Option<GetChainResponseNativeCurrency> nativeCurrency = default;
 
             while (utf8JsonReader.Read())
             {
@@ -131,15 +132,15 @@ namespace Beam.Model
                     {
                         case "blockNumber":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                blockNumber = utf8JsonReader.GetDecimal();
+                                blockNumber = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = utf8JsonReader.GetDecimal();
+                                chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "nativeCurrency":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                nativeCurrency = JsonSerializer.Deserialize<GetChainResponseNativeCurrency>(ref utf8JsonReader, jsonSerializerOptions);
+                                nativeCurrency = new Option<GetChainResponseNativeCurrency>(JsonSerializer.Deserialize<GetChainResponseNativeCurrency>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -147,16 +148,25 @@ namespace Beam.Model
                 }
             }
 
-            if (blockNumber == null)
-                throw new ArgumentNullException(nameof(blockNumber), "Property is required for class GetChainResponse.");
+            if (!blockNumber.IsSet)
+                throw new ArgumentException("Property is required for class GetChainResponse.", nameof(blockNumber));
 
-            if (chainId == null)
-                throw new ArgumentNullException(nameof(chainId), "Property is required for class GetChainResponse.");
+            if (!chainId.IsSet)
+                throw new ArgumentException("Property is required for class GetChainResponse.", nameof(chainId));
 
-            if (nativeCurrency == null)
-                throw new ArgumentNullException(nameof(nativeCurrency), "Property is required for class GetChainResponse.");
+            if (!nativeCurrency.IsSet)
+                throw new ArgumentException("Property is required for class GetChainResponse.", nameof(nativeCurrency));
 
-            return new GetChainResponse(blockNumber.Value, chainId.Value, nativeCurrency);
+            if (blockNumber.IsSet && blockNumber.Value == null)
+                throw new ArgumentNullException(nameof(blockNumber), "Property is not nullable for class GetChainResponse.");
+
+            if (chainId.IsSet && chainId.Value == null)
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class GetChainResponse.");
+
+            if (nativeCurrency.IsSet && nativeCurrency.Value == null)
+                throw new ArgumentNullException(nameof(nativeCurrency), "Property is not nullable for class GetChainResponse.");
+
+            return new GetChainResponse(blockNumber.Value.Value, chainId.Value.Value, nativeCurrency.Value);
         }
 
         /// <summary>
@@ -183,8 +193,13 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetChainResponse getChainResponse, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (getChainResponse.NativeCurrency == null)
+                throw new ArgumentNullException(nameof(getChainResponse.NativeCurrency), "Property is required for class GetChainResponse.");
+
             writer.WriteNumber("blockNumber", getChainResponse.BlockNumber);
+
             writer.WriteNumber("chainId", getChainResponse.ChainId);
+
             writer.WritePropertyName("nativeCurrency");
             JsonSerializer.Serialize(writer, getChainResponse.NativeCurrency, jsonSerializerOptions);
         }

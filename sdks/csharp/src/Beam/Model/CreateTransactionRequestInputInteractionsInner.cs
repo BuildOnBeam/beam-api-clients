@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -31,16 +32,16 @@ namespace Beam.Model
         /// Initializes a new instance of the <see cref="CreateTransactionRequestInputInteractionsInner" /> class.
         /// </summary>
         /// <param name="contractAddress">contractAddress</param>
-        /// <param name="functionArgs">functionArgs</param>
         /// <param name="functionName">functionName</param>
+        /// <param name="functionArgs">functionArgs</param>
         /// <param name="value">value</param>
         [JsonConstructor]
-        public CreateTransactionRequestInputInteractionsInner(string contractAddress, List<Object> functionArgs, string functionName, string value)
+        public CreateTransactionRequestInputInteractionsInner(string contractAddress, string functionName, Option<List<Object>> functionArgs = default, Option<string> value = default)
         {
             ContractAddress = contractAddress;
-            FunctionArgs = functionArgs;
             FunctionName = functionName;
-            Value = value;
+            FunctionArgsOption = functionArgs;
+            ValueOption = value;
             OnCreated();
         }
 
@@ -53,22 +54,36 @@ namespace Beam.Model
         public string ContractAddress { get; set; }
 
         /// <summary>
-        /// Gets or Sets FunctionArgs
-        /// </summary>
-        [JsonPropertyName("functionArgs")]
-        public List<Object> FunctionArgs { get; set; }
-
-        /// <summary>
         /// Gets or Sets FunctionName
         /// </summary>
         [JsonPropertyName("functionName")]
         public string FunctionName { get; set; }
 
         /// <summary>
+        /// Used to track the state of FunctionArgs
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<Object>> FunctionArgsOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets FunctionArgs
+        /// </summary>
+        [JsonPropertyName("functionArgs")]
+        public List<Object> FunctionArgs { get { return this. FunctionArgsOption; } set { this.FunctionArgsOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Value
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> ValueOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets Value
         /// </summary>
         [JsonPropertyName("value")]
-        public string Value { get; set; }
+        public string Value { get { return this. ValueOption; } set { this.ValueOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -79,8 +94,8 @@ namespace Beam.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class CreateTransactionRequestInputInteractionsInner {\n");
             sb.Append("  ContractAddress: ").Append(ContractAddress).Append("\n");
-            sb.Append("  FunctionArgs: ").Append(FunctionArgs).Append("\n");
             sb.Append("  FunctionName: ").Append(FunctionName).Append("\n");
+            sb.Append("  FunctionArgs: ").Append(FunctionArgs).Append("\n");
             sb.Append("  Value: ").Append(Value).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -119,10 +134,10 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string contractAddress = default;
-            List<Object> functionArgs = default;
-            string functionName = default;
-            string value = default;
+            Option<string> contractAddress = default;
+            Option<string> functionName = default;
+            Option<List<Object>> functionArgs = default;
+            Option<string> value = default;
 
             while (utf8JsonReader.Read())
             {
@@ -140,17 +155,17 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "contractAddress":
-                            contractAddress = utf8JsonReader.GetString();
+                            contractAddress = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "functionName":
+                            functionName = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "functionArgs":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                functionArgs = JsonSerializer.Deserialize<List<Object>>(ref utf8JsonReader, jsonSerializerOptions);
-                            break;
-                        case "functionName":
-                            functionName = utf8JsonReader.GetString();
+                                functionArgs = new Option<List<Object>>(JsonSerializer.Deserialize<List<Object>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "value":
-                            value = utf8JsonReader.GetString();
+                            value = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -158,19 +173,25 @@ namespace Beam.Model
                 }
             }
 
-            if (contractAddress == null)
-                throw new ArgumentNullException(nameof(contractAddress), "Property is required for class CreateTransactionRequestInputInteractionsInner.");
+            if (!contractAddress.IsSet)
+                throw new ArgumentException("Property is required for class CreateTransactionRequestInputInteractionsInner.", nameof(contractAddress));
 
-            if (functionArgs == null)
-                throw new ArgumentNullException(nameof(functionArgs), "Property is required for class CreateTransactionRequestInputInteractionsInner.");
+            if (!functionName.IsSet)
+                throw new ArgumentException("Property is required for class CreateTransactionRequestInputInteractionsInner.", nameof(functionName));
 
-            if (functionName == null)
-                throw new ArgumentNullException(nameof(functionName), "Property is required for class CreateTransactionRequestInputInteractionsInner.");
+            if (contractAddress.IsSet && contractAddress.Value == null)
+                throw new ArgumentNullException(nameof(contractAddress), "Property is not nullable for class CreateTransactionRequestInputInteractionsInner.");
 
-            if (value == null)
-                throw new ArgumentNullException(nameof(value), "Property is required for class CreateTransactionRequestInputInteractionsInner.");
+            if (functionName.IsSet && functionName.Value == null)
+                throw new ArgumentNullException(nameof(functionName), "Property is not nullable for class CreateTransactionRequestInputInteractionsInner.");
 
-            return new CreateTransactionRequestInputInteractionsInner(contractAddress, functionArgs, functionName, value);
+            if (functionArgs.IsSet && functionArgs.Value == null)
+                throw new ArgumentNullException(nameof(functionArgs), "Property is not nullable for class CreateTransactionRequestInputInteractionsInner.");
+
+            if (value.IsSet && value.Value == null)
+                throw new ArgumentNullException(nameof(value), "Property is not nullable for class CreateTransactionRequestInputInteractionsInner.");
+
+            return new CreateTransactionRequestInputInteractionsInner(contractAddress.Value, functionName.Value, functionArgs, value);
         }
 
         /// <summary>
@@ -197,11 +218,29 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, CreateTransactionRequestInputInteractionsInner createTransactionRequestInputInteractionsInner, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (createTransactionRequestInputInteractionsInner.ContractAddress == null)
+                throw new ArgumentNullException(nameof(createTransactionRequestInputInteractionsInner.ContractAddress), "Property is required for class CreateTransactionRequestInputInteractionsInner.");
+
+            if (createTransactionRequestInputInteractionsInner.FunctionName == null)
+                throw new ArgumentNullException(nameof(createTransactionRequestInputInteractionsInner.FunctionName), "Property is required for class CreateTransactionRequestInputInteractionsInner.");
+
+            if (createTransactionRequestInputInteractionsInner.FunctionArgsOption.IsSet && createTransactionRequestInputInteractionsInner.FunctionArgs == null)
+                throw new ArgumentNullException(nameof(createTransactionRequestInputInteractionsInner.FunctionArgs), "Property is required for class CreateTransactionRequestInputInteractionsInner.");
+
+            if (createTransactionRequestInputInteractionsInner.ValueOption.IsSet && createTransactionRequestInputInteractionsInner.Value == null)
+                throw new ArgumentNullException(nameof(createTransactionRequestInputInteractionsInner.Value), "Property is required for class CreateTransactionRequestInputInteractionsInner.");
+
             writer.WriteString("contractAddress", createTransactionRequestInputInteractionsInner.ContractAddress);
-            writer.WritePropertyName("functionArgs");
-            JsonSerializer.Serialize(writer, createTransactionRequestInputInteractionsInner.FunctionArgs, jsonSerializerOptions);
+
             writer.WriteString("functionName", createTransactionRequestInputInteractionsInner.FunctionName);
-            writer.WriteString("value", createTransactionRequestInputInteractionsInner.Value);
+
+            if (createTransactionRequestInputInteractionsInner.FunctionArgsOption.IsSet)
+            {
+                writer.WritePropertyName("functionArgs");
+                JsonSerializer.Serialize(writer, createTransactionRequestInputInteractionsInner.FunctionArgs, jsonSerializerOptions);
+            }
+            if (createTransactionRequestInputInteractionsInner.ValueOption.IsSet)
+                writer.WriteString("value", createTransactionRequestInputInteractionsInner.Value);
         }
     }
 }

@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -33,26 +34,40 @@ namespace Beam.Model
         /// <param name="caption">caption</param>
         /// <param name="src">src</param>
         [JsonConstructor]
-        public GetAssetResponseContractAvatar(string caption = default, string src = default)
+        public GetAssetResponseContractAvatar(Option<string> caption = default, Option<string> src = default)
         {
-            Caption = caption;
-            Src = src;
+            CaptionOption = caption;
+            SrcOption = src;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
+        /// Used to track the state of Caption
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> CaptionOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets Caption
         /// </summary>
         [JsonPropertyName("caption")]
-        public string Caption { get; set; }
+        public string Caption { get { return this. CaptionOption; } set { this.CaptionOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Src
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> SrcOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Src
         /// </summary>
         [JsonPropertyName("src")]
-        public string Src { get; set; }
+        public string Src { get { return this. SrcOption; } set { this.SrcOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -101,8 +116,8 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string caption = default;
-            string src = default;
+            Option<string> caption = default;
+            Option<string> src = default;
 
             while (utf8JsonReader.Read())
             {
@@ -120,10 +135,10 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "caption":
-                            caption = utf8JsonReader.GetString();
+                            caption = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "src":
-                            src = utf8JsonReader.GetString();
+                            src = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -158,8 +173,17 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetAssetResponseContractAvatar getAssetResponseContractAvatar, JsonSerializerOptions jsonSerializerOptions)
         {
-            writer.WriteString("caption", getAssetResponseContractAvatar.Caption);
-            writer.WriteString("src", getAssetResponseContractAvatar.Src);
+            if (getAssetResponseContractAvatar.CaptionOption.IsSet)
+                if (getAssetResponseContractAvatar.CaptionOption.Value != null)
+                    writer.WriteString("caption", getAssetResponseContractAvatar.Caption);
+                else
+                    writer.WriteNull("caption");
+
+            if (getAssetResponseContractAvatar.SrcOption.IsSet)
+                if (getAssetResponseContractAvatar.SrcOption.Value != null)
+                    writer.WriteString("src", getAssetResponseContractAvatar.Src);
+                else
+                    writer.WriteNull("src");
         }
     }
 }

@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -32,19 +33,26 @@ namespace Beam.Model
         /// </summary>
         /// <param name="status">status</param>
         [JsonConstructor]
-        public Check200ResponseInfoValue(string status) : base()
+        public Check200ResponseInfoValue(Option<string> status = default) : base()
         {
-            Status = status;
+            StatusOption = status;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
+        /// Used to track the state of Status
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> StatusOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets Status
         /// </summary>
         [JsonPropertyName("status")]
-        public string Status { get; set; }
+        public string Status { get { return this. StatusOption; } set { this.StatusOption = new(value); } }
 
         /// <summary>
         /// Gets or Sets additional properties
@@ -110,7 +118,7 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string status = default;
+            Option<string> status = default;
 
             while (utf8JsonReader.Read())
             {
@@ -128,7 +136,7 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "status":
-                            status = utf8JsonReader.GetString();
+                            status = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -136,8 +144,8 @@ namespace Beam.Model
                 }
             }
 
-            if (status == null)
-                throw new ArgumentNullException(nameof(status), "Property is required for class Check200ResponseInfoValue.");
+            if (status.IsSet && status.Value == null)
+                throw new ArgumentNullException(nameof(status), "Property is not nullable for class Check200ResponseInfoValue.");
 
             return new Check200ResponseInfoValue(status);
         }
@@ -166,7 +174,11 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, Check200ResponseInfoValue check200ResponseInfoValue, JsonSerializerOptions jsonSerializerOptions)
         {
-            writer.WriteString("status", check200ResponseInfoValue.Status);
+            if (check200ResponseInfoValue.StatusOption.IsSet && check200ResponseInfoValue.Status == null)
+                throw new ArgumentNullException(nameof(check200ResponseInfoValue.Status), "Property is required for class Check200ResponseInfoValue.");
+
+            if (check200ResponseInfoValue.StatusOption.IsSet)
+                writer.WriteString("status", check200ResponseInfoValue.Status);
         }
     }
 }

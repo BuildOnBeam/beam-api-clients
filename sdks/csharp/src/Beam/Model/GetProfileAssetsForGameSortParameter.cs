@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -38,15 +39,15 @@ namespace Beam.Model
         /// <param name="start">start</param>
         /// <param name="startPriceNumber">startPriceNumber</param>
         [JsonConstructor]
-        public GetProfileAssetsForGameSortParameter(CreatedAtEnum? createdAt = default, EndEnum? end = default, EndPriceNumberEnum? endPriceNumber = default, FixedPriceNumberEnum? fixedPriceNumber = default, RarityScoreEnum? rarityScore = default, StartEnum? start = default, StartPriceNumberEnum? startPriceNumber = default)
+        public GetProfileAssetsForGameSortParameter(Option<CreatedAtEnum?> createdAt = default, Option<EndEnum?> end = default, Option<EndPriceNumberEnum?> endPriceNumber = default, Option<FixedPriceNumberEnum?> fixedPriceNumber = default, Option<RarityScoreEnum?> rarityScore = default, Option<StartEnum?> start = default, Option<StartPriceNumberEnum?> startPriceNumber = default)
         {
-            CreatedAt = createdAt;
-            End = end;
-            EndPriceNumber = endPriceNumber;
-            FixedPriceNumber = fixedPriceNumber;
-            RarityScore = rarityScore;
-            Start = start;
-            StartPriceNumber = startPriceNumber;
+            CreatedAtOption = createdAt;
+            EndOption = end;
+            EndPriceNumberOption = endPriceNumber;
+            FixedPriceNumberOption = fixedPriceNumber;
+            RarityScoreOption = rarityScore;
+            StartOption = start;
+            StartPriceNumberOption = startPriceNumber;
             OnCreated();
         }
 
@@ -107,7 +108,7 @@ namespace Beam.Model
         /// <param name="value"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public static string? CreatedAtEnumToJsonValue(CreatedAtEnum? value)
+        public static string CreatedAtEnumToJsonValue(CreatedAtEnum? value)
         {
             if (value == null)
                 return null;
@@ -122,10 +123,17 @@ namespace Beam.Model
         }
 
         /// <summary>
+        /// Used to track the state of CreatedAt
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<CreatedAtEnum?> CreatedAtOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets CreatedAt
         /// </summary>
         [JsonPropertyName("createdAt")]
-        public CreatedAtEnum? CreatedAt { get; set; }
+        public CreatedAtEnum? CreatedAt { get { return this.CreatedAtOption; } set { this.CreatedAtOption = new(value); } }
 
         /// <summary>
         /// Defines End
@@ -182,7 +190,7 @@ namespace Beam.Model
         /// <param name="value"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public static string? EndEnumToJsonValue(EndEnum? value)
+        public static string EndEnumToJsonValue(EndEnum? value)
         {
             if (value == null)
                 return null;
@@ -197,10 +205,17 @@ namespace Beam.Model
         }
 
         /// <summary>
+        /// Used to track the state of End
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<EndEnum?> EndOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets End
         /// </summary>
         [JsonPropertyName("end")]
-        public EndEnum? End { get; set; }
+        public EndEnum? End { get { return this.EndOption; } set { this.EndOption = new(value); } }
 
         /// <summary>
         /// Defines EndPriceNumber
@@ -257,7 +272,7 @@ namespace Beam.Model
         /// <param name="value"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public static string? EndPriceNumberEnumToJsonValue(EndPriceNumberEnum? value)
+        public static string EndPriceNumberEnumToJsonValue(EndPriceNumberEnum? value)
         {
             if (value == null)
                 return null;
@@ -272,10 +287,17 @@ namespace Beam.Model
         }
 
         /// <summary>
+        /// Used to track the state of EndPriceNumber
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<EndPriceNumberEnum?> EndPriceNumberOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets EndPriceNumber
         /// </summary>
         [JsonPropertyName("endPriceNumber")]
-        public EndPriceNumberEnum? EndPriceNumber { get; set; }
+        public EndPriceNumberEnum? EndPriceNumber { get { return this.EndPriceNumberOption; } set { this.EndPriceNumberOption = new(value); } }
 
         /// <summary>
         /// Defines FixedPriceNumber
@@ -332,7 +354,7 @@ namespace Beam.Model
         /// <param name="value"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public static string? FixedPriceNumberEnumToJsonValue(FixedPriceNumberEnum? value)
+        public static string FixedPriceNumberEnumToJsonValue(FixedPriceNumberEnum? value)
         {
             if (value == null)
                 return null;
@@ -347,10 +369,17 @@ namespace Beam.Model
         }
 
         /// <summary>
+        /// Used to track the state of FixedPriceNumber
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<FixedPriceNumberEnum?> FixedPriceNumberOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets FixedPriceNumber
         /// </summary>
         [JsonPropertyName("fixedPriceNumber")]
-        public FixedPriceNumberEnum? FixedPriceNumber { get; set; }
+        public FixedPriceNumberEnum? FixedPriceNumber { get { return this.FixedPriceNumberOption; } set { this.FixedPriceNumberOption = new(value); } }
 
         /// <summary>
         /// Defines RarityScore
@@ -407,7 +436,7 @@ namespace Beam.Model
         /// <param name="value"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public static string? RarityScoreEnumToJsonValue(RarityScoreEnum? value)
+        public static string RarityScoreEnumToJsonValue(RarityScoreEnum? value)
         {
             if (value == null)
                 return null;
@@ -422,10 +451,17 @@ namespace Beam.Model
         }
 
         /// <summary>
+        /// Used to track the state of RarityScore
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<RarityScoreEnum?> RarityScoreOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets RarityScore
         /// </summary>
         [JsonPropertyName("rarityScore")]
-        public RarityScoreEnum? RarityScore { get; set; }
+        public RarityScoreEnum? RarityScore { get { return this.RarityScoreOption; } set { this.RarityScoreOption = new(value); } }
 
         /// <summary>
         /// Defines Start
@@ -482,7 +518,7 @@ namespace Beam.Model
         /// <param name="value"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public static string? StartEnumToJsonValue(StartEnum? value)
+        public static string StartEnumToJsonValue(StartEnum? value)
         {
             if (value == null)
                 return null;
@@ -497,10 +533,17 @@ namespace Beam.Model
         }
 
         /// <summary>
+        /// Used to track the state of Start
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<StartEnum?> StartOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets Start
         /// </summary>
         [JsonPropertyName("start")]
-        public StartEnum? Start { get; set; }
+        public StartEnum? Start { get { return this.StartOption; } set { this.StartOption = new(value); } }
 
         /// <summary>
         /// Defines StartPriceNumber
@@ -557,7 +600,7 @@ namespace Beam.Model
         /// <param name="value"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public static string? StartPriceNumberEnumToJsonValue(StartPriceNumberEnum? value)
+        public static string StartPriceNumberEnumToJsonValue(StartPriceNumberEnum? value)
         {
             if (value == null)
                 return null;
@@ -572,10 +615,17 @@ namespace Beam.Model
         }
 
         /// <summary>
+        /// Used to track the state of StartPriceNumber
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<StartPriceNumberEnum?> StartPriceNumberOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets StartPriceNumber
         /// </summary>
         [JsonPropertyName("startPriceNumber")]
-        public StartPriceNumberEnum? StartPriceNumber { get; set; }
+        public StartPriceNumberEnum? StartPriceNumber { get { return this.StartPriceNumberOption; } set { this.StartPriceNumberOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -629,13 +679,13 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            GetProfileAssetsForGameSortParameter.CreatedAtEnum? createdAt = default;
-            GetProfileAssetsForGameSortParameter.EndEnum? end = default;
-            GetProfileAssetsForGameSortParameter.EndPriceNumberEnum? endPriceNumber = default;
-            GetProfileAssetsForGameSortParameter.FixedPriceNumberEnum? fixedPriceNumber = default;
-            GetProfileAssetsForGameSortParameter.RarityScoreEnum? rarityScore = default;
-            GetProfileAssetsForGameSortParameter.StartEnum? start = default;
-            GetProfileAssetsForGameSortParameter.StartPriceNumberEnum? startPriceNumber = default;
+            Option<GetProfileAssetsForGameSortParameter.CreatedAtEnum?> createdAt = default;
+            Option<GetProfileAssetsForGameSortParameter.EndEnum?> end = default;
+            Option<GetProfileAssetsForGameSortParameter.EndPriceNumberEnum?> endPriceNumber = default;
+            Option<GetProfileAssetsForGameSortParameter.FixedPriceNumberEnum?> fixedPriceNumber = default;
+            Option<GetProfileAssetsForGameSortParameter.RarityScoreEnum?> rarityScore = default;
+            Option<GetProfileAssetsForGameSortParameter.StartEnum?> start = default;
+            Option<GetProfileAssetsForGameSortParameter.StartPriceNumberEnum?> startPriceNumber = default;
 
             while (utf8JsonReader.Read())
             {
@@ -654,45 +704,38 @@ namespace Beam.Model
                     {
                         case "createdAt":
                             string createdAtRawValue = utf8JsonReader.GetString();
-                            createdAt = createdAtRawValue == null
-                                ? null
-                                : GetProfileAssetsForGameSortParameter.CreatedAtEnumFromStringOrDefault(createdAtRawValue);
+                            if (createdAtRawValue != null)
+                                createdAt = new Option<GetProfileAssetsForGameSortParameter.CreatedAtEnum?>(GetProfileAssetsForGameSortParameter.CreatedAtEnumFromStringOrDefault(createdAtRawValue));
                             break;
                         case "end":
                             string endRawValue = utf8JsonReader.GetString();
-                            end = endRawValue == null
-                                ? null
-                                : GetProfileAssetsForGameSortParameter.EndEnumFromStringOrDefault(endRawValue);
+                            if (endRawValue != null)
+                                end = new Option<GetProfileAssetsForGameSortParameter.EndEnum?>(GetProfileAssetsForGameSortParameter.EndEnumFromStringOrDefault(endRawValue));
                             break;
                         case "endPriceNumber":
                             string endPriceNumberRawValue = utf8JsonReader.GetString();
-                            endPriceNumber = endPriceNumberRawValue == null
-                                ? null
-                                : GetProfileAssetsForGameSortParameter.EndPriceNumberEnumFromStringOrDefault(endPriceNumberRawValue);
+                            if (endPriceNumberRawValue != null)
+                                endPriceNumber = new Option<GetProfileAssetsForGameSortParameter.EndPriceNumberEnum?>(GetProfileAssetsForGameSortParameter.EndPriceNumberEnumFromStringOrDefault(endPriceNumberRawValue));
                             break;
                         case "fixedPriceNumber":
                             string fixedPriceNumberRawValue = utf8JsonReader.GetString();
-                            fixedPriceNumber = fixedPriceNumberRawValue == null
-                                ? null
-                                : GetProfileAssetsForGameSortParameter.FixedPriceNumberEnumFromStringOrDefault(fixedPriceNumberRawValue);
+                            if (fixedPriceNumberRawValue != null)
+                                fixedPriceNumber = new Option<GetProfileAssetsForGameSortParameter.FixedPriceNumberEnum?>(GetProfileAssetsForGameSortParameter.FixedPriceNumberEnumFromStringOrDefault(fixedPriceNumberRawValue));
                             break;
                         case "rarityScore":
                             string rarityScoreRawValue = utf8JsonReader.GetString();
-                            rarityScore = rarityScoreRawValue == null
-                                ? null
-                                : GetProfileAssetsForGameSortParameter.RarityScoreEnumFromStringOrDefault(rarityScoreRawValue);
+                            if (rarityScoreRawValue != null)
+                                rarityScore = new Option<GetProfileAssetsForGameSortParameter.RarityScoreEnum?>(GetProfileAssetsForGameSortParameter.RarityScoreEnumFromStringOrDefault(rarityScoreRawValue));
                             break;
                         case "start":
                             string startRawValue = utf8JsonReader.GetString();
-                            start = startRawValue == null
-                                ? null
-                                : GetProfileAssetsForGameSortParameter.StartEnumFromStringOrDefault(startRawValue);
+                            if (startRawValue != null)
+                                start = new Option<GetProfileAssetsForGameSortParameter.StartEnum?>(GetProfileAssetsForGameSortParameter.StartEnumFromStringOrDefault(startRawValue));
                             break;
                         case "startPriceNumber":
                             string startPriceNumberRawValue = utf8JsonReader.GetString();
-                            startPriceNumber = startPriceNumberRawValue == null
-                                ? null
-                                : GetProfileAssetsForGameSortParameter.StartPriceNumberEnumFromStringOrDefault(startPriceNumberRawValue);
+                            if (startPriceNumberRawValue != null)
+                                startPriceNumber = new Option<GetProfileAssetsForGameSortParameter.StartPriceNumberEnum?>(GetProfileAssetsForGameSortParameter.StartPriceNumberEnumFromStringOrDefault(startPriceNumberRawValue));
                             break;
                         default:
                             break;
@@ -727,44 +770,43 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetProfileAssetsForGameSortParameter getProfileAssetsForGameSortParameter, JsonSerializerOptions jsonSerializerOptions)
         {
-
-            var createdAtRawValue = GetProfileAssetsForGameSortParameter.CreatedAtEnumToJsonValue(getProfileAssetsForGameSortParameter.CreatedAt);
+            var createdAtRawValue = GetProfileAssetsForGameSortParameter.CreatedAtEnumToJsonValue(getProfileAssetsForGameSortParameter.CreatedAtOption.Value.Value);
             if (createdAtRawValue != null)
                 writer.WriteString("createdAt", createdAtRawValue);
             else
                 writer.WriteNull("createdAt");
 
-            var endRawValue = GetProfileAssetsForGameSortParameter.EndEnumToJsonValue(getProfileAssetsForGameSortParameter.End);
+            var endRawValue = GetProfileAssetsForGameSortParameter.EndEnumToJsonValue(getProfileAssetsForGameSortParameter.EndOption.Value.Value);
             if (endRawValue != null)
                 writer.WriteString("end", endRawValue);
             else
                 writer.WriteNull("end");
 
-            var endPriceNumberRawValue = GetProfileAssetsForGameSortParameter.EndPriceNumberEnumToJsonValue(getProfileAssetsForGameSortParameter.EndPriceNumber);
+            var endPriceNumberRawValue = GetProfileAssetsForGameSortParameter.EndPriceNumberEnumToJsonValue(getProfileAssetsForGameSortParameter.EndPriceNumberOption.Value.Value);
             if (endPriceNumberRawValue != null)
                 writer.WriteString("endPriceNumber", endPriceNumberRawValue);
             else
                 writer.WriteNull("endPriceNumber");
 
-            var fixedPriceNumberRawValue = GetProfileAssetsForGameSortParameter.FixedPriceNumberEnumToJsonValue(getProfileAssetsForGameSortParameter.FixedPriceNumber);
+            var fixedPriceNumberRawValue = GetProfileAssetsForGameSortParameter.FixedPriceNumberEnumToJsonValue(getProfileAssetsForGameSortParameter.FixedPriceNumberOption.Value.Value);
             if (fixedPriceNumberRawValue != null)
                 writer.WriteString("fixedPriceNumber", fixedPriceNumberRawValue);
             else
                 writer.WriteNull("fixedPriceNumber");
 
-            var rarityScoreRawValue = GetProfileAssetsForGameSortParameter.RarityScoreEnumToJsonValue(getProfileAssetsForGameSortParameter.RarityScore);
+            var rarityScoreRawValue = GetProfileAssetsForGameSortParameter.RarityScoreEnumToJsonValue(getProfileAssetsForGameSortParameter.RarityScoreOption.Value.Value);
             if (rarityScoreRawValue != null)
                 writer.WriteString("rarityScore", rarityScoreRawValue);
             else
                 writer.WriteNull("rarityScore");
 
-            var startRawValue = GetProfileAssetsForGameSortParameter.StartEnumToJsonValue(getProfileAssetsForGameSortParameter.Start);
+            var startRawValue = GetProfileAssetsForGameSortParameter.StartEnumToJsonValue(getProfileAssetsForGameSortParameter.StartOption.Value.Value);
             if (startRawValue != null)
                 writer.WriteString("start", startRawValue);
             else
                 writer.WriteNull("start");
 
-            var startPriceNumberRawValue = GetProfileAssetsForGameSortParameter.StartPriceNumberEnumToJsonValue(getProfileAssetsForGameSortParameter.StartPriceNumber);
+            var startPriceNumberRawValue = GetProfileAssetsForGameSortParameter.StartPriceNumberEnumToJsonValue(getProfileAssetsForGameSortParameter.StartPriceNumberOption.Value.Value);
             if (startPriceNumberRawValue != null)
                 writer.WriteString("startPriceNumber", startPriceNumberRawValue);
             else

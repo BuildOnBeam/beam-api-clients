@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -119,10 +120,10 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string amountIn = default;
-            string amountOut = default;
-            string tokenIn = default;
-            string tokenOut = default;
+            Option<string> amountIn = default;
+            Option<string> amountOut = default;
+            Option<string> tokenIn = default;
+            Option<string> tokenOut = default;
 
             while (utf8JsonReader.Read())
             {
@@ -140,16 +141,16 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "amountIn":
-                            amountIn = utf8JsonReader.GetString();
+                            amountIn = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "amountOut":
-                            amountOut = utf8JsonReader.GetString();
+                            amountOut = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "tokenIn":
-                            tokenIn = utf8JsonReader.GetString();
+                            tokenIn = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "tokenOut":
-                            tokenOut = utf8JsonReader.GetString();
+                            tokenOut = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -157,19 +158,31 @@ namespace Beam.Model
                 }
             }
 
-            if (amountIn == null)
-                throw new ArgumentNullException(nameof(amountIn), "Property is required for class GetQuoteResponse.");
+            if (!amountIn.IsSet)
+                throw new ArgumentException("Property is required for class GetQuoteResponse.", nameof(amountIn));
 
-            if (amountOut == null)
-                throw new ArgumentNullException(nameof(amountOut), "Property is required for class GetQuoteResponse.");
+            if (!amountOut.IsSet)
+                throw new ArgumentException("Property is required for class GetQuoteResponse.", nameof(amountOut));
 
-            if (tokenIn == null)
-                throw new ArgumentNullException(nameof(tokenIn), "Property is required for class GetQuoteResponse.");
+            if (!tokenIn.IsSet)
+                throw new ArgumentException("Property is required for class GetQuoteResponse.", nameof(tokenIn));
 
-            if (tokenOut == null)
-                throw new ArgumentNullException(nameof(tokenOut), "Property is required for class GetQuoteResponse.");
+            if (!tokenOut.IsSet)
+                throw new ArgumentException("Property is required for class GetQuoteResponse.", nameof(tokenOut));
 
-            return new GetQuoteResponse(amountIn, amountOut, tokenIn, tokenOut);
+            if (amountIn.IsSet && amountIn.Value == null)
+                throw new ArgumentNullException(nameof(amountIn), "Property is not nullable for class GetQuoteResponse.");
+
+            if (amountOut.IsSet && amountOut.Value == null)
+                throw new ArgumentNullException(nameof(amountOut), "Property is not nullable for class GetQuoteResponse.");
+
+            if (tokenIn.IsSet && tokenIn.Value == null)
+                throw new ArgumentNullException(nameof(tokenIn), "Property is not nullable for class GetQuoteResponse.");
+
+            if (tokenOut.IsSet && tokenOut.Value == null)
+                throw new ArgumentNullException(nameof(tokenOut), "Property is not nullable for class GetQuoteResponse.");
+
+            return new GetQuoteResponse(amountIn.Value, amountOut.Value, tokenIn.Value, tokenOut.Value);
         }
 
         /// <summary>
@@ -196,9 +209,24 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetQuoteResponse getQuoteResponse, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (getQuoteResponse.AmountIn == null)
+                throw new ArgumentNullException(nameof(getQuoteResponse.AmountIn), "Property is required for class GetQuoteResponse.");
+
+            if (getQuoteResponse.AmountOut == null)
+                throw new ArgumentNullException(nameof(getQuoteResponse.AmountOut), "Property is required for class GetQuoteResponse.");
+
+            if (getQuoteResponse.TokenIn == null)
+                throw new ArgumentNullException(nameof(getQuoteResponse.TokenIn), "Property is required for class GetQuoteResponse.");
+
+            if (getQuoteResponse.TokenOut == null)
+                throw new ArgumentNullException(nameof(getQuoteResponse.TokenOut), "Property is required for class GetQuoteResponse.");
+
             writer.WriteString("amountIn", getQuoteResponse.AmountIn);
+
             writer.WriteString("amountOut", getQuoteResponse.AmountOut);
+
             writer.WriteString("tokenIn", getQuoteResponse.TokenIn);
+
             writer.WriteString("tokenOut", getQuoteResponse.TokenOut);
         }
     }

@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -103,7 +104,6 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string ModelEnumToJsonValue(ModelEnum value)
         {
-
             if (value == ModelEnum.ContractFunctions)
                 return "ContractFunctions";
 
@@ -186,10 +186,10 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            int? chainId = default;
-            string id = default;
-            GetAllGasUsageResponseDataInnerDataInnerPolicy.ModelEnum? model = default;
-            string name = default;
+            Option<int?> chainId = default;
+            Option<string> id = default;
+            Option<GetAllGasUsageResponseDataInnerDataInnerPolicy.ModelEnum?> model = default;
+            Option<string> name = default;
 
             while (utf8JsonReader.Read())
             {
@@ -208,19 +208,18 @@ namespace Beam.Model
                     {
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = utf8JsonReader.GetInt32();
+                                chainId = new Option<int?>(utf8JsonReader.GetInt32());
                             break;
                         case "id":
-                            id = utf8JsonReader.GetString();
+                            id = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "model":
                             string modelRawValue = utf8JsonReader.GetString();
-                            model = modelRawValue == null
-                                ? null
-                                : GetAllGasUsageResponseDataInnerDataInnerPolicy.ModelEnumFromStringOrDefault(modelRawValue);
+                            if (modelRawValue != null)
+                                model = new Option<GetAllGasUsageResponseDataInnerDataInnerPolicy.ModelEnum?>(GetAllGasUsageResponseDataInnerDataInnerPolicy.ModelEnumFromStringOrDefault(modelRawValue));
                             break;
                         case "name":
-                            name = utf8JsonReader.GetString();
+                            name = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -228,19 +227,31 @@ namespace Beam.Model
                 }
             }
 
-            if (chainId == null)
-                throw new ArgumentNullException(nameof(chainId), "Property is required for class GetAllGasUsageResponseDataInnerDataInnerPolicy.");
+            if (!chainId.IsSet)
+                throw new ArgumentException("Property is required for class GetAllGasUsageResponseDataInnerDataInnerPolicy.", nameof(chainId));
 
-            if (id == null)
-                throw new ArgumentNullException(nameof(id), "Property is required for class GetAllGasUsageResponseDataInnerDataInnerPolicy.");
+            if (!id.IsSet)
+                throw new ArgumentException("Property is required for class GetAllGasUsageResponseDataInnerDataInnerPolicy.", nameof(id));
 
-            if (model == null)
-                throw new ArgumentNullException(nameof(model), "Property is required for class GetAllGasUsageResponseDataInnerDataInnerPolicy.");
+            if (!model.IsSet)
+                throw new ArgumentException("Property is required for class GetAllGasUsageResponseDataInnerDataInnerPolicy.", nameof(model));
 
-            if (name == null)
-                throw new ArgumentNullException(nameof(name), "Property is required for class GetAllGasUsageResponseDataInnerDataInnerPolicy.");
+            if (!name.IsSet)
+                throw new ArgumentException("Property is required for class GetAllGasUsageResponseDataInnerDataInnerPolicy.", nameof(name));
 
-            return new GetAllGasUsageResponseDataInnerDataInnerPolicy(chainId.Value, id, model.Value, name);
+            if (chainId.IsSet && chainId.Value == null)
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class GetAllGasUsageResponseDataInnerDataInnerPolicy.");
+
+            if (id.IsSet && id.Value == null)
+                throw new ArgumentNullException(nameof(id), "Property is not nullable for class GetAllGasUsageResponseDataInnerDataInnerPolicy.");
+
+            if (model.IsSet && model.Value == null)
+                throw new ArgumentNullException(nameof(model), "Property is not nullable for class GetAllGasUsageResponseDataInnerDataInnerPolicy.");
+
+            if (name.IsSet && name.Value == null)
+                throw new ArgumentNullException(nameof(name), "Property is not nullable for class GetAllGasUsageResponseDataInnerDataInnerPolicy.");
+
+            return new GetAllGasUsageResponseDataInnerDataInnerPolicy(chainId.Value.Value, id.Value, model.Value.Value, name.Value);
         }
 
         /// <summary>
@@ -267,7 +278,14 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetAllGasUsageResponseDataInnerDataInnerPolicy getAllGasUsageResponseDataInnerDataInnerPolicy, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (getAllGasUsageResponseDataInnerDataInnerPolicy.Id == null)
+                throw new ArgumentNullException(nameof(getAllGasUsageResponseDataInnerDataInnerPolicy.Id), "Property is required for class GetAllGasUsageResponseDataInnerDataInnerPolicy.");
+
+            if (getAllGasUsageResponseDataInnerDataInnerPolicy.Name == null)
+                throw new ArgumentNullException(nameof(getAllGasUsageResponseDataInnerDataInnerPolicy.Name), "Property is required for class GetAllGasUsageResponseDataInnerDataInnerPolicy.");
+
             writer.WriteNumber("chainId", getAllGasUsageResponseDataInnerDataInnerPolicy.ChainId);
+
             writer.WriteString("id", getAllGasUsageResponseDataInnerDataInnerPolicy.Id);
 
             var modelRawValue = GetAllGasUsageResponseDataInnerDataInnerPolicy.ModelEnumToJsonValue(getAllGasUsageResponseDataInnerDataInnerPolicy.Model);

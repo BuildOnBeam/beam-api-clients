@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -31,18 +32,18 @@ namespace Beam.Model
         /// Initializes a new instance of the <see cref="TransferAssetRequestInput" /> class.
         /// </summary>
         /// <param name="assets">assets</param>
-        /// <param name="policyId">policyId</param>
         /// <param name="chainId">chainId (default to 13337M)</param>
         /// <param name="optimistic">optimistic (default to false)</param>
+        /// <param name="policyId">policyId</param>
         /// <param name="sponsor">sponsor (default to true)</param>
         [JsonConstructor]
-        public TransferAssetRequestInput(List<TransferAssetRequestInputAssetsInner> assets, string policyId, decimal chainId = 13337M, bool optimistic = false, bool sponsor = true)
+        public TransferAssetRequestInput(List<TransferAssetRequestInputAssetsInner> assets, Option<decimal?> chainId = default, Option<bool?> optimistic = default, Option<string> policyId = default, Option<bool?> sponsor = default)
         {
             Assets = assets;
-            PolicyId = policyId;
-            ChainId = chainId;
-            Optimistic = optimistic;
-            Sponsor = sponsor;
+            ChainIdOption = chainId;
+            OptimisticOption = optimistic;
+            PolicyIdOption = policyId;
+            SponsorOption = sponsor;
             OnCreated();
         }
 
@@ -55,28 +56,56 @@ namespace Beam.Model
         public List<TransferAssetRequestInputAssetsInner> Assets { get; set; }
 
         /// <summary>
-        /// Gets or Sets PolicyId
+        /// Used to track the state of ChainId
         /// </summary>
-        [JsonPropertyName("policyId")]
-        public string PolicyId { get; set; }
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<decimal?> ChainIdOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [JsonPropertyName("chainId")]
-        public decimal ChainId { get; set; }
+        public decimal? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Optimistic
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> OptimisticOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Optimistic
         /// </summary>
         [JsonPropertyName("optimistic")]
-        public bool Optimistic { get; set; }
+        public bool? Optimistic { get { return this. OptimisticOption; } set { this.OptimisticOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of PolicyId
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> PolicyIdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets PolicyId
+        /// </summary>
+        [JsonPropertyName("policyId")]
+        public string PolicyId { get { return this. PolicyIdOption; } set { this.PolicyIdOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Sponsor
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> SponsorOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Sponsor
         /// </summary>
         [JsonPropertyName("sponsor")]
-        public bool Sponsor { get; set; }
+        public bool? Sponsor { get { return this. SponsorOption; } set { this.SponsorOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -87,9 +116,9 @@ namespace Beam.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class TransferAssetRequestInput {\n");
             sb.Append("  Assets: ").Append(Assets).Append("\n");
-            sb.Append("  PolicyId: ").Append(PolicyId).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  Optimistic: ").Append(Optimistic).Append("\n");
+            sb.Append("  PolicyId: ").Append(PolicyId).Append("\n");
             sb.Append("  Sponsor: ").Append(Sponsor).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -128,11 +157,11 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            List<TransferAssetRequestInputAssetsInner> assets = default;
-            string policyId = default;
-            decimal? chainId = default;
-            bool? optimistic = default;
-            bool? sponsor = default;
+            Option<List<TransferAssetRequestInputAssetsInner>> assets = default;
+            Option<decimal?> chainId = default;
+            Option<bool?> optimistic = default;
+            Option<string> policyId = default;
+            Option<bool?> sponsor = default;
 
             while (utf8JsonReader.Read())
             {
@@ -151,22 +180,22 @@ namespace Beam.Model
                     {
                         case "assets":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                assets = JsonSerializer.Deserialize<List<TransferAssetRequestInputAssetsInner>>(ref utf8JsonReader, jsonSerializerOptions);
-                            break;
-                        case "policyId":
-                            policyId = utf8JsonReader.GetString();
+                                assets = new Option<List<TransferAssetRequestInputAssetsInner>>(JsonSerializer.Deserialize<List<TransferAssetRequestInputAssetsInner>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = utf8JsonReader.GetDecimal();
+                                chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "optimistic":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                optimistic = utf8JsonReader.GetBoolean();
+                                optimistic = new Option<bool?>(utf8JsonReader.GetBoolean());
+                            break;
+                        case "policyId":
+                            policyId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "sponsor":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                sponsor = utf8JsonReader.GetBoolean();
+                                sponsor = new Option<bool?>(utf8JsonReader.GetBoolean());
                             break;
                         default:
                             break;
@@ -174,22 +203,25 @@ namespace Beam.Model
                 }
             }
 
-            if (assets == null)
-                throw new ArgumentNullException(nameof(assets), "Property is required for class TransferAssetRequestInput.");
+            if (!assets.IsSet)
+                throw new ArgumentException("Property is required for class TransferAssetRequestInput.", nameof(assets));
 
-            if (policyId == null)
-                throw new ArgumentNullException(nameof(policyId), "Property is required for class TransferAssetRequestInput.");
+            if (assets.IsSet && assets.Value == null)
+                throw new ArgumentNullException(nameof(assets), "Property is not nullable for class TransferAssetRequestInput.");
 
-            if (chainId == null)
-                throw new ArgumentNullException(nameof(chainId), "Property is required for class TransferAssetRequestInput.");
+            if (chainId.IsSet && chainId.Value == null)
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class TransferAssetRequestInput.");
 
-            if (optimistic == null)
-                throw new ArgumentNullException(nameof(optimistic), "Property is required for class TransferAssetRequestInput.");
+            if (optimistic.IsSet && optimistic.Value == null)
+                throw new ArgumentNullException(nameof(optimistic), "Property is not nullable for class TransferAssetRequestInput.");
 
-            if (sponsor == null)
-                throw new ArgumentNullException(nameof(sponsor), "Property is required for class TransferAssetRequestInput.");
+            if (policyId.IsSet && policyId.Value == null)
+                throw new ArgumentNullException(nameof(policyId), "Property is not nullable for class TransferAssetRequestInput.");
 
-            return new TransferAssetRequestInput(assets, policyId, chainId.Value, optimistic.Value, sponsor.Value);
+            if (sponsor.IsSet && sponsor.Value == null)
+                throw new ArgumentNullException(nameof(sponsor), "Property is not nullable for class TransferAssetRequestInput.");
+
+            return new TransferAssetRequestInput(assets.Value, chainId, optimistic, policyId, sponsor);
         }
 
         /// <summary>
@@ -216,12 +248,25 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, TransferAssetRequestInput transferAssetRequestInput, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (transferAssetRequestInput.Assets == null)
+                throw new ArgumentNullException(nameof(transferAssetRequestInput.Assets), "Property is required for class TransferAssetRequestInput.");
+
+            if (transferAssetRequestInput.PolicyIdOption.IsSet && transferAssetRequestInput.PolicyId == null)
+                throw new ArgumentNullException(nameof(transferAssetRequestInput.PolicyId), "Property is required for class TransferAssetRequestInput.");
+
             writer.WritePropertyName("assets");
             JsonSerializer.Serialize(writer, transferAssetRequestInput.Assets, jsonSerializerOptions);
-            writer.WriteString("policyId", transferAssetRequestInput.PolicyId);
-            writer.WriteNumber("chainId", transferAssetRequestInput.ChainId);
-            writer.WriteBoolean("optimistic", transferAssetRequestInput.Optimistic);
-            writer.WriteBoolean("sponsor", transferAssetRequestInput.Sponsor);
+            if (transferAssetRequestInput.ChainIdOption.IsSet)
+                writer.WriteNumber("chainId", transferAssetRequestInput.ChainIdOption.Value.Value);
+
+            if (transferAssetRequestInput.OptimisticOption.IsSet)
+                writer.WriteBoolean("optimistic", transferAssetRequestInput.OptimisticOption.Value.Value);
+
+            if (transferAssetRequestInput.PolicyIdOption.IsSet)
+                writer.WriteString("policyId", transferAssetRequestInput.PolicyId);
+
+            if (transferAssetRequestInput.SponsorOption.IsSet)
+                writer.WriteBoolean("sponsor", transferAssetRequestInput.SponsorOption.Value.Value);
         }
     }
 }

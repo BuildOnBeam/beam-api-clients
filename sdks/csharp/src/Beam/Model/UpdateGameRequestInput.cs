@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -30,45 +31,73 @@ namespace Beam.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateGameRequestInput" /> class.
         /// </summary>
-        /// <param name="name">name</param>
         /// <param name="coverImageUrl">coverImageUrl</param>
         /// <param name="description">description</param>
         /// <param name="logoImageUrl">logoImageUrl</param>
+        /// <param name="name">name</param>
         [JsonConstructor]
-        public UpdateGameRequestInput(string name, string coverImageUrl = default, string description = default, string logoImageUrl = default)
+        public UpdateGameRequestInput(Option<string> coverImageUrl = default, Option<string> description = default, Option<string> logoImageUrl = default, Option<string> name = default)
         {
-            Name = name;
-            CoverImageUrl = coverImageUrl;
-            Description = description;
-            LogoImageUrl = logoImageUrl;
+            CoverImageUrlOption = coverImageUrl;
+            DescriptionOption = description;
+            LogoImageUrlOption = logoImageUrl;
+            NameOption = name;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets Name
+        /// Used to track the state of CoverImageUrl
         /// </summary>
-        [JsonPropertyName("name")]
-        public string Name { get; set; }
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> CoverImageUrlOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets CoverImageUrl
         /// </summary>
         [JsonPropertyName("coverImageUrl")]
-        public string CoverImageUrl { get; set; }
+        public string CoverImageUrl { get { return this. CoverImageUrlOption; } set { this.CoverImageUrlOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Description
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> DescriptionOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Description
         /// </summary>
         [JsonPropertyName("description")]
-        public string Description { get; set; }
+        public string Description { get { return this. DescriptionOption; } set { this.DescriptionOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of LogoImageUrl
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> LogoImageUrlOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets LogoImageUrl
         /// </summary>
         [JsonPropertyName("logoImageUrl")]
-        public string LogoImageUrl { get; set; }
+        public string LogoImageUrl { get { return this. LogoImageUrlOption; } set { this.LogoImageUrlOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Name
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> NameOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Name
+        /// </summary>
+        [JsonPropertyName("name")]
+        public string Name { get { return this. NameOption; } set { this.NameOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -78,10 +107,10 @@ namespace Beam.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class UpdateGameRequestInput {\n");
-            sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  CoverImageUrl: ").Append(CoverImageUrl).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  LogoImageUrl: ").Append(LogoImageUrl).Append("\n");
+            sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -119,10 +148,10 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string name = default;
-            string coverImageUrl = default;
-            string description = default;
-            string logoImageUrl = default;
+            Option<string> coverImageUrl = default;
+            Option<string> description = default;
+            Option<string> logoImageUrl = default;
+            Option<string> name = default;
 
             while (utf8JsonReader.Read())
             {
@@ -139,17 +168,17 @@ namespace Beam.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "name":
-                            name = utf8JsonReader.GetString();
-                            break;
                         case "coverImageUrl":
-                            coverImageUrl = utf8JsonReader.GetString();
+                            coverImageUrl = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "description":
-                            description = utf8JsonReader.GetString();
+                            description = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "logoImageUrl":
-                            logoImageUrl = utf8JsonReader.GetString();
+                            logoImageUrl = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "name":
+                            name = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -157,10 +186,10 @@ namespace Beam.Model
                 }
             }
 
-            if (name == null)
-                throw new ArgumentNullException(nameof(name), "Property is required for class UpdateGameRequestInput.");
+            if (name.IsSet && name.Value == null)
+                throw new ArgumentNullException(nameof(name), "Property is not nullable for class UpdateGameRequestInput.");
 
-            return new UpdateGameRequestInput(name, coverImageUrl, description, logoImageUrl);
+            return new UpdateGameRequestInput(coverImageUrl, description, logoImageUrl, name);
         }
 
         /// <summary>
@@ -187,10 +216,29 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, UpdateGameRequestInput updateGameRequestInput, JsonSerializerOptions jsonSerializerOptions)
         {
-            writer.WriteString("name", updateGameRequestInput.Name);
-            writer.WriteString("coverImageUrl", updateGameRequestInput.CoverImageUrl);
-            writer.WriteString("description", updateGameRequestInput.Description);
-            writer.WriteString("logoImageUrl", updateGameRequestInput.LogoImageUrl);
+            if (updateGameRequestInput.NameOption.IsSet && updateGameRequestInput.Name == null)
+                throw new ArgumentNullException(nameof(updateGameRequestInput.Name), "Property is required for class UpdateGameRequestInput.");
+
+            if (updateGameRequestInput.CoverImageUrlOption.IsSet)
+                if (updateGameRequestInput.CoverImageUrlOption.Value != null)
+                    writer.WriteString("coverImageUrl", updateGameRequestInput.CoverImageUrl);
+                else
+                    writer.WriteNull("coverImageUrl");
+
+            if (updateGameRequestInput.DescriptionOption.IsSet)
+                if (updateGameRequestInput.DescriptionOption.Value != null)
+                    writer.WriteString("description", updateGameRequestInput.Description);
+                else
+                    writer.WriteNull("description");
+
+            if (updateGameRequestInput.LogoImageUrlOption.IsSet)
+                if (updateGameRequestInput.LogoImageUrlOption.Value != null)
+                    writer.WriteString("logoImageUrl", updateGameRequestInput.LogoImageUrl);
+                else
+                    writer.WriteNull("logoImageUrl");
+
+            if (updateGameRequestInput.NameOption.IsSet)
+                writer.WriteString("name", updateGameRequestInput.Name);
         }
     }
 }

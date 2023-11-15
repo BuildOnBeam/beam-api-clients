@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -33,10 +34,10 @@ namespace Beam.Model
         /// <param name="entityId">entityId</param>
         /// <param name="chainId">chainId (default to 13337M)</param>
         [JsonConstructor]
-        public CreateProfileRequestInput(string entityId, decimal chainId = 13337M)
+        public CreateProfileRequestInput(string entityId, Option<decimal?> chainId = default)
         {
             EntityId = entityId;
-            ChainId = chainId;
+            ChainIdOption = chainId;
             OnCreated();
         }
 
@@ -49,10 +50,17 @@ namespace Beam.Model
         public string EntityId { get; set; }
 
         /// <summary>
+        /// Used to track the state of ChainId
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<decimal?> ChainIdOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [JsonPropertyName("chainId")]
-        public decimal ChainId { get; set; }
+        public decimal? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -101,8 +109,8 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string entityId = default;
-            decimal? chainId = default;
+            Option<string> entityId = default;
+            Option<decimal?> chainId = default;
 
             while (utf8JsonReader.Read())
             {
@@ -120,11 +128,11 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "entityId":
-                            entityId = utf8JsonReader.GetString();
+                            entityId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = utf8JsonReader.GetDecimal();
+                                chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         default:
                             break;
@@ -132,13 +140,16 @@ namespace Beam.Model
                 }
             }
 
-            if (entityId == null)
-                throw new ArgumentNullException(nameof(entityId), "Property is required for class CreateProfileRequestInput.");
+            if (!entityId.IsSet)
+                throw new ArgumentException("Property is required for class CreateProfileRequestInput.", nameof(entityId));
 
-            if (chainId == null)
-                throw new ArgumentNullException(nameof(chainId), "Property is required for class CreateProfileRequestInput.");
+            if (entityId.IsSet && entityId.Value == null)
+                throw new ArgumentNullException(nameof(entityId), "Property is not nullable for class CreateProfileRequestInput.");
 
-            return new CreateProfileRequestInput(entityId, chainId.Value);
+            if (chainId.IsSet && chainId.Value == null)
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class CreateProfileRequestInput.");
+
+            return new CreateProfileRequestInput(entityId.Value, chainId);
         }
 
         /// <summary>
@@ -165,8 +176,13 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, CreateProfileRequestInput createProfileRequestInput, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (createProfileRequestInput.EntityId == null)
+                throw new ArgumentNullException(nameof(createProfileRequestInput.EntityId), "Property is required for class CreateProfileRequestInput.");
+
             writer.WriteString("entityId", createProfileRequestInput.EntityId);
-            writer.WriteNumber("chainId", createProfileRequestInput.ChainId);
+
+            if (createProfileRequestInput.ChainIdOption.IsSet)
+                writer.WriteNumber("chainId", createProfileRequestInput.ChainIdOption.Value.Value);
         }
     }
 }

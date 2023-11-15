@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -118,7 +119,6 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string TypeEnumToJsonValue(TypeEnum value)
         {
-
             if (value == TypeEnum.ReadOnly)
                 return "ReadOnly";
 
@@ -218,12 +218,12 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string apiKey = default;
-            string gameId = default;
-            string id = default;
-            RegenerateGameApiKeysResponseApiKeysInner.TypeEnum? type = default;
-            Object createdAt = default;
-            Object updatedAt = default;
+            Option<string> apiKey = default;
+            Option<string> gameId = default;
+            Option<string> id = default;
+            Option<RegenerateGameApiKeysResponseApiKeysInner.TypeEnum?> type = default;
+            Option<Object> createdAt = default;
+            Option<Object> updatedAt = default;
 
             while (utf8JsonReader.Read())
             {
@@ -241,27 +241,26 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "apiKey":
-                            apiKey = utf8JsonReader.GetString();
+                            apiKey = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "gameId":
-                            gameId = utf8JsonReader.GetString();
+                            gameId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "id":
-                            id = utf8JsonReader.GetString();
+                            id = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "type":
                             string typeRawValue = utf8JsonReader.GetString();
-                            type = typeRawValue == null
-                                ? null
-                                : RegenerateGameApiKeysResponseApiKeysInner.TypeEnumFromStringOrDefault(typeRawValue);
+                            if (typeRawValue != null)
+                                type = new Option<RegenerateGameApiKeysResponseApiKeysInner.TypeEnum?>(RegenerateGameApiKeysResponseApiKeysInner.TypeEnumFromStringOrDefault(typeRawValue));
                             break;
                         case "createdAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                createdAt = JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions);
+                                createdAt = new Option<Object>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "updatedAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                updatedAt = JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions);
+                                updatedAt = new Option<Object>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -269,19 +268,37 @@ namespace Beam.Model
                 }
             }
 
-            if (apiKey == null)
-                throw new ArgumentNullException(nameof(apiKey), "Property is required for class RegenerateGameApiKeysResponseApiKeysInner.");
+            if (!apiKey.IsSet)
+                throw new ArgumentException("Property is required for class RegenerateGameApiKeysResponseApiKeysInner.", nameof(apiKey));
 
-            if (gameId == null)
-                throw new ArgumentNullException(nameof(gameId), "Property is required for class RegenerateGameApiKeysResponseApiKeysInner.");
+            if (!gameId.IsSet)
+                throw new ArgumentException("Property is required for class RegenerateGameApiKeysResponseApiKeysInner.", nameof(gameId));
 
-            if (id == null)
-                throw new ArgumentNullException(nameof(id), "Property is required for class RegenerateGameApiKeysResponseApiKeysInner.");
+            if (!id.IsSet)
+                throw new ArgumentException("Property is required for class RegenerateGameApiKeysResponseApiKeysInner.", nameof(id));
 
-            if (type == null)
-                throw new ArgumentNullException(nameof(type), "Property is required for class RegenerateGameApiKeysResponseApiKeysInner.");
+            if (!type.IsSet)
+                throw new ArgumentException("Property is required for class RegenerateGameApiKeysResponseApiKeysInner.", nameof(type));
 
-            return new RegenerateGameApiKeysResponseApiKeysInner(apiKey, gameId, id, type.Value, createdAt, updatedAt);
+            if (!createdAt.IsSet)
+                throw new ArgumentException("Property is required for class RegenerateGameApiKeysResponseApiKeysInner.", nameof(createdAt));
+
+            if (!updatedAt.IsSet)
+                throw new ArgumentException("Property is required for class RegenerateGameApiKeysResponseApiKeysInner.", nameof(updatedAt));
+
+            if (apiKey.IsSet && apiKey.Value == null)
+                throw new ArgumentNullException(nameof(apiKey), "Property is not nullable for class RegenerateGameApiKeysResponseApiKeysInner.");
+
+            if (gameId.IsSet && gameId.Value == null)
+                throw new ArgumentNullException(nameof(gameId), "Property is not nullable for class RegenerateGameApiKeysResponseApiKeysInner.");
+
+            if (id.IsSet && id.Value == null)
+                throw new ArgumentNullException(nameof(id), "Property is not nullable for class RegenerateGameApiKeysResponseApiKeysInner.");
+
+            if (type.IsSet && type.Value == null)
+                throw new ArgumentNullException(nameof(type), "Property is not nullable for class RegenerateGameApiKeysResponseApiKeysInner.");
+
+            return new RegenerateGameApiKeysResponseApiKeysInner(apiKey.Value, gameId.Value, id.Value, type.Value.Value, createdAt.Value, updatedAt.Value);
         }
 
         /// <summary>
@@ -308,8 +325,19 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, RegenerateGameApiKeysResponseApiKeysInner regenerateGameApiKeysResponseApiKeysInner, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (regenerateGameApiKeysResponseApiKeysInner.ApiKey == null)
+                throw new ArgumentNullException(nameof(regenerateGameApiKeysResponseApiKeysInner.ApiKey), "Property is required for class RegenerateGameApiKeysResponseApiKeysInner.");
+
+            if (regenerateGameApiKeysResponseApiKeysInner.GameId == null)
+                throw new ArgumentNullException(nameof(regenerateGameApiKeysResponseApiKeysInner.GameId), "Property is required for class RegenerateGameApiKeysResponseApiKeysInner.");
+
+            if (regenerateGameApiKeysResponseApiKeysInner.Id == null)
+                throw new ArgumentNullException(nameof(regenerateGameApiKeysResponseApiKeysInner.Id), "Property is required for class RegenerateGameApiKeysResponseApiKeysInner.");
+
             writer.WriteString("apiKey", regenerateGameApiKeysResponseApiKeysInner.ApiKey);
+
             writer.WriteString("gameId", regenerateGameApiKeysResponseApiKeysInner.GameId);
+
             writer.WriteString("id", regenerateGameApiKeysResponseApiKeysInner.Id);
 
             var typeRawValue = RegenerateGameApiKeysResponseApiKeysInner.TypeEnumToJsonValue(regenerateGameApiKeysResponseApiKeysInner.Type);
@@ -318,10 +346,20 @@ namespace Beam.Model
             else
                 writer.WriteNull("type");
 
-            writer.WritePropertyName("createdAt");
-            JsonSerializer.Serialize(writer, regenerateGameApiKeysResponseApiKeysInner.CreatedAt, jsonSerializerOptions);
-            writer.WritePropertyName("updatedAt");
-            JsonSerializer.Serialize(writer, regenerateGameApiKeysResponseApiKeysInner.UpdatedAt, jsonSerializerOptions);
+            if (regenerateGameApiKeysResponseApiKeysInner.CreatedAt != null)
+            {
+                writer.WritePropertyName("createdAt");
+                JsonSerializer.Serialize(writer, regenerateGameApiKeysResponseApiKeysInner.CreatedAt, jsonSerializerOptions);
+            }
+            else
+                writer.WriteNull("createdAt");
+            if (regenerateGameApiKeysResponseApiKeysInner.UpdatedAt != null)
+            {
+                writer.WritePropertyName("updatedAt");
+                JsonSerializer.Serialize(writer, regenerateGameApiKeysResponseApiKeysInner.UpdatedAt, jsonSerializerOptions);
+            }
+            else
+                writer.WriteNull("updatedAt");
         }
     }
 }

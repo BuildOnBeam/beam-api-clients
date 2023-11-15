@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -92,7 +93,7 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string orderId = default;
+            Option<string> orderId = default;
 
             while (utf8JsonReader.Read())
             {
@@ -110,7 +111,7 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "orderId":
-                            orderId = utf8JsonReader.GetString();
+                            orderId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -118,10 +119,13 @@ namespace Beam.Model
                 }
             }
 
-            if (orderId == null)
-                throw new ArgumentNullException(nameof(orderId), "Property is required for class SellAssetResponse.");
+            if (!orderId.IsSet)
+                throw new ArgumentException("Property is required for class SellAssetResponse.", nameof(orderId));
 
-            return new SellAssetResponse(orderId);
+            if (orderId.IsSet && orderId.Value == null)
+                throw new ArgumentNullException(nameof(orderId), "Property is not nullable for class SellAssetResponse.");
+
+            return new SellAssetResponse(orderId.Value);
         }
 
         /// <summary>
@@ -148,6 +152,9 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, SellAssetResponse sellAssetResponse, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (sellAssetResponse.OrderId == null)
+                throw new ArgumentNullException(nameof(sellAssetResponse.OrderId), "Property is required for class SellAssetResponse.");
+
             writer.WriteString("orderId", sellAssetResponse.OrderId);
         }
     }

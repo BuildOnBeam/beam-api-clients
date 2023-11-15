@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -32,51 +33,86 @@ namespace Beam.Model
         /// </summary>
         /// <param name="components">components</param>
         /// <param name="indexed">indexed</param>
+        /// <param name="internalType">internalType</param>
         /// <param name="name">name</param>
         /// <param name="type">type</param>
-        /// <param name="internalType">internalType</param>
         [JsonConstructor]
-        public AddContractRequestInputAbiInnerInputsInner(List<Object> components, bool indexed, string name, string type, Object internalType = default)
+        public AddContractRequestInputAbiInnerInputsInner(Option<List<Object>> components = default, Option<bool?> indexed = default, Option<Object> internalType = default, Option<string> name = default, Option<string> type = default)
         {
-            Components = components;
-            Indexed = indexed;
-            Name = name;
-            Type = type;
-            InternalType = internalType;
+            ComponentsOption = components;
+            IndexedOption = indexed;
+            InternalTypeOption = internalType;
+            NameOption = name;
+            TypeOption = type;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
+        /// Used to track the state of Components
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<Object>> ComponentsOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets Components
         /// </summary>
         [JsonPropertyName("components")]
-        public List<Object> Components { get; set; }
+        public List<Object> Components { get { return this. ComponentsOption; } set { this.ComponentsOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Indexed
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> IndexedOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Indexed
         /// </summary>
         [JsonPropertyName("indexed")]
-        public bool Indexed { get; set; }
+        public bool? Indexed { get { return this. IndexedOption; } set { this.IndexedOption = new(value); } }
 
         /// <summary>
-        /// Gets or Sets Name
+        /// Used to track the state of InternalType
         /// </summary>
-        [JsonPropertyName("name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [JsonPropertyName("type")]
-        public string Type { get; set; }
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<Object> InternalTypeOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets InternalType
         /// </summary>
         [JsonPropertyName("internalType")]
-        public Object InternalType { get; set; }
+        public Object InternalType { get { return this. InternalTypeOption; } set { this.InternalTypeOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Name
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> NameOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Name
+        /// </summary>
+        [JsonPropertyName("name")]
+        public string Name { get { return this. NameOption; } set { this.NameOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Type
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> TypeOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [JsonPropertyName("type")]
+        public string Type { get { return this. TypeOption; } set { this.TypeOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -88,9 +124,9 @@ namespace Beam.Model
             sb.Append("class AddContractRequestInputAbiInnerInputsInner {\n");
             sb.Append("  Components: ").Append(Components).Append("\n");
             sb.Append("  Indexed: ").Append(Indexed).Append("\n");
+            sb.Append("  InternalType: ").Append(InternalType).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  InternalType: ").Append(InternalType).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -128,11 +164,11 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            List<Object> components = default;
-            bool? indexed = default;
-            string name = default;
-            string type = default;
-            Object internalType = default;
+            Option<List<Object>> components = default;
+            Option<bool?> indexed = default;
+            Option<Object> internalType = default;
+            Option<string> name = default;
+            Option<string> type = default;
 
             while (utf8JsonReader.Read())
             {
@@ -151,21 +187,21 @@ namespace Beam.Model
                     {
                         case "components":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                components = JsonSerializer.Deserialize<List<Object>>(ref utf8JsonReader, jsonSerializerOptions);
+                                components = new Option<List<Object>>(JsonSerializer.Deserialize<List<Object>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "indexed":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                indexed = utf8JsonReader.GetBoolean();
-                            break;
-                        case "name":
-                            name = utf8JsonReader.GetString();
-                            break;
-                        case "type":
-                            type = utf8JsonReader.GetString();
+                                indexed = new Option<bool?>(utf8JsonReader.GetBoolean());
                             break;
                         case "internalType":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                internalType = JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions);
+                                internalType = new Option<Object>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "name":
+                            name = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "type":
+                            type = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -173,19 +209,19 @@ namespace Beam.Model
                 }
             }
 
-            if (components == null)
-                throw new ArgumentNullException(nameof(components), "Property is required for class AddContractRequestInputAbiInnerInputsInner.");
+            if (components.IsSet && components.Value == null)
+                throw new ArgumentNullException(nameof(components), "Property is not nullable for class AddContractRequestInputAbiInnerInputsInner.");
 
-            if (indexed == null)
-                throw new ArgumentNullException(nameof(indexed), "Property is required for class AddContractRequestInputAbiInnerInputsInner.");
+            if (indexed.IsSet && indexed.Value == null)
+                throw new ArgumentNullException(nameof(indexed), "Property is not nullable for class AddContractRequestInputAbiInnerInputsInner.");
 
-            if (name == null)
-                throw new ArgumentNullException(nameof(name), "Property is required for class AddContractRequestInputAbiInnerInputsInner.");
+            if (name.IsSet && name.Value == null)
+                throw new ArgumentNullException(nameof(name), "Property is not nullable for class AddContractRequestInputAbiInnerInputsInner.");
 
-            if (type == null)
-                throw new ArgumentNullException(nameof(type), "Property is required for class AddContractRequestInputAbiInnerInputsInner.");
+            if (type.IsSet && type.Value == null)
+                throw new ArgumentNullException(nameof(type), "Property is not nullable for class AddContractRequestInputAbiInnerInputsInner.");
 
-            return new AddContractRequestInputAbiInnerInputsInner(components, indexed.Value, name, type, internalType);
+            return new AddContractRequestInputAbiInnerInputsInner(components, indexed, internalType, name, type);
         }
 
         /// <summary>
@@ -212,13 +248,36 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, AddContractRequestInputAbiInnerInputsInner addContractRequestInputAbiInnerInputsInner, JsonSerializerOptions jsonSerializerOptions)
         {
-            writer.WritePropertyName("components");
-            JsonSerializer.Serialize(writer, addContractRequestInputAbiInnerInputsInner.Components, jsonSerializerOptions);
-            writer.WriteBoolean("indexed", addContractRequestInputAbiInnerInputsInner.Indexed);
-            writer.WriteString("name", addContractRequestInputAbiInnerInputsInner.Name);
-            writer.WriteString("type", addContractRequestInputAbiInnerInputsInner.Type);
-            writer.WritePropertyName("internalType");
-            JsonSerializer.Serialize(writer, addContractRequestInputAbiInnerInputsInner.InternalType, jsonSerializerOptions);
+            if (addContractRequestInputAbiInnerInputsInner.ComponentsOption.IsSet && addContractRequestInputAbiInnerInputsInner.Components == null)
+                throw new ArgumentNullException(nameof(addContractRequestInputAbiInnerInputsInner.Components), "Property is required for class AddContractRequestInputAbiInnerInputsInner.");
+
+            if (addContractRequestInputAbiInnerInputsInner.NameOption.IsSet && addContractRequestInputAbiInnerInputsInner.Name == null)
+                throw new ArgumentNullException(nameof(addContractRequestInputAbiInnerInputsInner.Name), "Property is required for class AddContractRequestInputAbiInnerInputsInner.");
+
+            if (addContractRequestInputAbiInnerInputsInner.TypeOption.IsSet && addContractRequestInputAbiInnerInputsInner.Type == null)
+                throw new ArgumentNullException(nameof(addContractRequestInputAbiInnerInputsInner.Type), "Property is required for class AddContractRequestInputAbiInnerInputsInner.");
+
+            if (addContractRequestInputAbiInnerInputsInner.ComponentsOption.IsSet)
+            {
+                writer.WritePropertyName("components");
+                JsonSerializer.Serialize(writer, addContractRequestInputAbiInnerInputsInner.Components, jsonSerializerOptions);
+            }
+            if (addContractRequestInputAbiInnerInputsInner.IndexedOption.IsSet)
+                writer.WriteBoolean("indexed", addContractRequestInputAbiInnerInputsInner.IndexedOption.Value.Value);
+
+            if (addContractRequestInputAbiInnerInputsInner.InternalTypeOption.IsSet)
+                if (addContractRequestInputAbiInnerInputsInner.InternalTypeOption.Value != null)
+                {
+                    writer.WritePropertyName("internalType");
+                    JsonSerializer.Serialize(writer, addContractRequestInputAbiInnerInputsInner.InternalType, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("internalType");
+            if (addContractRequestInputAbiInnerInputsInner.NameOption.IsSet)
+                writer.WriteString("name", addContractRequestInputAbiInnerInputsInner.Name);
+
+            if (addContractRequestInputAbiInnerInputsInner.TypeOption.IsSet)
+                writer.WriteString("type", addContractRequestInputAbiInnerInputsInner.Type);
         }
     }
 }

@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -32,23 +33,23 @@ namespace Beam.Model
         /// </summary>
         /// <param name="amountToTransfer">amountToTransfer</param>
         /// <param name="assetAddress">assetAddress</param>
+        /// <param name="chainId">chainId (default to 13337M)</param>
+        /// <param name="optimistic">optimistic (default to false)</param>
         /// <param name="policyId">policyId</param>
         /// <param name="receiverEntityId">receiverEntityId</param>
         /// <param name="receiverWalletAddress">receiverWalletAddress</param>
-        /// <param name="chainId">chainId (default to 13337M)</param>
-        /// <param name="optimistic">optimistic (default to false)</param>
         /// <param name="sponsor">sponsor (default to true)</param>
         [JsonConstructor]
-        public TransferTokenRequestInput(string amountToTransfer, string assetAddress, string policyId, string receiverEntityId, string receiverWalletAddress, decimal chainId = 13337M, bool optimistic = false, bool sponsor = true)
+        public TransferTokenRequestInput(string amountToTransfer, string assetAddress, Option<decimal?> chainId = default, Option<bool?> optimistic = default, Option<string> policyId = default, Option<string> receiverEntityId = default, Option<string> receiverWalletAddress = default, Option<bool?> sponsor = default)
         {
             AmountToTransfer = amountToTransfer;
             AssetAddress = assetAddress;
-            PolicyId = policyId;
-            ReceiverEntityId = receiverEntityId;
-            ReceiverWalletAddress = receiverWalletAddress;
-            ChainId = chainId;
-            Optimistic = optimistic;
-            Sponsor = sponsor;
+            ChainIdOption = chainId;
+            OptimisticOption = optimistic;
+            PolicyIdOption = policyId;
+            ReceiverEntityIdOption = receiverEntityId;
+            ReceiverWalletAddressOption = receiverWalletAddress;
+            SponsorOption = sponsor;
             OnCreated();
         }
 
@@ -67,40 +68,82 @@ namespace Beam.Model
         public string AssetAddress { get; set; }
 
         /// <summary>
-        /// Gets or Sets PolicyId
+        /// Used to track the state of ChainId
         /// </summary>
-        [JsonPropertyName("policyId")]
-        public string PolicyId { get; set; }
-
-        /// <summary>
-        /// Gets or Sets ReceiverEntityId
-        /// </summary>
-        [JsonPropertyName("receiverEntityId")]
-        public string ReceiverEntityId { get; set; }
-
-        /// <summary>
-        /// Gets or Sets ReceiverWalletAddress
-        /// </summary>
-        [JsonPropertyName("receiverWalletAddress")]
-        public string ReceiverWalletAddress { get; set; }
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<decimal?> ChainIdOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [JsonPropertyName("chainId")]
-        public decimal ChainId { get; set; }
+        public decimal? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Optimistic
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> OptimisticOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Optimistic
         /// </summary>
         [JsonPropertyName("optimistic")]
-        public bool Optimistic { get; set; }
+        public bool? Optimistic { get { return this. OptimisticOption; } set { this.OptimisticOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of PolicyId
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> PolicyIdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets PolicyId
+        /// </summary>
+        [JsonPropertyName("policyId")]
+        public string PolicyId { get { return this. PolicyIdOption; } set { this.PolicyIdOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of ReceiverEntityId
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> ReceiverEntityIdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ReceiverEntityId
+        /// </summary>
+        [JsonPropertyName("receiverEntityId")]
+        public string ReceiverEntityId { get { return this. ReceiverEntityIdOption; } set { this.ReceiverEntityIdOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of ReceiverWalletAddress
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> ReceiverWalletAddressOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ReceiverWalletAddress
+        /// </summary>
+        [JsonPropertyName("receiverWalletAddress")]
+        public string ReceiverWalletAddress { get { return this. ReceiverWalletAddressOption; } set { this.ReceiverWalletAddressOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Sponsor
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> SponsorOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Sponsor
         /// </summary>
         [JsonPropertyName("sponsor")]
-        public bool Sponsor { get; set; }
+        public bool? Sponsor { get { return this. SponsorOption; } set { this.SponsorOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -112,11 +155,11 @@ namespace Beam.Model
             sb.Append("class TransferTokenRequestInput {\n");
             sb.Append("  AmountToTransfer: ").Append(AmountToTransfer).Append("\n");
             sb.Append("  AssetAddress: ").Append(AssetAddress).Append("\n");
+            sb.Append("  ChainId: ").Append(ChainId).Append("\n");
+            sb.Append("  Optimistic: ").Append(Optimistic).Append("\n");
             sb.Append("  PolicyId: ").Append(PolicyId).Append("\n");
             sb.Append("  ReceiverEntityId: ").Append(ReceiverEntityId).Append("\n");
             sb.Append("  ReceiverWalletAddress: ").Append(ReceiverWalletAddress).Append("\n");
-            sb.Append("  ChainId: ").Append(ChainId).Append("\n");
-            sb.Append("  Optimistic: ").Append(Optimistic).Append("\n");
             sb.Append("  Sponsor: ").Append(Sponsor).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -155,14 +198,14 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string amountToTransfer = default;
-            string assetAddress = default;
-            string policyId = default;
-            string receiverEntityId = default;
-            string receiverWalletAddress = default;
-            decimal? chainId = default;
-            bool? optimistic = default;
-            bool? sponsor = default;
+            Option<string> amountToTransfer = default;
+            Option<string> assetAddress = default;
+            Option<decimal?> chainId = default;
+            Option<bool?> optimistic = default;
+            Option<string> policyId = default;
+            Option<string> receiverEntityId = default;
+            Option<string> receiverWalletAddress = default;
+            Option<bool?> sponsor = default;
 
             while (utf8JsonReader.Read())
             {
@@ -180,31 +223,31 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "amountToTransfer":
-                            amountToTransfer = utf8JsonReader.GetString();
+                            amountToTransfer = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "assetAddress":
-                            assetAddress = utf8JsonReader.GetString();
-                            break;
-                        case "policyId":
-                            policyId = utf8JsonReader.GetString();
-                            break;
-                        case "receiverEntityId":
-                            receiverEntityId = utf8JsonReader.GetString();
-                            break;
-                        case "receiverWalletAddress":
-                            receiverWalletAddress = utf8JsonReader.GetString();
+                            assetAddress = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = utf8JsonReader.GetDecimal();
+                                chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "optimistic":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                optimistic = utf8JsonReader.GetBoolean();
+                                optimistic = new Option<bool?>(utf8JsonReader.GetBoolean());
+                            break;
+                        case "policyId":
+                            policyId = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "receiverEntityId":
+                            receiverEntityId = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "receiverWalletAddress":
+                            receiverWalletAddress = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "sponsor":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                sponsor = utf8JsonReader.GetBoolean();
+                                sponsor = new Option<bool?>(utf8JsonReader.GetBoolean());
                             break;
                         default:
                             break;
@@ -212,31 +255,37 @@ namespace Beam.Model
                 }
             }
 
-            if (amountToTransfer == null)
-                throw new ArgumentNullException(nameof(amountToTransfer), "Property is required for class TransferTokenRequestInput.");
+            if (!amountToTransfer.IsSet)
+                throw new ArgumentException("Property is required for class TransferTokenRequestInput.", nameof(amountToTransfer));
 
-            if (assetAddress == null)
-                throw new ArgumentNullException(nameof(assetAddress), "Property is required for class TransferTokenRequestInput.");
+            if (!assetAddress.IsSet)
+                throw new ArgumentException("Property is required for class TransferTokenRequestInput.", nameof(assetAddress));
 
-            if (policyId == null)
-                throw new ArgumentNullException(nameof(policyId), "Property is required for class TransferTokenRequestInput.");
+            if (amountToTransfer.IsSet && amountToTransfer.Value == null)
+                throw new ArgumentNullException(nameof(amountToTransfer), "Property is not nullable for class TransferTokenRequestInput.");
 
-            if (receiverEntityId == null)
-                throw new ArgumentNullException(nameof(receiverEntityId), "Property is required for class TransferTokenRequestInput.");
+            if (assetAddress.IsSet && assetAddress.Value == null)
+                throw new ArgumentNullException(nameof(assetAddress), "Property is not nullable for class TransferTokenRequestInput.");
 
-            if (receiverWalletAddress == null)
-                throw new ArgumentNullException(nameof(receiverWalletAddress), "Property is required for class TransferTokenRequestInput.");
+            if (chainId.IsSet && chainId.Value == null)
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class TransferTokenRequestInput.");
 
-            if (chainId == null)
-                throw new ArgumentNullException(nameof(chainId), "Property is required for class TransferTokenRequestInput.");
+            if (optimistic.IsSet && optimistic.Value == null)
+                throw new ArgumentNullException(nameof(optimistic), "Property is not nullable for class TransferTokenRequestInput.");
 
-            if (optimistic == null)
-                throw new ArgumentNullException(nameof(optimistic), "Property is required for class TransferTokenRequestInput.");
+            if (policyId.IsSet && policyId.Value == null)
+                throw new ArgumentNullException(nameof(policyId), "Property is not nullable for class TransferTokenRequestInput.");
 
-            if (sponsor == null)
-                throw new ArgumentNullException(nameof(sponsor), "Property is required for class TransferTokenRequestInput.");
+            if (receiverEntityId.IsSet && receiverEntityId.Value == null)
+                throw new ArgumentNullException(nameof(receiverEntityId), "Property is not nullable for class TransferTokenRequestInput.");
 
-            return new TransferTokenRequestInput(amountToTransfer, assetAddress, policyId, receiverEntityId, receiverWalletAddress, chainId.Value, optimistic.Value, sponsor.Value);
+            if (receiverWalletAddress.IsSet && receiverWalletAddress.Value == null)
+                throw new ArgumentNullException(nameof(receiverWalletAddress), "Property is not nullable for class TransferTokenRequestInput.");
+
+            if (sponsor.IsSet && sponsor.Value == null)
+                throw new ArgumentNullException(nameof(sponsor), "Property is not nullable for class TransferTokenRequestInput.");
+
+            return new TransferTokenRequestInput(amountToTransfer.Value, assetAddress.Value, chainId, optimistic, policyId, receiverEntityId, receiverWalletAddress, sponsor);
         }
 
         /// <summary>
@@ -263,14 +312,42 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, TransferTokenRequestInput transferTokenRequestInput, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (transferTokenRequestInput.AmountToTransfer == null)
+                throw new ArgumentNullException(nameof(transferTokenRequestInput.AmountToTransfer), "Property is required for class TransferTokenRequestInput.");
+
+            if (transferTokenRequestInput.AssetAddress == null)
+                throw new ArgumentNullException(nameof(transferTokenRequestInput.AssetAddress), "Property is required for class TransferTokenRequestInput.");
+
+            if (transferTokenRequestInput.PolicyIdOption.IsSet && transferTokenRequestInput.PolicyId == null)
+                throw new ArgumentNullException(nameof(transferTokenRequestInput.PolicyId), "Property is required for class TransferTokenRequestInput.");
+
+            if (transferTokenRequestInput.ReceiverEntityIdOption.IsSet && transferTokenRequestInput.ReceiverEntityId == null)
+                throw new ArgumentNullException(nameof(transferTokenRequestInput.ReceiverEntityId), "Property is required for class TransferTokenRequestInput.");
+
+            if (transferTokenRequestInput.ReceiverWalletAddressOption.IsSet && transferTokenRequestInput.ReceiverWalletAddress == null)
+                throw new ArgumentNullException(nameof(transferTokenRequestInput.ReceiverWalletAddress), "Property is required for class TransferTokenRequestInput.");
+
             writer.WriteString("amountToTransfer", transferTokenRequestInput.AmountToTransfer);
+
             writer.WriteString("assetAddress", transferTokenRequestInput.AssetAddress);
-            writer.WriteString("policyId", transferTokenRequestInput.PolicyId);
-            writer.WriteString("receiverEntityId", transferTokenRequestInput.ReceiverEntityId);
-            writer.WriteString("receiverWalletAddress", transferTokenRequestInput.ReceiverWalletAddress);
-            writer.WriteNumber("chainId", transferTokenRequestInput.ChainId);
-            writer.WriteBoolean("optimistic", transferTokenRequestInput.Optimistic);
-            writer.WriteBoolean("sponsor", transferTokenRequestInput.Sponsor);
+
+            if (transferTokenRequestInput.ChainIdOption.IsSet)
+                writer.WriteNumber("chainId", transferTokenRequestInput.ChainIdOption.Value.Value);
+
+            if (transferTokenRequestInput.OptimisticOption.IsSet)
+                writer.WriteBoolean("optimistic", transferTokenRequestInput.OptimisticOption.Value.Value);
+
+            if (transferTokenRequestInput.PolicyIdOption.IsSet)
+                writer.WriteString("policyId", transferTokenRequestInput.PolicyId);
+
+            if (transferTokenRequestInput.ReceiverEntityIdOption.IsSet)
+                writer.WriteString("receiverEntityId", transferTokenRequestInput.ReceiverEntityId);
+
+            if (transferTokenRequestInput.ReceiverWalletAddressOption.IsSet)
+                writer.WriteString("receiverWalletAddress", transferTokenRequestInput.ReceiverWalletAddress);
+
+            if (transferTokenRequestInput.SponsorOption.IsSet)
+                writer.WriteBoolean("sponsor", transferTokenRequestInput.SponsorOption.Value.Value);
         }
     }
 }

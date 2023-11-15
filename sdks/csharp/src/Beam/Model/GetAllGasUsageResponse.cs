@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -92,7 +93,7 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            List<GetAllGasUsageResponseDataInner> data = default;
+            Option<List<GetAllGasUsageResponseDataInner>> data = default;
 
             while (utf8JsonReader.Read())
             {
@@ -111,7 +112,7 @@ namespace Beam.Model
                     {
                         case "data":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                data = JsonSerializer.Deserialize<List<GetAllGasUsageResponseDataInner>>(ref utf8JsonReader, jsonSerializerOptions);
+                                data = new Option<List<GetAllGasUsageResponseDataInner>>(JsonSerializer.Deserialize<List<GetAllGasUsageResponseDataInner>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -119,10 +120,13 @@ namespace Beam.Model
                 }
             }
 
-            if (data == null)
-                throw new ArgumentNullException(nameof(data), "Property is required for class GetAllGasUsageResponse.");
+            if (!data.IsSet)
+                throw new ArgumentException("Property is required for class GetAllGasUsageResponse.", nameof(data));
 
-            return new GetAllGasUsageResponse(data);
+            if (data.IsSet && data.Value == null)
+                throw new ArgumentNullException(nameof(data), "Property is not nullable for class GetAllGasUsageResponse.");
+
+            return new GetAllGasUsageResponse(data.Value);
         }
 
         /// <summary>
@@ -149,6 +153,9 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetAllGasUsageResponse getAllGasUsageResponse, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (getAllGasUsageResponse.Data == null)
+                throw new ArgumentNullException(nameof(getAllGasUsageResponse.Data), "Property is required for class GetAllGasUsageResponse.");
+
             writer.WritePropertyName("data");
             JsonSerializer.Serialize(writer, getAllGasUsageResponse.Data, jsonSerializerOptions);
         }

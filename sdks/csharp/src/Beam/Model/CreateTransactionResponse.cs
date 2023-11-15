@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -33,22 +34,22 @@ namespace Beam.Model
         /// <param name="chainId">chainId</param>
         /// <param name="createdAt">createdAt</param>
         /// <param name="id">id</param>
+        /// <param name="updatedAt">updatedAt</param>
         /// <param name="interactions">interactions</param>
         /// <param name="response">response</param>
-        /// <param name="updatedAt">updatedAt</param>
-        /// <param name="userOperationHash">userOperationHash</param>
         /// <param name="userOperation">userOperation</param>
+        /// <param name="userOperationHash">userOperationHash</param>
         [JsonConstructor]
-        public CreateTransactionResponse(decimal chainId, decimal createdAt, string id, List<GetTransactionsResponseDataInnerInteractionsInner> interactions, GetTransactionsResponseDataInnerResponse response, decimal updatedAt, string userOperationHash, Object userOperation = default)
+        public CreateTransactionResponse(decimal chainId, decimal createdAt, string id, decimal updatedAt, Option<List<GetTransactionsResponseDataInnerInteractionsInner>> interactions = default, Option<GetTransactionsResponseDataInnerResponse> response = default, Option<Object> userOperation = default, Option<string> userOperationHash = default)
         {
             ChainId = chainId;
             CreatedAt = createdAt;
             Id = id;
-            Interactions = interactions;
-            Response = response;
             UpdatedAt = updatedAt;
-            UserOperationHash = userOperationHash;
-            UserOperation = userOperation;
+            InteractionsOption = interactions;
+            ResponseOption = response;
+            UserOperationOption = userOperation;
+            UserOperationHashOption = userOperationHash;
             OnCreated();
         }
 
@@ -73,34 +74,62 @@ namespace Beam.Model
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets Interactions
-        /// </summary>
-        [JsonPropertyName("interactions")]
-        public List<GetTransactionsResponseDataInnerInteractionsInner> Interactions { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Response
-        /// </summary>
-        [JsonPropertyName("response")]
-        public GetTransactionsResponseDataInnerResponse Response { get; set; }
-
-        /// <summary>
         /// Gets or Sets UpdatedAt
         /// </summary>
         [JsonPropertyName("updatedAt")]
         public decimal UpdatedAt { get; set; }
 
         /// <summary>
-        /// Gets or Sets UserOperationHash
+        /// Used to track the state of Interactions
         /// </summary>
-        [JsonPropertyName("userOperationHash")]
-        public string UserOperationHash { get; set; }
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<GetTransactionsResponseDataInnerInteractionsInner>> InteractionsOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Interactions
+        /// </summary>
+        [JsonPropertyName("interactions")]
+        public List<GetTransactionsResponseDataInnerInteractionsInner> Interactions { get { return this. InteractionsOption; } set { this.InteractionsOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Response
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<GetTransactionsResponseDataInnerResponse> ResponseOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Response
+        /// </summary>
+        [JsonPropertyName("response")]
+        public GetTransactionsResponseDataInnerResponse Response { get { return this. ResponseOption; } set { this.ResponseOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of UserOperation
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<Object> UserOperationOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets UserOperation
         /// </summary>
         [JsonPropertyName("userOperation")]
-        public Object UserOperation { get; set; }
+        public Object UserOperation { get { return this. UserOperationOption; } set { this.UserOperationOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of UserOperationHash
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> UserOperationHashOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets UserOperationHash
+        /// </summary>
+        [JsonPropertyName("userOperationHash")]
+        public string UserOperationHash { get { return this. UserOperationHashOption; } set { this.UserOperationHashOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -113,11 +142,11 @@ namespace Beam.Model
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
+            sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
             sb.Append("  Interactions: ").Append(Interactions).Append("\n");
             sb.Append("  Response: ").Append(Response).Append("\n");
-            sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
-            sb.Append("  UserOperationHash: ").Append(UserOperationHash).Append("\n");
             sb.Append("  UserOperation: ").Append(UserOperation).Append("\n");
+            sb.Append("  UserOperationHash: ").Append(UserOperationHash).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -155,14 +184,14 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            decimal? chainId = default;
-            decimal? createdAt = default;
-            string id = default;
-            List<GetTransactionsResponseDataInnerInteractionsInner> interactions = default;
-            GetTransactionsResponseDataInnerResponse response = default;
-            decimal? updatedAt = default;
-            string userOperationHash = default;
-            Object userOperation = default;
+            Option<decimal?> chainId = default;
+            Option<decimal?> createdAt = default;
+            Option<string> id = default;
+            Option<decimal?> updatedAt = default;
+            Option<List<GetTransactionsResponseDataInnerInteractionsInner>> interactions = default;
+            Option<GetTransactionsResponseDataInnerResponse> response = default;
+            Option<Object> userOperation = default;
+            Option<string> userOperationHash = default;
 
             while (utf8JsonReader.Read())
             {
@@ -181,33 +210,33 @@ namespace Beam.Model
                     {
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = utf8JsonReader.GetDecimal();
+                                chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "createdAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                createdAt = utf8JsonReader.GetDecimal();
+                                createdAt = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "id":
-                            id = utf8JsonReader.GetString();
-                            break;
-                        case "interactions":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                interactions = JsonSerializer.Deserialize<List<GetTransactionsResponseDataInnerInteractionsInner>>(ref utf8JsonReader, jsonSerializerOptions);
-                            break;
-                        case "response":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                response = JsonSerializer.Deserialize<GetTransactionsResponseDataInnerResponse>(ref utf8JsonReader, jsonSerializerOptions);
+                            id = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "updatedAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                updatedAt = utf8JsonReader.GetDecimal();
+                                updatedAt = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
-                        case "userOperationHash":
-                            userOperationHash = utf8JsonReader.GetString();
+                        case "interactions":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                interactions = new Option<List<GetTransactionsResponseDataInnerInteractionsInner>>(JsonSerializer.Deserialize<List<GetTransactionsResponseDataInnerInteractionsInner>>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "response":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                response = new Option<GetTransactionsResponseDataInnerResponse>(JsonSerializer.Deserialize<GetTransactionsResponseDataInnerResponse>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "userOperation":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                userOperation = JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions);
+                                userOperation = new Option<Object>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "userOperationHash":
+                            userOperationHash = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -215,28 +244,40 @@ namespace Beam.Model
                 }
             }
 
-            if (chainId == null)
-                throw new ArgumentNullException(nameof(chainId), "Property is required for class CreateTransactionResponse.");
+            if (!chainId.IsSet)
+                throw new ArgumentException("Property is required for class CreateTransactionResponse.", nameof(chainId));
 
-            if (createdAt == null)
-                throw new ArgumentNullException(nameof(createdAt), "Property is required for class CreateTransactionResponse.");
+            if (!createdAt.IsSet)
+                throw new ArgumentException("Property is required for class CreateTransactionResponse.", nameof(createdAt));
 
-            if (id == null)
-                throw new ArgumentNullException(nameof(id), "Property is required for class CreateTransactionResponse.");
+            if (!id.IsSet)
+                throw new ArgumentException("Property is required for class CreateTransactionResponse.", nameof(id));
 
-            if (interactions == null)
-                throw new ArgumentNullException(nameof(interactions), "Property is required for class CreateTransactionResponse.");
+            if (!updatedAt.IsSet)
+                throw new ArgumentException("Property is required for class CreateTransactionResponse.", nameof(updatedAt));
 
-            if (response == null)
-                throw new ArgumentNullException(nameof(response), "Property is required for class CreateTransactionResponse.");
+            if (chainId.IsSet && chainId.Value == null)
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class CreateTransactionResponse.");
 
-            if (updatedAt == null)
-                throw new ArgumentNullException(nameof(updatedAt), "Property is required for class CreateTransactionResponse.");
+            if (createdAt.IsSet && createdAt.Value == null)
+                throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class CreateTransactionResponse.");
 
-            if (userOperationHash == null)
-                throw new ArgumentNullException(nameof(userOperationHash), "Property is required for class CreateTransactionResponse.");
+            if (id.IsSet && id.Value == null)
+                throw new ArgumentNullException(nameof(id), "Property is not nullable for class CreateTransactionResponse.");
 
-            return new CreateTransactionResponse(chainId.Value, createdAt.Value, id, interactions, response, updatedAt.Value, userOperationHash, userOperation);
+            if (updatedAt.IsSet && updatedAt.Value == null)
+                throw new ArgumentNullException(nameof(updatedAt), "Property is not nullable for class CreateTransactionResponse.");
+
+            if (interactions.IsSet && interactions.Value == null)
+                throw new ArgumentNullException(nameof(interactions), "Property is not nullable for class CreateTransactionResponse.");
+
+            if (response.IsSet && response.Value == null)
+                throw new ArgumentNullException(nameof(response), "Property is not nullable for class CreateTransactionResponse.");
+
+            if (userOperationHash.IsSet && userOperationHash.Value == null)
+                throw new ArgumentNullException(nameof(userOperationHash), "Property is not nullable for class CreateTransactionResponse.");
+
+            return new CreateTransactionResponse(chainId.Value.Value, createdAt.Value.Value, id.Value, updatedAt.Value.Value, interactions, response, userOperation, userOperationHash);
         }
 
         /// <summary>
@@ -263,17 +304,46 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, CreateTransactionResponse createTransactionResponse, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (createTransactionResponse.Id == null)
+                throw new ArgumentNullException(nameof(createTransactionResponse.Id), "Property is required for class CreateTransactionResponse.");
+
+            if (createTransactionResponse.InteractionsOption.IsSet && createTransactionResponse.Interactions == null)
+                throw new ArgumentNullException(nameof(createTransactionResponse.Interactions), "Property is required for class CreateTransactionResponse.");
+
+            if (createTransactionResponse.ResponseOption.IsSet && createTransactionResponse.Response == null)
+                throw new ArgumentNullException(nameof(createTransactionResponse.Response), "Property is required for class CreateTransactionResponse.");
+
+            if (createTransactionResponse.UserOperationHashOption.IsSet && createTransactionResponse.UserOperationHash == null)
+                throw new ArgumentNullException(nameof(createTransactionResponse.UserOperationHash), "Property is required for class CreateTransactionResponse.");
+
             writer.WriteNumber("chainId", createTransactionResponse.ChainId);
+
             writer.WriteNumber("createdAt", createTransactionResponse.CreatedAt);
+
             writer.WriteString("id", createTransactionResponse.Id);
-            writer.WritePropertyName("interactions");
-            JsonSerializer.Serialize(writer, createTransactionResponse.Interactions, jsonSerializerOptions);
-            writer.WritePropertyName("response");
-            JsonSerializer.Serialize(writer, createTransactionResponse.Response, jsonSerializerOptions);
+
             writer.WriteNumber("updatedAt", createTransactionResponse.UpdatedAt);
-            writer.WriteString("userOperationHash", createTransactionResponse.UserOperationHash);
-            writer.WritePropertyName("userOperation");
-            JsonSerializer.Serialize(writer, createTransactionResponse.UserOperation, jsonSerializerOptions);
+
+            if (createTransactionResponse.InteractionsOption.IsSet)
+            {
+                writer.WritePropertyName("interactions");
+                JsonSerializer.Serialize(writer, createTransactionResponse.Interactions, jsonSerializerOptions);
+            }
+            if (createTransactionResponse.ResponseOption.IsSet)
+            {
+                writer.WritePropertyName("response");
+                JsonSerializer.Serialize(writer, createTransactionResponse.Response, jsonSerializerOptions);
+            }
+            if (createTransactionResponse.UserOperationOption.IsSet)
+                if (createTransactionResponse.UserOperationOption.Value != null)
+                {
+                    writer.WritePropertyName("userOperation");
+                    JsonSerializer.Serialize(writer, createTransactionResponse.UserOperation, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("userOperation");
+            if (createTransactionResponse.UserOperationHashOption.IsSet)
+                writer.WriteString("userOperationHash", createTransactionResponse.UserOperationHash);
         }
     }
 }

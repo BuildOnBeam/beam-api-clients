@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -101,8 +102,8 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            List<GetAllGasUsageResponseDataInnerDataInner> data = default;
-            GetAllGasUsageResponseDataInnerSummary summary = default;
+            Option<List<GetAllGasUsageResponseDataInnerDataInner>> data = default;
+            Option<GetAllGasUsageResponseDataInnerSummary> summary = default;
 
             while (utf8JsonReader.Read())
             {
@@ -121,11 +122,11 @@ namespace Beam.Model
                     {
                         case "data":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                data = JsonSerializer.Deserialize<List<GetAllGasUsageResponseDataInnerDataInner>>(ref utf8JsonReader, jsonSerializerOptions);
+                                data = new Option<List<GetAllGasUsageResponseDataInnerDataInner>>(JsonSerializer.Deserialize<List<GetAllGasUsageResponseDataInnerDataInner>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "summary":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                summary = JsonSerializer.Deserialize<GetAllGasUsageResponseDataInnerSummary>(ref utf8JsonReader, jsonSerializerOptions);
+                                summary = new Option<GetAllGasUsageResponseDataInnerSummary>(JsonSerializer.Deserialize<GetAllGasUsageResponseDataInnerSummary>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -133,13 +134,19 @@ namespace Beam.Model
                 }
             }
 
-            if (data == null)
-                throw new ArgumentNullException(nameof(data), "Property is required for class GetGasUsageResponse.");
+            if (!data.IsSet)
+                throw new ArgumentException("Property is required for class GetGasUsageResponse.", nameof(data));
 
-            if (summary == null)
-                throw new ArgumentNullException(nameof(summary), "Property is required for class GetGasUsageResponse.");
+            if (!summary.IsSet)
+                throw new ArgumentException("Property is required for class GetGasUsageResponse.", nameof(summary));
 
-            return new GetGasUsageResponse(data, summary);
+            if (data.IsSet && data.Value == null)
+                throw new ArgumentNullException(nameof(data), "Property is not nullable for class GetGasUsageResponse.");
+
+            if (summary.IsSet && summary.Value == null)
+                throw new ArgumentNullException(nameof(summary), "Property is not nullable for class GetGasUsageResponse.");
+
+            return new GetGasUsageResponse(data.Value, summary.Value);
         }
 
         /// <summary>
@@ -166,6 +173,12 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetGasUsageResponse getGasUsageResponse, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (getGasUsageResponse.Data == null)
+                throw new ArgumentNullException(nameof(getGasUsageResponse.Data), "Property is required for class GetGasUsageResponse.");
+
+            if (getGasUsageResponse.Summary == null)
+                throw new ArgumentNullException(nameof(getGasUsageResponse.Summary), "Property is required for class GetGasUsageResponse.");
+
             writer.WritePropertyName("data");
             JsonSerializer.Serialize(writer, getGasUsageResponse.Data, jsonSerializerOptions);
             writer.WritePropertyName("summary");

@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -103,7 +104,7 @@ namespace Beam.Model
         /// <param name="value"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public static string? RateTypeEnumToJsonValue(RateTypeEnum? value)
+        public static string RateTypeEnumToJsonValue(RateTypeEnum? value)
         {
             if (value == null)
                 return null;
@@ -197,11 +198,11 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            int? chainId = default;
-            string id = default;
-            string amount = default;
-            AddPolicyResponse.RateTypeEnum? rateType = default;
-            string token = default;
+            Option<int?> chainId = default;
+            Option<string> id = default;
+            Option<string> amount = default;
+            Option<AddPolicyResponse.RateTypeEnum?> rateType = default;
+            Option<string> token = default;
 
             while (utf8JsonReader.Read())
             {
@@ -220,22 +221,21 @@ namespace Beam.Model
                     {
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = utf8JsonReader.GetInt32();
+                                chainId = new Option<int?>(utf8JsonReader.GetInt32());
                             break;
                         case "id":
-                            id = utf8JsonReader.GetString();
+                            id = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "amount":
-                            amount = utf8JsonReader.GetString();
+                            amount = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "rateType":
                             string rateTypeRawValue = utf8JsonReader.GetString();
-                            rateType = rateTypeRawValue == null
-                                ? null
-                                : AddPolicyResponse.RateTypeEnumFromStringOrDefault(rateTypeRawValue);
+                            if (rateTypeRawValue != null)
+                                rateType = new Option<AddPolicyResponse.RateTypeEnum?>(AddPolicyResponse.RateTypeEnumFromStringOrDefault(rateTypeRawValue));
                             break;
                         case "token":
-                            token = utf8JsonReader.GetString();
+                            token = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -243,13 +243,28 @@ namespace Beam.Model
                 }
             }
 
-            if (chainId == null)
-                throw new ArgumentNullException(nameof(chainId), "Property is required for class AddPolicyResponse.");
+            if (!chainId.IsSet)
+                throw new ArgumentException("Property is required for class AddPolicyResponse.", nameof(chainId));
 
-            if (id == null)
-                throw new ArgumentNullException(nameof(id), "Property is required for class AddPolicyResponse.");
+            if (!id.IsSet)
+                throw new ArgumentException("Property is required for class AddPolicyResponse.", nameof(id));
 
-            return new AddPolicyResponse(chainId.Value, id, amount, rateType, token);
+            if (!amount.IsSet)
+                throw new ArgumentException("Property is required for class AddPolicyResponse.", nameof(amount));
+
+            if (!rateType.IsSet)
+                throw new ArgumentException("Property is required for class AddPolicyResponse.", nameof(rateType));
+
+            if (!token.IsSet)
+                throw new ArgumentException("Property is required for class AddPolicyResponse.", nameof(token));
+
+            if (chainId.IsSet && chainId.Value == null)
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class AddPolicyResponse.");
+
+            if (id.IsSet && id.Value == null)
+                throw new ArgumentNullException(nameof(id), "Property is not nullable for class AddPolicyResponse.");
+
+            return new AddPolicyResponse(chainId.Value.Value, id.Value, amount.Value, rateType.Value, token.Value);
         }
 
         /// <summary>
@@ -276,17 +291,28 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, AddPolicyResponse addPolicyResponse, JsonSerializerOptions jsonSerializerOptions)
         {
-            writer.WriteNumber("chainId", addPolicyResponse.ChainId);
-            writer.WriteString("id", addPolicyResponse.Id);
-            writer.WriteString("amount", addPolicyResponse.Amount);
+            if (addPolicyResponse.Id == null)
+                throw new ArgumentNullException(nameof(addPolicyResponse.Id), "Property is required for class AddPolicyResponse.");
 
-            var rateTypeRawValue = AddPolicyResponse.RateTypeEnumToJsonValue(addPolicyResponse.RateType);
+            writer.WriteNumber("chainId", addPolicyResponse.ChainId);
+
+            writer.WriteString("id", addPolicyResponse.Id);
+
+            if (addPolicyResponse.Amount != null)
+                writer.WriteString("amount", addPolicyResponse.Amount);
+            else
+                writer.WriteNull("amount");
+
+            var rateTypeRawValue = AddPolicyResponse.RateTypeEnumToJsonValue(addPolicyResponse.RateType.Value);
             if (rateTypeRawValue != null)
                 writer.WriteString("rateType", rateTypeRawValue);
             else
                 writer.WriteNull("rateType");
 
-            writer.WriteString("token", addPolicyResponse.Token);
+            if (addPolicyResponse.Token != null)
+                writer.WriteString("token", addPolicyResponse.Token);
+            else
+                writer.WriteNull("token");
         }
     }
 }

@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -92,7 +93,7 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            GetProfileNativeCurrencyResponseNativeTokenBalance nativeTokenBalance = default;
+            Option<GetProfileNativeCurrencyResponseNativeTokenBalance> nativeTokenBalance = default;
 
             while (utf8JsonReader.Read())
             {
@@ -111,7 +112,7 @@ namespace Beam.Model
                     {
                         case "nativeTokenBalance":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                nativeTokenBalance = JsonSerializer.Deserialize<GetProfileNativeCurrencyResponseNativeTokenBalance>(ref utf8JsonReader, jsonSerializerOptions);
+                                nativeTokenBalance = new Option<GetProfileNativeCurrencyResponseNativeTokenBalance>(JsonSerializer.Deserialize<GetProfileNativeCurrencyResponseNativeTokenBalance>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -119,10 +120,13 @@ namespace Beam.Model
                 }
             }
 
-            if (nativeTokenBalance == null)
-                throw new ArgumentNullException(nameof(nativeTokenBalance), "Property is required for class GetProfileNativeCurrencyResponse.");
+            if (!nativeTokenBalance.IsSet)
+                throw new ArgumentException("Property is required for class GetProfileNativeCurrencyResponse.", nameof(nativeTokenBalance));
 
-            return new GetProfileNativeCurrencyResponse(nativeTokenBalance);
+            if (nativeTokenBalance.IsSet && nativeTokenBalance.Value == null)
+                throw new ArgumentNullException(nameof(nativeTokenBalance), "Property is not nullable for class GetProfileNativeCurrencyResponse.");
+
+            return new GetProfileNativeCurrencyResponse(nativeTokenBalance.Value);
         }
 
         /// <summary>
@@ -149,6 +153,9 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetProfileNativeCurrencyResponse getProfileNativeCurrencyResponse, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (getProfileNativeCurrencyResponse.NativeTokenBalance == null)
+                throw new ArgumentNullException(nameof(getProfileNativeCurrencyResponse.NativeTokenBalance), "Property is required for class GetProfileNativeCurrencyResponse.");
+
             writer.WritePropertyName("nativeTokenBalance");
             JsonSerializer.Serialize(writer, getProfileNativeCurrencyResponse.NativeTokenBalance, jsonSerializerOptions);
         }

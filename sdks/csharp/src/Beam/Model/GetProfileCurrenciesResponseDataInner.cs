@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -34,19 +35,19 @@ namespace Beam.Model
         /// <param name="balance">balance</param>
         /// <param name="chainId">chainId</param>
         /// <param name="decimals">decimals</param>
-        /// <param name="logoUri">logoUri</param>
         /// <param name="name">name</param>
         /// <param name="symbol">symbol</param>
+        /// <param name="logoUri">logoUri</param>
         [JsonConstructor]
-        public GetProfileCurrenciesResponseDataInner(string address, string balance, decimal chainId, decimal decimals, string logoUri, string name, string symbol)
+        public GetProfileCurrenciesResponseDataInner(string address, string balance, decimal chainId, decimal decimals, string name, string symbol, Option<string> logoUri = default)
         {
             Address = address;
             Balance = balance;
             ChainId = chainId;
             Decimals = decimals;
-            LogoUri = logoUri;
             Name = name;
             Symbol = symbol;
+            LogoUriOption = logoUri;
             OnCreated();
         }
 
@@ -77,12 +78,6 @@ namespace Beam.Model
         public decimal Decimals { get; set; }
 
         /// <summary>
-        /// Gets or Sets LogoUri
-        /// </summary>
-        [JsonPropertyName("logoUri")]
-        public string LogoUri { get; set; }
-
-        /// <summary>
         /// Gets or Sets Name
         /// </summary>
         [JsonPropertyName("name")]
@@ -93,6 +88,19 @@ namespace Beam.Model
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; }
+
+        /// <summary>
+        /// Used to track the state of LogoUri
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> LogoUriOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets LogoUri
+        /// </summary>
+        [JsonPropertyName("logoUri")]
+        public string LogoUri { get { return this. LogoUriOption; } set { this.LogoUriOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -106,9 +114,9 @@ namespace Beam.Model
             sb.Append("  Balance: ").Append(Balance).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  Decimals: ").Append(Decimals).Append("\n");
-            sb.Append("  LogoUri: ").Append(LogoUri).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Symbol: ").Append(Symbol).Append("\n");
+            sb.Append("  LogoUri: ").Append(LogoUri).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -146,13 +154,13 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string address = default;
-            string balance = default;
-            decimal? chainId = default;
-            decimal? decimals = default;
-            string logoUri = default;
-            string name = default;
-            string symbol = default;
+            Option<string> address = default;
+            Option<string> balance = default;
+            Option<decimal?> chainId = default;
+            Option<decimal?> decimals = default;
+            Option<string> name = default;
+            Option<string> symbol = default;
+            Option<string> logoUri = default;
 
             while (utf8JsonReader.Read())
             {
@@ -170,27 +178,27 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "address":
-                            address = utf8JsonReader.GetString();
+                            address = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "balance":
-                            balance = utf8JsonReader.GetString();
+                            balance = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = utf8JsonReader.GetDecimal();
+                                chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "decimals":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                decimals = utf8JsonReader.GetDecimal();
-                            break;
-                        case "logoUri":
-                            logoUri = utf8JsonReader.GetString();
+                                decimals = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "name":
-                            name = utf8JsonReader.GetString();
+                            name = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "symbol":
-                            symbol = utf8JsonReader.GetString();
+                            symbol = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "logoUri":
+                            logoUri = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -198,28 +206,46 @@ namespace Beam.Model
                 }
             }
 
-            if (address == null)
-                throw new ArgumentNullException(nameof(address), "Property is required for class GetProfileCurrenciesResponseDataInner.");
+            if (!address.IsSet)
+                throw new ArgumentException("Property is required for class GetProfileCurrenciesResponseDataInner.", nameof(address));
 
-            if (balance == null)
-                throw new ArgumentNullException(nameof(balance), "Property is required for class GetProfileCurrenciesResponseDataInner.");
+            if (!balance.IsSet)
+                throw new ArgumentException("Property is required for class GetProfileCurrenciesResponseDataInner.", nameof(balance));
 
-            if (chainId == null)
-                throw new ArgumentNullException(nameof(chainId), "Property is required for class GetProfileCurrenciesResponseDataInner.");
+            if (!chainId.IsSet)
+                throw new ArgumentException("Property is required for class GetProfileCurrenciesResponseDataInner.", nameof(chainId));
 
-            if (decimals == null)
-                throw new ArgumentNullException(nameof(decimals), "Property is required for class GetProfileCurrenciesResponseDataInner.");
+            if (!decimals.IsSet)
+                throw new ArgumentException("Property is required for class GetProfileCurrenciesResponseDataInner.", nameof(decimals));
 
-            if (logoUri == null)
-                throw new ArgumentNullException(nameof(logoUri), "Property is required for class GetProfileCurrenciesResponseDataInner.");
+            if (!name.IsSet)
+                throw new ArgumentException("Property is required for class GetProfileCurrenciesResponseDataInner.", nameof(name));
 
-            if (name == null)
-                throw new ArgumentNullException(nameof(name), "Property is required for class GetProfileCurrenciesResponseDataInner.");
+            if (!symbol.IsSet)
+                throw new ArgumentException("Property is required for class GetProfileCurrenciesResponseDataInner.", nameof(symbol));
 
-            if (symbol == null)
-                throw new ArgumentNullException(nameof(symbol), "Property is required for class GetProfileCurrenciesResponseDataInner.");
+            if (address.IsSet && address.Value == null)
+                throw new ArgumentNullException(nameof(address), "Property is not nullable for class GetProfileCurrenciesResponseDataInner.");
 
-            return new GetProfileCurrenciesResponseDataInner(address, balance, chainId.Value, decimals.Value, logoUri, name, symbol);
+            if (balance.IsSet && balance.Value == null)
+                throw new ArgumentNullException(nameof(balance), "Property is not nullable for class GetProfileCurrenciesResponseDataInner.");
+
+            if (chainId.IsSet && chainId.Value == null)
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class GetProfileCurrenciesResponseDataInner.");
+
+            if (decimals.IsSet && decimals.Value == null)
+                throw new ArgumentNullException(nameof(decimals), "Property is not nullable for class GetProfileCurrenciesResponseDataInner.");
+
+            if (name.IsSet && name.Value == null)
+                throw new ArgumentNullException(nameof(name), "Property is not nullable for class GetProfileCurrenciesResponseDataInner.");
+
+            if (symbol.IsSet && symbol.Value == null)
+                throw new ArgumentNullException(nameof(symbol), "Property is not nullable for class GetProfileCurrenciesResponseDataInner.");
+
+            if (logoUri.IsSet && logoUri.Value == null)
+                throw new ArgumentNullException(nameof(logoUri), "Property is not nullable for class GetProfileCurrenciesResponseDataInner.");
+
+            return new GetProfileCurrenciesResponseDataInner(address.Value, balance.Value, chainId.Value.Value, decimals.Value.Value, name.Value, symbol.Value, logoUri);
         }
 
         /// <summary>
@@ -246,13 +272,35 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetProfileCurrenciesResponseDataInner getProfileCurrenciesResponseDataInner, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (getProfileCurrenciesResponseDataInner.Address == null)
+                throw new ArgumentNullException(nameof(getProfileCurrenciesResponseDataInner.Address), "Property is required for class GetProfileCurrenciesResponseDataInner.");
+
+            if (getProfileCurrenciesResponseDataInner.Balance == null)
+                throw new ArgumentNullException(nameof(getProfileCurrenciesResponseDataInner.Balance), "Property is required for class GetProfileCurrenciesResponseDataInner.");
+
+            if (getProfileCurrenciesResponseDataInner.Name == null)
+                throw new ArgumentNullException(nameof(getProfileCurrenciesResponseDataInner.Name), "Property is required for class GetProfileCurrenciesResponseDataInner.");
+
+            if (getProfileCurrenciesResponseDataInner.Symbol == null)
+                throw new ArgumentNullException(nameof(getProfileCurrenciesResponseDataInner.Symbol), "Property is required for class GetProfileCurrenciesResponseDataInner.");
+
+            if (getProfileCurrenciesResponseDataInner.LogoUriOption.IsSet && getProfileCurrenciesResponseDataInner.LogoUri == null)
+                throw new ArgumentNullException(nameof(getProfileCurrenciesResponseDataInner.LogoUri), "Property is required for class GetProfileCurrenciesResponseDataInner.");
+
             writer.WriteString("address", getProfileCurrenciesResponseDataInner.Address);
+
             writer.WriteString("balance", getProfileCurrenciesResponseDataInner.Balance);
+
             writer.WriteNumber("chainId", getProfileCurrenciesResponseDataInner.ChainId);
+
             writer.WriteNumber("decimals", getProfileCurrenciesResponseDataInner.Decimals);
-            writer.WriteString("logoUri", getProfileCurrenciesResponseDataInner.LogoUri);
+
             writer.WriteString("name", getProfileCurrenciesResponseDataInner.Name);
+
             writer.WriteString("symbol", getProfileCurrenciesResponseDataInner.Symbol);
+
+            if (getProfileCurrenciesResponseDataInner.LogoUriOption.IsSet)
+                writer.WriteString("logoUri", getProfileCurrenciesResponseDataInner.LogoUri);
         }
     }
 }

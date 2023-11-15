@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -36,13 +37,13 @@ namespace Beam.Model
         /// <param name="profile">profile</param>
         /// <param name="username">username</param>
         [JsonConstructor]
-        public GetAssetResponseOwnershipByAddressesInnerUser(string id, bool isCreator, bool? isRoyaltyOwner = default, GetAssetResponseOwnershipByAddressesInnerUserProfile profile = default, string username = default)
+        public GetAssetResponseOwnershipByAddressesInnerUser(string id, bool isCreator, Option<bool?> isRoyaltyOwner = default, Option<GetAssetResponseOwnershipByAddressesInnerUserProfile> profile = default, Option<string> username = default)
         {
             Id = id;
             IsCreator = isCreator;
-            IsRoyaltyOwner = isRoyaltyOwner;
-            Profile = profile;
-            Username = username;
+            IsRoyaltyOwnerOption = isRoyaltyOwner;
+            ProfileOption = profile;
+            UsernameOption = username;
             OnCreated();
         }
 
@@ -61,22 +62,43 @@ namespace Beam.Model
         public bool IsCreator { get; set; }
 
         /// <summary>
+        /// Used to track the state of IsRoyaltyOwner
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> IsRoyaltyOwnerOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets IsRoyaltyOwner
         /// </summary>
         [JsonPropertyName("isRoyaltyOwner")]
-        public bool? IsRoyaltyOwner { get; set; }
+        public bool? IsRoyaltyOwner { get { return this. IsRoyaltyOwnerOption; } set { this.IsRoyaltyOwnerOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Profile
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<GetAssetResponseOwnershipByAddressesInnerUserProfile> ProfileOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Profile
         /// </summary>
         [JsonPropertyName("profile")]
-        public GetAssetResponseOwnershipByAddressesInnerUserProfile Profile { get; set; }
+        public GetAssetResponseOwnershipByAddressesInnerUserProfile Profile { get { return this. ProfileOption; } set { this.ProfileOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Username
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> UsernameOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Username
         /// </summary>
         [JsonPropertyName("username")]
-        public string Username { get; set; }
+        public string Username { get { return this. UsernameOption; } set { this.UsernameOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -128,11 +150,11 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string id = default;
-            bool? isCreator = default;
-            bool? isRoyaltyOwner = default;
-            GetAssetResponseOwnershipByAddressesInnerUserProfile profile = default;
-            string username = default;
+            Option<string> id = default;
+            Option<bool?> isCreator = default;
+            Option<bool?> isRoyaltyOwner = default;
+            Option<GetAssetResponseOwnershipByAddressesInnerUserProfile> profile = default;
+            Option<string> username = default;
 
             while (utf8JsonReader.Read())
             {
@@ -150,22 +172,22 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "_id":
-                            id = utf8JsonReader.GetString();
+                            id = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "isCreator":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                isCreator = utf8JsonReader.GetBoolean();
+                                isCreator = new Option<bool?>(utf8JsonReader.GetBoolean());
                             break;
                         case "isRoyaltyOwner":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                isRoyaltyOwner = utf8JsonReader.GetBoolean();
+                                isRoyaltyOwner = new Option<bool?>(utf8JsonReader.GetBoolean());
                             break;
                         case "profile":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                profile = JsonSerializer.Deserialize<GetAssetResponseOwnershipByAddressesInnerUserProfile>(ref utf8JsonReader, jsonSerializerOptions);
+                                profile = new Option<GetAssetResponseOwnershipByAddressesInnerUserProfile>(JsonSerializer.Deserialize<GetAssetResponseOwnershipByAddressesInnerUserProfile>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "username":
-                            username = utf8JsonReader.GetString();
+                            username = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -173,13 +195,19 @@ namespace Beam.Model
                 }
             }
 
-            if (id == null)
-                throw new ArgumentNullException(nameof(id), "Property is required for class GetAssetResponseOwnershipByAddressesInnerUser.");
+            if (!id.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetResponseOwnershipByAddressesInnerUser.", nameof(id));
 
-            if (isCreator == null)
-                throw new ArgumentNullException(nameof(isCreator), "Property is required for class GetAssetResponseOwnershipByAddressesInnerUser.");
+            if (!isCreator.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetResponseOwnershipByAddressesInnerUser.", nameof(isCreator));
 
-            return new GetAssetResponseOwnershipByAddressesInnerUser(id, isCreator.Value, isRoyaltyOwner, profile, username);
+            if (id.IsSet && id.Value == null)
+                throw new ArgumentNullException(nameof(id), "Property is not nullable for class GetAssetResponseOwnershipByAddressesInnerUser.");
+
+            if (isCreator.IsSet && isCreator.Value == null)
+                throw new ArgumentNullException(nameof(isCreator), "Property is not nullable for class GetAssetResponseOwnershipByAddressesInnerUser.");
+
+            return new GetAssetResponseOwnershipByAddressesInnerUser(id.Value, isCreator.Value.Value, isRoyaltyOwner, profile, username);
         }
 
         /// <summary>
@@ -206,17 +234,32 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetAssetResponseOwnershipByAddressesInnerUser getAssetResponseOwnershipByAddressesInnerUser, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (getAssetResponseOwnershipByAddressesInnerUser.Id == null)
+                throw new ArgumentNullException(nameof(getAssetResponseOwnershipByAddressesInnerUser.Id), "Property is required for class GetAssetResponseOwnershipByAddressesInnerUser.");
+
             writer.WriteString("_id", getAssetResponseOwnershipByAddressesInnerUser.Id);
+
             writer.WriteBoolean("isCreator", getAssetResponseOwnershipByAddressesInnerUser.IsCreator);
 
-            if (getAssetResponseOwnershipByAddressesInnerUser.IsRoyaltyOwner != null)
-                writer.WriteBoolean("isRoyaltyOwner", getAssetResponseOwnershipByAddressesInnerUser.IsRoyaltyOwner.Value);
-            else
-                writer.WriteNull("isRoyaltyOwner");
+            if (getAssetResponseOwnershipByAddressesInnerUser.IsRoyaltyOwnerOption.IsSet)
+                if (getAssetResponseOwnershipByAddressesInnerUser.IsRoyaltyOwnerOption.Value != null)
+                    writer.WriteBoolean("isRoyaltyOwner", getAssetResponseOwnershipByAddressesInnerUser.IsRoyaltyOwnerOption.Value.Value);
+                else
+                    writer.WriteNull("isRoyaltyOwner");
 
-            writer.WritePropertyName("profile");
-            JsonSerializer.Serialize(writer, getAssetResponseOwnershipByAddressesInnerUser.Profile, jsonSerializerOptions);
-            writer.WriteString("username", getAssetResponseOwnershipByAddressesInnerUser.Username);
+            if (getAssetResponseOwnershipByAddressesInnerUser.ProfileOption.IsSet)
+                if (getAssetResponseOwnershipByAddressesInnerUser.ProfileOption.Value != null)
+                {
+                    writer.WritePropertyName("profile");
+                    JsonSerializer.Serialize(writer, getAssetResponseOwnershipByAddressesInnerUser.Profile, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("profile");
+            if (getAssetResponseOwnershipByAddressesInnerUser.UsernameOption.IsSet)
+                if (getAssetResponseOwnershipByAddressesInnerUser.UsernameOption.Value != null)
+                    writer.WriteString("username", getAssetResponseOwnershipByAddressesInnerUser.Username);
+                else
+                    writer.WriteNull("username");
         }
     }
 }

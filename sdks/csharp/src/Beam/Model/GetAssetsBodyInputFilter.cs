@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -33,10 +34,10 @@ namespace Beam.Model
         /// <param name="attributes">attributes</param>
         /// <param name="sellTypes">sellTypes</param>
         [JsonConstructor]
-        public GetAssetsBodyInputFilter(List<GetProfileAssetsForGameFilterParameterAttributesInner> attributes = default, List<GetAssetsBodyInputFilter.SellTypesEnum> sellTypes = default)
+        public GetAssetsBodyInputFilter(Option<List<GetProfileAssetsForGameFilterParameterAttributesInner>> attributes = default, Option<List<GetAssetsBodyInputFilter.SellTypesEnum>> sellTypes = default)
         {
-            Attributes = attributes;
-            SellTypes = sellTypes;
+            AttributesOption = attributes;
+            SellTypesOption = sellTypes;
             OnCreated();
         }
 
@@ -121,7 +122,6 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string SellTypesEnumToJsonValue(SellTypesEnum value)
         {
-
             if (value == SellTypesEnum.AscendingAuction)
                 return "AscendingAuction";
 
@@ -138,16 +138,30 @@ namespace Beam.Model
         }
 
         /// <summary>
+        /// Used to track the state of Attributes
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<GetProfileAssetsForGameFilterParameterAttributesInner>> AttributesOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets Attributes
         /// </summary>
         [JsonPropertyName("attributes")]
-        public List<GetProfileAssetsForGameFilterParameterAttributesInner> Attributes { get; set; }
+        public List<GetProfileAssetsForGameFilterParameterAttributesInner> Attributes { get { return this. AttributesOption; } set { this.AttributesOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of SellTypes
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<GetAssetsBodyInputFilter.SellTypesEnum>> SellTypesOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets SellTypes
         /// </summary>
         [JsonPropertyName("sellTypes")]
-        public List<GetAssetsBodyInputFilter.SellTypesEnum> SellTypes { get; set; }
+        public List<GetAssetsBodyInputFilter.SellTypesEnum> SellTypes { get { return this. SellTypesOption; } set { this.SellTypesOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -196,8 +210,8 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            List<GetProfileAssetsForGameFilterParameterAttributesInner> attributes = default;
-            List<GetAssetsBodyInputFilter.SellTypesEnum> sellTypes = default;
+            Option<List<GetProfileAssetsForGameFilterParameterAttributesInner>> attributes = default;
+            Option<List<GetAssetsBodyInputFilter.SellTypesEnum>> sellTypes = default;
 
             while (utf8JsonReader.Read())
             {
@@ -216,11 +230,11 @@ namespace Beam.Model
                     {
                         case "attributes":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                attributes = JsonSerializer.Deserialize<List<GetProfileAssetsForGameFilterParameterAttributesInner>>(ref utf8JsonReader, jsonSerializerOptions);
+                                attributes = new Option<List<GetProfileAssetsForGameFilterParameterAttributesInner>>(JsonSerializer.Deserialize<List<GetProfileAssetsForGameFilterParameterAttributesInner>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "sellTypes":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                sellTypes = JsonSerializer.Deserialize<List<GetAssetsBodyInputFilter.SellTypesEnum>>(ref utf8JsonReader, jsonSerializerOptions);
+                                sellTypes = new Option<List<GetAssetsBodyInputFilter.SellTypesEnum>>(JsonSerializer.Deserialize<List<GetAssetsBodyInputFilter.SellTypesEnum>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -255,10 +269,22 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetAssetsBodyInputFilter getAssetsBodyInputFilter, JsonSerializerOptions jsonSerializerOptions)
         {
-            writer.WritePropertyName("attributes");
-            JsonSerializer.Serialize(writer, getAssetsBodyInputFilter.Attributes, jsonSerializerOptions);
-            writer.WritePropertyName("sellTypes");
-            JsonSerializer.Serialize(writer, getAssetsBodyInputFilter.SellTypes, jsonSerializerOptions);
+            if (getAssetsBodyInputFilter.AttributesOption.IsSet)
+                if (getAssetsBodyInputFilter.AttributesOption.Value != null)
+                {
+                    writer.WritePropertyName("attributes");
+                    JsonSerializer.Serialize(writer, getAssetsBodyInputFilter.Attributes, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("attributes");
+            if (getAssetsBodyInputFilter.SellTypesOption.IsSet)
+                if (getAssetsBodyInputFilter.SellTypesOption.Value != null)
+                {
+                    writer.WritePropertyName("sellTypes");
+                    JsonSerializer.Serialize(writer, getAssetsBodyInputFilter.SellTypes, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("sellTypes");
         }
     }
 }

@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -92,7 +93,7 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string estimatedGas = default;
+            Option<string> estimatedGas = default;
 
             while (utf8JsonReader.Read())
             {
@@ -110,7 +111,7 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "estimatedGas":
-                            estimatedGas = utf8JsonReader.GetString();
+                            estimatedGas = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -118,10 +119,13 @@ namespace Beam.Model
                 }
             }
 
-            if (estimatedGas == null)
-                throw new ArgumentNullException(nameof(estimatedGas), "Property is required for class GetEstimateResponse.");
+            if (!estimatedGas.IsSet)
+                throw new ArgumentException("Property is required for class GetEstimateResponse.", nameof(estimatedGas));
 
-            return new GetEstimateResponse(estimatedGas);
+            if (estimatedGas.IsSet && estimatedGas.Value == null)
+                throw new ArgumentNullException(nameof(estimatedGas), "Property is not nullable for class GetEstimateResponse.");
+
+            return new GetEstimateResponse(estimatedGas.Value);
         }
 
         /// <summary>
@@ -148,6 +152,9 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetEstimateResponse getEstimateResponse, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (getEstimateResponse.EstimatedGas == null)
+                throw new ArgumentNullException(nameof(getEstimateResponse.EstimatedGas), "Property is required for class GetEstimateResponse.");
+
             writer.WriteString("estimatedGas", getEstimateResponse.EstimatedGas);
         }
     }

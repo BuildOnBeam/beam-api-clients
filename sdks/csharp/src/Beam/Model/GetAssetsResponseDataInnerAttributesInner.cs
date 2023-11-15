@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -36,47 +37,82 @@ namespace Beam.Model
         /// <param name="type">type</param>
         /// <param name="value">value</param>
         [JsonConstructor]
-        public GetAssetsResponseDataInnerAttributesInner(string displayType = default, decimal? maxValue = default, decimal? rarity = default, string type = default, string value = default)
+        public GetAssetsResponseDataInnerAttributesInner(Option<string> displayType = default, Option<decimal?> maxValue = default, Option<decimal?> rarity = default, Option<string> type = default, Option<string> value = default)
         {
-            DisplayType = displayType;
-            MaxValue = maxValue;
-            Rarity = rarity;
-            Type = type;
-            Value = value;
+            DisplayTypeOption = displayType;
+            MaxValueOption = maxValue;
+            RarityOption = rarity;
+            TypeOption = type;
+            ValueOption = value;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
+        /// Used to track the state of DisplayType
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> DisplayTypeOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets DisplayType
         /// </summary>
         [JsonPropertyName("displayType")]
-        public string DisplayType { get; set; }
+        public string DisplayType { get { return this. DisplayTypeOption; } set { this.DisplayTypeOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of MaxValue
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<decimal?> MaxValueOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets MaxValue
         /// </summary>
         [JsonPropertyName("maxValue")]
-        public decimal? MaxValue { get; set; }
+        public decimal? MaxValue { get { return this. MaxValueOption; } set { this.MaxValueOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Rarity
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<decimal?> RarityOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Rarity
         /// </summary>
         [JsonPropertyName("rarity")]
-        public decimal? Rarity { get; set; }
+        public decimal? Rarity { get { return this. RarityOption; } set { this.RarityOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Type
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> TypeOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public string Type { get { return this. TypeOption; } set { this.TypeOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Value
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> ValueOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Value
         /// </summary>
         [JsonPropertyName("value")]
-        public string Value { get; set; }
+        public string Value { get { return this. ValueOption; } set { this.ValueOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -128,11 +164,11 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string displayType = default;
-            decimal? maxValue = default;
-            decimal? rarity = default;
-            string type = default;
-            string value = default;
+            Option<string> displayType = default;
+            Option<decimal?> maxValue = default;
+            Option<decimal?> rarity = default;
+            Option<string> type = default;
+            Option<string> value = default;
 
             while (utf8JsonReader.Read())
             {
@@ -150,21 +186,21 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "displayType":
-                            displayType = utf8JsonReader.GetString();
+                            displayType = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "maxValue":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                maxValue = utf8JsonReader.GetDecimal();
+                                maxValue = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "rarity":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                rarity = utf8JsonReader.GetDecimal();
+                                rarity = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "type":
-                            type = utf8JsonReader.GetString();
+                            type = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "value":
-                            value = utf8JsonReader.GetString();
+                            value = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -199,20 +235,35 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetAssetsResponseDataInnerAttributesInner getAssetsResponseDataInnerAttributesInner, JsonSerializerOptions jsonSerializerOptions)
         {
-            writer.WriteString("displayType", getAssetsResponseDataInnerAttributesInner.DisplayType);
+            if (getAssetsResponseDataInnerAttributesInner.DisplayTypeOption.IsSet)
+                if (getAssetsResponseDataInnerAttributesInner.DisplayTypeOption.Value != null)
+                    writer.WriteString("displayType", getAssetsResponseDataInnerAttributesInner.DisplayType);
+                else
+                    writer.WriteNull("displayType");
 
-            if (getAssetsResponseDataInnerAttributesInner.MaxValue != null)
-                writer.WriteNumber("maxValue", getAssetsResponseDataInnerAttributesInner.MaxValue.Value);
-            else
-                writer.WriteNull("maxValue");
+            if (getAssetsResponseDataInnerAttributesInner.MaxValueOption.IsSet)
+                if (getAssetsResponseDataInnerAttributesInner.MaxValueOption.Value != null)
+                    writer.WriteNumber("maxValue", getAssetsResponseDataInnerAttributesInner.MaxValueOption.Value.Value);
+                else
+                    writer.WriteNull("maxValue");
 
-            if (getAssetsResponseDataInnerAttributesInner.Rarity != null)
-                writer.WriteNumber("rarity", getAssetsResponseDataInnerAttributesInner.Rarity.Value);
-            else
-                writer.WriteNull("rarity");
+            if (getAssetsResponseDataInnerAttributesInner.RarityOption.IsSet)
+                if (getAssetsResponseDataInnerAttributesInner.RarityOption.Value != null)
+                    writer.WriteNumber("rarity", getAssetsResponseDataInnerAttributesInner.RarityOption.Value.Value);
+                else
+                    writer.WriteNull("rarity");
 
-            writer.WriteString("type", getAssetsResponseDataInnerAttributesInner.Type);
-            writer.WriteString("value", getAssetsResponseDataInnerAttributesInner.Value);
+            if (getAssetsResponseDataInnerAttributesInner.TypeOption.IsSet)
+                if (getAssetsResponseDataInnerAttributesInner.TypeOption.Value != null)
+                    writer.WriteString("type", getAssetsResponseDataInnerAttributesInner.Type);
+                else
+                    writer.WriteNull("type");
+
+            if (getAssetsResponseDataInnerAttributesInner.ValueOption.IsSet)
+                if (getAssetsResponseDataInnerAttributesInner.ValueOption.Value != null)
+                    writer.WriteString("value", getAssetsResponseDataInnerAttributesInner.Value);
+                else
+                    writer.WriteNull("value");
         }
     }
 }

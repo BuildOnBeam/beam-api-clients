@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -101,8 +102,8 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            List<GetAssetListingsResponseDataInner> data = default;
-            GetAssetsResponsePagination pagination = default;
+            Option<List<GetAssetListingsResponseDataInner>> data = default;
+            Option<GetAssetsResponsePagination> pagination = default;
 
             while (utf8JsonReader.Read())
             {
@@ -121,11 +122,11 @@ namespace Beam.Model
                     {
                         case "data":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                data = JsonSerializer.Deserialize<List<GetAssetListingsResponseDataInner>>(ref utf8JsonReader, jsonSerializerOptions);
+                                data = new Option<List<GetAssetListingsResponseDataInner>>(JsonSerializer.Deserialize<List<GetAssetListingsResponseDataInner>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "pagination":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                pagination = JsonSerializer.Deserialize<GetAssetsResponsePagination>(ref utf8JsonReader, jsonSerializerOptions);
+                                pagination = new Option<GetAssetsResponsePagination>(JsonSerializer.Deserialize<GetAssetsResponsePagination>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -133,13 +134,19 @@ namespace Beam.Model
                 }
             }
 
-            if (data == null)
-                throw new ArgumentNullException(nameof(data), "Property is required for class GetAssetListingsResponse.");
+            if (!data.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetListingsResponse.", nameof(data));
 
-            if (pagination == null)
-                throw new ArgumentNullException(nameof(pagination), "Property is required for class GetAssetListingsResponse.");
+            if (!pagination.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetListingsResponse.", nameof(pagination));
 
-            return new GetAssetListingsResponse(data, pagination);
+            if (data.IsSet && data.Value == null)
+                throw new ArgumentNullException(nameof(data), "Property is not nullable for class GetAssetListingsResponse.");
+
+            if (pagination.IsSet && pagination.Value == null)
+                throw new ArgumentNullException(nameof(pagination), "Property is not nullable for class GetAssetListingsResponse.");
+
+            return new GetAssetListingsResponse(data.Value, pagination.Value);
         }
 
         /// <summary>
@@ -166,6 +173,12 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetAssetListingsResponse getAssetListingsResponse, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (getAssetListingsResponse.Data == null)
+                throw new ArgumentNullException(nameof(getAssetListingsResponse.Data), "Property is required for class GetAssetListingsResponse.");
+
+            if (getAssetListingsResponse.Pagination == null)
+                throw new ArgumentNullException(nameof(getAssetListingsResponse.Pagination), "Property is required for class GetAssetListingsResponse.");
+
             writer.WritePropertyName("data");
             JsonSerializer.Serialize(writer, getAssetListingsResponse.Data, jsonSerializerOptions);
             writer.WritePropertyName("pagination");

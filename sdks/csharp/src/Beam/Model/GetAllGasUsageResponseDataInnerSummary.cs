@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -36,13 +37,13 @@ namespace Beam.Model
         /// <param name="transactionCount">transactionCount</param>
         /// <param name="chainId">chainId (default to 13337M)</param>
         [JsonConstructor]
-        public GetAllGasUsageResponseDataInnerSummary(string averageTransactionFee, string totalTransactionFee, string totalTransactionFeeInUSD, decimal transactionCount, decimal chainId = 13337M)
+        public GetAllGasUsageResponseDataInnerSummary(string averageTransactionFee, string totalTransactionFee, string totalTransactionFeeInUSD, decimal transactionCount, Option<decimal?> chainId = default)
         {
             AverageTransactionFee = averageTransactionFee;
             TotalTransactionFee = totalTransactionFee;
             TotalTransactionFeeInUSD = totalTransactionFeeInUSD;
             TransactionCount = transactionCount;
-            ChainId = chainId;
+            ChainIdOption = chainId;
             OnCreated();
         }
 
@@ -73,10 +74,17 @@ namespace Beam.Model
         public decimal TransactionCount { get; set; }
 
         /// <summary>
+        /// Used to track the state of ChainId
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<decimal?> ChainIdOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [JsonPropertyName("chainId")]
-        public decimal ChainId { get; set; }
+        public decimal? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -128,11 +136,11 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string averageTransactionFee = default;
-            string totalTransactionFee = default;
-            string totalTransactionFeeInUSD = default;
-            decimal? transactionCount = default;
-            decimal? chainId = default;
+            Option<string> averageTransactionFee = default;
+            Option<string> totalTransactionFee = default;
+            Option<string> totalTransactionFeeInUSD = default;
+            Option<decimal?> transactionCount = default;
+            Option<decimal?> chainId = default;
 
             while (utf8JsonReader.Read())
             {
@@ -150,21 +158,21 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "averageTransactionFee":
-                            averageTransactionFee = utf8JsonReader.GetString();
+                            averageTransactionFee = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "totalTransactionFee":
-                            totalTransactionFee = utf8JsonReader.GetString();
+                            totalTransactionFee = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "totalTransactionFeeInUSD":
-                            totalTransactionFeeInUSD = utf8JsonReader.GetString();
+                            totalTransactionFeeInUSD = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "transactionCount":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                transactionCount = utf8JsonReader.GetDecimal();
+                                transactionCount = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = utf8JsonReader.GetDecimal();
+                                chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         default:
                             break;
@@ -172,22 +180,34 @@ namespace Beam.Model
                 }
             }
 
-            if (averageTransactionFee == null)
-                throw new ArgumentNullException(nameof(averageTransactionFee), "Property is required for class GetAllGasUsageResponseDataInnerSummary.");
+            if (!averageTransactionFee.IsSet)
+                throw new ArgumentException("Property is required for class GetAllGasUsageResponseDataInnerSummary.", nameof(averageTransactionFee));
 
-            if (totalTransactionFee == null)
-                throw new ArgumentNullException(nameof(totalTransactionFee), "Property is required for class GetAllGasUsageResponseDataInnerSummary.");
+            if (!totalTransactionFee.IsSet)
+                throw new ArgumentException("Property is required for class GetAllGasUsageResponseDataInnerSummary.", nameof(totalTransactionFee));
 
-            if (totalTransactionFeeInUSD == null)
-                throw new ArgumentNullException(nameof(totalTransactionFeeInUSD), "Property is required for class GetAllGasUsageResponseDataInnerSummary.");
+            if (!totalTransactionFeeInUSD.IsSet)
+                throw new ArgumentException("Property is required for class GetAllGasUsageResponseDataInnerSummary.", nameof(totalTransactionFeeInUSD));
 
-            if (transactionCount == null)
-                throw new ArgumentNullException(nameof(transactionCount), "Property is required for class GetAllGasUsageResponseDataInnerSummary.");
+            if (!transactionCount.IsSet)
+                throw new ArgumentException("Property is required for class GetAllGasUsageResponseDataInnerSummary.", nameof(transactionCount));
 
-            if (chainId == null)
-                throw new ArgumentNullException(nameof(chainId), "Property is required for class GetAllGasUsageResponseDataInnerSummary.");
+            if (averageTransactionFee.IsSet && averageTransactionFee.Value == null)
+                throw new ArgumentNullException(nameof(averageTransactionFee), "Property is not nullable for class GetAllGasUsageResponseDataInnerSummary.");
 
-            return new GetAllGasUsageResponseDataInnerSummary(averageTransactionFee, totalTransactionFee, totalTransactionFeeInUSD, transactionCount.Value, chainId.Value);
+            if (totalTransactionFee.IsSet && totalTransactionFee.Value == null)
+                throw new ArgumentNullException(nameof(totalTransactionFee), "Property is not nullable for class GetAllGasUsageResponseDataInnerSummary.");
+
+            if (totalTransactionFeeInUSD.IsSet && totalTransactionFeeInUSD.Value == null)
+                throw new ArgumentNullException(nameof(totalTransactionFeeInUSD), "Property is not nullable for class GetAllGasUsageResponseDataInnerSummary.");
+
+            if (transactionCount.IsSet && transactionCount.Value == null)
+                throw new ArgumentNullException(nameof(transactionCount), "Property is not nullable for class GetAllGasUsageResponseDataInnerSummary.");
+
+            if (chainId.IsSet && chainId.Value == null)
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class GetAllGasUsageResponseDataInnerSummary.");
+
+            return new GetAllGasUsageResponseDataInnerSummary(averageTransactionFee.Value, totalTransactionFee.Value, totalTransactionFeeInUSD.Value, transactionCount.Value.Value, chainId);
         }
 
         /// <summary>
@@ -214,11 +234,25 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetAllGasUsageResponseDataInnerSummary getAllGasUsageResponseDataInnerSummary, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (getAllGasUsageResponseDataInnerSummary.AverageTransactionFee == null)
+                throw new ArgumentNullException(nameof(getAllGasUsageResponseDataInnerSummary.AverageTransactionFee), "Property is required for class GetAllGasUsageResponseDataInnerSummary.");
+
+            if (getAllGasUsageResponseDataInnerSummary.TotalTransactionFee == null)
+                throw new ArgumentNullException(nameof(getAllGasUsageResponseDataInnerSummary.TotalTransactionFee), "Property is required for class GetAllGasUsageResponseDataInnerSummary.");
+
+            if (getAllGasUsageResponseDataInnerSummary.TotalTransactionFeeInUSD == null)
+                throw new ArgumentNullException(nameof(getAllGasUsageResponseDataInnerSummary.TotalTransactionFeeInUSD), "Property is required for class GetAllGasUsageResponseDataInnerSummary.");
+
             writer.WriteString("averageTransactionFee", getAllGasUsageResponseDataInnerSummary.AverageTransactionFee);
+
             writer.WriteString("totalTransactionFee", getAllGasUsageResponseDataInnerSummary.TotalTransactionFee);
+
             writer.WriteString("totalTransactionFeeInUSD", getAllGasUsageResponseDataInnerSummary.TotalTransactionFeeInUSD);
+
             writer.WriteNumber("transactionCount", getAllGasUsageResponseDataInnerSummary.TransactionCount);
-            writer.WriteNumber("chainId", getAllGasUsageResponseDataInnerSummary.ChainId);
+
+            if (getAllGasUsageResponseDataInnerSummary.ChainIdOption.IsSet)
+                writer.WriteNumber("chainId", getAllGasUsageResponseDataInnerSummary.ChainIdOption.Value.Value);
         }
     }
 }

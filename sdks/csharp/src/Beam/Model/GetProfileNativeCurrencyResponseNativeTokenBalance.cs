@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -33,18 +34,18 @@ namespace Beam.Model
         /// <param name="balance">balance</param>
         /// <param name="chainId">chainId</param>
         /// <param name="decimals">decimals</param>
-        /// <param name="logoUri">logoUri</param>
         /// <param name="name">name</param>
         /// <param name="symbol">symbol</param>
+        /// <param name="logoUri">logoUri</param>
         [JsonConstructor]
-        public GetProfileNativeCurrencyResponseNativeTokenBalance(string balance, decimal chainId, decimal decimals, string logoUri, string name, string symbol)
+        public GetProfileNativeCurrencyResponseNativeTokenBalance(string balance, decimal chainId, decimal decimals, string name, string symbol, Option<string> logoUri = default)
         {
             Balance = balance;
             ChainId = chainId;
             Decimals = decimals;
-            LogoUri = logoUri;
             Name = name;
             Symbol = symbol;
+            LogoUriOption = logoUri;
             OnCreated();
         }
 
@@ -69,12 +70,6 @@ namespace Beam.Model
         public decimal Decimals { get; set; }
 
         /// <summary>
-        /// Gets or Sets LogoUri
-        /// </summary>
-        [JsonPropertyName("logoUri")]
-        public string LogoUri { get; set; }
-
-        /// <summary>
         /// Gets or Sets Name
         /// </summary>
         [JsonPropertyName("name")]
@@ -87,6 +82,19 @@ namespace Beam.Model
         public string Symbol { get; set; }
 
         /// <summary>
+        /// Used to track the state of LogoUri
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> LogoUriOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets LogoUri
+        /// </summary>
+        [JsonPropertyName("logoUri")]
+        public string LogoUri { get { return this. LogoUriOption; } set { this.LogoUriOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -97,9 +105,9 @@ namespace Beam.Model
             sb.Append("  Balance: ").Append(Balance).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  Decimals: ").Append(Decimals).Append("\n");
-            sb.Append("  LogoUri: ").Append(LogoUri).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Symbol: ").Append(Symbol).Append("\n");
+            sb.Append("  LogoUri: ").Append(LogoUri).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -137,12 +145,12 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string balance = default;
-            decimal? chainId = default;
-            decimal? decimals = default;
-            string logoUri = default;
-            string name = default;
-            string symbol = default;
+            Option<string> balance = default;
+            Option<decimal?> chainId = default;
+            Option<decimal?> decimals = default;
+            Option<string> name = default;
+            Option<string> symbol = default;
+            Option<string> logoUri = default;
 
             while (utf8JsonReader.Read())
             {
@@ -160,24 +168,24 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "balance":
-                            balance = utf8JsonReader.GetString();
+                            balance = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = utf8JsonReader.GetDecimal();
+                                chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "decimals":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                decimals = utf8JsonReader.GetDecimal();
-                            break;
-                        case "logoUri":
-                            logoUri = utf8JsonReader.GetString();
+                                decimals = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "name":
-                            name = utf8JsonReader.GetString();
+                            name = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "symbol":
-                            symbol = utf8JsonReader.GetString();
+                            symbol = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "logoUri":
+                            logoUri = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -185,25 +193,40 @@ namespace Beam.Model
                 }
             }
 
-            if (balance == null)
-                throw new ArgumentNullException(nameof(balance), "Property is required for class GetProfileNativeCurrencyResponseNativeTokenBalance.");
+            if (!balance.IsSet)
+                throw new ArgumentException("Property is required for class GetProfileNativeCurrencyResponseNativeTokenBalance.", nameof(balance));
 
-            if (chainId == null)
-                throw new ArgumentNullException(nameof(chainId), "Property is required for class GetProfileNativeCurrencyResponseNativeTokenBalance.");
+            if (!chainId.IsSet)
+                throw new ArgumentException("Property is required for class GetProfileNativeCurrencyResponseNativeTokenBalance.", nameof(chainId));
 
-            if (decimals == null)
-                throw new ArgumentNullException(nameof(decimals), "Property is required for class GetProfileNativeCurrencyResponseNativeTokenBalance.");
+            if (!decimals.IsSet)
+                throw new ArgumentException("Property is required for class GetProfileNativeCurrencyResponseNativeTokenBalance.", nameof(decimals));
 
-            if (logoUri == null)
-                throw new ArgumentNullException(nameof(logoUri), "Property is required for class GetProfileNativeCurrencyResponseNativeTokenBalance.");
+            if (!name.IsSet)
+                throw new ArgumentException("Property is required for class GetProfileNativeCurrencyResponseNativeTokenBalance.", nameof(name));
 
-            if (name == null)
-                throw new ArgumentNullException(nameof(name), "Property is required for class GetProfileNativeCurrencyResponseNativeTokenBalance.");
+            if (!symbol.IsSet)
+                throw new ArgumentException("Property is required for class GetProfileNativeCurrencyResponseNativeTokenBalance.", nameof(symbol));
 
-            if (symbol == null)
-                throw new ArgumentNullException(nameof(symbol), "Property is required for class GetProfileNativeCurrencyResponseNativeTokenBalance.");
+            if (balance.IsSet && balance.Value == null)
+                throw new ArgumentNullException(nameof(balance), "Property is not nullable for class GetProfileNativeCurrencyResponseNativeTokenBalance.");
 
-            return new GetProfileNativeCurrencyResponseNativeTokenBalance(balance, chainId.Value, decimals.Value, logoUri, name, symbol);
+            if (chainId.IsSet && chainId.Value == null)
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class GetProfileNativeCurrencyResponseNativeTokenBalance.");
+
+            if (decimals.IsSet && decimals.Value == null)
+                throw new ArgumentNullException(nameof(decimals), "Property is not nullable for class GetProfileNativeCurrencyResponseNativeTokenBalance.");
+
+            if (name.IsSet && name.Value == null)
+                throw new ArgumentNullException(nameof(name), "Property is not nullable for class GetProfileNativeCurrencyResponseNativeTokenBalance.");
+
+            if (symbol.IsSet && symbol.Value == null)
+                throw new ArgumentNullException(nameof(symbol), "Property is not nullable for class GetProfileNativeCurrencyResponseNativeTokenBalance.");
+
+            if (logoUri.IsSet && logoUri.Value == null)
+                throw new ArgumentNullException(nameof(logoUri), "Property is not nullable for class GetProfileNativeCurrencyResponseNativeTokenBalance.");
+
+            return new GetProfileNativeCurrencyResponseNativeTokenBalance(balance.Value, chainId.Value.Value, decimals.Value.Value, name.Value, symbol.Value, logoUri);
         }
 
         /// <summary>
@@ -230,12 +253,30 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetProfileNativeCurrencyResponseNativeTokenBalance getProfileNativeCurrencyResponseNativeTokenBalance, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (getProfileNativeCurrencyResponseNativeTokenBalance.Balance == null)
+                throw new ArgumentNullException(nameof(getProfileNativeCurrencyResponseNativeTokenBalance.Balance), "Property is required for class GetProfileNativeCurrencyResponseNativeTokenBalance.");
+
+            if (getProfileNativeCurrencyResponseNativeTokenBalance.Name == null)
+                throw new ArgumentNullException(nameof(getProfileNativeCurrencyResponseNativeTokenBalance.Name), "Property is required for class GetProfileNativeCurrencyResponseNativeTokenBalance.");
+
+            if (getProfileNativeCurrencyResponseNativeTokenBalance.Symbol == null)
+                throw new ArgumentNullException(nameof(getProfileNativeCurrencyResponseNativeTokenBalance.Symbol), "Property is required for class GetProfileNativeCurrencyResponseNativeTokenBalance.");
+
+            if (getProfileNativeCurrencyResponseNativeTokenBalance.LogoUriOption.IsSet && getProfileNativeCurrencyResponseNativeTokenBalance.LogoUri == null)
+                throw new ArgumentNullException(nameof(getProfileNativeCurrencyResponseNativeTokenBalance.LogoUri), "Property is required for class GetProfileNativeCurrencyResponseNativeTokenBalance.");
+
             writer.WriteString("balance", getProfileNativeCurrencyResponseNativeTokenBalance.Balance);
+
             writer.WriteNumber("chainId", getProfileNativeCurrencyResponseNativeTokenBalance.ChainId);
+
             writer.WriteNumber("decimals", getProfileNativeCurrencyResponseNativeTokenBalance.Decimals);
-            writer.WriteString("logoUri", getProfileNativeCurrencyResponseNativeTokenBalance.LogoUri);
+
             writer.WriteString("name", getProfileNativeCurrencyResponseNativeTokenBalance.Name);
+
             writer.WriteString("symbol", getProfileNativeCurrencyResponseNativeTokenBalance.Symbol);
+
+            if (getProfileNativeCurrencyResponseNativeTokenBalance.LogoUriOption.IsSet)
+                writer.WriteString("logoUri", getProfileNativeCurrencyResponseNativeTokenBalance.LogoUri);
         }
     }
 }

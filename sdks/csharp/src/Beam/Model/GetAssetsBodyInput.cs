@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -30,45 +31,73 @@ namespace Beam.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="GetAssetsBodyInput" /> class.
         /// </summary>
+        /// <param name="filter">filter</param>
         /// <param name="limit">limit (default to 10M)</param>
         /// <param name="offset">offset (default to 0M)</param>
-        /// <param name="filter">filter</param>
         /// <param name="sort">sort</param>
         [JsonConstructor]
-        public GetAssetsBodyInput(decimal limit = 10M, decimal offset = 0M, GetAssetsBodyInputFilter filter = default, GetAssetsBodyInputSort sort = default)
+        public GetAssetsBodyInput(Option<GetAssetsBodyInputFilter> filter = default, Option<decimal?> limit = default, Option<decimal?> offset = default, Option<GetAssetsBodyInputSort> sort = default)
         {
-            Limit = limit;
-            Offset = offset;
-            Filter = filter;
-            Sort = sort;
+            FilterOption = filter;
+            LimitOption = limit;
+            OffsetOption = offset;
+            SortOption = sort;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets Limit
+        /// Used to track the state of Filter
         /// </summary>
-        [JsonPropertyName("limit")]
-        public decimal Limit { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Offset
-        /// </summary>
-        [JsonPropertyName("offset")]
-        public decimal Offset { get; set; }
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<GetAssetsBodyInputFilter> FilterOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Filter
         /// </summary>
         [JsonPropertyName("filter")]
-        public GetAssetsBodyInputFilter Filter { get; set; }
+        public GetAssetsBodyInputFilter Filter { get { return this. FilterOption; } set { this.FilterOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Limit
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<decimal?> LimitOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Limit
+        /// </summary>
+        [JsonPropertyName("limit")]
+        public decimal? Limit { get { return this. LimitOption; } set { this.LimitOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Offset
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<decimal?> OffsetOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Offset
+        /// </summary>
+        [JsonPropertyName("offset")]
+        public decimal? Offset { get { return this. OffsetOption; } set { this.OffsetOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Sort
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<GetAssetsBodyInputSort> SortOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Sort
         /// </summary>
         [JsonPropertyName("sort")]
-        public GetAssetsBodyInputSort Sort { get; set; }
+        public GetAssetsBodyInputSort Sort { get { return this. SortOption; } set { this.SortOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -78,9 +107,9 @@ namespace Beam.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class GetAssetsBodyInput {\n");
+            sb.Append("  Filter: ").Append(Filter).Append("\n");
             sb.Append("  Limit: ").Append(Limit).Append("\n");
             sb.Append("  Offset: ").Append(Offset).Append("\n");
-            sb.Append("  Filter: ").Append(Filter).Append("\n");
             sb.Append("  Sort: ").Append(Sort).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -94,7 +123,7 @@ namespace Beam.Model
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             // Limit (decimal) maximum
-            if (this.Limit > (decimal)100)
+            if (this.LimitOption.IsSet && this.LimitOption.Value > (decimal)100)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Limit, must be a value less than or equal to 100.", new [] { "Limit" });
             }
@@ -125,10 +154,10 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            decimal? limit = default;
-            decimal? offset = default;
-            GetAssetsBodyInputFilter filter = default;
-            GetAssetsBodyInputSort sort = default;
+            Option<GetAssetsBodyInputFilter> filter = default;
+            Option<decimal?> limit = default;
+            Option<decimal?> offset = default;
+            Option<GetAssetsBodyInputSort> sort = default;
 
             while (utf8JsonReader.Read())
             {
@@ -145,21 +174,21 @@ namespace Beam.Model
 
                     switch (localVarJsonPropertyName)
                     {
+                        case "filter":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                filter = new Option<GetAssetsBodyInputFilter>(JsonSerializer.Deserialize<GetAssetsBodyInputFilter>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
                         case "limit":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                limit = utf8JsonReader.GetDecimal();
+                                limit = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "offset":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                offset = utf8JsonReader.GetDecimal();
-                            break;
-                        case "filter":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                filter = JsonSerializer.Deserialize<GetAssetsBodyInputFilter>(ref utf8JsonReader, jsonSerializerOptions);
+                                offset = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "sort":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                sort = JsonSerializer.Deserialize<GetAssetsBodyInputSort>(ref utf8JsonReader, jsonSerializerOptions);
+                                sort = new Option<GetAssetsBodyInputSort>(JsonSerializer.Deserialize<GetAssetsBodyInputSort>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -167,13 +196,13 @@ namespace Beam.Model
                 }
             }
 
-            if (limit == null)
-                throw new ArgumentNullException(nameof(limit), "Property is required for class GetAssetsBodyInput.");
+            if (limit.IsSet && limit.Value == null)
+                throw new ArgumentNullException(nameof(limit), "Property is not nullable for class GetAssetsBodyInput.");
 
-            if (offset == null)
-                throw new ArgumentNullException(nameof(offset), "Property is required for class GetAssetsBodyInput.");
+            if (offset.IsSet && offset.Value == null)
+                throw new ArgumentNullException(nameof(offset), "Property is not nullable for class GetAssetsBodyInput.");
 
-            return new GetAssetsBodyInput(limit.Value, offset.Value, filter, sort);
+            return new GetAssetsBodyInput(filter, limit, offset, sort);
         }
 
         /// <summary>
@@ -200,12 +229,28 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetAssetsBodyInput getAssetsBodyInput, JsonSerializerOptions jsonSerializerOptions)
         {
-            writer.WriteNumber("limit", getAssetsBodyInput.Limit);
-            writer.WriteNumber("offset", getAssetsBodyInput.Offset);
-            writer.WritePropertyName("filter");
-            JsonSerializer.Serialize(writer, getAssetsBodyInput.Filter, jsonSerializerOptions);
-            writer.WritePropertyName("sort");
-            JsonSerializer.Serialize(writer, getAssetsBodyInput.Sort, jsonSerializerOptions);
+            if (getAssetsBodyInput.FilterOption.IsSet)
+                if (getAssetsBodyInput.FilterOption.Value != null)
+                {
+                    writer.WritePropertyName("filter");
+                    JsonSerializer.Serialize(writer, getAssetsBodyInput.Filter, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("filter");
+            if (getAssetsBodyInput.LimitOption.IsSet)
+                writer.WriteNumber("limit", getAssetsBodyInput.LimitOption.Value.Value);
+
+            if (getAssetsBodyInput.OffsetOption.IsSet)
+                writer.WriteNumber("offset", getAssetsBodyInput.OffsetOption.Value.Value);
+
+            if (getAssetsBodyInput.SortOption.IsSet)
+                if (getAssetsBodyInput.SortOption.Value != null)
+                {
+                    writer.WritePropertyName("sort");
+                    JsonSerializer.Serialize(writer, getAssetsBodyInput.Sort, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("sort");
         }
     }
 }

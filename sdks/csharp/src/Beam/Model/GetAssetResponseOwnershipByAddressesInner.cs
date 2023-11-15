@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -31,16 +32,16 @@ namespace Beam.Model
         /// Initializes a new instance of the <see cref="GetAssetResponseOwnershipByAddressesInner" /> class.
         /// </summary>
         /// <param name="address">address</param>
-        /// <param name="entityId">entityId</param>
         /// <param name="quantity">quantity</param>
         /// <param name="user">user</param>
+        /// <param name="entityId">entityId</param>
         [JsonConstructor]
-        public GetAssetResponseOwnershipByAddressesInner(string address, string entityId, decimal quantity, GetAssetResponseOwnershipByAddressesInnerUser user)
+        public GetAssetResponseOwnershipByAddressesInner(string address, decimal quantity, GetAssetResponseOwnershipByAddressesInnerUser user, Option<string> entityId = default)
         {
             Address = address;
-            EntityId = entityId;
             Quantity = quantity;
             User = user;
+            EntityIdOption = entityId;
             OnCreated();
         }
 
@@ -51,12 +52,6 @@ namespace Beam.Model
         /// </summary>
         [JsonPropertyName("address")]
         public string Address { get; set; }
-
-        /// <summary>
-        /// Gets or Sets EntityId
-        /// </summary>
-        [JsonPropertyName("entityId")]
-        public string EntityId { get; set; }
 
         /// <summary>
         /// Gets or Sets Quantity
@@ -71,6 +66,19 @@ namespace Beam.Model
         public GetAssetResponseOwnershipByAddressesInnerUser User { get; set; }
 
         /// <summary>
+        /// Used to track the state of EntityId
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> EntityIdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets EntityId
+        /// </summary>
+        [JsonPropertyName("entityId")]
+        public string EntityId { get { return this. EntityIdOption; } set { this.EntityIdOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -79,9 +87,9 @@ namespace Beam.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class GetAssetResponseOwnershipByAddressesInner {\n");
             sb.Append("  Address: ").Append(Address).Append("\n");
-            sb.Append("  EntityId: ").Append(EntityId).Append("\n");
             sb.Append("  Quantity: ").Append(Quantity).Append("\n");
             sb.Append("  User: ").Append(User).Append("\n");
+            sb.Append("  EntityId: ").Append(EntityId).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -119,10 +127,10 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string address = default;
-            string entityId = default;
-            decimal? quantity = default;
-            GetAssetResponseOwnershipByAddressesInnerUser user = default;
+            Option<string> address = default;
+            Option<decimal?> quantity = default;
+            Option<GetAssetResponseOwnershipByAddressesInnerUser> user = default;
+            Option<string> entityId = default;
 
             while (utf8JsonReader.Read())
             {
@@ -140,18 +148,18 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "address":
-                            address = utf8JsonReader.GetString();
-                            break;
-                        case "entityId":
-                            entityId = utf8JsonReader.GetString();
+                            address = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "quantity":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                quantity = utf8JsonReader.GetDecimal();
+                                quantity = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "user":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                user = JsonSerializer.Deserialize<GetAssetResponseOwnershipByAddressesInnerUser>(ref utf8JsonReader, jsonSerializerOptions);
+                                user = new Option<GetAssetResponseOwnershipByAddressesInnerUser>(JsonSerializer.Deserialize<GetAssetResponseOwnershipByAddressesInnerUser>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "entityId":
+                            entityId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -159,19 +167,28 @@ namespace Beam.Model
                 }
             }
 
-            if (address == null)
-                throw new ArgumentNullException(nameof(address), "Property is required for class GetAssetResponseOwnershipByAddressesInner.");
+            if (!address.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetResponseOwnershipByAddressesInner.", nameof(address));
 
-            if (entityId == null)
-                throw new ArgumentNullException(nameof(entityId), "Property is required for class GetAssetResponseOwnershipByAddressesInner.");
+            if (!quantity.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetResponseOwnershipByAddressesInner.", nameof(quantity));
 
-            if (quantity == null)
-                throw new ArgumentNullException(nameof(quantity), "Property is required for class GetAssetResponseOwnershipByAddressesInner.");
+            if (!user.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetResponseOwnershipByAddressesInner.", nameof(user));
 
-            if (user == null)
-                throw new ArgumentNullException(nameof(user), "Property is required for class GetAssetResponseOwnershipByAddressesInner.");
+            if (address.IsSet && address.Value == null)
+                throw new ArgumentNullException(nameof(address), "Property is not nullable for class GetAssetResponseOwnershipByAddressesInner.");
 
-            return new GetAssetResponseOwnershipByAddressesInner(address, entityId, quantity.Value, user);
+            if (quantity.IsSet && quantity.Value == null)
+                throw new ArgumentNullException(nameof(quantity), "Property is not nullable for class GetAssetResponseOwnershipByAddressesInner.");
+
+            if (user.IsSet && user.Value == null)
+                throw new ArgumentNullException(nameof(user), "Property is not nullable for class GetAssetResponseOwnershipByAddressesInner.");
+
+            if (entityId.IsSet && entityId.Value == null)
+                throw new ArgumentNullException(nameof(entityId), "Property is not nullable for class GetAssetResponseOwnershipByAddressesInner.");
+
+            return new GetAssetResponseOwnershipByAddressesInner(address.Value, quantity.Value.Value, user.Value, entityId);
         }
 
         /// <summary>
@@ -198,11 +215,23 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetAssetResponseOwnershipByAddressesInner getAssetResponseOwnershipByAddressesInner, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (getAssetResponseOwnershipByAddressesInner.Address == null)
+                throw new ArgumentNullException(nameof(getAssetResponseOwnershipByAddressesInner.Address), "Property is required for class GetAssetResponseOwnershipByAddressesInner.");
+
+            if (getAssetResponseOwnershipByAddressesInner.User == null)
+                throw new ArgumentNullException(nameof(getAssetResponseOwnershipByAddressesInner.User), "Property is required for class GetAssetResponseOwnershipByAddressesInner.");
+
+            if (getAssetResponseOwnershipByAddressesInner.EntityIdOption.IsSet && getAssetResponseOwnershipByAddressesInner.EntityId == null)
+                throw new ArgumentNullException(nameof(getAssetResponseOwnershipByAddressesInner.EntityId), "Property is required for class GetAssetResponseOwnershipByAddressesInner.");
+
             writer.WriteString("address", getAssetResponseOwnershipByAddressesInner.Address);
-            writer.WriteString("entityId", getAssetResponseOwnershipByAddressesInner.EntityId);
+
             writer.WriteNumber("quantity", getAssetResponseOwnershipByAddressesInner.Quantity);
+
             writer.WritePropertyName("user");
             JsonSerializer.Serialize(writer, getAssetResponseOwnershipByAddressesInner.User, jsonSerializerOptions);
+            if (getAssetResponseOwnershipByAddressesInner.EntityIdOption.IsSet)
+                writer.WriteString("entityId", getAssetResponseOwnershipByAddressesInner.EntityId);
         }
     }
 }

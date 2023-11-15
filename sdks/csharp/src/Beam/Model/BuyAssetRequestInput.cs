@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -30,27 +31,21 @@ namespace Beam.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="BuyAssetRequestInput" /> class.
         /// </summary>
-        /// <param name="policyId">policyId</param>
         /// <param name="quantity">quantity</param>
         /// <param name="optimistic">optimistic (default to false)</param>
+        /// <param name="policyId">policyId</param>
         /// <param name="sponsor">sponsor (default to true)</param>
         [JsonConstructor]
-        public BuyAssetRequestInput(string policyId, decimal quantity, bool optimistic = false, bool sponsor = true)
+        public BuyAssetRequestInput(decimal quantity, Option<bool?> optimistic = default, Option<string> policyId = default, Option<bool?> sponsor = default)
         {
-            PolicyId = policyId;
             Quantity = quantity;
-            Optimistic = optimistic;
-            Sponsor = sponsor;
+            OptimisticOption = optimistic;
+            PolicyIdOption = policyId;
+            SponsorOption = sponsor;
             OnCreated();
         }
 
         partial void OnCreated();
-
-        /// <summary>
-        /// Gets or Sets PolicyId
-        /// </summary>
-        [JsonPropertyName("policyId")]
-        public string PolicyId { get; set; }
 
         /// <summary>
         /// Gets or Sets Quantity
@@ -59,16 +54,43 @@ namespace Beam.Model
         public decimal Quantity { get; set; }
 
         /// <summary>
+        /// Used to track the state of Optimistic
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> OptimisticOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets Optimistic
         /// </summary>
         [JsonPropertyName("optimistic")]
-        public bool Optimistic { get; set; }
+        public bool? Optimistic { get { return this. OptimisticOption; } set { this.OptimisticOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of PolicyId
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> PolicyIdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets PolicyId
+        /// </summary>
+        [JsonPropertyName("policyId")]
+        public string PolicyId { get { return this. PolicyIdOption; } set { this.PolicyIdOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Sponsor
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> SponsorOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Sponsor
         /// </summary>
         [JsonPropertyName("sponsor")]
-        public bool Sponsor { get; set; }
+        public bool? Sponsor { get { return this. SponsorOption; } set { this.SponsorOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -78,9 +100,9 @@ namespace Beam.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class BuyAssetRequestInput {\n");
-            sb.Append("  PolicyId: ").Append(PolicyId).Append("\n");
             sb.Append("  Quantity: ").Append(Quantity).Append("\n");
             sb.Append("  Optimistic: ").Append(Optimistic).Append("\n");
+            sb.Append("  PolicyId: ").Append(PolicyId).Append("\n");
             sb.Append("  Sponsor: ").Append(Sponsor).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -119,10 +141,10 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string policyId = default;
-            decimal? quantity = default;
-            bool? optimistic = default;
-            bool? sponsor = default;
+            Option<decimal?> quantity = default;
+            Option<bool?> optimistic = default;
+            Option<string> policyId = default;
+            Option<bool?> sponsor = default;
 
             while (utf8JsonReader.Read())
             {
@@ -139,20 +161,20 @@ namespace Beam.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "policyId":
-                            policyId = utf8JsonReader.GetString();
-                            break;
                         case "quantity":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                quantity = utf8JsonReader.GetDecimal();
+                                quantity = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "optimistic":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                optimistic = utf8JsonReader.GetBoolean();
+                                optimistic = new Option<bool?>(utf8JsonReader.GetBoolean());
+                            break;
+                        case "policyId":
+                            policyId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "sponsor":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                sponsor = utf8JsonReader.GetBoolean();
+                                sponsor = new Option<bool?>(utf8JsonReader.GetBoolean());
                             break;
                         default:
                             break;
@@ -160,19 +182,22 @@ namespace Beam.Model
                 }
             }
 
-            if (policyId == null)
-                throw new ArgumentNullException(nameof(policyId), "Property is required for class BuyAssetRequestInput.");
+            if (!quantity.IsSet)
+                throw new ArgumentException("Property is required for class BuyAssetRequestInput.", nameof(quantity));
 
-            if (quantity == null)
-                throw new ArgumentNullException(nameof(quantity), "Property is required for class BuyAssetRequestInput.");
+            if (quantity.IsSet && quantity.Value == null)
+                throw new ArgumentNullException(nameof(quantity), "Property is not nullable for class BuyAssetRequestInput.");
 
-            if (optimistic == null)
-                throw new ArgumentNullException(nameof(optimistic), "Property is required for class BuyAssetRequestInput.");
+            if (optimistic.IsSet && optimistic.Value == null)
+                throw new ArgumentNullException(nameof(optimistic), "Property is not nullable for class BuyAssetRequestInput.");
 
-            if (sponsor == null)
-                throw new ArgumentNullException(nameof(sponsor), "Property is required for class BuyAssetRequestInput.");
+            if (policyId.IsSet && policyId.Value == null)
+                throw new ArgumentNullException(nameof(policyId), "Property is not nullable for class BuyAssetRequestInput.");
 
-            return new BuyAssetRequestInput(policyId, quantity.Value, optimistic.Value, sponsor.Value);
+            if (sponsor.IsSet && sponsor.Value == null)
+                throw new ArgumentNullException(nameof(sponsor), "Property is not nullable for class BuyAssetRequestInput.");
+
+            return new BuyAssetRequestInput(quantity.Value.Value, optimistic, policyId, sponsor);
         }
 
         /// <summary>
@@ -199,10 +224,19 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, BuyAssetRequestInput buyAssetRequestInput, JsonSerializerOptions jsonSerializerOptions)
         {
-            writer.WriteString("policyId", buyAssetRequestInput.PolicyId);
+            if (buyAssetRequestInput.PolicyIdOption.IsSet && buyAssetRequestInput.PolicyId == null)
+                throw new ArgumentNullException(nameof(buyAssetRequestInput.PolicyId), "Property is required for class BuyAssetRequestInput.");
+
             writer.WriteNumber("quantity", buyAssetRequestInput.Quantity);
-            writer.WriteBoolean("optimistic", buyAssetRequestInput.Optimistic);
-            writer.WriteBoolean("sponsor", buyAssetRequestInput.Sponsor);
+
+            if (buyAssetRequestInput.OptimisticOption.IsSet)
+                writer.WriteBoolean("optimistic", buyAssetRequestInput.OptimisticOption.Value.Value);
+
+            if (buyAssetRequestInput.PolicyIdOption.IsSet)
+                writer.WriteString("policyId", buyAssetRequestInput.PolicyId);
+
+            if (buyAssetRequestInput.SponsorOption.IsSet)
+                writer.WriteBoolean("sponsor", buyAssetRequestInput.SponsorOption.Value.Value);
         }
     }
 }

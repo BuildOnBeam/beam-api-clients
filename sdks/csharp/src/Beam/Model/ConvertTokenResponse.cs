@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -30,17 +31,17 @@ namespace Beam.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="ConvertTokenResponse" /> class.
         /// </summary>
-        /// <param name="explorerUrl">explorerUrl</param>
         /// <param name="status">status</param>
-        /// <param name="transactionHash">transactionHash</param>
         /// <param name="type">type</param>
+        /// <param name="explorerUrl">explorerUrl</param>
+        /// <param name="transactionHash">transactionHash</param>
         [JsonConstructor]
-        public ConvertTokenResponse(string explorerUrl, StatusEnum status, string transactionHash, TypeEnum type)
+        public ConvertTokenResponse(StatusEnum status, TypeEnum type, Option<string> explorerUrl = default, Option<string> transactionHash = default)
         {
-            ExplorerUrl = explorerUrl;
             Status = status;
-            TransactionHash = transactionHash;
             Type = type;
+            ExplorerUrlOption = explorerUrl;
+            TransactionHashOption = transactionHash;
             OnCreated();
         }
 
@@ -103,7 +104,6 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string StatusEnumToJsonValue(StatusEnum value)
         {
-
             if (value == StatusEnum.Pending)
                 return "pending";
 
@@ -176,7 +176,6 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string TypeEnumToJsonValue(TypeEnum value)
         {
-
             if (value == TypeEnum.Custodial)
                 return "custodial";
 
@@ -193,16 +192,30 @@ namespace Beam.Model
         public TypeEnum Type { get; set; }
 
         /// <summary>
+        /// Used to track the state of ExplorerUrl
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> ExplorerUrlOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets ExplorerUrl
         /// </summary>
         [JsonPropertyName("explorerUrl")]
-        public string ExplorerUrl { get; set; }
+        public string ExplorerUrl { get { return this. ExplorerUrlOption; } set { this.ExplorerUrlOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of TransactionHash
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> TransactionHashOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets TransactionHash
         /// </summary>
         [JsonPropertyName("transactionHash")]
-        public string TransactionHash { get; set; }
+        public string TransactionHash { get { return this. TransactionHashOption; } set { this.TransactionHashOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -212,10 +225,10 @@ namespace Beam.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class ConvertTokenResponse {\n");
-            sb.Append("  ExplorerUrl: ").Append(ExplorerUrl).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
-            sb.Append("  TransactionHash: ").Append(TransactionHash).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("  ExplorerUrl: ").Append(ExplorerUrl).Append("\n");
+            sb.Append("  TransactionHash: ").Append(TransactionHash).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -253,10 +266,10 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string explorerUrl = default;
-            ConvertTokenResponse.StatusEnum? status = default;
-            string transactionHash = default;
-            ConvertTokenResponse.TypeEnum? type = default;
+            Option<ConvertTokenResponse.StatusEnum?> status = default;
+            Option<ConvertTokenResponse.TypeEnum?> type = default;
+            Option<string> explorerUrl = default;
+            Option<string> transactionHash = default;
 
             while (utf8JsonReader.Read())
             {
@@ -273,23 +286,21 @@ namespace Beam.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "explorerUrl":
-                            explorerUrl = utf8JsonReader.GetString();
-                            break;
                         case "status":
                             string statusRawValue = utf8JsonReader.GetString();
-                            status = statusRawValue == null
-                                ? null
-                                : ConvertTokenResponse.StatusEnumFromStringOrDefault(statusRawValue);
-                            break;
-                        case "transactionHash":
-                            transactionHash = utf8JsonReader.GetString();
+                            if (statusRawValue != null)
+                                status = new Option<ConvertTokenResponse.StatusEnum?>(ConvertTokenResponse.StatusEnumFromStringOrDefault(statusRawValue));
                             break;
                         case "type":
                             string typeRawValue = utf8JsonReader.GetString();
-                            type = typeRawValue == null
-                                ? null
-                                : ConvertTokenResponse.TypeEnumFromStringOrDefault(typeRawValue);
+                            if (typeRawValue != null)
+                                type = new Option<ConvertTokenResponse.TypeEnum?>(ConvertTokenResponse.TypeEnumFromStringOrDefault(typeRawValue));
+                            break;
+                        case "explorerUrl":
+                            explorerUrl = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "transactionHash":
+                            transactionHash = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -297,19 +308,25 @@ namespace Beam.Model
                 }
             }
 
-            if (explorerUrl == null)
-                throw new ArgumentNullException(nameof(explorerUrl), "Property is required for class ConvertTokenResponse.");
+            if (!status.IsSet)
+                throw new ArgumentException("Property is required for class ConvertTokenResponse.", nameof(status));
 
-            if (status == null)
-                throw new ArgumentNullException(nameof(status), "Property is required for class ConvertTokenResponse.");
+            if (!type.IsSet)
+                throw new ArgumentException("Property is required for class ConvertTokenResponse.", nameof(type));
 
-            if (transactionHash == null)
-                throw new ArgumentNullException(nameof(transactionHash), "Property is required for class ConvertTokenResponse.");
+            if (status.IsSet && status.Value == null)
+                throw new ArgumentNullException(nameof(status), "Property is not nullable for class ConvertTokenResponse.");
 
-            if (type == null)
-                throw new ArgumentNullException(nameof(type), "Property is required for class ConvertTokenResponse.");
+            if (type.IsSet && type.Value == null)
+                throw new ArgumentNullException(nameof(type), "Property is not nullable for class ConvertTokenResponse.");
 
-            return new ConvertTokenResponse(explorerUrl, status.Value, transactionHash, type.Value);
+            if (explorerUrl.IsSet && explorerUrl.Value == null)
+                throw new ArgumentNullException(nameof(explorerUrl), "Property is not nullable for class ConvertTokenResponse.");
+
+            if (transactionHash.IsSet && transactionHash.Value == null)
+                throw new ArgumentNullException(nameof(transactionHash), "Property is not nullable for class ConvertTokenResponse.");
+
+            return new ConvertTokenResponse(status.Value.Value, type.Value.Value, explorerUrl, transactionHash);
         }
 
         /// <summary>
@@ -336,7 +353,11 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, ConvertTokenResponse convertTokenResponse, JsonSerializerOptions jsonSerializerOptions)
         {
-            writer.WriteString("explorerUrl", convertTokenResponse.ExplorerUrl);
+            if (convertTokenResponse.ExplorerUrlOption.IsSet && convertTokenResponse.ExplorerUrl == null)
+                throw new ArgumentNullException(nameof(convertTokenResponse.ExplorerUrl), "Property is required for class ConvertTokenResponse.");
+
+            if (convertTokenResponse.TransactionHashOption.IsSet && convertTokenResponse.TransactionHash == null)
+                throw new ArgumentNullException(nameof(convertTokenResponse.TransactionHash), "Property is required for class ConvertTokenResponse.");
 
             var statusRawValue = ConvertTokenResponse.StatusEnumToJsonValue(convertTokenResponse.Status);
             if (statusRawValue != null)
@@ -344,13 +365,17 @@ namespace Beam.Model
             else
                 writer.WriteNull("status");
 
-            writer.WriteString("transactionHash", convertTokenResponse.TransactionHash);
-
             var typeRawValue = ConvertTokenResponse.TypeEnumToJsonValue(convertTokenResponse.Type);
             if (typeRawValue != null)
                 writer.WriteString("type", typeRawValue);
             else
                 writer.WriteNull("type");
+
+            if (convertTokenResponse.ExplorerUrlOption.IsSet)
+                writer.WriteString("explorerUrl", convertTokenResponse.ExplorerUrl);
+
+            if (convertTokenResponse.TransactionHashOption.IsSet)
+                writer.WriteString("transactionHash", convertTokenResponse.TransactionHash);
         }
     }
 }

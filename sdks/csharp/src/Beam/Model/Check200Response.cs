@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -31,48 +32,76 @@ namespace Beam.Model
         /// Initializes a new instance of the <see cref="Check200Response" /> class.
         /// </summary>
         /// <param name="details">details</param>
-        /// <param name="status">status</param>
         /// <param name="error">error</param>
         /// <param name="info">info</param>
+        /// <param name="status">status</param>
         [JsonConstructor]
-        public Check200Response(Dictionary<string, Check200ResponseInfoValue> details, string status, Dictionary<string, Check200ResponseInfoValue> error = default, Dictionary<string, Check200ResponseInfoValue> info = default)
+        public Check200Response(Option<Dictionary<string, Check200ResponseInfoValue>> details = default, Option<Dictionary<string, Check200ResponseInfoValue>> error = default, Option<Dictionary<string, Check200ResponseInfoValue>> info = default, Option<string> status = default)
         {
-            Details = details;
-            Status = status;
-            Error = error;
-            Info = info;
+            DetailsOption = details;
+            ErrorOption = error;
+            InfoOption = info;
+            StatusOption = status;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
+        /// Used to track the state of Details
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<Dictionary<string, Check200ResponseInfoValue>> DetailsOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets Details
         /// </summary>
         /// <example>{&quot;database&quot;:{&quot;status&quot;:&quot;up&quot;}}</example>
         [JsonPropertyName("details")]
-        public Dictionary<string, Check200ResponseInfoValue> Details { get; set; }
+        public Dictionary<string, Check200ResponseInfoValue> Details { get { return this. DetailsOption; } set { this.DetailsOption = new(value); } }
 
         /// <summary>
-        /// Gets or Sets Status
+        /// Used to track the state of Error
         /// </summary>
-        /// <example>ok</example>
-        [JsonPropertyName("status")]
-        public string Status { get; set; }
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<Dictionary<string, Check200ResponseInfoValue>> ErrorOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Error
         /// </summary>
         /// <example>{}</example>
         [JsonPropertyName("error")]
-        public Dictionary<string, Check200ResponseInfoValue> Error { get; set; }
+        public Dictionary<string, Check200ResponseInfoValue> Error { get { return this. ErrorOption; } set { this.ErrorOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Info
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<Dictionary<string, Check200ResponseInfoValue>> InfoOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Info
         /// </summary>
         /// <example>{&quot;database&quot;:{&quot;status&quot;:&quot;up&quot;}}</example>
         [JsonPropertyName("info")]
-        public Dictionary<string, Check200ResponseInfoValue> Info { get; set; }
+        public Dictionary<string, Check200ResponseInfoValue> Info { get { return this. InfoOption; } set { this.InfoOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Status
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> StatusOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Status
+        /// </summary>
+        /// <example>ok</example>
+        [JsonPropertyName("status")]
+        public string Status { get { return this. StatusOption; } set { this.StatusOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -83,9 +112,9 @@ namespace Beam.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class Check200Response {\n");
             sb.Append("  Details: ").Append(Details).Append("\n");
-            sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  Error: ").Append(Error).Append("\n");
             sb.Append("  Info: ").Append(Info).Append("\n");
+            sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -123,10 +152,10 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Dictionary<string, Check200ResponseInfoValue> details = default;
-            string status = default;
-            Dictionary<string, Check200ResponseInfoValue> error = default;
-            Dictionary<string, Check200ResponseInfoValue> info = default;
+            Option<Dictionary<string, Check200ResponseInfoValue>> details = default;
+            Option<Dictionary<string, Check200ResponseInfoValue>> error = default;
+            Option<Dictionary<string, Check200ResponseInfoValue>> info = default;
+            Option<string> status = default;
 
             while (utf8JsonReader.Read())
             {
@@ -145,18 +174,18 @@ namespace Beam.Model
                     {
                         case "details":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                details = JsonSerializer.Deserialize<Dictionary<string, Check200ResponseInfoValue>>(ref utf8JsonReader, jsonSerializerOptions);
-                            break;
-                        case "status":
-                            status = utf8JsonReader.GetString();
+                                details = new Option<Dictionary<string, Check200ResponseInfoValue>>(JsonSerializer.Deserialize<Dictionary<string, Check200ResponseInfoValue>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "error":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                error = JsonSerializer.Deserialize<Dictionary<string, Check200ResponseInfoValue>>(ref utf8JsonReader, jsonSerializerOptions);
+                                error = new Option<Dictionary<string, Check200ResponseInfoValue>>(JsonSerializer.Deserialize<Dictionary<string, Check200ResponseInfoValue>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "info":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                info = JsonSerializer.Deserialize<Dictionary<string, Check200ResponseInfoValue>>(ref utf8JsonReader, jsonSerializerOptions);
+                                info = new Option<Dictionary<string, Check200ResponseInfoValue>>(JsonSerializer.Deserialize<Dictionary<string, Check200ResponseInfoValue>>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "status":
+                            status = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -164,13 +193,13 @@ namespace Beam.Model
                 }
             }
 
-            if (details == null)
-                throw new ArgumentNullException(nameof(details), "Property is required for class Check200Response.");
+            if (details.IsSet && details.Value == null)
+                throw new ArgumentNullException(nameof(details), "Property is not nullable for class Check200Response.");
 
-            if (status == null)
-                throw new ArgumentNullException(nameof(status), "Property is required for class Check200Response.");
+            if (status.IsSet && status.Value == null)
+                throw new ArgumentNullException(nameof(status), "Property is not nullable for class Check200Response.");
 
-            return new Check200Response(details, status, error, info);
+            return new Check200Response(details, error, info, status);
         }
 
         /// <summary>
@@ -197,13 +226,35 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, Check200Response check200Response, JsonSerializerOptions jsonSerializerOptions)
         {
-            writer.WritePropertyName("details");
-            JsonSerializer.Serialize(writer, check200Response.Details, jsonSerializerOptions);
-            writer.WriteString("status", check200Response.Status);
-            writer.WritePropertyName("error");
-            JsonSerializer.Serialize(writer, check200Response.Error, jsonSerializerOptions);
-            writer.WritePropertyName("info");
-            JsonSerializer.Serialize(writer, check200Response.Info, jsonSerializerOptions);
+            if (check200Response.DetailsOption.IsSet && check200Response.Details == null)
+                throw new ArgumentNullException(nameof(check200Response.Details), "Property is required for class Check200Response.");
+
+            if (check200Response.StatusOption.IsSet && check200Response.Status == null)
+                throw new ArgumentNullException(nameof(check200Response.Status), "Property is required for class Check200Response.");
+
+            if (check200Response.DetailsOption.IsSet)
+            {
+                writer.WritePropertyName("details");
+                JsonSerializer.Serialize(writer, check200Response.Details, jsonSerializerOptions);
+            }
+            if (check200Response.ErrorOption.IsSet)
+                if (check200Response.ErrorOption.Value != null)
+                {
+                    writer.WritePropertyName("error");
+                    JsonSerializer.Serialize(writer, check200Response.Error, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("error");
+            if (check200Response.InfoOption.IsSet)
+                if (check200Response.InfoOption.Value != null)
+                {
+                    writer.WritePropertyName("info");
+                    JsonSerializer.Serialize(writer, check200Response.Info, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("info");
+            if (check200Response.StatusOption.IsSet)
+                writer.WriteString("status", check200Response.Status);
         }
     }
 }

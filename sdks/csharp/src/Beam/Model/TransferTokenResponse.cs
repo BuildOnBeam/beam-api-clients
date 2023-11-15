@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -30,19 +31,19 @@ namespace Beam.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="TransferTokenResponse" /> class.
         /// </summary>
+        /// <param name="status">status</param>
+        /// <param name="type">type</param>
         /// <param name="explorerUrl">explorerUrl</param>
         /// <param name="payloadToSign">payloadToSign</param>
-        /// <param name="status">status</param>
         /// <param name="transactionHash">transactionHash</param>
-        /// <param name="type">type</param>
         [JsonConstructor]
-        public TransferTokenResponse(string explorerUrl, string payloadToSign, StatusEnum status, string transactionHash, TypeEnum type)
+        public TransferTokenResponse(StatusEnum status, TypeEnum type, Option<string> explorerUrl = default, Option<string> payloadToSign = default, Option<string> transactionHash = default)
         {
-            ExplorerUrl = explorerUrl;
-            PayloadToSign = payloadToSign;
             Status = status;
-            TransactionHash = transactionHash;
             Type = type;
+            ExplorerUrlOption = explorerUrl;
+            PayloadToSignOption = payloadToSign;
+            TransactionHashOption = transactionHash;
             OnCreated();
         }
 
@@ -105,7 +106,6 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string StatusEnumToJsonValue(StatusEnum value)
         {
-
             if (value == StatusEnum.Pending)
                 return "pending";
 
@@ -178,7 +178,6 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string TypeEnumToJsonValue(TypeEnum value)
         {
-
             if (value == TypeEnum.Custodial)
                 return "custodial";
 
@@ -195,22 +194,43 @@ namespace Beam.Model
         public TypeEnum Type { get; set; }
 
         /// <summary>
+        /// Used to track the state of ExplorerUrl
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> ExplorerUrlOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets ExplorerUrl
         /// </summary>
         [JsonPropertyName("explorerUrl")]
-        public string ExplorerUrl { get; set; }
+        public string ExplorerUrl { get { return this. ExplorerUrlOption; } set { this.ExplorerUrlOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of PayloadToSign
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> PayloadToSignOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets PayloadToSign
         /// </summary>
         [JsonPropertyName("payloadToSign")]
-        public string PayloadToSign { get; set; }
+        public string PayloadToSign { get { return this. PayloadToSignOption; } set { this.PayloadToSignOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of TransactionHash
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> TransactionHashOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets TransactionHash
         /// </summary>
         [JsonPropertyName("transactionHash")]
-        public string TransactionHash { get; set; }
+        public string TransactionHash { get { return this. TransactionHashOption; } set { this.TransactionHashOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -220,11 +240,11 @@ namespace Beam.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class TransferTokenResponse {\n");
+            sb.Append("  Status: ").Append(Status).Append("\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  ExplorerUrl: ").Append(ExplorerUrl).Append("\n");
             sb.Append("  PayloadToSign: ").Append(PayloadToSign).Append("\n");
-            sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  TransactionHash: ").Append(TransactionHash).Append("\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -262,11 +282,11 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string explorerUrl = default;
-            string payloadToSign = default;
-            TransferTokenResponse.StatusEnum? status = default;
-            string transactionHash = default;
-            TransferTokenResponse.TypeEnum? type = default;
+            Option<TransferTokenResponse.StatusEnum?> status = default;
+            Option<TransferTokenResponse.TypeEnum?> type = default;
+            Option<string> explorerUrl = default;
+            Option<string> payloadToSign = default;
+            Option<string> transactionHash = default;
 
             while (utf8JsonReader.Read())
             {
@@ -283,26 +303,24 @@ namespace Beam.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "explorerUrl":
-                            explorerUrl = utf8JsonReader.GetString();
-                            break;
-                        case "payloadToSign":
-                            payloadToSign = utf8JsonReader.GetString();
-                            break;
                         case "status":
                             string statusRawValue = utf8JsonReader.GetString();
-                            status = statusRawValue == null
-                                ? null
-                                : TransferTokenResponse.StatusEnumFromStringOrDefault(statusRawValue);
-                            break;
-                        case "transactionHash":
-                            transactionHash = utf8JsonReader.GetString();
+                            if (statusRawValue != null)
+                                status = new Option<TransferTokenResponse.StatusEnum?>(TransferTokenResponse.StatusEnumFromStringOrDefault(statusRawValue));
                             break;
                         case "type":
                             string typeRawValue = utf8JsonReader.GetString();
-                            type = typeRawValue == null
-                                ? null
-                                : TransferTokenResponse.TypeEnumFromStringOrDefault(typeRawValue);
+                            if (typeRawValue != null)
+                                type = new Option<TransferTokenResponse.TypeEnum?>(TransferTokenResponse.TypeEnumFromStringOrDefault(typeRawValue));
+                            break;
+                        case "explorerUrl":
+                            explorerUrl = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "payloadToSign":
+                            payloadToSign = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "transactionHash":
+                            transactionHash = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -310,22 +328,28 @@ namespace Beam.Model
                 }
             }
 
-            if (explorerUrl == null)
-                throw new ArgumentNullException(nameof(explorerUrl), "Property is required for class TransferTokenResponse.");
+            if (!status.IsSet)
+                throw new ArgumentException("Property is required for class TransferTokenResponse.", nameof(status));
 
-            if (payloadToSign == null)
-                throw new ArgumentNullException(nameof(payloadToSign), "Property is required for class TransferTokenResponse.");
+            if (!type.IsSet)
+                throw new ArgumentException("Property is required for class TransferTokenResponse.", nameof(type));
 
-            if (status == null)
-                throw new ArgumentNullException(nameof(status), "Property is required for class TransferTokenResponse.");
+            if (status.IsSet && status.Value == null)
+                throw new ArgumentNullException(nameof(status), "Property is not nullable for class TransferTokenResponse.");
 
-            if (transactionHash == null)
-                throw new ArgumentNullException(nameof(transactionHash), "Property is required for class TransferTokenResponse.");
+            if (type.IsSet && type.Value == null)
+                throw new ArgumentNullException(nameof(type), "Property is not nullable for class TransferTokenResponse.");
 
-            if (type == null)
-                throw new ArgumentNullException(nameof(type), "Property is required for class TransferTokenResponse.");
+            if (explorerUrl.IsSet && explorerUrl.Value == null)
+                throw new ArgumentNullException(nameof(explorerUrl), "Property is not nullable for class TransferTokenResponse.");
 
-            return new TransferTokenResponse(explorerUrl, payloadToSign, status.Value, transactionHash, type.Value);
+            if (payloadToSign.IsSet && payloadToSign.Value == null)
+                throw new ArgumentNullException(nameof(payloadToSign), "Property is not nullable for class TransferTokenResponse.");
+
+            if (transactionHash.IsSet && transactionHash.Value == null)
+                throw new ArgumentNullException(nameof(transactionHash), "Property is not nullable for class TransferTokenResponse.");
+
+            return new TransferTokenResponse(status.Value.Value, type.Value.Value, explorerUrl, payloadToSign, transactionHash);
         }
 
         /// <summary>
@@ -352,8 +376,14 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, TransferTokenResponse transferTokenResponse, JsonSerializerOptions jsonSerializerOptions)
         {
-            writer.WriteString("explorerUrl", transferTokenResponse.ExplorerUrl);
-            writer.WriteString("payloadToSign", transferTokenResponse.PayloadToSign);
+            if (transferTokenResponse.ExplorerUrlOption.IsSet && transferTokenResponse.ExplorerUrl == null)
+                throw new ArgumentNullException(nameof(transferTokenResponse.ExplorerUrl), "Property is required for class TransferTokenResponse.");
+
+            if (transferTokenResponse.PayloadToSignOption.IsSet && transferTokenResponse.PayloadToSign == null)
+                throw new ArgumentNullException(nameof(transferTokenResponse.PayloadToSign), "Property is required for class TransferTokenResponse.");
+
+            if (transferTokenResponse.TransactionHashOption.IsSet && transferTokenResponse.TransactionHash == null)
+                throw new ArgumentNullException(nameof(transferTokenResponse.TransactionHash), "Property is required for class TransferTokenResponse.");
 
             var statusRawValue = TransferTokenResponse.StatusEnumToJsonValue(transferTokenResponse.Status);
             if (statusRawValue != null)
@@ -361,13 +391,20 @@ namespace Beam.Model
             else
                 writer.WriteNull("status");
 
-            writer.WriteString("transactionHash", transferTokenResponse.TransactionHash);
-
             var typeRawValue = TransferTokenResponse.TypeEnumToJsonValue(transferTokenResponse.Type);
             if (typeRawValue != null)
                 writer.WriteString("type", typeRawValue);
             else
                 writer.WriteNull("type");
+
+            if (transferTokenResponse.ExplorerUrlOption.IsSet)
+                writer.WriteString("explorerUrl", transferTokenResponse.ExplorerUrl);
+
+            if (transferTokenResponse.PayloadToSignOption.IsSet)
+                writer.WriteString("payloadToSign", transferTokenResponse.PayloadToSign);
+
+            if (transferTokenResponse.TransactionHashOption.IsSet)
+                writer.WriteString("transactionHash", transferTokenResponse.TransactionHash);
         }
     }
 }

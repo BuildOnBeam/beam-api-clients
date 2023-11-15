@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -164,15 +165,15 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string externalEntityId = default;
-            string externalId = default;
-            string gameId = default;
-            string id = default;
-            List<CreateProfileResponseWalletsInner> wallets = default;
-            Object createdAt = default;
-            Object updatedAt = default;
-            Object userConnectionCreatedAt = default;
-            string userId = default;
+            Option<string> externalEntityId = default;
+            Option<string> externalId = default;
+            Option<string> gameId = default;
+            Option<string> id = default;
+            Option<List<CreateProfileResponseWalletsInner>> wallets = default;
+            Option<Object> createdAt = default;
+            Option<Object> updatedAt = default;
+            Option<Object> userConnectionCreatedAt = default;
+            Option<string> userId = default;
 
             while (utf8JsonReader.Read())
             {
@@ -190,35 +191,35 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "externalEntityId":
-                            externalEntityId = utf8JsonReader.GetString();
+                            externalEntityId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "externalId":
-                            externalId = utf8JsonReader.GetString();
+                            externalId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "gameId":
-                            gameId = utf8JsonReader.GetString();
+                            gameId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "id":
-                            id = utf8JsonReader.GetString();
+                            id = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "wallets":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                wallets = JsonSerializer.Deserialize<List<CreateProfileResponseWalletsInner>>(ref utf8JsonReader, jsonSerializerOptions);
+                                wallets = new Option<List<CreateProfileResponseWalletsInner>>(JsonSerializer.Deserialize<List<CreateProfileResponseWalletsInner>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "createdAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                createdAt = JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions);
+                                createdAt = new Option<Object>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "updatedAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                updatedAt = JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions);
+                                updatedAt = new Option<Object>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "userConnectionCreatedAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                userConnectionCreatedAt = JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions);
+                                userConnectionCreatedAt = new Option<Object>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "userId":
-                            userId = utf8JsonReader.GetString();
+                            userId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -226,22 +227,49 @@ namespace Beam.Model
                 }
             }
 
-            if (externalEntityId == null)
-                throw new ArgumentNullException(nameof(externalEntityId), "Property is required for class GetProfileResponse.");
+            if (!externalEntityId.IsSet)
+                throw new ArgumentException("Property is required for class GetProfileResponse.", nameof(externalEntityId));
 
-            if (externalId == null)
-                throw new ArgumentNullException(nameof(externalId), "Property is required for class GetProfileResponse.");
+            if (!externalId.IsSet)
+                throw new ArgumentException("Property is required for class GetProfileResponse.", nameof(externalId));
 
-            if (gameId == null)
-                throw new ArgumentNullException(nameof(gameId), "Property is required for class GetProfileResponse.");
+            if (!gameId.IsSet)
+                throw new ArgumentException("Property is required for class GetProfileResponse.", nameof(gameId));
 
-            if (id == null)
-                throw new ArgumentNullException(nameof(id), "Property is required for class GetProfileResponse.");
+            if (!id.IsSet)
+                throw new ArgumentException("Property is required for class GetProfileResponse.", nameof(id));
 
-            if (wallets == null)
-                throw new ArgumentNullException(nameof(wallets), "Property is required for class GetProfileResponse.");
+            if (!wallets.IsSet)
+                throw new ArgumentException("Property is required for class GetProfileResponse.", nameof(wallets));
 
-            return new GetProfileResponse(externalEntityId, externalId, gameId, id, wallets, createdAt, updatedAt, userConnectionCreatedAt, userId);
+            if (!createdAt.IsSet)
+                throw new ArgumentException("Property is required for class GetProfileResponse.", nameof(createdAt));
+
+            if (!updatedAt.IsSet)
+                throw new ArgumentException("Property is required for class GetProfileResponse.", nameof(updatedAt));
+
+            if (!userConnectionCreatedAt.IsSet)
+                throw new ArgumentException("Property is required for class GetProfileResponse.", nameof(userConnectionCreatedAt));
+
+            if (!userId.IsSet)
+                throw new ArgumentException("Property is required for class GetProfileResponse.", nameof(userId));
+
+            if (externalEntityId.IsSet && externalEntityId.Value == null)
+                throw new ArgumentNullException(nameof(externalEntityId), "Property is not nullable for class GetProfileResponse.");
+
+            if (externalId.IsSet && externalId.Value == null)
+                throw new ArgumentNullException(nameof(externalId), "Property is not nullable for class GetProfileResponse.");
+
+            if (gameId.IsSet && gameId.Value == null)
+                throw new ArgumentNullException(nameof(gameId), "Property is not nullable for class GetProfileResponse.");
+
+            if (id.IsSet && id.Value == null)
+                throw new ArgumentNullException(nameof(id), "Property is not nullable for class GetProfileResponse.");
+
+            if (wallets.IsSet && wallets.Value == null)
+                throw new ArgumentNullException(nameof(wallets), "Property is not nullable for class GetProfileResponse.");
+
+            return new GetProfileResponse(externalEntityId.Value, externalId.Value, gameId.Value, id.Value, wallets.Value, createdAt.Value, updatedAt.Value, userConnectionCreatedAt.Value, userId.Value);
         }
 
         /// <summary>
@@ -268,19 +296,56 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetProfileResponse getProfileResponse, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (getProfileResponse.ExternalEntityId == null)
+                throw new ArgumentNullException(nameof(getProfileResponse.ExternalEntityId), "Property is required for class GetProfileResponse.");
+
+            if (getProfileResponse.ExternalId == null)
+                throw new ArgumentNullException(nameof(getProfileResponse.ExternalId), "Property is required for class GetProfileResponse.");
+
+            if (getProfileResponse.GameId == null)
+                throw new ArgumentNullException(nameof(getProfileResponse.GameId), "Property is required for class GetProfileResponse.");
+
+            if (getProfileResponse.Id == null)
+                throw new ArgumentNullException(nameof(getProfileResponse.Id), "Property is required for class GetProfileResponse.");
+
+            if (getProfileResponse.Wallets == null)
+                throw new ArgumentNullException(nameof(getProfileResponse.Wallets), "Property is required for class GetProfileResponse.");
+
             writer.WriteString("externalEntityId", getProfileResponse.ExternalEntityId);
+
             writer.WriteString("externalId", getProfileResponse.ExternalId);
+
             writer.WriteString("gameId", getProfileResponse.GameId);
+
             writer.WriteString("id", getProfileResponse.Id);
+
             writer.WritePropertyName("wallets");
             JsonSerializer.Serialize(writer, getProfileResponse.Wallets, jsonSerializerOptions);
-            writer.WritePropertyName("createdAt");
-            JsonSerializer.Serialize(writer, getProfileResponse.CreatedAt, jsonSerializerOptions);
-            writer.WritePropertyName("updatedAt");
-            JsonSerializer.Serialize(writer, getProfileResponse.UpdatedAt, jsonSerializerOptions);
-            writer.WritePropertyName("userConnectionCreatedAt");
-            JsonSerializer.Serialize(writer, getProfileResponse.UserConnectionCreatedAt, jsonSerializerOptions);
-            writer.WriteString("userId", getProfileResponse.UserId);
+            if (getProfileResponse.CreatedAt != null)
+            {
+                writer.WritePropertyName("createdAt");
+                JsonSerializer.Serialize(writer, getProfileResponse.CreatedAt, jsonSerializerOptions);
+            }
+            else
+                writer.WriteNull("createdAt");
+            if (getProfileResponse.UpdatedAt != null)
+            {
+                writer.WritePropertyName("updatedAt");
+                JsonSerializer.Serialize(writer, getProfileResponse.UpdatedAt, jsonSerializerOptions);
+            }
+            else
+                writer.WriteNull("updatedAt");
+            if (getProfileResponse.UserConnectionCreatedAt != null)
+            {
+                writer.WritePropertyName("userConnectionCreatedAt");
+                JsonSerializer.Serialize(writer, getProfileResponse.UserConnectionCreatedAt, jsonSerializerOptions);
+            }
+            else
+                writer.WriteNull("userConnectionCreatedAt");
+            if (getProfileResponse.UserId != null)
+                writer.WriteString("userId", getProfileResponse.UserId);
+            else
+                writer.WriteNull("userId");
         }
     }
 }

@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -30,23 +31,23 @@ namespace Beam.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateAssetOfferRequestInput" /> class.
         /// </summary>
-        /// <param name="endTime">endTime</param>
         /// <param name="marketplaceId">marketplaceId</param>
         /// <param name="price">price</param>
         /// <param name="quantity">quantity</param>
-        /// <param name="startTime">startTime</param>
         /// <param name="chainId">chainId (default to 13337M)</param>
         /// <param name="currency">currency (default to CurrencyEnum.Beam)</param>
+        /// <param name="endTime">endTime</param>
+        /// <param name="startTime">startTime</param>
         [JsonConstructor]
-        public CreateAssetOfferRequestInput(string endTime, string marketplaceId, string price, decimal quantity, string startTime, decimal chainId = 13337M, CurrencyEnum currency = CurrencyEnum.Beam)
+        public CreateAssetOfferRequestInput(string marketplaceId, string price, decimal quantity, Option<decimal?> chainId = default, Option<CurrencyEnum?> currency = default, Option<string> endTime = default, Option<string> startTime = default)
         {
-            EndTime = endTime;
             MarketplaceId = marketplaceId;
             Price = price;
             Quantity = quantity;
-            StartTime = startTime;
-            ChainId = chainId;
-            Currency = currency;
+            ChainIdOption = chainId;
+            CurrencyOption = currency;
+            EndTimeOption = endTime;
+            StartTimeOption = startTime;
             OnCreated();
         }
 
@@ -217,9 +218,8 @@ namespace Beam.Model
         /// <param name="value"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public static string CurrencyEnumToJsonValue(CurrencyEnum value)
+        public static string CurrencyEnumToJsonValue(CurrencyEnum? value)
         {
-
             if (value == CurrencyEnum.Avax)
                 return "Avax";
 
@@ -260,16 +260,17 @@ namespace Beam.Model
         }
 
         /// <summary>
+        /// Used to track the state of Currency
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<CurrencyEnum?> CurrencyOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets Currency
         /// </summary>
         [JsonPropertyName("currency")]
-        public CurrencyEnum Currency { get; set; }
-
-        /// <summary>
-        /// Gets or Sets EndTime
-        /// </summary>
-        [JsonPropertyName("endTime")]
-        public string EndTime { get; set; }
+        public CurrencyEnum? Currency { get { return this.CurrencyOption; } set { this.CurrencyOption = new(value); } }
 
         /// <summary>
         /// Gets or Sets MarketplaceId
@@ -290,16 +291,43 @@ namespace Beam.Model
         public decimal Quantity { get; set; }
 
         /// <summary>
-        /// Gets or Sets StartTime
+        /// Used to track the state of ChainId
         /// </summary>
-        [JsonPropertyName("startTime")]
-        public string StartTime { get; set; }
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<decimal?> ChainIdOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [JsonPropertyName("chainId")]
-        public decimal ChainId { get; set; }
+        public decimal? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of EndTime
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> EndTimeOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets EndTime
+        /// </summary>
+        [JsonPropertyName("endTime")]
+        public string EndTime { get { return this. EndTimeOption; } set { this.EndTimeOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of StartTime
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> StartTimeOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets StartTime
+        /// </summary>
+        [JsonPropertyName("startTime")]
+        public string StartTime { get { return this. StartTimeOption; } set { this.StartTimeOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -309,13 +337,13 @@ namespace Beam.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class CreateAssetOfferRequestInput {\n");
-            sb.Append("  EndTime: ").Append(EndTime).Append("\n");
             sb.Append("  MarketplaceId: ").Append(MarketplaceId).Append("\n");
             sb.Append("  Price: ").Append(Price).Append("\n");
             sb.Append("  Quantity: ").Append(Quantity).Append("\n");
-            sb.Append("  StartTime: ").Append(StartTime).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  Currency: ").Append(Currency).Append("\n");
+            sb.Append("  EndTime: ").Append(EndTime).Append("\n");
+            sb.Append("  StartTime: ").Append(StartTime).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -353,13 +381,13 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string endTime = default;
-            string marketplaceId = default;
-            string price = default;
-            decimal? quantity = default;
-            string startTime = default;
-            decimal? chainId = default;
-            CreateAssetOfferRequestInput.CurrencyEnum? currency = default;
+            Option<string> marketplaceId = default;
+            Option<string> price = default;
+            Option<decimal?> quantity = default;
+            Option<decimal?> chainId = default;
+            Option<CreateAssetOfferRequestInput.CurrencyEnum?> currency = default;
+            Option<string> endTime = default;
+            Option<string> startTime = default;
 
             while (utf8JsonReader.Read())
             {
@@ -376,31 +404,30 @@ namespace Beam.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "endTime":
-                            endTime = utf8JsonReader.GetString();
-                            break;
                         case "marketplaceId":
-                            marketplaceId = utf8JsonReader.GetString();
+                            marketplaceId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "price":
-                            price = utf8JsonReader.GetString();
+                            price = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "quantity":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                quantity = utf8JsonReader.GetDecimal();
-                            break;
-                        case "startTime":
-                            startTime = utf8JsonReader.GetString();
+                                quantity = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = utf8JsonReader.GetDecimal();
+                                chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "currency":
                             string currencyRawValue = utf8JsonReader.GetString();
-                            currency = currencyRawValue == null
-                                ? null
-                                : CreateAssetOfferRequestInput.CurrencyEnumFromStringOrDefault(currencyRawValue);
+                            if (currencyRawValue != null)
+                                currency = new Option<CreateAssetOfferRequestInput.CurrencyEnum?>(CreateAssetOfferRequestInput.CurrencyEnumFromStringOrDefault(currencyRawValue));
+                            break;
+                        case "endTime":
+                            endTime = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "startTime":
+                            startTime = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -408,28 +435,37 @@ namespace Beam.Model
                 }
             }
 
-            if (endTime == null)
-                throw new ArgumentNullException(nameof(endTime), "Property is required for class CreateAssetOfferRequestInput.");
+            if (!marketplaceId.IsSet)
+                throw new ArgumentException("Property is required for class CreateAssetOfferRequestInput.", nameof(marketplaceId));
 
-            if (marketplaceId == null)
-                throw new ArgumentNullException(nameof(marketplaceId), "Property is required for class CreateAssetOfferRequestInput.");
+            if (!price.IsSet)
+                throw new ArgumentException("Property is required for class CreateAssetOfferRequestInput.", nameof(price));
 
-            if (price == null)
-                throw new ArgumentNullException(nameof(price), "Property is required for class CreateAssetOfferRequestInput.");
+            if (!quantity.IsSet)
+                throw new ArgumentException("Property is required for class CreateAssetOfferRequestInput.", nameof(quantity));
 
-            if (quantity == null)
-                throw new ArgumentNullException(nameof(quantity), "Property is required for class CreateAssetOfferRequestInput.");
+            if (marketplaceId.IsSet && marketplaceId.Value == null)
+                throw new ArgumentNullException(nameof(marketplaceId), "Property is not nullable for class CreateAssetOfferRequestInput.");
 
-            if (startTime == null)
-                throw new ArgumentNullException(nameof(startTime), "Property is required for class CreateAssetOfferRequestInput.");
+            if (price.IsSet && price.Value == null)
+                throw new ArgumentNullException(nameof(price), "Property is not nullable for class CreateAssetOfferRequestInput.");
 
-            if (chainId == null)
-                throw new ArgumentNullException(nameof(chainId), "Property is required for class CreateAssetOfferRequestInput.");
+            if (quantity.IsSet && quantity.Value == null)
+                throw new ArgumentNullException(nameof(quantity), "Property is not nullable for class CreateAssetOfferRequestInput.");
 
-            if (currency == null)
-                throw new ArgumentNullException(nameof(currency), "Property is required for class CreateAssetOfferRequestInput.");
+            if (chainId.IsSet && chainId.Value == null)
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class CreateAssetOfferRequestInput.");
 
-            return new CreateAssetOfferRequestInput(endTime, marketplaceId, price, quantity.Value, startTime, chainId.Value, currency.Value);
+            if (currency.IsSet && currency.Value == null)
+                throw new ArgumentNullException(nameof(currency), "Property is not nullable for class CreateAssetOfferRequestInput.");
+
+            if (endTime.IsSet && endTime.Value == null)
+                throw new ArgumentNullException(nameof(endTime), "Property is not nullable for class CreateAssetOfferRequestInput.");
+
+            if (startTime.IsSet && startTime.Value == null)
+                throw new ArgumentNullException(nameof(startTime), "Property is not nullable for class CreateAssetOfferRequestInput.");
+
+            return new CreateAssetOfferRequestInput(marketplaceId.Value, price.Value, quantity.Value.Value, chainId, currency, endTime, startTime);
         }
 
         /// <summary>
@@ -456,18 +492,38 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, CreateAssetOfferRequestInput createAssetOfferRequestInput, JsonSerializerOptions jsonSerializerOptions)
         {
-            writer.WriteString("endTime", createAssetOfferRequestInput.EndTime);
-            writer.WriteString("marketplaceId", createAssetOfferRequestInput.MarketplaceId);
-            writer.WriteString("price", createAssetOfferRequestInput.Price);
-            writer.WriteNumber("quantity", createAssetOfferRequestInput.Quantity);
-            writer.WriteString("startTime", createAssetOfferRequestInput.StartTime);
-            writer.WriteNumber("chainId", createAssetOfferRequestInput.ChainId);
+            if (createAssetOfferRequestInput.MarketplaceId == null)
+                throw new ArgumentNullException(nameof(createAssetOfferRequestInput.MarketplaceId), "Property is required for class CreateAssetOfferRequestInput.");
 
-            var currencyRawValue = CreateAssetOfferRequestInput.CurrencyEnumToJsonValue(createAssetOfferRequestInput.Currency);
+            if (createAssetOfferRequestInput.Price == null)
+                throw new ArgumentNullException(nameof(createAssetOfferRequestInput.Price), "Property is required for class CreateAssetOfferRequestInput.");
+
+            if (createAssetOfferRequestInput.EndTimeOption.IsSet && createAssetOfferRequestInput.EndTime == null)
+                throw new ArgumentNullException(nameof(createAssetOfferRequestInput.EndTime), "Property is required for class CreateAssetOfferRequestInput.");
+
+            if (createAssetOfferRequestInput.StartTimeOption.IsSet && createAssetOfferRequestInput.StartTime == null)
+                throw new ArgumentNullException(nameof(createAssetOfferRequestInput.StartTime), "Property is required for class CreateAssetOfferRequestInput.");
+
+            writer.WriteString("marketplaceId", createAssetOfferRequestInput.MarketplaceId);
+
+            writer.WriteString("price", createAssetOfferRequestInput.Price);
+
+            writer.WriteNumber("quantity", createAssetOfferRequestInput.Quantity);
+
+            if (createAssetOfferRequestInput.ChainIdOption.IsSet)
+                writer.WriteNumber("chainId", createAssetOfferRequestInput.ChainIdOption.Value.Value);
+
+            var currencyRawValue = CreateAssetOfferRequestInput.CurrencyEnumToJsonValue(createAssetOfferRequestInput.CurrencyOption.Value.Value);
             if (currencyRawValue != null)
                 writer.WriteString("currency", currencyRawValue);
             else
                 writer.WriteNull("currency");
+
+            if (createAssetOfferRequestInput.EndTimeOption.IsSet)
+                writer.WriteString("endTime", createAssetOfferRequestInput.EndTime);
+
+            if (createAssetOfferRequestInput.StartTimeOption.IsSet)
+                writer.WriteString("startTime", createAssetOfferRequestInput.StartTime);
         }
     }
 }

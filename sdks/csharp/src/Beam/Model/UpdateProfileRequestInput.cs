@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -92,7 +93,7 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string newEntityId = default;
+            Option<string> newEntityId = default;
 
             while (utf8JsonReader.Read())
             {
@@ -110,7 +111,7 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "newEntityId":
-                            newEntityId = utf8JsonReader.GetString();
+                            newEntityId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -118,10 +119,13 @@ namespace Beam.Model
                 }
             }
 
-            if (newEntityId == null)
-                throw new ArgumentNullException(nameof(newEntityId), "Property is required for class UpdateProfileRequestInput.");
+            if (!newEntityId.IsSet)
+                throw new ArgumentException("Property is required for class UpdateProfileRequestInput.", nameof(newEntityId));
 
-            return new UpdateProfileRequestInput(newEntityId);
+            if (newEntityId.IsSet && newEntityId.Value == null)
+                throw new ArgumentNullException(nameof(newEntityId), "Property is not nullable for class UpdateProfileRequestInput.");
+
+            return new UpdateProfileRequestInput(newEntityId.Value);
         }
 
         /// <summary>
@@ -148,6 +152,9 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, UpdateProfileRequestInput updateProfileRequestInput, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (updateProfileRequestInput.NewEntityId == null)
+                throw new ArgumentNullException(nameof(updateProfileRequestInput.NewEntityId), "Property is required for class UpdateProfileRequestInput.");
+
             writer.WriteString("newEntityId", updateProfileRequestInput.NewEntityId);
         }
     }

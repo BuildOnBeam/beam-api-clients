@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -173,16 +174,16 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            List<int> chainIds = default;
-            List<GetGameResponseContractsInner> contracts = default;
-            string id = default;
-            string name = default;
-            List<GetGameResponsePoliciesInner> policies = default;
-            string coverImageUrl = default;
-            Object createdAt = default;
-            string description = default;
-            string logoImageUrl = default;
-            Object updatedAt = default;
+            Option<List<int>> chainIds = default;
+            Option<List<GetGameResponseContractsInner>> contracts = default;
+            Option<string> id = default;
+            Option<string> name = default;
+            Option<List<GetGameResponsePoliciesInner>> policies = default;
+            Option<string> coverImageUrl = default;
+            Option<Object> createdAt = default;
+            Option<string> description = default;
+            Option<string> logoImageUrl = default;
+            Option<Object> updatedAt = default;
 
             while (utf8JsonReader.Read())
             {
@@ -201,38 +202,38 @@ namespace Beam.Model
                     {
                         case "chainIds":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainIds = JsonSerializer.Deserialize<List<int>>(ref utf8JsonReader, jsonSerializerOptions);
+                                chainIds = new Option<List<int>>(JsonSerializer.Deserialize<List<int>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "contracts":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                contracts = JsonSerializer.Deserialize<List<GetGameResponseContractsInner>>(ref utf8JsonReader, jsonSerializerOptions);
+                                contracts = new Option<List<GetGameResponseContractsInner>>(JsonSerializer.Deserialize<List<GetGameResponseContractsInner>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "id":
-                            id = utf8JsonReader.GetString();
+                            id = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "name":
-                            name = utf8JsonReader.GetString();
+                            name = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "policies":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                policies = JsonSerializer.Deserialize<List<GetGameResponsePoliciesInner>>(ref utf8JsonReader, jsonSerializerOptions);
+                                policies = new Option<List<GetGameResponsePoliciesInner>>(JsonSerializer.Deserialize<List<GetGameResponsePoliciesInner>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "coverImageUrl":
-                            coverImageUrl = utf8JsonReader.GetString();
+                            coverImageUrl = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "createdAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                createdAt = JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions);
+                                createdAt = new Option<Object>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "description":
-                            description = utf8JsonReader.GetString();
+                            description = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "logoImageUrl":
-                            logoImageUrl = utf8JsonReader.GetString();
+                            logoImageUrl = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "updatedAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                updatedAt = JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions);
+                                updatedAt = new Option<Object>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -240,22 +241,52 @@ namespace Beam.Model
                 }
             }
 
-            if (chainIds == null)
-                throw new ArgumentNullException(nameof(chainIds), "Property is required for class GetGameResponse.");
+            if (!chainIds.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponse.", nameof(chainIds));
 
-            if (contracts == null)
-                throw new ArgumentNullException(nameof(contracts), "Property is required for class GetGameResponse.");
+            if (!contracts.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponse.", nameof(contracts));
 
-            if (id == null)
-                throw new ArgumentNullException(nameof(id), "Property is required for class GetGameResponse.");
+            if (!id.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponse.", nameof(id));
 
-            if (name == null)
-                throw new ArgumentNullException(nameof(name), "Property is required for class GetGameResponse.");
+            if (!name.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponse.", nameof(name));
 
-            if (policies == null)
-                throw new ArgumentNullException(nameof(policies), "Property is required for class GetGameResponse.");
+            if (!policies.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponse.", nameof(policies));
 
-            return new GetGameResponse(chainIds, contracts, id, name, policies, coverImageUrl, createdAt, description, logoImageUrl, updatedAt);
+            if (!coverImageUrl.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponse.", nameof(coverImageUrl));
+
+            if (!createdAt.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponse.", nameof(createdAt));
+
+            if (!description.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponse.", nameof(description));
+
+            if (!logoImageUrl.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponse.", nameof(logoImageUrl));
+
+            if (!updatedAt.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponse.", nameof(updatedAt));
+
+            if (chainIds.IsSet && chainIds.Value == null)
+                throw new ArgumentNullException(nameof(chainIds), "Property is not nullable for class GetGameResponse.");
+
+            if (contracts.IsSet && contracts.Value == null)
+                throw new ArgumentNullException(nameof(contracts), "Property is not nullable for class GetGameResponse.");
+
+            if (id.IsSet && id.Value == null)
+                throw new ArgumentNullException(nameof(id), "Property is not nullable for class GetGameResponse.");
+
+            if (name.IsSet && name.Value == null)
+                throw new ArgumentNullException(nameof(name), "Property is not nullable for class GetGameResponse.");
+
+            if (policies.IsSet && policies.Value == null)
+                throw new ArgumentNullException(nameof(policies), "Property is not nullable for class GetGameResponse.");
+
+            return new GetGameResponse(chainIds.Value, contracts.Value, id.Value, name.Value, policies.Value, coverImageUrl.Value, createdAt.Value, description.Value, logoImageUrl.Value, updatedAt.Value);
         }
 
         /// <summary>
@@ -282,21 +313,60 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetGameResponse getGameResponse, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (getGameResponse.ChainIds == null)
+                throw new ArgumentNullException(nameof(getGameResponse.ChainIds), "Property is required for class GetGameResponse.");
+
+            if (getGameResponse.Contracts == null)
+                throw new ArgumentNullException(nameof(getGameResponse.Contracts), "Property is required for class GetGameResponse.");
+
+            if (getGameResponse.Id == null)
+                throw new ArgumentNullException(nameof(getGameResponse.Id), "Property is required for class GetGameResponse.");
+
+            if (getGameResponse.Name == null)
+                throw new ArgumentNullException(nameof(getGameResponse.Name), "Property is required for class GetGameResponse.");
+
+            if (getGameResponse.Policies == null)
+                throw new ArgumentNullException(nameof(getGameResponse.Policies), "Property is required for class GetGameResponse.");
+
             writer.WritePropertyName("chainIds");
             JsonSerializer.Serialize(writer, getGameResponse.ChainIds, jsonSerializerOptions);
             writer.WritePropertyName("contracts");
             JsonSerializer.Serialize(writer, getGameResponse.Contracts, jsonSerializerOptions);
             writer.WriteString("id", getGameResponse.Id);
+
             writer.WriteString("name", getGameResponse.Name);
+
             writer.WritePropertyName("policies");
             JsonSerializer.Serialize(writer, getGameResponse.Policies, jsonSerializerOptions);
-            writer.WriteString("coverImageUrl", getGameResponse.CoverImageUrl);
-            writer.WritePropertyName("createdAt");
-            JsonSerializer.Serialize(writer, getGameResponse.CreatedAt, jsonSerializerOptions);
-            writer.WriteString("description", getGameResponse.Description);
-            writer.WriteString("logoImageUrl", getGameResponse.LogoImageUrl);
-            writer.WritePropertyName("updatedAt");
-            JsonSerializer.Serialize(writer, getGameResponse.UpdatedAt, jsonSerializerOptions);
+            if (getGameResponse.CoverImageUrl != null)
+                writer.WriteString("coverImageUrl", getGameResponse.CoverImageUrl);
+            else
+                writer.WriteNull("coverImageUrl");
+
+            if (getGameResponse.CreatedAt != null)
+            {
+                writer.WritePropertyName("createdAt");
+                JsonSerializer.Serialize(writer, getGameResponse.CreatedAt, jsonSerializerOptions);
+            }
+            else
+                writer.WriteNull("createdAt");
+            if (getGameResponse.Description != null)
+                writer.WriteString("description", getGameResponse.Description);
+            else
+                writer.WriteNull("description");
+
+            if (getGameResponse.LogoImageUrl != null)
+                writer.WriteString("logoImageUrl", getGameResponse.LogoImageUrl);
+            else
+                writer.WriteNull("logoImageUrl");
+
+            if (getGameResponse.UpdatedAt != null)
+            {
+                writer.WritePropertyName("updatedAt");
+                JsonSerializer.Serialize(writer, getGameResponse.UpdatedAt, jsonSerializerOptions);
+            }
+            else
+                writer.WriteNull("updatedAt");
         }
     }
 }

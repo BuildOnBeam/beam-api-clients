@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -32,17 +33,17 @@ namespace Beam.Model
         /// </summary>
         /// <param name="assetAddress">assetAddress</param>
         /// <param name="assetId">assetId</param>
+        /// <param name="amountToTransfer">amountToTransfer (default to 1M)</param>
         /// <param name="receiverEntityId">receiverEntityId</param>
         /// <param name="receiverWalletAddress">receiverWalletAddress</param>
-        /// <param name="amountToTransfer">amountToTransfer (default to 1M)</param>
         [JsonConstructor]
-        public TransferAssetRequestInputAssetsInner(string assetAddress, string assetId, string receiverEntityId, string receiverWalletAddress, decimal amountToTransfer = 1M)
+        public TransferAssetRequestInputAssetsInner(string assetAddress, string assetId, Option<decimal?> amountToTransfer = default, Option<string> receiverEntityId = default, Option<string> receiverWalletAddress = default)
         {
             AssetAddress = assetAddress;
             AssetId = assetId;
-            ReceiverEntityId = receiverEntityId;
-            ReceiverWalletAddress = receiverWalletAddress;
-            AmountToTransfer = amountToTransfer;
+            AmountToTransferOption = amountToTransfer;
+            ReceiverEntityIdOption = receiverEntityId;
+            ReceiverWalletAddressOption = receiverWalletAddress;
             OnCreated();
         }
 
@@ -61,22 +62,43 @@ namespace Beam.Model
         public string AssetId { get; set; }
 
         /// <summary>
-        /// Gets or Sets ReceiverEntityId
+        /// Used to track the state of AmountToTransfer
         /// </summary>
-        [JsonPropertyName("receiverEntityId")]
-        public string ReceiverEntityId { get; set; }
-
-        /// <summary>
-        /// Gets or Sets ReceiverWalletAddress
-        /// </summary>
-        [JsonPropertyName("receiverWalletAddress")]
-        public string ReceiverWalletAddress { get; set; }
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<decimal?> AmountToTransferOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets AmountToTransfer
         /// </summary>
         [JsonPropertyName("amountToTransfer")]
-        public decimal AmountToTransfer { get; set; }
+        public decimal? AmountToTransfer { get { return this. AmountToTransferOption; } set { this.AmountToTransferOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of ReceiverEntityId
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> ReceiverEntityIdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ReceiverEntityId
+        /// </summary>
+        [JsonPropertyName("receiverEntityId")]
+        public string ReceiverEntityId { get { return this. ReceiverEntityIdOption; } set { this.ReceiverEntityIdOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of ReceiverWalletAddress
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> ReceiverWalletAddressOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ReceiverWalletAddress
+        /// </summary>
+        [JsonPropertyName("receiverWalletAddress")]
+        public string ReceiverWalletAddress { get { return this. ReceiverWalletAddressOption; } set { this.ReceiverWalletAddressOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -88,9 +110,9 @@ namespace Beam.Model
             sb.Append("class TransferAssetRequestInputAssetsInner {\n");
             sb.Append("  AssetAddress: ").Append(AssetAddress).Append("\n");
             sb.Append("  AssetId: ").Append(AssetId).Append("\n");
+            sb.Append("  AmountToTransfer: ").Append(AmountToTransfer).Append("\n");
             sb.Append("  ReceiverEntityId: ").Append(ReceiverEntityId).Append("\n");
             sb.Append("  ReceiverWalletAddress: ").Append(ReceiverWalletAddress).Append("\n");
-            sb.Append("  AmountToTransfer: ").Append(AmountToTransfer).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -103,7 +125,7 @@ namespace Beam.Model
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             // AmountToTransfer (decimal) minimum
-            if (this.AmountToTransfer < (decimal)0)
+            if (this.AmountToTransferOption.IsSet && this.AmountToTransferOption.Value < (decimal)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for AmountToTransfer, must be a value greater than or equal to 0.", new [] { "AmountToTransfer" });
             }
@@ -134,11 +156,11 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string assetAddress = default;
-            string assetId = default;
-            string receiverEntityId = default;
-            string receiverWalletAddress = default;
-            decimal? amountToTransfer = default;
+            Option<string> assetAddress = default;
+            Option<string> assetId = default;
+            Option<decimal?> amountToTransfer = default;
+            Option<string> receiverEntityId = default;
+            Option<string> receiverWalletAddress = default;
 
             while (utf8JsonReader.Read())
             {
@@ -156,20 +178,20 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "assetAddress":
-                            assetAddress = utf8JsonReader.GetString();
+                            assetAddress = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "assetId":
-                            assetId = utf8JsonReader.GetString();
-                            break;
-                        case "receiverEntityId":
-                            receiverEntityId = utf8JsonReader.GetString();
-                            break;
-                        case "receiverWalletAddress":
-                            receiverWalletAddress = utf8JsonReader.GetString();
+                            assetId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "amountToTransfer":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                amountToTransfer = utf8JsonReader.GetDecimal();
+                                amountToTransfer = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                            break;
+                        case "receiverEntityId":
+                            receiverEntityId = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "receiverWalletAddress":
+                            receiverWalletAddress = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -177,22 +199,28 @@ namespace Beam.Model
                 }
             }
 
-            if (assetAddress == null)
-                throw new ArgumentNullException(nameof(assetAddress), "Property is required for class TransferAssetRequestInputAssetsInner.");
+            if (!assetAddress.IsSet)
+                throw new ArgumentException("Property is required for class TransferAssetRequestInputAssetsInner.", nameof(assetAddress));
 
-            if (assetId == null)
-                throw new ArgumentNullException(nameof(assetId), "Property is required for class TransferAssetRequestInputAssetsInner.");
+            if (!assetId.IsSet)
+                throw new ArgumentException("Property is required for class TransferAssetRequestInputAssetsInner.", nameof(assetId));
 
-            if (receiverEntityId == null)
-                throw new ArgumentNullException(nameof(receiverEntityId), "Property is required for class TransferAssetRequestInputAssetsInner.");
+            if (assetAddress.IsSet && assetAddress.Value == null)
+                throw new ArgumentNullException(nameof(assetAddress), "Property is not nullable for class TransferAssetRequestInputAssetsInner.");
 
-            if (receiverWalletAddress == null)
-                throw new ArgumentNullException(nameof(receiverWalletAddress), "Property is required for class TransferAssetRequestInputAssetsInner.");
+            if (assetId.IsSet && assetId.Value == null)
+                throw new ArgumentNullException(nameof(assetId), "Property is not nullable for class TransferAssetRequestInputAssetsInner.");
 
-            if (amountToTransfer == null)
-                throw new ArgumentNullException(nameof(amountToTransfer), "Property is required for class TransferAssetRequestInputAssetsInner.");
+            if (amountToTransfer.IsSet && amountToTransfer.Value == null)
+                throw new ArgumentNullException(nameof(amountToTransfer), "Property is not nullable for class TransferAssetRequestInputAssetsInner.");
 
-            return new TransferAssetRequestInputAssetsInner(assetAddress, assetId, receiverEntityId, receiverWalletAddress, amountToTransfer.Value);
+            if (receiverEntityId.IsSet && receiverEntityId.Value == null)
+                throw new ArgumentNullException(nameof(receiverEntityId), "Property is not nullable for class TransferAssetRequestInputAssetsInner.");
+
+            if (receiverWalletAddress.IsSet && receiverWalletAddress.Value == null)
+                throw new ArgumentNullException(nameof(receiverWalletAddress), "Property is not nullable for class TransferAssetRequestInputAssetsInner.");
+
+            return new TransferAssetRequestInputAssetsInner(assetAddress.Value, assetId.Value, amountToTransfer, receiverEntityId, receiverWalletAddress);
         }
 
         /// <summary>
@@ -219,11 +247,30 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, TransferAssetRequestInputAssetsInner transferAssetRequestInputAssetsInner, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (transferAssetRequestInputAssetsInner.AssetAddress == null)
+                throw new ArgumentNullException(nameof(transferAssetRequestInputAssetsInner.AssetAddress), "Property is required for class TransferAssetRequestInputAssetsInner.");
+
+            if (transferAssetRequestInputAssetsInner.AssetId == null)
+                throw new ArgumentNullException(nameof(transferAssetRequestInputAssetsInner.AssetId), "Property is required for class TransferAssetRequestInputAssetsInner.");
+
+            if (transferAssetRequestInputAssetsInner.ReceiverEntityIdOption.IsSet && transferAssetRequestInputAssetsInner.ReceiverEntityId == null)
+                throw new ArgumentNullException(nameof(transferAssetRequestInputAssetsInner.ReceiverEntityId), "Property is required for class TransferAssetRequestInputAssetsInner.");
+
+            if (transferAssetRequestInputAssetsInner.ReceiverWalletAddressOption.IsSet && transferAssetRequestInputAssetsInner.ReceiverWalletAddress == null)
+                throw new ArgumentNullException(nameof(transferAssetRequestInputAssetsInner.ReceiverWalletAddress), "Property is required for class TransferAssetRequestInputAssetsInner.");
+
             writer.WriteString("assetAddress", transferAssetRequestInputAssetsInner.AssetAddress);
+
             writer.WriteString("assetId", transferAssetRequestInputAssetsInner.AssetId);
-            writer.WriteString("receiverEntityId", transferAssetRequestInputAssetsInner.ReceiverEntityId);
-            writer.WriteString("receiverWalletAddress", transferAssetRequestInputAssetsInner.ReceiverWalletAddress);
-            writer.WriteNumber("amountToTransfer", transferAssetRequestInputAssetsInner.AmountToTransfer);
+
+            if (transferAssetRequestInputAssetsInner.AmountToTransferOption.IsSet)
+                writer.WriteNumber("amountToTransfer", transferAssetRequestInputAssetsInner.AmountToTransferOption.Value.Value);
+
+            if (transferAssetRequestInputAssetsInner.ReceiverEntityIdOption.IsSet)
+                writer.WriteString("receiverEntityId", transferAssetRequestInputAssetsInner.ReceiverEntityId);
+
+            if (transferAssetRequestInputAssetsInner.ReceiverWalletAddressOption.IsSet)
+                writer.WriteString("receiverWalletAddress", transferAssetRequestInputAssetsInner.ReceiverWalletAddress);
         }
     }
 }

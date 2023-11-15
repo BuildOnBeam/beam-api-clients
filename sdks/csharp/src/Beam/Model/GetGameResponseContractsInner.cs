@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -157,7 +158,6 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string TypeEnumToJsonValue(TypeEnum value)
         {
-
             if (value == TypeEnum.ERC20)
                 return "ERC20";
 
@@ -287,15 +287,15 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string address = default;
-            int? chainId = default;
-            string externalId = default;
-            string id = default;
-            GetGameResponseContractsInner.TypeEnum? type = default;
-            Object createdAt = default;
-            string gameId = default;
-            string name = default;
-            Object updatedAt = default;
+            Option<string> address = default;
+            Option<int?> chainId = default;
+            Option<string> externalId = default;
+            Option<string> id = default;
+            Option<GetGameResponseContractsInner.TypeEnum?> type = default;
+            Option<Object> createdAt = default;
+            Option<string> gameId = default;
+            Option<string> name = default;
+            Option<Object> updatedAt = default;
 
             while (utf8JsonReader.Read())
             {
@@ -313,37 +313,36 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "address":
-                            address = utf8JsonReader.GetString();
+                            address = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = utf8JsonReader.GetInt32();
+                                chainId = new Option<int?>(utf8JsonReader.GetInt32());
                             break;
                         case "externalId":
-                            externalId = utf8JsonReader.GetString();
+                            externalId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "id":
-                            id = utf8JsonReader.GetString();
+                            id = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "type":
                             string typeRawValue = utf8JsonReader.GetString();
-                            type = typeRawValue == null
-                                ? null
-                                : GetGameResponseContractsInner.TypeEnumFromStringOrDefault(typeRawValue);
+                            if (typeRawValue != null)
+                                type = new Option<GetGameResponseContractsInner.TypeEnum?>(GetGameResponseContractsInner.TypeEnumFromStringOrDefault(typeRawValue));
                             break;
                         case "createdAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                createdAt = JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions);
+                                createdAt = new Option<Object>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "gameId":
-                            gameId = utf8JsonReader.GetString();
+                            gameId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "name":
-                            name = utf8JsonReader.GetString();
+                            name = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "updatedAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                updatedAt = JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions);
+                                updatedAt = new Option<Object>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -351,22 +350,49 @@ namespace Beam.Model
                 }
             }
 
-            if (address == null)
-                throw new ArgumentNullException(nameof(address), "Property is required for class GetGameResponseContractsInner.");
+            if (!address.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponseContractsInner.", nameof(address));
 
-            if (chainId == null)
-                throw new ArgumentNullException(nameof(chainId), "Property is required for class GetGameResponseContractsInner.");
+            if (!chainId.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponseContractsInner.", nameof(chainId));
 
-            if (externalId == null)
-                throw new ArgumentNullException(nameof(externalId), "Property is required for class GetGameResponseContractsInner.");
+            if (!externalId.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponseContractsInner.", nameof(externalId));
 
-            if (id == null)
-                throw new ArgumentNullException(nameof(id), "Property is required for class GetGameResponseContractsInner.");
+            if (!id.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponseContractsInner.", nameof(id));
 
-            if (type == null)
-                throw new ArgumentNullException(nameof(type), "Property is required for class GetGameResponseContractsInner.");
+            if (!type.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponseContractsInner.", nameof(type));
 
-            return new GetGameResponseContractsInner(address, chainId.Value, externalId, id, type.Value, createdAt, gameId, name, updatedAt);
+            if (!createdAt.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponseContractsInner.", nameof(createdAt));
+
+            if (!gameId.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponseContractsInner.", nameof(gameId));
+
+            if (!name.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponseContractsInner.", nameof(name));
+
+            if (!updatedAt.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponseContractsInner.", nameof(updatedAt));
+
+            if (address.IsSet && address.Value == null)
+                throw new ArgumentNullException(nameof(address), "Property is not nullable for class GetGameResponseContractsInner.");
+
+            if (chainId.IsSet && chainId.Value == null)
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class GetGameResponseContractsInner.");
+
+            if (externalId.IsSet && externalId.Value == null)
+                throw new ArgumentNullException(nameof(externalId), "Property is not nullable for class GetGameResponseContractsInner.");
+
+            if (id.IsSet && id.Value == null)
+                throw new ArgumentNullException(nameof(id), "Property is not nullable for class GetGameResponseContractsInner.");
+
+            if (type.IsSet && type.Value == null)
+                throw new ArgumentNullException(nameof(type), "Property is not nullable for class GetGameResponseContractsInner.");
+
+            return new GetGameResponseContractsInner(address.Value, chainId.Value.Value, externalId.Value, id.Value, type.Value.Value, createdAt.Value, gameId.Value, name.Value, updatedAt.Value);
         }
 
         /// <summary>
@@ -393,9 +419,21 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetGameResponseContractsInner getGameResponseContractsInner, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (getGameResponseContractsInner.Address == null)
+                throw new ArgumentNullException(nameof(getGameResponseContractsInner.Address), "Property is required for class GetGameResponseContractsInner.");
+
+            if (getGameResponseContractsInner.ExternalId == null)
+                throw new ArgumentNullException(nameof(getGameResponseContractsInner.ExternalId), "Property is required for class GetGameResponseContractsInner.");
+
+            if (getGameResponseContractsInner.Id == null)
+                throw new ArgumentNullException(nameof(getGameResponseContractsInner.Id), "Property is required for class GetGameResponseContractsInner.");
+
             writer.WriteString("address", getGameResponseContractsInner.Address);
+
             writer.WriteNumber("chainId", getGameResponseContractsInner.ChainId);
+
             writer.WriteString("externalId", getGameResponseContractsInner.ExternalId);
+
             writer.WriteString("id", getGameResponseContractsInner.Id);
 
             var typeRawValue = GetGameResponseContractsInner.TypeEnumToJsonValue(getGameResponseContractsInner.Type);
@@ -404,12 +442,30 @@ namespace Beam.Model
             else
                 writer.WriteNull("type");
 
-            writer.WritePropertyName("createdAt");
-            JsonSerializer.Serialize(writer, getGameResponseContractsInner.CreatedAt, jsonSerializerOptions);
-            writer.WriteString("gameId", getGameResponseContractsInner.GameId);
-            writer.WriteString("name", getGameResponseContractsInner.Name);
-            writer.WritePropertyName("updatedAt");
-            JsonSerializer.Serialize(writer, getGameResponseContractsInner.UpdatedAt, jsonSerializerOptions);
+            if (getGameResponseContractsInner.CreatedAt != null)
+            {
+                writer.WritePropertyName("createdAt");
+                JsonSerializer.Serialize(writer, getGameResponseContractsInner.CreatedAt, jsonSerializerOptions);
+            }
+            else
+                writer.WriteNull("createdAt");
+            if (getGameResponseContractsInner.GameId != null)
+                writer.WriteString("gameId", getGameResponseContractsInner.GameId);
+            else
+                writer.WriteNull("gameId");
+
+            if (getGameResponseContractsInner.Name != null)
+                writer.WriteString("name", getGameResponseContractsInner.Name);
+            else
+                writer.WriteNull("name");
+
+            if (getGameResponseContractsInner.UpdatedAt != null)
+            {
+                writer.WritePropertyName("updatedAt");
+                JsonSerializer.Serialize(writer, getGameResponseContractsInner.UpdatedAt, jsonSerializerOptions);
+            }
+            else
+                writer.WriteNull("updatedAt");
         }
     }
 }

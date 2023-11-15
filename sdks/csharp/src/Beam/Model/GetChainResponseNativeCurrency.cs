@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -110,9 +111,9 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            decimal? decimals = default;
-            string name = default;
-            string symbol = default;
+            Option<decimal?> decimals = default;
+            Option<string> name = default;
+            Option<string> symbol = default;
 
             while (utf8JsonReader.Read())
             {
@@ -131,13 +132,13 @@ namespace Beam.Model
                     {
                         case "decimals":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                decimals = utf8JsonReader.GetDecimal();
+                                decimals = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "name":
-                            name = utf8JsonReader.GetString();
+                            name = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "symbol":
-                            symbol = utf8JsonReader.GetString();
+                            symbol = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -145,16 +146,25 @@ namespace Beam.Model
                 }
             }
 
-            if (decimals == null)
-                throw new ArgumentNullException(nameof(decimals), "Property is required for class GetChainResponseNativeCurrency.");
+            if (!decimals.IsSet)
+                throw new ArgumentException("Property is required for class GetChainResponseNativeCurrency.", nameof(decimals));
 
-            if (name == null)
-                throw new ArgumentNullException(nameof(name), "Property is required for class GetChainResponseNativeCurrency.");
+            if (!name.IsSet)
+                throw new ArgumentException("Property is required for class GetChainResponseNativeCurrency.", nameof(name));
 
-            if (symbol == null)
-                throw new ArgumentNullException(nameof(symbol), "Property is required for class GetChainResponseNativeCurrency.");
+            if (!symbol.IsSet)
+                throw new ArgumentException("Property is required for class GetChainResponseNativeCurrency.", nameof(symbol));
 
-            return new GetChainResponseNativeCurrency(decimals.Value, name, symbol);
+            if (decimals.IsSet && decimals.Value == null)
+                throw new ArgumentNullException(nameof(decimals), "Property is not nullable for class GetChainResponseNativeCurrency.");
+
+            if (name.IsSet && name.Value == null)
+                throw new ArgumentNullException(nameof(name), "Property is not nullable for class GetChainResponseNativeCurrency.");
+
+            if (symbol.IsSet && symbol.Value == null)
+                throw new ArgumentNullException(nameof(symbol), "Property is not nullable for class GetChainResponseNativeCurrency.");
+
+            return new GetChainResponseNativeCurrency(decimals.Value.Value, name.Value, symbol.Value);
         }
 
         /// <summary>
@@ -181,8 +191,16 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetChainResponseNativeCurrency getChainResponseNativeCurrency, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (getChainResponseNativeCurrency.Name == null)
+                throw new ArgumentNullException(nameof(getChainResponseNativeCurrency.Name), "Property is required for class GetChainResponseNativeCurrency.");
+
+            if (getChainResponseNativeCurrency.Symbol == null)
+                throw new ArgumentNullException(nameof(getChainResponseNativeCurrency.Symbol), "Property is required for class GetChainResponseNativeCurrency.");
+
             writer.WriteNumber("decimals", getChainResponseNativeCurrency.Decimals);
+
             writer.WriteString("name", getChainResponseNativeCurrency.Name);
+
             writer.WriteString("symbol", getChainResponseNativeCurrency.Symbol);
         }
     }

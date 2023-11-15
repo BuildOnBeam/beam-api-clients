@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -35,12 +36,12 @@ namespace Beam.Model
         /// <param name="rarities">rarities</param>
         /// <param name="sellTypes">sellTypes</param>
         [JsonConstructor]
-        public GetProfileAssetsForGameFilterParameter(List<GetProfileAssetsForGameFilterParameterAttributesInner> attributes = default, List<GetProfileAssetsForGameFilterParameter.CurrenciesEnum> currencies = default, List<GetProfileAssetsForGameFilterParameter.RaritiesEnum> rarities = default, List<GetProfileAssetsForGameFilterParameter.SellTypesEnum> sellTypes = default)
+        public GetProfileAssetsForGameFilterParameter(Option<List<GetProfileAssetsForGameFilterParameterAttributesInner>> attributes = default, Option<List<GetProfileAssetsForGameFilterParameter.CurrenciesEnum>> currencies = default, Option<List<GetProfileAssetsForGameFilterParameter.RaritiesEnum>> rarities = default, Option<List<GetProfileAssetsForGameFilterParameter.SellTypesEnum>> sellTypes = default)
         {
-            Attributes = attributes;
-            Currencies = currencies;
-            Rarities = rarities;
-            SellTypes = sellTypes;
+            AttributesOption = attributes;
+            CurrenciesOption = currencies;
+            RaritiesOption = rarities;
+            SellTypesOption = sellTypes;
             OnCreated();
         }
 
@@ -213,7 +214,6 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string CurrenciesEnumToJsonValue(CurrenciesEnum value)
         {
-
             if (value == CurrenciesEnum.Avax)
                 return "Avax";
 
@@ -343,7 +343,6 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string RaritiesEnumToJsonValue(RaritiesEnum value)
         {
-
             if (value == RaritiesEnum.Common)
                 return "Common";
 
@@ -441,7 +440,6 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string SellTypesEnumToJsonValue(SellTypesEnum value)
         {
-
             if (value == SellTypesEnum.AscendingAuction)
                 return "AscendingAuction";
 
@@ -458,28 +456,56 @@ namespace Beam.Model
         }
 
         /// <summary>
+        /// Used to track the state of Attributes
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<GetProfileAssetsForGameFilterParameterAttributesInner>> AttributesOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets Attributes
         /// </summary>
         [JsonPropertyName("attributes")]
-        public List<GetProfileAssetsForGameFilterParameterAttributesInner> Attributes { get; set; }
+        public List<GetProfileAssetsForGameFilterParameterAttributesInner> Attributes { get { return this. AttributesOption; } set { this.AttributesOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Currencies
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<GetProfileAssetsForGameFilterParameter.CurrenciesEnum>> CurrenciesOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Currencies
         /// </summary>
         [JsonPropertyName("currencies")]
-        public List<GetProfileAssetsForGameFilterParameter.CurrenciesEnum> Currencies { get; set; }
+        public List<GetProfileAssetsForGameFilterParameter.CurrenciesEnum> Currencies { get { return this. CurrenciesOption; } set { this.CurrenciesOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Rarities
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<GetProfileAssetsForGameFilterParameter.RaritiesEnum>> RaritiesOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Rarities
         /// </summary>
         [JsonPropertyName("rarities")]
-        public List<GetProfileAssetsForGameFilterParameter.RaritiesEnum> Rarities { get; set; }
+        public List<GetProfileAssetsForGameFilterParameter.RaritiesEnum> Rarities { get { return this. RaritiesOption; } set { this.RaritiesOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of SellTypes
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<GetProfileAssetsForGameFilterParameter.SellTypesEnum>> SellTypesOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets SellTypes
         /// </summary>
         [JsonPropertyName("sellTypes")]
-        public List<GetProfileAssetsForGameFilterParameter.SellTypesEnum> SellTypes { get; set; }
+        public List<GetProfileAssetsForGameFilterParameter.SellTypesEnum> SellTypes { get { return this. SellTypesOption; } set { this.SellTypesOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -530,10 +556,10 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            List<GetProfileAssetsForGameFilterParameterAttributesInner> attributes = default;
-            List<GetProfileAssetsForGameFilterParameter.CurrenciesEnum> currencies = default;
-            List<GetProfileAssetsForGameFilterParameter.RaritiesEnum> rarities = default;
-            List<GetProfileAssetsForGameFilterParameter.SellTypesEnum> sellTypes = default;
+            Option<List<GetProfileAssetsForGameFilterParameterAttributesInner>> attributes = default;
+            Option<List<GetProfileAssetsForGameFilterParameter.CurrenciesEnum>> currencies = default;
+            Option<List<GetProfileAssetsForGameFilterParameter.RaritiesEnum>> rarities = default;
+            Option<List<GetProfileAssetsForGameFilterParameter.SellTypesEnum>> sellTypes = default;
 
             while (utf8JsonReader.Read())
             {
@@ -552,19 +578,19 @@ namespace Beam.Model
                     {
                         case "attributes":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                attributes = JsonSerializer.Deserialize<List<GetProfileAssetsForGameFilterParameterAttributesInner>>(ref utf8JsonReader, jsonSerializerOptions);
+                                attributes = new Option<List<GetProfileAssetsForGameFilterParameterAttributesInner>>(JsonSerializer.Deserialize<List<GetProfileAssetsForGameFilterParameterAttributesInner>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "currencies":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                currencies = JsonSerializer.Deserialize<List<GetProfileAssetsForGameFilterParameter.CurrenciesEnum>>(ref utf8JsonReader, jsonSerializerOptions);
+                                currencies = new Option<List<GetProfileAssetsForGameFilterParameter.CurrenciesEnum>>(JsonSerializer.Deserialize<List<GetProfileAssetsForGameFilterParameter.CurrenciesEnum>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "rarities":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                rarities = JsonSerializer.Deserialize<List<GetProfileAssetsForGameFilterParameter.RaritiesEnum>>(ref utf8JsonReader, jsonSerializerOptions);
+                                rarities = new Option<List<GetProfileAssetsForGameFilterParameter.RaritiesEnum>>(JsonSerializer.Deserialize<List<GetProfileAssetsForGameFilterParameter.RaritiesEnum>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "sellTypes":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                sellTypes = JsonSerializer.Deserialize<List<GetProfileAssetsForGameFilterParameter.SellTypesEnum>>(ref utf8JsonReader, jsonSerializerOptions);
+                                sellTypes = new Option<List<GetProfileAssetsForGameFilterParameter.SellTypesEnum>>(JsonSerializer.Deserialize<List<GetProfileAssetsForGameFilterParameter.SellTypesEnum>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -599,14 +625,38 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetProfileAssetsForGameFilterParameter getProfileAssetsForGameFilterParameter, JsonSerializerOptions jsonSerializerOptions)
         {
-            writer.WritePropertyName("attributes");
-            JsonSerializer.Serialize(writer, getProfileAssetsForGameFilterParameter.Attributes, jsonSerializerOptions);
-            writer.WritePropertyName("currencies");
-            JsonSerializer.Serialize(writer, getProfileAssetsForGameFilterParameter.Currencies, jsonSerializerOptions);
-            writer.WritePropertyName("rarities");
-            JsonSerializer.Serialize(writer, getProfileAssetsForGameFilterParameter.Rarities, jsonSerializerOptions);
-            writer.WritePropertyName("sellTypes");
-            JsonSerializer.Serialize(writer, getProfileAssetsForGameFilterParameter.SellTypes, jsonSerializerOptions);
+            if (getProfileAssetsForGameFilterParameter.AttributesOption.IsSet)
+                if (getProfileAssetsForGameFilterParameter.AttributesOption.Value != null)
+                {
+                    writer.WritePropertyName("attributes");
+                    JsonSerializer.Serialize(writer, getProfileAssetsForGameFilterParameter.Attributes, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("attributes");
+            if (getProfileAssetsForGameFilterParameter.CurrenciesOption.IsSet)
+                if (getProfileAssetsForGameFilterParameter.CurrenciesOption.Value != null)
+                {
+                    writer.WritePropertyName("currencies");
+                    JsonSerializer.Serialize(writer, getProfileAssetsForGameFilterParameter.Currencies, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("currencies");
+            if (getProfileAssetsForGameFilterParameter.RaritiesOption.IsSet)
+                if (getProfileAssetsForGameFilterParameter.RaritiesOption.Value != null)
+                {
+                    writer.WritePropertyName("rarities");
+                    JsonSerializer.Serialize(writer, getProfileAssetsForGameFilterParameter.Rarities, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("rarities");
+            if (getProfileAssetsForGameFilterParameter.SellTypesOption.IsSet)
+                if (getProfileAssetsForGameFilterParameter.SellTypesOption.Value != null)
+                {
+                    writer.WritePropertyName("sellTypes");
+                    JsonSerializer.Serialize(writer, getProfileAssetsForGameFilterParameter.SellTypes, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("sellTypes");
         }
     }
 }

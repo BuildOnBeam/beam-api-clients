@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -33,26 +34,40 @@ namespace Beam.Model
         /// <param name="type">type</param>
         /// <param name="value">value</param>
         [JsonConstructor]
-        public GetProfileAssetsForGameFilterParameterAttributesInner(string type = default, string value = default)
+        public GetProfileAssetsForGameFilterParameterAttributesInner(Option<string> type = default, Option<string> value = default)
         {
-            Type = type;
-            Value = value;
+            TypeOption = type;
+            ValueOption = value;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
+        /// Used to track the state of Type
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> TypeOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public string Type { get { return this. TypeOption; } set { this.TypeOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Value
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> ValueOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Value
         /// </summary>
         [JsonPropertyName("value")]
-        public string Value { get; set; }
+        public string Value { get { return this. ValueOption; } set { this.ValueOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -101,8 +116,8 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string type = default;
-            string value = default;
+            Option<string> type = default;
+            Option<string> value = default;
 
             while (utf8JsonReader.Read())
             {
@@ -120,10 +135,10 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "type":
-                            type = utf8JsonReader.GetString();
+                            type = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "value":
-                            value = utf8JsonReader.GetString();
+                            value = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -158,8 +173,17 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetProfileAssetsForGameFilterParameterAttributesInner getProfileAssetsForGameFilterParameterAttributesInner, JsonSerializerOptions jsonSerializerOptions)
         {
-            writer.WriteString("type", getProfileAssetsForGameFilterParameterAttributesInner.Type);
-            writer.WriteString("value", getProfileAssetsForGameFilterParameterAttributesInner.Value);
+            if (getProfileAssetsForGameFilterParameterAttributesInner.TypeOption.IsSet)
+                if (getProfileAssetsForGameFilterParameterAttributesInner.TypeOption.Value != null)
+                    writer.WriteString("type", getProfileAssetsForGameFilterParameterAttributesInner.Type);
+                else
+                    writer.WriteNull("type");
+
+            if (getProfileAssetsForGameFilterParameterAttributesInner.ValueOption.IsSet)
+                if (getProfileAssetsForGameFilterParameterAttributesInner.ValueOption.Value != null)
+                    writer.WriteString("value", getProfileAssetsForGameFilterParameterAttributesInner.Value);
+                else
+                    writer.WriteNull("value");
         }
     }
 }

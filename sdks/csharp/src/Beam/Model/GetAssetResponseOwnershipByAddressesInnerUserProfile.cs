@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -38,15 +39,15 @@ namespace Beam.Model
         /// <param name="twitter">twitter</param>
         /// <param name="website">website</param>
         [JsonConstructor]
-        public GetAssetResponseOwnershipByAddressesInnerUserProfile(bool isVerified, string bio = default, string profilePicture = default, string profilePictureUrl = default, string telegram = default, string twitter = default, string website = default)
+        public GetAssetResponseOwnershipByAddressesInnerUserProfile(bool isVerified, Option<string> bio = default, Option<string> profilePicture = default, Option<string> profilePictureUrl = default, Option<string> telegram = default, Option<string> twitter = default, Option<string> website = default)
         {
             IsVerified = isVerified;
-            Bio = bio;
-            ProfilePicture = profilePicture;
-            ProfilePictureUrl = profilePictureUrl;
-            Telegram = telegram;
-            Twitter = twitter;
-            Website = website;
+            BioOption = bio;
+            ProfilePictureOption = profilePicture;
+            ProfilePictureUrlOption = profilePictureUrl;
+            TelegramOption = telegram;
+            TwitterOption = twitter;
+            WebsiteOption = website;
             OnCreated();
         }
 
@@ -59,40 +60,82 @@ namespace Beam.Model
         public bool IsVerified { get; set; }
 
         /// <summary>
+        /// Used to track the state of Bio
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> BioOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets Bio
         /// </summary>
         [JsonPropertyName("bio")]
-        public string Bio { get; set; }
+        public string Bio { get { return this. BioOption; } set { this.BioOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of ProfilePicture
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> ProfilePictureOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets ProfilePicture
         /// </summary>
         [JsonPropertyName("profilePicture")]
-        public string ProfilePicture { get; set; }
+        public string ProfilePicture { get { return this. ProfilePictureOption; } set { this.ProfilePictureOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of ProfilePictureUrl
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> ProfilePictureUrlOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets ProfilePictureUrl
         /// </summary>
         [JsonPropertyName("profilePictureUrl")]
-        public string ProfilePictureUrl { get; set; }
+        public string ProfilePictureUrl { get { return this. ProfilePictureUrlOption; } set { this.ProfilePictureUrlOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Telegram
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> TelegramOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Telegram
         /// </summary>
         [JsonPropertyName("telegram")]
-        public string Telegram { get; set; }
+        public string Telegram { get { return this. TelegramOption; } set { this.TelegramOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Twitter
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> TwitterOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Twitter
         /// </summary>
         [JsonPropertyName("twitter")]
-        public string Twitter { get; set; }
+        public string Twitter { get { return this. TwitterOption; } set { this.TwitterOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Website
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> WebsiteOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Website
         /// </summary>
         [JsonPropertyName("website")]
-        public string Website { get; set; }
+        public string Website { get { return this. WebsiteOption; } set { this.WebsiteOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -146,13 +189,13 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            bool? isVerified = default;
-            string bio = default;
-            string profilePicture = default;
-            string profilePictureUrl = default;
-            string telegram = default;
-            string twitter = default;
-            string website = default;
+            Option<bool?> isVerified = default;
+            Option<string> bio = default;
+            Option<string> profilePicture = default;
+            Option<string> profilePictureUrl = default;
+            Option<string> telegram = default;
+            Option<string> twitter = default;
+            Option<string> website = default;
 
             while (utf8JsonReader.Read())
             {
@@ -171,25 +214,25 @@ namespace Beam.Model
                     {
                         case "isVerified":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                isVerified = utf8JsonReader.GetBoolean();
+                                isVerified = new Option<bool?>(utf8JsonReader.GetBoolean());
                             break;
                         case "bio":
-                            bio = utf8JsonReader.GetString();
+                            bio = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "profilePicture":
-                            profilePicture = utf8JsonReader.GetString();
+                            profilePicture = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "profilePictureUrl":
-                            profilePictureUrl = utf8JsonReader.GetString();
+                            profilePictureUrl = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "telegram":
-                            telegram = utf8JsonReader.GetString();
+                            telegram = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "twitter":
-                            twitter = utf8JsonReader.GetString();
+                            twitter = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "website":
-                            website = utf8JsonReader.GetString();
+                            website = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -197,10 +240,13 @@ namespace Beam.Model
                 }
             }
 
-            if (isVerified == null)
-                throw new ArgumentNullException(nameof(isVerified), "Property is required for class GetAssetResponseOwnershipByAddressesInnerUserProfile.");
+            if (!isVerified.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetResponseOwnershipByAddressesInnerUserProfile.", nameof(isVerified));
 
-            return new GetAssetResponseOwnershipByAddressesInnerUserProfile(isVerified.Value, bio, profilePicture, profilePictureUrl, telegram, twitter, website);
+            if (isVerified.IsSet && isVerified.Value == null)
+                throw new ArgumentNullException(nameof(isVerified), "Property is not nullable for class GetAssetResponseOwnershipByAddressesInnerUserProfile.");
+
+            return new GetAssetResponseOwnershipByAddressesInnerUserProfile(isVerified.Value.Value, bio, profilePicture, profilePictureUrl, telegram, twitter, website);
         }
 
         /// <summary>
@@ -228,12 +274,42 @@ namespace Beam.Model
         public void WriteProperties(ref Utf8JsonWriter writer, GetAssetResponseOwnershipByAddressesInnerUserProfile getAssetResponseOwnershipByAddressesInnerUserProfile, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteBoolean("isVerified", getAssetResponseOwnershipByAddressesInnerUserProfile.IsVerified);
-            writer.WriteString("bio", getAssetResponseOwnershipByAddressesInnerUserProfile.Bio);
-            writer.WriteString("profilePicture", getAssetResponseOwnershipByAddressesInnerUserProfile.ProfilePicture);
-            writer.WriteString("profilePictureUrl", getAssetResponseOwnershipByAddressesInnerUserProfile.ProfilePictureUrl);
-            writer.WriteString("telegram", getAssetResponseOwnershipByAddressesInnerUserProfile.Telegram);
-            writer.WriteString("twitter", getAssetResponseOwnershipByAddressesInnerUserProfile.Twitter);
-            writer.WriteString("website", getAssetResponseOwnershipByAddressesInnerUserProfile.Website);
+
+            if (getAssetResponseOwnershipByAddressesInnerUserProfile.BioOption.IsSet)
+                if (getAssetResponseOwnershipByAddressesInnerUserProfile.BioOption.Value != null)
+                    writer.WriteString("bio", getAssetResponseOwnershipByAddressesInnerUserProfile.Bio);
+                else
+                    writer.WriteNull("bio");
+
+            if (getAssetResponseOwnershipByAddressesInnerUserProfile.ProfilePictureOption.IsSet)
+                if (getAssetResponseOwnershipByAddressesInnerUserProfile.ProfilePictureOption.Value != null)
+                    writer.WriteString("profilePicture", getAssetResponseOwnershipByAddressesInnerUserProfile.ProfilePicture);
+                else
+                    writer.WriteNull("profilePicture");
+
+            if (getAssetResponseOwnershipByAddressesInnerUserProfile.ProfilePictureUrlOption.IsSet)
+                if (getAssetResponseOwnershipByAddressesInnerUserProfile.ProfilePictureUrlOption.Value != null)
+                    writer.WriteString("profilePictureUrl", getAssetResponseOwnershipByAddressesInnerUserProfile.ProfilePictureUrl);
+                else
+                    writer.WriteNull("profilePictureUrl");
+
+            if (getAssetResponseOwnershipByAddressesInnerUserProfile.TelegramOption.IsSet)
+                if (getAssetResponseOwnershipByAddressesInnerUserProfile.TelegramOption.Value != null)
+                    writer.WriteString("telegram", getAssetResponseOwnershipByAddressesInnerUserProfile.Telegram);
+                else
+                    writer.WriteNull("telegram");
+
+            if (getAssetResponseOwnershipByAddressesInnerUserProfile.TwitterOption.IsSet)
+                if (getAssetResponseOwnershipByAddressesInnerUserProfile.TwitterOption.Value != null)
+                    writer.WriteString("twitter", getAssetResponseOwnershipByAddressesInnerUserProfile.Twitter);
+                else
+                    writer.WriteNull("twitter");
+
+            if (getAssetResponseOwnershipByAddressesInnerUserProfile.WebsiteOption.IsSet)
+                if (getAssetResponseOwnershipByAddressesInnerUserProfile.WebsiteOption.Value != null)
+                    writer.WriteString("website", getAssetResponseOwnershipByAddressesInnerUserProfile.Website);
+                else
+                    writer.WriteNull("website");
         }
     }
 }

@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -32,25 +33,25 @@ namespace Beam.Model
         /// </summary>
         /// <param name="amountIn">amountIn</param>
         /// <param name="amountOut">amountOut</param>
-        /// <param name="policyId">policyId</param>
-        /// <param name="receiverEntityId">receiverEntityId</param>
         /// <param name="tokenIn">tokenIn</param>
         /// <param name="tokenOut">tokenOut</param>
         /// <param name="chainId">chainId (default to 13337M)</param>
         /// <param name="optimistic">optimistic (default to false)</param>
+        /// <param name="policyId">policyId</param>
+        /// <param name="receiverEntityId">receiverEntityId</param>
         /// <param name="sponsor">sponsor (default to true)</param>
         [JsonConstructor]
-        public ConvertTokenRequestInput(string amountIn, string amountOut, string policyId, string receiverEntityId, string tokenIn, string tokenOut, decimal chainId = 13337M, bool optimistic = false, bool sponsor = true)
+        public ConvertTokenRequestInput(string amountIn, string amountOut, string tokenIn, string tokenOut, Option<decimal?> chainId = default, Option<bool?> optimistic = default, Option<string> policyId = default, Option<string> receiverEntityId = default, Option<bool?> sponsor = default)
         {
             AmountIn = amountIn;
             AmountOut = amountOut;
-            PolicyId = policyId;
-            ReceiverEntityId = receiverEntityId;
             TokenIn = tokenIn;
             TokenOut = tokenOut;
-            ChainId = chainId;
-            Optimistic = optimistic;
-            Sponsor = sponsor;
+            ChainIdOption = chainId;
+            OptimisticOption = optimistic;
+            PolicyIdOption = policyId;
+            ReceiverEntityIdOption = receiverEntityId;
+            SponsorOption = sponsor;
             OnCreated();
         }
 
@@ -69,18 +70,6 @@ namespace Beam.Model
         public string AmountOut { get; set; }
 
         /// <summary>
-        /// Gets or Sets PolicyId
-        /// </summary>
-        [JsonPropertyName("policyId")]
-        public string PolicyId { get; set; }
-
-        /// <summary>
-        /// Gets or Sets ReceiverEntityId
-        /// </summary>
-        [JsonPropertyName("receiverEntityId")]
-        public string ReceiverEntityId { get; set; }
-
-        /// <summary>
         /// Gets or Sets TokenIn
         /// </summary>
         [JsonPropertyName("tokenIn")]
@@ -93,22 +82,69 @@ namespace Beam.Model
         public string TokenOut { get; set; }
 
         /// <summary>
+        /// Used to track the state of ChainId
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<decimal?> ChainIdOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [JsonPropertyName("chainId")]
-        public decimal ChainId { get; set; }
+        public decimal? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Optimistic
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> OptimisticOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Optimistic
         /// </summary>
         [JsonPropertyName("optimistic")]
-        public bool Optimistic { get; set; }
+        public bool? Optimistic { get { return this. OptimisticOption; } set { this.OptimisticOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of PolicyId
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> PolicyIdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets PolicyId
+        /// </summary>
+        [JsonPropertyName("policyId")]
+        public string PolicyId { get { return this. PolicyIdOption; } set { this.PolicyIdOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of ReceiverEntityId
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> ReceiverEntityIdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ReceiverEntityId
+        /// </summary>
+        [JsonPropertyName("receiverEntityId")]
+        public string ReceiverEntityId { get { return this. ReceiverEntityIdOption; } set { this.ReceiverEntityIdOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Sponsor
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> SponsorOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Sponsor
         /// </summary>
         [JsonPropertyName("sponsor")]
-        public bool Sponsor { get; set; }
+        public bool? Sponsor { get { return this. SponsorOption; } set { this.SponsorOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -120,12 +156,12 @@ namespace Beam.Model
             sb.Append("class ConvertTokenRequestInput {\n");
             sb.Append("  AmountIn: ").Append(AmountIn).Append("\n");
             sb.Append("  AmountOut: ").Append(AmountOut).Append("\n");
-            sb.Append("  PolicyId: ").Append(PolicyId).Append("\n");
-            sb.Append("  ReceiverEntityId: ").Append(ReceiverEntityId).Append("\n");
             sb.Append("  TokenIn: ").Append(TokenIn).Append("\n");
             sb.Append("  TokenOut: ").Append(TokenOut).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  Optimistic: ").Append(Optimistic).Append("\n");
+            sb.Append("  PolicyId: ").Append(PolicyId).Append("\n");
+            sb.Append("  ReceiverEntityId: ").Append(ReceiverEntityId).Append("\n");
             sb.Append("  Sponsor: ").Append(Sponsor).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -164,15 +200,15 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string amountIn = default;
-            string amountOut = default;
-            string policyId = default;
-            string receiverEntityId = default;
-            string tokenIn = default;
-            string tokenOut = default;
-            decimal? chainId = default;
-            bool? optimistic = default;
-            bool? sponsor = default;
+            Option<string> amountIn = default;
+            Option<string> amountOut = default;
+            Option<string> tokenIn = default;
+            Option<string> tokenOut = default;
+            Option<decimal?> chainId = default;
+            Option<bool?> optimistic = default;
+            Option<string> policyId = default;
+            Option<string> receiverEntityId = default;
+            Option<bool?> sponsor = default;
 
             while (utf8JsonReader.Read())
             {
@@ -190,34 +226,34 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "amountIn":
-                            amountIn = utf8JsonReader.GetString();
+                            amountIn = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "amountOut":
-                            amountOut = utf8JsonReader.GetString();
-                            break;
-                        case "policyId":
-                            policyId = utf8JsonReader.GetString();
-                            break;
-                        case "receiverEntityId":
-                            receiverEntityId = utf8JsonReader.GetString();
+                            amountOut = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "tokenIn":
-                            tokenIn = utf8JsonReader.GetString();
+                            tokenIn = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "tokenOut":
-                            tokenOut = utf8JsonReader.GetString();
+                            tokenOut = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = utf8JsonReader.GetDecimal();
+                                chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "optimistic":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                optimistic = utf8JsonReader.GetBoolean();
+                                optimistic = new Option<bool?>(utf8JsonReader.GetBoolean());
+                            break;
+                        case "policyId":
+                            policyId = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "receiverEntityId":
+                            receiverEntityId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "sponsor":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                sponsor = utf8JsonReader.GetBoolean();
+                                sponsor = new Option<bool?>(utf8JsonReader.GetBoolean());
                             break;
                         default:
                             break;
@@ -225,34 +261,46 @@ namespace Beam.Model
                 }
             }
 
-            if (amountIn == null)
-                throw new ArgumentNullException(nameof(amountIn), "Property is required for class ConvertTokenRequestInput.");
+            if (!amountIn.IsSet)
+                throw new ArgumentException("Property is required for class ConvertTokenRequestInput.", nameof(amountIn));
 
-            if (amountOut == null)
-                throw new ArgumentNullException(nameof(amountOut), "Property is required for class ConvertTokenRequestInput.");
+            if (!amountOut.IsSet)
+                throw new ArgumentException("Property is required for class ConvertTokenRequestInput.", nameof(amountOut));
 
-            if (policyId == null)
-                throw new ArgumentNullException(nameof(policyId), "Property is required for class ConvertTokenRequestInput.");
+            if (!tokenIn.IsSet)
+                throw new ArgumentException("Property is required for class ConvertTokenRequestInput.", nameof(tokenIn));
 
-            if (receiverEntityId == null)
-                throw new ArgumentNullException(nameof(receiverEntityId), "Property is required for class ConvertTokenRequestInput.");
+            if (!tokenOut.IsSet)
+                throw new ArgumentException("Property is required for class ConvertTokenRequestInput.", nameof(tokenOut));
 
-            if (tokenIn == null)
-                throw new ArgumentNullException(nameof(tokenIn), "Property is required for class ConvertTokenRequestInput.");
+            if (amountIn.IsSet && amountIn.Value == null)
+                throw new ArgumentNullException(nameof(amountIn), "Property is not nullable for class ConvertTokenRequestInput.");
 
-            if (tokenOut == null)
-                throw new ArgumentNullException(nameof(tokenOut), "Property is required for class ConvertTokenRequestInput.");
+            if (amountOut.IsSet && amountOut.Value == null)
+                throw new ArgumentNullException(nameof(amountOut), "Property is not nullable for class ConvertTokenRequestInput.");
 
-            if (chainId == null)
-                throw new ArgumentNullException(nameof(chainId), "Property is required for class ConvertTokenRequestInput.");
+            if (tokenIn.IsSet && tokenIn.Value == null)
+                throw new ArgumentNullException(nameof(tokenIn), "Property is not nullable for class ConvertTokenRequestInput.");
 
-            if (optimistic == null)
-                throw new ArgumentNullException(nameof(optimistic), "Property is required for class ConvertTokenRequestInput.");
+            if (tokenOut.IsSet && tokenOut.Value == null)
+                throw new ArgumentNullException(nameof(tokenOut), "Property is not nullable for class ConvertTokenRequestInput.");
 
-            if (sponsor == null)
-                throw new ArgumentNullException(nameof(sponsor), "Property is required for class ConvertTokenRequestInput.");
+            if (chainId.IsSet && chainId.Value == null)
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class ConvertTokenRequestInput.");
 
-            return new ConvertTokenRequestInput(amountIn, amountOut, policyId, receiverEntityId, tokenIn, tokenOut, chainId.Value, optimistic.Value, sponsor.Value);
+            if (optimistic.IsSet && optimistic.Value == null)
+                throw new ArgumentNullException(nameof(optimistic), "Property is not nullable for class ConvertTokenRequestInput.");
+
+            if (policyId.IsSet && policyId.Value == null)
+                throw new ArgumentNullException(nameof(policyId), "Property is not nullable for class ConvertTokenRequestInput.");
+
+            if (receiverEntityId.IsSet && receiverEntityId.Value == null)
+                throw new ArgumentNullException(nameof(receiverEntityId), "Property is not nullable for class ConvertTokenRequestInput.");
+
+            if (sponsor.IsSet && sponsor.Value == null)
+                throw new ArgumentNullException(nameof(sponsor), "Property is not nullable for class ConvertTokenRequestInput.");
+
+            return new ConvertTokenRequestInput(amountIn.Value, amountOut.Value, tokenIn.Value, tokenOut.Value, chainId, optimistic, policyId, receiverEntityId, sponsor);
         }
 
         /// <summary>
@@ -279,15 +327,46 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, ConvertTokenRequestInput convertTokenRequestInput, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (convertTokenRequestInput.AmountIn == null)
+                throw new ArgumentNullException(nameof(convertTokenRequestInput.AmountIn), "Property is required for class ConvertTokenRequestInput.");
+
+            if (convertTokenRequestInput.AmountOut == null)
+                throw new ArgumentNullException(nameof(convertTokenRequestInput.AmountOut), "Property is required for class ConvertTokenRequestInput.");
+
+            if (convertTokenRequestInput.TokenIn == null)
+                throw new ArgumentNullException(nameof(convertTokenRequestInput.TokenIn), "Property is required for class ConvertTokenRequestInput.");
+
+            if (convertTokenRequestInput.TokenOut == null)
+                throw new ArgumentNullException(nameof(convertTokenRequestInput.TokenOut), "Property is required for class ConvertTokenRequestInput.");
+
+            if (convertTokenRequestInput.PolicyIdOption.IsSet && convertTokenRequestInput.PolicyId == null)
+                throw new ArgumentNullException(nameof(convertTokenRequestInput.PolicyId), "Property is required for class ConvertTokenRequestInput.");
+
+            if (convertTokenRequestInput.ReceiverEntityIdOption.IsSet && convertTokenRequestInput.ReceiverEntityId == null)
+                throw new ArgumentNullException(nameof(convertTokenRequestInput.ReceiverEntityId), "Property is required for class ConvertTokenRequestInput.");
+
             writer.WriteString("amountIn", convertTokenRequestInput.AmountIn);
+
             writer.WriteString("amountOut", convertTokenRequestInput.AmountOut);
-            writer.WriteString("policyId", convertTokenRequestInput.PolicyId);
-            writer.WriteString("receiverEntityId", convertTokenRequestInput.ReceiverEntityId);
+
             writer.WriteString("tokenIn", convertTokenRequestInput.TokenIn);
+
             writer.WriteString("tokenOut", convertTokenRequestInput.TokenOut);
-            writer.WriteNumber("chainId", convertTokenRequestInput.ChainId);
-            writer.WriteBoolean("optimistic", convertTokenRequestInput.Optimistic);
-            writer.WriteBoolean("sponsor", convertTokenRequestInput.Sponsor);
+
+            if (convertTokenRequestInput.ChainIdOption.IsSet)
+                writer.WriteNumber("chainId", convertTokenRequestInput.ChainIdOption.Value.Value);
+
+            if (convertTokenRequestInput.OptimisticOption.IsSet)
+                writer.WriteBoolean("optimistic", convertTokenRequestInput.OptimisticOption.Value.Value);
+
+            if (convertTokenRequestInput.PolicyIdOption.IsSet)
+                writer.WriteString("policyId", convertTokenRequestInput.PolicyId);
+
+            if (convertTokenRequestInput.ReceiverEntityIdOption.IsSet)
+                writer.WriteString("receiverEntityId", convertTokenRequestInput.ReceiverEntityId);
+
+            if (convertTokenRequestInput.SponsorOption.IsSet)
+                writer.WriteBoolean("sponsor", convertTokenRequestInput.SponsorOption.Value.Value);
         }
     }
 }

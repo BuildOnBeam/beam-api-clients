@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -35,12 +36,12 @@ namespace Beam.Model
         /// <param name="tokenAddress">tokenAddress</param>
         /// <param name="chainId">chainId (default to 13337M)</param>
         [JsonConstructor]
-        public AddPolicyRequestInput(decimal amount, RateTypeEnum rateType, string tokenAddress, decimal chainId = 13337M)
+        public AddPolicyRequestInput(decimal amount, RateTypeEnum rateType, string tokenAddress, Option<decimal?> chainId = default)
         {
             Amount = amount;
             RateType = rateType;
             TokenAddress = tokenAddress;
-            ChainId = chainId;
+            ChainIdOption = chainId;
             OnCreated();
         }
 
@@ -103,7 +104,6 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string RateTypeEnumToJsonValue(RateTypeEnum value)
         {
-
             if (value == RateTypeEnum.Fixed)
                 return "Fixed";
 
@@ -132,10 +132,17 @@ namespace Beam.Model
         public string TokenAddress { get; set; }
 
         /// <summary>
+        /// Used to track the state of ChainId
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<decimal?> ChainIdOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [JsonPropertyName("chainId")]
-        public decimal ChainId { get; set; }
+        public decimal? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -192,10 +199,10 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            decimal? amount = default;
-            AddPolicyRequestInput.RateTypeEnum? rateType = default;
-            string tokenAddress = default;
-            decimal? chainId = default;
+            Option<decimal?> amount = default;
+            Option<AddPolicyRequestInput.RateTypeEnum?> rateType = default;
+            Option<string> tokenAddress = default;
+            Option<decimal?> chainId = default;
 
             while (utf8JsonReader.Read())
             {
@@ -214,20 +221,19 @@ namespace Beam.Model
                     {
                         case "amount":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                amount = utf8JsonReader.GetDecimal();
+                                amount = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "rateType":
                             string rateTypeRawValue = utf8JsonReader.GetString();
-                            rateType = rateTypeRawValue == null
-                                ? null
-                                : AddPolicyRequestInput.RateTypeEnumFromStringOrDefault(rateTypeRawValue);
+                            if (rateTypeRawValue != null)
+                                rateType = new Option<AddPolicyRequestInput.RateTypeEnum?>(AddPolicyRequestInput.RateTypeEnumFromStringOrDefault(rateTypeRawValue));
                             break;
                         case "tokenAddress":
-                            tokenAddress = utf8JsonReader.GetString();
+                            tokenAddress = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = utf8JsonReader.GetDecimal();
+                                chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         default:
                             break;
@@ -235,19 +241,28 @@ namespace Beam.Model
                 }
             }
 
-            if (amount == null)
-                throw new ArgumentNullException(nameof(amount), "Property is required for class AddPolicyRequestInput.");
+            if (!amount.IsSet)
+                throw new ArgumentException("Property is required for class AddPolicyRequestInput.", nameof(amount));
 
-            if (rateType == null)
-                throw new ArgumentNullException(nameof(rateType), "Property is required for class AddPolicyRequestInput.");
+            if (!rateType.IsSet)
+                throw new ArgumentException("Property is required for class AddPolicyRequestInput.", nameof(rateType));
 
-            if (tokenAddress == null)
-                throw new ArgumentNullException(nameof(tokenAddress), "Property is required for class AddPolicyRequestInput.");
+            if (!tokenAddress.IsSet)
+                throw new ArgumentException("Property is required for class AddPolicyRequestInput.", nameof(tokenAddress));
 
-            if (chainId == null)
-                throw new ArgumentNullException(nameof(chainId), "Property is required for class AddPolicyRequestInput.");
+            if (amount.IsSet && amount.Value == null)
+                throw new ArgumentNullException(nameof(amount), "Property is not nullable for class AddPolicyRequestInput.");
 
-            return new AddPolicyRequestInput(amount.Value, rateType.Value, tokenAddress, chainId.Value);
+            if (rateType.IsSet && rateType.Value == null)
+                throw new ArgumentNullException(nameof(rateType), "Property is not nullable for class AddPolicyRequestInput.");
+
+            if (tokenAddress.IsSet && tokenAddress.Value == null)
+                throw new ArgumentNullException(nameof(tokenAddress), "Property is not nullable for class AddPolicyRequestInput.");
+
+            if (chainId.IsSet && chainId.Value == null)
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class AddPolicyRequestInput.");
+
+            return new AddPolicyRequestInput(amount.Value.Value, rateType.Value.Value, tokenAddress.Value, chainId);
         }
 
         /// <summary>
@@ -274,6 +289,9 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, AddPolicyRequestInput addPolicyRequestInput, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (addPolicyRequestInput.TokenAddress == null)
+                throw new ArgumentNullException(nameof(addPolicyRequestInput.TokenAddress), "Property is required for class AddPolicyRequestInput.");
+
             writer.WriteNumber("amount", addPolicyRequestInput.Amount);
 
             var rateTypeRawValue = AddPolicyRequestInput.RateTypeEnumToJsonValue(addPolicyRequestInput.RateType);
@@ -283,7 +301,9 @@ namespace Beam.Model
                 writer.WriteNull("rateType");
 
             writer.WriteString("tokenAddress", addPolicyRequestInput.TokenAddress);
-            writer.WriteNumber("chainId", addPolicyRequestInput.ChainId);
+
+            if (addPolicyRequestInput.ChainIdOption.IsSet)
+                writer.WriteNumber("chainId", addPolicyRequestInput.ChainIdOption.Value.Value);
         }
     }
 }

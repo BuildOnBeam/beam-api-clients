@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -92,7 +93,7 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string callbackUrl = default;
+            Option<string> callbackUrl = default;
 
             while (utf8JsonReader.Read())
             {
@@ -110,7 +111,7 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "callbackUrl":
-                            callbackUrl = utf8JsonReader.GetString();
+                            callbackUrl = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -118,10 +119,13 @@ namespace Beam.Model
                 }
             }
 
-            if (callbackUrl == null)
-                throw new ArgumentNullException(nameof(callbackUrl), "Property is required for class GenerateLinkCodeRequestInput.");
+            if (!callbackUrl.IsSet)
+                throw new ArgumentException("Property is required for class GenerateLinkCodeRequestInput.", nameof(callbackUrl));
 
-            return new GenerateLinkCodeRequestInput(callbackUrl);
+            if (callbackUrl.IsSet && callbackUrl.Value == null)
+                throw new ArgumentNullException(nameof(callbackUrl), "Property is not nullable for class GenerateLinkCodeRequestInput.");
+
+            return new GenerateLinkCodeRequestInput(callbackUrl.Value);
         }
 
         /// <summary>
@@ -148,6 +152,9 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GenerateLinkCodeRequestInput generateLinkCodeRequestInput, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (generateLinkCodeRequestInput.CallbackUrl == null)
+                throw new ArgumentNullException(nameof(generateLinkCodeRequestInput.CallbackUrl), "Property is required for class GenerateLinkCodeRequestInput.");
+
             writer.WriteString("callbackUrl", generateLinkCodeRequestInput.CallbackUrl);
         }
     }

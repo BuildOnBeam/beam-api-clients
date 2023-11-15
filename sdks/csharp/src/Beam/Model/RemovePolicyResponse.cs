@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -92,7 +93,7 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            bool? success = default;
+            Option<bool?> success = default;
 
             while (utf8JsonReader.Read())
             {
@@ -111,7 +112,7 @@ namespace Beam.Model
                     {
                         case "success":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                success = utf8JsonReader.GetBoolean();
+                                success = new Option<bool?>(utf8JsonReader.GetBoolean());
                             break;
                         default:
                             break;
@@ -119,10 +120,13 @@ namespace Beam.Model
                 }
             }
 
-            if (success == null)
-                throw new ArgumentNullException(nameof(success), "Property is required for class RemovePolicyResponse.");
+            if (!success.IsSet)
+                throw new ArgumentException("Property is required for class RemovePolicyResponse.", nameof(success));
 
-            return new RemovePolicyResponse(success.Value);
+            if (success.IsSet && success.Value == null)
+                throw new ArgumentNullException(nameof(success), "Property is not nullable for class RemovePolicyResponse.");
+
+            return new RemovePolicyResponse(success.Value.Value);
         }
 
         /// <summary>

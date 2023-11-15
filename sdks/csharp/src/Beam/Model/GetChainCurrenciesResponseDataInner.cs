@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -211,7 +212,6 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string CurrencyEnumToJsonValue(CurrencyEnum value)
         {
-
             if (value == CurrencyEnum.Avax)
                 return "Avax";
 
@@ -317,9 +317,9 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            GetChainCurrenciesResponseDataInner.CurrencyEnum? currency = default;
-            decimal? decimals = default;
-            string tokenAddress = default;
+            Option<GetChainCurrenciesResponseDataInner.CurrencyEnum?> currency = default;
+            Option<decimal?> decimals = default;
+            Option<string> tokenAddress = default;
 
             while (utf8JsonReader.Read())
             {
@@ -338,16 +338,15 @@ namespace Beam.Model
                     {
                         case "currency":
                             string currencyRawValue = utf8JsonReader.GetString();
-                            currency = currencyRawValue == null
-                                ? null
-                                : GetChainCurrenciesResponseDataInner.CurrencyEnumFromStringOrDefault(currencyRawValue);
+                            if (currencyRawValue != null)
+                                currency = new Option<GetChainCurrenciesResponseDataInner.CurrencyEnum?>(GetChainCurrenciesResponseDataInner.CurrencyEnumFromStringOrDefault(currencyRawValue));
                             break;
                         case "decimals":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                decimals = utf8JsonReader.GetDecimal();
+                                decimals = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "tokenAddress":
-                            tokenAddress = utf8JsonReader.GetString();
+                            tokenAddress = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -355,16 +354,25 @@ namespace Beam.Model
                 }
             }
 
-            if (currency == null)
-                throw new ArgumentNullException(nameof(currency), "Property is required for class GetChainCurrenciesResponseDataInner.");
+            if (!currency.IsSet)
+                throw new ArgumentException("Property is required for class GetChainCurrenciesResponseDataInner.", nameof(currency));
 
-            if (decimals == null)
-                throw new ArgumentNullException(nameof(decimals), "Property is required for class GetChainCurrenciesResponseDataInner.");
+            if (!decimals.IsSet)
+                throw new ArgumentException("Property is required for class GetChainCurrenciesResponseDataInner.", nameof(decimals));
 
-            if (tokenAddress == null)
-                throw new ArgumentNullException(nameof(tokenAddress), "Property is required for class GetChainCurrenciesResponseDataInner.");
+            if (!tokenAddress.IsSet)
+                throw new ArgumentException("Property is required for class GetChainCurrenciesResponseDataInner.", nameof(tokenAddress));
 
-            return new GetChainCurrenciesResponseDataInner(currency.Value, decimals.Value, tokenAddress);
+            if (currency.IsSet && currency.Value == null)
+                throw new ArgumentNullException(nameof(currency), "Property is not nullable for class GetChainCurrenciesResponseDataInner.");
+
+            if (decimals.IsSet && decimals.Value == null)
+                throw new ArgumentNullException(nameof(decimals), "Property is not nullable for class GetChainCurrenciesResponseDataInner.");
+
+            if (tokenAddress.IsSet && tokenAddress.Value == null)
+                throw new ArgumentNullException(nameof(tokenAddress), "Property is not nullable for class GetChainCurrenciesResponseDataInner.");
+
+            return new GetChainCurrenciesResponseDataInner(currency.Value.Value, decimals.Value.Value, tokenAddress.Value);
         }
 
         /// <summary>
@@ -391,6 +399,8 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetChainCurrenciesResponseDataInner getChainCurrenciesResponseDataInner, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (getChainCurrenciesResponseDataInner.TokenAddress == null)
+                throw new ArgumentNullException(nameof(getChainCurrenciesResponseDataInner.TokenAddress), "Property is required for class GetChainCurrenciesResponseDataInner.");
 
             var currencyRawValue = GetChainCurrenciesResponseDataInner.CurrencyEnumToJsonValue(getChainCurrenciesResponseDataInner.Currency);
             if (currencyRawValue != null)
@@ -399,6 +409,7 @@ namespace Beam.Model
                 writer.WriteNull("currency");
 
             writer.WriteNumber("decimals", getChainCurrenciesResponseDataInner.Decimals);
+
             writer.WriteString("tokenAddress", getChainCurrenciesResponseDataInner.TokenAddress);
         }
     }

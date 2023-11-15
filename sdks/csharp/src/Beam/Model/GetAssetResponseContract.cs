@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -44,7 +45,7 @@ namespace Beam.Model
         /// <param name="royalty">royalty</param>
         /// <param name="royaltyAddress">royaltyAddress</param>
         [JsonConstructor]
-        public GetAssetResponseContract(string address, GetAssetResponseContractAvatar avatar, decimal chainId, GetAssetResponseContractHeader header, string id, string name, NetworkEnum network, string slug, SymbolEnum symbol, TypeEnum type, string description = default, decimal? royalty = default, string royaltyAddress = default)
+        public GetAssetResponseContract(string address, GetAssetResponseContractAvatar avatar, decimal chainId, GetAssetResponseContractHeader header, string id, string name, NetworkEnum network, string slug, SymbolEnum symbol, TypeEnum type, Option<string> description = default, Option<decimal?> royalty = default, Option<string> royaltyAddress = default)
         {
             Address = address;
             Avatar = avatar;
@@ -56,9 +57,9 @@ namespace Beam.Model
             Slug = slug;
             Symbol = symbol;
             Type = type;
-            Description = description;
-            Royalty = royalty;
-            RoyaltyAddress = royaltyAddress;
+            DescriptionOption = description;
+            RoyaltyOption = royalty;
+            RoyaltyAddressOption = royaltyAddress;
             OnCreated();
         }
 
@@ -143,7 +144,6 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string NetworkEnumToJsonValue(NetworkEnum value)
         {
-
             if (value == NetworkEnum.Avalanche)
                 return "Avalanche";
 
@@ -332,7 +332,6 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string SymbolEnumToJsonValue(SymbolEnum value)
         {
-
             if (value == SymbolEnum.Avax)
                 return "Avax";
 
@@ -435,7 +434,6 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string TypeEnumToJsonValue(TypeEnum value)
         {
-
             if (value == TypeEnum.ERC721)
                 return "ERC721";
 
@@ -494,22 +492,43 @@ namespace Beam.Model
         public string Slug { get; set; }
 
         /// <summary>
+        /// Used to track the state of Description
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> DescriptionOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets Description
         /// </summary>
         [JsonPropertyName("description")]
-        public string Description { get; set; }
+        public string Description { get { return this. DescriptionOption; } set { this.DescriptionOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Royalty
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<decimal?> RoyaltyOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Royalty
         /// </summary>
         [JsonPropertyName("royalty")]
-        public decimal? Royalty { get; set; }
+        public decimal? Royalty { get { return this. RoyaltyOption; } set { this.RoyaltyOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of RoyaltyAddress
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> RoyaltyAddressOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets RoyaltyAddress
         /// </summary>
         [JsonPropertyName("royaltyAddress")]
-        public string RoyaltyAddress { get; set; }
+        public string RoyaltyAddress { get { return this. RoyaltyAddressOption; } set { this.RoyaltyAddressOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -569,19 +588,19 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string address = default;
-            GetAssetResponseContractAvatar avatar = default;
-            decimal? chainId = default;
-            GetAssetResponseContractHeader header = default;
-            string id = default;
-            string name = default;
-            GetAssetResponseContract.NetworkEnum? network = default;
-            string slug = default;
-            GetAssetResponseContract.SymbolEnum? symbol = default;
-            GetAssetResponseContract.TypeEnum? type = default;
-            string description = default;
-            decimal? royalty = default;
-            string royaltyAddress = default;
+            Option<string> address = default;
+            Option<GetAssetResponseContractAvatar> avatar = default;
+            Option<decimal?> chainId = default;
+            Option<GetAssetResponseContractHeader> header = default;
+            Option<string> id = default;
+            Option<string> name = default;
+            Option<GetAssetResponseContract.NetworkEnum?> network = default;
+            Option<string> slug = default;
+            Option<GetAssetResponseContract.SymbolEnum?> symbol = default;
+            Option<GetAssetResponseContract.TypeEnum?> type = default;
+            Option<string> description = default;
+            Option<decimal?> royalty = default;
+            Option<string> royaltyAddress = default;
 
             while (utf8JsonReader.Read())
             {
@@ -599,56 +618,53 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "address":
-                            address = utf8JsonReader.GetString();
+                            address = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "avatar":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                avatar = JsonSerializer.Deserialize<GetAssetResponseContractAvatar>(ref utf8JsonReader, jsonSerializerOptions);
+                                avatar = new Option<GetAssetResponseContractAvatar>(JsonSerializer.Deserialize<GetAssetResponseContractAvatar>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = utf8JsonReader.GetDecimal();
+                                chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "header":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                header = JsonSerializer.Deserialize<GetAssetResponseContractHeader>(ref utf8JsonReader, jsonSerializerOptions);
+                                header = new Option<GetAssetResponseContractHeader>(JsonSerializer.Deserialize<GetAssetResponseContractHeader>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "_id":
-                            id = utf8JsonReader.GetString();
+                            id = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "name":
-                            name = utf8JsonReader.GetString();
+                            name = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "network":
                             string networkRawValue = utf8JsonReader.GetString();
-                            network = networkRawValue == null
-                                ? null
-                                : GetAssetResponseContract.NetworkEnumFromStringOrDefault(networkRawValue);
+                            if (networkRawValue != null)
+                                network = new Option<GetAssetResponseContract.NetworkEnum?>(GetAssetResponseContract.NetworkEnumFromStringOrDefault(networkRawValue));
                             break;
                         case "slug":
-                            slug = utf8JsonReader.GetString();
+                            slug = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "symbol":
                             string symbolRawValue = utf8JsonReader.GetString();
-                            symbol = symbolRawValue == null
-                                ? null
-                                : GetAssetResponseContract.SymbolEnumFromStringOrDefault(symbolRawValue);
+                            if (symbolRawValue != null)
+                                symbol = new Option<GetAssetResponseContract.SymbolEnum?>(GetAssetResponseContract.SymbolEnumFromStringOrDefault(symbolRawValue));
                             break;
                         case "type":
                             string typeRawValue = utf8JsonReader.GetString();
-                            type = typeRawValue == null
-                                ? null
-                                : GetAssetResponseContract.TypeEnumFromStringOrDefault(typeRawValue);
+                            if (typeRawValue != null)
+                                type = new Option<GetAssetResponseContract.TypeEnum?>(GetAssetResponseContract.TypeEnumFromStringOrDefault(typeRawValue));
                             break;
                         case "description":
-                            description = utf8JsonReader.GetString();
+                            description = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "royalty":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                royalty = utf8JsonReader.GetDecimal();
+                                royalty = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "royaltyAddress":
-                            royaltyAddress = utf8JsonReader.GetString();
+                            royaltyAddress = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -656,37 +672,67 @@ namespace Beam.Model
                 }
             }
 
-            if (address == null)
-                throw new ArgumentNullException(nameof(address), "Property is required for class GetAssetResponseContract.");
+            if (!address.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetResponseContract.", nameof(address));
 
-            if (avatar == null)
-                throw new ArgumentNullException(nameof(avatar), "Property is required for class GetAssetResponseContract.");
+            if (!avatar.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetResponseContract.", nameof(avatar));
 
-            if (chainId == null)
-                throw new ArgumentNullException(nameof(chainId), "Property is required for class GetAssetResponseContract.");
+            if (!chainId.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetResponseContract.", nameof(chainId));
 
-            if (header == null)
-                throw new ArgumentNullException(nameof(header), "Property is required for class GetAssetResponseContract.");
+            if (!header.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetResponseContract.", nameof(header));
 
-            if (id == null)
-                throw new ArgumentNullException(nameof(id), "Property is required for class GetAssetResponseContract.");
+            if (!id.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetResponseContract.", nameof(id));
 
-            if (name == null)
-                throw new ArgumentNullException(nameof(name), "Property is required for class GetAssetResponseContract.");
+            if (!name.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetResponseContract.", nameof(name));
 
-            if (network == null)
-                throw new ArgumentNullException(nameof(network), "Property is required for class GetAssetResponseContract.");
+            if (!network.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetResponseContract.", nameof(network));
 
-            if (slug == null)
-                throw new ArgumentNullException(nameof(slug), "Property is required for class GetAssetResponseContract.");
+            if (!slug.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetResponseContract.", nameof(slug));
 
-            if (symbol == null)
-                throw new ArgumentNullException(nameof(symbol), "Property is required for class GetAssetResponseContract.");
+            if (!symbol.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetResponseContract.", nameof(symbol));
 
-            if (type == null)
-                throw new ArgumentNullException(nameof(type), "Property is required for class GetAssetResponseContract.");
+            if (!type.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetResponseContract.", nameof(type));
 
-            return new GetAssetResponseContract(address, avatar, chainId.Value, header, id, name, network.Value, slug, symbol.Value, type.Value, description, royalty, royaltyAddress);
+            if (address.IsSet && address.Value == null)
+                throw new ArgumentNullException(nameof(address), "Property is not nullable for class GetAssetResponseContract.");
+
+            if (avatar.IsSet && avatar.Value == null)
+                throw new ArgumentNullException(nameof(avatar), "Property is not nullable for class GetAssetResponseContract.");
+
+            if (chainId.IsSet && chainId.Value == null)
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class GetAssetResponseContract.");
+
+            if (header.IsSet && header.Value == null)
+                throw new ArgumentNullException(nameof(header), "Property is not nullable for class GetAssetResponseContract.");
+
+            if (id.IsSet && id.Value == null)
+                throw new ArgumentNullException(nameof(id), "Property is not nullable for class GetAssetResponseContract.");
+
+            if (name.IsSet && name.Value == null)
+                throw new ArgumentNullException(nameof(name), "Property is not nullable for class GetAssetResponseContract.");
+
+            if (network.IsSet && network.Value == null)
+                throw new ArgumentNullException(nameof(network), "Property is not nullable for class GetAssetResponseContract.");
+
+            if (slug.IsSet && slug.Value == null)
+                throw new ArgumentNullException(nameof(slug), "Property is not nullable for class GetAssetResponseContract.");
+
+            if (symbol.IsSet && symbol.Value == null)
+                throw new ArgumentNullException(nameof(symbol), "Property is not nullable for class GetAssetResponseContract.");
+
+            if (type.IsSet && type.Value == null)
+                throw new ArgumentNullException(nameof(type), "Property is not nullable for class GetAssetResponseContract.");
+
+            return new GetAssetResponseContract(address.Value, avatar.Value, chainId.Value.Value, header.Value, id.Value, name.Value, network.Value.Value, slug.Value, symbol.Value.Value, type.Value.Value, description, royalty, royaltyAddress);
         }
 
         /// <summary>
@@ -713,13 +759,34 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetAssetResponseContract getAssetResponseContract, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (getAssetResponseContract.Address == null)
+                throw new ArgumentNullException(nameof(getAssetResponseContract.Address), "Property is required for class GetAssetResponseContract.");
+
+            if (getAssetResponseContract.Avatar == null)
+                throw new ArgumentNullException(nameof(getAssetResponseContract.Avatar), "Property is required for class GetAssetResponseContract.");
+
+            if (getAssetResponseContract.Header == null)
+                throw new ArgumentNullException(nameof(getAssetResponseContract.Header), "Property is required for class GetAssetResponseContract.");
+
+            if (getAssetResponseContract.Id == null)
+                throw new ArgumentNullException(nameof(getAssetResponseContract.Id), "Property is required for class GetAssetResponseContract.");
+
+            if (getAssetResponseContract.Name == null)
+                throw new ArgumentNullException(nameof(getAssetResponseContract.Name), "Property is required for class GetAssetResponseContract.");
+
+            if (getAssetResponseContract.Slug == null)
+                throw new ArgumentNullException(nameof(getAssetResponseContract.Slug), "Property is required for class GetAssetResponseContract.");
+
             writer.WriteString("address", getAssetResponseContract.Address);
+
             writer.WritePropertyName("avatar");
             JsonSerializer.Serialize(writer, getAssetResponseContract.Avatar, jsonSerializerOptions);
             writer.WriteNumber("chainId", getAssetResponseContract.ChainId);
+
             writer.WritePropertyName("header");
             JsonSerializer.Serialize(writer, getAssetResponseContract.Header, jsonSerializerOptions);
             writer.WriteString("_id", getAssetResponseContract.Id);
+
             writer.WriteString("name", getAssetResponseContract.Name);
 
             var networkRawValue = GetAssetResponseContract.NetworkEnumToJsonValue(getAssetResponseContract.Network);
@@ -742,14 +809,23 @@ namespace Beam.Model
             else
                 writer.WriteNull("type");
 
-            writer.WriteString("description", getAssetResponseContract.Description);
+            if (getAssetResponseContract.DescriptionOption.IsSet)
+                if (getAssetResponseContract.DescriptionOption.Value != null)
+                    writer.WriteString("description", getAssetResponseContract.Description);
+                else
+                    writer.WriteNull("description");
 
-            if (getAssetResponseContract.Royalty != null)
-                writer.WriteNumber("royalty", getAssetResponseContract.Royalty.Value);
-            else
-                writer.WriteNull("royalty");
+            if (getAssetResponseContract.RoyaltyOption.IsSet)
+                if (getAssetResponseContract.RoyaltyOption.Value != null)
+                    writer.WriteNumber("royalty", getAssetResponseContract.RoyaltyOption.Value.Value);
+                else
+                    writer.WriteNull("royalty");
 
-            writer.WriteString("royaltyAddress", getAssetResponseContract.RoyaltyAddress);
+            if (getAssetResponseContract.RoyaltyAddressOption.IsSet)
+                if (getAssetResponseContract.RoyaltyAddressOption.Value != null)
+                    writer.WriteString("royaltyAddress", getAssetResponseContract.RoyaltyAddress);
+                else
+                    writer.WriteNull("royaltyAddress");
         }
     }
 }

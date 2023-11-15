@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -229,7 +230,6 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string CurrencyEnumToJsonValue(CurrencyEnum value)
         {
-
             if (value == CurrencyEnum.Avax)
                 return "Avax";
 
@@ -332,7 +332,6 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string KindEnumToJsonValue(KindEnum value)
         {
-
             if (value == KindEnum.SignedCollectionOrder)
                 return "SignedCollectionOrder";
 
@@ -475,18 +474,18 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            GetAssetOffersResponseDataInner.CurrencyEnum? currency = default;
-            DateTime? endTime = default;
-            GetAssetOffersResponseDataInner.KindEnum? kind = default;
-            string offerer = default;
-            string offererEntityId = default;
-            string orderId = default;
-            decimal? quantity = default;
-            decimal? quantityAvailable = default;
-            decimal? quantityFilled = default;
-            DateTime? startTime = default;
-            string tokenAmount = default;
-            decimal? tokenAmountNumber = default;
+            Option<GetAssetOffersResponseDataInner.CurrencyEnum?> currency = default;
+            Option<DateTime?> endTime = default;
+            Option<GetAssetOffersResponseDataInner.KindEnum?> kind = default;
+            Option<string> offerer = default;
+            Option<string> offererEntityId = default;
+            Option<string> orderId = default;
+            Option<decimal?> quantity = default;
+            Option<decimal?> quantityAvailable = default;
+            Option<decimal?> quantityFilled = default;
+            Option<DateTime?> startTime = default;
+            Option<string> tokenAmount = default;
+            Option<decimal?> tokenAmountNumber = default;
 
             while (utf8JsonReader.Read())
             {
@@ -505,51 +504,49 @@ namespace Beam.Model
                     {
                         case "currency":
                             string currencyRawValue = utf8JsonReader.GetString();
-                            currency = currencyRawValue == null
-                                ? null
-                                : GetAssetOffersResponseDataInner.CurrencyEnumFromStringOrDefault(currencyRawValue);
+                            if (currencyRawValue != null)
+                                currency = new Option<GetAssetOffersResponseDataInner.CurrencyEnum?>(GetAssetOffersResponseDataInner.CurrencyEnumFromStringOrDefault(currencyRawValue));
                             break;
                         case "endTime":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                endTime = JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions);
+                                endTime = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "kind":
                             string kindRawValue = utf8JsonReader.GetString();
-                            kind = kindRawValue == null
-                                ? null
-                                : GetAssetOffersResponseDataInner.KindEnumFromStringOrDefault(kindRawValue);
+                            if (kindRawValue != null)
+                                kind = new Option<GetAssetOffersResponseDataInner.KindEnum?>(GetAssetOffersResponseDataInner.KindEnumFromStringOrDefault(kindRawValue));
                             break;
                         case "offerer":
-                            offerer = utf8JsonReader.GetString();
+                            offerer = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "offererEntityId":
-                            offererEntityId = utf8JsonReader.GetString();
+                            offererEntityId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "orderId":
-                            orderId = utf8JsonReader.GetString();
+                            orderId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "quantity":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                quantity = utf8JsonReader.GetDecimal();
+                                quantity = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "quantityAvailable":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                quantityAvailable = utf8JsonReader.GetDecimal();
+                                quantityAvailable = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "quantityFilled":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                quantityFilled = utf8JsonReader.GetDecimal();
+                                quantityFilled = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "startTime":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                startTime = JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions);
+                                startTime = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "tokenAmount":
-                            tokenAmount = utf8JsonReader.GetString();
+                            tokenAmount = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "tokenAmountNumber":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                tokenAmountNumber = utf8JsonReader.GetDecimal();
+                                tokenAmountNumber = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         default:
                             break;
@@ -557,43 +554,79 @@ namespace Beam.Model
                 }
             }
 
-            if (currency == null)
-                throw new ArgumentNullException(nameof(currency), "Property is required for class GetAssetOffersResponseDataInner.");
+            if (!currency.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetOffersResponseDataInner.", nameof(currency));
 
-            if (endTime == null)
-                throw new ArgumentNullException(nameof(endTime), "Property is required for class GetAssetOffersResponseDataInner.");
+            if (!endTime.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetOffersResponseDataInner.", nameof(endTime));
 
-            if (kind == null)
-                throw new ArgumentNullException(nameof(kind), "Property is required for class GetAssetOffersResponseDataInner.");
+            if (!kind.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetOffersResponseDataInner.", nameof(kind));
 
-            if (offerer == null)
-                throw new ArgumentNullException(nameof(offerer), "Property is required for class GetAssetOffersResponseDataInner.");
+            if (!offerer.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetOffersResponseDataInner.", nameof(offerer));
 
-            if (offererEntityId == null)
-                throw new ArgumentNullException(nameof(offererEntityId), "Property is required for class GetAssetOffersResponseDataInner.");
+            if (!offererEntityId.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetOffersResponseDataInner.", nameof(offererEntityId));
 
-            if (orderId == null)
-                throw new ArgumentNullException(nameof(orderId), "Property is required for class GetAssetOffersResponseDataInner.");
+            if (!orderId.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetOffersResponseDataInner.", nameof(orderId));
 
-            if (quantity == null)
-                throw new ArgumentNullException(nameof(quantity), "Property is required for class GetAssetOffersResponseDataInner.");
+            if (!quantity.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetOffersResponseDataInner.", nameof(quantity));
 
-            if (quantityAvailable == null)
-                throw new ArgumentNullException(nameof(quantityAvailable), "Property is required for class GetAssetOffersResponseDataInner.");
+            if (!quantityAvailable.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetOffersResponseDataInner.", nameof(quantityAvailable));
 
-            if (quantityFilled == null)
-                throw new ArgumentNullException(nameof(quantityFilled), "Property is required for class GetAssetOffersResponseDataInner.");
+            if (!quantityFilled.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetOffersResponseDataInner.", nameof(quantityFilled));
 
-            if (startTime == null)
-                throw new ArgumentNullException(nameof(startTime), "Property is required for class GetAssetOffersResponseDataInner.");
+            if (!startTime.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetOffersResponseDataInner.", nameof(startTime));
 
-            if (tokenAmount == null)
-                throw new ArgumentNullException(nameof(tokenAmount), "Property is required for class GetAssetOffersResponseDataInner.");
+            if (!tokenAmount.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetOffersResponseDataInner.", nameof(tokenAmount));
 
-            if (tokenAmountNumber == null)
-                throw new ArgumentNullException(nameof(tokenAmountNumber), "Property is required for class GetAssetOffersResponseDataInner.");
+            if (!tokenAmountNumber.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetOffersResponseDataInner.", nameof(tokenAmountNumber));
 
-            return new GetAssetOffersResponseDataInner(currency.Value, endTime.Value, kind.Value, offerer, offererEntityId, orderId, quantity.Value, quantityAvailable.Value, quantityFilled.Value, startTime.Value, tokenAmount, tokenAmountNumber.Value);
+            if (currency.IsSet && currency.Value == null)
+                throw new ArgumentNullException(nameof(currency), "Property is not nullable for class GetAssetOffersResponseDataInner.");
+
+            if (endTime.IsSet && endTime.Value == null)
+                throw new ArgumentNullException(nameof(endTime), "Property is not nullable for class GetAssetOffersResponseDataInner.");
+
+            if (kind.IsSet && kind.Value == null)
+                throw new ArgumentNullException(nameof(kind), "Property is not nullable for class GetAssetOffersResponseDataInner.");
+
+            if (offerer.IsSet && offerer.Value == null)
+                throw new ArgumentNullException(nameof(offerer), "Property is not nullable for class GetAssetOffersResponseDataInner.");
+
+            if (offererEntityId.IsSet && offererEntityId.Value == null)
+                throw new ArgumentNullException(nameof(offererEntityId), "Property is not nullable for class GetAssetOffersResponseDataInner.");
+
+            if (orderId.IsSet && orderId.Value == null)
+                throw new ArgumentNullException(nameof(orderId), "Property is not nullable for class GetAssetOffersResponseDataInner.");
+
+            if (quantity.IsSet && quantity.Value == null)
+                throw new ArgumentNullException(nameof(quantity), "Property is not nullable for class GetAssetOffersResponseDataInner.");
+
+            if (quantityAvailable.IsSet && quantityAvailable.Value == null)
+                throw new ArgumentNullException(nameof(quantityAvailable), "Property is not nullable for class GetAssetOffersResponseDataInner.");
+
+            if (quantityFilled.IsSet && quantityFilled.Value == null)
+                throw new ArgumentNullException(nameof(quantityFilled), "Property is not nullable for class GetAssetOffersResponseDataInner.");
+
+            if (startTime.IsSet && startTime.Value == null)
+                throw new ArgumentNullException(nameof(startTime), "Property is not nullable for class GetAssetOffersResponseDataInner.");
+
+            if (tokenAmount.IsSet && tokenAmount.Value == null)
+                throw new ArgumentNullException(nameof(tokenAmount), "Property is not nullable for class GetAssetOffersResponseDataInner.");
+
+            if (tokenAmountNumber.IsSet && tokenAmountNumber.Value == null)
+                throw new ArgumentNullException(nameof(tokenAmountNumber), "Property is not nullable for class GetAssetOffersResponseDataInner.");
+
+            return new GetAssetOffersResponseDataInner(currency.Value.Value, endTime.Value.Value, kind.Value.Value, offerer.Value, offererEntityId.Value, orderId.Value, quantity.Value.Value, quantityAvailable.Value.Value, quantityFilled.Value.Value, startTime.Value.Value, tokenAmount.Value, tokenAmountNumber.Value.Value);
         }
 
         /// <summary>
@@ -620,6 +653,17 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetAssetOffersResponseDataInner getAssetOffersResponseDataInner, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (getAssetOffersResponseDataInner.Offerer == null)
+                throw new ArgumentNullException(nameof(getAssetOffersResponseDataInner.Offerer), "Property is required for class GetAssetOffersResponseDataInner.");
+
+            if (getAssetOffersResponseDataInner.OffererEntityId == null)
+                throw new ArgumentNullException(nameof(getAssetOffersResponseDataInner.OffererEntityId), "Property is required for class GetAssetOffersResponseDataInner.");
+
+            if (getAssetOffersResponseDataInner.OrderId == null)
+                throw new ArgumentNullException(nameof(getAssetOffersResponseDataInner.OrderId), "Property is required for class GetAssetOffersResponseDataInner.");
+
+            if (getAssetOffersResponseDataInner.TokenAmount == null)
+                throw new ArgumentNullException(nameof(getAssetOffersResponseDataInner.TokenAmount), "Property is required for class GetAssetOffersResponseDataInner.");
 
             var currencyRawValue = GetAssetOffersResponseDataInner.CurrencyEnumToJsonValue(getAssetOffersResponseDataInner.Currency);
             if (currencyRawValue != null)
@@ -636,13 +680,21 @@ namespace Beam.Model
                 writer.WriteNull("kind");
 
             writer.WriteString("offerer", getAssetOffersResponseDataInner.Offerer);
+
             writer.WriteString("offererEntityId", getAssetOffersResponseDataInner.OffererEntityId);
+
             writer.WriteString("orderId", getAssetOffersResponseDataInner.OrderId);
+
             writer.WriteNumber("quantity", getAssetOffersResponseDataInner.Quantity);
+
             writer.WriteNumber("quantityAvailable", getAssetOffersResponseDataInner.QuantityAvailable);
+
             writer.WriteNumber("quantityFilled", getAssetOffersResponseDataInner.QuantityFilled);
+
             writer.WriteString("startTime", getAssetOffersResponseDataInner.StartTime.ToString(StartTimeFormat));
+
             writer.WriteString("tokenAmount", getAssetOffersResponseDataInner.TokenAmount);
+
             writer.WriteNumber("tokenAmountNumber", getAssetOffersResponseDataInner.TokenAmountNumber);
         }
     }

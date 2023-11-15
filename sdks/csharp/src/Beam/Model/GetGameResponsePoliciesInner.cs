@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -119,7 +120,6 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string ModelEnumToJsonValue(ModelEnum value)
         {
-
             if (value == ModelEnum.ContractFunctions)
                 return "ContractFunctions";
 
@@ -192,7 +192,6 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string TypeEnumToJsonValue(TypeEnum value)
         {
-
             if (value == TypeEnum.PayForUser)
                 return "PayForUser";
 
@@ -263,7 +262,7 @@ namespace Beam.Model
         /// <param name="value"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public static string? RateTypeEnumToJsonValue(RateTypeEnum? value)
+        public static string RateTypeEnumToJsonValue(RateTypeEnum? value)
         {
             if (value == null)
                 return null;
@@ -394,18 +393,18 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            int? chainId = default;
-            string externalId = default;
-            string gameId = default;
-            string id = default;
-            GetGameResponsePoliciesInner.ModelEnum? model = default;
-            string name = default;
-            GetGameResponsePoliciesInner.TypeEnum? type = default;
-            string amount = default;
-            Object createdAt = default;
-            GetGameResponsePoliciesInner.RateTypeEnum? rateType = default;
-            string token = default;
-            Object updatedAt = default;
+            Option<int?> chainId = default;
+            Option<string> externalId = default;
+            Option<string> gameId = default;
+            Option<string> id = default;
+            Option<GetGameResponsePoliciesInner.ModelEnum?> model = default;
+            Option<string> name = default;
+            Option<GetGameResponsePoliciesInner.TypeEnum?> type = default;
+            Option<string> amount = default;
+            Option<Object> createdAt = default;
+            Option<GetGameResponsePoliciesInner.RateTypeEnum?> rateType = default;
+            Option<string> token = default;
+            Option<Object> updatedAt = default;
 
             while (utf8JsonReader.Read())
             {
@@ -424,51 +423,48 @@ namespace Beam.Model
                     {
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = utf8JsonReader.GetInt32();
+                                chainId = new Option<int?>(utf8JsonReader.GetInt32());
                             break;
                         case "externalId":
-                            externalId = utf8JsonReader.GetString();
+                            externalId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "gameId":
-                            gameId = utf8JsonReader.GetString();
+                            gameId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "id":
-                            id = utf8JsonReader.GetString();
+                            id = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "model":
                             string modelRawValue = utf8JsonReader.GetString();
-                            model = modelRawValue == null
-                                ? null
-                                : GetGameResponsePoliciesInner.ModelEnumFromStringOrDefault(modelRawValue);
+                            if (modelRawValue != null)
+                                model = new Option<GetGameResponsePoliciesInner.ModelEnum?>(GetGameResponsePoliciesInner.ModelEnumFromStringOrDefault(modelRawValue));
                             break;
                         case "name":
-                            name = utf8JsonReader.GetString();
+                            name = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "type":
                             string typeRawValue = utf8JsonReader.GetString();
-                            type = typeRawValue == null
-                                ? null
-                                : GetGameResponsePoliciesInner.TypeEnumFromStringOrDefault(typeRawValue);
+                            if (typeRawValue != null)
+                                type = new Option<GetGameResponsePoliciesInner.TypeEnum?>(GetGameResponsePoliciesInner.TypeEnumFromStringOrDefault(typeRawValue));
                             break;
                         case "amount":
-                            amount = utf8JsonReader.GetString();
+                            amount = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "createdAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                createdAt = JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions);
+                                createdAt = new Option<Object>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "rateType":
                             string rateTypeRawValue = utf8JsonReader.GetString();
-                            rateType = rateTypeRawValue == null
-                                ? null
-                                : GetGameResponsePoliciesInner.RateTypeEnumFromStringOrDefault(rateTypeRawValue);
+                            if (rateTypeRawValue != null)
+                                rateType = new Option<GetGameResponsePoliciesInner.RateTypeEnum?>(GetGameResponsePoliciesInner.RateTypeEnumFromStringOrDefault(rateTypeRawValue));
                             break;
                         case "token":
-                            token = utf8JsonReader.GetString();
+                            token = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "updatedAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                updatedAt = JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions);
+                                updatedAt = new Option<Object>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -476,28 +472,64 @@ namespace Beam.Model
                 }
             }
 
-            if (chainId == null)
-                throw new ArgumentNullException(nameof(chainId), "Property is required for class GetGameResponsePoliciesInner.");
+            if (!chainId.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponsePoliciesInner.", nameof(chainId));
 
-            if (externalId == null)
-                throw new ArgumentNullException(nameof(externalId), "Property is required for class GetGameResponsePoliciesInner.");
+            if (!externalId.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponsePoliciesInner.", nameof(externalId));
 
-            if (gameId == null)
-                throw new ArgumentNullException(nameof(gameId), "Property is required for class GetGameResponsePoliciesInner.");
+            if (!gameId.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponsePoliciesInner.", nameof(gameId));
 
-            if (id == null)
-                throw new ArgumentNullException(nameof(id), "Property is required for class GetGameResponsePoliciesInner.");
+            if (!id.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponsePoliciesInner.", nameof(id));
 
-            if (model == null)
-                throw new ArgumentNullException(nameof(model), "Property is required for class GetGameResponsePoliciesInner.");
+            if (!model.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponsePoliciesInner.", nameof(model));
 
-            if (name == null)
-                throw new ArgumentNullException(nameof(name), "Property is required for class GetGameResponsePoliciesInner.");
+            if (!name.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponsePoliciesInner.", nameof(name));
 
-            if (type == null)
-                throw new ArgumentNullException(nameof(type), "Property is required for class GetGameResponsePoliciesInner.");
+            if (!type.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponsePoliciesInner.", nameof(type));
 
-            return new GetGameResponsePoliciesInner(chainId.Value, externalId, gameId, id, model.Value, name, type.Value, amount, createdAt, rateType, token, updatedAt);
+            if (!amount.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponsePoliciesInner.", nameof(amount));
+
+            if (!createdAt.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponsePoliciesInner.", nameof(createdAt));
+
+            if (!rateType.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponsePoliciesInner.", nameof(rateType));
+
+            if (!token.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponsePoliciesInner.", nameof(token));
+
+            if (!updatedAt.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponsePoliciesInner.", nameof(updatedAt));
+
+            if (chainId.IsSet && chainId.Value == null)
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class GetGameResponsePoliciesInner.");
+
+            if (externalId.IsSet && externalId.Value == null)
+                throw new ArgumentNullException(nameof(externalId), "Property is not nullable for class GetGameResponsePoliciesInner.");
+
+            if (gameId.IsSet && gameId.Value == null)
+                throw new ArgumentNullException(nameof(gameId), "Property is not nullable for class GetGameResponsePoliciesInner.");
+
+            if (id.IsSet && id.Value == null)
+                throw new ArgumentNullException(nameof(id), "Property is not nullable for class GetGameResponsePoliciesInner.");
+
+            if (model.IsSet && model.Value == null)
+                throw new ArgumentNullException(nameof(model), "Property is not nullable for class GetGameResponsePoliciesInner.");
+
+            if (name.IsSet && name.Value == null)
+                throw new ArgumentNullException(nameof(name), "Property is not nullable for class GetGameResponsePoliciesInner.");
+
+            if (type.IsSet && type.Value == null)
+                throw new ArgumentNullException(nameof(type), "Property is not nullable for class GetGameResponsePoliciesInner.");
+
+            return new GetGameResponsePoliciesInner(chainId.Value.Value, externalId.Value, gameId.Value, id.Value, model.Value.Value, name.Value, type.Value.Value, amount.Value, createdAt.Value, rateType.Value, token.Value, updatedAt.Value);
         }
 
         /// <summary>
@@ -524,9 +556,24 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetGameResponsePoliciesInner getGameResponsePoliciesInner, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (getGameResponsePoliciesInner.ExternalId == null)
+                throw new ArgumentNullException(nameof(getGameResponsePoliciesInner.ExternalId), "Property is required for class GetGameResponsePoliciesInner.");
+
+            if (getGameResponsePoliciesInner.GameId == null)
+                throw new ArgumentNullException(nameof(getGameResponsePoliciesInner.GameId), "Property is required for class GetGameResponsePoliciesInner.");
+
+            if (getGameResponsePoliciesInner.Id == null)
+                throw new ArgumentNullException(nameof(getGameResponsePoliciesInner.Id), "Property is required for class GetGameResponsePoliciesInner.");
+
+            if (getGameResponsePoliciesInner.Name == null)
+                throw new ArgumentNullException(nameof(getGameResponsePoliciesInner.Name), "Property is required for class GetGameResponsePoliciesInner.");
+
             writer.WriteNumber("chainId", getGameResponsePoliciesInner.ChainId);
+
             writer.WriteString("externalId", getGameResponsePoliciesInner.ExternalId);
+
             writer.WriteString("gameId", getGameResponsePoliciesInner.GameId);
+
             writer.WriteString("id", getGameResponsePoliciesInner.Id);
 
             var modelRawValue = GetGameResponsePoliciesInner.ModelEnumToJsonValue(getGameResponsePoliciesInner.Model);
@@ -543,19 +590,36 @@ namespace Beam.Model
             else
                 writer.WriteNull("type");
 
-            writer.WriteString("amount", getGameResponsePoliciesInner.Amount);
-            writer.WritePropertyName("createdAt");
-            JsonSerializer.Serialize(writer, getGameResponsePoliciesInner.CreatedAt, jsonSerializerOptions);
+            if (getGameResponsePoliciesInner.Amount != null)
+                writer.WriteString("amount", getGameResponsePoliciesInner.Amount);
+            else
+                writer.WriteNull("amount");
 
-            var rateTypeRawValue = GetGameResponsePoliciesInner.RateTypeEnumToJsonValue(getGameResponsePoliciesInner.RateType);
+            if (getGameResponsePoliciesInner.CreatedAt != null)
+            {
+                writer.WritePropertyName("createdAt");
+                JsonSerializer.Serialize(writer, getGameResponsePoliciesInner.CreatedAt, jsonSerializerOptions);
+            }
+            else
+                writer.WriteNull("createdAt");
+            var rateTypeRawValue = GetGameResponsePoliciesInner.RateTypeEnumToJsonValue(getGameResponsePoliciesInner.RateType.Value);
             if (rateTypeRawValue != null)
                 writer.WriteString("rateType", rateTypeRawValue);
             else
                 writer.WriteNull("rateType");
 
-            writer.WriteString("token", getGameResponsePoliciesInner.Token);
-            writer.WritePropertyName("updatedAt");
-            JsonSerializer.Serialize(writer, getGameResponsePoliciesInner.UpdatedAt, jsonSerializerOptions);
+            if (getGameResponsePoliciesInner.Token != null)
+                writer.WriteString("token", getGameResponsePoliciesInner.Token);
+            else
+                writer.WriteNull("token");
+
+            if (getGameResponsePoliciesInner.UpdatedAt != null)
+            {
+                writer.WritePropertyName("updatedAt");
+                JsonSerializer.Serialize(writer, getGameResponsePoliciesInner.UpdatedAt, jsonSerializerOptions);
+            }
+            else
+                writer.WriteNull("updatedAt");
         }
     }
 }

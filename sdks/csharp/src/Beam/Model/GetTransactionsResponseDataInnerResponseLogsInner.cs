@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -35,24 +36,24 @@ namespace Beam.Model
         /// <param name="blockNumber">blockNumber</param>
         /// <param name="data">data</param>
         /// <param name="logIndex">logIndex</param>
-        /// <param name="orphaned">orphaned</param>
         /// <param name="removed">removed</param>
         /// <param name="topics">topics</param>
         /// <param name="transactionHash">transactionHash</param>
         /// <param name="transactionIndex">transactionIndex</param>
+        /// <param name="orphaned">orphaned</param>
         [JsonConstructor]
-        public GetTransactionsResponseDataInnerResponseLogsInner(string address, string blockHash, decimal blockNumber, string data, decimal logIndex, bool orphaned, bool removed, List<string> topics, string transactionHash, decimal transactionIndex)
+        public GetTransactionsResponseDataInnerResponseLogsInner(string address, string blockHash, decimal blockNumber, string data, decimal logIndex, bool removed, List<string> topics, string transactionHash, decimal transactionIndex, Option<bool?> orphaned = default)
         {
             Address = address;
             BlockHash = blockHash;
             BlockNumber = blockNumber;
             Data = data;
             LogIndex = logIndex;
-            Orphaned = orphaned;
             Removed = removed;
             Topics = topics;
             TransactionHash = transactionHash;
             TransactionIndex = transactionIndex;
+            OrphanedOption = orphaned;
             OnCreated();
         }
 
@@ -89,12 +90,6 @@ namespace Beam.Model
         public decimal LogIndex { get; set; }
 
         /// <summary>
-        /// Gets or Sets Orphaned
-        /// </summary>
-        [JsonPropertyName("orphaned")]
-        public bool Orphaned { get; set; }
-
-        /// <summary>
         /// Gets or Sets Removed
         /// </summary>
         [JsonPropertyName("removed")]
@@ -119,6 +114,19 @@ namespace Beam.Model
         public decimal TransactionIndex { get; set; }
 
         /// <summary>
+        /// Used to track the state of Orphaned
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> OrphanedOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Orphaned
+        /// </summary>
+        [JsonPropertyName("orphaned")]
+        public bool? Orphaned { get { return this. OrphanedOption; } set { this.OrphanedOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -131,11 +139,11 @@ namespace Beam.Model
             sb.Append("  BlockNumber: ").Append(BlockNumber).Append("\n");
             sb.Append("  Data: ").Append(Data).Append("\n");
             sb.Append("  LogIndex: ").Append(LogIndex).Append("\n");
-            sb.Append("  Orphaned: ").Append(Orphaned).Append("\n");
             sb.Append("  Removed: ").Append(Removed).Append("\n");
             sb.Append("  Topics: ").Append(Topics).Append("\n");
             sb.Append("  TransactionHash: ").Append(TransactionHash).Append("\n");
             sb.Append("  TransactionIndex: ").Append(TransactionIndex).Append("\n");
+            sb.Append("  Orphaned: ").Append(Orphaned).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -173,16 +181,16 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string address = default;
-            string blockHash = default;
-            decimal? blockNumber = default;
-            string data = default;
-            decimal? logIndex = default;
-            bool? orphaned = default;
-            bool? removed = default;
-            List<string> topics = default;
-            string transactionHash = default;
-            decimal? transactionIndex = default;
+            Option<string> address = default;
+            Option<string> blockHash = default;
+            Option<decimal?> blockNumber = default;
+            Option<string> data = default;
+            Option<decimal?> logIndex = default;
+            Option<bool?> removed = default;
+            Option<List<string>> topics = default;
+            Option<string> transactionHash = default;
+            Option<decimal?> transactionIndex = default;
+            Option<bool?> orphaned = default;
 
             while (utf8JsonReader.Read())
             {
@@ -200,40 +208,40 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "address":
-                            address = utf8JsonReader.GetString();
+                            address = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "blockHash":
-                            blockHash = utf8JsonReader.GetString();
+                            blockHash = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "blockNumber":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                blockNumber = utf8JsonReader.GetDecimal();
+                                blockNumber = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "data":
-                            data = utf8JsonReader.GetString();
+                            data = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "logIndex":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                logIndex = utf8JsonReader.GetDecimal();
-                            break;
-                        case "orphaned":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                orphaned = utf8JsonReader.GetBoolean();
+                                logIndex = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "removed":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                removed = utf8JsonReader.GetBoolean();
+                                removed = new Option<bool?>(utf8JsonReader.GetBoolean());
                             break;
                         case "topics":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                topics = JsonSerializer.Deserialize<List<string>>(ref utf8JsonReader, jsonSerializerOptions);
+                                topics = new Option<List<string>>(JsonSerializer.Deserialize<List<string>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "transactionHash":
-                            transactionHash = utf8JsonReader.GetString();
+                            transactionHash = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "transactionIndex":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                transactionIndex = utf8JsonReader.GetDecimal();
+                                transactionIndex = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                            break;
+                        case "orphaned":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                orphaned = new Option<bool?>(utf8JsonReader.GetBoolean());
                             break;
                         default:
                             break;
@@ -241,37 +249,64 @@ namespace Beam.Model
                 }
             }
 
-            if (address == null)
-                throw new ArgumentNullException(nameof(address), "Property is required for class GetTransactionsResponseDataInnerResponseLogsInner.");
+            if (!address.IsSet)
+                throw new ArgumentException("Property is required for class GetTransactionsResponseDataInnerResponseLogsInner.", nameof(address));
 
-            if (blockHash == null)
-                throw new ArgumentNullException(nameof(blockHash), "Property is required for class GetTransactionsResponseDataInnerResponseLogsInner.");
+            if (!blockHash.IsSet)
+                throw new ArgumentException("Property is required for class GetTransactionsResponseDataInnerResponseLogsInner.", nameof(blockHash));
 
-            if (blockNumber == null)
-                throw new ArgumentNullException(nameof(blockNumber), "Property is required for class GetTransactionsResponseDataInnerResponseLogsInner.");
+            if (!blockNumber.IsSet)
+                throw new ArgumentException("Property is required for class GetTransactionsResponseDataInnerResponseLogsInner.", nameof(blockNumber));
 
-            if (data == null)
-                throw new ArgumentNullException(nameof(data), "Property is required for class GetTransactionsResponseDataInnerResponseLogsInner.");
+            if (!data.IsSet)
+                throw new ArgumentException("Property is required for class GetTransactionsResponseDataInnerResponseLogsInner.", nameof(data));
 
-            if (logIndex == null)
-                throw new ArgumentNullException(nameof(logIndex), "Property is required for class GetTransactionsResponseDataInnerResponseLogsInner.");
+            if (!logIndex.IsSet)
+                throw new ArgumentException("Property is required for class GetTransactionsResponseDataInnerResponseLogsInner.", nameof(logIndex));
 
-            if (orphaned == null)
-                throw new ArgumentNullException(nameof(orphaned), "Property is required for class GetTransactionsResponseDataInnerResponseLogsInner.");
+            if (!removed.IsSet)
+                throw new ArgumentException("Property is required for class GetTransactionsResponseDataInnerResponseLogsInner.", nameof(removed));
 
-            if (removed == null)
-                throw new ArgumentNullException(nameof(removed), "Property is required for class GetTransactionsResponseDataInnerResponseLogsInner.");
+            if (!topics.IsSet)
+                throw new ArgumentException("Property is required for class GetTransactionsResponseDataInnerResponseLogsInner.", nameof(topics));
 
-            if (topics == null)
-                throw new ArgumentNullException(nameof(topics), "Property is required for class GetTransactionsResponseDataInnerResponseLogsInner.");
+            if (!transactionHash.IsSet)
+                throw new ArgumentException("Property is required for class GetTransactionsResponseDataInnerResponseLogsInner.", nameof(transactionHash));
 
-            if (transactionHash == null)
-                throw new ArgumentNullException(nameof(transactionHash), "Property is required for class GetTransactionsResponseDataInnerResponseLogsInner.");
+            if (!transactionIndex.IsSet)
+                throw new ArgumentException("Property is required for class GetTransactionsResponseDataInnerResponseLogsInner.", nameof(transactionIndex));
 
-            if (transactionIndex == null)
-                throw new ArgumentNullException(nameof(transactionIndex), "Property is required for class GetTransactionsResponseDataInnerResponseLogsInner.");
+            if (address.IsSet && address.Value == null)
+                throw new ArgumentNullException(nameof(address), "Property is not nullable for class GetTransactionsResponseDataInnerResponseLogsInner.");
 
-            return new GetTransactionsResponseDataInnerResponseLogsInner(address, blockHash, blockNumber.Value, data, logIndex.Value, orphaned.Value, removed.Value, topics, transactionHash, transactionIndex.Value);
+            if (blockHash.IsSet && blockHash.Value == null)
+                throw new ArgumentNullException(nameof(blockHash), "Property is not nullable for class GetTransactionsResponseDataInnerResponseLogsInner.");
+
+            if (blockNumber.IsSet && blockNumber.Value == null)
+                throw new ArgumentNullException(nameof(blockNumber), "Property is not nullable for class GetTransactionsResponseDataInnerResponseLogsInner.");
+
+            if (data.IsSet && data.Value == null)
+                throw new ArgumentNullException(nameof(data), "Property is not nullable for class GetTransactionsResponseDataInnerResponseLogsInner.");
+
+            if (logIndex.IsSet && logIndex.Value == null)
+                throw new ArgumentNullException(nameof(logIndex), "Property is not nullable for class GetTransactionsResponseDataInnerResponseLogsInner.");
+
+            if (removed.IsSet && removed.Value == null)
+                throw new ArgumentNullException(nameof(removed), "Property is not nullable for class GetTransactionsResponseDataInnerResponseLogsInner.");
+
+            if (topics.IsSet && topics.Value == null)
+                throw new ArgumentNullException(nameof(topics), "Property is not nullable for class GetTransactionsResponseDataInnerResponseLogsInner.");
+
+            if (transactionHash.IsSet && transactionHash.Value == null)
+                throw new ArgumentNullException(nameof(transactionHash), "Property is not nullable for class GetTransactionsResponseDataInnerResponseLogsInner.");
+
+            if (transactionIndex.IsSet && transactionIndex.Value == null)
+                throw new ArgumentNullException(nameof(transactionIndex), "Property is not nullable for class GetTransactionsResponseDataInnerResponseLogsInner.");
+
+            if (orphaned.IsSet && orphaned.Value == null)
+                throw new ArgumentNullException(nameof(orphaned), "Property is not nullable for class GetTransactionsResponseDataInnerResponseLogsInner.");
+
+            return new GetTransactionsResponseDataInnerResponseLogsInner(address.Value, blockHash.Value, blockNumber.Value.Value, data.Value, logIndex.Value.Value, removed.Value.Value, topics.Value, transactionHash.Value, transactionIndex.Value.Value, orphaned);
         }
 
         /// <summary>
@@ -298,17 +333,41 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetTransactionsResponseDataInnerResponseLogsInner getTransactionsResponseDataInnerResponseLogsInner, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (getTransactionsResponseDataInnerResponseLogsInner.Address == null)
+                throw new ArgumentNullException(nameof(getTransactionsResponseDataInnerResponseLogsInner.Address), "Property is required for class GetTransactionsResponseDataInnerResponseLogsInner.");
+
+            if (getTransactionsResponseDataInnerResponseLogsInner.BlockHash == null)
+                throw new ArgumentNullException(nameof(getTransactionsResponseDataInnerResponseLogsInner.BlockHash), "Property is required for class GetTransactionsResponseDataInnerResponseLogsInner.");
+
+            if (getTransactionsResponseDataInnerResponseLogsInner.Data == null)
+                throw new ArgumentNullException(nameof(getTransactionsResponseDataInnerResponseLogsInner.Data), "Property is required for class GetTransactionsResponseDataInnerResponseLogsInner.");
+
+            if (getTransactionsResponseDataInnerResponseLogsInner.Topics == null)
+                throw new ArgumentNullException(nameof(getTransactionsResponseDataInnerResponseLogsInner.Topics), "Property is required for class GetTransactionsResponseDataInnerResponseLogsInner.");
+
+            if (getTransactionsResponseDataInnerResponseLogsInner.TransactionHash == null)
+                throw new ArgumentNullException(nameof(getTransactionsResponseDataInnerResponseLogsInner.TransactionHash), "Property is required for class GetTransactionsResponseDataInnerResponseLogsInner.");
+
             writer.WriteString("address", getTransactionsResponseDataInnerResponseLogsInner.Address);
+
             writer.WriteString("blockHash", getTransactionsResponseDataInnerResponseLogsInner.BlockHash);
+
             writer.WriteNumber("blockNumber", getTransactionsResponseDataInnerResponseLogsInner.BlockNumber);
+
             writer.WriteString("data", getTransactionsResponseDataInnerResponseLogsInner.Data);
+
             writer.WriteNumber("logIndex", getTransactionsResponseDataInnerResponseLogsInner.LogIndex);
-            writer.WriteBoolean("orphaned", getTransactionsResponseDataInnerResponseLogsInner.Orphaned);
+
             writer.WriteBoolean("removed", getTransactionsResponseDataInnerResponseLogsInner.Removed);
+
             writer.WritePropertyName("topics");
             JsonSerializer.Serialize(writer, getTransactionsResponseDataInnerResponseLogsInner.Topics, jsonSerializerOptions);
             writer.WriteString("transactionHash", getTransactionsResponseDataInnerResponseLogsInner.TransactionHash);
+
             writer.WriteNumber("transactionIndex", getTransactionsResponseDataInnerResponseLogsInner.TransactionIndex);
+
+            if (getTransactionsResponseDataInnerResponseLogsInner.OrphanedOption.IsSet)
+                writer.WriteBoolean("orphaned", getTransactionsResponseDataInnerResponseLogsInner.OrphanedOption.Value.Value);
         }
     }
 }

@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -55,7 +56,7 @@ namespace Beam.Model
         /// <param name="thumbnailImageUrl">thumbnailImageUrl</param>
         /// <param name="youtubeUrl">youtubeUrl</param>
         [JsonConstructor]
-        public GetAssetResponse(decimal chainId, GetAssetResponseContract contract, string contractAddress, string id, string name, NetworkEnum network, string tokenId, string tokenUri, List<GetAssetsResponseDataInnerAttributesInner> attributes = default, string backgroundColor = default, string description = default, string externalUrl = default, string indexerDataSyncedAt = default, string lastSoldTokenAmount = default, LastSoldTokenCurrencyEnum? lastSoldTokenCurrency = default, GetAssetResponseListing listing = default, string mintedAt = default, decimal? normalizedRarityScore = default, List<GetAssetResponseOwnershipByAddressesInner> ownershipByAddresses = default, RarityEnum? rarity = default, decimal? rarityScore = default, string standardImageUrl = default, string thumbnailImageUrl = default, string youtubeUrl = default)
+        public GetAssetResponse(decimal chainId, GetAssetResponseContract contract, string contractAddress, string id, string name, NetworkEnum network, string tokenId, string tokenUri, Option<List<GetAssetsResponseDataInnerAttributesInner>> attributes = default, Option<string> backgroundColor = default, Option<string> description = default, Option<string> externalUrl = default, Option<string> indexerDataSyncedAt = default, Option<string> lastSoldTokenAmount = default, Option<LastSoldTokenCurrencyEnum?> lastSoldTokenCurrency = default, Option<GetAssetResponseListing> listing = default, Option<string> mintedAt = default, Option<decimal?> normalizedRarityScore = default, Option<List<GetAssetResponseOwnershipByAddressesInner>> ownershipByAddresses = default, Option<RarityEnum?> rarity = default, Option<decimal?> rarityScore = default, Option<string> standardImageUrl = default, Option<string> thumbnailImageUrl = default, Option<string> youtubeUrl = default)
         {
             ChainId = chainId;
             Contract = contract;
@@ -65,22 +66,22 @@ namespace Beam.Model
             Network = network;
             TokenId = tokenId;
             TokenUri = tokenUri;
-            Attributes = attributes;
-            BackgroundColor = backgroundColor;
-            Description = description;
-            ExternalUrl = externalUrl;
-            IndexerDataSyncedAt = indexerDataSyncedAt;
-            LastSoldTokenAmount = lastSoldTokenAmount;
-            LastSoldTokenCurrency = lastSoldTokenCurrency;
-            Listing = listing;
-            MintedAt = mintedAt;
-            NormalizedRarityScore = normalizedRarityScore;
-            OwnershipByAddresses = ownershipByAddresses;
-            Rarity = rarity;
-            RarityScore = rarityScore;
-            StandardImageUrl = standardImageUrl;
-            ThumbnailImageUrl = thumbnailImageUrl;
-            YoutubeUrl = youtubeUrl;
+            AttributesOption = attributes;
+            BackgroundColorOption = backgroundColor;
+            DescriptionOption = description;
+            ExternalUrlOption = externalUrl;
+            IndexerDataSyncedAtOption = indexerDataSyncedAt;
+            LastSoldTokenAmountOption = lastSoldTokenAmount;
+            LastSoldTokenCurrencyOption = lastSoldTokenCurrency;
+            ListingOption = listing;
+            MintedAtOption = mintedAt;
+            NormalizedRarityScoreOption = normalizedRarityScore;
+            OwnershipByAddressesOption = ownershipByAddresses;
+            RarityOption = rarity;
+            RarityScoreOption = rarityScore;
+            StandardImageUrlOption = standardImageUrl;
+            ThumbnailImageUrlOption = thumbnailImageUrl;
+            YoutubeUrlOption = youtubeUrl;
             OnCreated();
         }
 
@@ -165,7 +166,6 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string NetworkEnumToJsonValue(NetworkEnum value)
         {
-
             if (value == NetworkEnum.Avalanche)
                 return "Avalanche";
 
@@ -352,7 +352,7 @@ namespace Beam.Model
         /// <param name="value"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public static string? LastSoldTokenCurrencyEnumToJsonValue(LastSoldTokenCurrencyEnum? value)
+        public static string LastSoldTokenCurrencyEnumToJsonValue(LastSoldTokenCurrencyEnum? value)
         {
             if (value == null)
                 return null;
@@ -397,10 +397,17 @@ namespace Beam.Model
         }
 
         /// <summary>
+        /// Used to track the state of LastSoldTokenCurrency
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<LastSoldTokenCurrencyEnum?> LastSoldTokenCurrencyOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets LastSoldTokenCurrency
         /// </summary>
         [JsonPropertyName("lastSoldTokenCurrency")]
-        public LastSoldTokenCurrencyEnum? LastSoldTokenCurrency { get; set; }
+        public LastSoldTokenCurrencyEnum? LastSoldTokenCurrency { get { return this.LastSoldTokenCurrencyOption; } set { this.LastSoldTokenCurrencyOption = new(value); } }
 
         /// <summary>
         /// Defines Rarity
@@ -490,7 +497,7 @@ namespace Beam.Model
         /// <param name="value"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public static string? RarityEnumToJsonValue(RarityEnum? value)
+        public static string RarityEnumToJsonValue(RarityEnum? value)
         {
             if (value == null)
                 return null;
@@ -514,10 +521,17 @@ namespace Beam.Model
         }
 
         /// <summary>
+        /// Used to track the state of Rarity
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<RarityEnum?> RarityOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets Rarity
         /// </summary>
         [JsonPropertyName("rarity")]
-        public RarityEnum? Rarity { get; set; }
+        public RarityEnum? Rarity { get { return this.RarityOption; } set { this.RarityOption = new(value); } }
 
         /// <summary>
         /// Gets or Sets ChainId
@@ -562,88 +576,186 @@ namespace Beam.Model
         public string TokenUri { get; set; }
 
         /// <summary>
+        /// Used to track the state of Attributes
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<GetAssetsResponseDataInnerAttributesInner>> AttributesOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets Attributes
         /// </summary>
         [JsonPropertyName("attributes")]
-        public List<GetAssetsResponseDataInnerAttributesInner> Attributes { get; set; }
+        public List<GetAssetsResponseDataInnerAttributesInner> Attributes { get { return this. AttributesOption; } set { this.AttributesOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of BackgroundColor
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> BackgroundColorOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets BackgroundColor
         /// </summary>
         [JsonPropertyName("backgroundColor")]
-        public string BackgroundColor { get; set; }
+        public string BackgroundColor { get { return this. BackgroundColorOption; } set { this.BackgroundColorOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Description
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> DescriptionOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Description
         /// </summary>
         [JsonPropertyName("description")]
-        public string Description { get; set; }
+        public string Description { get { return this. DescriptionOption; } set { this.DescriptionOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of ExternalUrl
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> ExternalUrlOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets ExternalUrl
         /// </summary>
         [JsonPropertyName("externalUrl")]
-        public string ExternalUrl { get; set; }
+        public string ExternalUrl { get { return this. ExternalUrlOption; } set { this.ExternalUrlOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of IndexerDataSyncedAt
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> IndexerDataSyncedAtOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets IndexerDataSyncedAt
         /// </summary>
         [JsonPropertyName("indexerDataSyncedAt")]
-        public string IndexerDataSyncedAt { get; set; }
+        public string IndexerDataSyncedAt { get { return this. IndexerDataSyncedAtOption; } set { this.IndexerDataSyncedAtOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of LastSoldTokenAmount
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> LastSoldTokenAmountOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets LastSoldTokenAmount
         /// </summary>
         [JsonPropertyName("lastSoldTokenAmount")]
-        public string LastSoldTokenAmount { get; set; }
+        public string LastSoldTokenAmount { get { return this. LastSoldTokenAmountOption; } set { this.LastSoldTokenAmountOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Listing
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<GetAssetResponseListing> ListingOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Listing
         /// </summary>
         [JsonPropertyName("listing")]
-        public GetAssetResponseListing Listing { get; set; }
+        public GetAssetResponseListing Listing { get { return this. ListingOption; } set { this.ListingOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of MintedAt
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> MintedAtOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets MintedAt
         /// </summary>
         [JsonPropertyName("mintedAt")]
-        public string MintedAt { get; set; }
+        public string MintedAt { get { return this. MintedAtOption; } set { this.MintedAtOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of NormalizedRarityScore
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<decimal?> NormalizedRarityScoreOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets NormalizedRarityScore
         /// </summary>
         [JsonPropertyName("normalizedRarityScore")]
-        public decimal? NormalizedRarityScore { get; set; }
+        public decimal? NormalizedRarityScore { get { return this. NormalizedRarityScoreOption; } set { this.NormalizedRarityScoreOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of OwnershipByAddresses
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<GetAssetResponseOwnershipByAddressesInner>> OwnershipByAddressesOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets OwnershipByAddresses
         /// </summary>
         [JsonPropertyName("ownershipByAddresses")]
-        public List<GetAssetResponseOwnershipByAddressesInner> OwnershipByAddresses { get; set; }
+        public List<GetAssetResponseOwnershipByAddressesInner> OwnershipByAddresses { get { return this. OwnershipByAddressesOption; } set { this.OwnershipByAddressesOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of RarityScore
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<decimal?> RarityScoreOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets RarityScore
         /// </summary>
         [JsonPropertyName("rarityScore")]
-        public decimal? RarityScore { get; set; }
+        public decimal? RarityScore { get { return this. RarityScoreOption; } set { this.RarityScoreOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of StandardImageUrl
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> StandardImageUrlOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets StandardImageUrl
         /// </summary>
         [JsonPropertyName("standardImageUrl")]
-        public string StandardImageUrl { get; set; }
+        public string StandardImageUrl { get { return this. StandardImageUrlOption; } set { this.StandardImageUrlOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of ThumbnailImageUrl
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> ThumbnailImageUrlOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets ThumbnailImageUrl
         /// </summary>
         [JsonPropertyName("thumbnailImageUrl")]
-        public string ThumbnailImageUrl { get; set; }
+        public string ThumbnailImageUrl { get { return this. ThumbnailImageUrlOption; } set { this.ThumbnailImageUrlOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of YoutubeUrl
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> YoutubeUrlOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets YoutubeUrl
         /// </summary>
         [JsonPropertyName("youtubeUrl")]
-        public string YoutubeUrl { get; set; }
+        public string YoutubeUrl { get { return this. YoutubeUrlOption; } set { this.YoutubeUrlOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -714,30 +826,30 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            decimal? chainId = default;
-            GetAssetResponseContract contract = default;
-            string contractAddress = default;
-            string id = default;
-            string name = default;
-            GetAssetResponse.NetworkEnum? network = default;
-            string tokenId = default;
-            string tokenUri = default;
-            List<GetAssetsResponseDataInnerAttributesInner> attributes = default;
-            string backgroundColor = default;
-            string description = default;
-            string externalUrl = default;
-            string indexerDataSyncedAt = default;
-            string lastSoldTokenAmount = default;
-            GetAssetResponse.LastSoldTokenCurrencyEnum? lastSoldTokenCurrency = default;
-            GetAssetResponseListing listing = default;
-            string mintedAt = default;
-            decimal? normalizedRarityScore = default;
-            List<GetAssetResponseOwnershipByAddressesInner> ownershipByAddresses = default;
-            GetAssetResponse.RarityEnum? rarity = default;
-            decimal? rarityScore = default;
-            string standardImageUrl = default;
-            string thumbnailImageUrl = default;
-            string youtubeUrl = default;
+            Option<decimal?> chainId = default;
+            Option<GetAssetResponseContract> contract = default;
+            Option<string> contractAddress = default;
+            Option<string> id = default;
+            Option<string> name = default;
+            Option<GetAssetResponse.NetworkEnum?> network = default;
+            Option<string> tokenId = default;
+            Option<string> tokenUri = default;
+            Option<List<GetAssetsResponseDataInnerAttributesInner>> attributes = default;
+            Option<string> backgroundColor = default;
+            Option<string> description = default;
+            Option<string> externalUrl = default;
+            Option<string> indexerDataSyncedAt = default;
+            Option<string> lastSoldTokenAmount = default;
+            Option<GetAssetResponse.LastSoldTokenCurrencyEnum?> lastSoldTokenCurrency = default;
+            Option<GetAssetResponseListing> listing = default;
+            Option<string> mintedAt = default;
+            Option<decimal?> normalizedRarityScore = default;
+            Option<List<GetAssetResponseOwnershipByAddressesInner>> ownershipByAddresses = default;
+            Option<GetAssetResponse.RarityEnum?> rarity = default;
+            Option<decimal?> rarityScore = default;
+            Option<string> standardImageUrl = default;
+            Option<string> thumbnailImageUrl = default;
+            Option<string> youtubeUrl = default;
 
             while (utf8JsonReader.Read())
             {
@@ -756,91 +868,88 @@ namespace Beam.Model
                     {
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = utf8JsonReader.GetDecimal();
+                                chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "contract":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                contract = JsonSerializer.Deserialize<GetAssetResponseContract>(ref utf8JsonReader, jsonSerializerOptions);
+                                contract = new Option<GetAssetResponseContract>(JsonSerializer.Deserialize<GetAssetResponseContract>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "contractAddress":
-                            contractAddress = utf8JsonReader.GetString();
+                            contractAddress = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "_id":
-                            id = utf8JsonReader.GetString();
+                            id = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "name":
-                            name = utf8JsonReader.GetString();
+                            name = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "network":
                             string networkRawValue = utf8JsonReader.GetString();
-                            network = networkRawValue == null
-                                ? null
-                                : GetAssetResponse.NetworkEnumFromStringOrDefault(networkRawValue);
+                            if (networkRawValue != null)
+                                network = new Option<GetAssetResponse.NetworkEnum?>(GetAssetResponse.NetworkEnumFromStringOrDefault(networkRawValue));
                             break;
                         case "tokenId":
-                            tokenId = utf8JsonReader.GetString();
+                            tokenId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "tokenUri":
-                            tokenUri = utf8JsonReader.GetString();
+                            tokenUri = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "attributes":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                attributes = JsonSerializer.Deserialize<List<GetAssetsResponseDataInnerAttributesInner>>(ref utf8JsonReader, jsonSerializerOptions);
+                                attributes = new Option<List<GetAssetsResponseDataInnerAttributesInner>>(JsonSerializer.Deserialize<List<GetAssetsResponseDataInnerAttributesInner>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "backgroundColor":
-                            backgroundColor = utf8JsonReader.GetString();
+                            backgroundColor = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "description":
-                            description = utf8JsonReader.GetString();
+                            description = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "externalUrl":
-                            externalUrl = utf8JsonReader.GetString();
+                            externalUrl = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "indexerDataSyncedAt":
-                            indexerDataSyncedAt = utf8JsonReader.GetString();
+                            indexerDataSyncedAt = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "lastSoldTokenAmount":
-                            lastSoldTokenAmount = utf8JsonReader.GetString();
+                            lastSoldTokenAmount = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "lastSoldTokenCurrency":
                             string lastSoldTokenCurrencyRawValue = utf8JsonReader.GetString();
-                            lastSoldTokenCurrency = lastSoldTokenCurrencyRawValue == null
-                                ? null
-                                : GetAssetResponse.LastSoldTokenCurrencyEnumFromStringOrDefault(lastSoldTokenCurrencyRawValue);
+                            if (lastSoldTokenCurrencyRawValue != null)
+                                lastSoldTokenCurrency = new Option<GetAssetResponse.LastSoldTokenCurrencyEnum?>(GetAssetResponse.LastSoldTokenCurrencyEnumFromStringOrDefault(lastSoldTokenCurrencyRawValue));
                             break;
                         case "listing":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                listing = JsonSerializer.Deserialize<GetAssetResponseListing>(ref utf8JsonReader, jsonSerializerOptions);
+                                listing = new Option<GetAssetResponseListing>(JsonSerializer.Deserialize<GetAssetResponseListing>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "mintedAt":
-                            mintedAt = utf8JsonReader.GetString();
+                            mintedAt = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "normalizedRarityScore":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                normalizedRarityScore = utf8JsonReader.GetDecimal();
+                                normalizedRarityScore = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "ownershipByAddresses":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                ownershipByAddresses = JsonSerializer.Deserialize<List<GetAssetResponseOwnershipByAddressesInner>>(ref utf8JsonReader, jsonSerializerOptions);
+                                ownershipByAddresses = new Option<List<GetAssetResponseOwnershipByAddressesInner>>(JsonSerializer.Deserialize<List<GetAssetResponseOwnershipByAddressesInner>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "rarity":
                             string rarityRawValue = utf8JsonReader.GetString();
-                            rarity = rarityRawValue == null
-                                ? null
-                                : GetAssetResponse.RarityEnumFromStringOrDefault(rarityRawValue);
+                            if (rarityRawValue != null)
+                                rarity = new Option<GetAssetResponse.RarityEnum?>(GetAssetResponse.RarityEnumFromStringOrDefault(rarityRawValue));
                             break;
                         case "rarityScore":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                rarityScore = utf8JsonReader.GetDecimal();
+                                rarityScore = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "standardImageUrl":
-                            standardImageUrl = utf8JsonReader.GetString();
+                            standardImageUrl = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "thumbnailImageUrl":
-                            thumbnailImageUrl = utf8JsonReader.GetString();
+                            thumbnailImageUrl = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "youtubeUrl":
-                            youtubeUrl = utf8JsonReader.GetString();
+                            youtubeUrl = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -848,31 +957,55 @@ namespace Beam.Model
                 }
             }
 
-            if (chainId == null)
-                throw new ArgumentNullException(nameof(chainId), "Property is required for class GetAssetResponse.");
+            if (!chainId.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetResponse.", nameof(chainId));
 
-            if (contract == null)
-                throw new ArgumentNullException(nameof(contract), "Property is required for class GetAssetResponse.");
+            if (!contract.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetResponse.", nameof(contract));
 
-            if (contractAddress == null)
-                throw new ArgumentNullException(nameof(contractAddress), "Property is required for class GetAssetResponse.");
+            if (!contractAddress.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetResponse.", nameof(contractAddress));
 
-            if (id == null)
-                throw new ArgumentNullException(nameof(id), "Property is required for class GetAssetResponse.");
+            if (!id.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetResponse.", nameof(id));
 
-            if (name == null)
-                throw new ArgumentNullException(nameof(name), "Property is required for class GetAssetResponse.");
+            if (!name.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetResponse.", nameof(name));
 
-            if (network == null)
-                throw new ArgumentNullException(nameof(network), "Property is required for class GetAssetResponse.");
+            if (!network.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetResponse.", nameof(network));
 
-            if (tokenId == null)
-                throw new ArgumentNullException(nameof(tokenId), "Property is required for class GetAssetResponse.");
+            if (!tokenId.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetResponse.", nameof(tokenId));
 
-            if (tokenUri == null)
-                throw new ArgumentNullException(nameof(tokenUri), "Property is required for class GetAssetResponse.");
+            if (!tokenUri.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetResponse.", nameof(tokenUri));
 
-            return new GetAssetResponse(chainId.Value, contract, contractAddress, id, name, network.Value, tokenId, tokenUri, attributes, backgroundColor, description, externalUrl, indexerDataSyncedAt, lastSoldTokenAmount, lastSoldTokenCurrency, listing, mintedAt, normalizedRarityScore, ownershipByAddresses, rarity, rarityScore, standardImageUrl, thumbnailImageUrl, youtubeUrl);
+            if (chainId.IsSet && chainId.Value == null)
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class GetAssetResponse.");
+
+            if (contract.IsSet && contract.Value == null)
+                throw new ArgumentNullException(nameof(contract), "Property is not nullable for class GetAssetResponse.");
+
+            if (contractAddress.IsSet && contractAddress.Value == null)
+                throw new ArgumentNullException(nameof(contractAddress), "Property is not nullable for class GetAssetResponse.");
+
+            if (id.IsSet && id.Value == null)
+                throw new ArgumentNullException(nameof(id), "Property is not nullable for class GetAssetResponse.");
+
+            if (name.IsSet && name.Value == null)
+                throw new ArgumentNullException(nameof(name), "Property is not nullable for class GetAssetResponse.");
+
+            if (network.IsSet && network.Value == null)
+                throw new ArgumentNullException(nameof(network), "Property is not nullable for class GetAssetResponse.");
+
+            if (tokenId.IsSet && tokenId.Value == null)
+                throw new ArgumentNullException(nameof(tokenId), "Property is not nullable for class GetAssetResponse.");
+
+            if (tokenUri.IsSet && tokenUri.Value == null)
+                throw new ArgumentNullException(nameof(tokenUri), "Property is not nullable for class GetAssetResponse.");
+
+            return new GetAssetResponse(chainId.Value.Value, contract.Value, contractAddress.Value, id.Value, name.Value, network.Value.Value, tokenId.Value, tokenUri.Value, attributes, backgroundColor, description, externalUrl, indexerDataSyncedAt, lastSoldTokenAmount, lastSoldTokenCurrency, listing, mintedAt, normalizedRarityScore, ownershipByAddresses, rarity, rarityScore, standardImageUrl, thumbnailImageUrl, youtubeUrl);
         }
 
         /// <summary>
@@ -899,11 +1032,32 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetAssetResponse getAssetResponse, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (getAssetResponse.Contract == null)
+                throw new ArgumentNullException(nameof(getAssetResponse.Contract), "Property is required for class GetAssetResponse.");
+
+            if (getAssetResponse.ContractAddress == null)
+                throw new ArgumentNullException(nameof(getAssetResponse.ContractAddress), "Property is required for class GetAssetResponse.");
+
+            if (getAssetResponse.Id == null)
+                throw new ArgumentNullException(nameof(getAssetResponse.Id), "Property is required for class GetAssetResponse.");
+
+            if (getAssetResponse.Name == null)
+                throw new ArgumentNullException(nameof(getAssetResponse.Name), "Property is required for class GetAssetResponse.");
+
+            if (getAssetResponse.TokenId == null)
+                throw new ArgumentNullException(nameof(getAssetResponse.TokenId), "Property is required for class GetAssetResponse.");
+
+            if (getAssetResponse.TokenUri == null)
+                throw new ArgumentNullException(nameof(getAssetResponse.TokenUri), "Property is required for class GetAssetResponse.");
+
             writer.WriteNumber("chainId", getAssetResponse.ChainId);
+
             writer.WritePropertyName("contract");
             JsonSerializer.Serialize(writer, getAssetResponse.Contract, jsonSerializerOptions);
             writer.WriteString("contractAddress", getAssetResponse.ContractAddress);
+
             writer.WriteString("_id", getAssetResponse.Id);
+
             writer.WriteString("name", getAssetResponse.Name);
 
             var networkRawValue = GetAssetResponse.NetworkEnumToJsonValue(getAssetResponse.Network);
@@ -913,47 +1067,110 @@ namespace Beam.Model
                 writer.WriteNull("network");
 
             writer.WriteString("tokenId", getAssetResponse.TokenId);
-            writer.WriteString("tokenUri", getAssetResponse.TokenUri);
-            writer.WritePropertyName("attributes");
-            JsonSerializer.Serialize(writer, getAssetResponse.Attributes, jsonSerializerOptions);
-            writer.WriteString("backgroundColor", getAssetResponse.BackgroundColor);
-            writer.WriteString("description", getAssetResponse.Description);
-            writer.WriteString("externalUrl", getAssetResponse.ExternalUrl);
-            writer.WriteString("indexerDataSyncedAt", getAssetResponse.IndexerDataSyncedAt);
-            writer.WriteString("lastSoldTokenAmount", getAssetResponse.LastSoldTokenAmount);
 
-            var lastSoldTokenCurrencyRawValue = GetAssetResponse.LastSoldTokenCurrencyEnumToJsonValue(getAssetResponse.LastSoldTokenCurrency);
+            writer.WriteString("tokenUri", getAssetResponse.TokenUri);
+
+            if (getAssetResponse.AttributesOption.IsSet)
+                if (getAssetResponse.AttributesOption.Value != null)
+                {
+                    writer.WritePropertyName("attributes");
+                    JsonSerializer.Serialize(writer, getAssetResponse.Attributes, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("attributes");
+            if (getAssetResponse.BackgroundColorOption.IsSet)
+                if (getAssetResponse.BackgroundColorOption.Value != null)
+                    writer.WriteString("backgroundColor", getAssetResponse.BackgroundColor);
+                else
+                    writer.WriteNull("backgroundColor");
+
+            if (getAssetResponse.DescriptionOption.IsSet)
+                if (getAssetResponse.DescriptionOption.Value != null)
+                    writer.WriteString("description", getAssetResponse.Description);
+                else
+                    writer.WriteNull("description");
+
+            if (getAssetResponse.ExternalUrlOption.IsSet)
+                if (getAssetResponse.ExternalUrlOption.Value != null)
+                    writer.WriteString("externalUrl", getAssetResponse.ExternalUrl);
+                else
+                    writer.WriteNull("externalUrl");
+
+            if (getAssetResponse.IndexerDataSyncedAtOption.IsSet)
+                if (getAssetResponse.IndexerDataSyncedAtOption.Value != null)
+                    writer.WriteString("indexerDataSyncedAt", getAssetResponse.IndexerDataSyncedAt);
+                else
+                    writer.WriteNull("indexerDataSyncedAt");
+
+            if (getAssetResponse.LastSoldTokenAmountOption.IsSet)
+                if (getAssetResponse.LastSoldTokenAmountOption.Value != null)
+                    writer.WriteString("lastSoldTokenAmount", getAssetResponse.LastSoldTokenAmount);
+                else
+                    writer.WriteNull("lastSoldTokenAmount");
+
+            var lastSoldTokenCurrencyRawValue = GetAssetResponse.LastSoldTokenCurrencyEnumToJsonValue(getAssetResponse.LastSoldTokenCurrencyOption.Value.Value);
             if (lastSoldTokenCurrencyRawValue != null)
                 writer.WriteString("lastSoldTokenCurrency", lastSoldTokenCurrencyRawValue);
             else
                 writer.WriteNull("lastSoldTokenCurrency");
 
-            writer.WritePropertyName("listing");
-            JsonSerializer.Serialize(writer, getAssetResponse.Listing, jsonSerializerOptions);
-            writer.WriteString("mintedAt", getAssetResponse.MintedAt);
+            if (getAssetResponse.ListingOption.IsSet)
+                if (getAssetResponse.ListingOption.Value != null)
+                {
+                    writer.WritePropertyName("listing");
+                    JsonSerializer.Serialize(writer, getAssetResponse.Listing, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("listing");
+            if (getAssetResponse.MintedAtOption.IsSet)
+                if (getAssetResponse.MintedAtOption.Value != null)
+                    writer.WriteString("mintedAt", getAssetResponse.MintedAt);
+                else
+                    writer.WriteNull("mintedAt");
 
-            if (getAssetResponse.NormalizedRarityScore != null)
-                writer.WriteNumber("normalizedRarityScore", getAssetResponse.NormalizedRarityScore.Value);
-            else
-                writer.WriteNull("normalizedRarityScore");
+            if (getAssetResponse.NormalizedRarityScoreOption.IsSet)
+                if (getAssetResponse.NormalizedRarityScoreOption.Value != null)
+                    writer.WriteNumber("normalizedRarityScore", getAssetResponse.NormalizedRarityScoreOption.Value.Value);
+                else
+                    writer.WriteNull("normalizedRarityScore");
 
-            writer.WritePropertyName("ownershipByAddresses");
-            JsonSerializer.Serialize(writer, getAssetResponse.OwnershipByAddresses, jsonSerializerOptions);
-
-            var rarityRawValue = GetAssetResponse.RarityEnumToJsonValue(getAssetResponse.Rarity);
+            if (getAssetResponse.OwnershipByAddressesOption.IsSet)
+                if (getAssetResponse.OwnershipByAddressesOption.Value != null)
+                {
+                    writer.WritePropertyName("ownershipByAddresses");
+                    JsonSerializer.Serialize(writer, getAssetResponse.OwnershipByAddresses, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("ownershipByAddresses");
+            var rarityRawValue = GetAssetResponse.RarityEnumToJsonValue(getAssetResponse.RarityOption.Value.Value);
             if (rarityRawValue != null)
                 writer.WriteString("rarity", rarityRawValue);
             else
                 writer.WriteNull("rarity");
 
-            if (getAssetResponse.RarityScore != null)
-                writer.WriteNumber("rarityScore", getAssetResponse.RarityScore.Value);
-            else
-                writer.WriteNull("rarityScore");
+            if (getAssetResponse.RarityScoreOption.IsSet)
+                if (getAssetResponse.RarityScoreOption.Value != null)
+                    writer.WriteNumber("rarityScore", getAssetResponse.RarityScoreOption.Value.Value);
+                else
+                    writer.WriteNull("rarityScore");
 
-            writer.WriteString("standardImageUrl", getAssetResponse.StandardImageUrl);
-            writer.WriteString("thumbnailImageUrl", getAssetResponse.ThumbnailImageUrl);
-            writer.WriteString("youtubeUrl", getAssetResponse.YoutubeUrl);
+            if (getAssetResponse.StandardImageUrlOption.IsSet)
+                if (getAssetResponse.StandardImageUrlOption.Value != null)
+                    writer.WriteString("standardImageUrl", getAssetResponse.StandardImageUrl);
+                else
+                    writer.WriteNull("standardImageUrl");
+
+            if (getAssetResponse.ThumbnailImageUrlOption.IsSet)
+                if (getAssetResponse.ThumbnailImageUrlOption.Value != null)
+                    writer.WriteString("thumbnailImageUrl", getAssetResponse.ThumbnailImageUrl);
+                else
+                    writer.WriteNull("thumbnailImageUrl");
+
+            if (getAssetResponse.YoutubeUrlOption.IsSet)
+                if (getAssetResponse.YoutubeUrlOption.Value != null)
+                    writer.WriteString("youtubeUrl", getAssetResponse.YoutubeUrl);
+                else
+                    writer.WriteNull("youtubeUrl");
         }
     }
 }

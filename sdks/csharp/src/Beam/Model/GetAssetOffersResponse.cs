@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -92,7 +93,7 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            List<GetAssetOffersResponseDataInner> data = default;
+            Option<List<GetAssetOffersResponseDataInner>> data = default;
 
             while (utf8JsonReader.Read())
             {
@@ -111,7 +112,7 @@ namespace Beam.Model
                     {
                         case "data":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                data = JsonSerializer.Deserialize<List<GetAssetOffersResponseDataInner>>(ref utf8JsonReader, jsonSerializerOptions);
+                                data = new Option<List<GetAssetOffersResponseDataInner>>(JsonSerializer.Deserialize<List<GetAssetOffersResponseDataInner>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -119,10 +120,13 @@ namespace Beam.Model
                 }
             }
 
-            if (data == null)
-                throw new ArgumentNullException(nameof(data), "Property is required for class GetAssetOffersResponse.");
+            if (!data.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetOffersResponse.", nameof(data));
 
-            return new GetAssetOffersResponse(data);
+            if (data.IsSet && data.Value == null)
+                throw new ArgumentNullException(nameof(data), "Property is not nullable for class GetAssetOffersResponse.");
+
+            return new GetAssetOffersResponse(data.Value);
         }
 
         /// <summary>
@@ -149,6 +153,9 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetAssetOffersResponse getAssetOffersResponse, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (getAssetOffersResponse.Data == null)
+                throw new ArgumentNullException(nameof(getAssetOffersResponse.Data), "Property is required for class GetAssetOffersResponse.");
+
             writer.WritePropertyName("data");
             JsonSerializer.Serialize(writer, getAssetOffersResponse.Data, jsonSerializerOptions);
         }

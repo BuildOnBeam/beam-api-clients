@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -32,19 +33,26 @@ namespace Beam.Model
         /// </summary>
         /// <param name="src">src</param>
         [JsonConstructor]
-        public GetAssetResponseContractHeaderBackground(string src = default)
+        public GetAssetResponseContractHeaderBackground(Option<string> src = default)
         {
-            Src = src;
+            SrcOption = src;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
+        /// Used to track the state of Src
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> SrcOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets Src
         /// </summary>
         [JsonPropertyName("src")]
-        public string Src { get; set; }
+        public string Src { get { return this. SrcOption; } set { this.SrcOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -92,7 +100,7 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string src = default;
+            Option<string> src = default;
 
             while (utf8JsonReader.Read())
             {
@@ -110,7 +118,7 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "src":
-                            src = utf8JsonReader.GetString();
+                            src = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -145,7 +153,11 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetAssetResponseContractHeaderBackground getAssetResponseContractHeaderBackground, JsonSerializerOptions jsonSerializerOptions)
         {
-            writer.WriteString("src", getAssetResponseContractHeaderBackground.Src);
+            if (getAssetResponseContractHeaderBackground.SrcOption.IsSet)
+                if (getAssetResponseContractHeaderBackground.SrcOption.Value != null)
+                    writer.WriteString("src", getAssetResponseContractHeaderBackground.Src);
+                else
+                    writer.WriteNull("src");
         }
     }
 }

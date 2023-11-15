@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -32,19 +33,26 @@ namespace Beam.Model
         /// </summary>
         /// <param name="background">background</param>
         [JsonConstructor]
-        public GetAssetResponseContractHeader(GetAssetResponseContractHeaderBackground background = default)
+        public GetAssetResponseContractHeader(Option<GetAssetResponseContractHeaderBackground> background = default)
         {
-            Background = background;
+            BackgroundOption = background;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
+        /// Used to track the state of Background
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<GetAssetResponseContractHeaderBackground> BackgroundOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets Background
         /// </summary>
         [JsonPropertyName("background")]
-        public GetAssetResponseContractHeaderBackground Background { get; set; }
+        public GetAssetResponseContractHeaderBackground Background { get { return this. BackgroundOption; } set { this.BackgroundOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -92,7 +100,7 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            GetAssetResponseContractHeaderBackground background = default;
+            Option<GetAssetResponseContractHeaderBackground> background = default;
 
             while (utf8JsonReader.Read())
             {
@@ -111,7 +119,7 @@ namespace Beam.Model
                     {
                         case "background":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                background = JsonSerializer.Deserialize<GetAssetResponseContractHeaderBackground>(ref utf8JsonReader, jsonSerializerOptions);
+                                background = new Option<GetAssetResponseContractHeaderBackground>(JsonSerializer.Deserialize<GetAssetResponseContractHeaderBackground>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -146,8 +154,14 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetAssetResponseContractHeader getAssetResponseContractHeader, JsonSerializerOptions jsonSerializerOptions)
         {
-            writer.WritePropertyName("background");
-            JsonSerializer.Serialize(writer, getAssetResponseContractHeader.Background, jsonSerializerOptions);
+            if (getAssetResponseContractHeader.BackgroundOption.IsSet)
+                if (getAssetResponseContractHeader.BackgroundOption.Value != null)
+                {
+                    writer.WritePropertyName("background");
+                    JsonSerializer.Serialize(writer, getAssetResponseContractHeader.Background, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("background");
         }
     }
 }

@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -92,7 +93,7 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string offerId = default;
+            Option<string> offerId = default;
 
             while (utf8JsonReader.Read())
             {
@@ -110,7 +111,7 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "offerId":
-                            offerId = utf8JsonReader.GetString();
+                            offerId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -118,10 +119,13 @@ namespace Beam.Model
                 }
             }
 
-            if (offerId == null)
-                throw new ArgumentNullException(nameof(offerId), "Property is required for class CreateOfferResponse.");
+            if (!offerId.IsSet)
+                throw new ArgumentException("Property is required for class CreateOfferResponse.", nameof(offerId));
 
-            return new CreateOfferResponse(offerId);
+            if (offerId.IsSet && offerId.Value == null)
+                throw new ArgumentNullException(nameof(offerId), "Property is not nullable for class CreateOfferResponse.");
+
+            return new CreateOfferResponse(offerId.Value);
         }
 
         /// <summary>
@@ -148,6 +152,9 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, CreateOfferResponse createOfferResponse, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (createOfferResponse.OfferId == null)
+                throw new ArgumentNullException(nameof(createOfferResponse.OfferId), "Property is required for class CreateOfferResponse.");
+
             writer.WriteString("offerId", createOfferResponse.OfferId);
         }
     }

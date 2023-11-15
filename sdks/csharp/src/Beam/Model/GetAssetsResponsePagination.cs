@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -34,11 +35,11 @@ namespace Beam.Model
         /// <param name="limit">limit (default to 10M)</param>
         /// <param name="offset">offset (default to 0M)</param>
         [JsonConstructor]
-        public GetAssetsResponsePagination(decimal count, decimal limit = 10M, decimal offset = 0M)
+        public GetAssetsResponsePagination(decimal count, Option<decimal?> limit = default, Option<decimal?> offset = default)
         {
             Count = count;
-            Limit = limit;
-            Offset = offset;
+            LimitOption = limit;
+            OffsetOption = offset;
             OnCreated();
         }
 
@@ -51,16 +52,30 @@ namespace Beam.Model
         public decimal Count { get; set; }
 
         /// <summary>
+        /// Used to track the state of Limit
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<decimal?> LimitOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets Limit
         /// </summary>
         [JsonPropertyName("limit")]
-        public decimal Limit { get; set; }
+        public decimal? Limit { get { return this. LimitOption; } set { this.LimitOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Offset
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<decimal?> OffsetOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Offset
         /// </summary>
         [JsonPropertyName("offset")]
-        public decimal Offset { get; set; }
+        public decimal? Offset { get { return this. OffsetOption; } set { this.OffsetOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -110,9 +125,9 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            decimal? count = default;
-            decimal? limit = default;
-            decimal? offset = default;
+            Option<decimal?> count = default;
+            Option<decimal?> limit = default;
+            Option<decimal?> offset = default;
 
             while (utf8JsonReader.Read())
             {
@@ -131,15 +146,15 @@ namespace Beam.Model
                     {
                         case "count":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                count = utf8JsonReader.GetDecimal();
+                                count = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "limit":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                limit = utf8JsonReader.GetDecimal();
+                                limit = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "offset":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                offset = utf8JsonReader.GetDecimal();
+                                offset = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         default:
                             break;
@@ -147,16 +162,19 @@ namespace Beam.Model
                 }
             }
 
-            if (count == null)
-                throw new ArgumentNullException(nameof(count), "Property is required for class GetAssetsResponsePagination.");
+            if (!count.IsSet)
+                throw new ArgumentException("Property is required for class GetAssetsResponsePagination.", nameof(count));
 
-            if (limit == null)
-                throw new ArgumentNullException(nameof(limit), "Property is required for class GetAssetsResponsePagination.");
+            if (count.IsSet && count.Value == null)
+                throw new ArgumentNullException(nameof(count), "Property is not nullable for class GetAssetsResponsePagination.");
 
-            if (offset == null)
-                throw new ArgumentNullException(nameof(offset), "Property is required for class GetAssetsResponsePagination.");
+            if (limit.IsSet && limit.Value == null)
+                throw new ArgumentNullException(nameof(limit), "Property is not nullable for class GetAssetsResponsePagination.");
 
-            return new GetAssetsResponsePagination(count.Value, limit.Value, offset.Value);
+            if (offset.IsSet && offset.Value == null)
+                throw new ArgumentNullException(nameof(offset), "Property is not nullable for class GetAssetsResponsePagination.");
+
+            return new GetAssetsResponsePagination(count.Value.Value, limit, offset);
         }
 
         /// <summary>
@@ -184,8 +202,12 @@ namespace Beam.Model
         public void WriteProperties(ref Utf8JsonWriter writer, GetAssetsResponsePagination getAssetsResponsePagination, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteNumber("count", getAssetsResponsePagination.Count);
-            writer.WriteNumber("limit", getAssetsResponsePagination.Limit);
-            writer.WriteNumber("offset", getAssetsResponsePagination.Offset);
+
+            if (getAssetsResponsePagination.LimitOption.IsSet)
+                writer.WriteNumber("limit", getAssetsResponsePagination.LimitOption.Value.Value);
+
+            if (getAssetsResponsePagination.OffsetOption.IsSet)
+                writer.WriteNumber("offset", getAssetsResponsePagination.OffsetOption.Value.Value);
         }
     }
 }

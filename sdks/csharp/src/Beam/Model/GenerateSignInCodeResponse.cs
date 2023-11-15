@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Beam.Client;
 
 namespace Beam.Model
 {
@@ -92,7 +93,7 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            string challenge = default;
+            Option<string> challenge = default;
 
             while (utf8JsonReader.Read())
             {
@@ -110,7 +111,7 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "challenge":
-                            challenge = utf8JsonReader.GetString();
+                            challenge = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -118,10 +119,13 @@ namespace Beam.Model
                 }
             }
 
-            if (challenge == null)
-                throw new ArgumentNullException(nameof(challenge), "Property is required for class GenerateSignInCodeResponse.");
+            if (!challenge.IsSet)
+                throw new ArgumentException("Property is required for class GenerateSignInCodeResponse.", nameof(challenge));
 
-            return new GenerateSignInCodeResponse(challenge);
+            if (challenge.IsSet && challenge.Value == null)
+                throw new ArgumentNullException(nameof(challenge), "Property is not nullable for class GenerateSignInCodeResponse.");
+
+            return new GenerateSignInCodeResponse(challenge.Value);
         }
 
         /// <summary>
@@ -148,6 +152,9 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GenerateSignInCodeResponse generateSignInCodeResponse, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (generateSignInCodeResponse.Challenge == null)
+                throw new ArgumentNullException(nameof(generateSignInCodeResponse.Challenge), "Property is required for class GenerateSignInCodeResponse.");
+
             writer.WriteString("challenge", generateSignInCodeResponse.Challenge);
         }
     }
