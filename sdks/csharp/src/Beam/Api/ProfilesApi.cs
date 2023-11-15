@@ -199,13 +199,13 @@ namespace Beam.Api
     /// <summary>
     /// The <see cref="ICreateProfileApiResponse"/>
     /// </summary>
-    public interface ICreateProfileApiResponse : Beam.Client.IApiResponse, IOk<Beam.Model.CreateProfileResponse>
+    public interface ICreateProfileApiResponse : Beam.Client.IApiResponse, ICreated<Beam.Model.CreateProfileResponse>
     {
         /// <summary>
-        /// Returns true if the response is 200 Ok
+        /// Returns true if the response is 201 Created
         /// </summary>
         /// <returns></returns>
-        bool IsOk { get; }
+        bool IsCreated { get; }
     }
 
     /// <summary>
@@ -884,38 +884,38 @@ namespace Beam.Api
             partial void OnCreated(System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
 
             /// <summary>
-            /// Returns true if the response is 200 Ok
+            /// Returns true if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public bool IsOk => 200 == (int)StatusCode;
+            public bool IsCreated => 201 == (int)StatusCode;
 
             /// <summary>
-            /// Deserializes the response if the response is 200 Ok
+            /// Deserializes the response if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public Beam.Model.CreateProfileResponse Ok()
+            public Beam.Model.CreateProfileResponse Created()
             {
                 // This logic may be modified with the AsModel.mustache template
-                return IsOk
+                return IsCreated
                     ? System.Text.Json.JsonSerializer.Deserialize<Beam.Model.CreateProfileResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
             /// <summary>
-            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// Returns true if the response is 201 Created and the deserialized response is not null
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out Beam.Model.CreateProfileResponse result)
+            public bool TryCreated([NotNullWhen(true)]out Beam.Model.CreateProfileResponse result)
             {
                 result = null;
 
                 try
                 {
-                    result = Ok();
+                    result = Created();
                 } catch (Exception e)
                 {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)201);
                 }
 
                 return result != null;

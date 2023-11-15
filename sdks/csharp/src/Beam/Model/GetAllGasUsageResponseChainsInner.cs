@@ -24,17 +24,17 @@ using Beam.Client;
 namespace Beam.Model
 {
     /// <summary>
-    /// GetGasUsageResponse
+    /// GetAllGasUsageResponseChainsInner
     /// </summary>
-    public partial class GetGasUsageResponse : IValidatableObject
+    public partial class GetAllGasUsageResponseChainsInner : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetGasUsageResponse" /> class.
+        /// Initializes a new instance of the <see cref="GetAllGasUsageResponseChainsInner" /> class.
         /// </summary>
         /// <param name="policies">policies</param>
         /// <param name="summary">summary</param>
         [JsonConstructor]
-        public GetGasUsageResponse(List<GetAllGasUsageResponseChainsInnerPoliciesInner> policies, GetAllGasUsageResponseChainsInnerSummary summary)
+        public GetAllGasUsageResponseChainsInner(List<GetAllGasUsageResponseChainsInnerPoliciesInner> policies, GetAllGasUsageResponseChainsInnerSummary summary)
         {
             Policies = policies;
             Summary = summary;
@@ -62,7 +62,7 @@ namespace Beam.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class GetGasUsageResponse {\n");
+            sb.Append("class GetAllGasUsageResponseChainsInner {\n");
             sb.Append("  Policies: ").Append(Policies).Append("\n");
             sb.Append("  Summary: ").Append(Summary).Append("\n");
             sb.Append("}\n");
@@ -81,19 +81,19 @@ namespace Beam.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="GetGasUsageResponse" />
+    /// A Json converter for type <see cref="GetAllGasUsageResponseChainsInner" />
     /// </summary>
-    public class GetGasUsageResponseJsonConverter : JsonConverter<GetGasUsageResponse>
+    public class GetAllGasUsageResponseChainsInnerJsonConverter : JsonConverter<GetAllGasUsageResponseChainsInner>
     {
         /// <summary>
-        /// Deserializes json to <see cref="GetGasUsageResponse" />
+        /// Deserializes json to <see cref="GetAllGasUsageResponseChainsInner" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override GetGasUsageResponse Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override GetAllGasUsageResponseChainsInner Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -135,54 +135,54 @@ namespace Beam.Model
             }
 
             if (!policies.IsSet)
-                throw new ArgumentException("Property is required for class GetGasUsageResponse.", nameof(policies));
+                throw new ArgumentException("Property is required for class GetAllGasUsageResponseChainsInner.", nameof(policies));
 
             if (!summary.IsSet)
-                throw new ArgumentException("Property is required for class GetGasUsageResponse.", nameof(summary));
+                throw new ArgumentException("Property is required for class GetAllGasUsageResponseChainsInner.", nameof(summary));
 
             if (policies.IsSet && policies.Value == null)
-                throw new ArgumentNullException(nameof(policies), "Property is not nullable for class GetGasUsageResponse.");
+                throw new ArgumentNullException(nameof(policies), "Property is not nullable for class GetAllGasUsageResponseChainsInner.");
 
             if (summary.IsSet && summary.Value == null)
-                throw new ArgumentNullException(nameof(summary), "Property is not nullable for class GetGasUsageResponse.");
+                throw new ArgumentNullException(nameof(summary), "Property is not nullable for class GetAllGasUsageResponseChainsInner.");
 
-            return new GetGasUsageResponse(policies.Value, summary.Value);
+            return new GetAllGasUsageResponseChainsInner(policies.Value, summary.Value);
         }
 
         /// <summary>
-        /// Serializes a <see cref="GetGasUsageResponse" />
+        /// Serializes a <see cref="GetAllGasUsageResponseChainsInner" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="getGasUsageResponse"></param>
+        /// <param name="getAllGasUsageResponseChainsInner"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, GetGasUsageResponse getGasUsageResponse, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, GetAllGasUsageResponseChainsInner getAllGasUsageResponseChainsInner, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(ref writer, getGasUsageResponse, jsonSerializerOptions);
+            WriteProperties(ref writer, getAllGasUsageResponseChainsInner, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="GetGasUsageResponse" />
+        /// Serializes the properties of <see cref="GetAllGasUsageResponseChainsInner" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="getGasUsageResponse"></param>
+        /// <param name="getAllGasUsageResponseChainsInner"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(ref Utf8JsonWriter writer, GetGasUsageResponse getGasUsageResponse, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(ref Utf8JsonWriter writer, GetAllGasUsageResponseChainsInner getAllGasUsageResponseChainsInner, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (getGasUsageResponse.Policies == null)
-                throw new ArgumentNullException(nameof(getGasUsageResponse.Policies), "Property is required for class GetGasUsageResponse.");
+            if (getAllGasUsageResponseChainsInner.Policies == null)
+                throw new ArgumentNullException(nameof(getAllGasUsageResponseChainsInner.Policies), "Property is required for class GetAllGasUsageResponseChainsInner.");
 
-            if (getGasUsageResponse.Summary == null)
-                throw new ArgumentNullException(nameof(getGasUsageResponse.Summary), "Property is required for class GetGasUsageResponse.");
+            if (getAllGasUsageResponseChainsInner.Summary == null)
+                throw new ArgumentNullException(nameof(getAllGasUsageResponseChainsInner.Summary), "Property is required for class GetAllGasUsageResponseChainsInner.");
 
             writer.WritePropertyName("policies");
-            JsonSerializer.Serialize(writer, getGasUsageResponse.Policies, jsonSerializerOptions);
+            JsonSerializer.Serialize(writer, getAllGasUsageResponseChainsInner.Policies, jsonSerializerOptions);
             writer.WritePropertyName("summary");
-            JsonSerializer.Serialize(writer, getGasUsageResponse.Summary, jsonSerializerOptions);
+            JsonSerializer.Serialize(writer, getAllGasUsageResponseChainsInner.Summary, jsonSerializerOptions);
         }
     }
 }

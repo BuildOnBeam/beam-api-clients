@@ -449,13 +449,13 @@ namespace Beam.Api
     /// <summary>
     /// The <see cref="ICreateAssetOfferApiResponse"/>
     /// </summary>
-    public interface ICreateAssetOfferApiResponse : Beam.Client.IApiResponse, IOk<Beam.Model.CreateOfferResponse>
+    public interface ICreateAssetOfferApiResponse : Beam.Client.IApiResponse, ICreated<Beam.Model.CreateOfferResponse>
     {
         /// <summary>
-        /// Returns true if the response is 200 Ok
+        /// Returns true if the response is 201 Created
         /// </summary>
         /// <returns></returns>
-        bool IsOk { get; }
+        bool IsCreated { get; }
     }
 
     /// <summary>
@@ -557,13 +557,13 @@ namespace Beam.Api
     /// <summary>
     /// The <see cref="IListAssetApiResponse"/>
     /// </summary>
-    public interface IListAssetApiResponse : Beam.Client.IApiResponse, IOk<Beam.Model.SellAssetResponse>
+    public interface IListAssetApiResponse : Beam.Client.IApiResponse, ICreated<Beam.Model.SellAssetResponse>
     {
         /// <summary>
-        /// Returns true if the response is 200 Ok
+        /// Returns true if the response is 201 Created
         /// </summary>
         /// <returns></returns>
-        bool IsOk { get; }
+        bool IsCreated { get; }
     }
 
     /// <summary>
@@ -2150,38 +2150,38 @@ namespace Beam.Api
             partial void OnCreated(System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
 
             /// <summary>
-            /// Returns true if the response is 200 Ok
+            /// Returns true if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public bool IsOk => 200 == (int)StatusCode;
+            public bool IsCreated => 201 == (int)StatusCode;
 
             /// <summary>
-            /// Deserializes the response if the response is 200 Ok
+            /// Deserializes the response if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public Beam.Model.CreateOfferResponse Ok()
+            public Beam.Model.CreateOfferResponse Created()
             {
                 // This logic may be modified with the AsModel.mustache template
-                return IsOk
+                return IsCreated
                     ? System.Text.Json.JsonSerializer.Deserialize<Beam.Model.CreateOfferResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
             /// <summary>
-            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// Returns true if the response is 201 Created and the deserialized response is not null
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out Beam.Model.CreateOfferResponse result)
+            public bool TryCreated([NotNullWhen(true)]out Beam.Model.CreateOfferResponse result)
             {
                 result = null;
 
                 try
                 {
-                    result = Ok();
+                    result = Created();
                 } catch (Exception e)
                 {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)201);
                 }
 
                 return result != null;
@@ -4369,38 +4369,38 @@ namespace Beam.Api
             partial void OnCreated(System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
 
             /// <summary>
-            /// Returns true if the response is 200 Ok
+            /// Returns true if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public bool IsOk => 200 == (int)StatusCode;
+            public bool IsCreated => 201 == (int)StatusCode;
 
             /// <summary>
-            /// Deserializes the response if the response is 200 Ok
+            /// Deserializes the response if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public Beam.Model.SellAssetResponse Ok()
+            public Beam.Model.SellAssetResponse Created()
             {
                 // This logic may be modified with the AsModel.mustache template
-                return IsOk
+                return IsCreated
                     ? System.Text.Json.JsonSerializer.Deserialize<Beam.Model.SellAssetResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
             /// <summary>
-            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// Returns true if the response is 201 Created and the deserialized response is not null
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out Beam.Model.SellAssetResponse result)
+            public bool TryCreated([NotNullWhen(true)]out Beam.Model.SellAssetResponse result)
             {
                 result = null;
 
                 try
                 {
-                    result = Ok();
+                    result = Created();
                 } catch (Exception e)
                 {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)201);
                 }
 
                 return result != null;

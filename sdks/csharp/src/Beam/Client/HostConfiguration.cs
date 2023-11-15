@@ -70,11 +70,11 @@ namespace Beam.Client
             _jsonOptions.Converters.Add(new GenerateSignInCodeRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new GenerateSignInCodeResponseJsonConverter());
             _jsonOptions.Converters.Add(new GetAllGasUsageResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetAllGasUsageResponseDataInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetAllGasUsageResponseDataInnerDataInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetAllGasUsageResponseDataInnerDataInnerPeriodsInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetAllGasUsageResponseDataInnerDataInnerPolicyJsonConverter());
-            _jsonOptions.Converters.Add(new GetAllGasUsageResponseDataInnerSummaryJsonConverter());
+            _jsonOptions.Converters.Add(new GetAllGasUsageResponseChainsInnerJsonConverter());
+            _jsonOptions.Converters.Add(new GetAllGasUsageResponseChainsInnerPoliciesInnerJsonConverter());
+            _jsonOptions.Converters.Add(new GetAllGasUsageResponseChainsInnerPoliciesInnerPeriodsInnerJsonConverter());
+            _jsonOptions.Converters.Add(new GetAllGasUsageResponseChainsInnerPoliciesInnerPolicyJsonConverter());
+            _jsonOptions.Converters.Add(new GetAllGasUsageResponseChainsInnerSummaryJsonConverter());
             _jsonOptions.Converters.Add(new GetAllProfilesResponseJsonConverter());
             _jsonOptions.Converters.Add(new GetAllProfilesResponseDataInnerJsonConverter());
             _jsonOptions.Converters.Add(new GetAssetListingsResponseJsonConverter());
@@ -108,6 +108,9 @@ namespace Beam.Client
             _jsonOptions.Converters.Add(new GetGameResponseContractsInnerJsonConverter());
             _jsonOptions.Converters.Add(new GetGameResponsePoliciesInnerJsonConverter());
             _jsonOptions.Converters.Add(new GetGasUsageResponseJsonConverter());
+            _jsonOptions.Converters.Add(new GetPoliciesResponseJsonConverter());
+            _jsonOptions.Converters.Add(new GetPoliciesResponseDataInnerJsonConverter());
+            _jsonOptions.Converters.Add(new GetPolicyUsageResponseJsonConverter());
             _jsonOptions.Converters.Add(new GetProfileAssetsForGameFilterParameterJsonConverter());
             _jsonOptions.Converters.Add(new GetProfileAssetsForGameFilterParameterAttributesInnerJsonConverter());
             _jsonOptions.Converters.Add(new GetProfileAssetsForGameSortParameterJsonConverter());

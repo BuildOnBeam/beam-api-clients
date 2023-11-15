@@ -4,6 +4,7 @@
 /* eslint-disable */
 import type { AddPolicyRequestInput } from '../models/AddPolicyRequestInput';
 import type { AddPolicyResponse } from '../models/AddPolicyResponse';
+import type { GetPoliciesResponse } from '../models/GetPoliciesResponse';
 import type { RemovePolicyResponse } from '../models/RemovePolicyResponse';
 
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
@@ -31,10 +32,10 @@ export class PolicyService {
 
   /**
    * Get a list of policies
-   * @returns any
+   * @returns GetPoliciesResponse
    * @throws ApiError
    */
-  public getPolicies(): CancelablePromise<any> {
+  public getPolicies(): CancelablePromise<GetPoliciesResponse> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v1/policies',

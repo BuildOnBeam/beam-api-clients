@@ -256,7 +256,6 @@ export class AssetsService {
   }
 
   /**
-   * @deprecated
    * Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155)
    * This endpoint is deprecated. Use POST route instead.
    * @param assetAddress

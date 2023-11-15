@@ -132,8 +132,8 @@ namespace Beam.Client
                 return ConvertTokenResponse.TypeEnumToJsonValue(convertTokenResponseTypeEnum);
             if (obj is CreateAssetOfferRequestInput.CurrencyEnum createAssetOfferRequestInputCurrencyEnum)
                 return CreateAssetOfferRequestInput.CurrencyEnumToJsonValue(createAssetOfferRequestInputCurrencyEnum);
-            if (obj is GetAllGasUsageResponseDataInnerDataInnerPolicy.ModelEnum getAllGasUsageResponseDataInnerDataInnerPolicyModelEnum)
-                return GetAllGasUsageResponseDataInnerDataInnerPolicy.ModelEnumToJsonValue(getAllGasUsageResponseDataInnerDataInnerPolicyModelEnum);
+            if (obj is GetAllGasUsageResponseChainsInnerPoliciesInnerPolicy.ModelEnum getAllGasUsageResponseChainsInnerPoliciesInnerPolicyModelEnum)
+                return GetAllGasUsageResponseChainsInnerPoliciesInnerPolicy.ModelEnumToJsonValue(getAllGasUsageResponseChainsInnerPoliciesInnerPolicyModelEnum);
             if (obj is GetAssetListingsResponseDataInnerNft.RarityEnum getAssetListingsResponseDataInnerNftRarityEnum)
                 return GetAssetListingsResponseDataInnerNft.RarityEnumToJsonValue(getAssetListingsResponseDataInnerNftRarityEnum);
             if (obj is GetAssetOffersResponseDataInner.CurrencyEnum getAssetOffersResponseDataInnerCurrencyEnum)
@@ -184,6 +184,10 @@ namespace Beam.Client
                 return GetGameResponsePoliciesInner.TypeEnumToJsonValue(getGameResponsePoliciesInnerTypeEnum);
             if (obj is GetGameResponsePoliciesInner.RateTypeEnum getGameResponsePoliciesInnerRateTypeEnum)
                 return GetGameResponsePoliciesInner.RateTypeEnumToJsonValue(getGameResponsePoliciesInnerRateTypeEnum);
+            if (obj is GetPoliciesResponseDataInner.ModelEnum getPoliciesResponseDataInnerModelEnum)
+                return GetPoliciesResponseDataInner.ModelEnumToJsonValue(getPoliciesResponseDataInnerModelEnum);
+            if (obj is GetPoliciesResponseDataInner.TypeEnum getPoliciesResponseDataInnerTypeEnum)
+                return GetPoliciesResponseDataInner.TypeEnumToJsonValue(getPoliciesResponseDataInnerTypeEnum);
             if (obj is GetProfileAssetsForGameFilterParameter.CurrenciesEnum getProfileAssetsForGameFilterParameterCurrenciesEnum)
                 return GetProfileAssetsForGameFilterParameter.CurrenciesEnumToJsonValue(getProfileAssetsForGameFilterParameterCurrenciesEnum);
             if (obj is GetProfileAssetsForGameFilterParameter.RaritiesEnum getProfileAssetsForGameFilterParameterRaritiesEnum)

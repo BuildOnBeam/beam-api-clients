@@ -116,19 +116,19 @@ namespace Beam.Api
     /// <summary>
     /// The <see cref="IDeletePolicyApiResponse"/>
     /// </summary>
-    public interface IDeletePolicyApiResponse : Beam.Client.IApiResponse, ICreated<Beam.Model.RemovePolicyResponse>
+    public interface IDeletePolicyApiResponse : Beam.Client.IApiResponse, IOk<Beam.Model.RemovePolicyResponse>
     {
         /// <summary>
-        /// Returns true if the response is 201 Created
+        /// Returns true if the response is 200 Ok
         /// </summary>
         /// <returns></returns>
-        bool IsCreated { get; }
+        bool IsOk { get; }
     }
 
     /// <summary>
     /// The <see cref="IGetPoliciesApiResponse"/>
     /// </summary>
-    public interface IGetPoliciesApiResponse : Beam.Client.IApiResponse
+    public interface IGetPoliciesApiResponse : Beam.Client.IApiResponse, IOk<Beam.Model.GetPoliciesResponse>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -670,38 +670,38 @@ namespace Beam.Api
             partial void OnCreated(System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
 
             /// <summary>
-            /// Returns true if the response is 201 Created
+            /// Returns true if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public bool IsCreated => 201 == (int)StatusCode;
+            public bool IsOk => 200 == (int)StatusCode;
 
             /// <summary>
-            /// Deserializes the response if the response is 201 Created
+            /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public Beam.Model.RemovePolicyResponse Created()
+            public Beam.Model.RemovePolicyResponse Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
-                return IsCreated
+                return IsOk
                     ? System.Text.Json.JsonSerializer.Deserialize<Beam.Model.RemovePolicyResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
             /// <summary>
-            /// Returns true if the response is 201 Created and the deserialized response is not null
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryCreated([NotNullWhen(true)]out Beam.Model.RemovePolicyResponse result)
+            public bool TryOk([NotNullWhen(true)]out Beam.Model.RemovePolicyResponse result)
             {
                 result = null;
 
                 try
                 {
-                    result = Created();
+                    result = Ok();
                 } catch (Exception e)
                 {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)201);
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
                 }
 
                 return result != null;
@@ -804,6 +804,15 @@ namespace Beam.Api
 
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
 
+                    string[] acceptLocalVars = new string[] {
+                        "application/json"
+                    };
+
+                    string acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+
+                    if (acceptLocalVar != null)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+
                     httpRequestMessageLocalVar.Method = HttpMethod.Get;
 
                     DateTime requestedAtLocalVar = DateTime.UtcNow;
@@ -869,6 +878,38 @@ namespace Beam.Api
             /// </summary>
             /// <returns></returns>
             public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public Beam.Model.GetPoliciesResponse Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<Beam.Model.GetPoliciesResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk([NotNullWhen(true)]out Beam.Model.GetPoliciesResponse result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
 
             private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
             {

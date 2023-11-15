@@ -45,6 +45,8 @@ export type { GetChainResponse } from './models/GetChainResponse';
 export type { GetEstimateResponse } from './models/GetEstimateResponse';
 export type { GetGameResponse } from './models/GetGameResponse';
 export type { GetGasUsageResponse } from './models/GetGasUsageResponse';
+export type { GetPoliciesResponse } from './models/GetPoliciesResponse';
+export { GetPolicyUsageResponse } from './models/GetPolicyUsageResponse';
 export type { GetProfileCurrenciesResponse } from './models/GetProfileCurrenciesResponse';
 export type { GetProfileNativeCurrencyResponse } from './models/GetProfileNativeCurrencyResponse';
 export type { GetProfileResponse } from './models/GetProfileResponse';

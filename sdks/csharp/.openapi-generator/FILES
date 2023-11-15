@@ -66,11 +66,11 @@ src/Beam/Model/GenerateLinkCodeResponse.cs
 src/Beam/Model/GenerateSignInCodeRequestInput.cs
 src/Beam/Model/GenerateSignInCodeResponse.cs
 src/Beam/Model/GetAllGasUsageResponse.cs
-src/Beam/Model/GetAllGasUsageResponseDataInner.cs
-src/Beam/Model/GetAllGasUsageResponseDataInnerDataInner.cs
-src/Beam/Model/GetAllGasUsageResponseDataInnerDataInnerPeriodsInner.cs
-src/Beam/Model/GetAllGasUsageResponseDataInnerDataInnerPolicy.cs
-src/Beam/Model/GetAllGasUsageResponseDataInnerSummary.cs
+src/Beam/Model/GetAllGasUsageResponseChainsInner.cs
+src/Beam/Model/GetAllGasUsageResponseChainsInnerPoliciesInner.cs
+src/Beam/Model/GetAllGasUsageResponseChainsInnerPoliciesInnerPeriodsInner.cs
+src/Beam/Model/GetAllGasUsageResponseChainsInnerPoliciesInnerPolicy.cs
+src/Beam/Model/GetAllGasUsageResponseChainsInnerSummary.cs
 src/Beam/Model/GetAllProfilesResponse.cs
 src/Beam/Model/GetAllProfilesResponseDataInner.cs
 src/Beam/Model/GetAssetListingsResponse.cs
@@ -104,6 +104,9 @@ src/Beam/Model/GetGameResponse.cs
 src/Beam/Model/GetGameResponseContractsInner.cs
 src/Beam/Model/GetGameResponsePoliciesInner.cs
 src/Beam/Model/GetGasUsageResponse.cs
+src/Beam/Model/GetPoliciesResponse.cs
+src/Beam/Model/GetPoliciesResponseDataInner.cs
+src/Beam/Model/GetPolicyUsageResponse.cs
 src/Beam/Model/GetProfileAssetsForGameFilterParameter.cs
 src/Beam/Model/GetProfileAssetsForGameFilterParameterAttributesInner.cs
 src/Beam/Model/GetProfileAssetsForGameSortParameter.cs

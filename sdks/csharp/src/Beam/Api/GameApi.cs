@@ -162,13 +162,13 @@ namespace Beam.Api
     /// <summary>
     /// The <see cref="IGetGameApiResponse"/>
     /// </summary>
-    public interface IGetGameApiResponse : Beam.Client.IApiResponse, IDefault<Beam.Model.GetGameResponse>
+    public interface IGetGameApiResponse : Beam.Client.IApiResponse, IOk<Beam.Model.GetGameResponse>
     {
         /// <summary>
-        /// Returns true if the response is the default response type
+        /// Returns true if the response is 200 Ok
         /// </summary>
         /// <returns></returns>
-        bool IsDefault { get; }
+        bool IsOk { get; }
     }
 
     /// <summary>
@@ -186,25 +186,25 @@ namespace Beam.Api
     /// <summary>
     /// The <see cref="IRemoveContractFromGameApiResponse"/>
     /// </summary>
-    public interface IRemoveContractFromGameApiResponse : Beam.Client.IApiResponse, ICreated<Beam.Model.RemoveContractResponse>
+    public interface IRemoveContractFromGameApiResponse : Beam.Client.IApiResponse, IOk<Beam.Model.RemoveContractResponse>
     {
         /// <summary>
-        /// Returns true if the response is 201 Created
+        /// Returns true if the response is 200 Ok
         /// </summary>
         /// <returns></returns>
-        bool IsCreated { get; }
+        bool IsOk { get; }
     }
 
     /// <summary>
     /// The <see cref="IUpdateGameApiResponse"/>
     /// </summary>
-    public interface IUpdateGameApiResponse : Beam.Client.IApiResponse, ICreated<Beam.Model.UpdateGameResponse>
+    public interface IUpdateGameApiResponse : Beam.Client.IApiResponse, IOk<Beam.Model.UpdateGameResponse>
     {
         /// <summary>
-        /// Returns true if the response is 201 Created
+        /// Returns true if the response is 200 Ok
         /// </summary>
         /// <returns></returns>
-        bool IsCreated { get; }
+        bool IsOk { get; }
     }
 
     /// <summary>
@@ -756,38 +756,38 @@ namespace Beam.Api
             partial void OnCreated(System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
 
             /// <summary>
-            /// Returns true if the response is the default response type
+            /// Returns true if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public bool IsDefault => true;
+            public bool IsOk => 200 == (int)StatusCode;
 
             /// <summary>
-            /// Deserializes the response if the response is 0 Default
+            /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public Beam.Model.GetGameResponse Default()
+            public Beam.Model.GetGameResponse Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
-                return IsDefault
+                return IsOk
                     ? System.Text.Json.JsonSerializer.Deserialize<Beam.Model.GetGameResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
             /// <summary>
-            /// Returns true if the response is 0 Default and the deserialized response is not null
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryDefault([NotNullWhen(true)]out Beam.Model.GetGameResponse result)
+            public bool TryOk([NotNullWhen(true)]out Beam.Model.GetGameResponse result)
             {
                 result = null;
 
                 try
                 {
-                    result = Default();
+                    result = Ok();
                 } catch (Exception e)
                 {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)0);
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
                 }
 
                 return result != null;
@@ -1195,38 +1195,38 @@ namespace Beam.Api
             partial void OnCreated(System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
 
             /// <summary>
-            /// Returns true if the response is 201 Created
+            /// Returns true if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public bool IsCreated => 201 == (int)StatusCode;
+            public bool IsOk => 200 == (int)StatusCode;
 
             /// <summary>
-            /// Deserializes the response if the response is 201 Created
+            /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public Beam.Model.RemoveContractResponse Created()
+            public Beam.Model.RemoveContractResponse Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
-                return IsCreated
+                return IsOk
                     ? System.Text.Json.JsonSerializer.Deserialize<Beam.Model.RemoveContractResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
             /// <summary>
-            /// Returns true if the response is 201 Created and the deserialized response is not null
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryCreated([NotNullWhen(true)]out Beam.Model.RemoveContractResponse result)
+            public bool TryOk([NotNullWhen(true)]out Beam.Model.RemoveContractResponse result)
             {
                 result = null;
 
                 try
                 {
-                    result = Created();
+                    result = Ok();
                 } catch (Exception e)
                 {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)201);
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
                 }
 
                 return result != null;
@@ -1435,38 +1435,38 @@ namespace Beam.Api
             partial void OnCreated(System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
 
             /// <summary>
-            /// Returns true if the response is 201 Created
+            /// Returns true if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public bool IsCreated => 201 == (int)StatusCode;
+            public bool IsOk => 200 == (int)StatusCode;
 
             /// <summary>
-            /// Deserializes the response if the response is 201 Created
+            /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public Beam.Model.UpdateGameResponse Created()
+            public Beam.Model.UpdateGameResponse Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
-                return IsCreated
+                return IsOk
                     ? System.Text.Json.JsonSerializer.Deserialize<Beam.Model.UpdateGameResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
             /// <summary>
-            /// Returns true if the response is 201 Created and the deserialized response is not null
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryCreated([NotNullWhen(true)]out Beam.Model.UpdateGameResponse result)
+            public bool TryOk([NotNullWhen(true)]out Beam.Model.UpdateGameResponse result)
             {
                 result = null;
 
                 try
                 {
-                    result = Created();
+                    result = Ok();
                 } catch (Exception e)
                 {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)201);
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
                 }
 
                 return result != null;

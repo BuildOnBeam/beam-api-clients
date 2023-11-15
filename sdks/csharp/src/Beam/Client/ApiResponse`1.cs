@@ -192,26 +192,6 @@ namespace Beam.Client
     /// An interface for responses of type 
     /// </summary>
     /// <typeparam name="TType"></typeparam>
-    public interface IDefault<TType> : IApiResponse
-    {
-        /// <summary>
-        /// Deserializes the response if the response is Default
-        /// </summary>
-        /// <returns></returns>
-        TType Default();
-
-        /// <summary>
-        /// Returns true if the response is Default and the deserialized response is not null
-        /// </summary>
-        /// <param name="result"></param>
-        /// <returns></returns>
-        bool TryDefault([NotNullWhen(true)]out TType result);
-    }
-
-    /// <summary>
-    /// An interface for responses of type 
-    /// </summary>
-    /// <typeparam name="TType"></typeparam>
     public interface ICreated<TType> : IApiResponse
     {
         /// <summary>

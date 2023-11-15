@@ -37,6 +37,8 @@ export * from './GetChainResponse';
 export * from './GetEstimateResponse';
 export * from './GetGameResponse';
 export * from './GetGasUsageResponse';
+export * from './GetPoliciesResponse';
+export * from './GetPolicyUsageResponse';
 export * from './GetProfileCurrenciesResponse';
 export * from './GetProfileNativeCurrencyResponse';
 export * from './GetProfileResponse';

@@ -4,7 +4,7 @@
 /* eslint-disable */
 
 export type GetGasUsageResponse = {
-  data: Array<{
+  policies: Array<{
     totalTransactionFeeInUSD: string;
     totalTransactionFee: string;
     averageTransactionFee: string;

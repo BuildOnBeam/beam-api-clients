@@ -4,6 +4,7 @@
 /* eslint-disable */
 import type { GetAllGasUsageResponse } from '../models/GetAllGasUsageResponse';
 import type { GetGasUsageResponse } from '../models/GetGasUsageResponse';
+import type { GetPolicyUsageResponse } from '../models/GetPolicyUsageResponse';
 
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -29,7 +30,7 @@ export class ReportingService {
    * @returns GetGasUsageResponse
    * @throws ApiError
    */
-  public getTotalGameUsageForChain(
+  public getTotalGameUsageByChain(
     chainId: number,
   ): CancelablePromise<GetGasUsageResponse> {
     return this.httpRequest.request({
@@ -44,12 +45,12 @@ export class ReportingService {
   /**
    * Get gas usage from a single policy
    * @param policyId
-   * @returns GetGasUsageResponse
+   * @returns GetPolicyUsageResponse
    * @throws ApiError
    */
   public getPolicyUsage(
     policyId: string,
-  ): CancelablePromise<GetGasUsageResponse> {
+  ): CancelablePromise<GetPolicyUsageResponse> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v1/reporting/gas/policies/{policyId}',

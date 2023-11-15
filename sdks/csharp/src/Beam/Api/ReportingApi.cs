@@ -86,8 +86,8 @@ namespace Beam.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chainId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IGetTotalGameUsageForChainApiResponse"/>&gt;</returns>
-        Task<IGetTotalGameUsageForChainApiResponse> GetTotalGameUsageForChainAsync(decimal chainId, System.Threading.CancellationToken cancellationToken = default);
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetTotalGameUsageByChainApiResponse"/>&gt;</returns>
+        Task<IGetTotalGameUsageByChainApiResponse> GetTotalGameUsageByChainAsync(decimal chainId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get total gas usage for single chain
@@ -97,14 +97,14 @@ namespace Beam.Api
         /// </remarks>
         /// <param name="chainId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IGetTotalGameUsageForChainApiResponse"/>&gt;</returns>
-        Task<IGetTotalGameUsageForChainApiResponse> GetTotalGameUsageForChainOrDefaultAsync(decimal chainId, System.Threading.CancellationToken cancellationToken = default);
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetTotalGameUsageByChainApiResponse"/>&gt;</returns>
+        Task<IGetTotalGameUsageByChainApiResponse> GetTotalGameUsageByChainOrDefaultAsync(decimal chainId, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
     /// The <see cref="IGetPolicyUsageApiResponse"/>
     /// </summary>
-    public interface IGetPolicyUsageApiResponse : Beam.Client.IApiResponse, IOk<Beam.Model.GetGasUsageResponse>
+    public interface IGetPolicyUsageApiResponse : Beam.Client.IApiResponse, IOk<Beam.Model.GetPolicyUsageResponse>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -126,9 +126,9 @@ namespace Beam.Api
     }
 
     /// <summary>
-    /// The <see cref="IGetTotalGameUsageForChainApiResponse"/>
+    /// The <see cref="IGetTotalGameUsageByChainApiResponse"/>
     /// </summary>
-    public interface IGetTotalGameUsageForChainApiResponse : Beam.Client.IApiResponse, IOk<Beam.Model.GetGasUsageResponse>
+    public interface IGetTotalGameUsageByChainApiResponse : Beam.Client.IApiResponse, IOk<Beam.Model.GetGasUsageResponse>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -185,21 +185,21 @@ namespace Beam.Api
         /// <summary>
         /// The event raised after the server response
         /// </summary>
-        public event EventHandler<ApiResponseEventArgs> OnGetTotalGameUsageForChain;
+        public event EventHandler<ApiResponseEventArgs> OnGetTotalGameUsageByChain;
 
         /// <summary>
         /// The event raised after an error querying the server
         /// </summary>
-        public event EventHandler<ExceptionEventArgs> OnErrorGetTotalGameUsageForChain;
+        public event EventHandler<ExceptionEventArgs> OnErrorGetTotalGameUsageByChain;
 
-        internal void ExecuteOnGetTotalGameUsageForChain(ReportingApi.GetTotalGameUsageForChainApiResponse apiResponse)
+        internal void ExecuteOnGetTotalGameUsageByChain(ReportingApi.GetTotalGameUsageByChainApiResponse apiResponse)
         {
-            OnGetTotalGameUsageForChain?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+            OnGetTotalGameUsageByChain?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
 
-        internal void ExecuteOnErrorGetTotalGameUsageForChain(Exception exception)
+        internal void ExecuteOnErrorGetTotalGameUsageByChain(Exception exception)
         {
-            OnErrorGetTotalGameUsageForChain?.Invoke(this, new ExceptionEventArgs(exception));
+            OnErrorGetTotalGameUsageByChain?.Invoke(this, new ExceptionEventArgs(exception));
         }
     }
 
@@ -439,11 +439,11 @@ namespace Beam.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public Beam.Model.GetGasUsageResponse Ok()
+            public Beam.Model.GetPolicyUsageResponse Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<Beam.Model.GetGasUsageResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<Beam.Model.GetPolicyUsageResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -452,7 +452,7 @@ namespace Beam.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out Beam.Model.GetGasUsageResponse result)
+            public bool TryOk([NotNullWhen(true)]out Beam.Model.GetPolicyUsageResponse result)
             {
                 result = null;
 
@@ -682,17 +682,17 @@ namespace Beam.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetTotalGameUsageForChain(ref decimal chainId);
+        partial void FormatGetTotalGameUsageByChain(ref decimal chainId);
 
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="chainId"></param>
-        private void AfterGetTotalGameUsageForChainDefaultImplementation(IGetTotalGameUsageForChainApiResponse apiResponseLocalVar, decimal chainId)
+        private void AfterGetTotalGameUsageByChainDefaultImplementation(IGetTotalGameUsageByChainApiResponse apiResponseLocalVar, decimal chainId)
         {
             bool suppressDefaultLog = false;
-            AfterGetTotalGameUsageForChain(ref suppressDefaultLog, apiResponseLocalVar, chainId);
+            AfterGetTotalGameUsageByChain(ref suppressDefaultLog, apiResponseLocalVar, chainId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -703,7 +703,7 @@ namespace Beam.Api
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="chainId"></param>
-        partial void AfterGetTotalGameUsageForChain(ref bool suppressDefaultLog, IGetTotalGameUsageForChainApiResponse apiResponseLocalVar, decimal chainId);
+        partial void AfterGetTotalGameUsageByChain(ref bool suppressDefaultLog, IGetTotalGameUsageByChainApiResponse apiResponseLocalVar, decimal chainId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -712,10 +712,10 @@ namespace Beam.Api
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
         /// <param name="chainId"></param>
-        private void OnErrorGetTotalGameUsageForChainDefaultImplementation(Exception exception, string pathFormat, string path, decimal chainId)
+        private void OnErrorGetTotalGameUsageByChainDefaultImplementation(Exception exception, string pathFormat, string path, decimal chainId)
         {
             bool suppressDefaultLog = false;
-            OnErrorGetTotalGameUsageForChain(ref suppressDefaultLog, exception, pathFormat, path, chainId);
+            OnErrorGetTotalGameUsageByChain(ref suppressDefaultLog, exception, pathFormat, path, chainId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -728,19 +728,19 @@ namespace Beam.Api
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
         /// <param name="chainId"></param>
-        partial void OnErrorGetTotalGameUsageForChain(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, decimal chainId);
+        partial void OnErrorGetTotalGameUsageByChain(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, decimal chainId);
 
         /// <summary>
         /// Get total gas usage for single chain 
         /// </summary>
         /// <param name="chainId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IGetTotalGameUsageForChainApiResponse"/>&gt;</returns>
-        public async Task<IGetTotalGameUsageForChainApiResponse> GetTotalGameUsageForChainOrDefaultAsync(decimal chainId, System.Threading.CancellationToken cancellationToken = default)
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetTotalGameUsageByChainApiResponse"/>&gt;</returns>
+        public async Task<IGetTotalGameUsageByChainApiResponse> GetTotalGameUsageByChainOrDefaultAsync(decimal chainId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await GetTotalGameUsageForChainAsync(chainId, cancellationToken).ConfigureAwait(false);
+                return await GetTotalGameUsageByChainAsync(chainId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -754,14 +754,14 @@ namespace Beam.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chainId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IGetTotalGameUsageForChainApiResponse"/>&gt;</returns>
-        public async Task<IGetTotalGameUsageForChainApiResponse> GetTotalGameUsageForChainAsync(decimal chainId, System.Threading.CancellationToken cancellationToken = default)
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetTotalGameUsageByChainApiResponse"/>&gt;</returns>
+        public async Task<IGetTotalGameUsageByChainApiResponse> GetTotalGameUsageByChainAsync(decimal chainId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                FormatGetTotalGameUsageForChain(ref chainId);
+                FormatGetTotalGameUsageByChain(ref chainId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -796,13 +796,13 @@ namespace Beam.Api
                     {
                         string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
 
-                        ILogger<GetTotalGameUsageForChainApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<GetTotalGameUsageForChainApiResponse>();
+                        ILogger<GetTotalGameUsageByChainApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<GetTotalGameUsageByChainApiResponse>();
 
-                        GetTotalGameUsageForChainApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/reporting/gas/{chainId}", requestedAtLocalVar, _jsonSerializerOptions);
+                        GetTotalGameUsageByChainApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/reporting/gas/{chainId}", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterGetTotalGameUsageForChainDefaultImplementation(apiResponseLocalVar, chainId);
+                        AfterGetTotalGameUsageByChainDefaultImplementation(apiResponseLocalVar, chainId);
 
-                        Events.ExecuteOnGetTotalGameUsageForChain(apiResponseLocalVar);
+                        Events.ExecuteOnGetTotalGameUsageByChain(apiResponseLocalVar);
 
                         if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
                             foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
@@ -814,24 +814,24 @@ namespace Beam.Api
             }
             catch(Exception e)
             {
-                OnErrorGetTotalGameUsageForChainDefaultImplementation(e, "/v1/reporting/gas/{chainId}", uriBuilderLocalVar.Path, chainId);
-                Events.ExecuteOnErrorGetTotalGameUsageForChain(e);
+                OnErrorGetTotalGameUsageByChainDefaultImplementation(e, "/v1/reporting/gas/{chainId}", uriBuilderLocalVar.Path, chainId);
+                Events.ExecuteOnErrorGetTotalGameUsageByChain(e);
                 throw;
             }
         }
 
         /// <summary>
-        /// The <see cref="GetTotalGameUsageForChainApiResponse"/>
+        /// The <see cref="GetTotalGameUsageByChainApiResponse"/>
         /// </summary>
-        public partial class GetTotalGameUsageForChainApiResponse : Beam.Client.ApiResponse, IGetTotalGameUsageForChainApiResponse
+        public partial class GetTotalGameUsageByChainApiResponse : Beam.Client.ApiResponse, IGetTotalGameUsageByChainApiResponse
         {
             /// <summary>
             /// The logger
             /// </summary>
-            public ILogger<GetTotalGameUsageForChainApiResponse> Logger { get; }
+            public ILogger<GetTotalGameUsageByChainApiResponse> Logger { get; }
 
             /// <summary>
-            /// The <see cref="GetTotalGameUsageForChainApiResponse"/>
+            /// The <see cref="GetTotalGameUsageByChainApiResponse"/>
             /// </summary>
             /// <param name="logger"></param>
             /// <param name="httpRequestMessage"></param>
@@ -840,7 +840,7 @@ namespace Beam.Api
             /// <param name="path"></param>
             /// <param name="requestedAt"></param>
             /// <param name="jsonSerializerOptions"></param>
-            public GetTotalGameUsageForChainApiResponse(ILogger<GetTotalGameUsageForChainApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            public GetTotalGameUsageByChainApiResponse(ILogger<GetTotalGameUsageByChainApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
             {
                 Logger = logger;
                 OnCreated(httpRequestMessage, httpResponseMessage);
