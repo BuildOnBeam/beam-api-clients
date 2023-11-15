@@ -13,14 +13,14 @@ The Beam client for the .NET ecosystem provides a type-safe interface for consum
 In order to get started with Beam, you will need an API key. The API key for your game will be provided by your partner at Merit Circle.
 
 ## Using the library in your project
-You have to register necessary services in your container. Then all Api Clients can be used easily by injecting into your classes.
+You have to register necessary services in your dependency injection container, then all Api Clients can be used easily by injecting them into your classes.
 
 ### Package reference
 Simply include our Nuget from https://www.nuget.org/packages/Beam in your .csproj file like any other dependency:
 ```xml
 <PackageReference Include="Beam" Version="1.0.*" />
 ```
-Our deployment pipeline increments **patch** version on every deployment. You can either use concrete version number or use `*` to always use the newest one. We try to limit breaking changes but as this is still new, these might happen.
+Our deployment pipeline increments **patch** version on every deployment. You can either use a concrete version number or a wildcard(`*`) to always use newest SDK. We try to limit breaking changes but as this is still a new product, these might happen.
 
 ### DI registration
 In case of generic host applications:
@@ -89,7 +89,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApi(options =>
 {
     // the type of token here depends on the api security specifications
-    ApiKeyToken token = new("<your token>", prefix: string.Empty);
+    var token = new ApiKeyToken("<your token>");
     options.AddTokens(token);
 
     // optionally choose the method the tokens will be provided with, default is RateLimitProvider
@@ -161,7 +161,7 @@ To use Api clients provided by this SDK, simply inject them into your class:
   Use the provided On and After methods in the Api class from the namespace Beam.Rest.DefaultApi.
   Or provide your own class by using the generic ConfigureApi method.
 - How do I specify different ApiKeyToken for different ApiClients?
-  You can now use exposed ApiKeyTokenProvider one ach client to set custom ApiKey if needed. That token will only be used for that ApiClient instance.
+  You can now use exposed ApiKeyTokenProvider one each client to set custom ApiKey if needed. That token will only be used for that ApiClient instance.
   ```cs
     _gameApi.ApiKeyProvider.SetToken(new ApiKeyToken("<your token>"));
   ```
