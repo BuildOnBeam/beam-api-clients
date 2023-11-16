@@ -31,22 +31,16 @@ namespace Beam.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="GetPoliciesResponseDataInner" /> class.
         /// </summary>
-        /// <param name="chainId">chainId</param>
         /// <param name="id">id</param>
-        /// <param name="model">model</param>
-        /// <param name="name">name</param>
-        /// <param name="type">type</param>
         /// <param name="amount">amount</param>
+        /// <param name="rateType">rateType</param>
         /// <param name="token">token</param>
         [JsonConstructor]
-        public GetPoliciesResponseDataInner(int chainId, string id, ModelEnum model, string name, TypeEnum type, string amount = default, string token = default)
+        public GetPoliciesResponseDataInner(string id, string amount = default, RateTypeEnum? rateType = default, string token = default)
         {
-            ChainId = chainId;
             Id = id;
-            Model = model;
-            Name = name;
-            Type = type;
             Amount = amount;
+            RateType = rateType;
             Token = token;
             OnCreated();
         }
@@ -54,166 +48,85 @@ namespace Beam.Model
         partial void OnCreated();
 
         /// <summary>
-        /// Defines Model
+        /// Defines RateType
         /// </summary>
-        public enum ModelEnum
+        public enum RateTypeEnum
         {
             /// <summary>
-            /// Enum ContractFunctions for value: ContractFunctions
+            /// Enum Fixed for value: Fixed
             /// </summary>
-            ContractFunctions = 1,
+            Fixed = 1,
 
             /// <summary>
-            /// Enum AccountFunctions for value: AccountFunctions
+            /// Enum Dynamic for value: Dynamic
             /// </summary>
-            AccountFunctions = 2
+            Dynamic = 2
         }
 
         /// <summary>
-        /// Returns a <see cref="ModelEnum"/>
+        /// Returns a <see cref="RateTypeEnum"/>
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public static ModelEnum ModelEnumFromString(string value)
+        public static RateTypeEnum RateTypeEnumFromString(string value)
         {
-            if (value.Equals("ContractFunctions"))
-                return ModelEnum.ContractFunctions;
+            if (value.Equals("Fixed"))
+                return RateTypeEnum.Fixed;
 
-            if (value.Equals("AccountFunctions"))
-                return ModelEnum.AccountFunctions;
+            if (value.Equals("Dynamic"))
+                return RateTypeEnum.Dynamic;
 
-            throw new NotImplementedException($"Could not convert value to type ModelEnum: '{value}'");
+            throw new NotImplementedException($"Could not convert value to type RateTypeEnum: '{value}'");
         }
 
         /// <summary>
-        /// Returns a <see cref="ModelEnum"/>
+        /// Returns a <see cref="RateTypeEnum"/>
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static ModelEnum? ModelEnumFromStringOrDefault(string value)
+        public static RateTypeEnum? RateTypeEnumFromStringOrDefault(string value)
         {
-            if (value.Equals("ContractFunctions"))
-                return ModelEnum.ContractFunctions;
+            if (value.Equals("Fixed"))
+                return RateTypeEnum.Fixed;
 
-            if (value.Equals("AccountFunctions"))
-                return ModelEnum.AccountFunctions;
+            if (value.Equals("Dynamic"))
+                return RateTypeEnum.Dynamic;
 
             return null;
         }
 
         /// <summary>
-        /// Converts the <see cref="ModelEnum"/> to the json value
+        /// Converts the <see cref="RateTypeEnum"/> to the json value
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public static string ModelEnumToJsonValue(ModelEnum value)
+        public static string RateTypeEnumToJsonValue(RateTypeEnum? value)
         {
-            if (value == ModelEnum.ContractFunctions)
-                return "ContractFunctions";
+            if (value == null)
+                return null;
 
-            if (value == ModelEnum.AccountFunctions)
-                return "AccountFunctions";
+            if (value == RateTypeEnum.Fixed)
+                return "Fixed";
+
+            if (value == RateTypeEnum.Dynamic)
+                return "Dynamic";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }
 
         /// <summary>
-        /// Gets or Sets Model
+        /// Gets or Sets RateType
         /// </summary>
-        [JsonPropertyName("model")]
-        public ModelEnum Model { get; set; }
-
-        /// <summary>
-        /// Defines Type
-        /// </summary>
-        public enum TypeEnum
-        {
-            /// <summary>
-            /// Enum PayForUser for value: PayForUser
-            /// </summary>
-            PayForUser = 1,
-
-            /// <summary>
-            /// Enum ChargeCustomToken for value: ChargeCustomToken
-            /// </summary>
-            ChargeCustomToken = 2
-        }
-
-        /// <summary>
-        /// Returns a <see cref="TypeEnum"/>
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public static TypeEnum TypeEnumFromString(string value)
-        {
-            if (value.Equals("PayForUser"))
-                return TypeEnum.PayForUser;
-
-            if (value.Equals("ChargeCustomToken"))
-                return TypeEnum.ChargeCustomToken;
-
-            throw new NotImplementedException($"Could not convert value to type TypeEnum: '{value}'");
-        }
-
-        /// <summary>
-        /// Returns a <see cref="TypeEnum"/>
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public static TypeEnum? TypeEnumFromStringOrDefault(string value)
-        {
-            if (value.Equals("PayForUser"))
-                return TypeEnum.PayForUser;
-
-            if (value.Equals("ChargeCustomToken"))
-                return TypeEnum.ChargeCustomToken;
-
-            return null;
-        }
-
-        /// <summary>
-        /// Converts the <see cref="TypeEnum"/> to the json value
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public static string TypeEnumToJsonValue(TypeEnum value)
-        {
-            if (value == TypeEnum.PayForUser)
-                return "PayForUser";
-
-            if (value == TypeEnum.ChargeCustomToken)
-                return "ChargeCustomToken";
-
-            throw new NotImplementedException($"Value could not be handled: '{value}'");
-        }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [JsonPropertyName("type")]
-        public TypeEnum Type { get; set; }
-
-        /// <summary>
-        /// Gets or Sets ChainId
-        /// </summary>
-        [JsonPropertyName("chainId")]
-        public int ChainId { get; set; }
+        [JsonPropertyName("rateType")]
+        public RateTypeEnum? RateType { get; set; }
 
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
         [JsonPropertyName("id")]
         public string Id { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Name
-        /// </summary>
-        [JsonPropertyName("name")]
-        public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Amount
@@ -235,12 +148,9 @@ namespace Beam.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class GetPoliciesResponseDataInner {\n");
-            sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
-            sb.Append("  Model: ").Append(Model).Append("\n");
-            sb.Append("  Name: ").Append(Name).Append("\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Amount: ").Append(Amount).Append("\n");
+            sb.Append("  RateType: ").Append(RateType).Append("\n");
             sb.Append("  Token: ").Append(Token).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -279,12 +189,9 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<int?> chainId = default;
             Option<string> id = default;
-            Option<GetPoliciesResponseDataInner.ModelEnum?> model = default;
-            Option<string> name = default;
-            Option<GetPoliciesResponseDataInner.TypeEnum?> type = default;
             Option<string> amount = default;
+            Option<GetPoliciesResponseDataInner.RateTypeEnum?> rateType = default;
             Option<string> token = default;
 
             while (utf8JsonReader.Read())
@@ -302,28 +209,16 @@ namespace Beam.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "chainId":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = new Option<int?>(utf8JsonReader.GetInt32());
-                            break;
                         case "id":
                             id = new Option<string>(utf8JsonReader.GetString());
                             break;
-                        case "model":
-                            string modelRawValue = utf8JsonReader.GetString();
-                            if (modelRawValue != null)
-                                model = new Option<GetPoliciesResponseDataInner.ModelEnum?>(GetPoliciesResponseDataInner.ModelEnumFromStringOrDefault(modelRawValue));
-                            break;
-                        case "name":
-                            name = new Option<string>(utf8JsonReader.GetString());
-                            break;
-                        case "type":
-                            string typeRawValue = utf8JsonReader.GetString();
-                            if (typeRawValue != null)
-                                type = new Option<GetPoliciesResponseDataInner.TypeEnum?>(GetPoliciesResponseDataInner.TypeEnumFromStringOrDefault(typeRawValue));
-                            break;
                         case "amount":
                             amount = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "rateType":
+                            string rateTypeRawValue = utf8JsonReader.GetString();
+                            if (rateTypeRawValue != null)
+                                rateType = new Option<GetPoliciesResponseDataInner.RateTypeEnum?>(GetPoliciesResponseDataInner.RateTypeEnumFromStringOrDefault(rateTypeRawValue));
                             break;
                         case "token":
                             token = new Option<string>(utf8JsonReader.GetString());
@@ -334,43 +229,22 @@ namespace Beam.Model
                 }
             }
 
-            if (!chainId.IsSet)
-                throw new ArgumentException("Property is required for class GetPoliciesResponseDataInner.", nameof(chainId));
-
             if (!id.IsSet)
                 throw new ArgumentException("Property is required for class GetPoliciesResponseDataInner.", nameof(id));
-
-            if (!model.IsSet)
-                throw new ArgumentException("Property is required for class GetPoliciesResponseDataInner.", nameof(model));
-
-            if (!name.IsSet)
-                throw new ArgumentException("Property is required for class GetPoliciesResponseDataInner.", nameof(name));
-
-            if (!type.IsSet)
-                throw new ArgumentException("Property is required for class GetPoliciesResponseDataInner.", nameof(type));
 
             if (!amount.IsSet)
                 throw new ArgumentException("Property is required for class GetPoliciesResponseDataInner.", nameof(amount));
 
+            if (!rateType.IsSet)
+                throw new ArgumentException("Property is required for class GetPoliciesResponseDataInner.", nameof(rateType));
+
             if (!token.IsSet)
                 throw new ArgumentException("Property is required for class GetPoliciesResponseDataInner.", nameof(token));
-
-            if (chainId.IsSet && chainId.Value == null)
-                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class GetPoliciesResponseDataInner.");
 
             if (id.IsSet && id.Value == null)
                 throw new ArgumentNullException(nameof(id), "Property is not nullable for class GetPoliciesResponseDataInner.");
 
-            if (model.IsSet && model.Value == null)
-                throw new ArgumentNullException(nameof(model), "Property is not nullable for class GetPoliciesResponseDataInner.");
-
-            if (name.IsSet && name.Value == null)
-                throw new ArgumentNullException(nameof(name), "Property is not nullable for class GetPoliciesResponseDataInner.");
-
-            if (type.IsSet && type.Value == null)
-                throw new ArgumentNullException(nameof(type), "Property is not nullable for class GetPoliciesResponseDataInner.");
-
-            return new GetPoliciesResponseDataInner(chainId.Value.Value, id.Value, model.Value.Value, name.Value, type.Value.Value, amount.Value, token.Value);
+            return new GetPoliciesResponseDataInner(id.Value, amount.Value, rateType.Value, token.Value);
         }
 
         /// <summary>
@@ -400,31 +274,18 @@ namespace Beam.Model
             if (getPoliciesResponseDataInner.Id == null)
                 throw new ArgumentNullException(nameof(getPoliciesResponseDataInner.Id), "Property is required for class GetPoliciesResponseDataInner.");
 
-            if (getPoliciesResponseDataInner.Name == null)
-                throw new ArgumentNullException(nameof(getPoliciesResponseDataInner.Name), "Property is required for class GetPoliciesResponseDataInner.");
-
-            writer.WriteNumber("chainId", getPoliciesResponseDataInner.ChainId);
-
             writer.WriteString("id", getPoliciesResponseDataInner.Id);
-
-            var modelRawValue = GetPoliciesResponseDataInner.ModelEnumToJsonValue(getPoliciesResponseDataInner.Model);
-            if (modelRawValue != null)
-                writer.WriteString("model", modelRawValue);
-            else
-                writer.WriteNull("model");
-
-            writer.WriteString("name", getPoliciesResponseDataInner.Name);
-
-            var typeRawValue = GetPoliciesResponseDataInner.TypeEnumToJsonValue(getPoliciesResponseDataInner.Type);
-            if (typeRawValue != null)
-                writer.WriteString("type", typeRawValue);
-            else
-                writer.WriteNull("type");
 
             if (getPoliciesResponseDataInner.Amount != null)
                 writer.WriteString("amount", getPoliciesResponseDataInner.Amount);
             else
                 writer.WriteNull("amount");
+
+            var rateTypeRawValue = GetPoliciesResponseDataInner.RateTypeEnumToJsonValue(getPoliciesResponseDataInner.RateType.Value);
+            if (rateTypeRawValue != null)
+                writer.WriteString("rateType", rateTypeRawValue);
+            else
+                writer.WriteNull("rateType");
 
             if (getPoliciesResponseDataInner.Token != null)
                 writer.WriteString("token", getPoliciesResponseDataInner.Token);

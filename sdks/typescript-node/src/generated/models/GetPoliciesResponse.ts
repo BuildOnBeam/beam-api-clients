@@ -6,11 +6,8 @@
 export type GetPoliciesResponse = {
   data: Array<{
     id: string;
-    name: string;
-    chainId: number;
-    token: string | null;
+    rateType: 'Fixed' | 'Dynamic' | null;
     amount: string | null;
-    model: 'ContractFunctions' | 'AccountFunctions';
-    type: 'PayForUser' | 'ChargeCustomToken';
+    token: string | null;
   }>;
 };
