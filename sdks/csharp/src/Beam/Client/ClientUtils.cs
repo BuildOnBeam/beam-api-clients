@@ -212,6 +212,10 @@ namespace Beam.Client
                 return SellAssetRequestInput.SellTypeEnumToJsonValue(sellAssetRequestInputSellTypeEnum);
             if (obj is SellAssetRequestInput.CurrencyEnum sellAssetRequestInputCurrencyEnum)
                 return SellAssetRequestInput.CurrencyEnumToJsonValue(sellAssetRequestInputCurrencyEnum);
+            if (obj is TradeTokensResponse.StatusEnum tradeTokensResponseStatusEnum)
+                return TradeTokensResponse.StatusEnumToJsonValue(tradeTokensResponseStatusEnum);
+            if (obj is TradeTokensResponse.TypeEnum tradeTokensResponseTypeEnum)
+                return TradeTokensResponse.TypeEnumToJsonValue(tradeTokensResponseTypeEnum);
             if (obj is TransferAssetResponse.StatusEnum transferAssetResponseStatusEnum)
                 return TransferAssetResponse.StatusEnumToJsonValue(transferAssetResponseStatusEnum);
             if (obj is TransferAssetResponse.TypeEnum transferAssetResponseTypeEnum)

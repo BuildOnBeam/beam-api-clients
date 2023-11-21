@@ -14,6 +14,7 @@ src/Beam/Api/MarketplaceApi.cs
 src/Beam/Api/PolicyApi.cs
 src/Beam/Api/ProfilesApi.cs
 src/Beam/Api/ReportingApi.cs
+src/Beam/Api/TradingApi.cs
 src/Beam/Api/TransactionsApi.cs
 src/Beam/Client/ApiException.cs
 src/Beam/Client/ApiFactory.cs
@@ -128,6 +129,10 @@ src/Beam/Model/RemoveContractResponse.cs
 src/Beam/Model/RemovePolicyResponse.cs
 src/Beam/Model/SellAssetRequestInput.cs
 src/Beam/Model/SellAssetResponse.cs
+src/Beam/Model/TradeTokensRequestInput.cs
+src/Beam/Model/TradeTokensRequestInputInitiator.cs
+src/Beam/Model/TradeTokensRequestInputInitiatorTokensInner.cs
+src/Beam/Model/TradeTokensResponse.cs
 src/Beam/Model/TransferAssetRequestInput.cs
 src/Beam/Model/TransferAssetRequestInputAssetsInner.cs
 src/Beam/Model/TransferAssetResponse.cs

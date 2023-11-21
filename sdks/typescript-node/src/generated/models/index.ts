@@ -50,6 +50,8 @@ export * from './RemoveContractResponse';
 export * from './RemovePolicyResponse';
 export * from './SellAssetRequestInput';
 export * from './SellAssetResponse';
+export * from './TradeTokensRequestInput';
+export * from './TradeTokensResponse';
 export * from './TransferAssetRequestInput';
 export * from './TransferAssetResponse';
 export * from './TransferNativeTokenRequestInput';

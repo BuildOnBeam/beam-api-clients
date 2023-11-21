@@ -67,7 +67,7 @@ export class ExchangeService {
   }
 
   /**
-   * Trade an exact amount of `tokenIn` for a minimum amount of `tokenOut`
+   * Swap an exact amount of `tokenIn` for a minimum amount of `tokenOut`
    * @param entityId
    * @param requestBody
    * @returns ConvertTokenResponse

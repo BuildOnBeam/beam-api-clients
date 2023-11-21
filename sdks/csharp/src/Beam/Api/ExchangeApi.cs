@@ -34,7 +34,7 @@ namespace Beam.Api
         ExchangeApiEvents Events { get; }
 
         /// <summary>
-        /// Trade an exact amount of &#x60;tokenIn&#x60; for a minimum amount of &#x60;tokenOut&#x60;
+        /// Swap an exact amount of &#x60;tokenIn&#x60; for a minimum amount of &#x60;tokenOut&#x60;
         /// </summary>
         /// <remarks>
         /// 
@@ -47,7 +47,7 @@ namespace Beam.Api
         Task<IConvertInputApiResponse> ConvertInputAsync(ConvertTokenRequestInput convertTokenRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Trade an exact amount of &#x60;tokenIn&#x60; for a minimum amount of &#x60;tokenOut&#x60;
+        /// Swap an exact amount of &#x60;tokenIn&#x60; for a minimum amount of &#x60;tokenOut&#x60;
         /// </summary>
         /// <remarks>
         /// 
@@ -391,7 +391,7 @@ namespace Beam.Api
         partial void OnErrorConvertInput(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, ConvertTokenRequestInput convertTokenRequestInput, string entityId);
 
         /// <summary>
-        /// Trade an exact amount of &#x60;tokenIn&#x60; for a minimum amount of &#x60;tokenOut&#x60; 
+        /// Swap an exact amount of &#x60;tokenIn&#x60; for a minimum amount of &#x60;tokenOut&#x60; 
         /// </summary>
         /// <param name="convertTokenRequestInput"></param>
         /// <param name="entityId"></param>
@@ -410,7 +410,7 @@ namespace Beam.Api
         }
 
         /// <summary>
-        /// Trade an exact amount of &#x60;tokenIn&#x60; for a minimum amount of &#x60;tokenOut&#x60; 
+        /// Swap an exact amount of &#x60;tokenIn&#x60; for a minimum amount of &#x60;tokenOut&#x60; 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="convertTokenRequestInput"></param>

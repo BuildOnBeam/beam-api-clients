@@ -132,6 +132,10 @@ namespace Beam.Client
             _jsonOptions.Converters.Add(new RemovePolicyResponseJsonConverter());
             _jsonOptions.Converters.Add(new SellAssetRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new SellAssetResponseJsonConverter());
+            _jsonOptions.Converters.Add(new TradeTokensRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new TradeTokensRequestInputInitiatorJsonConverter());
+            _jsonOptions.Converters.Add(new TradeTokensRequestInputInitiatorTokensInnerJsonConverter());
+            _jsonOptions.Converters.Add(new TradeTokensResponseJsonConverter());
             _jsonOptions.Converters.Add(new TransferAssetRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new TransferAssetRequestInputAssetsInnerJsonConverter());
             _jsonOptions.Converters.Add(new TransferAssetResponseJsonConverter());
@@ -163,6 +167,8 @@ namespace Beam.Client
             _services.AddTransient<IProfilesApi, ProfilesApi>();
             _services.AddSingleton<ReportingApiEvents>();
             _services.AddTransient<IReportingApi, ReportingApi>();
+            _services.AddSingleton<TradingApiEvents>();
+            _services.AddTransient<ITradingApi, TradingApi>();
             _services.AddSingleton<TransactionsApiEvents>();
             _services.AddTransient<ITransactionsApi, TransactionsApi>();
         }
@@ -191,6 +197,7 @@ namespace Beam.Client
             builders.Add(_services.AddHttpClient<IPolicyApi, PolicyApi>(client));
             builders.Add(_services.AddHttpClient<IProfilesApi, ProfilesApi>(client));
             builders.Add(_services.AddHttpClient<IReportingApi, ReportingApi>(client));
+            builders.Add(_services.AddHttpClient<ITradingApi, TradingApi>(client));
             builders.Add(_services.AddHttpClient<ITransactionsApi, TransactionsApi>(client));
             
             if (builder != null)
