@@ -176,6 +176,10 @@ namespace Beam.Client
                 return GetAssetsResponseDataInner.RarityEnumToJsonValue(getAssetsResponseDataInnerRarityEnum);
             if (obj is GetChainCurrenciesResponseDataInner.CurrencyEnum getChainCurrenciesResponseDataInnerCurrencyEnum)
                 return GetChainCurrenciesResponseDataInner.CurrencyEnumToJsonValue(getChainCurrenciesResponseDataInnerCurrencyEnum);
+            if (obj is GetGameResponse.PegiContentEnum getGameResponsePegiContentEnum)
+                return GetGameResponse.PegiContentEnumToJsonValue(getGameResponsePegiContentEnum);
+            if (obj is GetGameResponse.PegiRatingEnum getGameResponsePegiRatingEnum)
+                return GetGameResponse.PegiRatingEnumToJsonValue(getGameResponsePegiRatingEnum);
             if (obj is GetGameResponseContractsInner.TypeEnum getGameResponseContractsInnerTypeEnum)
                 return GetGameResponseContractsInner.TypeEnumToJsonValue(getGameResponseContractsInnerTypeEnum);
             if (obj is GetGameResponsePoliciesInner.ModelEnum getGameResponsePoliciesInnerModelEnum)
@@ -206,6 +210,10 @@ namespace Beam.Client
                 return GetProfileAssetsForGameSortParameter.StartEnumToJsonValue(getProfileAssetsForGameSortParameterStartEnum);
             if (obj is GetProfileAssetsForGameSortParameter.StartPriceNumberEnum getProfileAssetsForGameSortParameterStartPriceNumberEnum)
                 return GetProfileAssetsForGameSortParameter.StartPriceNumberEnumToJsonValue(getProfileAssetsForGameSortParameterStartPriceNumberEnum);
+            if (obj is RegenerateGameApiKeysResponse.PegiContentEnum regenerateGameApiKeysResponsePegiContentEnum)
+                return RegenerateGameApiKeysResponse.PegiContentEnumToJsonValue(regenerateGameApiKeysResponsePegiContentEnum);
+            if (obj is RegenerateGameApiKeysResponse.PegiRatingEnum regenerateGameApiKeysResponsePegiRatingEnum)
+                return RegenerateGameApiKeysResponse.PegiRatingEnumToJsonValue(regenerateGameApiKeysResponsePegiRatingEnum);
             if (obj is RegenerateGameApiKeysResponseApiKeysInner.TypeEnum regenerateGameApiKeysResponseApiKeysInnerTypeEnum)
                 return RegenerateGameApiKeysResponseApiKeysInner.TypeEnumToJsonValue(regenerateGameApiKeysResponseApiKeysInnerTypeEnum);
             if (obj is SellAssetRequestInput.SellTypeEnum sellAssetRequestInputSellTypeEnum)
@@ -224,6 +232,20 @@ namespace Beam.Client
                 return TransferTokenResponse.StatusEnumToJsonValue(transferTokenResponseStatusEnum);
             if (obj is TransferTokenResponse.TypeEnum transferTokenResponseTypeEnum)
                 return TransferTokenResponse.TypeEnumToJsonValue(transferTokenResponseTypeEnum);
+            if (obj is UpdateGameRequestInput.PegiContentEnum updateGameRequestInputPegiContentEnum)
+                return UpdateGameRequestInput.PegiContentEnumToJsonValue(updateGameRequestInputPegiContentEnum);
+            if (obj is UpdateGameRequestInput.PegiRatingEnum updateGameRequestInputPegiRatingEnum)
+                return UpdateGameRequestInput.PegiRatingEnumToJsonValue(updateGameRequestInputPegiRatingEnum);
+            if (obj is UpdateGameResponse.PegiContentEnum updateGameResponsePegiContentEnum)
+                return UpdateGameResponse.PegiContentEnumToJsonValue(updateGameResponsePegiContentEnum);
+            if (obj is UpdateGameResponse.PegiRatingEnum updateGameResponsePegiRatingEnum)
+                return UpdateGameResponse.PegiRatingEnumToJsonValue(updateGameResponsePegiRatingEnum);
+            if (obj is UpdateGameResponsePoliciesInner.ModelEnum updateGameResponsePoliciesInnerModelEnum)
+                return UpdateGameResponsePoliciesInner.ModelEnumToJsonValue(updateGameResponsePoliciesInnerModelEnum);
+            if (obj is UpdateGameResponsePoliciesInner.TypeEnum updateGameResponsePoliciesInnerTypeEnum)
+                return UpdateGameResponsePoliciesInner.TypeEnumToJsonValue(updateGameResponsePoliciesInnerTypeEnum);
+            if (obj is UpdateGameResponsePoliciesInner.RateTypeEnum updateGameResponsePoliciesInnerRateTypeEnum)
+                return UpdateGameResponsePoliciesInner.RateTypeEnumToJsonValue(updateGameResponsePoliciesInnerRateTypeEnum);
             if (obj is ICollection collection)
             {
                 List<string> entries = new();

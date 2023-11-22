@@ -144,6 +144,7 @@ namespace Beam.Client
             _jsonOptions.Converters.Add(new TransferTokenResponseJsonConverter());
             _jsonOptions.Converters.Add(new UpdateGameRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new UpdateGameResponseJsonConverter());
+            _jsonOptions.Converters.Add(new UpdateGameResponsePoliciesInnerJsonConverter());
             _jsonOptions.Converters.Add(new UpdateProfileRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new UpdateProfileResponseJsonConverter());
             JsonSerializerOptionsProvider jsonSerializerOptionsProvider = new(_jsonOptions);

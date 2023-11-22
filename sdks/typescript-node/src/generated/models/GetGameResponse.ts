@@ -4,6 +4,17 @@
 /* eslint-disable */
 
 export type GetGameResponse = {
+  pegiRating: GetGameResponse.pegiRating | null;
+  pegiContent: Array<
+    | 'BadLanguage'
+    | 'Discrimination'
+    | 'Drugs'
+    | 'Fear'
+    | 'Gambling'
+    | 'Sex'
+    | 'Violence'
+    | 'InGamePurchases'
+  >;
   id: string;
   createdAt: any;
   updatedAt: any;
@@ -26,7 +37,7 @@ export type GetGameResponse = {
   policies: Array<{
     model: 'ContractFunctions' | 'AccountFunctions';
     type: 'PayForUser' | 'ChargeCustomToken';
-    rateType: 'Fixed' | 'Dynamic' | null;
+    rateType?: 'Fixed' | 'Dynamic' | null;
     id: string;
     createdAt: any;
     updatedAt: any;
@@ -38,3 +49,13 @@ export type GetGameResponse = {
     amount: string | null;
   }>;
 };
+
+export namespace GetGameResponse {
+  export enum pegiRating {
+    THREE = 'Three',
+    SEVEN = 'Seven',
+    TWELVE = 'Twelve',
+    SIXTEEN = 'Sixteen',
+    EIGHTEEN = 'Eighteen',
+  }
+}

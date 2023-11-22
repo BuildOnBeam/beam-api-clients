@@ -4,6 +4,17 @@
 /* eslint-disable */
 
 export type RegenerateGameApiKeysResponse = {
+  pegiRating: RegenerateGameApiKeysResponse.pegiRating | null;
+  pegiContent: Array<
+    | 'BadLanguage'
+    | 'Discrimination'
+    | 'Drugs'
+    | 'Fear'
+    | 'Gambling'
+    | 'Sex'
+    | 'Violence'
+    | 'InGamePurchases'
+  >;
   id: string;
   createdAt: any;
   updatedAt: any;
@@ -21,3 +32,13 @@ export type RegenerateGameApiKeysResponse = {
     gameId: string;
   }>;
 };
+
+export namespace RegenerateGameApiKeysResponse {
+  export enum pegiRating {
+    THREE = 'Three',
+    SEVEN = 'Seven',
+    TWELVE = 'Twelve',
+    SIXTEEN = 'Sixteen',
+    EIGHTEEN = 'Eighteen',
+  }
+}

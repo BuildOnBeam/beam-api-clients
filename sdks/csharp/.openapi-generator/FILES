@@ -141,5 +141,6 @@ src/Beam/Model/TransferTokenRequestInput.cs
 src/Beam/Model/TransferTokenResponse.cs
 src/Beam/Model/UpdateGameRequestInput.cs
 src/Beam/Model/UpdateGameResponse.cs
+src/Beam/Model/UpdateGameResponsePoliciesInner.cs
 src/Beam/Model/UpdateProfileRequestInput.cs
 src/Beam/Model/UpdateProfileResponse.cs

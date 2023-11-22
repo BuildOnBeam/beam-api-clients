@@ -4,6 +4,17 @@
 /* eslint-disable */
 
 export type UpdateGameResponse = {
+  pegiRating: UpdateGameResponse.pegiRating | null;
+  pegiContent: Array<
+    | 'BadLanguage'
+    | 'Discrimination'
+    | 'Drugs'
+    | 'Fear'
+    | 'Gambling'
+    | 'Sex'
+    | 'Violence'
+    | 'InGamePurchases'
+  >;
   id: string;
   createdAt: any;
   updatedAt: any;
@@ -38,3 +49,13 @@ export type UpdateGameResponse = {
     amount: string | null;
   }>;
 };
+
+export namespace UpdateGameResponse {
+  export enum pegiRating {
+    THREE = 'Three',
+    SEVEN = 'Seven',
+    TWELVE = 'Twelve',
+    SIXTEEN = 'Sixteen',
+    EIGHTEEN = 'Eighteen',
+  }
+}
