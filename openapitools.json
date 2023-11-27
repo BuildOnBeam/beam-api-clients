@@ -12,7 +12,7 @@
         "output": "./sdks/csharp",
         "library": "generichost",
         "inputSpec": "https://api.testnet.onbeam.com/api/game-json",
-        "templateDir": "./out",
+        "templateDir": "./templates",
         "skipValidateSpec": true,
         "globalProperty": {
           "modelTests": false,
