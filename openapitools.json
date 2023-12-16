@@ -4,7 +4,7 @@
   "generator-cli": {
     "version": "7.2.0-SNAPSHOT",
     "repository": {
-      "downloadUrl": "https://oss.sonatype.org/content/repositories/snapshots/org/openapitools/openapi-generator-cli/7.2.0-SNAPSHOT/openapi-generator-cli-7.2.0-20231115.074950-12.jar"
+      "downloadUrl": "https://oss.sonatype.org/content/repositories/snapshots/org/openapitools/openapi-generator-cli/7.2.0-SNAPSHOT/openapi-generator-cli-7.2.0-20231215.065935-106.jar"
     },
     "generators": {
       "csharp": {
