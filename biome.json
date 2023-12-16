@@ -4,7 +4,11 @@
     "ignore": [
       "pnpm-lock.yaml",
       "./sdks/typescript-node/src/generated/core/request.ts",
-      "./sdks/typescript-node/src/generated/core/NodeHttpRequest.ts"
+      "./sdks/typescript-node/src/generated/core/NodeHttpRequest.ts",
+      "./sdks/csharp/src/Beam/bin/*",
+      "./sdks/csharp/src/Beam/obj/*",
+      "./sdks/csharp/src/Beam.Test/bin/*",
+      "./sdks/csharp/src/Beam.Test/obj/*"
     ]
   },
   "formatter": {
