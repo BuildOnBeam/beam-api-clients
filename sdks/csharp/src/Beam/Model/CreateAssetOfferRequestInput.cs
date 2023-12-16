@@ -514,11 +514,7 @@ namespace Beam.Model
                 writer.WriteNumber("chainId", createAssetOfferRequestInput.ChainIdOption.Value.Value);
 
             var currencyRawValue = CreateAssetOfferRequestInput.CurrencyEnumToJsonValue(createAssetOfferRequestInput.CurrencyOption.Value.Value);
-            if (currencyRawValue != null)
-                writer.WriteString("currency", currencyRawValue);
-            else
-                writer.WriteNull("currency");
-
+            writer.WriteString("currency", currencyRawValue);
             if (createAssetOfferRequestInput.EndTimeOption.IsSet)
                 writer.WriteString("endTime", createAssetOfferRequestInput.EndTime);
 

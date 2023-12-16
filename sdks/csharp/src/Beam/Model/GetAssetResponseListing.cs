@@ -820,11 +820,7 @@ namespace Beam.Model
             writer.WriteString("contractId", getAssetResponseListing.ContractId);
 
             var currencyRawValue = GetAssetResponseListing.CurrencyEnumToJsonValue(getAssetResponseListing.Currency);
-            if (currencyRawValue != null)
-                writer.WriteString("currency", currencyRawValue);
-            else
-                writer.WriteNull("currency");
-
+            writer.WriteString("currency", currencyRawValue);
             writer.WriteString("endTime", getAssetResponseListing.EndTime);
 
             writer.WriteString("expiresAt", getAssetResponseListing.ExpiresAt);
@@ -838,11 +834,7 @@ namespace Beam.Model
             writer.WriteNumber("quantity", getAssetResponseListing.Quantity);
 
             var sellTypeRawValue = GetAssetResponseListing.SellTypeEnumToJsonValue(getAssetResponseListing.SellType);
-            if (sellTypeRawValue != null)
-                writer.WriteString("sellType", sellTypeRawValue);
-            else
-                writer.WriteNull("sellType");
-
+            writer.WriteString("sellType", sellTypeRawValue);
             writer.WriteString("startTime", getAssetResponseListing.StartTime);
 
             writer.WriteString("tokenAddress", getAssetResponseListing.TokenAddress);

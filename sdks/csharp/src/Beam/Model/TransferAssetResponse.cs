@@ -386,17 +386,9 @@ namespace Beam.Model
                 throw new ArgumentNullException(nameof(transferAssetResponse.TransactionHash), "Property is required for class TransferAssetResponse.");
 
             var statusRawValue = TransferAssetResponse.StatusEnumToJsonValue(transferAssetResponse.Status);
-            if (statusRawValue != null)
-                writer.WriteString("status", statusRawValue);
-            else
-                writer.WriteNull("status");
-
+            writer.WriteString("status", statusRawValue);
             var typeRawValue = TransferAssetResponse.TypeEnumToJsonValue(transferAssetResponse.Type);
-            if (typeRawValue != null)
-                writer.WriteString("type", typeRawValue);
-            else
-                writer.WriteNull("type");
-
+            writer.WriteString("type", typeRawValue);
             if (transferAssetResponse.ExplorerUrlOption.IsSet)
                 writer.WriteString("explorerUrl", transferAssetResponse.ExplorerUrl);
 

@@ -666,19 +666,11 @@ namespace Beam.Model
                 throw new ArgumentNullException(nameof(getAssetOffersResponseDataInner.TokenAmount), "Property is required for class GetAssetOffersResponseDataInner.");
 
             var currencyRawValue = GetAssetOffersResponseDataInner.CurrencyEnumToJsonValue(getAssetOffersResponseDataInner.Currency);
-            if (currencyRawValue != null)
-                writer.WriteString("currency", currencyRawValue);
-            else
-                writer.WriteNull("currency");
-
+            writer.WriteString("currency", currencyRawValue);
             writer.WriteString("endTime", getAssetOffersResponseDataInner.EndTime.ToString(EndTimeFormat));
 
             var kindRawValue = GetAssetOffersResponseDataInner.KindEnumToJsonValue(getAssetOffersResponseDataInner.Kind);
-            if (kindRawValue != null)
-                writer.WriteString("kind", kindRawValue);
-            else
-                writer.WriteNull("kind");
-
+            writer.WriteString("kind", kindRawValue);
             writer.WriteString("offerer", getAssetOffersResponseDataInner.Offerer);
 
             writer.WriteString("offererEntityId", getAssetOffersResponseDataInner.OffererEntityId);

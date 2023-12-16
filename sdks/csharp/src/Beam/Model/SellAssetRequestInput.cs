@@ -676,20 +676,12 @@ namespace Beam.Model
             writer.WriteNumber("quantity", sellAssetRequestInput.Quantity);
 
             var sellTypeRawValue = SellAssetRequestInput.SellTypeEnumToJsonValue(sellAssetRequestInput.SellType);
-            if (sellTypeRawValue != null)
-                writer.WriteString("sellType", sellTypeRawValue);
-            else
-                writer.WriteNull("sellType");
-
+            writer.WriteString("sellType", sellTypeRawValue);
             if (sellAssetRequestInput.ChainIdOption.IsSet)
                 writer.WriteNumber("chainId", sellAssetRequestInput.ChainIdOption.Value.Value);
 
             var currencyRawValue = SellAssetRequestInput.CurrencyEnumToJsonValue(sellAssetRequestInput.CurrencyOption.Value.Value);
-            if (currencyRawValue != null)
-                writer.WriteString("currency", currencyRawValue);
-            else
-                writer.WriteNull("currency");
-
+            writer.WriteString("currency", currencyRawValue);
             if (sellAssetRequestInput.EndTimeOption.IsSet)
                 writer.WriteString("endTime", sellAssetRequestInput.EndTime);
 

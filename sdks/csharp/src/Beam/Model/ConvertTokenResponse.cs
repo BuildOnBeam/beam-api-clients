@@ -360,17 +360,9 @@ namespace Beam.Model
                 throw new ArgumentNullException(nameof(convertTokenResponse.TransactionHash), "Property is required for class ConvertTokenResponse.");
 
             var statusRawValue = ConvertTokenResponse.StatusEnumToJsonValue(convertTokenResponse.Status);
-            if (statusRawValue != null)
-                writer.WriteString("status", statusRawValue);
-            else
-                writer.WriteNull("status");
-
+            writer.WriteString("status", statusRawValue);
             var typeRawValue = ConvertTokenResponse.TypeEnumToJsonValue(convertTokenResponse.Type);
-            if (typeRawValue != null)
-                writer.WriteString("type", typeRawValue);
-            else
-                writer.WriteNull("type");
-
+            writer.WriteString("type", typeRawValue);
             if (convertTokenResponse.ExplorerUrlOption.IsSet)
                 writer.WriteString("explorerUrl", convertTokenResponse.ExplorerUrl);
 

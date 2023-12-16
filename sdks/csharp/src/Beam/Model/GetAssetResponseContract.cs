@@ -790,25 +790,13 @@ namespace Beam.Model
             writer.WriteString("name", getAssetResponseContract.Name);
 
             var networkRawValue = GetAssetResponseContract.NetworkEnumToJsonValue(getAssetResponseContract.Network);
-            if (networkRawValue != null)
-                writer.WriteString("network", networkRawValue);
-            else
-                writer.WriteNull("network");
-
+            writer.WriteString("network", networkRawValue);
             writer.WriteString("slug", getAssetResponseContract.Slug);
 
             var symbolRawValue = GetAssetResponseContract.SymbolEnumToJsonValue(getAssetResponseContract.Symbol);
-            if (symbolRawValue != null)
-                writer.WriteString("symbol", symbolRawValue);
-            else
-                writer.WriteNull("symbol");
-
+            writer.WriteString("symbol", symbolRawValue);
             var typeRawValue = GetAssetResponseContract.TypeEnumToJsonValue(getAssetResponseContract.Type);
-            if (typeRawValue != null)
-                writer.WriteString("type", typeRawValue);
-            else
-                writer.WriteNull("type");
-
+            writer.WriteString("type", typeRawValue);
             if (getAssetResponseContract.DescriptionOption.IsSet)
                 if (getAssetResponseContract.DescriptionOption.Value != null)
                     writer.WriteString("description", getAssetResponseContract.Description);

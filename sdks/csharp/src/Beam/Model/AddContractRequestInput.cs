@@ -372,10 +372,7 @@ namespace Beam.Model
             writer.WriteString("name", addContractRequestInput.Name);
 
             var typeRawValue = AddContractRequestInput.TypeEnumToJsonValue(addContractRequestInput.Type);
-            if (typeRawValue != null)
-                writer.WriteString("type", typeRawValue);
-            else
-                writer.WriteNull("type");
+            writer.WriteString("type", typeRawValue);
         }
     }
 }

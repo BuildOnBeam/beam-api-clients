@@ -225,6 +225,7 @@ namespace Beam.Api
         /// <param name="offset"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetListedAssetsApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IGetListedAssetsApiResponse> GetListedAssetsAsync(Option<GetProfileAssetsForGameFilterParameter> filter = default, Option<GetProfileAssetsForGameSortParameter> sort = default, Option<decimal> limit = default, Option<decimal> offset = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -239,6 +240,7 @@ namespace Beam.Api
         /// <param name="offset"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetListedAssetsApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IGetListedAssetsApiResponse> GetListedAssetsOrDefaultAsync(Option<GetProfileAssetsForGameFilterParameter> filter = default, Option<GetProfileAssetsForGameSortParameter> sort = default, Option<decimal> limit = default, Option<decimal> offset = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -255,6 +257,7 @@ namespace Beam.Api
         /// <param name="offset"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetListedAssetsForProfileApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IGetListedAssetsForProfileApiResponse> GetListedAssetsForProfileAsync(string entityId, Option<GetProfileAssetsForGameFilterParameter> filter = default, Option<GetProfileAssetsForGameSortParameter> sort = default, Option<decimal> limit = default, Option<decimal> offset = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -270,6 +273,7 @@ namespace Beam.Api
         /// <param name="offset"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetListedAssetsForProfileApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IGetListedAssetsForProfileApiResponse> GetListedAssetsForProfileOrDefaultAsync(string entityId, Option<GetProfileAssetsForGameFilterParameter> filter = default, Option<GetProfileAssetsForGameSortParameter> sort = default, Option<decimal> limit = default, Option<decimal> offset = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -1027,10 +1031,9 @@ namespace Beam.Api
                         : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(acceptAssetOfferRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
-                    ApiKeyToken apiKeyTokenLocalVar;
-                    apiKeyTokenLocalVar = (ApiKeyToken) await ApiKeyProvider.GetAsync(cancellationToken).ConfigureAwait(false);
-                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar);
-                    apiKeyTokenLocalVar.UseInHeader(httpRequestMessageLocalVar, "x-api-key");
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
 
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
 
@@ -1289,10 +1292,9 @@ namespace Beam.Api
                         : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(buyAssetRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
-                    ApiKeyToken apiKeyTokenLocalVar;
-                    apiKeyTokenLocalVar = (ApiKeyToken) await ApiKeyProvider.GetAsync(cancellationToken).ConfigureAwait(false);
-                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar);
-                    apiKeyTokenLocalVar.UseInHeader(httpRequestMessageLocalVar, "x-api-key");
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
 
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
 
@@ -1551,10 +1553,9 @@ namespace Beam.Api
                         : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(cancelAssetOfferRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
-                    ApiKeyToken apiKeyTokenLocalVar;
-                    apiKeyTokenLocalVar = (ApiKeyToken) await ApiKeyProvider.GetAsync(cancellationToken).ConfigureAwait(false);
-                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar);
-                    apiKeyTokenLocalVar.UseInHeader(httpRequestMessageLocalVar, "x-api-key");
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
 
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
 
@@ -1813,10 +1814,9 @@ namespace Beam.Api
                         : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(cancelAssetListingRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
-                    ApiKeyToken apiKeyTokenLocalVar;
-                    apiKeyTokenLocalVar = (ApiKeyToken) await ApiKeyProvider.GetAsync(cancellationToken).ConfigureAwait(false);
-                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar);
-                    apiKeyTokenLocalVar.UseInHeader(httpRequestMessageLocalVar, "x-api-key");
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
 
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
 
@@ -2064,10 +2064,9 @@ namespace Beam.Api
                         : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(createAssetOfferRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
-                    ApiKeyToken apiKeyTokenLocalVar;
-                    apiKeyTokenLocalVar = (ApiKeyToken) await ApiKeyProvider.GetAsync(cancellationToken).ConfigureAwait(false);
-                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar);
-                    apiKeyTokenLocalVar.UseInHeader(httpRequestMessageLocalVar, "x-api-key");
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
 
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
 
@@ -2301,10 +2300,9 @@ namespace Beam.Api
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BmarketplaceId%7D", Uri.EscapeDataString(marketplaceId.ToString()));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
-                    ApiKeyToken apiKeyTokenLocalVar;
-                    apiKeyTokenLocalVar = (ApiKeyToken) await ApiKeyProvider.GetAsync(cancellationToken).ConfigureAwait(false);
-                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar);
-                    apiKeyTokenLocalVar.UseInHeader(httpRequestMessageLocalVar, "x-api-key");
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
 
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
 
@@ -2516,10 +2514,9 @@ namespace Beam.Api
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BchainId%7D", Uri.EscapeDataString(chainId.ToString()));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
-                    ApiKeyToken apiKeyTokenLocalVar;
-                    apiKeyTokenLocalVar = (ApiKeyToken) await ApiKeyProvider.GetAsync(cancellationToken).ConfigureAwait(false);
-                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar);
-                    apiKeyTokenLocalVar.UseInHeader(httpRequestMessageLocalVar, "x-api-key");
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
 
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
 
@@ -2781,10 +2778,9 @@ namespace Beam.Api
                     uriBuilderLocalVar.Query = parseQueryStringLocalVar.ToString();
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
-                    ApiKeyToken apiKeyTokenLocalVar;
-                    apiKeyTokenLocalVar = (ApiKeyToken) await ApiKeyProvider.GetAsync(cancellationToken).ConfigureAwait(false);
-                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar);
-                    apiKeyTokenLocalVar.UseInHeader(httpRequestMessageLocalVar, "x-api-key");
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
 
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
 
@@ -3057,10 +3053,9 @@ namespace Beam.Api
                     uriBuilderLocalVar.Query = parseQueryStringLocalVar.ToString();
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
-                    ApiKeyToken apiKeyTokenLocalVar;
-                    apiKeyTokenLocalVar = (ApiKeyToken) await ApiKeyProvider.GetAsync(cancellationToken).ConfigureAwait(false);
-                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar);
-                    apiKeyTokenLocalVar.UseInHeader(httpRequestMessageLocalVar, "x-api-key");
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
 
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
 
@@ -3299,10 +3294,9 @@ namespace Beam.Api
                         : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(getAssetsBodyInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
-                    ApiKeyToken apiKeyTokenLocalVar;
-                    apiKeyTokenLocalVar = (ApiKeyToken) await ApiKeyProvider.GetAsync(cancellationToken).ConfigureAwait(false);
-                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar);
-                    apiKeyTokenLocalVar.UseInHeader(httpRequestMessageLocalVar, "x-api-key");
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
 
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
 
@@ -3539,10 +3533,9 @@ namespace Beam.Api
                         : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(getAssetsBodyInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
-                    ApiKeyToken apiKeyTokenLocalVar;
-                    apiKeyTokenLocalVar = (ApiKeyToken) await ApiKeyProvider.GetAsync(cancellationToken).ConfigureAwait(false);
-                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar);
-                    apiKeyTokenLocalVar.UseInHeader(httpRequestMessageLocalVar, "x-api-key");
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
 
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
 
@@ -3800,10 +3793,9 @@ namespace Beam.Api
                     uriBuilderLocalVar.Query = parseQueryStringLocalVar.ToString();
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
-                    ApiKeyToken apiKeyTokenLocalVar;
-                    apiKeyTokenLocalVar = (ApiKeyToken) await ApiKeyProvider.GetAsync(cancellationToken).ConfigureAwait(false);
-                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar);
-                    apiKeyTokenLocalVar.UseInHeader(httpRequestMessageLocalVar, "x-api-key");
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
 
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
 
@@ -4041,10 +4033,9 @@ namespace Beam.Api
                     uriBuilderLocalVar.Query = parseQueryStringLocalVar.ToString();
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
-                    ApiKeyToken apiKeyTokenLocalVar;
-                    apiKeyTokenLocalVar = (ApiKeyToken) await ApiKeyProvider.GetAsync(cancellationToken).ConfigureAwait(false);
-                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar);
-                    apiKeyTokenLocalVar.UseInHeader(httpRequestMessageLocalVar, "x-api-key");
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
 
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
 
@@ -4283,10 +4274,9 @@ namespace Beam.Api
                         : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(sellAssetRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
-                    ApiKeyToken apiKeyTokenLocalVar;
-                    apiKeyTokenLocalVar = (ApiKeyToken) await ApiKeyProvider.GetAsync(cancellationToken).ConfigureAwait(false);
-                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar);
-                    apiKeyTokenLocalVar.UseInHeader(httpRequestMessageLocalVar, "x-api-key");
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
 
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
 

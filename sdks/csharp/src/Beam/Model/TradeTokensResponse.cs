@@ -360,17 +360,9 @@ namespace Beam.Model
                 throw new ArgumentNullException(nameof(tradeTokensResponse.TransactionHash), "Property is required for class TradeTokensResponse.");
 
             var statusRawValue = TradeTokensResponse.StatusEnumToJsonValue(tradeTokensResponse.Status);
-            if (statusRawValue != null)
-                writer.WriteString("status", statusRawValue);
-            else
-                writer.WriteNull("status");
-
+            writer.WriteString("status", statusRawValue);
             var typeRawValue = TradeTokensResponse.TypeEnumToJsonValue(tradeTokensResponse.Type);
-            if (typeRawValue != null)
-                writer.WriteString("type", typeRawValue);
-            else
-                writer.WriteNull("type");
-
+            writer.WriteString("type", typeRawValue);
             if (tradeTokensResponse.ExplorerUrlOption.IsSet)
                 writer.WriteString("explorerUrl", tradeTokensResponse.ExplorerUrl);
 

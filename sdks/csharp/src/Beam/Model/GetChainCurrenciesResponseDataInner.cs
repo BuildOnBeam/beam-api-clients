@@ -403,11 +403,7 @@ namespace Beam.Model
                 throw new ArgumentNullException(nameof(getChainCurrenciesResponseDataInner.TokenAddress), "Property is required for class GetChainCurrenciesResponseDataInner.");
 
             var currencyRawValue = GetChainCurrenciesResponseDataInner.CurrencyEnumToJsonValue(getChainCurrenciesResponseDataInner.Currency);
-            if (currencyRawValue != null)
-                writer.WriteString("currency", currencyRawValue);
-            else
-                writer.WriteNull("currency");
-
+            writer.WriteString("currency", currencyRawValue);
             writer.WriteNumber("decimals", getChainCurrenciesResponseDataInner.Decimals);
 
             writer.WriteString("tokenAddress", getChainCurrenciesResponseDataInner.TokenAddress);

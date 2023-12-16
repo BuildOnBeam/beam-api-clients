@@ -1061,11 +1061,7 @@ namespace Beam.Model
             writer.WriteString("name", getAssetResponse.Name);
 
             var networkRawValue = GetAssetResponse.NetworkEnumToJsonValue(getAssetResponse.Network);
-            if (networkRawValue != null)
-                writer.WriteString("network", networkRawValue);
-            else
-                writer.WriteNull("network");
-
+            writer.WriteString("network", networkRawValue);
             writer.WriteString("tokenId", getAssetResponse.TokenId);
 
             writer.WriteString("tokenUri", getAssetResponse.TokenUri);

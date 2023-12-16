@@ -295,11 +295,7 @@ namespace Beam.Model
             writer.WriteNumber("amount", addPolicyRequestInput.Amount);
 
             var rateTypeRawValue = AddPolicyRequestInput.RateTypeEnumToJsonValue(addPolicyRequestInput.RateType);
-            if (rateTypeRawValue != null)
-                writer.WriteString("rateType", rateTypeRawValue);
-            else
-                writer.WriteNull("rateType");
-
+            writer.WriteString("rateType", rateTypeRawValue);
             writer.WriteString("tokenAddress", addPolicyRequestInput.TokenAddress);
 
             if (addPolicyRequestInput.ChainIdOption.IsSet)

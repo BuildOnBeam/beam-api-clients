@@ -437,11 +437,7 @@ namespace Beam.Model
             writer.WriteString("id", getGameResponseContractsInner.Id);
 
             var typeRawValue = GetGameResponseContractsInner.TypeEnumToJsonValue(getGameResponseContractsInner.Type);
-            if (typeRawValue != null)
-                writer.WriteString("type", typeRawValue);
-            else
-                writer.WriteNull("type");
-
+            writer.WriteString("type", typeRawValue);
             if (getGameResponseContractsInner.CreatedAt != null)
             {
                 writer.WritePropertyName("createdAt");

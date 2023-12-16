@@ -26,14 +26,14 @@ namespace Beam.Model
     /// <summary>
     /// Check200ResponseInfoValue
     /// </summary>
-    public partial class Check200ResponseInfoValue : Dictionary<String, string>, IValidatableObject
+    public partial class Check200ResponseInfoValue : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Check200ResponseInfoValue" /> class.
         /// </summary>
         /// <param name="status">status</param>
         [JsonConstructor]
-        public Check200ResponseInfoValue(Option<string> status = default) : base()
+        public Check200ResponseInfoValue(Option<string> status = default)
         {
             StatusOption = status;
             OnCreated();
@@ -68,7 +68,6 @@ namespace Beam.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class Check200ResponseInfoValue {\n");
-            sb.Append("  ").Append(base.ToString()?.Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
@@ -81,16 +80,6 @@ namespace Beam.Model
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-        {
-            return this.BaseValidate(validationContext);
-        }
-
-        /// <summary>
-        /// To validate all properties of the instance
-        /// </summary>
-        /// <param name="validationContext">Validation context</param>
-        /// <returns>Validation Result</returns>
-        protected IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> BaseValidate(ValidationContext validationContext)
         {
             yield break;
         }

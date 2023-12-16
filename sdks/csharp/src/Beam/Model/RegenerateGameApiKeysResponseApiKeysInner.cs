@@ -341,11 +341,7 @@ namespace Beam.Model
             writer.WriteString("id", regenerateGameApiKeysResponseApiKeysInner.Id);
 
             var typeRawValue = RegenerateGameApiKeysResponseApiKeysInner.TypeEnumToJsonValue(regenerateGameApiKeysResponseApiKeysInner.Type);
-            if (typeRawValue != null)
-                writer.WriteString("type", typeRawValue);
-            else
-                writer.WriteNull("type");
-
+            writer.WriteString("type", typeRawValue);
             if (regenerateGameApiKeysResponseApiKeysInner.CreatedAt != null)
             {
                 writer.WritePropertyName("createdAt");

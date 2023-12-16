@@ -289,11 +289,7 @@ namespace Beam.Model
             writer.WriteString("id", getAllGasUsageResponseChainsInnerPoliciesInnerPolicy.Id);
 
             var modelRawValue = GetAllGasUsageResponseChainsInnerPoliciesInnerPolicy.ModelEnumToJsonValue(getAllGasUsageResponseChainsInnerPoliciesInnerPolicy.Model);
-            if (modelRawValue != null)
-                writer.WriteString("model", modelRawValue);
-            else
-                writer.WriteNull("model");
-
+            writer.WriteString("model", modelRawValue);
             writer.WriteString("name", getAllGasUsageResponseChainsInnerPoliciesInnerPolicy.Name);
         }
     }

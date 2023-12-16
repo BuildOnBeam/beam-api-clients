@@ -581,19 +581,11 @@ namespace Beam.Model
             writer.WriteString("id", getGameResponsePoliciesInner.Id);
 
             var modelRawValue = GetGameResponsePoliciesInner.ModelEnumToJsonValue(getGameResponsePoliciesInner.Model);
-            if (modelRawValue != null)
-                writer.WriteString("model", modelRawValue);
-            else
-                writer.WriteNull("model");
-
+            writer.WriteString("model", modelRawValue);
             writer.WriteString("name", getGameResponsePoliciesInner.Name);
 
             var typeRawValue = GetGameResponsePoliciesInner.TypeEnumToJsonValue(getGameResponsePoliciesInner.Type);
-            if (typeRawValue != null)
-                writer.WriteString("type", typeRawValue);
-            else
-                writer.WriteNull("type");
-
+            writer.WriteString("type", typeRawValue);
             if (getGameResponsePoliciesInner.Amount != null)
                 writer.WriteString("amount", getGameResponsePoliciesInner.Amount);
             else

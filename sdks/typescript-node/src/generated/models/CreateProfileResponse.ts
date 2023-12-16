@@ -11,7 +11,7 @@ export type CreateProfileResponse = {
   externalEntityId: string;
   gameId: string;
   userId: string | null;
-  userConnectionCreatedAt: any;
+  userConnectionCreatedAt?: string | null;
   wallets: Array<{
     id: string;
     createdAt: any;
