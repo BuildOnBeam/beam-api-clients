@@ -31,31 +31,37 @@ namespace Beam.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateProfileResponse" /> class.
         /// </summary>
+        /// <param name="createdAt">createdAt</param>
         /// <param name="externalEntityId">externalEntityId</param>
         /// <param name="externalId">externalId</param>
         /// <param name="gameId">gameId</param>
         /// <param name="id">id</param>
-        /// <param name="wallets">wallets</param>
-        /// <param name="createdAt">createdAt</param>
         /// <param name="updatedAt">updatedAt</param>
+        /// <param name="wallets">wallets</param>
         /// <param name="userConnectionCreatedAt">userConnectionCreatedAt</param>
         /// <param name="userId">userId</param>
         [JsonConstructor]
-        public CreateProfileResponse(string externalEntityId, string externalId, string gameId, string id, List<CreateProfileResponseWalletsInner> wallets, Object createdAt = default, Object updatedAt = default, Option<DateTime?> userConnectionCreatedAt = default, string userId = default)
+        public CreateProfileResponse(DateTime createdAt, string externalEntityId, string externalId, string gameId, string id, DateTime updatedAt, List<CreateProfileResponseWalletsInner> wallets, Option<DateTime?> userConnectionCreatedAt = default, string userId = default)
         {
+            CreatedAt = createdAt;
             ExternalEntityId = externalEntityId;
             ExternalId = externalId;
             GameId = gameId;
             Id = id;
-            Wallets = wallets;
-            CreatedAt = createdAt;
             UpdatedAt = updatedAt;
+            Wallets = wallets;
             UserConnectionCreatedAtOption = userConnectionCreatedAt;
             UserId = userId;
             OnCreated();
         }
 
         partial void OnCreated();
+
+        /// <summary>
+        /// Gets or Sets CreatedAt
+        /// </summary>
+        [JsonPropertyName("createdAt")]
+        public DateTime CreatedAt { get; set; }
 
         /// <summary>
         /// Gets or Sets ExternalEntityId
@@ -82,22 +88,16 @@ namespace Beam.Model
         public string Id { get; set; }
 
         /// <summary>
+        /// Gets or Sets UpdatedAt
+        /// </summary>
+        [JsonPropertyName("updatedAt")]
+        public DateTime UpdatedAt { get; set; }
+
+        /// <summary>
         /// Gets or Sets Wallets
         /// </summary>
         [JsonPropertyName("wallets")]
         public List<CreateProfileResponseWalletsInner> Wallets { get; set; }
-
-        /// <summary>
-        /// Gets or Sets CreatedAt
-        /// </summary>
-        [JsonPropertyName("createdAt")]
-        public Object CreatedAt { get; set; }
-
-        /// <summary>
-        /// Gets or Sets UpdatedAt
-        /// </summary>
-        [JsonPropertyName("updatedAt")]
-        public Object UpdatedAt { get; set; }
 
         /// <summary>
         /// Used to track the state of UserConnectionCreatedAt
@@ -126,13 +126,13 @@ namespace Beam.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class CreateProfileResponse {\n");
+            sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  ExternalEntityId: ").Append(ExternalEntityId).Append("\n");
             sb.Append("  ExternalId: ").Append(ExternalId).Append("\n");
             sb.Append("  GameId: ").Append(GameId).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
-            sb.Append("  Wallets: ").Append(Wallets).Append("\n");
-            sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
+            sb.Append("  Wallets: ").Append(Wallets).Append("\n");
             sb.Append("  UserConnectionCreatedAt: ").Append(UserConnectionCreatedAt).Append("\n");
             sb.Append("  UserId: ").Append(UserId).Append("\n");
             sb.Append("}\n");
@@ -156,6 +156,16 @@ namespace Beam.Model
     public class CreateProfileResponseJsonConverter : JsonConverter<CreateProfileResponse>
     {
         /// <summary>
+        /// The format to use to serialize CreatedAt
+        /// </summary>
+        public static string CreatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
+        /// The format to use to serialize UpdatedAt
+        /// </summary>
+        public static string UpdatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
         /// The format to use to serialize UserConnectionCreatedAt
         /// </summary>
         public static string UserConnectionCreatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
@@ -177,13 +187,13 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
+            Option<DateTime?> createdAt = default;
             Option<string> externalEntityId = default;
             Option<string> externalId = default;
             Option<string> gameId = default;
             Option<string> id = default;
+            Option<DateTime?> updatedAt = default;
             Option<List<CreateProfileResponseWalletsInner>> wallets = default;
-            Option<Object> createdAt = default;
-            Option<Object> updatedAt = default;
             Option<DateTime?> userConnectionCreatedAt = default;
             Option<string> userId = default;
 
@@ -202,6 +212,10 @@ namespace Beam.Model
 
                     switch (localVarJsonPropertyName)
                     {
+                        case "createdAt":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                createdAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
                         case "externalEntityId":
                             externalEntityId = new Option<string>(utf8JsonReader.GetString());
                             break;
@@ -214,17 +228,13 @@ namespace Beam.Model
                         case "id":
                             id = new Option<string>(utf8JsonReader.GetString());
                             break;
+                        case "updatedAt":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                updatedAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
                         case "wallets":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 wallets = new Option<List<CreateProfileResponseWalletsInner>>(JsonSerializer.Deserialize<List<CreateProfileResponseWalletsInner>>(ref utf8JsonReader, jsonSerializerOptions));
-                            break;
-                        case "createdAt":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                createdAt = new Option<Object>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
-                            break;
-                        case "updatedAt":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                updatedAt = new Option<Object>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "userConnectionCreatedAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
@@ -239,6 +249,9 @@ namespace Beam.Model
                 }
             }
 
+            if (!createdAt.IsSet)
+                throw new ArgumentException("Property is required for class CreateProfileResponse.", nameof(createdAt));
+
             if (!externalEntityId.IsSet)
                 throw new ArgumentException("Property is required for class CreateProfileResponse.", nameof(externalEntityId));
 
@@ -251,17 +264,17 @@ namespace Beam.Model
             if (!id.IsSet)
                 throw new ArgumentException("Property is required for class CreateProfileResponse.", nameof(id));
 
-            if (!wallets.IsSet)
-                throw new ArgumentException("Property is required for class CreateProfileResponse.", nameof(wallets));
-
-            if (!createdAt.IsSet)
-                throw new ArgumentException("Property is required for class CreateProfileResponse.", nameof(createdAt));
-
             if (!updatedAt.IsSet)
                 throw new ArgumentException("Property is required for class CreateProfileResponse.", nameof(updatedAt));
 
+            if (!wallets.IsSet)
+                throw new ArgumentException("Property is required for class CreateProfileResponse.", nameof(wallets));
+
             if (!userId.IsSet)
                 throw new ArgumentException("Property is required for class CreateProfileResponse.", nameof(userId));
+
+            if (createdAt.IsSet && createdAt.Value == null)
+                throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class CreateProfileResponse.");
 
             if (externalEntityId.IsSet && externalEntityId.Value == null)
                 throw new ArgumentNullException(nameof(externalEntityId), "Property is not nullable for class CreateProfileResponse.");
@@ -275,10 +288,13 @@ namespace Beam.Model
             if (id.IsSet && id.Value == null)
                 throw new ArgumentNullException(nameof(id), "Property is not nullable for class CreateProfileResponse.");
 
+            if (updatedAt.IsSet && updatedAt.Value == null)
+                throw new ArgumentNullException(nameof(updatedAt), "Property is not nullable for class CreateProfileResponse.");
+
             if (wallets.IsSet && wallets.Value == null)
                 throw new ArgumentNullException(nameof(wallets), "Property is not nullable for class CreateProfileResponse.");
 
-            return new CreateProfileResponse(externalEntityId.Value, externalId.Value, gameId.Value, id.Value, wallets.Value, createdAt.Value, updatedAt.Value, userConnectionCreatedAt, userId.Value);
+            return new CreateProfileResponse(createdAt.Value.Value, externalEntityId.Value, externalId.Value, gameId.Value, id.Value, updatedAt.Value.Value, wallets.Value, userConnectionCreatedAt, userId.Value);
         }
 
         /// <summary>
@@ -320,6 +336,8 @@ namespace Beam.Model
             if (createProfileResponse.Wallets == null)
                 throw new ArgumentNullException(nameof(createProfileResponse.Wallets), "Property is required for class CreateProfileResponse.");
 
+            writer.WriteString("createdAt", createProfileResponse.CreatedAt.ToString(CreatedAtFormat));
+
             writer.WriteString("externalEntityId", createProfileResponse.ExternalEntityId);
 
             writer.WriteString("externalId", createProfileResponse.ExternalId);
@@ -328,22 +346,10 @@ namespace Beam.Model
 
             writer.WriteString("id", createProfileResponse.Id);
 
+            writer.WriteString("updatedAt", createProfileResponse.UpdatedAt.ToString(UpdatedAtFormat));
+
             writer.WritePropertyName("wallets");
             JsonSerializer.Serialize(writer, createProfileResponse.Wallets, jsonSerializerOptions);
-            if (createProfileResponse.CreatedAt != null)
-            {
-                writer.WritePropertyName("createdAt");
-                JsonSerializer.Serialize(writer, createProfileResponse.CreatedAt, jsonSerializerOptions);
-            }
-            else
-                writer.WriteNull("createdAt");
-            if (createProfileResponse.UpdatedAt != null)
-            {
-                writer.WritePropertyName("updatedAt");
-                JsonSerializer.Serialize(writer, createProfileResponse.UpdatedAt, jsonSerializerOptions);
-            }
-            else
-                writer.WriteNull("updatedAt");
             if (createProfileResponse.UserConnectionCreatedAtOption.IsSet)
                 if (createProfileResponse.UserConnectionCreatedAtOption.Value != null)
                     writer.WriteString("userConnectionCreatedAt", createProfileResponse.UserConnectionCreatedAtOption.Value.Value.ToString(UserConnectionCreatedAtFormat));

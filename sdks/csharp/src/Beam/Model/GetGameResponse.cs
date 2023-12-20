@@ -33,31 +33,31 @@ namespace Beam.Model
         /// </summary>
         /// <param name="chainIds">chainIds</param>
         /// <param name="contracts">contracts</param>
+        /// <param name="createdAt">createdAt</param>
         /// <param name="id">id</param>
         /// <param name="name">name</param>
         /// <param name="pegiContent">pegiContent</param>
         /// <param name="policies">policies</param>
+        /// <param name="updatedAt">updatedAt</param>
         /// <param name="coverImageUrl">coverImageUrl</param>
-        /// <param name="createdAt">createdAt</param>
         /// <param name="description">description</param>
         /// <param name="logoImageUrl">logoImageUrl</param>
         /// <param name="pegiRating">pegiRating</param>
-        /// <param name="updatedAt">updatedAt</param>
         [JsonConstructor]
-        public GetGameResponse(List<int> chainIds, List<GetGameResponseContractsInner> contracts, string id, string name, List<GetGameResponse.PegiContentEnum> pegiContent, List<GetGameResponsePoliciesInner> policies, string coverImageUrl = default, Object createdAt = default, string description = default, string logoImageUrl = default, PegiRatingEnum? pegiRating = default, Object updatedAt = default)
+        public GetGameResponse(List<int> chainIds, List<GetGameResponseContractsInner> contracts, DateTime createdAt, string id, string name, List<GetGameResponse.PegiContentEnum> pegiContent, List<GetGameResponsePoliciesInner> policies, DateTime updatedAt, string coverImageUrl = default, string description = default, string logoImageUrl = default, PegiRatingEnum? pegiRating = default)
         {
             ChainIds = chainIds;
             Contracts = contracts;
+            CreatedAt = createdAt;
             Id = id;
             Name = name;
             PegiContent = pegiContent;
             Policies = policies;
+            UpdatedAt = updatedAt;
             CoverImageUrl = coverImageUrl;
-            CreatedAt = createdAt;
             Description = description;
             LogoImageUrl = logoImageUrl;
             PegiRating = pegiRating;
-            UpdatedAt = updatedAt;
             OnCreated();
         }
 
@@ -343,6 +343,12 @@ namespace Beam.Model
         public List<GetGameResponseContractsInner> Contracts { get; set; }
 
         /// <summary>
+        /// Gets or Sets CreatedAt
+        /// </summary>
+        [JsonPropertyName("createdAt")]
+        public DateTime CreatedAt { get; set; }
+
+        /// <summary>
         /// Gets or Sets Id
         /// </summary>
         [JsonPropertyName("id")]
@@ -367,16 +373,16 @@ namespace Beam.Model
         public List<GetGameResponsePoliciesInner> Policies { get; set; }
 
         /// <summary>
+        /// Gets or Sets UpdatedAt
+        /// </summary>
+        [JsonPropertyName("updatedAt")]
+        public DateTime UpdatedAt { get; set; }
+
+        /// <summary>
         /// Gets or Sets CoverImageUrl
         /// </summary>
         [JsonPropertyName("coverImageUrl")]
         public string CoverImageUrl { get; set; }
-
-        /// <summary>
-        /// Gets or Sets CreatedAt
-        /// </summary>
-        [JsonPropertyName("createdAt")]
-        public Object CreatedAt { get; set; }
 
         /// <summary>
         /// Gets or Sets Description
@@ -391,12 +397,6 @@ namespace Beam.Model
         public string LogoImageUrl { get; set; }
 
         /// <summary>
-        /// Gets or Sets UpdatedAt
-        /// </summary>
-        [JsonPropertyName("updatedAt")]
-        public Object UpdatedAt { get; set; }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -406,16 +406,16 @@ namespace Beam.Model
             sb.Append("class GetGameResponse {\n");
             sb.Append("  ChainIds: ").Append(ChainIds).Append("\n");
             sb.Append("  Contracts: ").Append(Contracts).Append("\n");
+            sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  PegiContent: ").Append(PegiContent).Append("\n");
             sb.Append("  Policies: ").Append(Policies).Append("\n");
+            sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
             sb.Append("  CoverImageUrl: ").Append(CoverImageUrl).Append("\n");
-            sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  LogoImageUrl: ").Append(LogoImageUrl).Append("\n");
             sb.Append("  PegiRating: ").Append(PegiRating).Append("\n");
-            sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -437,6 +437,16 @@ namespace Beam.Model
     public class GetGameResponseJsonConverter : JsonConverter<GetGameResponse>
     {
         /// <summary>
+        /// The format to use to serialize CreatedAt
+        /// </summary>
+        public static string CreatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
+        /// The format to use to serialize UpdatedAt
+        /// </summary>
+        public static string UpdatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
         /// Deserializes json to <see cref="GetGameResponse" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
@@ -455,16 +465,16 @@ namespace Beam.Model
 
             Option<List<int>> chainIds = default;
             Option<List<GetGameResponseContractsInner>> contracts = default;
+            Option<DateTime?> createdAt = default;
             Option<string> id = default;
             Option<string> name = default;
             Option<List<GetGameResponse.PegiContentEnum>> pegiContent = default;
             Option<List<GetGameResponsePoliciesInner>> policies = default;
+            Option<DateTime?> updatedAt = default;
             Option<string> coverImageUrl = default;
-            Option<Object> createdAt = default;
             Option<string> description = default;
             Option<string> logoImageUrl = default;
             Option<GetGameResponse.PegiRatingEnum?> pegiRating = default;
-            Option<Object> updatedAt = default;
 
             while (utf8JsonReader.Read())
             {
@@ -489,6 +499,10 @@ namespace Beam.Model
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 contracts = new Option<List<GetGameResponseContractsInner>>(JsonSerializer.Deserialize<List<GetGameResponseContractsInner>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
+                        case "createdAt":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                createdAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
                         case "id":
                             id = new Option<string>(utf8JsonReader.GetString());
                             break;
@@ -503,12 +517,12 @@ namespace Beam.Model
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 policies = new Option<List<GetGameResponsePoliciesInner>>(JsonSerializer.Deserialize<List<GetGameResponsePoliciesInner>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
+                        case "updatedAt":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                updatedAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
                         case "coverImageUrl":
                             coverImageUrl = new Option<string>(utf8JsonReader.GetString());
-                            break;
-                        case "createdAt":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                createdAt = new Option<Object>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "description":
                             description = new Option<string>(utf8JsonReader.GetString());
@@ -520,10 +534,6 @@ namespace Beam.Model
                             string pegiRatingRawValue = utf8JsonReader.GetString();
                             if (pegiRatingRawValue != null)
                                 pegiRating = new Option<GetGameResponse.PegiRatingEnum?>(GetGameResponse.PegiRatingEnumFromStringOrDefault(pegiRatingRawValue));
-                            break;
-                        case "updatedAt":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                updatedAt = new Option<Object>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -537,6 +547,9 @@ namespace Beam.Model
             if (!contracts.IsSet)
                 throw new ArgumentException("Property is required for class GetGameResponse.", nameof(contracts));
 
+            if (!createdAt.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponse.", nameof(createdAt));
+
             if (!id.IsSet)
                 throw new ArgumentException("Property is required for class GetGameResponse.", nameof(id));
 
@@ -549,11 +562,11 @@ namespace Beam.Model
             if (!policies.IsSet)
                 throw new ArgumentException("Property is required for class GetGameResponse.", nameof(policies));
 
+            if (!updatedAt.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponse.", nameof(updatedAt));
+
             if (!coverImageUrl.IsSet)
                 throw new ArgumentException("Property is required for class GetGameResponse.", nameof(coverImageUrl));
-
-            if (!createdAt.IsSet)
-                throw new ArgumentException("Property is required for class GetGameResponse.", nameof(createdAt));
 
             if (!description.IsSet)
                 throw new ArgumentException("Property is required for class GetGameResponse.", nameof(description));
@@ -564,14 +577,14 @@ namespace Beam.Model
             if (!pegiRating.IsSet)
                 throw new ArgumentException("Property is required for class GetGameResponse.", nameof(pegiRating));
 
-            if (!updatedAt.IsSet)
-                throw new ArgumentException("Property is required for class GetGameResponse.", nameof(updatedAt));
-
             if (chainIds.IsSet && chainIds.Value == null)
                 throw new ArgumentNullException(nameof(chainIds), "Property is not nullable for class GetGameResponse.");
 
             if (contracts.IsSet && contracts.Value == null)
                 throw new ArgumentNullException(nameof(contracts), "Property is not nullable for class GetGameResponse.");
+
+            if (createdAt.IsSet && createdAt.Value == null)
+                throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class GetGameResponse.");
 
             if (id.IsSet && id.Value == null)
                 throw new ArgumentNullException(nameof(id), "Property is not nullable for class GetGameResponse.");
@@ -585,7 +598,10 @@ namespace Beam.Model
             if (policies.IsSet && policies.Value == null)
                 throw new ArgumentNullException(nameof(policies), "Property is not nullable for class GetGameResponse.");
 
-            return new GetGameResponse(chainIds.Value, contracts.Value, id.Value, name.Value, pegiContent.Value, policies.Value, coverImageUrl.Value, createdAt.Value, description.Value, logoImageUrl.Value, pegiRating.Value, updatedAt.Value);
+            if (updatedAt.IsSet && updatedAt.Value == null)
+                throw new ArgumentNullException(nameof(updatedAt), "Property is not nullable for class GetGameResponse.");
+
+            return new GetGameResponse(chainIds.Value, contracts.Value, createdAt.Value.Value, id.Value, name.Value, pegiContent.Value, policies.Value, updatedAt.Value.Value, coverImageUrl.Value, description.Value, logoImageUrl.Value, pegiRating.Value);
         }
 
         /// <summary>
@@ -634,6 +650,8 @@ namespace Beam.Model
             JsonSerializer.Serialize(writer, getGameResponse.ChainIds, jsonSerializerOptions);
             writer.WritePropertyName("contracts");
             JsonSerializer.Serialize(writer, getGameResponse.Contracts, jsonSerializerOptions);
+            writer.WriteString("createdAt", getGameResponse.CreatedAt.ToString(CreatedAtFormat));
+
             writer.WriteString("id", getGameResponse.Id);
 
             writer.WriteString("name", getGameResponse.Name);
@@ -642,18 +660,13 @@ namespace Beam.Model
             JsonSerializer.Serialize(writer, getGameResponse.PegiContent, jsonSerializerOptions);
             writer.WritePropertyName("policies");
             JsonSerializer.Serialize(writer, getGameResponse.Policies, jsonSerializerOptions);
+            writer.WriteString("updatedAt", getGameResponse.UpdatedAt.ToString(UpdatedAtFormat));
+
             if (getGameResponse.CoverImageUrl != null)
                 writer.WriteString("coverImageUrl", getGameResponse.CoverImageUrl);
             else
                 writer.WriteNull("coverImageUrl");
 
-            if (getGameResponse.CreatedAt != null)
-            {
-                writer.WritePropertyName("createdAt");
-                JsonSerializer.Serialize(writer, getGameResponse.CreatedAt, jsonSerializerOptions);
-            }
-            else
-                writer.WriteNull("createdAt");
             if (getGameResponse.Description != null)
                 writer.WriteString("description", getGameResponse.Description);
             else
@@ -669,14 +682,6 @@ namespace Beam.Model
                 writer.WriteString("pegiRating", pegiRatingRawValue);
             else
                 writer.WriteNull("pegiRating");
-
-            if (getGameResponse.UpdatedAt != null)
-            {
-                writer.WritePropertyName("updatedAt");
-                JsonSerializer.Serialize(writer, getGameResponse.UpdatedAt, jsonSerializerOptions);
-            }
-            else
-                writer.WriteNull("updatedAt");
         }
     }
 }

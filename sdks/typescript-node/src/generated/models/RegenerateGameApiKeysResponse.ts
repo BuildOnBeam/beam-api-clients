@@ -16,8 +16,8 @@ export type RegenerateGameApiKeysResponse = {
     | 'InGamePurchases'
   >;
   id: string;
-  createdAt: any;
-  updatedAt: any;
+  createdAt: string;
+  updatedAt: string;
   name: string;
   description: string | null;
   coverImageUrl: string | null;

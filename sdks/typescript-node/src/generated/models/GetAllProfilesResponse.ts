@@ -12,7 +12,7 @@ export type GetAllProfilesResponse = {
     externalEntityId: string;
     gameId: string;
     userId: string | null;
-    userConnectionCreatedAt: any;
+    userConnectionCreatedAt?: any;
     wallets: Array<{
       id: string;
       createdAt: any;

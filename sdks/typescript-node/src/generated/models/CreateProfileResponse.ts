@@ -5,8 +5,8 @@
 
 export type CreateProfileResponse = {
   id: string;
-  createdAt: any;
-  updatedAt: any;
+  createdAt: string;
+  updatedAt: string;
   externalId: string;
   externalEntityId: string;
   gameId: string;

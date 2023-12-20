@@ -6,8 +6,8 @@
 export type AddContractResponse = {
   type: AddContractResponse.type;
   id: string;
-  createdAt: any;
-  updatedAt: any;
+  createdAt: string;
+  updatedAt: string;
   externalId: string;
   address: string;
   name: string | null;
