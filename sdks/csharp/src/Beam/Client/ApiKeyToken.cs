@@ -10,6 +10,7 @@ namespace Beam.Client
     public class ApiKeyToken : TokenBase
     {
         private string _raw;
+        public string Header;
 
         /// <summary>
         /// Constructs an ApiKeyToken object.
@@ -17,19 +18,19 @@ namespace Beam.Client
         /// <param name="value"></param>
         /// <param name="prefix"></param>
         /// <param name="timeout"></param>
-        public ApiKeyToken(string value, string prefix = "", TimeSpan? timeout = null) : base(timeout)
+        public ApiKeyToken(string value, string prefix = "", TimeSpan? timeout = null, string header = "x-api-key") : base(timeout)
         {
             _raw = $"{ prefix }{ value }";
+            Header = header;
         }
 
         /// <summary>
         /// Places the token in the header.
         /// </summary>
         /// <param name="request"></param>
-        /// <param name="headerName"></param>
-        public virtual void UseInHeader(System.Net.Http.HttpRequestMessage request, string headerName)
+        public virtual void UseInHeader(System.Net.Http.HttpRequestMessage request)
         {
-            request.Headers.Add(headerName, _raw);
+            request.Headers.Add(Header, _raw);
         }
 
         /// <summary>

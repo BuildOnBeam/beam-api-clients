@@ -26,7 +26,7 @@ namespace {{packageName}}
         /// </summary>
         public abstract void SetToken(TTokenBase newToken);
 
-        internal abstract System.Threading.Tasks.ValueTask<TTokenBase> GetAsync(System.Threading.CancellationToken cancellation = default{{^netstandard20OrLater}}(System.Threading.CancellationToken){{/netstandard20OrLater}});
+        internal abstract System.Threading.Tasks.ValueTask<TTokenBase> GetAsync(string header = "x-api-key", System.Threading.CancellationToken cancellation = default{{^netstandard20OrLater}}(System.Threading.CancellationToken){{/netstandard20OrLater}});
 
         /// <summary>
         /// Instantiates a TokenProvider.

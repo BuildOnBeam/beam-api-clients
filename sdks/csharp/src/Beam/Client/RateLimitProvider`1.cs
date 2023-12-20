@@ -41,7 +41,7 @@ namespace Beam.Client
                 _tokens[i].TokenBecameAvailable += ((sender) => AvailableTokens.Writer.TryWrite((TTokenBase) sender));
         }
 
-        internal override async System.Threading.Tasks.ValueTask<TTokenBase> GetAsync(System.Threading.CancellationToken cancellation = default)
+        internal override async System.Threading.Tasks.ValueTask<TTokenBase> GetAsync(string header = "x-api-key", System.Threading.CancellationToken cancellation = default)
             => await AvailableTokens.Reader.ReadAsync(cancellation).ConfigureAwait(false);
 
 

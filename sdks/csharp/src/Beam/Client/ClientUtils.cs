@@ -38,32 +38,6 @@ namespace Beam.Client
         public delegate void EventHandler<T>(object sender, T e) where T : EventArgs;
 
         /// <summary>
-        /// An enum of headers
-        /// </summary>
-        public enum ApiKeyHeader
-        {
-            /// <summary>
-            /// The x-api-key header
-            /// </summary>
-            X-api-key
-        }
-
-        /// <summary>
-        /// Converte an ApiKeyHeader to a string
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        /// <exception cref="System.ComponentModel.InvalidEnumArgumentException"></exception>
-        public static string ApiKeyHeaderToString(ApiKeyHeader value)
-        {
-            return value switch
-            {
-                ApiKeyHeader.X-api-key => "x-api-key",
-                _ => throw new System.ComponentModel.InvalidEnumArgumentException(nameof(value), (int)value, typeof(ApiKeyHeader)),
-            };
-        }
-
-        /// <summary>
         /// Returns true when deserialization succeeds.
         /// </summary>
         /// <typeparam name="T"></typeparam>

@@ -41,7 +41,7 @@ namespace {{packageName}}.{{clientPackage}} {{^netStandard}}
                 _tokens[i].TokenBecameAvailable += ((sender) => AvailableTokens.Writer.TryWrite((TTokenBase) sender));
         }
 
-        internal override async System.Threading.Tasks.ValueTask<TTokenBase> GetAsync(System.Threading.CancellationToken cancellation = default{{^netstandard20OrLater}}(System.Threading.CancellationToken){{/netstandard20OrLater}})
+        internal override async System.Threading.Tasks.ValueTask<TTokenBase> GetAsync(string header = "x-api-key", System.Threading.CancellationToken cancellation = default{{^netstandard20OrLater}}(System.Threading.CancellationToken){{/netstandard20OrLater}})
             => await AvailableTokens.Reader.ReadAsync(cancellation).ConfigureAwait(false);
 
 

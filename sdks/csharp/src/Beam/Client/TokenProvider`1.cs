@@ -30,7 +30,7 @@ namespace Beam
         /// </summary>
         public abstract void SetToken(TTokenBase newToken);
 
-        internal abstract System.Threading.Tasks.ValueTask<TTokenBase> GetAsync(System.Threading.CancellationToken cancellation = default);
+        internal abstract System.Threading.Tasks.ValueTask<TTokenBase> GetAsync(string header = "x-api-key", System.Threading.CancellationToken cancellation = default);
 
         /// <summary>
         /// Instantiates a TokenProvider.
