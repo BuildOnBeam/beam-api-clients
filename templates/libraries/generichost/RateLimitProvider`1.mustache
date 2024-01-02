@@ -17,6 +17,7 @@ namespace {{packageName}}.{{clientPackage}} {{^netStandard}}
     /// Provides a token to the api clients. Tokens will be rate limited based on the provided TimeSpan.
     /// </summary>
     /// <typeparam name="TTokenBase"></typeparam>
+    [Obsolete("Please use SimpleApiKeyTokenProvider instead. This might result in CPU usage leaking in high throughput situations!")]
     {{>visibility}} class RateLimitProvider<TTokenBase> : TokenProvider<TTokenBase> where TTokenBase : TokenBase
     {
         internal Channel<TTokenBase> AvailableTokens { get; set; }
@@ -41,7 +42,7 @@ namespace {{packageName}}.{{clientPackage}} {{^netStandard}}
                 _tokens[i].TokenBecameAvailable += ((sender) => AvailableTokens.Writer.TryWrite((TTokenBase) sender));
         }
 
-        internal override async System.Threading.Tasks.ValueTask<TTokenBase> GetAsync(string header = "x-api-key", System.Threading.CancellationToken cancellation = default{{^netstandard20OrLater}}(System.Threading.CancellationToken){{/netstandard20OrLater}})
+        public override async System.Threading.Tasks.ValueTask<TTokenBase> GetAsync(string header = "x-api-key", System.Threading.CancellationToken cancellation = default{{^netstandard20OrLater}}(System.Threading.CancellationToken){{/netstandard20OrLater}})
             => await AvailableTokens.Reader.ReadAsync(cancellation).ConfigureAwait(false);
 
 
@@ -69,6 +70,7 @@ namespace {{packageName}}.{{clientPackage}} {{^netStandard}}
     /// Provides a token to the api clients. Tokens will be rate limited based on the provided TimeSpan.
     /// </summary>
     /// <typeparam name="TTokenBase"></typeparam>
+    [Obsolete("Please use SimpleApiKeyTokenProvider instead. This might result in CPU usage leaking in high throughput situations!")]
     public class RateLimitProvider<TTokenBase> : TokenProvider<TTokenBase> where TTokenBase : TokenBase
     {
         internal ConcurrentDictionary<TTokenBase, TTokenBase> AvailableTokens = new ConcurrentDictionary<TTokenBase, TTokenBase>();
@@ -96,7 +98,7 @@ namespace {{packageName}}.{{clientPackage}} {{^netStandard}}
             }
         }
 
-        internal override async System.Threading.Tasks.ValueTask<TTokenBase> GetAsync(System.Threading.CancellationToken cancellation = default{{^netstandard20OrLater}}(System.Threading.CancellationToken){{/netstandard20OrLater}})
+        public override async System.Threading.Tasks.ValueTask<TTokenBase> GetAsync(System.Threading.CancellationToken cancellation = default{{^netstandard20OrLater}}(System.Threading.CancellationToken){{/netstandard20OrLater}})
         {
             await _semaphore.WaitAsync().ConfigureAwait(false);
 

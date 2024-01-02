@@ -22,6 +22,10 @@ Simply include our Nuget from https://www.nuget.org/packages/Beam in your .cspro
 ```
 Our deployment pipeline increments **patch** version on every deployment. You can either use a concrete version number or a wildcard(`*`) to always use newest SDK. We try to limit breaking changes but as this is still a new product, these might happen.
 
+### Important changes:
+#### 1.0.31
+- Deprecated `RateLimitProvider` for tokens as it might cause high CPU usage in high throughput cases. Please use `SimpleApiKeyTokenProvider`` or simply remove `options.UseProvider<RateLimitProvider<ApiKeyToken>, ApiKeyToken>();` from `.AddApi()` if used before. `SimpleApiKeyTokenProvider` is the new default.
+
 ### DI registration
 In case of generic host applications:
 ```cs
@@ -52,9 +56,6 @@ namespace YourProject
               // the type of token here depends on the api security specifications
               ApiKeyToken token = new("<your token>");
               options.AddTokens(token);
-
-              // optionally choose the method the tokens will be provided with, default is RateLimitProvider
-              options.UseProvider<RateLimitProvider<ApiKeyToken>, ApiKeyToken>();
 
               options.ConfigureJsonOptions((jsonOptions) =>
               {
@@ -91,9 +92,6 @@ builder.Services.AddApi(options =>
     // the type of token here depends on the api security specifications
     var token = new ApiKeyToken("<your token>");
     options.AddTokens(token);
-
-    // optionally choose the method the tokens will be provided with, default is RateLimitProvider
-    options.UseProvider<RateLimitProvider<ApiKeyToken>, ApiKeyToken>();
 
     options.ConfigureJsonOptions((jsonOptions) =>
     {
