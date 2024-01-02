@@ -17,6 +17,7 @@ namespace Beam.Client
     /// Provides a token to the api clients. Tokens will be rate limited based on the provided TimeSpan.
     /// </summary>
     /// <typeparam name="TTokenBase"></typeparam>
+    [Obsolete("Please use SimpleApiKeyTokenProvider instead. This might result in CPU usage leaking in high throughput situations!")]
     public class RateLimitProvider<TTokenBase> : TokenProvider<TTokenBase> where TTokenBase : TokenBase
     {
         internal Channel<TTokenBase> AvailableTokens { get; set; }
@@ -41,7 +42,7 @@ namespace Beam.Client
                 _tokens[i].TokenBecameAvailable += ((sender) => AvailableTokens.Writer.TryWrite((TTokenBase) sender));
         }
 
-        internal override async System.Threading.Tasks.ValueTask<TTokenBase> GetAsync(string header = "x-api-key", System.Threading.CancellationToken cancellation = default)
+        public override async System.Threading.Tasks.ValueTask<TTokenBase> GetAsync(string header = "x-api-key", System.Threading.CancellationToken cancellation = default)
             => await AvailableTokens.Reader.ReadAsync(cancellation).ConfigureAwait(false);
 
 

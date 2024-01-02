@@ -30,7 +30,7 @@ namespace Beam
         /// </summary>
         public abstract void SetToken(TTokenBase newToken);
 
-        internal abstract System.Threading.Tasks.ValueTask<TTokenBase> GetAsync(string header = "x-api-key", System.Threading.CancellationToken cancellation = default);
+        public abstract System.Threading.Tasks.ValueTask<TTokenBase> GetAsync(string header = "x-api-key", System.Threading.CancellationToken cancellation = default);
 
         /// <summary>
         /// Instantiates a TokenProvider.
@@ -42,6 +42,33 @@ namespace Beam
 
             if (_tokens.Length == 0)
                 throw new ArgumentException("You did not provide any tokens.");
+        }
+    }
+
+    /// <summary>
+    /// Provides a token to the api clients. Your tokens will be used directly.
+    /// </summary>
+    /// <typeparam name="TTokenBase"></typeparam>
+    public class SimpleApiKeyTokenProvider<TTokenBase> : TokenProvider<TTokenBase> where TTokenBase : ApiKeyToken
+    {
+        /// <summary>
+        /// Instantiates a SimpleTokenProvider. Your tokens will be used directly.
+        /// </summary>
+        /// <param name="container"></param>
+        public SimpleApiKeyTokenProvider(TokenContainer<TTokenBase> container) : base(container.Tokens)
+        {
+        }
+
+        public override async System.Threading.Tasks.ValueTask<TTokenBase> GetAsync(string header = "x-api-key", System.Threading.CancellationToken cancellation = default)
+            => _tokens.FirstOrDefault(t => string.Equals(t.Header, header, StringComparison.OrdinalIgnoreCase));
+
+
+        /// <summary>
+        /// Sets the new token as a single token for the provider.
+        /// </summary>
+        public override void SetToken(TTokenBase newToken)
+        {
+            _tokens = new TTokenBase[1] { newToken };
         }
     }
 }
