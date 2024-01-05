@@ -618,9 +618,6 @@ namespace Beam.Model
             if (endTime.IsSet && endTime.Value == null)
                 throw new ArgumentNullException(nameof(endTime), "Property is not nullable for class SellAssetRequestInput.");
 
-            if (policyId.IsSet && policyId.Value == null)
-                throw new ArgumentNullException(nameof(policyId), "Property is not nullable for class SellAssetRequestInput.");
-
             if (sponsor.IsSet && sponsor.Value == null)
                 throw new ArgumentNullException(nameof(sponsor), "Property is not nullable for class SellAssetRequestInput.");
 
@@ -663,9 +660,6 @@ namespace Beam.Model
             if (sellAssetRequestInput.EndTimeOption.IsSet && sellAssetRequestInput.EndTime == null)
                 throw new ArgumentNullException(nameof(sellAssetRequestInput.EndTime), "Property is required for class SellAssetRequestInput.");
 
-            if (sellAssetRequestInput.PolicyIdOption.IsSet && sellAssetRequestInput.PolicyId == null)
-                throw new ArgumentNullException(nameof(sellAssetRequestInput.PolicyId), "Property is required for class SellAssetRequestInput.");
-
             if (sellAssetRequestInput.StartTimeOption.IsSet && sellAssetRequestInput.StartTime == null)
                 throw new ArgumentNullException(nameof(sellAssetRequestInput.StartTime), "Property is required for class SellAssetRequestInput.");
 
@@ -686,7 +680,10 @@ namespace Beam.Model
                 writer.WriteString("endTime", sellAssetRequestInput.EndTime);
 
             if (sellAssetRequestInput.PolicyIdOption.IsSet)
-                writer.WriteString("policyId", sellAssetRequestInput.PolicyId);
+                if (sellAssetRequestInput.PolicyIdOption.Value != null)
+                    writer.WriteString("policyId", sellAssetRequestInput.PolicyId);
+                else
+                    writer.WriteNull("policyId");
 
             if (sellAssetRequestInput.SponsorOption.IsSet)
                 writer.WriteBoolean("sponsor", sellAssetRequestInput.SponsorOption.Value.Value);

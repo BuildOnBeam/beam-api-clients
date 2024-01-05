@@ -37,7 +37,7 @@ namespace Beam.Api
         /// Get a single NFT (e.g. ERC721 / ERC1155)
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
@@ -46,13 +46,14 @@ namespace Beam.Api
         /// <param name="entityId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAssetApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IGetAssetApiResponse> GetAssetAsync(string assetAddress, string assetId, Option<decimal> chainId = default, Option<string> entityId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a single NFT (e.g. ERC721 / ERC1155)
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
@@ -60,13 +61,14 @@ namespace Beam.Api
         /// <param name="entityId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAssetApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IGetAssetApiResponse> GetAssetOrDefaultAsync(string assetAddress, string assetId, Option<decimal> chainId = default, Option<string> entityId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155)
         /// </summary>
         /// <remarks>
-        /// This endpoint is deprecated. Use POST route instead.
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
@@ -77,13 +79,14 @@ namespace Beam.Api
         /// <param name="offset"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetContractAssetsApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IGetContractAssetsApiResponse> GetContractAssetsAsync(string assetAddress, Option<GetProfileAssetsForGameFilterParameter> filter = default, Option<GetProfileAssetsForGameSortParameter> sort = default, Option<decimal> chainId = default, Option<decimal> limit = default, Option<decimal> offset = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155)
         /// </summary>
         /// <remarks>
-        /// This endpoint is deprecated. Use POST route instead.
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <param name="assetAddress"></param>
         /// <param name="filter"> (optional)</param>
@@ -93,13 +96,14 @@ namespace Beam.Api
         /// <param name="offset"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetContractAssetsApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IGetContractAssetsApiResponse> GetContractAssetsOrDefaultAsync(string assetAddress, Option<GetProfileAssetsForGameFilterParameter> filter = default, Option<GetProfileAssetsForGameSortParameter> sort = default, Option<decimal> chainId = default, Option<decimal> limit = default, Option<decimal> offset = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155)
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="getAssetsBodyInput"></param>
@@ -107,19 +111,21 @@ namespace Beam.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetContractAssetsPostApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IGetContractAssetsPostApiResponse> GetContractAssetsPostAsync(GetAssetsBodyInput getAssetsBodyInput, string assetAddress, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155)
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <param name="getAssetsBodyInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetContractAssetsPostApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IGetContractAssetsPostApiResponse> GetContractAssetsPostOrDefaultAsync(GetAssetsBodyInput getAssetsBodyInput, string assetAddress, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -161,7 +167,7 @@ namespace Beam.Api
         /// Get all the assets of a profile (NFT assets, e.g. ERC721 / ERC1155)
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="getAssetsBodyInput"></param>
@@ -169,144 +175,156 @@ namespace Beam.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetProfileAssetsForGamePostApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IGetProfileAssetsForGamePostApiResponse> GetProfileAssetsForGamePostAsync(GetAssetsBodyInput getAssetsBodyInput, string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all the assets of a profile (NFT assets, e.g. ERC721 / ERC1155)
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <param name="getAssetsBodyInput"></param>
         /// <param name="entityId"></param>
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetProfileAssetsForGamePostApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IGetProfileAssetsForGamePostApiResponse> GetProfileAssetsForGamePostOrDefaultAsync(GetAssetsBodyInput getAssetsBodyInput, string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all the currencies owned by an account (ERC20)
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetProfileCurrenciesApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IGetProfileCurrenciesApiResponse> GetProfileCurrenciesAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all the currencies owned by an account (ERC20)
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <param name="entityId"></param>
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetProfileCurrenciesApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IGetProfileCurrenciesApiResponse> GetProfileCurrenciesOrDefaultAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get the native token balance
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetProfileNativeCurrencyApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IGetProfileNativeCurrencyApiResponse> GetProfileNativeCurrencyAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get the native token balance
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <param name="entityId"></param>
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetProfileNativeCurrencyApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IGetProfileNativeCurrencyApiResponse> GetProfileNativeCurrencyOrDefaultAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Transfer an asset (NFT assets, ERC721 / ERC1155)
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="transferAssetRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ITransferAssetApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<ITransferAssetApiResponse> TransferAssetAsync(TransferAssetRequestInput transferAssetRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Transfer an asset (NFT assets, ERC721 / ERC1155)
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <param name="transferAssetRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ITransferAssetApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<ITransferAssetApiResponse> TransferAssetOrDefaultAsync(TransferAssetRequestInput transferAssetRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Transfer the native token (MC)
+        /// Transfer the native token (BEAM)
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="transferNativeTokenRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ITransferNativeTokenApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<ITransferNativeTokenApiResponse> TransferNativeTokenAsync(TransferNativeTokenRequestInput transferNativeTokenRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Transfer the native token (MC)
+        /// Transfer the native token (BEAM)
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <param name="transferNativeTokenRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ITransferNativeTokenApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<ITransferNativeTokenApiResponse> TransferNativeTokenOrDefaultAsync(TransferNativeTokenRequestInput transferNativeTokenRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Transfer a token (token assets, ERC20)
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="transferTokenRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ITransferTokenApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<ITransferTokenApiResponse> TransferTokenAsync(TransferTokenRequestInput transferTokenRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Transfer a token (token assets, ERC20)
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <param name="transferTokenRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ITransferTokenApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<ITransferTokenApiResponse> TransferTokenOrDefaultAsync(TransferTokenRequestInput transferTokenRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
     }
 
@@ -763,7 +781,7 @@ namespace Beam.Api
         partial void OnErrorGetAsset(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string assetAddress, string assetId, Option<decimal> chainId, Option<string> entityId);
 
         /// <summary>
-        /// Get a single NFT (e.g. ERC721 / ERC1155) 
+        /// Get a single NFT (e.g. ERC721 / ERC1155) V1 is being deprecated, please use V2
         /// </summary>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
@@ -784,7 +802,7 @@ namespace Beam.Api
         }
 
         /// <summary>
-        /// Get a single NFT (e.g. ERC721 / ERC1155) 
+        /// Get a single NFT (e.g. ERC721 / ERC1155) V1 is being deprecated, please use V2
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
@@ -1035,7 +1053,7 @@ namespace Beam.Api
         partial void OnErrorGetContractAssets(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string assetAddress, Option<GetProfileAssetsForGameFilterParameter> filter, Option<GetProfileAssetsForGameSortParameter> sort, Option<decimal> chainId, Option<decimal> limit, Option<decimal> offset);
 
         /// <summary>
-        /// Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155) This endpoint is deprecated. Use POST route instead.
+        /// Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155) V1 is being deprecated, please use V2
         /// </summary>
         /// <param name="assetAddress"></param>
         /// <param name="filter"> (optional)</param>
@@ -1058,7 +1076,7 @@ namespace Beam.Api
         }
 
         /// <summary>
-        /// Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155) This endpoint is deprecated. Use POST route instead.
+        /// Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155) V1 is being deprecated, please use V2
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
@@ -1303,7 +1321,7 @@ namespace Beam.Api
         partial void OnErrorGetContractAssetsPost(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, GetAssetsBodyInput getAssetsBodyInput, string assetAddress, Option<decimal> chainId);
 
         /// <summary>
-        /// Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155) 
+        /// Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155) V1 is being deprecated, please use V2
         /// </summary>
         /// <param name="getAssetsBodyInput"></param>
         /// <param name="assetAddress"></param>
@@ -1323,7 +1341,7 @@ namespace Beam.Api
         }
 
         /// <summary>
-        /// Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155) 
+        /// Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155) V1 is being deprecated, please use V2
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="getAssetsBodyInput"></param>
@@ -1850,7 +1868,7 @@ namespace Beam.Api
         partial void OnErrorGetProfileAssetsForGamePost(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, GetAssetsBodyInput getAssetsBodyInput, string entityId, Option<decimal> chainId);
 
         /// <summary>
-        /// Get all the assets of a profile (NFT assets, e.g. ERC721 / ERC1155) 
+        /// Get all the assets of a profile (NFT assets, e.g. ERC721 / ERC1155) V1 is being deprecated, please use V2
         /// </summary>
         /// <param name="getAssetsBodyInput"></param>
         /// <param name="entityId"></param>
@@ -1870,7 +1888,7 @@ namespace Beam.Api
         }
 
         /// <summary>
-        /// Get all the assets of a profile (NFT assets, e.g. ERC721 / ERC1155) 
+        /// Get all the assets of a profile (NFT assets, e.g. ERC721 / ERC1155) V1 is being deprecated, please use V2
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="getAssetsBodyInput"></param>
@@ -2105,7 +2123,7 @@ namespace Beam.Api
         partial void OnErrorGetProfileCurrencies(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string entityId, Option<decimal> chainId);
 
         /// <summary>
-        /// Get all the currencies owned by an account (ERC20) 
+        /// Get all the currencies owned by an account (ERC20) V1 is being deprecated, please use V2
         /// </summary>
         /// <param name="entityId"></param>
         /// <param name="chainId"> (optional)</param>
@@ -2124,7 +2142,7 @@ namespace Beam.Api
         }
 
         /// <summary>
-        /// Get all the currencies owned by an account (ERC20) 
+        /// Get all the currencies owned by an account (ERC20) V1 is being deprecated, please use V2
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
@@ -2345,7 +2363,7 @@ namespace Beam.Api
         partial void OnErrorGetProfileNativeCurrency(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string entityId, Option<decimal> chainId);
 
         /// <summary>
-        /// Get the native token balance 
+        /// Get the native token balance V1 is being deprecated, please use V2
         /// </summary>
         /// <param name="entityId"></param>
         /// <param name="chainId"> (optional)</param>
@@ -2364,7 +2382,7 @@ namespace Beam.Api
         }
 
         /// <summary>
-        /// Get the native token balance 
+        /// Get the native token balance V1 is being deprecated, please use V2
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
@@ -2589,7 +2607,7 @@ namespace Beam.Api
         partial void OnErrorTransferAsset(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, TransferAssetRequestInput transferAssetRequestInput, string entityId);
 
         /// <summary>
-        /// Transfer an asset (NFT assets, ERC721 / ERC1155) 
+        /// Transfer an asset (NFT assets, ERC721 / ERC1155) V1 is being deprecated, please use V2
         /// </summary>
         /// <param name="transferAssetRequestInput"></param>
         /// <param name="entityId"></param>
@@ -2608,7 +2626,7 @@ namespace Beam.Api
         }
 
         /// <summary>
-        /// Transfer an asset (NFT assets, ERC721 / ERC1155) 
+        /// Transfer an asset (NFT assets, ERC721 / ERC1155) V1 is being deprecated, please use V2
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="transferAssetRequestInput"></param>
@@ -2839,7 +2857,7 @@ namespace Beam.Api
         partial void OnErrorTransferNativeToken(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, TransferNativeTokenRequestInput transferNativeTokenRequestInput, string entityId);
 
         /// <summary>
-        /// Transfer the native token (MC) 
+        /// Transfer the native token (BEAM) V1 is being deprecated, please use V2
         /// </summary>
         /// <param name="transferNativeTokenRequestInput"></param>
         /// <param name="entityId"></param>
@@ -2858,7 +2876,7 @@ namespace Beam.Api
         }
 
         /// <summary>
-        /// Transfer the native token (MC) 
+        /// Transfer the native token (BEAM) V1 is being deprecated, please use V2
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="transferNativeTokenRequestInput"></param>
@@ -3089,7 +3107,7 @@ namespace Beam.Api
         partial void OnErrorTransferToken(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, TransferTokenRequestInput transferTokenRequestInput, string entityId);
 
         /// <summary>
-        /// Transfer a token (token assets, ERC20) 
+        /// Transfer a token (token assets, ERC20) V1 is being deprecated, please use V2
         /// </summary>
         /// <param name="transferTokenRequestInput"></param>
         /// <param name="entityId"></param>
@@ -3108,7 +3126,7 @@ namespace Beam.Api
         }
 
         /// <summary>
-        /// Transfer a token (token assets, ERC20) 
+        /// Transfer a token (token assets, ERC20) V1 is being deprecated, please use V2
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="transferTokenRequestInput"></param>

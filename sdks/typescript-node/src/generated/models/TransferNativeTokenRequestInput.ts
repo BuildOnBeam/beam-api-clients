@@ -9,6 +9,6 @@ export type TransferNativeTokenRequestInput = {
   amountToTransfer: string;
   optimistic?: boolean;
   sponsor?: boolean;
-  policyId?: string;
+  policyId?: string | null;
   chainId?: number;
 };

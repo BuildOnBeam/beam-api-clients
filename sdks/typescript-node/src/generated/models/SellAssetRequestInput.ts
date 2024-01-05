@@ -12,7 +12,7 @@ export type SellAssetRequestInput = {
   sellType: SellAssetRequestInput.sellType;
   currency?: SellAssetRequestInput.currency;
   sponsor?: boolean;
-  policyId?: string;
+  policyId?: string | null;
   chainId?: number;
 };
 

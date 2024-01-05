@@ -191,9 +191,6 @@ namespace Beam.Model
             if (optimistic.IsSet && optimistic.Value == null)
                 throw new ArgumentNullException(nameof(optimistic), "Property is not nullable for class AcceptAssetOfferRequestInput.");
 
-            if (policyId.IsSet && policyId.Value == null)
-                throw new ArgumentNullException(nameof(policyId), "Property is not nullable for class AcceptAssetOfferRequestInput.");
-
             if (sponsor.IsSet && sponsor.Value == null)
                 throw new ArgumentNullException(nameof(sponsor), "Property is not nullable for class AcceptAssetOfferRequestInput.");
 
@@ -224,16 +221,16 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (acceptAssetOfferRequestInput.PolicyIdOption.IsSet && acceptAssetOfferRequestInput.PolicyId == null)
-                throw new ArgumentNullException(nameof(acceptAssetOfferRequestInput.PolicyId), "Property is required for class AcceptAssetOfferRequestInput.");
-
             writer.WriteNumber("quantity", acceptAssetOfferRequestInput.Quantity);
 
             if (acceptAssetOfferRequestInput.OptimisticOption.IsSet)
                 writer.WriteBoolean("optimistic", acceptAssetOfferRequestInput.OptimisticOption.Value.Value);
 
             if (acceptAssetOfferRequestInput.PolicyIdOption.IsSet)
-                writer.WriteString("policyId", acceptAssetOfferRequestInput.PolicyId);
+                if (acceptAssetOfferRequestInput.PolicyIdOption.Value != null)
+                    writer.WriteString("policyId", acceptAssetOfferRequestInput.PolicyId);
+                else
+                    writer.WriteNull("policyId");
 
             if (acceptAssetOfferRequestInput.SponsorOption.IsSet)
                 writer.WriteBoolean("sponsor", acceptAssetOfferRequestInput.SponsorOption.Value.Value);

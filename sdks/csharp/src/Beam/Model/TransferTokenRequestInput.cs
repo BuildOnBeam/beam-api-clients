@@ -273,9 +273,6 @@ namespace Beam.Model
             if (optimistic.IsSet && optimistic.Value == null)
                 throw new ArgumentNullException(nameof(optimistic), "Property is not nullable for class TransferTokenRequestInput.");
 
-            if (policyId.IsSet && policyId.Value == null)
-                throw new ArgumentNullException(nameof(policyId), "Property is not nullable for class TransferTokenRequestInput.");
-
             if (receiverEntityId.IsSet && receiverEntityId.Value == null)
                 throw new ArgumentNullException(nameof(receiverEntityId), "Property is not nullable for class TransferTokenRequestInput.");
 
@@ -318,9 +315,6 @@ namespace Beam.Model
             if (transferTokenRequestInput.AssetAddress == null)
                 throw new ArgumentNullException(nameof(transferTokenRequestInput.AssetAddress), "Property is required for class TransferTokenRequestInput.");
 
-            if (transferTokenRequestInput.PolicyIdOption.IsSet && transferTokenRequestInput.PolicyId == null)
-                throw new ArgumentNullException(nameof(transferTokenRequestInput.PolicyId), "Property is required for class TransferTokenRequestInput.");
-
             if (transferTokenRequestInput.ReceiverEntityIdOption.IsSet && transferTokenRequestInput.ReceiverEntityId == null)
                 throw new ArgumentNullException(nameof(transferTokenRequestInput.ReceiverEntityId), "Property is required for class TransferTokenRequestInput.");
 
@@ -338,7 +332,10 @@ namespace Beam.Model
                 writer.WriteBoolean("optimistic", transferTokenRequestInput.OptimisticOption.Value.Value);
 
             if (transferTokenRequestInput.PolicyIdOption.IsSet)
-                writer.WriteString("policyId", transferTokenRequestInput.PolicyId);
+                if (transferTokenRequestInput.PolicyIdOption.Value != null)
+                    writer.WriteString("policyId", transferTokenRequestInput.PolicyId);
+                else
+                    writer.WriteNull("policyId");
 
             if (transferTokenRequestInput.ReceiverEntityIdOption.IsSet)
                 writer.WriteString("receiverEntityId", transferTokenRequestInput.ReceiverEntityId);

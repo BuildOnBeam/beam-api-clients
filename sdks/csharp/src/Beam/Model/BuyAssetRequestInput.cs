@@ -191,9 +191,6 @@ namespace Beam.Model
             if (optimistic.IsSet && optimistic.Value == null)
                 throw new ArgumentNullException(nameof(optimistic), "Property is not nullable for class BuyAssetRequestInput.");
 
-            if (policyId.IsSet && policyId.Value == null)
-                throw new ArgumentNullException(nameof(policyId), "Property is not nullable for class BuyAssetRequestInput.");
-
             if (sponsor.IsSet && sponsor.Value == null)
                 throw new ArgumentNullException(nameof(sponsor), "Property is not nullable for class BuyAssetRequestInput.");
 
@@ -224,16 +221,16 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, BuyAssetRequestInput buyAssetRequestInput, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (buyAssetRequestInput.PolicyIdOption.IsSet && buyAssetRequestInput.PolicyId == null)
-                throw new ArgumentNullException(nameof(buyAssetRequestInput.PolicyId), "Property is required for class BuyAssetRequestInput.");
-
             writer.WriteNumber("quantity", buyAssetRequestInput.Quantity);
 
             if (buyAssetRequestInput.OptimisticOption.IsSet)
                 writer.WriteBoolean("optimistic", buyAssetRequestInput.OptimisticOption.Value.Value);
 
             if (buyAssetRequestInput.PolicyIdOption.IsSet)
-                writer.WriteString("policyId", buyAssetRequestInput.PolicyId);
+                if (buyAssetRequestInput.PolicyIdOption.Value != null)
+                    writer.WriteString("policyId", buyAssetRequestInput.PolicyId);
+                else
+                    writer.WriteNull("policyId");
 
             if (buyAssetRequestInput.SponsorOption.IsSet)
                 writer.WriteBoolean("sponsor", buyAssetRequestInput.SponsorOption.Value.Value);

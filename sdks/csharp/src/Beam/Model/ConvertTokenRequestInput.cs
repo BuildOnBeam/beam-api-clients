@@ -291,9 +291,6 @@ namespace Beam.Model
             if (optimistic.IsSet && optimistic.Value == null)
                 throw new ArgumentNullException(nameof(optimistic), "Property is not nullable for class ConvertTokenRequestInput.");
 
-            if (policyId.IsSet && policyId.Value == null)
-                throw new ArgumentNullException(nameof(policyId), "Property is not nullable for class ConvertTokenRequestInput.");
-
             if (receiverEntityId.IsSet && receiverEntityId.Value == null)
                 throw new ArgumentNullException(nameof(receiverEntityId), "Property is not nullable for class ConvertTokenRequestInput.");
 
@@ -339,9 +336,6 @@ namespace Beam.Model
             if (convertTokenRequestInput.TokenOut == null)
                 throw new ArgumentNullException(nameof(convertTokenRequestInput.TokenOut), "Property is required for class ConvertTokenRequestInput.");
 
-            if (convertTokenRequestInput.PolicyIdOption.IsSet && convertTokenRequestInput.PolicyId == null)
-                throw new ArgumentNullException(nameof(convertTokenRequestInput.PolicyId), "Property is required for class ConvertTokenRequestInput.");
-
             if (convertTokenRequestInput.ReceiverEntityIdOption.IsSet && convertTokenRequestInput.ReceiverEntityId == null)
                 throw new ArgumentNullException(nameof(convertTokenRequestInput.ReceiverEntityId), "Property is required for class ConvertTokenRequestInput.");
 
@@ -360,7 +354,10 @@ namespace Beam.Model
                 writer.WriteBoolean("optimistic", convertTokenRequestInput.OptimisticOption.Value.Value);
 
             if (convertTokenRequestInput.PolicyIdOption.IsSet)
-                writer.WriteString("policyId", convertTokenRequestInput.PolicyId);
+                if (convertTokenRequestInput.PolicyIdOption.Value != null)
+                    writer.WriteString("policyId", convertTokenRequestInput.PolicyId);
+                else
+                    writer.WriteNull("policyId");
 
             if (convertTokenRequestInput.ReceiverEntityIdOption.IsSet)
                 writer.WriteString("receiverEntityId", convertTokenRequestInput.ReceiverEntityId);

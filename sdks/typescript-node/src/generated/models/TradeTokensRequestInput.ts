@@ -21,6 +21,6 @@ export type TradeTokensRequestInput = {
     }>;
   };
   sponsor?: boolean;
-  policyId?: string;
+  policyId?: string | null;
   chainId?: number;
 };

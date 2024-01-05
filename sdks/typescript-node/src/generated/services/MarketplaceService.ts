@@ -25,7 +25,9 @@ export class MarketplaceService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
 
   /**
+   * @deprecated
    * Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155)
+   * V1 is being deprecated, please use V2
    * @param requestBody
    * @returns GetAssetListingsResponse
    * @throws ApiError
@@ -44,7 +46,7 @@ export class MarketplaceService {
   /**
    * @deprecated
    * Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155)
-   * This endpoint is deprecated. Use POST route instead.
+   * V1 is being deprecated, please use V2
    * @param limit
    * @param offset
    * @param filter
@@ -104,7 +106,9 @@ export class MarketplaceService {
   }
 
   /**
+   * @deprecated
    * Get all the assets listed by a profile (NFT assets, e.g. ERC721 / ERC1155)
+   * V1 is being deprecated, please use V2
    * @param entityId
    * @param requestBody
    * @returns GetAssetListingsResponse
@@ -128,7 +132,7 @@ export class MarketplaceService {
   /**
    * @deprecated
    * Get all the assets listed by a profile (NFT assets, e.g. ERC721 / ERC1155)
-   * This endpoint is deprecated. Use POST route instead.
+   * V1 is being deprecated, please use V2
    * @param entityId
    * @param limit
    * @param offset
@@ -193,7 +197,9 @@ export class MarketplaceService {
   }
 
   /**
+   * @deprecated
    * List an asset for sale
+   * V1 is being deprecated, please use V2
    * @param entityId
    * @param requestBody
    * @returns SellAssetResponse
@@ -215,7 +221,9 @@ export class MarketplaceService {
   }
 
   /**
+   * @deprecated
    * Buy listed asset
+   * V1 is being deprecated, please use V2
    * @param entityId
    * @param orderId
    * @param requestBody
@@ -240,7 +248,9 @@ export class MarketplaceService {
   }
 
   /**
+   * @deprecated
    * Cancel asset listing
+   * V1 is being deprecated, please use V2
    * @param entityId
    * @param orderId
    * @param requestBody
@@ -265,7 +275,9 @@ export class MarketplaceService {
   }
 
   /**
+   * @deprecated
    * Make an offer for an asset
+   * V1 is being deprecated, please use V2
    * @param entityId
    * @param requestBody
    * @returns CreateOfferResponse
@@ -287,7 +299,9 @@ export class MarketplaceService {
   }
 
   /**
+   * @deprecated
    * Get all offers that player created
+   * V1 is being deprecated, please use V2
    * @param entityId
    * @param chainId
    * @returns GetAssetOffersResponse
@@ -310,7 +324,9 @@ export class MarketplaceService {
   }
 
   /**
+   * @deprecated
    * Get all asset offers that player created
+   * V1 is being deprecated, please use V2
    * @param entityId
    * @param marketplaceId
    * @param chainId
@@ -336,7 +352,9 @@ export class MarketplaceService {
   }
 
   /**
+   * @deprecated
    * Accept an offer for an asset
+   * V1 is being deprecated, please use V2
    * @param entityId
    * @param offerId
    * @param requestBody
@@ -361,7 +379,9 @@ export class MarketplaceService {
   }
 
   /**
+   * @deprecated
    * Cancel an offer for an asset
+   * V1 is being deprecated, please use V2
    * @param entityId
    * @param offerId
    * @param requestBody
@@ -386,7 +406,9 @@ export class MarketplaceService {
   }
 
   /**
+   * @deprecated
    * Get all offers for an asset
+   * V1 is being deprecated, please use V2
    * @param marketplaceId
    * @returns GetAssetOffersResponse
    * @throws ApiError
@@ -404,6 +426,8 @@ export class MarketplaceService {
   }
 
   /**
+   * @deprecated
+   * V1 is being deprecated, please use V2
    * @param chainId
    * @returns GetChainCurrenciesResponse
    * @throws ApiError

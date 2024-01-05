@@ -211,9 +211,6 @@ namespace Beam.Model
             if (chainId.IsSet && chainId.Value == null)
                 throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class TradeTokensRequestInput.");
 
-            if (policyId.IsSet && policyId.Value == null)
-                throw new ArgumentNullException(nameof(policyId), "Property is not nullable for class TradeTokensRequestInput.");
-
             if (sponsor.IsSet && sponsor.Value == null)
                 throw new ArgumentNullException(nameof(sponsor), "Property is not nullable for class TradeTokensRequestInput.");
 
@@ -250,9 +247,6 @@ namespace Beam.Model
             if (tradeTokensRequestInput.Initiator == null)
                 throw new ArgumentNullException(nameof(tradeTokensRequestInput.Initiator), "Property is required for class TradeTokensRequestInput.");
 
-            if (tradeTokensRequestInput.PolicyIdOption.IsSet && tradeTokensRequestInput.PolicyId == null)
-                throw new ArgumentNullException(nameof(tradeTokensRequestInput.PolicyId), "Property is required for class TradeTokensRequestInput.");
-
             writer.WritePropertyName("counterparty");
             JsonSerializer.Serialize(writer, tradeTokensRequestInput.Counterparty, jsonSerializerOptions);
             writer.WritePropertyName("initiator");
@@ -261,7 +255,10 @@ namespace Beam.Model
                 writer.WriteNumber("chainId", tradeTokensRequestInput.ChainIdOption.Value.Value);
 
             if (tradeTokensRequestInput.PolicyIdOption.IsSet)
-                writer.WriteString("policyId", tradeTokensRequestInput.PolicyId);
+                if (tradeTokensRequestInput.PolicyIdOption.Value != null)
+                    writer.WriteString("policyId", tradeTokensRequestInput.PolicyId);
+                else
+                    writer.WriteNull("policyId");
 
             if (tradeTokensRequestInput.SponsorOption.IsSet)
                 writer.WriteBoolean("sponsor", tradeTokensRequestInput.SponsorOption.Value.Value);

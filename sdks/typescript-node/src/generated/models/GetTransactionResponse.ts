@@ -35,8 +35,8 @@ export type GetTransactionResponse = {
   };
   interactions?: Array<{
     to?: string;
-    contract?: string;
     value?: string;
+    contract?: string;
     functionName?: string;
     functionArgs?: any[];
   }>;

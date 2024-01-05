@@ -215,9 +215,6 @@ namespace Beam.Model
             if (optimistic.IsSet && optimistic.Value == null)
                 throw new ArgumentNullException(nameof(optimistic), "Property is not nullable for class CreateTransactionRequestInput.");
 
-            if (policyId.IsSet && policyId.Value == null)
-                throw new ArgumentNullException(nameof(policyId), "Property is not nullable for class CreateTransactionRequestInput.");
-
             if (sponsor.IsSet && sponsor.Value == null)
                 throw new ArgumentNullException(nameof(sponsor), "Property is not nullable for class CreateTransactionRequestInput.");
 
@@ -251,9 +248,6 @@ namespace Beam.Model
             if (createTransactionRequestInput.Interactions == null)
                 throw new ArgumentNullException(nameof(createTransactionRequestInput.Interactions), "Property is required for class CreateTransactionRequestInput.");
 
-            if (createTransactionRequestInput.PolicyIdOption.IsSet && createTransactionRequestInput.PolicyId == null)
-                throw new ArgumentNullException(nameof(createTransactionRequestInput.PolicyId), "Property is required for class CreateTransactionRequestInput.");
-
             writer.WritePropertyName("interactions");
             JsonSerializer.Serialize(writer, createTransactionRequestInput.Interactions, jsonSerializerOptions);
             if (createTransactionRequestInput.ChainIdOption.IsSet)
@@ -263,7 +257,10 @@ namespace Beam.Model
                 writer.WriteBoolean("optimistic", createTransactionRequestInput.OptimisticOption.Value.Value);
 
             if (createTransactionRequestInput.PolicyIdOption.IsSet)
-                writer.WriteString("policyId", createTransactionRequestInput.PolicyId);
+                if (createTransactionRequestInput.PolicyIdOption.Value != null)
+                    writer.WriteString("policyId", createTransactionRequestInput.PolicyId);
+                else
+                    writer.WriteNull("policyId");
 
             if (createTransactionRequestInput.SponsorOption.IsSet)
                 writer.WriteBoolean("sponsor", createTransactionRequestInput.SponsorOption.Value.Value);

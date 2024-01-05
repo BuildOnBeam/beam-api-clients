@@ -132,10 +132,16 @@ namespace Beam.Client
                 return ConvertTokenResponse.TypeEnumToJsonValue(convertTokenResponseTypeEnum);
             if (obj is CreateAssetOfferRequestInput.CurrencyEnum createAssetOfferRequestInputCurrencyEnum)
                 return CreateAssetOfferRequestInput.CurrencyEnumToJsonValue(createAssetOfferRequestInputCurrencyEnum);
+            if (obj is CreateAssetOfferRequestInputV2.CurrencyEnum createAssetOfferRequestInputV2CurrencyEnum)
+                return CreateAssetOfferRequestInputV2.CurrencyEnumToJsonValue(createAssetOfferRequestInputV2CurrencyEnum);
             if (obj is GetAllGasUsageResponseChainsInnerPoliciesInnerPolicy.ModelEnum getAllGasUsageResponseChainsInnerPoliciesInnerPolicyModelEnum)
                 return GetAllGasUsageResponseChainsInnerPoliciesInnerPolicy.ModelEnumToJsonValue(getAllGasUsageResponseChainsInnerPoliciesInnerPolicyModelEnum);
             if (obj is GetAssetListingsResponseDataInnerNft.RarityEnum getAssetListingsResponseDataInnerNftRarityEnum)
                 return GetAssetListingsResponseDataInnerNft.RarityEnumToJsonValue(getAssetListingsResponseDataInnerNftRarityEnum);
+            if (obj is GetAssetListingsResponseV2DataInner.StatusEnum getAssetListingsResponseV2DataInnerStatusEnum)
+                return GetAssetListingsResponseV2DataInner.StatusEnumToJsonValue(getAssetListingsResponseV2DataInnerStatusEnum);
+            if (obj is GetAssetListingsResponseV2DataInnerPriceCurrency.SymbolEnum getAssetListingsResponseV2DataInnerPriceCurrencySymbolEnum)
+                return GetAssetListingsResponseV2DataInnerPriceCurrency.SymbolEnumToJsonValue(getAssetListingsResponseV2DataInnerPriceCurrencySymbolEnum);
             if (obj is GetAssetOffersResponseDataInner.CurrencyEnum getAssetOffersResponseDataInnerCurrencyEnum)
                 return GetAssetOffersResponseDataInner.CurrencyEnumToJsonValue(getAssetOffersResponseDataInnerCurrencyEnum);
             if (obj is GetAssetOffersResponseDataInner.KindEnum getAssetOffersResponseDataInnerKindEnum)
@@ -156,6 +162,8 @@ namespace Beam.Client
                 return GetAssetResponseListing.CurrencyEnumToJsonValue(getAssetResponseListingCurrencyEnum);
             if (obj is GetAssetResponseListing.SellTypeEnum getAssetResponseListingSellTypeEnum)
                 return GetAssetResponseListing.SellTypeEnumToJsonValue(getAssetResponseListingSellTypeEnum);
+            if (obj is GetAssetResponseV2.RarityEnum getAssetResponseV2RarityEnum)
+                return GetAssetResponseV2.RarityEnumToJsonValue(getAssetResponseV2RarityEnum);
             if (obj is GetAssetsBodyInputFilter.SellTypesEnum getAssetsBodyInputFilterSellTypesEnum)
                 return GetAssetsBodyInputFilter.SellTypesEnumToJsonValue(getAssetsBodyInputFilterSellTypesEnum);
             if (obj is GetAssetsBodyInputSort.CreatedAtEnum getAssetsBodyInputSortCreatedAtEnum)
@@ -172,10 +180,24 @@ namespace Beam.Client
                 return GetAssetsBodyInputSort.StartEnumToJsonValue(getAssetsBodyInputSortStartEnum);
             if (obj is GetAssetsBodyInputSort.StartPriceNumberEnum getAssetsBodyInputSortStartPriceNumberEnum)
                 return GetAssetsBodyInputSort.StartPriceNumberEnumToJsonValue(getAssetsBodyInputSortStartPriceNumberEnum);
+            if (obj is GetAssetsForContractBodyInputV2.SortByEnum getAssetsForContractBodyInputV2SortByEnum)
+                return GetAssetsForContractBodyInputV2.SortByEnumToJsonValue(getAssetsForContractBodyInputV2SortByEnum);
+            if (obj is GetAssetsForContractBodyInputV2.SortDirectionEnum getAssetsForContractBodyInputV2SortDirectionEnum)
+                return GetAssetsForContractBodyInputV2.SortDirectionEnumToJsonValue(getAssetsForContractBodyInputV2SortDirectionEnum);
+            if (obj is GetAssetsForContractResponseV2DataInner.RarityEnum getAssetsForContractResponseV2DataInnerRarityEnum)
+                return GetAssetsForContractResponseV2DataInner.RarityEnumToJsonValue(getAssetsForContractResponseV2DataInnerRarityEnum);
+            if (obj is GetAssetsForProfileBodyInputV2.SortByEnum getAssetsForProfileBodyInputV2SortByEnum)
+                return GetAssetsForProfileBodyInputV2.SortByEnumToJsonValue(getAssetsForProfileBodyInputV2SortByEnum);
+            if (obj is GetAssetsForProfileBodyInputV2.SortDirectionEnum getAssetsForProfileBodyInputV2SortDirectionEnum)
+                return GetAssetsForProfileBodyInputV2.SortDirectionEnumToJsonValue(getAssetsForProfileBodyInputV2SortDirectionEnum);
+            if (obj is GetAssetsForProfileResponseV2DataInner.RarityEnum getAssetsForProfileResponseV2DataInnerRarityEnum)
+                return GetAssetsForProfileResponseV2DataInner.RarityEnumToJsonValue(getAssetsForProfileResponseV2DataInnerRarityEnum);
             if (obj is GetAssetsResponseDataInner.RarityEnum getAssetsResponseDataInnerRarityEnum)
                 return GetAssetsResponseDataInner.RarityEnumToJsonValue(getAssetsResponseDataInnerRarityEnum);
             if (obj is GetChainCurrenciesResponseDataInner.CurrencyEnum getChainCurrenciesResponseDataInnerCurrencyEnum)
                 return GetChainCurrenciesResponseDataInner.CurrencyEnumToJsonValue(getChainCurrenciesResponseDataInnerCurrencyEnum);
+            if (obj is GetChainCurrenciesResponseV2DataInner.SymbolEnum getChainCurrenciesResponseV2DataInnerSymbolEnum)
+                return GetChainCurrenciesResponseV2DataInner.SymbolEnumToJsonValue(getChainCurrenciesResponseV2DataInnerSymbolEnum);
             if (obj is GetGameResponse.PegiContentEnum getGameResponsePegiContentEnum)
                 return GetGameResponse.PegiContentEnumToJsonValue(getGameResponsePegiContentEnum);
             if (obj is GetGameResponse.PegiRatingEnum getGameResponsePegiRatingEnum)
@@ -188,6 +210,10 @@ namespace Beam.Client
                 return GetGameResponsePoliciesInner.TypeEnumToJsonValue(getGameResponsePoliciesInnerTypeEnum);
             if (obj is GetGameResponsePoliciesInner.RateTypeEnum getGameResponsePoliciesInnerRateTypeEnum)
                 return GetGameResponsePoliciesInner.RateTypeEnumToJsonValue(getGameResponsePoliciesInnerRateTypeEnum);
+            if (obj is GetListedAssetsBodyInputV2.SortByEnum getListedAssetsBodyInputV2SortByEnum)
+                return GetListedAssetsBodyInputV2.SortByEnumToJsonValue(getListedAssetsBodyInputV2SortByEnum);
+            if (obj is GetListedAssetsBodyInputV2.SortDirectionEnum getListedAssetsBodyInputV2SortDirectionEnum)
+                return GetListedAssetsBodyInputV2.SortDirectionEnumToJsonValue(getListedAssetsBodyInputV2SortDirectionEnum);
             if (obj is GetPoliciesResponseDataInner.RateTypeEnum getPoliciesResponseDataInnerRateTypeEnum)
                 return GetPoliciesResponseDataInner.RateTypeEnumToJsonValue(getPoliciesResponseDataInnerRateTypeEnum);
             if (obj is GetProfileAssetsForGameFilterParameter.CurrenciesEnum getProfileAssetsForGameFilterParameterCurrenciesEnum)
@@ -220,6 +246,10 @@ namespace Beam.Client
                 return SellAssetRequestInput.SellTypeEnumToJsonValue(sellAssetRequestInputSellTypeEnum);
             if (obj is SellAssetRequestInput.CurrencyEnum sellAssetRequestInputCurrencyEnum)
                 return SellAssetRequestInput.CurrencyEnumToJsonValue(sellAssetRequestInputCurrencyEnum);
+            if (obj is SellAssetRequestInputV2.SellTypeEnum sellAssetRequestInputV2SellTypeEnum)
+                return SellAssetRequestInputV2.SellTypeEnumToJsonValue(sellAssetRequestInputV2SellTypeEnum);
+            if (obj is SellAssetRequestInputV2.CurrencyEnum sellAssetRequestInputV2CurrencyEnum)
+                return SellAssetRequestInputV2.CurrencyEnumToJsonValue(sellAssetRequestInputV2CurrencyEnum);
             if (obj is TradeTokensResponse.StatusEnum tradeTokensResponseStatusEnum)
                 return TradeTokensResponse.StatusEnumToJsonValue(tradeTokensResponseStatusEnum);
             if (obj is TradeTokensResponse.TypeEnum tradeTokensResponseTypeEnum)
@@ -228,10 +258,18 @@ namespace Beam.Client
                 return TransferAssetResponse.StatusEnumToJsonValue(transferAssetResponseStatusEnum);
             if (obj is TransferAssetResponse.TypeEnum transferAssetResponseTypeEnum)
                 return TransferAssetResponse.TypeEnumToJsonValue(transferAssetResponseTypeEnum);
+            if (obj is TransferAssetResponseV2.StatusEnum transferAssetResponseV2StatusEnum)
+                return TransferAssetResponseV2.StatusEnumToJsonValue(transferAssetResponseV2StatusEnum);
+            if (obj is TransferAssetResponseV2.TypeEnum transferAssetResponseV2TypeEnum)
+                return TransferAssetResponseV2.TypeEnumToJsonValue(transferAssetResponseV2TypeEnum);
             if (obj is TransferTokenResponse.StatusEnum transferTokenResponseStatusEnum)
                 return TransferTokenResponse.StatusEnumToJsonValue(transferTokenResponseStatusEnum);
             if (obj is TransferTokenResponse.TypeEnum transferTokenResponseTypeEnum)
                 return TransferTokenResponse.TypeEnumToJsonValue(transferTokenResponseTypeEnum);
+            if (obj is TransferTokenResponseV2.StatusEnum transferTokenResponseV2StatusEnum)
+                return TransferTokenResponseV2.StatusEnumToJsonValue(transferTokenResponseV2StatusEnum);
+            if (obj is TransferTokenResponseV2.TypeEnum transferTokenResponseV2TypeEnum)
+                return TransferTokenResponseV2.TypeEnumToJsonValue(transferTokenResponseV2TypeEnum);
             if (obj is UpdateGameRequestInput.PegiContentEnum updateGameRequestInputPegiContentEnum)
                 return UpdateGameRequestInput.PegiContentEnumToJsonValue(updateGameRequestInputPegiContentEnum);
             if (obj is UpdateGameRequestInput.PegiRatingEnum updateGameRequestInputPegiRatingEnum)

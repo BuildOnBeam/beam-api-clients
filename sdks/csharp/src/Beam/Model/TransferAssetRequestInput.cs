@@ -215,9 +215,6 @@ namespace Beam.Model
             if (optimistic.IsSet && optimistic.Value == null)
                 throw new ArgumentNullException(nameof(optimistic), "Property is not nullable for class TransferAssetRequestInput.");
 
-            if (policyId.IsSet && policyId.Value == null)
-                throw new ArgumentNullException(nameof(policyId), "Property is not nullable for class TransferAssetRequestInput.");
-
             if (sponsor.IsSet && sponsor.Value == null)
                 throw new ArgumentNullException(nameof(sponsor), "Property is not nullable for class TransferAssetRequestInput.");
 
@@ -251,9 +248,6 @@ namespace Beam.Model
             if (transferAssetRequestInput.Assets == null)
                 throw new ArgumentNullException(nameof(transferAssetRequestInput.Assets), "Property is required for class TransferAssetRequestInput.");
 
-            if (transferAssetRequestInput.PolicyIdOption.IsSet && transferAssetRequestInput.PolicyId == null)
-                throw new ArgumentNullException(nameof(transferAssetRequestInput.PolicyId), "Property is required for class TransferAssetRequestInput.");
-
             writer.WritePropertyName("assets");
             JsonSerializer.Serialize(writer, transferAssetRequestInput.Assets, jsonSerializerOptions);
             if (transferAssetRequestInput.ChainIdOption.IsSet)
@@ -263,7 +257,10 @@ namespace Beam.Model
                 writer.WriteBoolean("optimistic", transferAssetRequestInput.OptimisticOption.Value.Value);
 
             if (transferAssetRequestInput.PolicyIdOption.IsSet)
-                writer.WriteString("policyId", transferAssetRequestInput.PolicyId);
+                if (transferAssetRequestInput.PolicyIdOption.Value != null)
+                    writer.WriteString("policyId", transferAssetRequestInput.PolicyId);
+                else
+                    writer.WriteNull("policyId");
 
             if (transferAssetRequestInput.SponsorOption.IsSet)
                 writer.WriteBoolean("sponsor", transferAssetRequestInput.SponsorOption.Value.Value);

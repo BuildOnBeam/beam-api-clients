@@ -37,7 +37,7 @@ namespace Beam.Api
         /// Accept an offer for an asset
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="acceptAssetOfferRequestInput"></param>
@@ -45,26 +45,28 @@ namespace Beam.Api
         /// <param name="offerId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IAcceptAssetOfferApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IAcceptAssetOfferApiResponse> AcceptAssetOfferAsync(AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Accept an offer for an asset
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <param name="acceptAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IAcceptAssetOfferApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IAcceptAssetOfferApiResponse> AcceptAssetOfferOrDefaultAsync(AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Buy listed asset
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="buyAssetRequestInput"></param>
@@ -72,26 +74,28 @@ namespace Beam.Api
         /// <param name="orderId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IBuyListedAssetApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IBuyListedAssetApiResponse> BuyListedAssetAsync(BuyAssetRequestInput buyAssetRequestInput, string entityId, string orderId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Buy listed asset
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <param name="buyAssetRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IBuyListedAssetApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IBuyListedAssetApiResponse> BuyListedAssetOrDefaultAsync(BuyAssetRequestInput buyAssetRequestInput, string entityId, string orderId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Cancel an offer for an asset
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancelAssetOfferRequestInput"></param>
@@ -99,26 +103,28 @@ namespace Beam.Api
         /// <param name="offerId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICancelAssetOfferApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<ICancelAssetOfferApiResponse> CancelAssetOfferAsync(CancelAssetOfferRequestInput cancelAssetOfferRequestInput, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Cancel an offer for an asset
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <param name="cancelAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICancelAssetOfferApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<ICancelAssetOfferApiResponse> CancelAssetOfferOrDefaultAsync(CancelAssetOfferRequestInput cancelAssetOfferRequestInput, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Cancel asset listing
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancelAssetListingRequestInput"></param>
@@ -126,97 +132,105 @@ namespace Beam.Api
         /// <param name="orderId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICancelListingApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<ICancelListingApiResponse> CancelListingAsync(CancelAssetListingRequestInput cancelAssetListingRequestInput, string entityId, string orderId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Cancel asset listing
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <param name="cancelAssetListingRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICancelListingApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<ICancelListingApiResponse> CancelListingOrDefaultAsync(CancelAssetListingRequestInput cancelAssetListingRequestInput, string entityId, string orderId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Make an offer for an asset
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="createAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateAssetOfferApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<ICreateAssetOfferApiResponse> CreateAssetOfferAsync(CreateAssetOfferRequestInput createAssetOfferRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Make an offer for an asset
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <param name="createAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateAssetOfferApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<ICreateAssetOfferApiResponse> CreateAssetOfferOrDefaultAsync(CreateAssetOfferRequestInput createAssetOfferRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all offers for an asset
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="marketplaceId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAssetOffersApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IGetAssetOffersApiResponse> GetAssetOffersAsync(string marketplaceId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all offers for an asset
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <param name="marketplaceId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAssetOffersApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IGetAssetOffersApiResponse> GetAssetOffersOrDefaultAsync(string marketplaceId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chainId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetChainCurrenciesApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IGetChainCurrenciesApiResponse> GetChainCurrenciesAsync(decimal chainId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <param name="chainId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetChainCurrenciesApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IGetChainCurrenciesApiResponse> GetChainCurrenciesOrDefaultAsync(decimal chainId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155)
         /// </summary>
         /// <remarks>
-        /// This endpoint is deprecated. Use POST route instead.
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="filter"> (optional)</param>
@@ -232,7 +246,7 @@ namespace Beam.Api
         /// Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155)
         /// </summary>
         /// <remarks>
-        /// This endpoint is deprecated. Use POST route instead.
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <param name="filter"> (optional)</param>
         /// <param name="sort"> (optional)</param>
@@ -247,7 +261,7 @@ namespace Beam.Api
         /// Get all the assets listed by a profile (NFT assets, e.g. ERC721 / ERC1155)
         /// </summary>
         /// <remarks>
-        /// This endpoint is deprecated. Use POST route instead.
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
@@ -264,7 +278,7 @@ namespace Beam.Api
         /// Get all the assets listed by a profile (NFT assets, e.g. ERC721 / ERC1155)
         /// </summary>
         /// <remarks>
-        /// This endpoint is deprecated. Use POST route instead.
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <param name="entityId"></param>
         /// <param name="filter"> (optional)</param>
@@ -280,55 +294,59 @@ namespace Beam.Api
         /// Get all the assets listed by a profile (NFT assets, e.g. ERC721 / ERC1155)
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="getAssetsBodyInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetListedAssetsForProfilePostApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IGetListedAssetsForProfilePostApiResponse> GetListedAssetsForProfilePostAsync(GetAssetsBodyInput getAssetsBodyInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all the assets listed by a profile (NFT assets, e.g. ERC721 / ERC1155)
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <param name="getAssetsBodyInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetListedAssetsForProfilePostApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IGetListedAssetsForProfilePostApiResponse> GetListedAssetsForProfilePostOrDefaultAsync(GetAssetsBodyInput getAssetsBodyInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155)
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="getAssetsBodyInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetListedAssetsPostApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IGetListedAssetsPostApiResponse> GetListedAssetsPostAsync(GetAssetsBodyInput getAssetsBodyInput, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155)
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <param name="getAssetsBodyInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetListedAssetsPostApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IGetListedAssetsPostApiResponse> GetListedAssetsPostOrDefaultAsync(GetAssetsBodyInput getAssetsBodyInput, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all asset offers that player created
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
@@ -336,69 +354,75 @@ namespace Beam.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetPlayerAssetOffersApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IGetPlayerAssetOffersApiResponse> GetPlayerAssetOffersAsync(string entityId, string marketplaceId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all asset offers that player created
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <param name="entityId"></param>
         /// <param name="marketplaceId"></param>
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetPlayerAssetOffersApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IGetPlayerAssetOffersApiResponse> GetPlayerAssetOffersOrDefaultAsync(string entityId, string marketplaceId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all offers that player created
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetPlayerOffersApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IGetPlayerOffersApiResponse> GetPlayerOffersAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all offers that player created
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <param name="entityId"></param>
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetPlayerOffersApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IGetPlayerOffersApiResponse> GetPlayerOffersOrDefaultAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List an asset for sale
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="sellAssetRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IListAssetApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IListAssetApiResponse> ListAssetAsync(SellAssetRequestInput sellAssetRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List an asset for sale
         /// </summary>
         /// <remarks>
-        /// 
+        /// V1 is being deprecated, please use V2
         /// </remarks>
         /// <param name="sellAssetRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IListAssetApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IListAssetApiResponse> ListAssetOrDefaultAsync(SellAssetRequestInput sellAssetRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
     }
 
@@ -979,7 +1003,7 @@ namespace Beam.Api
         partial void OnErrorAcceptAssetOffer(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, string entityId, string offerId);
 
         /// <summary>
-        /// Accept an offer for an asset 
+        /// Accept an offer for an asset V1 is being deprecated, please use V2
         /// </summary>
         /// <param name="acceptAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
@@ -999,7 +1023,7 @@ namespace Beam.Api
         }
 
         /// <summary>
-        /// Accept an offer for an asset 
+        /// Accept an offer for an asset V1 is being deprecated, please use V2
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="acceptAssetOfferRequestInput"></param>
@@ -1240,7 +1264,7 @@ namespace Beam.Api
         partial void OnErrorBuyListedAsset(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, BuyAssetRequestInput buyAssetRequestInput, string entityId, string orderId);
 
         /// <summary>
-        /// Buy listed asset 
+        /// Buy listed asset V1 is being deprecated, please use V2
         /// </summary>
         /// <param name="buyAssetRequestInput"></param>
         /// <param name="entityId"></param>
@@ -1260,7 +1284,7 @@ namespace Beam.Api
         }
 
         /// <summary>
-        /// Buy listed asset 
+        /// Buy listed asset V1 is being deprecated, please use V2
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="buyAssetRequestInput"></param>
@@ -1501,7 +1525,7 @@ namespace Beam.Api
         partial void OnErrorCancelAssetOffer(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, CancelAssetOfferRequestInput cancelAssetOfferRequestInput, string entityId, string offerId);
 
         /// <summary>
-        /// Cancel an offer for an asset 
+        /// Cancel an offer for an asset V1 is being deprecated, please use V2
         /// </summary>
         /// <param name="cancelAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
@@ -1521,7 +1545,7 @@ namespace Beam.Api
         }
 
         /// <summary>
-        /// Cancel an offer for an asset 
+        /// Cancel an offer for an asset V1 is being deprecated, please use V2
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancelAssetOfferRequestInput"></param>
@@ -1762,7 +1786,7 @@ namespace Beam.Api
         partial void OnErrorCancelListing(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, CancelAssetListingRequestInput cancelAssetListingRequestInput, string entityId, string orderId);
 
         /// <summary>
-        /// Cancel asset listing 
+        /// Cancel asset listing V1 is being deprecated, please use V2
         /// </summary>
         /// <param name="cancelAssetListingRequestInput"></param>
         /// <param name="entityId"></param>
@@ -1782,7 +1806,7 @@ namespace Beam.Api
         }
 
         /// <summary>
-        /// Cancel asset listing 
+        /// Cancel asset listing V1 is being deprecated, please use V2
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancelAssetListingRequestInput"></param>
@@ -2015,7 +2039,7 @@ namespace Beam.Api
         partial void OnErrorCreateAssetOffer(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, CreateAssetOfferRequestInput createAssetOfferRequestInput, string entityId);
 
         /// <summary>
-        /// Make an offer for an asset 
+        /// Make an offer for an asset V1 is being deprecated, please use V2
         /// </summary>
         /// <param name="createAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
@@ -2034,7 +2058,7 @@ namespace Beam.Api
         }
 
         /// <summary>
-        /// Make an offer for an asset 
+        /// Make an offer for an asset V1 is being deprecated, please use V2
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="createAssetOfferRequestInput"></param>
@@ -2257,7 +2281,7 @@ namespace Beam.Api
         partial void OnErrorGetAssetOffers(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string marketplaceId);
 
         /// <summary>
-        /// Get all offers for an asset 
+        /// Get all offers for an asset V1 is being deprecated, please use V2
         /// </summary>
         /// <param name="marketplaceId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2275,7 +2299,7 @@ namespace Beam.Api
         }
 
         /// <summary>
-        /// Get all offers for an asset 
+        /// Get all offers for an asset V1 is being deprecated, please use V2
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="marketplaceId"></param>
@@ -2473,7 +2497,7 @@ namespace Beam.Api
         partial void OnErrorGetChainCurrencies(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, decimal chainId);
 
         /// <summary>
-        ///  
+        ///  V1 is being deprecated, please use V2
         /// </summary>
         /// <param name="chainId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2491,7 +2515,7 @@ namespace Beam.Api
         }
 
         /// <summary>
-        ///  
+        ///  V1 is being deprecated, please use V2
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chainId"></param>
@@ -2714,7 +2738,7 @@ namespace Beam.Api
         partial void OnErrorGetListedAssets(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, Option<GetProfileAssetsForGameFilterParameter> filter, Option<GetProfileAssetsForGameSortParameter> sort, Option<decimal> limit, Option<decimal> offset);
 
         /// <summary>
-        /// Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155) This endpoint is deprecated. Use POST route instead.
+        /// Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155) V1 is being deprecated, please use V2
         /// </summary>
         /// <param name="filter"> (optional)</param>
         /// <param name="sort"> (optional)</param>
@@ -2735,7 +2759,7 @@ namespace Beam.Api
         }
 
         /// <summary>
-        /// Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155) This endpoint is deprecated. Use POST route instead.
+        /// Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155) V1 is being deprecated, please use V2
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="filter"> (optional)</param>
@@ -2986,7 +3010,7 @@ namespace Beam.Api
         partial void OnErrorGetListedAssetsForProfile(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string entityId, Option<GetProfileAssetsForGameFilterParameter> filter, Option<GetProfileAssetsForGameSortParameter> sort, Option<decimal> limit, Option<decimal> offset);
 
         /// <summary>
-        /// Get all the assets listed by a profile (NFT assets, e.g. ERC721 / ERC1155) This endpoint is deprecated. Use POST route instead.
+        /// Get all the assets listed by a profile (NFT assets, e.g. ERC721 / ERC1155) V1 is being deprecated, please use V2
         /// </summary>
         /// <param name="entityId"></param>
         /// <param name="filter"> (optional)</param>
@@ -3008,7 +3032,7 @@ namespace Beam.Api
         }
 
         /// <summary>
-        /// Get all the assets listed by a profile (NFT assets, e.g. ERC721 / ERC1155) This endpoint is deprecated. Use POST route instead.
+        /// Get all the assets listed by a profile (NFT assets, e.g. ERC721 / ERC1155) V1 is being deprecated, please use V2
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
@@ -3245,7 +3269,7 @@ namespace Beam.Api
         partial void OnErrorGetListedAssetsForProfilePost(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, GetAssetsBodyInput getAssetsBodyInput, string entityId);
 
         /// <summary>
-        /// Get all the assets listed by a profile (NFT assets, e.g. ERC721 / ERC1155) 
+        /// Get all the assets listed by a profile (NFT assets, e.g. ERC721 / ERC1155) V1 is being deprecated, please use V2
         /// </summary>
         /// <param name="getAssetsBodyInput"></param>
         /// <param name="entityId"></param>
@@ -3264,7 +3288,7 @@ namespace Beam.Api
         }
 
         /// <summary>
-        /// Get all the assets listed by a profile (NFT assets, e.g. ERC721 / ERC1155) 
+        /// Get all the assets listed by a profile (NFT assets, e.g. ERC721 / ERC1155) V1 is being deprecated, please use V2
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="getAssetsBodyInput"></param>
@@ -3487,7 +3511,7 @@ namespace Beam.Api
         partial void OnErrorGetListedAssetsPost(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, GetAssetsBodyInput getAssetsBodyInput);
 
         /// <summary>
-        /// Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155) 
+        /// Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155) V1 is being deprecated, please use V2
         /// </summary>
         /// <param name="getAssetsBodyInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -3505,7 +3529,7 @@ namespace Beam.Api
         }
 
         /// <summary>
-        /// Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155) 
+        /// Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155) V1 is being deprecated, please use V2
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="getAssetsBodyInput"></param>
@@ -3738,7 +3762,7 @@ namespace Beam.Api
         partial void OnErrorGetPlayerAssetOffers(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string entityId, string marketplaceId, Option<decimal> chainId);
 
         /// <summary>
-        /// Get all asset offers that player created 
+        /// Get all asset offers that player created V1 is being deprecated, please use V2
         /// </summary>
         /// <param name="entityId"></param>
         /// <param name="marketplaceId"></param>
@@ -3758,7 +3782,7 @@ namespace Beam.Api
         }
 
         /// <summary>
-        /// Get all asset offers that player created 
+        /// Get all asset offers that player created V1 is being deprecated, please use V2
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
@@ -3981,7 +4005,7 @@ namespace Beam.Api
         partial void OnErrorGetPlayerOffers(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string entityId, Option<decimal> chainId);
 
         /// <summary>
-        /// Get all offers that player created 
+        /// Get all offers that player created V1 is being deprecated, please use V2
         /// </summary>
         /// <param name="entityId"></param>
         /// <param name="chainId"> (optional)</param>
@@ -4000,7 +4024,7 @@ namespace Beam.Api
         }
 
         /// <summary>
-        /// Get all offers that player created 
+        /// Get all offers that player created V1 is being deprecated, please use V2
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
@@ -4225,7 +4249,7 @@ namespace Beam.Api
         partial void OnErrorListAsset(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, SellAssetRequestInput sellAssetRequestInput, string entityId);
 
         /// <summary>
-        /// List an asset for sale 
+        /// List an asset for sale V1 is being deprecated, please use V2
         /// </summary>
         /// <param name="sellAssetRequestInput"></param>
         /// <param name="entityId"></param>
@@ -4244,7 +4268,7 @@ namespace Beam.Api
         }
 
         /// <summary>
-        /// List an asset for sale 
+        /// List an asset for sale V1 is being deprecated, please use V2
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="sellAssetRequestInput"></param>

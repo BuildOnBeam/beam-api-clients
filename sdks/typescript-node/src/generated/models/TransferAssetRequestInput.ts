@@ -13,6 +13,6 @@ export type TransferAssetRequestInput = {
   }>;
   optimistic?: boolean;
   sponsor?: boolean;
-  policyId?: string;
+  policyId?: string | null;
   chainId?: number;
 };

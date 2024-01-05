@@ -11,6 +11,6 @@ export type ConvertTokenRequestInput = {
   receiverEntityId?: string;
   optimistic?: boolean;
   sponsor?: boolean;
-  policyId?: string;
+  policyId?: string | null;
   chainId?: number;
 };

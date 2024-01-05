@@ -254,9 +254,6 @@ namespace Beam.Model
             if (optimistic.IsSet && optimistic.Value == null)
                 throw new ArgumentNullException(nameof(optimistic), "Property is not nullable for class TransferNativeTokenRequestInput.");
 
-            if (policyId.IsSet && policyId.Value == null)
-                throw new ArgumentNullException(nameof(policyId), "Property is not nullable for class TransferNativeTokenRequestInput.");
-
             if (receiverEntityId.IsSet && receiverEntityId.Value == null)
                 throw new ArgumentNullException(nameof(receiverEntityId), "Property is not nullable for class TransferNativeTokenRequestInput.");
 
@@ -296,9 +293,6 @@ namespace Beam.Model
             if (transferNativeTokenRequestInput.AmountToTransfer == null)
                 throw new ArgumentNullException(nameof(transferNativeTokenRequestInput.AmountToTransfer), "Property is required for class TransferNativeTokenRequestInput.");
 
-            if (transferNativeTokenRequestInput.PolicyIdOption.IsSet && transferNativeTokenRequestInput.PolicyId == null)
-                throw new ArgumentNullException(nameof(transferNativeTokenRequestInput.PolicyId), "Property is required for class TransferNativeTokenRequestInput.");
-
             if (transferNativeTokenRequestInput.ReceiverEntityIdOption.IsSet && transferNativeTokenRequestInput.ReceiverEntityId == null)
                 throw new ArgumentNullException(nameof(transferNativeTokenRequestInput.ReceiverEntityId), "Property is required for class TransferNativeTokenRequestInput.");
 
@@ -314,7 +308,10 @@ namespace Beam.Model
                 writer.WriteBoolean("optimistic", transferNativeTokenRequestInput.OptimisticOption.Value.Value);
 
             if (transferNativeTokenRequestInput.PolicyIdOption.IsSet)
-                writer.WriteString("policyId", transferNativeTokenRequestInput.PolicyId);
+                if (transferNativeTokenRequestInput.PolicyIdOption.Value != null)
+                    writer.WriteString("policyId", transferNativeTokenRequestInput.PolicyId);
+                else
+                    writer.WriteNull("policyId");
 
             if (transferNativeTokenRequestInput.ReceiverEntityIdOption.IsSet)
                 writer.WriteString("receiverEntityId", transferNativeTokenRequestInput.ReceiverEntityId);

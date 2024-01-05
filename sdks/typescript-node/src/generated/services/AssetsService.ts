@@ -20,7 +20,9 @@ export class AssetsService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
 
   /**
+   * @deprecated
    * Get all the assets of a profile (NFT assets, e.g. ERC721 / ERC1155)
+   * V1 is being deprecated, please use V2
    * @param entityId
    * @param requestBody
    * @param chainId
@@ -117,7 +119,9 @@ export class AssetsService {
   }
 
   /**
+   * @deprecated
    * Get all the currencies owned by an account (ERC20)
+   * V1 is being deprecated, please use V2
    * @param entityId
    * @param chainId
    * @returns GetProfileCurrenciesResponse
@@ -140,7 +144,9 @@ export class AssetsService {
   }
 
   /**
+   * @deprecated
    * Get the native token balance
+   * V1 is being deprecated, please use V2
    * @param entityId
    * @param chainId
    * @returns GetProfileNativeCurrencyResponse
@@ -163,7 +169,9 @@ export class AssetsService {
   }
 
   /**
+   * @deprecated
    * Transfer an asset (NFT assets, ERC721 / ERC1155)
+   * V1 is being deprecated, please use V2
    * @param entityId
    * @param requestBody
    * @returns TransferAssetResponse
@@ -185,7 +193,9 @@ export class AssetsService {
   }
 
   /**
+   * @deprecated
    * Transfer a token (token assets, ERC20)
+   * V1 is being deprecated, please use V2
    * @param entityId
    * @param requestBody
    * @returns TransferTokenResponse
@@ -207,7 +217,9 @@ export class AssetsService {
   }
 
   /**
-   * Transfer the native token (MC)
+   * @deprecated
+   * Transfer the native token (BEAM)
+   * V1 is being deprecated, please use V2
    * @param entityId
    * @param requestBody
    * @returns TransferTokenResponse
@@ -229,7 +241,9 @@ export class AssetsService {
   }
 
   /**
+   * @deprecated
    * Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155)
+   * V1 is being deprecated, please use V2
    * @param assetAddress
    * @param requestBody
    * @param chainId
@@ -256,8 +270,9 @@ export class AssetsService {
   }
 
   /**
+   * @deprecated
    * Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155)
-   * This endpoint is deprecated. Use POST route instead.
+   * V1 is being deprecated, please use V2
    * @param assetAddress
    * @param chainId
    * @param limit
@@ -325,7 +340,9 @@ export class AssetsService {
   }
 
   /**
+   * @deprecated
    * Get a single NFT (e.g. ERC721 / ERC1155)
+   * V1 is being deprecated, please use V2
    * @param assetAddress
    * @param assetId
    * @param chainId
