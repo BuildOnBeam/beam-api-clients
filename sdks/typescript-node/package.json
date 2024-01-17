@@ -10,8 +10,8 @@
   ],
   "scripts": {
     "generate": "pnpm generate:client && pnpm generate:cleanup && pnpm generate:barrels && pnpm build",
-    "generate:client": "node --experimental-loader=ts-node/esm openapi.config.ts",
-    "generate:cleanup": "node --experimental-loader=ts-node/esm cleanup-generator-output.ts",
+    "generate:client": "tsx openapi.config.ts",
+    "generate:cleanup": "tsx cleanup-generator-output.ts",
     "generate:barrels": "barrelsby -c ./barrelsby.json --delete",
     "build": "tsup --config ./tsup.config.ts"
   },
@@ -19,13 +19,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^20.4.2",
+    "@types/node": "^20.11.5",
     "barrelsby": "^2.8.1",
     "openapi-typescript-codegen": "^0.25.0",
-    "tiny-replace-files": "^1.0.2",
-    "ts-node": "^10.9.1",
-    "tsup": "^7.1.0",
-    "typescript": "^5.1.6"
+    "tsup": "^8.0.1",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
   },
   "dependencies": {
     "form-data": "^4.0.0",

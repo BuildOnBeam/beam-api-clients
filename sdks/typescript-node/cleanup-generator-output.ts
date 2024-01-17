@@ -1,4 +1,4 @@
-import { replaceStringInFilesSync } from 'tiny-replace-files';
+import * as fs from 'fs';
 
 /**
  * One of our responses contain a property with the name 'symbol'. Our generator creates a very usable output
@@ -7,10 +7,14 @@ import { replaceStringInFilesSync } from 'tiny-replace-files';
  * Therefore, we automatically replace 'symbol' for 'currencySymbol' and call it a day.
  */
 
-const options = {
-  files: 'src/generated/models/GetAssetResponse.ts',
-  from: 'symbol',
-  to: 'currencySymbol',
-};
+const file = './src/generated/models/GetAssetResponse.ts';
 
-replaceStringInFilesSync(options);
+fs.readFile(file, 'utf8', (err, data) => {
+  if (err) return console.error(err);
+
+  const formatted = data.replace(/symbol/g, 'currencySymbol');
+
+  fs.writeFile(file, formatted, 'utf8', (err) => {
+    if (err) return console.error(err);
+  });
+});
