@@ -40,11 +40,12 @@ namespace Beam.Model
         /// <param name="policies">policies</param>
         /// <param name="updatedAt">updatedAt</param>
         /// <param name="coverImageUrl">coverImageUrl</param>
+        /// <param name="depositor">depositor</param>
         /// <param name="description">description</param>
         /// <param name="logoImageUrl">logoImageUrl</param>
         /// <param name="pegiRating">pegiRating</param>
         [JsonConstructor]
-        public GetGameResponse(List<int> chainIds, List<GetGameResponseContractsInner> contracts, DateTime createdAt, string id, string name, List<GetGameResponse.PegiContentEnum> pegiContent, List<GetGameResponsePoliciesInner> policies, DateTime updatedAt, string coverImageUrl = default, string description = default, string logoImageUrl = default, PegiRatingEnum? pegiRating = default)
+        public GetGameResponse(List<int> chainIds, List<GetGameResponseContractsInner> contracts, DateTime createdAt, string id, string name, List<GetGameResponse.PegiContentEnum> pegiContent, List<GetGameResponsePoliciesInner> policies, DateTime updatedAt, string coverImageUrl = default, Option<GetGameResponseDepositor> depositor = default, string description = default, string logoImageUrl = default, PegiRatingEnum? pegiRating = default)
         {
             ChainIds = chainIds;
             Contracts = contracts;
@@ -55,6 +56,7 @@ namespace Beam.Model
             Policies = policies;
             UpdatedAt = updatedAt;
             CoverImageUrl = coverImageUrl;
+            DepositorOption = depositor;
             Description = description;
             LogoImageUrl = logoImageUrl;
             PegiRating = pegiRating;
@@ -385,6 +387,19 @@ namespace Beam.Model
         public string CoverImageUrl { get; set; }
 
         /// <summary>
+        /// Used to track the state of Depositor
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<GetGameResponseDepositor> DepositorOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Depositor
+        /// </summary>
+        [JsonPropertyName("depositor")]
+        public GetGameResponseDepositor Depositor { get { return this. DepositorOption; } set { this.DepositorOption = new(value); } }
+
+        /// <summary>
         /// Gets or Sets Description
         /// </summary>
         [JsonPropertyName("description")]
@@ -413,6 +428,7 @@ namespace Beam.Model
             sb.Append("  Policies: ").Append(Policies).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
             sb.Append("  CoverImageUrl: ").Append(CoverImageUrl).Append("\n");
+            sb.Append("  Depositor: ").Append(Depositor).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  LogoImageUrl: ").Append(LogoImageUrl).Append("\n");
             sb.Append("  PegiRating: ").Append(PegiRating).Append("\n");
@@ -472,6 +488,7 @@ namespace Beam.Model
             Option<List<GetGameResponsePoliciesInner>> policies = default;
             Option<DateTime?> updatedAt = default;
             Option<string> coverImageUrl = default;
+            Option<GetGameResponseDepositor> depositor = default;
             Option<string> description = default;
             Option<string> logoImageUrl = default;
             Option<GetGameResponse.PegiRatingEnum?> pegiRating = default;
@@ -523,6 +540,10 @@ namespace Beam.Model
                             break;
                         case "coverImageUrl":
                             coverImageUrl = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "depositor":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                depositor = new Option<GetGameResponseDepositor>(JsonSerializer.Deserialize<GetGameResponseDepositor>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "description":
                             description = new Option<string>(utf8JsonReader.GetString());
@@ -601,7 +622,7 @@ namespace Beam.Model
             if (updatedAt.IsSet && updatedAt.Value == null)
                 throw new ArgumentNullException(nameof(updatedAt), "Property is not nullable for class GetGameResponse.");
 
-            return new GetGameResponse(chainIds.Value, contracts.Value, createdAt.Value.Value, id.Value, name.Value, pegiContent.Value, policies.Value, updatedAt.Value.Value, coverImageUrl.Value, description.Value, logoImageUrl.Value, pegiRating.Value);
+            return new GetGameResponse(chainIds.Value, contracts.Value, createdAt.Value.Value, id.Value, name.Value, pegiContent.Value, policies.Value, updatedAt.Value.Value, coverImageUrl.Value, depositor, description.Value, logoImageUrl.Value, pegiRating.Value);
         }
 
         /// <summary>
@@ -667,6 +688,14 @@ namespace Beam.Model
             else
                 writer.WriteNull("coverImageUrl");
 
+            if (getGameResponse.DepositorOption.IsSet)
+                if (getGameResponse.DepositorOption.Value != null)
+                {
+                    writer.WritePropertyName("depositor");
+                    JsonSerializer.Serialize(writer, getGameResponse.Depositor, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("depositor");
             if (getGameResponse.Description != null)
                 writer.WriteString("description", getGameResponse.Description);
             else

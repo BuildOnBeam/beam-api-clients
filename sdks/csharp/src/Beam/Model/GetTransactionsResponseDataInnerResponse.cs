@@ -34,26 +34,28 @@ namespace Beam.Model
         /// <param name="createdAt">createdAt</param>
         /// <param name="blockNumber">blockNumber</param>
         /// <param name="error">error</param>
+        /// <param name="gasFee">gasFee</param>
         /// <param name="gasUsed">gasUsed</param>
+        /// <param name="l1GasFee">l1GasFee</param>
         /// <param name="l1GasUsed">l1GasUsed</param>
         /// <param name="logs">logs</param>
         /// <param name="status">status</param>
         /// <param name="to">to</param>
         /// <param name="transactionHash">transactionHash</param>
-        /// <param name="userOpHash">userOpHash</param>
         [JsonConstructor]
-        public GetTransactionsResponseDataInnerResponse(decimal createdAt, Option<decimal?> blockNumber = default, Option<Object> error = default, Option<decimal?> gasUsed = default, Option<string> l1GasUsed = default, Option<List<GetTransactionsResponseDataInnerResponseLogsInner>> logs = default, Option<decimal?> status = default, Option<string> to = default, Option<string> transactionHash = default, Option<string> userOpHash = default)
+        public GetTransactionsResponseDataInnerResponse(decimal createdAt, Option<decimal?> blockNumber = default, Option<Object> error = default, Option<string> gasFee = default, Option<decimal?> gasUsed = default, Option<string> l1GasFee = default, Option<string> l1GasUsed = default, Option<List<GetTransactionsResponseDataInnerResponseLogsInner>> logs = default, Option<decimal?> status = default, Option<string> to = default, Option<string> transactionHash = default)
         {
             CreatedAt = createdAt;
             BlockNumberOption = blockNumber;
             ErrorOption = error;
+            GasFeeOption = gasFee;
             GasUsedOption = gasUsed;
+            L1GasFeeOption = l1GasFee;
             L1GasUsedOption = l1GasUsed;
             LogsOption = logs;
             StatusOption = status;
             ToOption = to;
             TransactionHashOption = transactionHash;
-            UserOpHashOption = userOpHash;
             OnCreated();
         }
 
@@ -92,6 +94,19 @@ namespace Beam.Model
         public Object Error { get { return this. ErrorOption; } set { this.ErrorOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of GasFee
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> GasFeeOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets GasFee
+        /// </summary>
+        [JsonPropertyName("gasFee")]
+        public string GasFee { get { return this. GasFeeOption; } set { this.GasFeeOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of GasUsed
         /// </summary>
         [JsonIgnore]
@@ -103,6 +118,19 @@ namespace Beam.Model
         /// </summary>
         [JsonPropertyName("gasUsed")]
         public decimal? GasUsed { get { return this. GasUsedOption; } set { this.GasUsedOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of L1GasFee
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> L1GasFeeOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets L1GasFee
+        /// </summary>
+        [JsonPropertyName("l1GasFee")]
+        public string L1GasFee { get { return this. L1GasFeeOption; } set { this.L1GasFeeOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of L1GasUsed
@@ -170,19 +198,6 @@ namespace Beam.Model
         public string TransactionHash { get { return this. TransactionHashOption; } set { this.TransactionHashOption = new(value); } }
 
         /// <summary>
-        /// Used to track the state of UserOpHash
-        /// </summary>
-        [JsonIgnore]
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string> UserOpHashOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets UserOpHash
-        /// </summary>
-        [JsonPropertyName("userOpHash")]
-        public string UserOpHash { get { return this. UserOpHashOption; } set { this.UserOpHashOption = new(value); } }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -193,13 +208,14 @@ namespace Beam.Model
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  BlockNumber: ").Append(BlockNumber).Append("\n");
             sb.Append("  Error: ").Append(Error).Append("\n");
+            sb.Append("  GasFee: ").Append(GasFee).Append("\n");
             sb.Append("  GasUsed: ").Append(GasUsed).Append("\n");
+            sb.Append("  L1GasFee: ").Append(L1GasFee).Append("\n");
             sb.Append("  L1GasUsed: ").Append(L1GasUsed).Append("\n");
             sb.Append("  Logs: ").Append(Logs).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  To: ").Append(To).Append("\n");
             sb.Append("  TransactionHash: ").Append(TransactionHash).Append("\n");
-            sb.Append("  UserOpHash: ").Append(UserOpHash).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -240,13 +256,14 @@ namespace Beam.Model
             Option<decimal?> createdAt = default;
             Option<decimal?> blockNumber = default;
             Option<Object> error = default;
+            Option<string> gasFee = default;
             Option<decimal?> gasUsed = default;
+            Option<string> l1GasFee = default;
             Option<string> l1GasUsed = default;
             Option<List<GetTransactionsResponseDataInnerResponseLogsInner>> logs = default;
             Option<decimal?> status = default;
             Option<string> to = default;
             Option<string> transactionHash = default;
-            Option<string> userOpHash = default;
 
             while (utf8JsonReader.Read())
             {
@@ -275,9 +292,15 @@ namespace Beam.Model
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 error = new Option<Object>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
+                        case "gasFee":
+                            gasFee = new Option<string>(utf8JsonReader.GetString());
+                            break;
                         case "gasUsed":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 gasUsed = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                            break;
+                        case "l1GasFee":
+                            l1GasFee = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "l1GasUsed":
                             l1GasUsed = new Option<string>(utf8JsonReader.GetString());
@@ -296,9 +319,6 @@ namespace Beam.Model
                         case "transactionHash":
                             transactionHash = new Option<string>(utf8JsonReader.GetString());
                             break;
-                        case "userOpHash":
-                            userOpHash = new Option<string>(utf8JsonReader.GetString());
-                            break;
                         default:
                             break;
                     }
@@ -314,8 +334,14 @@ namespace Beam.Model
             if (blockNumber.IsSet && blockNumber.Value == null)
                 throw new ArgumentNullException(nameof(blockNumber), "Property is not nullable for class GetTransactionsResponseDataInnerResponse.");
 
+            if (gasFee.IsSet && gasFee.Value == null)
+                throw new ArgumentNullException(nameof(gasFee), "Property is not nullable for class GetTransactionsResponseDataInnerResponse.");
+
             if (gasUsed.IsSet && gasUsed.Value == null)
                 throw new ArgumentNullException(nameof(gasUsed), "Property is not nullable for class GetTransactionsResponseDataInnerResponse.");
+
+            if (l1GasFee.IsSet && l1GasFee.Value == null)
+                throw new ArgumentNullException(nameof(l1GasFee), "Property is not nullable for class GetTransactionsResponseDataInnerResponse.");
 
             if (l1GasUsed.IsSet && l1GasUsed.Value == null)
                 throw new ArgumentNullException(nameof(l1GasUsed), "Property is not nullable for class GetTransactionsResponseDataInnerResponse.");
@@ -332,10 +358,7 @@ namespace Beam.Model
             if (transactionHash.IsSet && transactionHash.Value == null)
                 throw new ArgumentNullException(nameof(transactionHash), "Property is not nullable for class GetTransactionsResponseDataInnerResponse.");
 
-            if (userOpHash.IsSet && userOpHash.Value == null)
-                throw new ArgumentNullException(nameof(userOpHash), "Property is not nullable for class GetTransactionsResponseDataInnerResponse.");
-
-            return new GetTransactionsResponseDataInnerResponse(createdAt.Value.Value, blockNumber, error, gasUsed, l1GasUsed, logs, status, to, transactionHash, userOpHash);
+            return new GetTransactionsResponseDataInnerResponse(createdAt.Value.Value, blockNumber, error, gasFee, gasUsed, l1GasFee, l1GasUsed, logs, status, to, transactionHash);
         }
 
         /// <summary>
@@ -362,6 +385,12 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetTransactionsResponseDataInnerResponse getTransactionsResponseDataInnerResponse, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (getTransactionsResponseDataInnerResponse.GasFeeOption.IsSet && getTransactionsResponseDataInnerResponse.GasFee == null)
+                throw new ArgumentNullException(nameof(getTransactionsResponseDataInnerResponse.GasFee), "Property is required for class GetTransactionsResponseDataInnerResponse.");
+
+            if (getTransactionsResponseDataInnerResponse.L1GasFeeOption.IsSet && getTransactionsResponseDataInnerResponse.L1GasFee == null)
+                throw new ArgumentNullException(nameof(getTransactionsResponseDataInnerResponse.L1GasFee), "Property is required for class GetTransactionsResponseDataInnerResponse.");
+
             if (getTransactionsResponseDataInnerResponse.L1GasUsedOption.IsSet && getTransactionsResponseDataInnerResponse.L1GasUsed == null)
                 throw new ArgumentNullException(nameof(getTransactionsResponseDataInnerResponse.L1GasUsed), "Property is required for class GetTransactionsResponseDataInnerResponse.");
 
@@ -373,9 +402,6 @@ namespace Beam.Model
 
             if (getTransactionsResponseDataInnerResponse.TransactionHashOption.IsSet && getTransactionsResponseDataInnerResponse.TransactionHash == null)
                 throw new ArgumentNullException(nameof(getTransactionsResponseDataInnerResponse.TransactionHash), "Property is required for class GetTransactionsResponseDataInnerResponse.");
-
-            if (getTransactionsResponseDataInnerResponse.UserOpHashOption.IsSet && getTransactionsResponseDataInnerResponse.UserOpHash == null)
-                throw new ArgumentNullException(nameof(getTransactionsResponseDataInnerResponse.UserOpHash), "Property is required for class GetTransactionsResponseDataInnerResponse.");
 
             writer.WriteNumber("createdAt", getTransactionsResponseDataInnerResponse.CreatedAt);
 
@@ -390,8 +416,14 @@ namespace Beam.Model
                 }
                 else
                     writer.WriteNull("error");
+            if (getTransactionsResponseDataInnerResponse.GasFeeOption.IsSet)
+                writer.WriteString("gasFee", getTransactionsResponseDataInnerResponse.GasFee);
+
             if (getTransactionsResponseDataInnerResponse.GasUsedOption.IsSet)
                 writer.WriteNumber("gasUsed", getTransactionsResponseDataInnerResponse.GasUsedOption.Value.Value);
+
+            if (getTransactionsResponseDataInnerResponse.L1GasFeeOption.IsSet)
+                writer.WriteString("l1GasFee", getTransactionsResponseDataInnerResponse.L1GasFee);
 
             if (getTransactionsResponseDataInnerResponse.L1GasUsedOption.IsSet)
                 writer.WriteString("l1GasUsed", getTransactionsResponseDataInnerResponse.L1GasUsed);
@@ -409,9 +441,6 @@ namespace Beam.Model
 
             if (getTransactionsResponseDataInnerResponse.TransactionHashOption.IsSet)
                 writer.WriteString("transactionHash", getTransactionsResponseDataInnerResponse.TransactionHash);
-
-            if (getTransactionsResponseDataInnerResponse.UserOpHashOption.IsSet)
-                writer.WriteString("userOpHash", getTransactionsResponseDataInnerResponse.UserOpHash);
         }
     }
 }

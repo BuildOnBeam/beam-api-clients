@@ -184,7 +184,12 @@ namespace Beam.Model
             /// <summary>
             /// Enum USDT for value: USDT
             /// </summary>
-            USDT = 4
+            USDT = 4,
+
+            /// <summary>
+            /// Enum IMX for value: IMX
+            /// </summary>
+            IMX = 5
         }
 
         /// <summary>
@@ -206,6 +211,9 @@ namespace Beam.Model
 
             if (value.Equals("USDT"))
                 return CurrencyEnum.USDT;
+
+            if (value.Equals("IMX"))
+                return CurrencyEnum.IMX;
 
             throw new NotImplementedException($"Could not convert value to type CurrencyEnum: '{value}'");
         }
@@ -229,6 +237,9 @@ namespace Beam.Model
             if (value.Equals("USDT"))
                 return CurrencyEnum.USDT;
 
+            if (value.Equals("IMX"))
+                return CurrencyEnum.IMX;
+
             return null;
         }
 
@@ -251,6 +262,9 @@ namespace Beam.Model
 
             if (value == CurrencyEnum.USDT)
                 return "USDT";
+
+            if (value == CurrencyEnum.IMX)
+                return "IMX";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }

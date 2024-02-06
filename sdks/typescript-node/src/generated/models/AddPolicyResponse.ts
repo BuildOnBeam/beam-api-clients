@@ -9,6 +9,7 @@ export type AddPolicyResponse = {
   token: string | null;
   amount: string | null;
   rateType: AddPolicyResponse.rateType | null;
+  depositorId: string | null;
 };
 
 export namespace AddPolicyResponse {

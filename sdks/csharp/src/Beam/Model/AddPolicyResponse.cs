@@ -34,14 +34,16 @@ namespace Beam.Model
         /// <param name="chainId">chainId</param>
         /// <param name="id">id</param>
         /// <param name="amount">amount</param>
+        /// <param name="depositorId">depositorId</param>
         /// <param name="rateType">rateType</param>
         /// <param name="token">token</param>
         [JsonConstructor]
-        public AddPolicyResponse(int chainId, string id, string amount = default, RateTypeEnum? rateType = default, string token = default)
+        public AddPolicyResponse(int chainId, string id, string amount = default, string depositorId = default, RateTypeEnum? rateType = default, string token = default)
         {
             ChainId = chainId;
             Id = id;
             Amount = amount;
+            DepositorId = depositorId;
             RateType = rateType;
             Token = token;
             OnCreated();
@@ -143,6 +145,12 @@ namespace Beam.Model
         public string Amount { get; set; }
 
         /// <summary>
+        /// Gets or Sets DepositorId
+        /// </summary>
+        [JsonPropertyName("depositorId")]
+        public string DepositorId { get; set; }
+
+        /// <summary>
         /// Gets or Sets Token
         /// </summary>
         [JsonPropertyName("token")]
@@ -159,6 +167,7 @@ namespace Beam.Model
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Amount: ").Append(Amount).Append("\n");
+            sb.Append("  DepositorId: ").Append(DepositorId).Append("\n");
             sb.Append("  RateType: ").Append(RateType).Append("\n");
             sb.Append("  Token: ").Append(Token).Append("\n");
             sb.Append("}\n");
@@ -201,6 +210,7 @@ namespace Beam.Model
             Option<int?> chainId = default;
             Option<string> id = default;
             Option<string> amount = default;
+            Option<string> depositorId = default;
             Option<AddPolicyResponse.RateTypeEnum?> rateType = default;
             Option<string> token = default;
 
@@ -229,6 +239,9 @@ namespace Beam.Model
                         case "amount":
                             amount = new Option<string>(utf8JsonReader.GetString());
                             break;
+                        case "depositorId":
+                            depositorId = new Option<string>(utf8JsonReader.GetString());
+                            break;
                         case "rateType":
                             string rateTypeRawValue = utf8JsonReader.GetString();
                             if (rateTypeRawValue != null)
@@ -252,6 +265,9 @@ namespace Beam.Model
             if (!amount.IsSet)
                 throw new ArgumentException("Property is required for class AddPolicyResponse.", nameof(amount));
 
+            if (!depositorId.IsSet)
+                throw new ArgumentException("Property is required for class AddPolicyResponse.", nameof(depositorId));
+
             if (!rateType.IsSet)
                 throw new ArgumentException("Property is required for class AddPolicyResponse.", nameof(rateType));
 
@@ -264,7 +280,7 @@ namespace Beam.Model
             if (id.IsSet && id.Value == null)
                 throw new ArgumentNullException(nameof(id), "Property is not nullable for class AddPolicyResponse.");
 
-            return new AddPolicyResponse(chainId.Value.Value, id.Value, amount.Value, rateType.Value, token.Value);
+            return new AddPolicyResponse(chainId.Value.Value, id.Value, amount.Value, depositorId.Value, rateType.Value, token.Value);
         }
 
         /// <summary>
@@ -302,6 +318,11 @@ namespace Beam.Model
                 writer.WriteString("amount", addPolicyResponse.Amount);
             else
                 writer.WriteNull("amount");
+
+            if (addPolicyResponse.DepositorId != null)
+                writer.WriteString("depositorId", addPolicyResponse.DepositorId);
+            else
+                writer.WriteNull("depositorId");
 
             var rateTypeRawValue = AddPolicyResponse.RateTypeEnumToJsonValue(addPolicyResponse.RateType.Value);
             if (rateTypeRawValue != null)

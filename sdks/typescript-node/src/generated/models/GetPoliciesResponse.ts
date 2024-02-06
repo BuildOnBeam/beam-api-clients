@@ -9,5 +9,6 @@ export type GetPoliciesResponse = {
     rateType: 'Fixed' | 'Dynamic' | null;
     amount: string | null;
     token: string | null;
+    depositorId: string | null;
   }>;
 };

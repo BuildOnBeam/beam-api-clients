@@ -33,13 +33,15 @@ namespace Beam.Model
         /// </summary>
         /// <param name="id">id</param>
         /// <param name="amount">amount</param>
+        /// <param name="depositorId">depositorId</param>
         /// <param name="rateType">rateType</param>
         /// <param name="token">token</param>
         [JsonConstructor]
-        public GetPoliciesResponseDataInner(string id, string amount = default, RateTypeEnum? rateType = default, string token = default)
+        public GetPoliciesResponseDataInner(string id, string amount = default, string depositorId = default, RateTypeEnum? rateType = default, string token = default)
         {
             Id = id;
             Amount = amount;
+            DepositorId = depositorId;
             RateType = rateType;
             Token = token;
             OnCreated();
@@ -135,6 +137,12 @@ namespace Beam.Model
         public string Amount { get; set; }
 
         /// <summary>
+        /// Gets or Sets DepositorId
+        /// </summary>
+        [JsonPropertyName("depositorId")]
+        public string DepositorId { get; set; }
+
+        /// <summary>
         /// Gets or Sets Token
         /// </summary>
         [JsonPropertyName("token")]
@@ -150,6 +158,7 @@ namespace Beam.Model
             sb.Append("class GetPoliciesResponseDataInner {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Amount: ").Append(Amount).Append("\n");
+            sb.Append("  DepositorId: ").Append(DepositorId).Append("\n");
             sb.Append("  RateType: ").Append(RateType).Append("\n");
             sb.Append("  Token: ").Append(Token).Append("\n");
             sb.Append("}\n");
@@ -191,6 +200,7 @@ namespace Beam.Model
 
             Option<string> id = default;
             Option<string> amount = default;
+            Option<string> depositorId = default;
             Option<GetPoliciesResponseDataInner.RateTypeEnum?> rateType = default;
             Option<string> token = default;
 
@@ -215,6 +225,9 @@ namespace Beam.Model
                         case "amount":
                             amount = new Option<string>(utf8JsonReader.GetString());
                             break;
+                        case "depositorId":
+                            depositorId = new Option<string>(utf8JsonReader.GetString());
+                            break;
                         case "rateType":
                             string rateTypeRawValue = utf8JsonReader.GetString();
                             if (rateTypeRawValue != null)
@@ -235,6 +248,9 @@ namespace Beam.Model
             if (!amount.IsSet)
                 throw new ArgumentException("Property is required for class GetPoliciesResponseDataInner.", nameof(amount));
 
+            if (!depositorId.IsSet)
+                throw new ArgumentException("Property is required for class GetPoliciesResponseDataInner.", nameof(depositorId));
+
             if (!rateType.IsSet)
                 throw new ArgumentException("Property is required for class GetPoliciesResponseDataInner.", nameof(rateType));
 
@@ -244,7 +260,7 @@ namespace Beam.Model
             if (id.IsSet && id.Value == null)
                 throw new ArgumentNullException(nameof(id), "Property is not nullable for class GetPoliciesResponseDataInner.");
 
-            return new GetPoliciesResponseDataInner(id.Value, amount.Value, rateType.Value, token.Value);
+            return new GetPoliciesResponseDataInner(id.Value, amount.Value, depositorId.Value, rateType.Value, token.Value);
         }
 
         /// <summary>
@@ -280,6 +296,11 @@ namespace Beam.Model
                 writer.WriteString("amount", getPoliciesResponseDataInner.Amount);
             else
                 writer.WriteNull("amount");
+
+            if (getPoliciesResponseDataInner.DepositorId != null)
+                writer.WriteString("depositorId", getPoliciesResponseDataInner.DepositorId);
+            else
+                writer.WriteNull("depositorId");
 
             var rateTypeRawValue = GetPoliciesResponseDataInner.RateTypeEnumToJsonValue(getPoliciesResponseDataInner.RateType.Value);
             if (rateTypeRawValue != null)

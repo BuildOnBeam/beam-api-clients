@@ -47,6 +47,7 @@ export type UpdateGameResponse = {
     gameId: string;
     token: string | null;
     amount: string | null;
+    depositorId: string | null;
   }>;
 };
 

@@ -23,6 +23,14 @@ export type GetGameResponse = {
   coverImageUrl: string | null;
   logoImageUrl: string | null;
   chainIds: number[];
+  depositor?: {
+    id: string;
+    createdAt: any;
+    updatedAt: any;
+    externalId: string;
+    address: string;
+    gameId: string;
+  } | null;
   contracts: Array<{
     type: 'ERC20' | 'ERC721' | 'ERC1155' | 'SEAPORT' | 'UNISWAPV2' | 'WETH';
     id: string;
@@ -47,6 +55,7 @@ export type GetGameResponse = {
     gameId: string;
     token: string | null;
     amount: string | null;
+    depositorId: string | null;
   }>;
 };
 

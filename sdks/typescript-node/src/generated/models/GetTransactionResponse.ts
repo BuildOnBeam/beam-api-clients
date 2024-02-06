@@ -14,9 +14,10 @@ export type GetTransactionResponse = {
     createdAt: number;
     blockNumber?: number;
     transactionHash?: string;
-    userOpHash?: string;
     l1GasUsed?: string;
     gasUsed?: number;
+    gasFee?: string;
+    l1GasFee?: string;
     status?: number;
     logs?: Array<{
       blockNumber: number;

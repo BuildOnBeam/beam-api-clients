@@ -40,11 +40,12 @@ namespace Beam.Model
         /// <param name="type">type</param>
         /// <param name="amount">amount</param>
         /// <param name="createdAt">createdAt</param>
+        /// <param name="depositorId">depositorId</param>
         /// <param name="rateType">rateType</param>
         /// <param name="token">token</param>
         /// <param name="updatedAt">updatedAt</param>
         [JsonConstructor]
-        public GetGameResponsePoliciesInner(int chainId, string externalId, string gameId, string id, ModelEnum model, string name, TypeEnum type, string amount = default, Object createdAt = default, Option<RateTypeEnum?> rateType = default, string token = default, Object updatedAt = default)
+        public GetGameResponsePoliciesInner(int chainId, string externalId, string gameId, string id, ModelEnum model, string name, TypeEnum type, string amount = default, Object createdAt = default, string depositorId = default, Option<RateTypeEnum?> rateType = default, string token = default, Object updatedAt = default)
         {
             ChainId = chainId;
             ExternalId = externalId;
@@ -55,6 +56,7 @@ namespace Beam.Model
             Type = type;
             Amount = amount;
             CreatedAt = createdAt;
+            DepositorId = depositorId;
             RateTypeOption = rateType;
             Token = token;
             UpdatedAt = updatedAt;
@@ -332,6 +334,12 @@ namespace Beam.Model
         public Object CreatedAt { get; set; }
 
         /// <summary>
+        /// Gets or Sets DepositorId
+        /// </summary>
+        [JsonPropertyName("depositorId")]
+        public string DepositorId { get; set; }
+
+        /// <summary>
         /// Gets or Sets Token
         /// </summary>
         [JsonPropertyName("token")]
@@ -360,6 +368,7 @@ namespace Beam.Model
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Amount: ").Append(Amount).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
+            sb.Append("  DepositorId: ").Append(DepositorId).Append("\n");
             sb.Append("  RateType: ").Append(RateType).Append("\n");
             sb.Append("  Token: ").Append(Token).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
@@ -409,6 +418,7 @@ namespace Beam.Model
             Option<GetGameResponsePoliciesInner.TypeEnum?> type = default;
             Option<string> amount = default;
             Option<Object> createdAt = default;
+            Option<string> depositorId = default;
             Option<GetGameResponsePoliciesInner.RateTypeEnum?> rateType = default;
             Option<string> token = default;
             Option<Object> updatedAt = default;
@@ -461,6 +471,9 @@ namespace Beam.Model
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 createdAt = new Option<Object>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
+                        case "depositorId":
+                            depositorId = new Option<string>(utf8JsonReader.GetString());
+                            break;
                         case "rateType":
                             string rateTypeRawValue = utf8JsonReader.GetString();
                             if (rateTypeRawValue != null)
@@ -506,6 +519,9 @@ namespace Beam.Model
             if (!createdAt.IsSet)
                 throw new ArgumentException("Property is required for class GetGameResponsePoliciesInner.", nameof(createdAt));
 
+            if (!depositorId.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponsePoliciesInner.", nameof(depositorId));
+
             if (!token.IsSet)
                 throw new ArgumentException("Property is required for class GetGameResponsePoliciesInner.", nameof(token));
 
@@ -533,7 +549,7 @@ namespace Beam.Model
             if (type.IsSet && type.Value == null)
                 throw new ArgumentNullException(nameof(type), "Property is not nullable for class GetGameResponsePoliciesInner.");
 
-            return new GetGameResponsePoliciesInner(chainId.Value.Value, externalId.Value, gameId.Value, id.Value, model.Value.Value, name.Value, type.Value.Value, amount.Value, createdAt.Value, rateType, token.Value, updatedAt.Value);
+            return new GetGameResponsePoliciesInner(chainId.Value.Value, externalId.Value, gameId.Value, id.Value, model.Value.Value, name.Value, type.Value.Value, amount.Value, createdAt.Value, depositorId.Value, rateType, token.Value, updatedAt.Value);
         }
 
         /// <summary>
@@ -598,6 +614,11 @@ namespace Beam.Model
             }
             else
                 writer.WriteNull("createdAt");
+            if (getGameResponsePoliciesInner.DepositorId != null)
+                writer.WriteString("depositorId", getGameResponsePoliciesInner.DepositorId);
+            else
+                writer.WriteNull("depositorId");
+
             var rateTypeRawValue = GetGameResponsePoliciesInner.RateTypeEnumToJsonValue(getGameResponsePoliciesInner.RateTypeOption.Value.Value);
             if (rateTypeRawValue != null)
                 writer.WriteString("rateType", rateTypeRawValue);

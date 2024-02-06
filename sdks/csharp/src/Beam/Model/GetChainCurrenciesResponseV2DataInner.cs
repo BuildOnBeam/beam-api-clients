@@ -68,7 +68,12 @@ namespace Beam.Model
             /// <summary>
             /// Enum USDT for value: USDT
             /// </summary>
-            USDT = 4
+            USDT = 4,
+
+            /// <summary>
+            /// Enum IMX for value: IMX
+            /// </summary>
+            IMX = 5
         }
 
         /// <summary>
@@ -90,6 +95,9 @@ namespace Beam.Model
 
             if (value.Equals("USDT"))
                 return SymbolEnum.USDT;
+
+            if (value.Equals("IMX"))
+                return SymbolEnum.IMX;
 
             throw new NotImplementedException($"Could not convert value to type SymbolEnum: '{value}'");
         }
@@ -113,6 +121,9 @@ namespace Beam.Model
             if (value.Equals("USDT"))
                 return SymbolEnum.USDT;
 
+            if (value.Equals("IMX"))
+                return SymbolEnum.IMX;
+
             return null;
         }
 
@@ -135,6 +146,9 @@ namespace Beam.Model
 
             if (value == SymbolEnum.USDT)
                 return "USDT";
+
+            if (value == SymbolEnum.IMX)
+                return "IMX";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }
