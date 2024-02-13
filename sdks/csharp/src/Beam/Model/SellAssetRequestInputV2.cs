@@ -38,10 +38,10 @@ namespace Beam.Model
         /// <param name="sellType">sellType</param>
         /// <param name="chainId">chainId (default to 13337M)</param>
         /// <param name="currency">currency (default to CurrencyEnum.BEAM)</param>
-        /// <param name="endTime">endTime</param>
+        /// <param name="endTime">Date time string with YYYY-MM-DDTHH:mm:ss.sssZ format or Unix timestamp in milliseconds</param>
         /// <param name="policyId">policyId</param>
         /// <param name="sponsor">sponsor (default to true)</param>
-        /// <param name="startTime">startTime</param>
+        /// <param name="startTime">Date time string with YYYY-MM-DDTHH:mm:ss.sssZ format or Unix timestamp in milliseconds</param>
         [JsonConstructor]
         public SellAssetRequestInputV2(string assetAddress, string assetId, string price, decimal quantity, SellTypeEnum sellType, Option<decimal?> chainId = default, Option<CurrencyEnum?> currency = default, Option<string> endTime = default, Option<string> policyId = default, Option<bool?> sponsor = default, Option<string> startTime = default)
         {
@@ -327,8 +327,9 @@ namespace Beam.Model
         public Option<string> EndTimeOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets EndTime
+        /// Date time string with YYYY-MM-DDTHH:mm:ss.sssZ format or Unix timestamp in milliseconds
         /// </summary>
+        /// <value>Date time string with YYYY-MM-DDTHH:mm:ss.sssZ format or Unix timestamp in milliseconds</value>
         [JsonPropertyName("endTime")]
         public string EndTime { get { return this. EndTimeOption; } set { this.EndTimeOption = new(value); } }
 
@@ -366,8 +367,9 @@ namespace Beam.Model
         public Option<string> StartTimeOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets StartTime
+        /// Date time string with YYYY-MM-DDTHH:mm:ss.sssZ format or Unix timestamp in milliseconds
         /// </summary>
+        /// <value>Date time string with YYYY-MM-DDTHH:mm:ss.sssZ format or Unix timestamp in milliseconds</value>
         [JsonPropertyName("startTime")]
         public string StartTime { get { return this. StartTimeOption; } set { this.StartTimeOption = new(value); } }
 

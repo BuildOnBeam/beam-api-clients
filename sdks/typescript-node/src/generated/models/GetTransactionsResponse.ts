@@ -16,7 +16,7 @@ export type GetTransactionsResponse = {
       blockNumber?: number;
       transactionHash?: string;
       l1GasUsed?: string;
-      gasUsed?: number;
+      gasUsed?: string;
       gasFee?: string;
       l1GasFee?: string;
       status?: number;

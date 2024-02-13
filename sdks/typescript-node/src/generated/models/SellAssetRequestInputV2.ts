@@ -8,7 +8,13 @@ export type SellAssetRequestInputV2 = {
   assetId: string;
   quantity: number;
   price: string;
+  /**
+   * Date time string with YYYY-MM-DDTHH:mm:ss.sssZ format or Unix timestamp in milliseconds
+   */
   startTime?: string | null;
+  /**
+   * Date time string with YYYY-MM-DDTHH:mm:ss.sssZ format or Unix timestamp in milliseconds
+   */
   endTime?: string | null;
   sellType: SellAssetRequestInputV2.sellType;
   currency?: SellAssetRequestInputV2.currency;

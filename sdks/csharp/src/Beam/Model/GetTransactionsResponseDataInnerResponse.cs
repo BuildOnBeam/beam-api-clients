@@ -43,7 +43,7 @@ namespace Beam.Model
         /// <param name="to">to</param>
         /// <param name="transactionHash">transactionHash</param>
         [JsonConstructor]
-        public GetTransactionsResponseDataInnerResponse(decimal createdAt, Option<decimal?> blockNumber = default, Option<Object> error = default, Option<string> gasFee = default, Option<decimal?> gasUsed = default, Option<string> l1GasFee = default, Option<string> l1GasUsed = default, Option<List<GetTransactionsResponseDataInnerResponseLogsInner>> logs = default, Option<decimal?> status = default, Option<string> to = default, Option<string> transactionHash = default)
+        public GetTransactionsResponseDataInnerResponse(decimal createdAt, Option<decimal?> blockNumber = default, Option<Object> error = default, Option<string> gasFee = default, Option<string> gasUsed = default, Option<string> l1GasFee = default, Option<string> l1GasUsed = default, Option<List<GetTransactionsResponseDataInnerResponseLogsInner>> logs = default, Option<decimal?> status = default, Option<string> to = default, Option<string> transactionHash = default)
         {
             CreatedAt = createdAt;
             BlockNumberOption = blockNumber;
@@ -111,13 +111,13 @@ namespace Beam.Model
         /// </summary>
         [JsonIgnore]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<decimal?> GasUsedOption { get; private set; }
+        public Option<string> GasUsedOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets GasUsed
         /// </summary>
         [JsonPropertyName("gasUsed")]
-        public decimal? GasUsed { get { return this. GasUsedOption; } set { this.GasUsedOption = new(value); } }
+        public string GasUsed { get { return this. GasUsedOption; } set { this.GasUsedOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of L1GasFee
@@ -257,7 +257,7 @@ namespace Beam.Model
             Option<decimal?> blockNumber = default;
             Option<Object> error = default;
             Option<string> gasFee = default;
-            Option<decimal?> gasUsed = default;
+            Option<string> gasUsed = default;
             Option<string> l1GasFee = default;
             Option<string> l1GasUsed = default;
             Option<List<GetTransactionsResponseDataInnerResponseLogsInner>> logs = default;
@@ -296,8 +296,7 @@ namespace Beam.Model
                             gasFee = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "gasUsed":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                gasUsed = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                            gasUsed = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "l1GasFee":
                             l1GasFee = new Option<string>(utf8JsonReader.GetString());
@@ -388,6 +387,9 @@ namespace Beam.Model
             if (getTransactionsResponseDataInnerResponse.GasFeeOption.IsSet && getTransactionsResponseDataInnerResponse.GasFee == null)
                 throw new ArgumentNullException(nameof(getTransactionsResponseDataInnerResponse.GasFee), "Property is required for class GetTransactionsResponseDataInnerResponse.");
 
+            if (getTransactionsResponseDataInnerResponse.GasUsedOption.IsSet && getTransactionsResponseDataInnerResponse.GasUsed == null)
+                throw new ArgumentNullException(nameof(getTransactionsResponseDataInnerResponse.GasUsed), "Property is required for class GetTransactionsResponseDataInnerResponse.");
+
             if (getTransactionsResponseDataInnerResponse.L1GasFeeOption.IsSet && getTransactionsResponseDataInnerResponse.L1GasFee == null)
                 throw new ArgumentNullException(nameof(getTransactionsResponseDataInnerResponse.L1GasFee), "Property is required for class GetTransactionsResponseDataInnerResponse.");
 
@@ -420,7 +422,7 @@ namespace Beam.Model
                 writer.WriteString("gasFee", getTransactionsResponseDataInnerResponse.GasFee);
 
             if (getTransactionsResponseDataInnerResponse.GasUsedOption.IsSet)
-                writer.WriteNumber("gasUsed", getTransactionsResponseDataInnerResponse.GasUsedOption.Value.Value);
+                writer.WriteString("gasUsed", getTransactionsResponseDataInnerResponse.GasUsed);
 
             if (getTransactionsResponseDataInnerResponse.L1GasFeeOption.IsSet)
                 writer.WriteString("l1GasFee", getTransactionsResponseDataInnerResponse.L1GasFee);
