@@ -33,7 +33,7 @@ namespace Beam.Model
         /// </summary>
         /// <param name="nativeTokenBalance">nativeTokenBalance</param>
         [JsonConstructor]
-        public GetProfileNativeCurrencyResponseV2(GetProfileNativeCurrencyResponseNativeTokenBalance nativeTokenBalance)
+        public GetProfileNativeCurrencyResponseV2(GetProfileNativeCurrencyResponseV2NativeTokenBalance nativeTokenBalance)
         {
             NativeTokenBalance = nativeTokenBalance;
             OnCreated();
@@ -45,7 +45,7 @@ namespace Beam.Model
         /// Gets or Sets NativeTokenBalance
         /// </summary>
         [JsonPropertyName("nativeTokenBalance")]
-        public GetProfileNativeCurrencyResponseNativeTokenBalance NativeTokenBalance { get; set; }
+        public GetProfileNativeCurrencyResponseV2NativeTokenBalance NativeTokenBalance { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -93,7 +93,7 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<GetProfileNativeCurrencyResponseNativeTokenBalance> nativeTokenBalance = default;
+            Option<GetProfileNativeCurrencyResponseV2NativeTokenBalance> nativeTokenBalance = default;
 
             while (utf8JsonReader.Read())
             {
@@ -112,7 +112,7 @@ namespace Beam.Model
                     {
                         case "nativeTokenBalance":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                nativeTokenBalance = new Option<GetProfileNativeCurrencyResponseNativeTokenBalance>(JsonSerializer.Deserialize<GetProfileNativeCurrencyResponseNativeTokenBalance>(ref utf8JsonReader, jsonSerializerOptions));
+                                nativeTokenBalance = new Option<GetProfileNativeCurrencyResponseV2NativeTokenBalance>(JsonSerializer.Deserialize<GetProfileNativeCurrencyResponseV2NativeTokenBalance>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;

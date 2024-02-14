@@ -37,7 +37,7 @@ namespace Beam.Model
         /// <param name="policyId">policyId</param>
         /// <param name="sponsor">sponsor (default to true)</param>
         [JsonConstructor]
-        public TransferAssetRequestInputV2(List<TransferAssetRequestInputAssetsInner> assets, Option<decimal?> chainId = default, Option<bool?> optimistic = default, Option<string> policyId = default, Option<bool?> sponsor = default)
+        public TransferAssetRequestInputV2(List<TransferAssetRequestInputV2AssetsInner> assets, Option<decimal?> chainId = default, Option<bool?> optimistic = default, Option<string> policyId = default, Option<bool?> sponsor = default)
         {
             Assets = assets;
             ChainIdOption = chainId;
@@ -53,7 +53,7 @@ namespace Beam.Model
         /// Gets or Sets Assets
         /// </summary>
         [JsonPropertyName("assets")]
-        public List<TransferAssetRequestInputAssetsInner> Assets { get; set; }
+        public List<TransferAssetRequestInputV2AssetsInner> Assets { get; set; }
 
         /// <summary>
         /// Used to track the state of ChainId
@@ -157,7 +157,7 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<List<TransferAssetRequestInputAssetsInner>> assets = default;
+            Option<List<TransferAssetRequestInputV2AssetsInner>> assets = default;
             Option<decimal?> chainId = default;
             Option<bool?> optimistic = default;
             Option<string> policyId = default;
@@ -180,7 +180,7 @@ namespace Beam.Model
                     {
                         case "assets":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                assets = new Option<List<TransferAssetRequestInputAssetsInner>>(JsonSerializer.Deserialize<List<TransferAssetRequestInputAssetsInner>>(ref utf8JsonReader, jsonSerializerOptions));
+                                assets = new Option<List<TransferAssetRequestInputV2AssetsInner>>(JsonSerializer.Deserialize<List<TransferAssetRequestInputV2AssetsInner>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)

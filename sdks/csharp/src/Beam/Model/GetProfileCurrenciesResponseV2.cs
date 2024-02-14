@@ -33,7 +33,7 @@ namespace Beam.Model
         /// </summary>
         /// <param name="data">data</param>
         [JsonConstructor]
-        public GetProfileCurrenciesResponseV2(List<GetProfileCurrenciesResponseDataInner> data)
+        public GetProfileCurrenciesResponseV2(List<GetProfileCurrenciesResponseV2DataInner> data)
         {
             Data = data;
             OnCreated();
@@ -45,7 +45,7 @@ namespace Beam.Model
         /// Gets or Sets Data
         /// </summary>
         [JsonPropertyName("data")]
-        public List<GetProfileCurrenciesResponseDataInner> Data { get; set; }
+        public List<GetProfileCurrenciesResponseV2DataInner> Data { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -93,7 +93,7 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<List<GetProfileCurrenciesResponseDataInner>> data = default;
+            Option<List<GetProfileCurrenciesResponseV2DataInner>> data = default;
 
             while (utf8JsonReader.Read())
             {
@@ -112,7 +112,7 @@ namespace Beam.Model
                     {
                         case "data":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                data = new Option<List<GetProfileCurrenciesResponseDataInner>>(JsonSerializer.Deserialize<List<GetProfileCurrenciesResponseDataInner>>(ref utf8JsonReader, jsonSerializerOptions));
+                                data = new Option<List<GetProfileCurrenciesResponseV2DataInner>>(JsonSerializer.Deserialize<List<GetProfileCurrenciesResponseV2DataInner>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
