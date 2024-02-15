@@ -155,9 +155,6 @@ To use Api clients provided by this SDK, simply inject them into your class:
   It depends how you made the request. If the return type is ApiResponse<T> no error will be thrown, though the Content property will be null.
   StatusCode and ReasonPhrase will contain information about the error.
   If the return type is T, then it will throw. If the return type is TOrDefault, it will return null.
-- How do I validate requests and process responses?
-  Use the provided On and After methods in the Api class from the namespace Beam.Rest.DefaultApi.
-  Or provide your own class by using the generic ConfigureApi method.
 - How do I specify different ApiKeyToken for different ApiClients?
   You can now use exposed ApiKeyTokenProvider one each client to set custom ApiKey if needed. That token will only be used for that ApiClient instance.
   ```cs
