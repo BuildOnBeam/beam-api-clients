@@ -31,6 +31,20 @@ export type GetGameResponse = {
     address: string;
     gameId: string;
   } | null;
+  developers: Array<{
+    role: 'Owner' | 'Admin' | 'Viewer' | null;
+    id: string;
+    developerId: string;
+    gameId: string;
+    developer: {
+      id: string;
+      name: string | null;
+      email: string;
+      createdAt: any;
+      lastSeenAt: any;
+      externalId: string | null;
+    };
+  }>;
   contracts: Array<{
     type: 'ERC20' | 'ERC721' | 'ERC1155' | 'SEAPORT' | 'UNISWAPV2' | 'WETH';
     id: string;

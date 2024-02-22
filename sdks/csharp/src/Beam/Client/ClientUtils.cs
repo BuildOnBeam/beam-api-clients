@@ -160,6 +160,8 @@ namespace Beam.Client
                 return GetGameResponse.PegiRatingEnumToJsonValue(getGameResponsePegiRatingEnum);
             if (obj is GetGameResponseContractsInner.TypeEnum getGameResponseContractsInnerTypeEnum)
                 return GetGameResponseContractsInner.TypeEnumToJsonValue(getGameResponseContractsInnerTypeEnum);
+            if (obj is GetGameResponseDevelopersInner.RoleEnum getGameResponseDevelopersInnerRoleEnum)
+                return GetGameResponseDevelopersInner.RoleEnumToJsonValue(getGameResponseDevelopersInnerRoleEnum);
             if (obj is GetGameResponsePoliciesInner.ModelEnum getGameResponsePoliciesInnerModelEnum)
                 return GetGameResponsePoliciesInner.ModelEnumToJsonValue(getGameResponsePoliciesInnerModelEnum);
             if (obj is GetGameResponsePoliciesInner.TypeEnum getGameResponsePoliciesInnerTypeEnum)

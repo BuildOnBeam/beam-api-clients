@@ -102,6 +102,8 @@ namespace Beam.Client
             _jsonOptions.Converters.Add(new GetGameResponseJsonConverter());
             _jsonOptions.Converters.Add(new GetGameResponseContractsInnerJsonConverter());
             _jsonOptions.Converters.Add(new GetGameResponseDepositorJsonConverter());
+            _jsonOptions.Converters.Add(new GetGameResponseDevelopersInnerJsonConverter());
+            _jsonOptions.Converters.Add(new GetGameResponseDevelopersInnerDeveloperJsonConverter());
             _jsonOptions.Converters.Add(new GetGameResponsePoliciesInnerJsonConverter());
             _jsonOptions.Converters.Add(new GetGasUsageResponseJsonConverter());
             _jsonOptions.Converters.Add(new GetListedAssetsBodyInputV2JsonConverter());

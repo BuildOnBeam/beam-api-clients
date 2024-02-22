@@ -34,6 +34,7 @@ namespace Beam.Model
         /// <param name="chainIds">chainIds</param>
         /// <param name="contracts">contracts</param>
         /// <param name="createdAt">createdAt</param>
+        /// <param name="developers">developers</param>
         /// <param name="id">id</param>
         /// <param name="name">name</param>
         /// <param name="pegiContent">pegiContent</param>
@@ -45,11 +46,12 @@ namespace Beam.Model
         /// <param name="logoImageUrl">logoImageUrl</param>
         /// <param name="pegiRating">pegiRating</param>
         [JsonConstructor]
-        public GetGameResponse(List<int> chainIds, List<GetGameResponseContractsInner> contracts, DateTime createdAt, string id, string name, List<GetGameResponse.PegiContentEnum> pegiContent, List<GetGameResponsePoliciesInner> policies, DateTime updatedAt, string coverImageUrl = default, Option<GetGameResponseDepositor> depositor = default, string description = default, string logoImageUrl = default, PegiRatingEnum? pegiRating = default)
+        public GetGameResponse(List<int> chainIds, List<GetGameResponseContractsInner> contracts, DateTime createdAt, List<GetGameResponseDevelopersInner> developers, string id, string name, List<GetGameResponse.PegiContentEnum> pegiContent, List<GetGameResponsePoliciesInner> policies, DateTime updatedAt, string coverImageUrl = default, Option<GetGameResponseDepositor> depositor = default, string description = default, string logoImageUrl = default, PegiRatingEnum? pegiRating = default)
         {
             ChainIds = chainIds;
             Contracts = contracts;
             CreatedAt = createdAt;
+            Developers = developers;
             Id = id;
             Name = name;
             PegiContent = pegiContent;
@@ -351,6 +353,12 @@ namespace Beam.Model
         public DateTime CreatedAt { get; set; }
 
         /// <summary>
+        /// Gets or Sets Developers
+        /// </summary>
+        [JsonPropertyName("developers")]
+        public List<GetGameResponseDevelopersInner> Developers { get; set; }
+
+        /// <summary>
         /// Gets or Sets Id
         /// </summary>
         [JsonPropertyName("id")]
@@ -422,6 +430,7 @@ namespace Beam.Model
             sb.Append("  ChainIds: ").Append(ChainIds).Append("\n");
             sb.Append("  Contracts: ").Append(Contracts).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
+            sb.Append("  Developers: ").Append(Developers).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  PegiContent: ").Append(PegiContent).Append("\n");
@@ -482,6 +491,7 @@ namespace Beam.Model
             Option<List<int>> chainIds = default;
             Option<List<GetGameResponseContractsInner>> contracts = default;
             Option<DateTime?> createdAt = default;
+            Option<List<GetGameResponseDevelopersInner>> developers = default;
             Option<string> id = default;
             Option<string> name = default;
             Option<List<GetGameResponse.PegiContentEnum>> pegiContent = default;
@@ -519,6 +529,10 @@ namespace Beam.Model
                         case "createdAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 createdAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "developers":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                developers = new Option<List<GetGameResponseDevelopersInner>>(JsonSerializer.Deserialize<List<GetGameResponseDevelopersInner>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "id":
                             id = new Option<string>(utf8JsonReader.GetString());
@@ -571,6 +585,9 @@ namespace Beam.Model
             if (!createdAt.IsSet)
                 throw new ArgumentException("Property is required for class GetGameResponse.", nameof(createdAt));
 
+            if (!developers.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponse.", nameof(developers));
+
             if (!id.IsSet)
                 throw new ArgumentException("Property is required for class GetGameResponse.", nameof(id));
 
@@ -607,6 +624,9 @@ namespace Beam.Model
             if (createdAt.IsSet && createdAt.Value == null)
                 throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class GetGameResponse.");
 
+            if (developers.IsSet && developers.Value == null)
+                throw new ArgumentNullException(nameof(developers), "Property is not nullable for class GetGameResponse.");
+
             if (id.IsSet && id.Value == null)
                 throw new ArgumentNullException(nameof(id), "Property is not nullable for class GetGameResponse.");
 
@@ -622,7 +642,7 @@ namespace Beam.Model
             if (updatedAt.IsSet && updatedAt.Value == null)
                 throw new ArgumentNullException(nameof(updatedAt), "Property is not nullable for class GetGameResponse.");
 
-            return new GetGameResponse(chainIds.Value, contracts.Value, createdAt.Value.Value, id.Value, name.Value, pegiContent.Value, policies.Value, updatedAt.Value.Value, coverImageUrl.Value, depositor, description.Value, logoImageUrl.Value, pegiRating.Value);
+            return new GetGameResponse(chainIds.Value, contracts.Value, createdAt.Value.Value, developers.Value, id.Value, name.Value, pegiContent.Value, policies.Value, updatedAt.Value.Value, coverImageUrl.Value, depositor, description.Value, logoImageUrl.Value, pegiRating.Value);
         }
 
         /// <summary>
@@ -655,6 +675,9 @@ namespace Beam.Model
             if (getGameResponse.Contracts == null)
                 throw new ArgumentNullException(nameof(getGameResponse.Contracts), "Property is required for class GetGameResponse.");
 
+            if (getGameResponse.Developers == null)
+                throw new ArgumentNullException(nameof(getGameResponse.Developers), "Property is required for class GetGameResponse.");
+
             if (getGameResponse.Id == null)
                 throw new ArgumentNullException(nameof(getGameResponse.Id), "Property is required for class GetGameResponse.");
 
@@ -673,6 +696,8 @@ namespace Beam.Model
             JsonSerializer.Serialize(writer, getGameResponse.Contracts, jsonSerializerOptions);
             writer.WriteString("createdAt", getGameResponse.CreatedAt.ToString(CreatedAtFormat));
 
+            writer.WritePropertyName("developers");
+            JsonSerializer.Serialize(writer, getGameResponse.Developers, jsonSerializerOptions);
             writer.WriteString("id", getGameResponse.Id);
 
             writer.WriteString("name", getGameResponse.Name);

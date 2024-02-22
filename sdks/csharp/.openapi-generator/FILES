@@ -99,6 +99,8 @@ src/Beam/Model/GetEstimateResponse.cs
 src/Beam/Model/GetGameResponse.cs
 src/Beam/Model/GetGameResponseContractsInner.cs
 src/Beam/Model/GetGameResponseDepositor.cs
+src/Beam/Model/GetGameResponseDevelopersInner.cs
+src/Beam/Model/GetGameResponseDevelopersInnerDeveloper.cs
 src/Beam/Model/GetGameResponsePoliciesInner.cs
 src/Beam/Model/GetGasUsageResponse.cs
 src/Beam/Model/GetListedAssetsBodyInputV2.cs
