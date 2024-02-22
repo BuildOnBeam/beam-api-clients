@@ -63,11 +63,11 @@ namespace Beam.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="createTransactionRequestInput"></param>
+        /// <param name="createTransactionRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IEstimateProfileTransactionGasApiResponse"/>&gt;</returns>
-        Task<IEstimateProfileTransactionGasApiResponse> EstimateProfileTransactionGasAsync(CreateTransactionRequestInput createTransactionRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IEstimateProfileTransactionGasApiResponse> EstimateProfileTransactionGasAsync(CreateTransactionRequestInputV2 createTransactionRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Estimate gas fee for a transaction on behalf of a profile
@@ -75,11 +75,11 @@ namespace Beam.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="createTransactionRequestInput"></param>
+        /// <param name="createTransactionRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IEstimateProfileTransactionGasApiResponse"/>&gt;</returns>
-        Task<IEstimateProfileTransactionGasApiResponse> EstimateProfileTransactionGasOrDefaultAsync(CreateTransactionRequestInput createTransactionRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IEstimateProfileTransactionGasApiResponse> EstimateProfileTransactionGasOrDefaultAsync(CreateTransactionRequestInputV2 createTransactionRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
@@ -419,18 +419,18 @@ namespace Beam.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatEstimateProfileTransactionGas(CreateTransactionRequestInput createTransactionRequestInput, ref string entityId);
+        partial void FormatEstimateProfileTransactionGas(CreateTransactionRequestInputV2 createTransactionRequestInputV2, ref string entityId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="createTransactionRequestInput"></param>
+        /// <param name="createTransactionRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <returns></returns>
-        private void ValidateEstimateProfileTransactionGas(CreateTransactionRequestInput createTransactionRequestInput, string entityId)
+        private void ValidateEstimateProfileTransactionGas(CreateTransactionRequestInputV2 createTransactionRequestInputV2, string entityId)
         {
-            if (createTransactionRequestInput == null)
-                throw new ArgumentNullException(nameof(createTransactionRequestInput));
+            if (createTransactionRequestInputV2 == null)
+                throw new ArgumentNullException(nameof(createTransactionRequestInputV2));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -440,12 +440,12 @@ namespace Beam.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="createTransactionRequestInput"></param>
+        /// <param name="createTransactionRequestInputV2"></param>
         /// <param name="entityId"></param>
-        private void AfterEstimateProfileTransactionGasDefaultImplementation(IEstimateProfileTransactionGasApiResponse apiResponseLocalVar, CreateTransactionRequestInput createTransactionRequestInput, string entityId)
+        private void AfterEstimateProfileTransactionGasDefaultImplementation(IEstimateProfileTransactionGasApiResponse apiResponseLocalVar, CreateTransactionRequestInputV2 createTransactionRequestInputV2, string entityId)
         {
             bool suppressDefaultLog = false;
-            AfterEstimateProfileTransactionGas(ref suppressDefaultLog, apiResponseLocalVar, createTransactionRequestInput, entityId);
+            AfterEstimateProfileTransactionGas(ref suppressDefaultLog, apiResponseLocalVar, createTransactionRequestInputV2, entityId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -455,9 +455,9 @@ namespace Beam.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="createTransactionRequestInput"></param>
+        /// <param name="createTransactionRequestInputV2"></param>
         /// <param name="entityId"></param>
-        partial void AfterEstimateProfileTransactionGas(ref bool suppressDefaultLog, IEstimateProfileTransactionGasApiResponse apiResponseLocalVar, CreateTransactionRequestInput createTransactionRequestInput, string entityId);
+        partial void AfterEstimateProfileTransactionGas(ref bool suppressDefaultLog, IEstimateProfileTransactionGasApiResponse apiResponseLocalVar, CreateTransactionRequestInputV2 createTransactionRequestInputV2, string entityId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -465,12 +465,12 @@ namespace Beam.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="createTransactionRequestInput"></param>
+        /// <param name="createTransactionRequestInputV2"></param>
         /// <param name="entityId"></param>
-        private void OnErrorEstimateProfileTransactionGasDefaultImplementation(Exception exception, string pathFormat, string path, CreateTransactionRequestInput createTransactionRequestInput, string entityId)
+        private void OnErrorEstimateProfileTransactionGasDefaultImplementation(Exception exception, string pathFormat, string path, CreateTransactionRequestInputV2 createTransactionRequestInputV2, string entityId)
         {
             bool suppressDefaultLog = false;
-            OnErrorEstimateProfileTransactionGas(ref suppressDefaultLog, exception, pathFormat, path, createTransactionRequestInput, entityId);
+            OnErrorEstimateProfileTransactionGas(ref suppressDefaultLog, exception, pathFormat, path, createTransactionRequestInputV2, entityId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -482,22 +482,22 @@ namespace Beam.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="createTransactionRequestInput"></param>
+        /// <param name="createTransactionRequestInputV2"></param>
         /// <param name="entityId"></param>
-        partial void OnErrorEstimateProfileTransactionGas(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, CreateTransactionRequestInput createTransactionRequestInput, string entityId);
+        partial void OnErrorEstimateProfileTransactionGas(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, CreateTransactionRequestInputV2 createTransactionRequestInputV2, string entityId);
 
         /// <summary>
         /// Estimate gas fee for a transaction on behalf of a profile 
         /// </summary>
-        /// <param name="createTransactionRequestInput"></param>
+        /// <param name="createTransactionRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IEstimateProfileTransactionGasApiResponse"/>&gt;</returns>
-        public async Task<IEstimateProfileTransactionGasApiResponse> EstimateProfileTransactionGasOrDefaultAsync(CreateTransactionRequestInput createTransactionRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IEstimateProfileTransactionGasApiResponse> EstimateProfileTransactionGasOrDefaultAsync(CreateTransactionRequestInputV2 createTransactionRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await EstimateProfileTransactionGasAsync(createTransactionRequestInput, entityId, cancellationToken).ConfigureAwait(false);
+                return await EstimateProfileTransactionGasAsync(createTransactionRequestInputV2, entityId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -509,19 +509,19 @@ namespace Beam.Api
         /// Estimate gas fee for a transaction on behalf of a profile 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="createTransactionRequestInput"></param>
+        /// <param name="createTransactionRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IEstimateProfileTransactionGasApiResponse"/>&gt;</returns>
-        public async Task<IEstimateProfileTransactionGasApiResponse> EstimateProfileTransactionGasAsync(CreateTransactionRequestInput createTransactionRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IEstimateProfileTransactionGasApiResponse> EstimateProfileTransactionGasAsync(CreateTransactionRequestInputV2 createTransactionRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateEstimateProfileTransactionGas(createTransactionRequestInput, entityId);
+                ValidateEstimateProfileTransactionGas(createTransactionRequestInputV2, entityId);
 
-                FormatEstimateProfileTransactionGas(createTransactionRequestInput, ref entityId);
+                FormatEstimateProfileTransactionGas(createTransactionRequestInputV2, ref entityId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -531,9 +531,9 @@ namespace Beam.Api
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/chain/estimate/profiles/{entityId}/transaction";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (createTransactionRequestInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (createTransactionRequestInputV2 as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(createTransactionRequestInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(createTransactionRequestInputV2, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -572,7 +572,7 @@ namespace Beam.Api
 
                         EstimateProfileTransactionGasApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/chain/estimate/profiles/{entityId}/transaction", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterEstimateProfileTransactionGasDefaultImplementation(apiResponseLocalVar, createTransactionRequestInput, entityId);
+                        AfterEstimateProfileTransactionGasDefaultImplementation(apiResponseLocalVar, createTransactionRequestInputV2, entityId);
 
                         Events.ExecuteOnEstimateProfileTransactionGas(apiResponseLocalVar);
 
@@ -586,7 +586,7 @@ namespace Beam.Api
             }
             catch(Exception e)
             {
-                OnErrorEstimateProfileTransactionGasDefaultImplementation(e, "/v1/chain/estimate/profiles/{entityId}/transaction", uriBuilderLocalVar.Path, createTransactionRequestInput, entityId);
+                OnErrorEstimateProfileTransactionGasDefaultImplementation(e, "/v1/chain/estimate/profiles/{entityId}/transaction", uriBuilderLocalVar.Path, createTransactionRequestInputV2, entityId);
                 Events.ExecuteOnErrorEstimateProfileTransactionGas(e);
                 throw;
             }

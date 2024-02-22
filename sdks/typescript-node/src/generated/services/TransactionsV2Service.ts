@@ -2,32 +2,31 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { CreateTransactionRequestInput } from '../models/CreateTransactionRequestInput';
-import type { CreateTransactionResponse } from '../models/CreateTransactionResponse';
-import type { GetTransactionResponse } from '../models/GetTransactionResponse';
-import type { GetTransactionsResponse } from '../models/GetTransactionsResponse';
+import type { CreateTransactionRequestInputV2 } from '../models/CreateTransactionRequestInputV2';
+import type { CreateTransactionResponseV2 } from '../models/CreateTransactionResponseV2';
+import type { GetTransactionResponseV2 } from '../models/GetTransactionResponseV2';
+import type { GetTransactionsResponseV2 } from '../models/GetTransactionsResponseV2';
 
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 import type { CancelablePromise } from '../core/CancelablePromise';
 
-export class TransactionsService {
+export class TransactionsV2Service {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
 
   /**
-   * @deprecated
    * Get a paginated list of transactions from your game
    * @param limit
    * @param offset
-   * @returns GetTransactionsResponse
+   * @returns GetTransactionsResponseV2
    * @throws ApiError
    */
   public getTransactions(
     limit?: number,
     offset?: number,
-  ): CancelablePromise<GetTransactionsResponse> {
+  ): CancelablePromise<GetTransactionsResponseV2> {
     return this.httpRequest.request({
       method: 'GET',
-      url: '/v1/transactions',
+      url: '/v2/transactions',
       query: {
         limit: limit,
         offset: offset,
@@ -36,18 +35,17 @@ export class TransactionsService {
   }
 
   /**
-   * @deprecated
    * Getting a transaction
    * @param transactionId
-   * @returns GetTransactionResponse
+   * @returns GetTransactionResponseV2
    * @throws ApiError
    */
   public getTransaction(
     transactionId: string,
-  ): CancelablePromise<GetTransactionResponse> {
+  ): CancelablePromise<GetTransactionResponseV2> {
     return this.httpRequest.request({
       method: 'GET',
-      url: '/v1/transactions/{transactionId}',
+      url: '/v2/transactions/{transactionId}',
       path: {
         transactionId: transactionId,
       },
@@ -55,22 +53,21 @@ export class TransactionsService {
   }
 
   /**
-   * @deprecated
    * Get a paginated list of transactions created on behalf of a profile
    * @param entityId
    * @param limit
    * @param offset
-   * @returns GetTransactionsResponse
+   * @returns GetTransactionsResponseV2
    * @throws ApiError
    */
   public getProfileTransactions(
     entityId: string,
     limit?: number,
     offset?: number,
-  ): CancelablePromise<GetTransactionsResponse> {
+  ): CancelablePromise<GetTransactionsResponseV2> {
     return this.httpRequest.request({
       method: 'GET',
-      url: '/v1/transactions/profiles/{entityId}',
+      url: '/v2/transactions/profiles/{entityId}',
       path: {
         entityId: entityId,
       },
@@ -82,20 +79,19 @@ export class TransactionsService {
   }
 
   /**
-   * @deprecated
    * Creating a new transaction on behalf of a profile
    * @param entityId
    * @param requestBody
-   * @returns CreateTransactionResponse
+   * @returns CreateTransactionResponseV2
    * @throws ApiError
    */
   public createProfileTransaction(
     entityId: string,
-    requestBody: CreateTransactionRequestInput,
-  ): CancelablePromise<CreateTransactionResponse> {
+    requestBody: CreateTransactionRequestInputV2,
+  ): CancelablePromise<CreateTransactionResponseV2> {
     return this.httpRequest.request({
       method: 'POST',
-      url: '/v1/transactions/profiles/{entityId}',
+      url: '/v2/transactions/profiles/{entityId}',
       path: {
         entityId: entityId,
       },

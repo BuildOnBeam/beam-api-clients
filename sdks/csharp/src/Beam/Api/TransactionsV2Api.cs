@@ -26,12 +26,12 @@ namespace Beam.Api
     /// Represents a collection of functions to interact with the API endpoints
     /// This class is registered as transient.
     /// </summary>
-    public interface ITransactionsApi : IApi
+    public interface ITransactionsV2Api : IApi
     {
         /// <summary>
         /// The class containing the events
         /// </summary>
-        TransactionsApiEvents Events { get; }
+        TransactionsV2ApiEvents Events { get; }
 
         /// <summary>
         /// Creating a new transaction on behalf of a profile
@@ -40,12 +40,11 @@ namespace Beam.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="createTransactionRequestInput"></param>
+        /// <param name="createTransactionRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateProfileTransactionApiResponse"/>&gt;</returns>
-        [Obsolete]
-        Task<ICreateProfileTransactionApiResponse> CreateProfileTransactionAsync(CreateTransactionRequestInput createTransactionRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICreateProfileTransactionApiResponse> CreateProfileTransactionAsync(CreateTransactionRequestInputV2 createTransactionRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Creating a new transaction on behalf of a profile
@@ -53,12 +52,11 @@ namespace Beam.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="createTransactionRequestInput"></param>
+        /// <param name="createTransactionRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateProfileTransactionApiResponse"/>&gt;</returns>
-        [Obsolete]
-        Task<ICreateProfileTransactionApiResponse> CreateProfileTransactionOrDefaultAsync(CreateTransactionRequestInput createTransactionRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICreateProfileTransactionApiResponse> CreateProfileTransactionOrDefaultAsync(CreateTransactionRequestInputV2 createTransactionRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a paginated list of transactions created on behalf of a profile
@@ -72,7 +70,6 @@ namespace Beam.Api
         /// <param name="offset"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetProfileTransactionsApiResponse"/>&gt;</returns>
-        [Obsolete]
         Task<IGetProfileTransactionsApiResponse> GetProfileTransactionsAsync(string entityId, Option<decimal> limit = default, Option<decimal> offset = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -86,7 +83,6 @@ namespace Beam.Api
         /// <param name="offset"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetProfileTransactionsApiResponse"/>&gt;</returns>
-        [Obsolete]
         Task<IGetProfileTransactionsApiResponse> GetProfileTransactionsOrDefaultAsync(string entityId, Option<decimal> limit = default, Option<decimal> offset = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -99,7 +95,6 @@ namespace Beam.Api
         /// <param name="transactionId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetTransactionApiResponse"/>&gt;</returns>
-        [Obsolete]
         Task<IGetTransactionApiResponse> GetTransactionAsync(string transactionId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -111,7 +106,6 @@ namespace Beam.Api
         /// <param name="transactionId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetTransactionApiResponse"/>&gt;</returns>
-        [Obsolete]
         Task<IGetTransactionApiResponse> GetTransactionOrDefaultAsync(string transactionId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -125,7 +119,6 @@ namespace Beam.Api
         /// <param name="offset"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetTransactionsApiResponse"/>&gt;</returns>
-        [Obsolete]
         Task<IGetTransactionsApiResponse> GetTransactionsAsync(Option<decimal> limit = default, Option<decimal> offset = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -138,14 +131,13 @@ namespace Beam.Api
         /// <param name="offset"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetTransactionsApiResponse"/>&gt;</returns>
-        [Obsolete]
         Task<IGetTransactionsApiResponse> GetTransactionsOrDefaultAsync(Option<decimal> limit = default, Option<decimal> offset = default, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
     /// The <see cref="ICreateProfileTransactionApiResponse"/>
     /// </summary>
-    public interface ICreateProfileTransactionApiResponse : Beam.Client.IApiResponse, ICreated<Beam.Model.CreateTransactionResponse>
+    public interface ICreateProfileTransactionApiResponse : Beam.Client.IApiResponse, ICreated<Beam.Model.CreateTransactionResponseV2>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
@@ -157,7 +149,7 @@ namespace Beam.Api
     /// <summary>
     /// The <see cref="IGetProfileTransactionsApiResponse"/>
     /// </summary>
-    public interface IGetProfileTransactionsApiResponse : Beam.Client.IApiResponse, IOk<Beam.Model.GetTransactionsResponse>
+    public interface IGetProfileTransactionsApiResponse : Beam.Client.IApiResponse, IOk<Beam.Model.GetTransactionsResponseV2>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -169,7 +161,7 @@ namespace Beam.Api
     /// <summary>
     /// The <see cref="IGetTransactionApiResponse"/>
     /// </summary>
-    public interface IGetTransactionApiResponse : Beam.Client.IApiResponse, IOk<Beam.Model.GetTransactionResponse>
+    public interface IGetTransactionApiResponse : Beam.Client.IApiResponse, IOk<Beam.Model.GetTransactionResponseV2>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -181,7 +173,7 @@ namespace Beam.Api
     /// <summary>
     /// The <see cref="IGetTransactionsApiResponse"/>
     /// </summary>
-    public interface IGetTransactionsApiResponse : Beam.Client.IApiResponse, IOk<Beam.Model.GetTransactionsResponse>
+    public interface IGetTransactionsApiResponse : Beam.Client.IApiResponse, IOk<Beam.Model.GetTransactionsResponseV2>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -193,7 +185,7 @@ namespace Beam.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public class TransactionsApiEvents
+    public class TransactionsV2ApiEvents
     {
         /// <summary>
         /// The event raised after the server response
@@ -205,7 +197,7 @@ namespace Beam.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs> OnErrorCreateProfileTransaction;
 
-        internal void ExecuteOnCreateProfileTransaction(TransactionsApi.CreateProfileTransactionApiResponse apiResponse)
+        internal void ExecuteOnCreateProfileTransaction(TransactionsV2Api.CreateProfileTransactionApiResponse apiResponse)
         {
             OnCreateProfileTransaction?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -225,7 +217,7 @@ namespace Beam.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs> OnErrorGetProfileTransactions;
 
-        internal void ExecuteOnGetProfileTransactions(TransactionsApi.GetProfileTransactionsApiResponse apiResponse)
+        internal void ExecuteOnGetProfileTransactions(TransactionsV2Api.GetProfileTransactionsApiResponse apiResponse)
         {
             OnGetProfileTransactions?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -245,7 +237,7 @@ namespace Beam.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs> OnErrorGetTransaction;
 
-        internal void ExecuteOnGetTransaction(TransactionsApi.GetTransactionApiResponse apiResponse)
+        internal void ExecuteOnGetTransaction(TransactionsV2Api.GetTransactionApiResponse apiResponse)
         {
             OnGetTransaction?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -265,7 +257,7 @@ namespace Beam.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs> OnErrorGetTransactions;
 
-        internal void ExecuteOnGetTransactions(TransactionsApi.GetTransactionsApiResponse apiResponse)
+        internal void ExecuteOnGetTransactions(TransactionsV2Api.GetTransactionsApiResponse apiResponse)
         {
             OnGetTransactions?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -279,7 +271,7 @@ namespace Beam.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public sealed partial class TransactionsApi : ITransactionsApi
+    public sealed partial class TransactionsV2Api : ITransactionsV2Api
     {
         private JsonSerializerOptions _jsonSerializerOptions;
 
@@ -291,7 +283,7 @@ namespace Beam.Api
         /// <summary>
         /// The logger
         /// </summary>
-        public ILogger<TransactionsApi> Logger { get; }
+        public ILogger<TransactionsV2Api> Logger { get; }
 
         /// <summary>
         /// The HttpClient
@@ -301,7 +293,7 @@ namespace Beam.Api
         /// <summary>
         /// The class containing the events
         /// </summary>
-        public TransactionsApiEvents Events { get; }
+        public TransactionsV2ApiEvents Events { get; }
 
         /// <summary>
         /// A token provider of type <see cref="ApiKeyProvider"/>
@@ -309,32 +301,32 @@ namespace Beam.Api
         public TokenProvider<ApiKeyToken> ApiKeyProvider { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TransactionsApi"/> class.
+        /// Initializes a new instance of the <see cref="TransactionsV2Api"/> class.
         /// </summary>
         /// <returns></returns>
-        public TransactionsApi(ILogger<TransactionsApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, TransactionsApiEvents transactionsApiEvents,
+        public TransactionsV2Api(ILogger<TransactionsV2Api> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, TransactionsV2ApiEvents transactionsV2ApiEvents,
             TokenProvider<ApiKeyToken> apiKeyProvider)
         {
             _jsonSerializerOptions = jsonSerializerOptionsProvider.Options;
             LoggerFactory = loggerFactory;
-            Logger = LoggerFactory.CreateLogger<TransactionsApi>();
+            Logger = LoggerFactory.CreateLogger<TransactionsV2Api>();
             HttpClient = httpClient;
-            Events = transactionsApiEvents;
+            Events = transactionsV2ApiEvents;
             ApiKeyProvider = apiKeyProvider;
         }
 
-        partial void FormatCreateProfileTransaction(CreateTransactionRequestInput createTransactionRequestInput, ref string entityId);
+        partial void FormatCreateProfileTransaction(CreateTransactionRequestInputV2 createTransactionRequestInputV2, ref string entityId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="createTransactionRequestInput"></param>
+        /// <param name="createTransactionRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <returns></returns>
-        private void ValidateCreateProfileTransaction(CreateTransactionRequestInput createTransactionRequestInput, string entityId)
+        private void ValidateCreateProfileTransaction(CreateTransactionRequestInputV2 createTransactionRequestInputV2, string entityId)
         {
-            if (createTransactionRequestInput == null)
-                throw new ArgumentNullException(nameof(createTransactionRequestInput));
+            if (createTransactionRequestInputV2 == null)
+                throw new ArgumentNullException(nameof(createTransactionRequestInputV2));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -344,12 +336,12 @@ namespace Beam.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="createTransactionRequestInput"></param>
+        /// <param name="createTransactionRequestInputV2"></param>
         /// <param name="entityId"></param>
-        private void AfterCreateProfileTransactionDefaultImplementation(ICreateProfileTransactionApiResponse apiResponseLocalVar, CreateTransactionRequestInput createTransactionRequestInput, string entityId)
+        private void AfterCreateProfileTransactionDefaultImplementation(ICreateProfileTransactionApiResponse apiResponseLocalVar, CreateTransactionRequestInputV2 createTransactionRequestInputV2, string entityId)
         {
             bool suppressDefaultLog = false;
-            AfterCreateProfileTransaction(ref suppressDefaultLog, apiResponseLocalVar, createTransactionRequestInput, entityId);
+            AfterCreateProfileTransaction(ref suppressDefaultLog, apiResponseLocalVar, createTransactionRequestInputV2, entityId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -359,9 +351,9 @@ namespace Beam.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="createTransactionRequestInput"></param>
+        /// <param name="createTransactionRequestInputV2"></param>
         /// <param name="entityId"></param>
-        partial void AfterCreateProfileTransaction(ref bool suppressDefaultLog, ICreateProfileTransactionApiResponse apiResponseLocalVar, CreateTransactionRequestInput createTransactionRequestInput, string entityId);
+        partial void AfterCreateProfileTransaction(ref bool suppressDefaultLog, ICreateProfileTransactionApiResponse apiResponseLocalVar, CreateTransactionRequestInputV2 createTransactionRequestInputV2, string entityId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -369,12 +361,12 @@ namespace Beam.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="createTransactionRequestInput"></param>
+        /// <param name="createTransactionRequestInputV2"></param>
         /// <param name="entityId"></param>
-        private void OnErrorCreateProfileTransactionDefaultImplementation(Exception exception, string pathFormat, string path, CreateTransactionRequestInput createTransactionRequestInput, string entityId)
+        private void OnErrorCreateProfileTransactionDefaultImplementation(Exception exception, string pathFormat, string path, CreateTransactionRequestInputV2 createTransactionRequestInputV2, string entityId)
         {
             bool suppressDefaultLog = false;
-            OnErrorCreateProfileTransaction(ref suppressDefaultLog, exception, pathFormat, path, createTransactionRequestInput, entityId);
+            OnErrorCreateProfileTransaction(ref suppressDefaultLog, exception, pathFormat, path, createTransactionRequestInputV2, entityId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -386,22 +378,22 @@ namespace Beam.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="createTransactionRequestInput"></param>
+        /// <param name="createTransactionRequestInputV2"></param>
         /// <param name="entityId"></param>
-        partial void OnErrorCreateProfileTransaction(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, CreateTransactionRequestInput createTransactionRequestInput, string entityId);
+        partial void OnErrorCreateProfileTransaction(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, CreateTransactionRequestInputV2 createTransactionRequestInputV2, string entityId);
 
         /// <summary>
         /// Creating a new transaction on behalf of a profile 
         /// </summary>
-        /// <param name="createTransactionRequestInput"></param>
+        /// <param name="createTransactionRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateProfileTransactionApiResponse"/>&gt;</returns>
-        public async Task<ICreateProfileTransactionApiResponse> CreateProfileTransactionOrDefaultAsync(CreateTransactionRequestInput createTransactionRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICreateProfileTransactionApiResponse> CreateProfileTransactionOrDefaultAsync(CreateTransactionRequestInputV2 createTransactionRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await CreateProfileTransactionAsync(createTransactionRequestInput, entityId, cancellationToken).ConfigureAwait(false);
+                return await CreateProfileTransactionAsync(createTransactionRequestInputV2, entityId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -413,31 +405,31 @@ namespace Beam.Api
         /// Creating a new transaction on behalf of a profile 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="createTransactionRequestInput"></param>
+        /// <param name="createTransactionRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateProfileTransactionApiResponse"/>&gt;</returns>
-        public async Task<ICreateProfileTransactionApiResponse> CreateProfileTransactionAsync(CreateTransactionRequestInput createTransactionRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICreateProfileTransactionApiResponse> CreateProfileTransactionAsync(CreateTransactionRequestInputV2 createTransactionRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateCreateProfileTransaction(createTransactionRequestInput, entityId);
+                ValidateCreateProfileTransaction(createTransactionRequestInputV2, entityId);
 
-                FormatCreateProfileTransaction(createTransactionRequestInput, ref entityId);
+                FormatCreateProfileTransaction(createTransactionRequestInputV2, ref entityId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
                     uriBuilderLocalVar.Host = HttpClient.BaseAddress.Host;
                     uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
                     uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
-                    uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/transactions/profiles/{entityId}";
+                    uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v2/transactions/profiles/{entityId}";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (createTransactionRequestInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (createTransactionRequestInputV2 as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(createTransactionRequestInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(createTransactionRequestInputV2, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -474,9 +466,9 @@ namespace Beam.Api
 
                         ILogger<CreateProfileTransactionApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<CreateProfileTransactionApiResponse>();
 
-                        CreateProfileTransactionApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/transactions/profiles/{entityId}", requestedAtLocalVar, _jsonSerializerOptions);
+                        CreateProfileTransactionApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v2/transactions/profiles/{entityId}", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterCreateProfileTransactionDefaultImplementation(apiResponseLocalVar, createTransactionRequestInput, entityId);
+                        AfterCreateProfileTransactionDefaultImplementation(apiResponseLocalVar, createTransactionRequestInputV2, entityId);
 
                         Events.ExecuteOnCreateProfileTransaction(apiResponseLocalVar);
 
@@ -490,7 +482,7 @@ namespace Beam.Api
             }
             catch(Exception e)
             {
-                OnErrorCreateProfileTransactionDefaultImplementation(e, "/v1/transactions/profiles/{entityId}", uriBuilderLocalVar.Path, createTransactionRequestInput, entityId);
+                OnErrorCreateProfileTransactionDefaultImplementation(e, "/v2/transactions/profiles/{entityId}", uriBuilderLocalVar.Path, createTransactionRequestInputV2, entityId);
                 Events.ExecuteOnErrorCreateProfileTransaction(e);
                 throw;
             }
@@ -534,11 +526,11 @@ namespace Beam.Api
             /// Deserializes the response if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public Beam.Model.CreateTransactionResponse Created()
+            public Beam.Model.CreateTransactionResponseV2 Created()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsCreated
-                    ? System.Text.Json.JsonSerializer.Deserialize<Beam.Model.CreateTransactionResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<Beam.Model.CreateTransactionResponseV2>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -547,7 +539,7 @@ namespace Beam.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryCreated([NotNullWhen(true)]out Beam.Model.CreateTransactionResponse result)
+            public bool TryCreated([NotNullWhen(true)]out Beam.Model.CreateTransactionResponseV2 result)
             {
                 result = null;
 
@@ -684,7 +676,7 @@ namespace Beam.Api
                     uriBuilderLocalVar.Host = HttpClient.BaseAddress.Host;
                     uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
                     uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
-                    uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/transactions/profiles/{entityId}";
+                    uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v2/transactions/profiles/{entityId}";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
 
                     System.Collections.Specialized.NameValueCollection parseQueryStringLocalVar = System.Web.HttpUtility.ParseQueryString(string.Empty);
@@ -723,7 +715,7 @@ namespace Beam.Api
 
                         ILogger<GetProfileTransactionsApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<GetProfileTransactionsApiResponse>();
 
-                        GetProfileTransactionsApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/transactions/profiles/{entityId}", requestedAtLocalVar, _jsonSerializerOptions);
+                        GetProfileTransactionsApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v2/transactions/profiles/{entityId}", requestedAtLocalVar, _jsonSerializerOptions);
 
                         AfterGetProfileTransactionsDefaultImplementation(apiResponseLocalVar, entityId, limit, offset);
 
@@ -739,7 +731,7 @@ namespace Beam.Api
             }
             catch(Exception e)
             {
-                OnErrorGetProfileTransactionsDefaultImplementation(e, "/v1/transactions/profiles/{entityId}", uriBuilderLocalVar.Path, entityId, limit, offset);
+                OnErrorGetProfileTransactionsDefaultImplementation(e, "/v2/transactions/profiles/{entityId}", uriBuilderLocalVar.Path, entityId, limit, offset);
                 Events.ExecuteOnErrorGetProfileTransactions(e);
                 throw;
             }
@@ -783,11 +775,11 @@ namespace Beam.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public Beam.Model.GetTransactionsResponse Ok()
+            public Beam.Model.GetTransactionsResponseV2 Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<Beam.Model.GetTransactionsResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<Beam.Model.GetTransactionsResponseV2>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -796,7 +788,7 @@ namespace Beam.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out Beam.Model.GetTransactionsResponse result)
+            public bool TryOk([NotNullWhen(true)]out Beam.Model.GetTransactionsResponseV2 result)
             {
                 result = null;
 
@@ -921,7 +913,7 @@ namespace Beam.Api
                     uriBuilderLocalVar.Host = HttpClient.BaseAddress.Host;
                     uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
                     uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
-                    uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/transactions/{transactionId}";
+                    uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v2/transactions/{transactionId}";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BtransactionId%7D", Uri.EscapeDataString(transactionId.ToString()));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
@@ -950,7 +942,7 @@ namespace Beam.Api
 
                         ILogger<GetTransactionApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<GetTransactionApiResponse>();
 
-                        GetTransactionApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/transactions/{transactionId}", requestedAtLocalVar, _jsonSerializerOptions);
+                        GetTransactionApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v2/transactions/{transactionId}", requestedAtLocalVar, _jsonSerializerOptions);
 
                         AfterGetTransactionDefaultImplementation(apiResponseLocalVar, transactionId);
 
@@ -966,7 +958,7 @@ namespace Beam.Api
             }
             catch(Exception e)
             {
-                OnErrorGetTransactionDefaultImplementation(e, "/v1/transactions/{transactionId}", uriBuilderLocalVar.Path, transactionId);
+                OnErrorGetTransactionDefaultImplementation(e, "/v2/transactions/{transactionId}", uriBuilderLocalVar.Path, transactionId);
                 Events.ExecuteOnErrorGetTransaction(e);
                 throw;
             }
@@ -1010,11 +1002,11 @@ namespace Beam.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public Beam.Model.GetTransactionResponse Ok()
+            public Beam.Model.GetTransactionResponseV2 Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<Beam.Model.GetTransactionResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<Beam.Model.GetTransactionResponseV2>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1023,7 +1015,7 @@ namespace Beam.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out Beam.Model.GetTransactionResponse result)
+            public bool TryOk([NotNullWhen(true)]out Beam.Model.GetTransactionResponseV2 result)
             {
                 result = null;
 
@@ -1141,7 +1133,7 @@ namespace Beam.Api
                     uriBuilderLocalVar.Host = HttpClient.BaseAddress.Host;
                     uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
                     uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
-                    uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/transactions";
+                    uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v2/transactions";
 
                     System.Collections.Specialized.NameValueCollection parseQueryStringLocalVar = System.Web.HttpUtility.ParseQueryString(string.Empty);
 
@@ -1179,7 +1171,7 @@ namespace Beam.Api
 
                         ILogger<GetTransactionsApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<GetTransactionsApiResponse>();
 
-                        GetTransactionsApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/transactions", requestedAtLocalVar, _jsonSerializerOptions);
+                        GetTransactionsApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v2/transactions", requestedAtLocalVar, _jsonSerializerOptions);
 
                         AfterGetTransactionsDefaultImplementation(apiResponseLocalVar, limit, offset);
 
@@ -1195,7 +1187,7 @@ namespace Beam.Api
             }
             catch(Exception e)
             {
-                OnErrorGetTransactionsDefaultImplementation(e, "/v1/transactions", uriBuilderLocalVar.Path, limit, offset);
+                OnErrorGetTransactionsDefaultImplementation(e, "/v2/transactions", uriBuilderLocalVar.Path, limit, offset);
                 Events.ExecuteOnErrorGetTransactions(e);
                 throw;
             }
@@ -1239,11 +1231,11 @@ namespace Beam.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public Beam.Model.GetTransactionsResponse Ok()
+            public Beam.Model.GetTransactionsResponseV2 Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<Beam.Model.GetTransactionsResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<Beam.Model.GetTransactionsResponseV2>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1252,7 +1244,7 @@ namespace Beam.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out Beam.Model.GetTransactionsResponse result)
+            public bool TryOk([NotNullWhen(true)]out Beam.Model.GetTransactionsResponseV2 result)
             {
                 result = null;
 

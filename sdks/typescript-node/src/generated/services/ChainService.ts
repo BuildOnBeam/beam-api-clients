@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { CreateTransactionRequestInput } from '../models/CreateTransactionRequestInput';
+import type { CreateTransactionRequestInputV2 } from '../models/CreateTransactionRequestInputV2';
 import type { GetChainResponse } from '../models/GetChainResponse';
 import type { GetEstimateResponse } from '../models/GetEstimateResponse';
 
@@ -36,7 +36,7 @@ export class ChainService {
    */
   public estimateProfileTransactionGas(
     entityId: string,
-    requestBody: CreateTransactionRequestInput,
+    requestBody: CreateTransactionRequestInputV2,
   ): CancelablePromise<GetEstimateResponse> {
     return this.httpRequest.request({
       method: 'POST',

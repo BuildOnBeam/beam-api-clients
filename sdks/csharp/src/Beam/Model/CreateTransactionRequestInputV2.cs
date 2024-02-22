@@ -24,12 +24,12 @@ using Beam.Client;
 namespace Beam.Model
 {
     /// <summary>
-    /// CreateTransactionRequestInput
+    /// CreateTransactionRequestInputV2
     /// </summary>
-    public partial class CreateTransactionRequestInput : IValidatableObject
+    public partial class CreateTransactionRequestInputV2 : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CreateTransactionRequestInput" /> class.
+        /// Initializes a new instance of the <see cref="CreateTransactionRequestInputV2" /> class.
         /// </summary>
         /// <param name="interactions">interactions</param>
         /// <param name="chainId">chainId (default to 13337M)</param>
@@ -37,7 +37,7 @@ namespace Beam.Model
         /// <param name="policyId">policyId</param>
         /// <param name="sponsor">sponsor (default to true)</param>
         [JsonConstructor]
-        public CreateTransactionRequestInput(List<CreateTransactionRequestInputV2InteractionsInner> interactions, Option<decimal?> chainId = default, Option<bool?> optimistic = default, Option<string> policyId = default, Option<bool?> sponsor = default)
+        public CreateTransactionRequestInputV2(List<CreateTransactionRequestInputV2InteractionsInner> interactions, Option<decimal?> chainId = default, Option<bool?> optimistic = default, Option<string> policyId = default, Option<bool?> sponsor = default)
         {
             Interactions = interactions;
             ChainIdOption = chainId;
@@ -114,7 +114,7 @@ namespace Beam.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class CreateTransactionRequestInput {\n");
+            sb.Append("class CreateTransactionRequestInputV2 {\n");
             sb.Append("  Interactions: ").Append(Interactions).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  Optimistic: ").Append(Optimistic).Append("\n");
@@ -136,19 +136,19 @@ namespace Beam.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="CreateTransactionRequestInput" />
+    /// A Json converter for type <see cref="CreateTransactionRequestInputV2" />
     /// </summary>
-    public class CreateTransactionRequestInputJsonConverter : JsonConverter<CreateTransactionRequestInput>
+    public class CreateTransactionRequestInputV2JsonConverter : JsonConverter<CreateTransactionRequestInputV2>
     {
         /// <summary>
-        /// Deserializes json to <see cref="CreateTransactionRequestInput" />
+        /// Deserializes json to <see cref="CreateTransactionRequestInputV2" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override CreateTransactionRequestInput Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override CreateTransactionRequestInputV2 Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -204,66 +204,66 @@ namespace Beam.Model
             }
 
             if (!interactions.IsSet)
-                throw new ArgumentException("Property is required for class CreateTransactionRequestInput.", nameof(interactions));
+                throw new ArgumentException("Property is required for class CreateTransactionRequestInputV2.", nameof(interactions));
 
             if (interactions.IsSet && interactions.Value == null)
-                throw new ArgumentNullException(nameof(interactions), "Property is not nullable for class CreateTransactionRequestInput.");
+                throw new ArgumentNullException(nameof(interactions), "Property is not nullable for class CreateTransactionRequestInputV2.");
 
             if (chainId.IsSet && chainId.Value == null)
-                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class CreateTransactionRequestInput.");
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class CreateTransactionRequestInputV2.");
 
             if (optimistic.IsSet && optimistic.Value == null)
-                throw new ArgumentNullException(nameof(optimistic), "Property is not nullable for class CreateTransactionRequestInput.");
+                throw new ArgumentNullException(nameof(optimistic), "Property is not nullable for class CreateTransactionRequestInputV2.");
 
             if (sponsor.IsSet && sponsor.Value == null)
-                throw new ArgumentNullException(nameof(sponsor), "Property is not nullable for class CreateTransactionRequestInput.");
+                throw new ArgumentNullException(nameof(sponsor), "Property is not nullable for class CreateTransactionRequestInputV2.");
 
-            return new CreateTransactionRequestInput(interactions.Value, chainId, optimistic, policyId, sponsor);
+            return new CreateTransactionRequestInputV2(interactions.Value, chainId, optimistic, policyId, sponsor);
         }
 
         /// <summary>
-        /// Serializes a <see cref="CreateTransactionRequestInput" />
+        /// Serializes a <see cref="CreateTransactionRequestInputV2" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="createTransactionRequestInput"></param>
+        /// <param name="createTransactionRequestInputV2"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, CreateTransactionRequestInput createTransactionRequestInput, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, CreateTransactionRequestInputV2 createTransactionRequestInputV2, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(ref writer, createTransactionRequestInput, jsonSerializerOptions);
+            WriteProperties(ref writer, createTransactionRequestInputV2, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="CreateTransactionRequestInput" />
+        /// Serializes the properties of <see cref="CreateTransactionRequestInputV2" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="createTransactionRequestInput"></param>
+        /// <param name="createTransactionRequestInputV2"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(ref Utf8JsonWriter writer, CreateTransactionRequestInput createTransactionRequestInput, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(ref Utf8JsonWriter writer, CreateTransactionRequestInputV2 createTransactionRequestInputV2, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (createTransactionRequestInput.Interactions == null)
-                throw new ArgumentNullException(nameof(createTransactionRequestInput.Interactions), "Property is required for class CreateTransactionRequestInput.");
+            if (createTransactionRequestInputV2.Interactions == null)
+                throw new ArgumentNullException(nameof(createTransactionRequestInputV2.Interactions), "Property is required for class CreateTransactionRequestInputV2.");
 
             writer.WritePropertyName("interactions");
-            JsonSerializer.Serialize(writer, createTransactionRequestInput.Interactions, jsonSerializerOptions);
-            if (createTransactionRequestInput.ChainIdOption.IsSet)
-                writer.WriteNumber("chainId", createTransactionRequestInput.ChainIdOption.Value.Value);
+            JsonSerializer.Serialize(writer, createTransactionRequestInputV2.Interactions, jsonSerializerOptions);
+            if (createTransactionRequestInputV2.ChainIdOption.IsSet)
+                writer.WriteNumber("chainId", createTransactionRequestInputV2.ChainIdOption.Value.Value);
 
-            if (createTransactionRequestInput.OptimisticOption.IsSet)
-                writer.WriteBoolean("optimistic", createTransactionRequestInput.OptimisticOption.Value.Value);
+            if (createTransactionRequestInputV2.OptimisticOption.IsSet)
+                writer.WriteBoolean("optimistic", createTransactionRequestInputV2.OptimisticOption.Value.Value);
 
-            if (createTransactionRequestInput.PolicyIdOption.IsSet)
-                if (createTransactionRequestInput.PolicyIdOption.Value != null)
-                    writer.WriteString("policyId", createTransactionRequestInput.PolicyId);
+            if (createTransactionRequestInputV2.PolicyIdOption.IsSet)
+                if (createTransactionRequestInputV2.PolicyIdOption.Value != null)
+                    writer.WriteString("policyId", createTransactionRequestInputV2.PolicyId);
                 else
                     writer.WriteNull("policyId");
 
-            if (createTransactionRequestInput.SponsorOption.IsSet)
-                writer.WriteBoolean("sponsor", createTransactionRequestInput.SponsorOption.Value.Value);
+            if (createTransactionRequestInputV2.SponsorOption.IsSet)
+                writer.WriteBoolean("sponsor", createTransactionRequestInputV2.SponsorOption.Value.Value);
         }
     }
 }
