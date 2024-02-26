@@ -130,6 +130,7 @@ src/Beam/Model/GetTransactionsResponseV2.cs
 src/Beam/Model/GetTransactionsResponseV2DataInner.cs
 src/Beam/Model/GetTransactionsResponseV2DataInnerIntent.cs
 src/Beam/Model/GetTransactionsResponseV2DataInnerTransaction.cs
+src/Beam/Model/GetTransactionsResponseV2DataInnerTransactionLogsInner.cs
 src/Beam/Model/RegenerateGameApiKeysResponse.cs
 src/Beam/Model/RegenerateGameApiKeysResponseApiKeysInner.cs
 src/Beam/Model/RemoveContractResponse.cs

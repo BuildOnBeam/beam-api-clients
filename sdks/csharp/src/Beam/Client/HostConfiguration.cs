@@ -132,6 +132,7 @@ namespace Beam.Client
             _jsonOptions.Converters.Add(new GetTransactionsResponseV2DataInnerJsonConverter());
             _jsonOptions.Converters.Add(new GetTransactionsResponseV2DataInnerIntentJsonConverter());
             _jsonOptions.Converters.Add(new GetTransactionsResponseV2DataInnerTransactionJsonConverter());
+            _jsonOptions.Converters.Add(new GetTransactionsResponseV2DataInnerTransactionLogsInnerJsonConverter());
             _jsonOptions.Converters.Add(new RegenerateGameApiKeysResponseJsonConverter());
             _jsonOptions.Converters.Add(new RegenerateGameApiKeysResponseApiKeysInnerJsonConverter());
             _jsonOptions.Converters.Add(new RemoveContractResponseJsonConverter());

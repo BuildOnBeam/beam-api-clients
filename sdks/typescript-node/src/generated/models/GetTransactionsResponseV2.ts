@@ -29,6 +29,18 @@ export type GetTransactionsResponseV2 = {
       gasUsed?: string;
       gasFee?: string;
       status?: number;
+      logs?: Array<{
+        blockNumber: number;
+        blockHash: string;
+        transactionIndex: number;
+        removed: boolean;
+        address: string;
+        data: string;
+        topics: string[];
+        transactionHash: string;
+        logIndex: number;
+        orphaned?: boolean | null;
+      }>;
     } | null;
   }>;
   pagination: {

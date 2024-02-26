@@ -36,15 +36,17 @@ namespace Beam.Model
         /// <param name="gasFee">gasFee</param>
         /// <param name="gasUsed">gasUsed</param>
         /// <param name="hash">hash</param>
+        /// <param name="logs">logs</param>
         /// <param name="status">status</param>
         [JsonConstructor]
-        public GetTransactionsResponseV2DataInnerTransaction(Option<decimal?> blockNumber = default, Object createdAt = default, Option<string> gasFee = default, Option<string> gasUsed = default, Option<string> hash = default, Option<decimal?> status = default)
+        public GetTransactionsResponseV2DataInnerTransaction(Option<decimal?> blockNumber = default, Object createdAt = default, Option<string> gasFee = default, Option<string> gasUsed = default, Option<string> hash = default, Option<List<GetTransactionsResponseV2DataInnerTransactionLogsInner>> logs = default, Option<decimal?> status = default)
         {
             BlockNumberOption = blockNumber;
             CreatedAt = createdAt;
             GasFeeOption = gasFee;
             GasUsedOption = gasUsed;
             HashOption = hash;
+            LogsOption = logs;
             StatusOption = status;
             OnCreated();
         }
@@ -110,6 +112,19 @@ namespace Beam.Model
         public string Hash { get { return this. HashOption; } set { this.HashOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of Logs
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<GetTransactionsResponseV2DataInnerTransactionLogsInner>> LogsOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Logs
+        /// </summary>
+        [JsonPropertyName("logs")]
+        public List<GetTransactionsResponseV2DataInnerTransactionLogsInner> Logs { get { return this. LogsOption; } set { this.LogsOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of Status
         /// </summary>
         [JsonIgnore]
@@ -135,6 +150,7 @@ namespace Beam.Model
             sb.Append("  GasFee: ").Append(GasFee).Append("\n");
             sb.Append("  GasUsed: ").Append(GasUsed).Append("\n");
             sb.Append("  Hash: ").Append(Hash).Append("\n");
+            sb.Append("  Logs: ").Append(Logs).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -178,6 +194,7 @@ namespace Beam.Model
             Option<string> gasFee = default;
             Option<string> gasUsed = default;
             Option<string> hash = default;
+            Option<List<GetTransactionsResponseV2DataInnerTransactionLogsInner>> logs = default;
             Option<decimal?> status = default;
 
             while (utf8JsonReader.Read())
@@ -212,6 +229,10 @@ namespace Beam.Model
                         case "hash":
                             hash = new Option<string>(utf8JsonReader.GetString());
                             break;
+                        case "logs":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                logs = new Option<List<GetTransactionsResponseV2DataInnerTransactionLogsInner>>(JsonSerializer.Deserialize<List<GetTransactionsResponseV2DataInnerTransactionLogsInner>>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
                         case "status":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 status = new Option<decimal?>(utf8JsonReader.GetDecimal());
@@ -237,10 +258,13 @@ namespace Beam.Model
             if (hash.IsSet && hash.Value == null)
                 throw new ArgumentNullException(nameof(hash), "Property is not nullable for class GetTransactionsResponseV2DataInnerTransaction.");
 
+            if (logs.IsSet && logs.Value == null)
+                throw new ArgumentNullException(nameof(logs), "Property is not nullable for class GetTransactionsResponseV2DataInnerTransaction.");
+
             if (status.IsSet && status.Value == null)
                 throw new ArgumentNullException(nameof(status), "Property is not nullable for class GetTransactionsResponseV2DataInnerTransaction.");
 
-            return new GetTransactionsResponseV2DataInnerTransaction(blockNumber, createdAt.Value, gasFee, gasUsed, hash, status);
+            return new GetTransactionsResponseV2DataInnerTransaction(blockNumber, createdAt.Value, gasFee, gasUsed, hash, logs, status);
         }
 
         /// <summary>
@@ -276,6 +300,9 @@ namespace Beam.Model
             if (getTransactionsResponseV2DataInnerTransaction.HashOption.IsSet && getTransactionsResponseV2DataInnerTransaction.Hash == null)
                 throw new ArgumentNullException(nameof(getTransactionsResponseV2DataInnerTransaction.Hash), "Property is required for class GetTransactionsResponseV2DataInnerTransaction.");
 
+            if (getTransactionsResponseV2DataInnerTransaction.LogsOption.IsSet && getTransactionsResponseV2DataInnerTransaction.Logs == null)
+                throw new ArgumentNullException(nameof(getTransactionsResponseV2DataInnerTransaction.Logs), "Property is required for class GetTransactionsResponseV2DataInnerTransaction.");
+
             if (getTransactionsResponseV2DataInnerTransaction.BlockNumberOption.IsSet)
                 writer.WriteNumber("blockNumber", getTransactionsResponseV2DataInnerTransaction.BlockNumberOption.Value.Value);
 
@@ -295,6 +322,11 @@ namespace Beam.Model
             if (getTransactionsResponseV2DataInnerTransaction.HashOption.IsSet)
                 writer.WriteString("hash", getTransactionsResponseV2DataInnerTransaction.Hash);
 
+            if (getTransactionsResponseV2DataInnerTransaction.LogsOption.IsSet)
+            {
+                writer.WritePropertyName("logs");
+                JsonSerializer.Serialize(writer, getTransactionsResponseV2DataInnerTransaction.Logs, jsonSerializerOptions);
+            }
             if (getTransactionsResponseV2DataInnerTransaction.StatusOption.IsSet)
                 writer.WriteNumber("status", getTransactionsResponseV2DataInnerTransaction.StatusOption.Value.Value);
         }
