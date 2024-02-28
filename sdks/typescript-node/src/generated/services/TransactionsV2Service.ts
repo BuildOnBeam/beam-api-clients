@@ -20,7 +20,7 @@ export class TransactionsV2Service {
    * @returns GetTransactionsResponseV2
    * @throws ApiError
    */
-  public getTransactions(
+  public getTransactionsV2(
     limit?: number,
     offset?: number,
   ): CancelablePromise<GetTransactionsResponseV2> {
@@ -40,7 +40,7 @@ export class TransactionsV2Service {
    * @returns GetTransactionResponseV2
    * @throws ApiError
    */
-  public getTransaction(
+  public getTransactionV2(
     transactionId: string,
   ): CancelablePromise<GetTransactionResponseV2> {
     return this.httpRequest.request({
@@ -60,7 +60,7 @@ export class TransactionsV2Service {
    * @returns GetTransactionsResponseV2
    * @throws ApiError
    */
-  public getProfileTransactions(
+  public getProfileTransactionsV2(
     entityId: string,
     limit?: number,
     offset?: number,
@@ -85,7 +85,7 @@ export class TransactionsV2Service {
    * @returns CreateTransactionResponseV2
    * @throws ApiError
    */
-  public createProfileTransaction(
+  public createProfileTransactionV2(
     entityId: string,
     requestBody: CreateTransactionRequestInputV2,
   ): CancelablePromise<CreateTransactionResponseV2> {
