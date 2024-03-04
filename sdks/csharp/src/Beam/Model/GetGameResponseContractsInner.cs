@@ -36,18 +36,20 @@ namespace Beam.Model
         /// <param name="externalId">externalId</param>
         /// <param name="id">id</param>
         /// <param name="type">type</param>
+        /// <param name="abi">abi</param>
         /// <param name="createdAt">createdAt</param>
         /// <param name="gameId">gameId</param>
         /// <param name="name">name</param>
         /// <param name="updatedAt">updatedAt</param>
         [JsonConstructor]
-        public GetGameResponseContractsInner(string address, int chainId, string externalId, string id, TypeEnum type, Object createdAt = default, string gameId = default, string name = default, Object updatedAt = default)
+        public GetGameResponseContractsInner(string address, int chainId, string externalId, string id, TypeEnum type, GetGameResponseContractsInnerAbi abi = default, Object createdAt = default, string gameId = default, string name = default, Object updatedAt = default)
         {
             Address = address;
             ChainId = chainId;
             ExternalId = externalId;
             Id = id;
             Type = type;
+            Abi = abi;
             CreatedAt = createdAt;
             GameId = gameId;
             Name = name;
@@ -210,6 +212,12 @@ namespace Beam.Model
         public string Id { get; set; }
 
         /// <summary>
+        /// Gets or Sets Abi
+        /// </summary>
+        [JsonPropertyName("abi")]
+        public GetGameResponseContractsInnerAbi Abi { get; set; }
+
+        /// <summary>
         /// Gets or Sets CreatedAt
         /// </summary>
         [JsonPropertyName("createdAt")]
@@ -246,6 +254,7 @@ namespace Beam.Model
             sb.Append("  ExternalId: ").Append(ExternalId).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("  Abi: ").Append(Abi).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  GameId: ").Append(GameId).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
@@ -292,6 +301,7 @@ namespace Beam.Model
             Option<string> externalId = default;
             Option<string> id = default;
             Option<GetGameResponseContractsInner.TypeEnum?> type = default;
+            Option<GetGameResponseContractsInnerAbi> abi = default;
             Option<Object> createdAt = default;
             Option<string> gameId = default;
             Option<string> name = default;
@@ -330,6 +340,10 @@ namespace Beam.Model
                             if (typeRawValue != null)
                                 type = new Option<GetGameResponseContractsInner.TypeEnum?>(GetGameResponseContractsInner.TypeEnumFromStringOrDefault(typeRawValue));
                             break;
+                        case "abi":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                abi = new Option<GetGameResponseContractsInnerAbi>(JsonSerializer.Deserialize<GetGameResponseContractsInnerAbi>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
                         case "createdAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 createdAt = new Option<Object>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
@@ -365,6 +379,9 @@ namespace Beam.Model
             if (!type.IsSet)
                 throw new ArgumentException("Property is required for class GetGameResponseContractsInner.", nameof(type));
 
+            if (!abi.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponseContractsInner.", nameof(abi));
+
             if (!createdAt.IsSet)
                 throw new ArgumentException("Property is required for class GetGameResponseContractsInner.", nameof(createdAt));
 
@@ -392,7 +409,7 @@ namespace Beam.Model
             if (type.IsSet && type.Value == null)
                 throw new ArgumentNullException(nameof(type), "Property is not nullable for class GetGameResponseContractsInner.");
 
-            return new GetGameResponseContractsInner(address.Value, chainId.Value.Value, externalId.Value, id.Value, type.Value.Value, createdAt.Value, gameId.Value, name.Value, updatedAt.Value);
+            return new GetGameResponseContractsInner(address.Value, chainId.Value.Value, externalId.Value, id.Value, type.Value.Value, abi.Value, createdAt.Value, gameId.Value, name.Value, updatedAt.Value);
         }
 
         /// <summary>
@@ -438,6 +455,13 @@ namespace Beam.Model
 
             var typeRawValue = GetGameResponseContractsInner.TypeEnumToJsonValue(getGameResponseContractsInner.Type);
             writer.WriteString("type", typeRawValue);
+            if (getGameResponseContractsInner.Abi != null)
+            {
+                writer.WritePropertyName("abi");
+                JsonSerializer.Serialize(writer, getGameResponseContractsInner.Abi, jsonSerializerOptions);
+            }
+            else
+                writer.WriteNull("abi");
             if (getGameResponseContractsInner.CreatedAt != null)
             {
                 writer.WritePropertyName("createdAt");

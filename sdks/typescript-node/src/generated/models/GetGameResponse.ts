@@ -55,6 +55,7 @@ export type GetGameResponse = {
     name: string | null;
     chainId: number;
     gameId: string | null;
+    abi: string | number | boolean | Record<string, any>;
   }>;
   policies: Array<{
     model: 'ContractFunctions' | 'AccountFunctions';

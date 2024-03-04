@@ -38,10 +38,11 @@ namespace Beam.Model
         /// <param name="id">id</param>
         /// <param name="type">type</param>
         /// <param name="updatedAt">updatedAt</param>
+        /// <param name="abi">abi</param>
         /// <param name="gameId">gameId</param>
         /// <param name="name">name</param>
         [JsonConstructor]
-        public AddContractResponse(string address, int chainId, DateTime createdAt, string externalId, string id, TypeEnum type, DateTime updatedAt, string gameId = default, string name = default)
+        public AddContractResponse(string address, int chainId, DateTime createdAt, string externalId, string id, TypeEnum type, DateTime updatedAt, GetGameResponseContractsInnerAbi abi = default, string gameId = default, string name = default)
         {
             Address = address;
             ChainId = chainId;
@@ -50,6 +51,7 @@ namespace Beam.Model
             Id = id;
             Type = type;
             UpdatedAt = updatedAt;
+            Abi = abi;
             GameId = gameId;
             Name = name;
             OnCreated();
@@ -222,6 +224,12 @@ namespace Beam.Model
         public DateTime UpdatedAt { get; set; }
 
         /// <summary>
+        /// Gets or Sets Abi
+        /// </summary>
+        [JsonPropertyName("abi")]
+        public GetGameResponseContractsInnerAbi Abi { get; set; }
+
+        /// <summary>
         /// Gets or Sets GameId
         /// </summary>
         [JsonPropertyName("gameId")]
@@ -248,6 +256,7 @@ namespace Beam.Model
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
+            sb.Append("  Abi: ").Append(Abi).Append("\n");
             sb.Append("  GameId: ").Append(GameId).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("}\n");
@@ -304,6 +313,7 @@ namespace Beam.Model
             Option<string> id = default;
             Option<AddContractResponse.TypeEnum?> type = default;
             Option<DateTime?> updatedAt = default;
+            Option<GetGameResponseContractsInnerAbi> abi = default;
             Option<string> gameId = default;
             Option<string> name = default;
 
@@ -348,6 +358,10 @@ namespace Beam.Model
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 updatedAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
+                        case "abi":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                abi = new Option<GetGameResponseContractsInnerAbi>(JsonSerializer.Deserialize<GetGameResponseContractsInnerAbi>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
                         case "gameId":
                             gameId = new Option<string>(utf8JsonReader.GetString());
                             break;
@@ -381,6 +395,9 @@ namespace Beam.Model
             if (!updatedAt.IsSet)
                 throw new ArgumentException("Property is required for class AddContractResponse.", nameof(updatedAt));
 
+            if (!abi.IsSet)
+                throw new ArgumentException("Property is required for class AddContractResponse.", nameof(abi));
+
             if (!gameId.IsSet)
                 throw new ArgumentException("Property is required for class AddContractResponse.", nameof(gameId));
 
@@ -408,7 +425,7 @@ namespace Beam.Model
             if (updatedAt.IsSet && updatedAt.Value == null)
                 throw new ArgumentNullException(nameof(updatedAt), "Property is not nullable for class AddContractResponse.");
 
-            return new AddContractResponse(address.Value, chainId.Value.Value, createdAt.Value.Value, externalId.Value, id.Value, type.Value.Value, updatedAt.Value.Value, gameId.Value, name.Value);
+            return new AddContractResponse(address.Value, chainId.Value.Value, createdAt.Value.Value, externalId.Value, id.Value, type.Value.Value, updatedAt.Value.Value, abi.Value, gameId.Value, name.Value);
         }
 
         /// <summary>
@@ -458,6 +475,13 @@ namespace Beam.Model
             writer.WriteString("type", typeRawValue);
             writer.WriteString("updatedAt", addContractResponse.UpdatedAt.ToString(UpdatedAtFormat));
 
+            if (addContractResponse.Abi != null)
+            {
+                writer.WritePropertyName("abi");
+                JsonSerializer.Serialize(writer, addContractResponse.Abi, jsonSerializerOptions);
+            }
+            else
+                writer.WriteNull("abi");
             if (addContractResponse.GameId != null)
                 writer.WriteString("gameId", addContractResponse.GameId);
             else
