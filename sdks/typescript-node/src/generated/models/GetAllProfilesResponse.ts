@@ -19,9 +19,10 @@ export type GetAllProfilesResponse = {
       updatedAt: any;
       externalId: string;
       address: string;
+      externalOwnerAddress: string | null;
       chainId: number;
-      custodial: boolean;
-      profileId: string;
+      profileId: string | null;
+      playerProfileId: string | null;
     }>;
   }>;
   pagination: {

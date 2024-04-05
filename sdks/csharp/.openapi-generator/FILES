@@ -17,6 +17,7 @@ src/Beam/Api/ReportingApi.cs
 src/Beam/Api/TradingApi.cs
 src/Beam/Api/TransactionsApi.cs
 src/Beam/Api/TransactionsV2Api.cs
+src/Beam/Api/WebhooksApi.cs
 src/Beam/Client/ApiException.cs
 src/Beam/Client/ApiFactory.cs
 src/Beam/Client/ApiKeyToken.cs
@@ -66,6 +67,7 @@ src/Beam/Model/CreateTransactionRequestInputV2.cs
 src/Beam/Model/CreateTransactionRequestInputV2InteractionsInner.cs
 src/Beam/Model/CreateTransactionResponse.cs
 src/Beam/Model/CreateTransactionResponseV2.cs
+src/Beam/Model/CreateWebhookForGame.cs
 src/Beam/Model/GenerateLinkCodeRequestInput.cs
 src/Beam/Model/GenerateLinkCodeResponse.cs
 src/Beam/Model/GenerateSignInCodeRequestInput.cs
@@ -132,6 +134,8 @@ src/Beam/Model/GetTransactionsResponseV2DataInner.cs
 src/Beam/Model/GetTransactionsResponseV2DataInnerIntent.cs
 src/Beam/Model/GetTransactionsResponseV2DataInnerTransaction.cs
 src/Beam/Model/GetTransactionsResponseV2DataInnerTransactionLogsInner.cs
+src/Beam/Model/GetWebhooksForGameResponse.cs
+src/Beam/Model/GetWebhooksForGameResponseWebhooksInner.cs
 src/Beam/Model/RegenerateGameApiKeysResponse.cs
 src/Beam/Model/RegenerateGameApiKeysResponseApiKeysInner.cs
 src/Beam/Model/RemoveContractResponse.cs
@@ -153,3 +157,4 @@ src/Beam/Model/UpdateGameResponse.cs
 src/Beam/Model/UpdateGameResponsePoliciesInner.cs
 src/Beam/Model/UpdateProfileRequestInput.cs
 src/Beam/Model/UpdateProfileResponse.cs
+src/Beam/Model/WebhookForGameResponse.cs

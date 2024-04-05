@@ -68,6 +68,7 @@ namespace Beam.Client
             _jsonOptions.Converters.Add(new CreateTransactionRequestInputV2InteractionsInnerJsonConverter());
             _jsonOptions.Converters.Add(new CreateTransactionResponseJsonConverter());
             _jsonOptions.Converters.Add(new CreateTransactionResponseV2JsonConverter());
+            _jsonOptions.Converters.Add(new CreateWebhookForGameJsonConverter());
             _jsonOptions.Converters.Add(new GenerateLinkCodeRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new GenerateLinkCodeResponseJsonConverter());
             _jsonOptions.Converters.Add(new GenerateSignInCodeRequestInputJsonConverter());
@@ -134,6 +135,8 @@ namespace Beam.Client
             _jsonOptions.Converters.Add(new GetTransactionsResponseV2DataInnerIntentJsonConverter());
             _jsonOptions.Converters.Add(new GetTransactionsResponseV2DataInnerTransactionJsonConverter());
             _jsonOptions.Converters.Add(new GetTransactionsResponseV2DataInnerTransactionLogsInnerJsonConverter());
+            _jsonOptions.Converters.Add(new GetWebhooksForGameResponseJsonConverter());
+            _jsonOptions.Converters.Add(new GetWebhooksForGameResponseWebhooksInnerJsonConverter());
             _jsonOptions.Converters.Add(new RegenerateGameApiKeysResponseJsonConverter());
             _jsonOptions.Converters.Add(new RegenerateGameApiKeysResponseApiKeysInnerJsonConverter());
             _jsonOptions.Converters.Add(new RemoveContractResponseJsonConverter());
@@ -155,6 +158,7 @@ namespace Beam.Client
             _jsonOptions.Converters.Add(new UpdateGameResponsePoliciesInnerJsonConverter());
             _jsonOptions.Converters.Add(new UpdateProfileRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new UpdateProfileResponseJsonConverter());
+            _jsonOptions.Converters.Add(new WebhookForGameResponseJsonConverter());
             JsonSerializerOptionsProvider jsonSerializerOptionsProvider = new(_jsonOptions);
             _services.AddSingleton(jsonSerializerOptionsProvider);
             _services.AddSingleton<IApiFactory, ApiFactory>();
@@ -182,6 +186,8 @@ namespace Beam.Client
             _services.AddTransient<ITransactionsApi, TransactionsApi>();
             _services.AddSingleton<TransactionsV2ApiEvents>();
             _services.AddTransient<ITransactionsV2Api, TransactionsV2Api>();
+            _services.AddSingleton<WebhooksApiEvents>();
+            _services.AddTransient<IWebhooksApi, WebhooksApi>();
         }
 
         /// <summary>
@@ -211,6 +217,7 @@ namespace Beam.Client
             builders.Add(_services.AddHttpClient<ITradingApi, TradingApi>(client));
             builders.Add(_services.AddHttpClient<ITransactionsApi, TransactionsApi>(client));
             builders.Add(_services.AddHttpClient<ITransactionsV2Api, TransactionsV2Api>(client));
+            builders.Add(_services.AddHttpClient<IWebhooksApi, WebhooksApi>(client));
             
             if (builder != null)
                 foreach (IHttpClientBuilder instance in builders)

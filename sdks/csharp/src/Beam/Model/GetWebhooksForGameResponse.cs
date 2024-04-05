@@ -24,34 +24,28 @@ using Beam.Client;
 namespace Beam.Model
 {
     /// <summary>
-    /// Check200ResponseInfoValue
+    /// GetWebhooksForGameResponse
     /// </summary>
-    public partial class Check200ResponseInfoValue : IValidatableObject
+    public partial class GetWebhooksForGameResponse : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Check200ResponseInfoValue" /> class.
+        /// Initializes a new instance of the <see cref="GetWebhooksForGameResponse" /> class.
         /// </summary>
-        /// <param name="status">status</param>
+        /// <param name="webhooks">webhooks</param>
         [JsonConstructor]
-        public Check200ResponseInfoValue(string status)
+        public GetWebhooksForGameResponse(List<GetWebhooksForGameResponseWebhooksInner> webhooks)
         {
-            Status = status;
+            Webhooks = webhooks;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets Status
+        /// Gets or Sets Webhooks
         /// </summary>
-        [JsonPropertyName("status")]
-        public string Status { get; set; }
-
-        /// <summary>
-        /// Gets or Sets additional properties
-        /// </summary>
-        [JsonExtensionData]
-        public Dictionary<string, JsonElement> AdditionalProperties { get; } = new Dictionary<string, JsonElement>();
+        [JsonPropertyName("webhooks")]
+        public List<GetWebhooksForGameResponseWebhooksInner> Webhooks { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -60,9 +54,8 @@ namespace Beam.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class Check200ResponseInfoValue {\n");
-            sb.Append("  Status: ").Append(Status).Append("\n");
-            sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
+            sb.Append("class GetWebhooksForGameResponse {\n");
+            sb.Append("  Webhooks: ").Append(Webhooks).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -79,19 +72,19 @@ namespace Beam.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="Check200ResponseInfoValue" />
+    /// A Json converter for type <see cref="GetWebhooksForGameResponse" />
     /// </summary>
-    public class Check200ResponseInfoValueJsonConverter : JsonConverter<Check200ResponseInfoValue>
+    public class GetWebhooksForGameResponseJsonConverter : JsonConverter<GetWebhooksForGameResponse>
     {
         /// <summary>
-        /// Deserializes json to <see cref="Check200ResponseInfoValue" />
+        /// Deserializes json to <see cref="GetWebhooksForGameResponse" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override Check200ResponseInfoValue Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override GetWebhooksForGameResponse Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -100,7 +93,7 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<string> status = default;
+            Option<List<GetWebhooksForGameResponseWebhooksInner>> webhooks = default;
 
             while (utf8JsonReader.Read())
             {
@@ -117,8 +110,9 @@ namespace Beam.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "status":
-                            status = new Option<string>(utf8JsonReader.GetString());
+                        case "webhooks":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                webhooks = new Option<List<GetWebhooksForGameResponseWebhooksInner>>(JsonSerializer.Deserialize<List<GetWebhooksForGameResponseWebhooksInner>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -126,43 +120,44 @@ namespace Beam.Model
                 }
             }
 
-            if (!status.IsSet)
-                throw new ArgumentException("Property is required for class Check200ResponseInfoValue.", nameof(status));
+            if (!webhooks.IsSet)
+                throw new ArgumentException("Property is required for class GetWebhooksForGameResponse.", nameof(webhooks));
 
-            if (status.IsSet && status.Value == null)
-                throw new ArgumentNullException(nameof(status), "Property is not nullable for class Check200ResponseInfoValue.");
+            if (webhooks.IsSet && webhooks.Value == null)
+                throw new ArgumentNullException(nameof(webhooks), "Property is not nullable for class GetWebhooksForGameResponse.");
 
-            return new Check200ResponseInfoValue(status.Value);
+            return new GetWebhooksForGameResponse(webhooks.Value);
         }
 
         /// <summary>
-        /// Serializes a <see cref="Check200ResponseInfoValue" />
+        /// Serializes a <see cref="GetWebhooksForGameResponse" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="check200ResponseInfoValue"></param>
+        /// <param name="getWebhooksForGameResponse"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, Check200ResponseInfoValue check200ResponseInfoValue, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, GetWebhooksForGameResponse getWebhooksForGameResponse, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(ref writer, check200ResponseInfoValue, jsonSerializerOptions);
+            WriteProperties(ref writer, getWebhooksForGameResponse, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="Check200ResponseInfoValue" />
+        /// Serializes the properties of <see cref="GetWebhooksForGameResponse" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="check200ResponseInfoValue"></param>
+        /// <param name="getWebhooksForGameResponse"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(ref Utf8JsonWriter writer, Check200ResponseInfoValue check200ResponseInfoValue, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(ref Utf8JsonWriter writer, GetWebhooksForGameResponse getWebhooksForGameResponse, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (check200ResponseInfoValue.Status == null)
-                throw new ArgumentNullException(nameof(check200ResponseInfoValue.Status), "Property is required for class Check200ResponseInfoValue.");
+            if (getWebhooksForGameResponse.Webhooks == null)
+                throw new ArgumentNullException(nameof(getWebhooksForGameResponse.Webhooks), "Property is required for class GetWebhooksForGameResponse.");
 
-            writer.WriteString("status", check200ResponseInfoValue.Status);
+            writer.WritePropertyName("webhooks");
+            JsonSerializer.Serialize(writer, getWebhooksForGameResponse.Webhooks, jsonSerializerOptions);
         }
     }
 }

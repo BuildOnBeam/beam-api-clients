@@ -33,22 +33,24 @@ namespace Beam.Model
         /// </summary>
         /// <param name="address">address</param>
         /// <param name="chainId">chainId</param>
-        /// <param name="custodial">custodial</param>
         /// <param name="externalId">externalId</param>
         /// <param name="id">id</param>
-        /// <param name="profileId">profileId</param>
         /// <param name="createdAt">createdAt</param>
+        /// <param name="externalOwnerAddress">externalOwnerAddress</param>
+        /// <param name="playerProfileId">playerProfileId</param>
+        /// <param name="profileId">profileId</param>
         /// <param name="updatedAt">updatedAt</param>
         [JsonConstructor]
-        public CreateProfileResponseWalletsInner(string address, int chainId, bool custodial, string externalId, string id, string profileId, Object createdAt = default, Object updatedAt = default)
+        public CreateProfileResponseWalletsInner(string address, int chainId, string externalId, string id, Object createdAt = default, string externalOwnerAddress = default, string playerProfileId = default, string profileId = default, Object updatedAt = default)
         {
             Address = address;
             ChainId = chainId;
-            Custodial = custodial;
             ExternalId = externalId;
             Id = id;
-            ProfileId = profileId;
             CreatedAt = createdAt;
+            ExternalOwnerAddress = externalOwnerAddress;
+            PlayerProfileId = playerProfileId;
+            ProfileId = profileId;
             UpdatedAt = updatedAt;
             OnCreated();
         }
@@ -68,12 +70,6 @@ namespace Beam.Model
         public int ChainId { get; set; }
 
         /// <summary>
-        /// Gets or Sets Custodial
-        /// </summary>
-        [JsonPropertyName("custodial")]
-        public bool Custodial { get; set; }
-
-        /// <summary>
         /// Gets or Sets ExternalId
         /// </summary>
         [JsonPropertyName("externalId")]
@@ -86,16 +82,28 @@ namespace Beam.Model
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets ProfileId
-        /// </summary>
-        [JsonPropertyName("profileId")]
-        public string ProfileId { get; set; }
-
-        /// <summary>
         /// Gets or Sets CreatedAt
         /// </summary>
         [JsonPropertyName("createdAt")]
         public Object CreatedAt { get; set; }
+
+        /// <summary>
+        /// Gets or Sets ExternalOwnerAddress
+        /// </summary>
+        [JsonPropertyName("externalOwnerAddress")]
+        public string ExternalOwnerAddress { get; set; }
+
+        /// <summary>
+        /// Gets or Sets PlayerProfileId
+        /// </summary>
+        [JsonPropertyName("playerProfileId")]
+        public string PlayerProfileId { get; set; }
+
+        /// <summary>
+        /// Gets or Sets ProfileId
+        /// </summary>
+        [JsonPropertyName("profileId")]
+        public string ProfileId { get; set; }
 
         /// <summary>
         /// Gets or Sets UpdatedAt
@@ -113,11 +121,12 @@ namespace Beam.Model
             sb.Append("class CreateProfileResponseWalletsInner {\n");
             sb.Append("  Address: ").Append(Address).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
-            sb.Append("  Custodial: ").Append(Custodial).Append("\n");
             sb.Append("  ExternalId: ").Append(ExternalId).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
-            sb.Append("  ProfileId: ").Append(ProfileId).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
+            sb.Append("  ExternalOwnerAddress: ").Append(ExternalOwnerAddress).Append("\n");
+            sb.Append("  PlayerProfileId: ").Append(PlayerProfileId).Append("\n");
+            sb.Append("  ProfileId: ").Append(ProfileId).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -158,11 +167,12 @@ namespace Beam.Model
 
             Option<string> address = default;
             Option<int?> chainId = default;
-            Option<bool?> custodial = default;
             Option<string> externalId = default;
             Option<string> id = default;
-            Option<string> profileId = default;
             Option<Object> createdAt = default;
+            Option<string> externalOwnerAddress = default;
+            Option<string> playerProfileId = default;
+            Option<string> profileId = default;
             Option<Object> updatedAt = default;
 
             while (utf8JsonReader.Read())
@@ -187,22 +197,24 @@ namespace Beam.Model
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 chainId = new Option<int?>(utf8JsonReader.GetInt32());
                             break;
-                        case "custodial":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                custodial = new Option<bool?>(utf8JsonReader.GetBoolean());
-                            break;
                         case "externalId":
                             externalId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "id":
                             id = new Option<string>(utf8JsonReader.GetString());
                             break;
-                        case "profileId":
-                            profileId = new Option<string>(utf8JsonReader.GetString());
-                            break;
                         case "createdAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 createdAt = new Option<Object>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "externalOwnerAddress":
+                            externalOwnerAddress = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "playerProfileId":
+                            playerProfileId = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "profileId":
+                            profileId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "updatedAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
@@ -220,20 +232,23 @@ namespace Beam.Model
             if (!chainId.IsSet)
                 throw new ArgumentException("Property is required for class CreateProfileResponseWalletsInner.", nameof(chainId));
 
-            if (!custodial.IsSet)
-                throw new ArgumentException("Property is required for class CreateProfileResponseWalletsInner.", nameof(custodial));
-
             if (!externalId.IsSet)
                 throw new ArgumentException("Property is required for class CreateProfileResponseWalletsInner.", nameof(externalId));
 
             if (!id.IsSet)
                 throw new ArgumentException("Property is required for class CreateProfileResponseWalletsInner.", nameof(id));
 
-            if (!profileId.IsSet)
-                throw new ArgumentException("Property is required for class CreateProfileResponseWalletsInner.", nameof(profileId));
-
             if (!createdAt.IsSet)
                 throw new ArgumentException("Property is required for class CreateProfileResponseWalletsInner.", nameof(createdAt));
+
+            if (!externalOwnerAddress.IsSet)
+                throw new ArgumentException("Property is required for class CreateProfileResponseWalletsInner.", nameof(externalOwnerAddress));
+
+            if (!playerProfileId.IsSet)
+                throw new ArgumentException("Property is required for class CreateProfileResponseWalletsInner.", nameof(playerProfileId));
+
+            if (!profileId.IsSet)
+                throw new ArgumentException("Property is required for class CreateProfileResponseWalletsInner.", nameof(profileId));
 
             if (!updatedAt.IsSet)
                 throw new ArgumentException("Property is required for class CreateProfileResponseWalletsInner.", nameof(updatedAt));
@@ -244,19 +259,13 @@ namespace Beam.Model
             if (chainId.IsSet && chainId.Value == null)
                 throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class CreateProfileResponseWalletsInner.");
 
-            if (custodial.IsSet && custodial.Value == null)
-                throw new ArgumentNullException(nameof(custodial), "Property is not nullable for class CreateProfileResponseWalletsInner.");
-
             if (externalId.IsSet && externalId.Value == null)
                 throw new ArgumentNullException(nameof(externalId), "Property is not nullable for class CreateProfileResponseWalletsInner.");
 
             if (id.IsSet && id.Value == null)
                 throw new ArgumentNullException(nameof(id), "Property is not nullable for class CreateProfileResponseWalletsInner.");
 
-            if (profileId.IsSet && profileId.Value == null)
-                throw new ArgumentNullException(nameof(profileId), "Property is not nullable for class CreateProfileResponseWalletsInner.");
-
-            return new CreateProfileResponseWalletsInner(address.Value, chainId.Value.Value, custodial.Value.Value, externalId.Value, id.Value, profileId.Value, createdAt.Value, updatedAt.Value);
+            return new CreateProfileResponseWalletsInner(address.Value, chainId.Value.Value, externalId.Value, id.Value, createdAt.Value, externalOwnerAddress.Value, playerProfileId.Value, profileId.Value, updatedAt.Value);
         }
 
         /// <summary>
@@ -292,20 +301,13 @@ namespace Beam.Model
             if (createProfileResponseWalletsInner.Id == null)
                 throw new ArgumentNullException(nameof(createProfileResponseWalletsInner.Id), "Property is required for class CreateProfileResponseWalletsInner.");
 
-            if (createProfileResponseWalletsInner.ProfileId == null)
-                throw new ArgumentNullException(nameof(createProfileResponseWalletsInner.ProfileId), "Property is required for class CreateProfileResponseWalletsInner.");
-
             writer.WriteString("address", createProfileResponseWalletsInner.Address);
 
             writer.WriteNumber("chainId", createProfileResponseWalletsInner.ChainId);
 
-            writer.WriteBoolean("custodial", createProfileResponseWalletsInner.Custodial);
-
             writer.WriteString("externalId", createProfileResponseWalletsInner.ExternalId);
 
             writer.WriteString("id", createProfileResponseWalletsInner.Id);
-
-            writer.WriteString("profileId", createProfileResponseWalletsInner.ProfileId);
 
             if (createProfileResponseWalletsInner.CreatedAt != null)
             {
@@ -314,6 +316,21 @@ namespace Beam.Model
             }
             else
                 writer.WriteNull("createdAt");
+            if (createProfileResponseWalletsInner.ExternalOwnerAddress != null)
+                writer.WriteString("externalOwnerAddress", createProfileResponseWalletsInner.ExternalOwnerAddress);
+            else
+                writer.WriteNull("externalOwnerAddress");
+
+            if (createProfileResponseWalletsInner.PlayerProfileId != null)
+                writer.WriteString("playerProfileId", createProfileResponseWalletsInner.PlayerProfileId);
+            else
+                writer.WriteNull("playerProfileId");
+
+            if (createProfileResponseWalletsInner.ProfileId != null)
+                writer.WriteString("profileId", createProfileResponseWalletsInner.ProfileId);
+            else
+                writer.WriteNull("profileId");
+
             if (createProfileResponseWalletsInner.UpdatedAt != null)
             {
                 writer.WritePropertyName("updatedAt");

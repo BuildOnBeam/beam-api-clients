@@ -14,9 +14,9 @@ export class HealthService {
    */
   public check(): CancelablePromise<{
     status?: string;
-    info?: Record<string, Record<string, string>> | null;
-    error?: Record<string, Record<string, string>> | null;
-    details?: Record<string, Record<string, string>>;
+    info?: Record<string, Record<string, any>> | null;
+    error?: Record<string, Record<string, any>> | null;
+    details?: Record<string, Record<string, any>>;
   }> {
     return this.httpRequest.request({
       method: 'GET',

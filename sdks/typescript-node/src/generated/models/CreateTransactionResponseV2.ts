@@ -51,7 +51,7 @@ export type CreateTransactionResponseV2 = {
    * Profile and wallet information related to the transaction
    */
   profile: {
-    id: string;
+    id?: string | null;
     wallet: {
       address: string;
     };

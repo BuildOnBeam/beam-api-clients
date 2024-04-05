@@ -31,29 +31,36 @@ namespace Beam.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="GetTransactionResponseV2Profile" /> class.
         /// </summary>
-        /// <param name="id">id</param>
         /// <param name="wallet">wallet</param>
+        /// <param name="id">id</param>
         [JsonConstructor]
-        public GetTransactionResponseV2Profile(string id, GetTransactionResponseV2ProfileWallet wallet)
+        public GetTransactionResponseV2Profile(GetTransactionResponseV2ProfileWallet wallet, Option<string> id = default)
         {
-            Id = id;
             Wallet = wallet;
+            IdOption = id;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets Id
-        /// </summary>
-        [JsonPropertyName("id")]
-        public string Id { get; set; }
-
-        /// <summary>
         /// Gets or Sets Wallet
         /// </summary>
         [JsonPropertyName("wallet")]
         public GetTransactionResponseV2ProfileWallet Wallet { get; set; }
+
+        /// <summary>
+        /// Used to track the state of Id
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> IdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Id
+        /// </summary>
+        [JsonPropertyName("id")]
+        public string Id { get { return this. IdOption; } set { this.IdOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -63,8 +70,8 @@ namespace Beam.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class GetTransactionResponseV2Profile {\n");
-            sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Wallet: ").Append(Wallet).Append("\n");
+            sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -102,8 +109,8 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<string> id = default;
             Option<GetTransactionResponseV2ProfileWallet> wallet = default;
+            Option<string> id = default;
 
             while (utf8JsonReader.Read())
             {
@@ -120,12 +127,12 @@ namespace Beam.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "id":
-                            id = new Option<string>(utf8JsonReader.GetString());
-                            break;
                         case "wallet":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 wallet = new Option<GetTransactionResponseV2ProfileWallet>(JsonSerializer.Deserialize<GetTransactionResponseV2ProfileWallet>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "id":
+                            id = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -133,19 +140,13 @@ namespace Beam.Model
                 }
             }
 
-            if (!id.IsSet)
-                throw new ArgumentException("Property is required for class GetTransactionResponseV2Profile.", nameof(id));
-
             if (!wallet.IsSet)
                 throw new ArgumentException("Property is required for class GetTransactionResponseV2Profile.", nameof(wallet));
-
-            if (id.IsSet && id.Value == null)
-                throw new ArgumentNullException(nameof(id), "Property is not nullable for class GetTransactionResponseV2Profile.");
 
             if (wallet.IsSet && wallet.Value == null)
                 throw new ArgumentNullException(nameof(wallet), "Property is not nullable for class GetTransactionResponseV2Profile.");
 
-            return new GetTransactionResponseV2Profile(id.Value, wallet.Value);
+            return new GetTransactionResponseV2Profile(wallet.Value, id);
         }
 
         /// <summary>
@@ -172,16 +173,16 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetTransactionResponseV2Profile getTransactionResponseV2Profile, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (getTransactionResponseV2Profile.Id == null)
-                throw new ArgumentNullException(nameof(getTransactionResponseV2Profile.Id), "Property is required for class GetTransactionResponseV2Profile.");
-
             if (getTransactionResponseV2Profile.Wallet == null)
                 throw new ArgumentNullException(nameof(getTransactionResponseV2Profile.Wallet), "Property is required for class GetTransactionResponseV2Profile.");
 
-            writer.WriteString("id", getTransactionResponseV2Profile.Id);
-
             writer.WritePropertyName("wallet");
             JsonSerializer.Serialize(writer, getTransactionResponseV2Profile.Wallet, jsonSerializerOptions);
+            if (getTransactionResponseV2Profile.IdOption.IsSet)
+                if (getTransactionResponseV2Profile.IdOption.Value != null)
+                    writer.WriteString("id", getTransactionResponseV2Profile.Id);
+                else
+                    writer.WriteNull("id");
         }
     }
 }

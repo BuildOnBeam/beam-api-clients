@@ -32,6 +32,7 @@ export type { CreateTransactionRequestInput } from './models/CreateTransactionRe
 export type { CreateTransactionRequestInputV2 } from './models/CreateTransactionRequestInputV2';
 export type { CreateTransactionResponse } from './models/CreateTransactionResponse';
 export type { CreateTransactionResponseV2 } from './models/CreateTransactionResponseV2';
+export type { CreateWebhookForGame } from './models/CreateWebhookForGame';
 export type { GenerateLinkCodeRequestInput } from './models/GenerateLinkCodeRequestInput';
 export type { GenerateLinkCodeResponse } from './models/GenerateLinkCodeResponse';
 export type { GenerateSignInCodeRequestInput } from './models/GenerateSignInCodeRequestInput';
@@ -60,6 +61,7 @@ export type { GetTransactionResponse } from './models/GetTransactionResponse';
 export type { GetTransactionResponseV2 } from './models/GetTransactionResponseV2';
 export type { GetTransactionsResponse } from './models/GetTransactionsResponse';
 export type { GetTransactionsResponseV2 } from './models/GetTransactionsResponseV2';
+export type { GetWebhooksForGameResponse } from './models/GetWebhooksForGameResponse';
 export { RegenerateGameApiKeysResponse } from './models/RegenerateGameApiKeysResponse';
 export type { RemoveContractResponse } from './models/RemoveContractResponse';
 export type { RemovePolicyResponse } from './models/RemovePolicyResponse';
@@ -76,6 +78,7 @@ export { UpdateGameRequestInput } from './models/UpdateGameRequestInput';
 export { UpdateGameResponse } from './models/UpdateGameResponse';
 export type { UpdateProfileRequestInput } from './models/UpdateProfileRequestInput';
 export type { UpdateProfileResponse } from './models/UpdateProfileResponse';
+export type { WebhookForGameResponse } from './models/WebhookForGameResponse';
 
 export { AssetsV2Service } from './services/AssetsV2Service';
 export { ChainService } from './services/ChainService';
@@ -89,3 +92,4 @@ export { ReportingService } from './services/ReportingService';
 export { TradingService } from './services/TradingService';
 export { TransactionsService } from './services/TransactionsService';
 export { TransactionsV2Service } from './services/TransactionsV2Service';
+export { WebhooksService } from './services/WebhooksService';

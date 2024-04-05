@@ -69,7 +69,12 @@ namespace Beam.Model
             /// <summary>
             /// Enum Regenerate for value: Regenerate
             /// </summary>
-            Regenerate = 3
+            Regenerate = 3,
+
+            /// <summary>
+            /// Enum Publishable for value: Publishable
+            /// </summary>
+            Publishable = 4
         }
 
         /// <summary>
@@ -88,6 +93,9 @@ namespace Beam.Model
 
             if (value.Equals("Regenerate"))
                 return TypeEnum.Regenerate;
+
+            if (value.Equals("Publishable"))
+                return TypeEnum.Publishable;
 
             throw new NotImplementedException($"Could not convert value to type TypeEnum: '{value}'");
         }
@@ -108,6 +116,9 @@ namespace Beam.Model
             if (value.Equals("Regenerate"))
                 return TypeEnum.Regenerate;
 
+            if (value.Equals("Publishable"))
+                return TypeEnum.Publishable;
+
             return null;
         }
 
@@ -127,6 +138,9 @@ namespace Beam.Model
 
             if (value == TypeEnum.Regenerate)
                 return "Regenerate";
+
+            if (value == TypeEnum.Publishable)
+                return "Publishable";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }

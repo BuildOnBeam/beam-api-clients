@@ -132,6 +132,8 @@ namespace Beam.Client
                 return ConvertTokenResponse.TypeEnumToJsonValue(convertTokenResponseTypeEnum);
             if (obj is CreateAssetOfferRequestInputV2.CurrencyEnum createAssetOfferRequestInputV2CurrencyEnum)
                 return CreateAssetOfferRequestInputV2.CurrencyEnumToJsonValue(createAssetOfferRequestInputV2CurrencyEnum);
+            if (obj is CreateWebhookForGame.EventsEnum createWebhookForGameEventsEnum)
+                return CreateWebhookForGame.EventsEnumToJsonValue(createWebhookForGameEventsEnum);
             if (obj is GetAllGasUsageResponseChainsInnerPoliciesInnerPolicy.ModelEnum getAllGasUsageResponseChainsInnerPoliciesInnerPolicyModelEnum)
                 return GetAllGasUsageResponseChainsInnerPoliciesInnerPolicy.ModelEnumToJsonValue(getAllGasUsageResponseChainsInnerPoliciesInnerPolicyModelEnum);
             if (obj is GetAssetListingsResponseV2DataInner.StatusEnum getAssetListingsResponseV2DataInnerStatusEnum)
@@ -174,6 +176,8 @@ namespace Beam.Client
                 return GetListedAssetsBodyInputV2.SortDirectionEnumToJsonValue(getListedAssetsBodyInputV2SortDirectionEnum);
             if (obj is GetPoliciesResponseDataInner.RateTypeEnum getPoliciesResponseDataInnerRateTypeEnum)
                 return GetPoliciesResponseDataInner.RateTypeEnumToJsonValue(getPoliciesResponseDataInnerRateTypeEnum);
+            if (obj is GetWebhooksForGameResponseWebhooksInner.EventsEnum getWebhooksForGameResponseWebhooksInnerEventsEnum)
+                return GetWebhooksForGameResponseWebhooksInner.EventsEnumToJsonValue(getWebhooksForGameResponseWebhooksInnerEventsEnum);
             if (obj is RegenerateGameApiKeysResponse.PegiContentEnum regenerateGameApiKeysResponsePegiContentEnum)
                 return RegenerateGameApiKeysResponse.PegiContentEnumToJsonValue(regenerateGameApiKeysResponsePegiContentEnum);
             if (obj is RegenerateGameApiKeysResponse.PegiRatingEnum regenerateGameApiKeysResponsePegiRatingEnum)
@@ -210,6 +214,8 @@ namespace Beam.Client
                 return UpdateGameResponsePoliciesInner.TypeEnumToJsonValue(updateGameResponsePoliciesInnerTypeEnum);
             if (obj is UpdateGameResponsePoliciesInner.RateTypeEnum updateGameResponsePoliciesInnerRateTypeEnum)
                 return UpdateGameResponsePoliciesInner.RateTypeEnumToJsonValue(updateGameResponsePoliciesInnerRateTypeEnum);
+            if (obj is WebhookForGameResponse.EventsEnum webhookForGameResponseEventsEnum)
+                return WebhookForGameResponse.EventsEnumToJsonValue(webhookForGameResponseEventsEnum);
             if (obj is ICollection collection)
             {
                 List<string> entries = new();
