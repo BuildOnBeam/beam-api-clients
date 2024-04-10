@@ -31,5 +31,6 @@ export type GetGasUsageResponse = {
     averageTransactionFee: string;
     transactionCount: number;
     chainId?: number;
+    profilesCount: number;
   };
 };

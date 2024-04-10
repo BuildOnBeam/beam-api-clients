@@ -35,14 +35,16 @@ namespace Beam.Model
         /// Initializes a new instance of the <see cref="GetAllGasUsageResponseChainsInnerSummary" /> class.
         /// </summary>
         /// <param name="averageTransactionFee">averageTransactionFee</param>
+        /// <param name="profilesCount">profilesCount</param>
         /// <param name="totalTransactionFee">totalTransactionFee</param>
         /// <param name="totalTransactionFeeInUSD">totalTransactionFeeInUSD</param>
         /// <param name="transactionCount">transactionCount</param>
         /// <param name="chainId">chainId (default to 13337M)</param>
         [JsonConstructor]
-        public GetAllGasUsageResponseChainsInnerSummary(string averageTransactionFee, string totalTransactionFee, string totalTransactionFeeInUSD, decimal transactionCount, Option<decimal?> chainId = default)
+        public GetAllGasUsageResponseChainsInnerSummary(string averageTransactionFee, decimal profilesCount, string totalTransactionFee, string totalTransactionFeeInUSD, decimal transactionCount, Option<decimal?> chainId = default)
         {
             AverageTransactionFee = averageTransactionFee;
+            ProfilesCount = profilesCount;
             TotalTransactionFee = totalTransactionFee;
             TotalTransactionFeeInUSD = totalTransactionFeeInUSD;
             TransactionCount = transactionCount;
@@ -57,6 +59,12 @@ namespace Beam.Model
         /// </summary>
         [JsonPropertyName("averageTransactionFee")]
         public string AverageTransactionFee { get; set; }
+
+        /// <summary>
+        /// Gets or Sets ProfilesCount
+        /// </summary>
+        [JsonPropertyName("profilesCount")]
+        public decimal ProfilesCount { get; set; }
 
         /// <summary>
         /// Gets or Sets TotalTransactionFee
@@ -98,6 +106,7 @@ namespace Beam.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class GetAllGasUsageResponseChainsInnerSummary {\n");
             sb.Append("  AverageTransactionFee: ").Append(AverageTransactionFee).Append("\n");
+            sb.Append("  ProfilesCount: ").Append(ProfilesCount).Append("\n");
             sb.Append("  TotalTransactionFee: ").Append(TotalTransactionFee).Append("\n");
             sb.Append("  TotalTransactionFeeInUSD: ").Append(TotalTransactionFeeInUSD).Append("\n");
             sb.Append("  TransactionCount: ").Append(TransactionCount).Append("\n");
@@ -140,6 +149,7 @@ namespace Beam.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<string?> averageTransactionFee = default;
+            Option<decimal?> profilesCount = default;
             Option<string?> totalTransactionFee = default;
             Option<string?> totalTransactionFeeInUSD = default;
             Option<decimal?> transactionCount = default;
@@ -162,6 +172,10 @@ namespace Beam.Model
                     {
                         case "averageTransactionFee":
                             averageTransactionFee = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
+                        case "profilesCount":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                profilesCount = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "totalTransactionFee":
                             totalTransactionFee = new Option<string?>(utf8JsonReader.GetString()!);
@@ -186,6 +200,9 @@ namespace Beam.Model
             if (!averageTransactionFee.IsSet)
                 throw new ArgumentException("Property is required for class GetAllGasUsageResponseChainsInnerSummary.", nameof(averageTransactionFee));
 
+            if (!profilesCount.IsSet)
+                throw new ArgumentException("Property is required for class GetAllGasUsageResponseChainsInnerSummary.", nameof(profilesCount));
+
             if (!totalTransactionFee.IsSet)
                 throw new ArgumentException("Property is required for class GetAllGasUsageResponseChainsInnerSummary.", nameof(totalTransactionFee));
 
@@ -197,6 +214,9 @@ namespace Beam.Model
 
             if (averageTransactionFee.IsSet && averageTransactionFee.Value == null)
                 throw new ArgumentNullException(nameof(averageTransactionFee), "Property is not nullable for class GetAllGasUsageResponseChainsInnerSummary.");
+
+            if (profilesCount.IsSet && profilesCount.Value == null)
+                throw new ArgumentNullException(nameof(profilesCount), "Property is not nullable for class GetAllGasUsageResponseChainsInnerSummary.");
 
             if (totalTransactionFee.IsSet && totalTransactionFee.Value == null)
                 throw new ArgumentNullException(nameof(totalTransactionFee), "Property is not nullable for class GetAllGasUsageResponseChainsInnerSummary.");
@@ -210,7 +230,7 @@ namespace Beam.Model
             if (chainId.IsSet && chainId.Value == null)
                 throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class GetAllGasUsageResponseChainsInnerSummary.");
 
-            return new GetAllGasUsageResponseChainsInnerSummary(averageTransactionFee.Value!, totalTransactionFee.Value!, totalTransactionFeeInUSD.Value!, transactionCount.Value!.Value!, chainId);
+            return new GetAllGasUsageResponseChainsInnerSummary(averageTransactionFee.Value!, profilesCount.Value!.Value!, totalTransactionFee.Value!, totalTransactionFeeInUSD.Value!, transactionCount.Value!.Value!, chainId);
         }
 
         /// <summary>
@@ -247,6 +267,8 @@ namespace Beam.Model
                 throw new ArgumentNullException(nameof(getAllGasUsageResponseChainsInnerSummary.TotalTransactionFeeInUSD), "Property is required for class GetAllGasUsageResponseChainsInnerSummary.");
 
             writer.WriteString("averageTransactionFee", getAllGasUsageResponseChainsInnerSummary.AverageTransactionFee);
+
+            writer.WriteNumber("profilesCount", getAllGasUsageResponseChainsInnerSummary.ProfilesCount);
 
             writer.WriteString("totalTransactionFee", getAllGasUsageResponseChainsInnerSummary.TotalTransactionFee);
 

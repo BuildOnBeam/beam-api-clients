@@ -19,7 +19,6 @@ export type GetAllProfilesResponse = {
       updatedAt: any;
       externalId: string;
       address: string;
-      externalOwnerAddress: string | null;
       chainId: number;
       profileId: string | null;
       playerProfileId: string | null;

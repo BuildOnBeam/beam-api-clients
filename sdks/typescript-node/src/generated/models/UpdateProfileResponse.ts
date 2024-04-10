@@ -18,7 +18,6 @@ export type UpdateProfileResponse = {
     updatedAt: any;
     externalId: string;
     address: string;
-    externalOwnerAddress: string | null;
     chainId: number;
     profileId: string | null;
     playerProfileId: string | null;
