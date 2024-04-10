@@ -55,7 +55,7 @@ namespace Beam.Client
             if (reader.TokenType == JsonTokenType.Null)
                 return null;
 
-            string value = reader.GetString();
+            string value = reader.GetString()!;
 
             foreach(string format in Formats)
                 if (DateTime.TryParseExact(value, format, CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal | DateTimeStyles.AssumeUniversal, out DateTime result))

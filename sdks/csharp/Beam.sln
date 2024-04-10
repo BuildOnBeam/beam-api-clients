@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 VisualStudioVersion = 12.0.0.0
 MinimumVisualStudioVersion = 10.0.0.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beam", "src\Beam\Beam.csproj", "{D6D5534A-4033-4C1B-9593-8BC532D6A05C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beam", "src\Beam\Beam.csproj", "{FECE7436-F667-47B5-B288-64485A753CEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -10,10 +10,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D6D5534A-4033-4C1B-9593-8BC532D6A05C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D6D5534A-4033-4C1B-9593-8BC532D6A05C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D6D5534A-4033-4C1B-9593-8BC532D6A05C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D6D5534A-4033-4C1B-9593-8BC532D6A05C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FECE7436-F667-47B5-B288-64485A753CEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FECE7436-F667-47B5-B288-64485A753CEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FECE7436-F667-47B5-B288-64485A753CEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FECE7436-F667-47B5-B288-64485A753CEC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.ActiveCfg = Release|Any CPU
