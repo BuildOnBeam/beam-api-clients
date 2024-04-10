@@ -26,6 +26,7 @@ namespace Beam.Extensions
         /// </summary>
         /// <param name="builder"></param>
         /// <param name="options"></param>
+        [Obsolete("Use ConfigureBeamApi")]
         public static IHostBuilder ConfigureApi(this IHostBuilder builder, Action<HostBuilderContext, IServiceCollection, HostConfiguration> options)
         {
             builder.ConfigureServices((context, services) => 
@@ -34,7 +35,26 @@ namespace Beam.Extensions
 
                 options(context, services, config);
 
-                IServiceCollectionExtensions.AddApi(services, config);
+                IServiceCollectionExtensions.AddBeamApi(services, config);
+            });
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Add the api to your host builder.
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="options"></param>
+        public static IHostBuilder ConfigureBeamApi(this IHostBuilder builder, Action<HostBuilderContext, IServiceCollection, HostConfiguration> options)
+        {
+            builder.ConfigureServices((context, services) => 
+            {
+                HostConfiguration config = new HostConfiguration(services);
+
+                options(context, services, config);
+
+                IServiceCollectionExtensions.AddBeamApi(services, config);
             });
 
             return builder;

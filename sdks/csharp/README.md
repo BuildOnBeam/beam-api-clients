@@ -87,7 +87,7 @@ using Beam.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddApi(options =>
+builder.Services.AddBeamApi(options =>
 {
     // the type of token here depends on the api security specifications
     var token = new ApiKeyToken("<your token>");

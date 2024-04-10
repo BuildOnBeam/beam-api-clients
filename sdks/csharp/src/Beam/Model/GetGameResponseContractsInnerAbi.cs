@@ -209,25 +209,18 @@ namespace Beam.Model
             }
 
             if (varString != null)
-              // isNullable
                 return new GetGameResponseContractsInnerAbi(varString);
 
             if (varDecimal != null)
-              // isNullable
-              // weird
                 return new GetGameResponseContractsInnerAbi(varDecimal.Value);
 
             if (varBool != null)
-              // isNullable
-              // weird
                 return new GetGameResponseContractsInnerAbi(varBool.Value);
 
             if (dictionary != null)
-              // isNullable
                 return new GetGameResponseContractsInnerAbi(dictionary);
 
             if (list != null)
-              // isNullable
                 return new GetGameResponseContractsInnerAbi(list);
 
             throw new JsonException();

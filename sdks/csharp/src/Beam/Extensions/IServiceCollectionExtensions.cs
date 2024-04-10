@@ -26,12 +26,11 @@ namespace Beam.Extensions
         /// </summary>
         /// <param name="services"></param>
         /// <param name="options"></param>
-        [Obsolete("Use AddBeamApi")]
-        public static void AddApi(this IServiceCollection services, Action<HostConfiguration> options)
+        public static void AddBeamApi(this IServiceCollection services, Action<HostConfiguration> options)
         {
             HostConfiguration config = new(services);
             options(config);
-            AddApi(services, config);
+            AddBeamApi(services, config);
         }
 
         /// <summary>
@@ -39,17 +38,18 @@ namespace Beam.Extensions
         /// </summary>
         /// <param name="services"></param>
         /// <param name="options"></param>
-        public static void AddBeamApi(this IServiceCollection services, Action<HostConfiguration> options)
+        [Obsolete("Use AddBeamApi")]
+        public static void AddApi(this IServiceCollection services, Action<HostConfiguration> options)
         {
             HostConfiguration config = new(services);
             options(config);
-            AddApi(services, config);
+            AddBeamApi(services, config);
         }
 
-        internal static void AddApi(IServiceCollection services, HostConfiguration host)
+        internal static void AddBeamApi(IServiceCollection services, HostConfiguration host)
         {
             if (!host.HttpClientsAdded)
-                host.AddApiHttpClients();
+                host.AddBeamApiHttpClients();
 
             services.AddSingleton<CookieContainer>();
 

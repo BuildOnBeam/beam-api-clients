@@ -19,6 +19,7 @@
         },
         "additionalProperties": {
           "packageName": "Beam",
+          "apiName": "BeamApi",
           "returnICollection": true,
           "optionalMethodArgument": false,
           "nullableReferenceTypes": true,

@@ -198,7 +198,7 @@ namespace Beam.Client
         /// <param name="client"></param>
         /// <param name="builder"></param>
         /// <returns></returns>
-        public HostConfiguration AddApiHttpClients
+        public HostConfiguration AddBeamApiHttpClients
         (
             Action<HttpClient>? client = null, Action<IHttpClientBuilder>? builder = null)
         {

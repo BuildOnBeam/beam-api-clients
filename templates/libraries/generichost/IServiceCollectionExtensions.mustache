@@ -20,7 +20,6 @@ namespace {{packageName}}.Extensions
         /// Add the api to your host builder.
         /// </summary>
         /// <param name="services"></param>
-        [Obsolete("Use Add{{packageName}}Api")]
         public static void Add{{apiName}}(this IServiceCollection services)
         {
             HostConfiguration config = new{{^net70OrLater}} HostConfiguration{{/net70OrLater}}(services);
@@ -31,7 +30,8 @@ namespace {{packageName}}.Extensions
         /// Add the api to your host builder.
         /// </summary>
         /// <param name="services"></param>
-        public static void Add{{packageName}}Api(this IServiceCollection services)
+        [Obsolete("Use Add{{apiName}}")]
+        public static void AddApi(this IServiceCollection services)
         {
             HostConfiguration config = new{{^net70OrLater}} HostConfiguration{{/net70OrLater}}(services);
             Add{{apiName}}(services, config);
@@ -43,7 +43,6 @@ namespace {{packageName}}.Extensions
         /// </summary>
         /// <param name="services"></param>
         /// <param name="options"></param>
-        [Obsolete("Use Add{{packageName}}Api")]
         public static void Add{{apiName}}(this IServiceCollection services, Action<HostConfiguration> options)
         {
             HostConfiguration config = new{{^net70OrLater}} HostConfiguration{{/net70OrLater}}(services);
@@ -56,7 +55,8 @@ namespace {{packageName}}.Extensions
         /// </summary>
         /// <param name="services"></param>
         /// <param name="options"></param>
-        public static void Add{{packageName}}Api(this IServiceCollection services, Action<HostConfiguration> options)
+        [Obsolete("Use Add{{apiName}}")]
+        public static void AddApi(this IServiceCollection services, Action<HostConfiguration> options)
         {
             HostConfiguration config = new{{^net70OrLater}} HostConfiguration{{/net70OrLater}}(services);
             options(config);
