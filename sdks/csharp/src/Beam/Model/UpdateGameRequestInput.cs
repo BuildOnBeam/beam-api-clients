@@ -34,6 +34,7 @@ namespace Beam.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateGameRequestInput" /> class.
         /// </summary>
+        /// <param name="backgroundImageUrl">backgroundImageUrl</param>
         /// <param name="coverImageUrl">coverImageUrl</param>
         /// <param name="description">description</param>
         /// <param name="logoImageUrl">logoImageUrl</param>
@@ -41,8 +42,9 @@ namespace Beam.Model
         /// <param name="pegiContent">pegiContent</param>
         /// <param name="pegiRating">pegiRating</param>
         [JsonConstructor]
-        public UpdateGameRequestInput(Option<string?> coverImageUrl = default, Option<string?> description = default, Option<string?> logoImageUrl = default, Option<string?> name = default, Option<List<UpdateGameRequestInput.PegiContentEnum>?> pegiContent = default, Option<PegiRatingEnum?> pegiRating = default)
+        public UpdateGameRequestInput(Option<string?> backgroundImageUrl = default, Option<string?> coverImageUrl = default, Option<string?> description = default, Option<string?> logoImageUrl = default, Option<string?> name = default, Option<List<UpdateGameRequestInput.PegiContentEnum>?> pegiContent = default, Option<PegiRatingEnum?> pegiRating = default)
         {
+            BackgroundImageUrlOption = backgroundImageUrl;
             CoverImageUrlOption = coverImageUrl;
             DescriptionOption = description;
             LogoImageUrlOption = logoImageUrl;
@@ -329,6 +331,19 @@ namespace Beam.Model
         public PegiRatingEnum? PegiRating { get { return this.PegiRatingOption; } set { this.PegiRatingOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of BackgroundImageUrl
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> BackgroundImageUrlOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets BackgroundImageUrl
+        /// </summary>
+        [JsonPropertyName("backgroundImageUrl")]
+        public string? BackgroundImageUrl { get { return this. BackgroundImageUrlOption; } set { this.BackgroundImageUrlOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of CoverImageUrl
         /// </summary>
         [JsonIgnore]
@@ -401,6 +416,7 @@ namespace Beam.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class UpdateGameRequestInput {\n");
+            sb.Append("  BackgroundImageUrl: ").Append(BackgroundImageUrl).Append("\n");
             sb.Append("  CoverImageUrl: ").Append(CoverImageUrl).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  LogoImageUrl: ").Append(LogoImageUrl).Append("\n");
@@ -444,6 +460,7 @@ namespace Beam.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
+            Option<string?> backgroundImageUrl = default;
             Option<string?> coverImageUrl = default;
             Option<string?> description = default;
             Option<string?> logoImageUrl = default;
@@ -466,6 +483,9 @@ namespace Beam.Model
 
                     switch (localVarJsonPropertyName)
                     {
+                        case "backgroundImageUrl":
+                            backgroundImageUrl = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         case "coverImageUrl":
                             coverImageUrl = new Option<string?>(utf8JsonReader.GetString());
                             break;
@@ -499,7 +519,7 @@ namespace Beam.Model
             if (pegiContent.IsSet && pegiContent.Value == null)
                 throw new ArgumentNullException(nameof(pegiContent), "Property is not nullable for class UpdateGameRequestInput.");
 
-            return new UpdateGameRequestInput(coverImageUrl, description, logoImageUrl, name, pegiContent, pegiRating);
+            return new UpdateGameRequestInput(backgroundImageUrl, coverImageUrl, description, logoImageUrl, name, pegiContent, pegiRating);
         }
 
         /// <summary>
@@ -531,6 +551,12 @@ namespace Beam.Model
 
             if (updateGameRequestInput.PegiContentOption.IsSet && updateGameRequestInput.PegiContent == null)
                 throw new ArgumentNullException(nameof(updateGameRequestInput.PegiContent), "Property is required for class UpdateGameRequestInput.");
+
+            if (updateGameRequestInput.BackgroundImageUrlOption.IsSet)
+                if (updateGameRequestInput.BackgroundImageUrlOption.Value != null)
+                    writer.WriteString("backgroundImageUrl", updateGameRequestInput.BackgroundImageUrl);
+                else
+                    writer.WriteNull("backgroundImageUrl");
 
             if (updateGameRequestInput.CoverImageUrlOption.IsSet)
                 if (updateGameRequestInput.CoverImageUrlOption.Value != null)

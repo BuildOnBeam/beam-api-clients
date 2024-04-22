@@ -132,6 +132,7 @@ src/Beam/Model/GetTransactionsResponseDataInnerResponseLogsInner.cs
 src/Beam/Model/GetTransactionsResponseV2.cs
 src/Beam/Model/GetTransactionsResponseV2DataInner.cs
 src/Beam/Model/GetTransactionsResponseV2DataInnerIntent.cs
+src/Beam/Model/GetTransactionsResponseV2DataInnerIntentInteractionsInner.cs
 src/Beam/Model/GetTransactionsResponseV2DataInnerTransaction.cs
 src/Beam/Model/GetTransactionsResponseV2DataInnerTransactionLogsInner.cs
 src/Beam/Model/GetWebhooksForGameResponse.cs

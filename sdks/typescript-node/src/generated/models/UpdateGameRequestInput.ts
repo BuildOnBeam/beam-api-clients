@@ -7,6 +7,7 @@ export type UpdateGameRequestInput = {
   name?: string;
   description?: string | null;
   coverImageUrl?: string | null;
+  backgroundImageUrl?: string | null;
   logoImageUrl?: string | null;
   pegiRating?: UpdateGameRequestInput.pegiRating | null;
   pegiContent?: Array<

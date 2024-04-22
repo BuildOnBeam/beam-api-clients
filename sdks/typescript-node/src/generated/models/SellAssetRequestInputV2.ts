@@ -37,5 +37,6 @@ export namespace SellAssetRequestInputV2 {
     USDC = 'USDC',
     USDT = 'USDT',
     IMX = 'IMX',
+    WIMX = 'WIMX',
   }
 }

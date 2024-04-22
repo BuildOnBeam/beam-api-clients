@@ -27,24 +27,22 @@ using Beam.Client;
 namespace Beam.Model
 {
     /// <summary>
-    /// GetTransactionsResponseDataInnerInteractionsInner
+    /// GetTransactionsResponseV2DataInnerIntentInteractionsInner
     /// </summary>
-    public partial class GetTransactionsResponseDataInnerInteractionsInner : IValidatableObject
+    public partial class GetTransactionsResponseV2DataInnerIntentInteractionsInner : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetTransactionsResponseDataInnerInteractionsInner" /> class.
+        /// Initializes a new instance of the <see cref="GetTransactionsResponseV2DataInnerIntentInteractionsInner" /> class.
         /// </summary>
         /// <param name="contract">contract</param>
-        /// <param name="dataSuffix">dataSuffix</param>
         /// <param name="functionArgs">functionArgs</param>
         /// <param name="functionName">functionName</param>
         /// <param name="to">to</param>
         /// <param name="value">value</param>
         [JsonConstructor]
-        public GetTransactionsResponseDataInnerInteractionsInner(Option<string?> contract = default, Option<string?> dataSuffix = default, Option<List<Object>?> functionArgs = default, Option<string?> functionName = default, Option<string?> to = default, Option<string?> value = default)
+        public GetTransactionsResponseV2DataInnerIntentInteractionsInner(Option<string?> contract = default, Option<List<Object>?> functionArgs = default, Option<string?> functionName = default, Option<string?> to = default, Option<string?> value = default)
         {
             ContractOption = contract;
-            DataSuffixOption = dataSuffix;
             FunctionArgsOption = functionArgs;
             FunctionNameOption = functionName;
             ToOption = to;
@@ -66,19 +64,6 @@ namespace Beam.Model
         /// </summary>
         [JsonPropertyName("contract")]
         public string? Contract { get { return this. ContractOption; } set { this.ContractOption = new(value); } }
-
-        /// <summary>
-        /// Used to track the state of DataSuffix
-        /// </summary>
-        [JsonIgnore]
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> DataSuffixOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets DataSuffix
-        /// </summary>
-        [JsonPropertyName("dataSuffix")]
-        public string? DataSuffix { get { return this. DataSuffixOption; } set { this.DataSuffixOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of FunctionArgs
@@ -139,9 +124,8 @@ namespace Beam.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class GetTransactionsResponseDataInnerInteractionsInner {\n");
+            sb.Append("class GetTransactionsResponseV2DataInnerIntentInteractionsInner {\n");
             sb.Append("  Contract: ").Append(Contract).Append("\n");
-            sb.Append("  DataSuffix: ").Append(DataSuffix).Append("\n");
             sb.Append("  FunctionArgs: ").Append(FunctionArgs).Append("\n");
             sb.Append("  FunctionName: ").Append(FunctionName).Append("\n");
             sb.Append("  To: ").Append(To).Append("\n");
@@ -162,19 +146,19 @@ namespace Beam.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="GetTransactionsResponseDataInnerInteractionsInner" />
+    /// A Json converter for type <see cref="GetTransactionsResponseV2DataInnerIntentInteractionsInner" />
     /// </summary>
-    public class GetTransactionsResponseDataInnerInteractionsInnerJsonConverter : JsonConverter<GetTransactionsResponseDataInnerInteractionsInner>
+    public class GetTransactionsResponseV2DataInnerIntentInteractionsInnerJsonConverter : JsonConverter<GetTransactionsResponseV2DataInnerIntentInteractionsInner>
     {
         /// <summary>
-        /// Deserializes json to <see cref="GetTransactionsResponseDataInnerInteractionsInner" />
+        /// Deserializes json to <see cref="GetTransactionsResponseV2DataInnerIntentInteractionsInner" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override GetTransactionsResponseDataInnerInteractionsInner Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override GetTransactionsResponseV2DataInnerIntentInteractionsInner Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -184,7 +168,6 @@ namespace Beam.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<string?> contract = default;
-            Option<string?> dataSuffix = default;
             Option<List<Object>?> functionArgs = default;
             Option<string?> functionName = default;
             Option<string?> to = default;
@@ -208,9 +191,6 @@ namespace Beam.Model
                         case "contract":
                             contract = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "dataSuffix":
-                            dataSuffix = new Option<string?>(utf8JsonReader.GetString()!);
-                            break;
                         case "functionArgs":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 functionArgs = new Option<List<Object>?>(JsonSerializer.Deserialize<List<Object>>(ref utf8JsonReader, jsonSerializerOptions)!);
@@ -231,87 +211,78 @@ namespace Beam.Model
             }
 
             if (contract.IsSet && contract.Value == null)
-                throw new ArgumentNullException(nameof(contract), "Property is not nullable for class GetTransactionsResponseDataInnerInteractionsInner.");
-
-            if (dataSuffix.IsSet && dataSuffix.Value == null)
-                throw new ArgumentNullException(nameof(dataSuffix), "Property is not nullable for class GetTransactionsResponseDataInnerInteractionsInner.");
+                throw new ArgumentNullException(nameof(contract), "Property is not nullable for class GetTransactionsResponseV2DataInnerIntentInteractionsInner.");
 
             if (functionArgs.IsSet && functionArgs.Value == null)
-                throw new ArgumentNullException(nameof(functionArgs), "Property is not nullable for class GetTransactionsResponseDataInnerInteractionsInner.");
+                throw new ArgumentNullException(nameof(functionArgs), "Property is not nullable for class GetTransactionsResponseV2DataInnerIntentInteractionsInner.");
 
             if (functionName.IsSet && functionName.Value == null)
-                throw new ArgumentNullException(nameof(functionName), "Property is not nullable for class GetTransactionsResponseDataInnerInteractionsInner.");
+                throw new ArgumentNullException(nameof(functionName), "Property is not nullable for class GetTransactionsResponseV2DataInnerIntentInteractionsInner.");
 
             if (to.IsSet && to.Value == null)
-                throw new ArgumentNullException(nameof(to), "Property is not nullable for class GetTransactionsResponseDataInnerInteractionsInner.");
+                throw new ArgumentNullException(nameof(to), "Property is not nullable for class GetTransactionsResponseV2DataInnerIntentInteractionsInner.");
 
             if (value.IsSet && value.Value == null)
-                throw new ArgumentNullException(nameof(value), "Property is not nullable for class GetTransactionsResponseDataInnerInteractionsInner.");
+                throw new ArgumentNullException(nameof(value), "Property is not nullable for class GetTransactionsResponseV2DataInnerIntentInteractionsInner.");
 
-            return new GetTransactionsResponseDataInnerInteractionsInner(contract, dataSuffix, functionArgs, functionName, to, value);
+            return new GetTransactionsResponseV2DataInnerIntentInteractionsInner(contract, functionArgs, functionName, to, value);
         }
 
         /// <summary>
-        /// Serializes a <see cref="GetTransactionsResponseDataInnerInteractionsInner" />
+        /// Serializes a <see cref="GetTransactionsResponseV2DataInnerIntentInteractionsInner" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="getTransactionsResponseDataInnerInteractionsInner"></param>
+        /// <param name="getTransactionsResponseV2DataInnerIntentInteractionsInner"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, GetTransactionsResponseDataInnerInteractionsInner getTransactionsResponseDataInnerInteractionsInner, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, GetTransactionsResponseV2DataInnerIntentInteractionsInner getTransactionsResponseV2DataInnerIntentInteractionsInner, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(ref writer, getTransactionsResponseDataInnerInteractionsInner, jsonSerializerOptions);
+            WriteProperties(ref writer, getTransactionsResponseV2DataInnerIntentInteractionsInner, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="GetTransactionsResponseDataInnerInteractionsInner" />
+        /// Serializes the properties of <see cref="GetTransactionsResponseV2DataInnerIntentInteractionsInner" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="getTransactionsResponseDataInnerInteractionsInner"></param>
+        /// <param name="getTransactionsResponseV2DataInnerIntentInteractionsInner"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(ref Utf8JsonWriter writer, GetTransactionsResponseDataInnerInteractionsInner getTransactionsResponseDataInnerInteractionsInner, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(ref Utf8JsonWriter writer, GetTransactionsResponseV2DataInnerIntentInteractionsInner getTransactionsResponseV2DataInnerIntentInteractionsInner, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (getTransactionsResponseDataInnerInteractionsInner.ContractOption.IsSet && getTransactionsResponseDataInnerInteractionsInner.Contract == null)
-                throw new ArgumentNullException(nameof(getTransactionsResponseDataInnerInteractionsInner.Contract), "Property is required for class GetTransactionsResponseDataInnerInteractionsInner.");
+            if (getTransactionsResponseV2DataInnerIntentInteractionsInner.ContractOption.IsSet && getTransactionsResponseV2DataInnerIntentInteractionsInner.Contract == null)
+                throw new ArgumentNullException(nameof(getTransactionsResponseV2DataInnerIntentInteractionsInner.Contract), "Property is required for class GetTransactionsResponseV2DataInnerIntentInteractionsInner.");
 
-            if (getTransactionsResponseDataInnerInteractionsInner.DataSuffixOption.IsSet && getTransactionsResponseDataInnerInteractionsInner.DataSuffix == null)
-                throw new ArgumentNullException(nameof(getTransactionsResponseDataInnerInteractionsInner.DataSuffix), "Property is required for class GetTransactionsResponseDataInnerInteractionsInner.");
+            if (getTransactionsResponseV2DataInnerIntentInteractionsInner.FunctionArgsOption.IsSet && getTransactionsResponseV2DataInnerIntentInteractionsInner.FunctionArgs == null)
+                throw new ArgumentNullException(nameof(getTransactionsResponseV2DataInnerIntentInteractionsInner.FunctionArgs), "Property is required for class GetTransactionsResponseV2DataInnerIntentInteractionsInner.");
 
-            if (getTransactionsResponseDataInnerInteractionsInner.FunctionArgsOption.IsSet && getTransactionsResponseDataInnerInteractionsInner.FunctionArgs == null)
-                throw new ArgumentNullException(nameof(getTransactionsResponseDataInnerInteractionsInner.FunctionArgs), "Property is required for class GetTransactionsResponseDataInnerInteractionsInner.");
+            if (getTransactionsResponseV2DataInnerIntentInteractionsInner.FunctionNameOption.IsSet && getTransactionsResponseV2DataInnerIntentInteractionsInner.FunctionName == null)
+                throw new ArgumentNullException(nameof(getTransactionsResponseV2DataInnerIntentInteractionsInner.FunctionName), "Property is required for class GetTransactionsResponseV2DataInnerIntentInteractionsInner.");
 
-            if (getTransactionsResponseDataInnerInteractionsInner.FunctionNameOption.IsSet && getTransactionsResponseDataInnerInteractionsInner.FunctionName == null)
-                throw new ArgumentNullException(nameof(getTransactionsResponseDataInnerInteractionsInner.FunctionName), "Property is required for class GetTransactionsResponseDataInnerInteractionsInner.");
+            if (getTransactionsResponseV2DataInnerIntentInteractionsInner.ToOption.IsSet && getTransactionsResponseV2DataInnerIntentInteractionsInner.To == null)
+                throw new ArgumentNullException(nameof(getTransactionsResponseV2DataInnerIntentInteractionsInner.To), "Property is required for class GetTransactionsResponseV2DataInnerIntentInteractionsInner.");
 
-            if (getTransactionsResponseDataInnerInteractionsInner.ToOption.IsSet && getTransactionsResponseDataInnerInteractionsInner.To == null)
-                throw new ArgumentNullException(nameof(getTransactionsResponseDataInnerInteractionsInner.To), "Property is required for class GetTransactionsResponseDataInnerInteractionsInner.");
+            if (getTransactionsResponseV2DataInnerIntentInteractionsInner.ValueOption.IsSet && getTransactionsResponseV2DataInnerIntentInteractionsInner.Value == null)
+                throw new ArgumentNullException(nameof(getTransactionsResponseV2DataInnerIntentInteractionsInner.Value), "Property is required for class GetTransactionsResponseV2DataInnerIntentInteractionsInner.");
 
-            if (getTransactionsResponseDataInnerInteractionsInner.ValueOption.IsSet && getTransactionsResponseDataInnerInteractionsInner.Value == null)
-                throw new ArgumentNullException(nameof(getTransactionsResponseDataInnerInteractionsInner.Value), "Property is required for class GetTransactionsResponseDataInnerInteractionsInner.");
+            if (getTransactionsResponseV2DataInnerIntentInteractionsInner.ContractOption.IsSet)
+                writer.WriteString("contract", getTransactionsResponseV2DataInnerIntentInteractionsInner.Contract);
 
-            if (getTransactionsResponseDataInnerInteractionsInner.ContractOption.IsSet)
-                writer.WriteString("contract", getTransactionsResponseDataInnerInteractionsInner.Contract);
-
-            if (getTransactionsResponseDataInnerInteractionsInner.DataSuffixOption.IsSet)
-                writer.WriteString("dataSuffix", getTransactionsResponseDataInnerInteractionsInner.DataSuffix);
-
-            if (getTransactionsResponseDataInnerInteractionsInner.FunctionArgsOption.IsSet)
+            if (getTransactionsResponseV2DataInnerIntentInteractionsInner.FunctionArgsOption.IsSet)
             {
                 writer.WritePropertyName("functionArgs");
-                JsonSerializer.Serialize(writer, getTransactionsResponseDataInnerInteractionsInner.FunctionArgs, jsonSerializerOptions);
+                JsonSerializer.Serialize(writer, getTransactionsResponseV2DataInnerIntentInteractionsInner.FunctionArgs, jsonSerializerOptions);
             }
-            if (getTransactionsResponseDataInnerInteractionsInner.FunctionNameOption.IsSet)
-                writer.WriteString("functionName", getTransactionsResponseDataInnerInteractionsInner.FunctionName);
+            if (getTransactionsResponseV2DataInnerIntentInteractionsInner.FunctionNameOption.IsSet)
+                writer.WriteString("functionName", getTransactionsResponseV2DataInnerIntentInteractionsInner.FunctionName);
 
-            if (getTransactionsResponseDataInnerInteractionsInner.ToOption.IsSet)
-                writer.WriteString("to", getTransactionsResponseDataInnerInteractionsInner.To);
+            if (getTransactionsResponseV2DataInnerIntentInteractionsInner.ToOption.IsSet)
+                writer.WriteString("to", getTransactionsResponseV2DataInnerIntentInteractionsInner.To);
 
-            if (getTransactionsResponseDataInnerInteractionsInner.ValueOption.IsSet)
-                writer.WriteString("value", getTransactionsResponseDataInnerInteractionsInner.Value);
+            if (getTransactionsResponseV2DataInnerIntentInteractionsInner.ValueOption.IsSet)
+                writer.WriteString("value", getTransactionsResponseV2DataInnerIntentInteractionsInner.Value);
         }
     }
 }

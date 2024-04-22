@@ -21,6 +21,7 @@ export type GetGameResponse = {
   name: string;
   description: string | null;
   coverImageUrl: string | null;
+  backgroundImageUrl: string | null;
   logoImageUrl: string | null;
   chainIds: number[];
   depositor?: {

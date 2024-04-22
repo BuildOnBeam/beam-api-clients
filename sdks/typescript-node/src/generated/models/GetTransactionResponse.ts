@@ -40,5 +40,6 @@ export type GetTransactionResponse = {
     contract?: string;
     functionName?: string;
     functionArgs?: any[];
+    dataSuffix?: string;
   }>;
 };

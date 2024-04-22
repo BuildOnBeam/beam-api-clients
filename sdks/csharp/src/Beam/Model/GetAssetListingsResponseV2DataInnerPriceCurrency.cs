@@ -76,7 +76,12 @@ namespace Beam.Model
             /// <summary>
             /// Enum IMX for value: IMX
             /// </summary>
-            IMX = 5
+            IMX = 5,
+
+            /// <summary>
+            /// Enum WIMX for value: WIMX
+            /// </summary>
+            WIMX = 6
         }
 
         /// <summary>
@@ -102,6 +107,9 @@ namespace Beam.Model
             if (value.Equals("IMX"))
                 return SymbolEnum.IMX;
 
+            if (value.Equals("WIMX"))
+                return SymbolEnum.WIMX;
+
             throw new NotImplementedException($"Could not convert value to type SymbolEnum: '{value}'");
         }
 
@@ -126,6 +134,9 @@ namespace Beam.Model
 
             if (value.Equals("IMX"))
                 return SymbolEnum.IMX;
+
+            if (value.Equals("WIMX"))
+                return SymbolEnum.WIMX;
 
             return null;
         }
@@ -155,6 +166,9 @@ namespace Beam.Model
 
             if (value == SymbolEnum.IMX)
                 return "IMX";
+
+            if (value == SymbolEnum.WIMX)
+                return "WIMX";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }

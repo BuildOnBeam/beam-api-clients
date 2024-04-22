@@ -41,12 +41,13 @@ namespace Beam.Model
         /// <param name="name">name</param>
         /// <param name="pegiContent">pegiContent</param>
         /// <param name="updatedAt">updatedAt</param>
+        /// <param name="backgroundImageUrl">backgroundImageUrl</param>
         /// <param name="coverImageUrl">coverImageUrl</param>
         /// <param name="description">description</param>
         /// <param name="logoImageUrl">logoImageUrl</param>
         /// <param name="pegiRating">pegiRating</param>
         [JsonConstructor]
-        public RegenerateGameApiKeysResponse(List<RegenerateGameApiKeysResponseApiKeysInner> apiKeys, List<int> chainIds, DateTime createdAt, string id, string name, List<RegenerateGameApiKeysResponse.PegiContentEnum> pegiContent, DateTime updatedAt, string? coverImageUrl = default, string? description = default, string? logoImageUrl = default, PegiRatingEnum? pegiRating = default)
+        public RegenerateGameApiKeysResponse(List<RegenerateGameApiKeysResponseApiKeysInner> apiKeys, List<int> chainIds, DateTime createdAt, string id, string name, List<RegenerateGameApiKeysResponse.PegiContentEnum> pegiContent, DateTime updatedAt, string? backgroundImageUrl = default, string? coverImageUrl = default, string? description = default, string? logoImageUrl = default, PegiRatingEnum? pegiRating = default)
         {
             ApiKeys = apiKeys;
             ChainIds = chainIds;
@@ -55,6 +56,7 @@ namespace Beam.Model
             Name = name;
             PegiContent = pegiContent;
             UpdatedAt = updatedAt;
+            BackgroundImageUrl = backgroundImageUrl;
             CoverImageUrl = coverImageUrl;
             Description = description;
             LogoImageUrl = logoImageUrl;
@@ -374,6 +376,12 @@ namespace Beam.Model
         public DateTime UpdatedAt { get; set; }
 
         /// <summary>
+        /// Gets or Sets BackgroundImageUrl
+        /// </summary>
+        [JsonPropertyName("backgroundImageUrl")]
+        public string? BackgroundImageUrl { get; set; }
+
+        /// <summary>
         /// Gets or Sets CoverImageUrl
         /// </summary>
         [JsonPropertyName("coverImageUrl")]
@@ -406,6 +414,7 @@ namespace Beam.Model
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  PegiContent: ").Append(PegiContent).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
+            sb.Append("  BackgroundImageUrl: ").Append(BackgroundImageUrl).Append("\n");
             sb.Append("  CoverImageUrl: ").Append(CoverImageUrl).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  LogoImageUrl: ").Append(LogoImageUrl).Append("\n");
@@ -464,6 +473,7 @@ namespace Beam.Model
             Option<string?> name = default;
             Option<List<RegenerateGameApiKeysResponse.PegiContentEnum>?> pegiContent = default;
             Option<DateTime?> updatedAt = default;
+            Option<string?> backgroundImageUrl = default;
             Option<string?> coverImageUrl = default;
             Option<string?> description = default;
             Option<string?> logoImageUrl = default;
@@ -510,6 +520,9 @@ namespace Beam.Model
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 updatedAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
+                        case "backgroundImageUrl":
+                            backgroundImageUrl = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         case "coverImageUrl":
                             coverImageUrl = new Option<string?>(utf8JsonReader.GetString());
                             break;
@@ -551,6 +564,9 @@ namespace Beam.Model
             if (!updatedAt.IsSet)
                 throw new ArgumentException("Property is required for class RegenerateGameApiKeysResponse.", nameof(updatedAt));
 
+            if (!backgroundImageUrl.IsSet)
+                throw new ArgumentException("Property is required for class RegenerateGameApiKeysResponse.", nameof(backgroundImageUrl));
+
             if (!coverImageUrl.IsSet)
                 throw new ArgumentException("Property is required for class RegenerateGameApiKeysResponse.", nameof(coverImageUrl));
 
@@ -584,7 +600,7 @@ namespace Beam.Model
             if (updatedAt.IsSet && updatedAt.Value == null)
                 throw new ArgumentNullException(nameof(updatedAt), "Property is not nullable for class RegenerateGameApiKeysResponse.");
 
-            return new RegenerateGameApiKeysResponse(apiKeys.Value!, chainIds.Value!, createdAt.Value!.Value!, id.Value!, name.Value!, pegiContent.Value!, updatedAt.Value!.Value!, coverImageUrl.Value!, description.Value!, logoImageUrl.Value!, pegiRating.Value!);
+            return new RegenerateGameApiKeysResponse(apiKeys.Value!, chainIds.Value!, createdAt.Value!.Value!, id.Value!, name.Value!, pegiContent.Value!, updatedAt.Value!.Value!, backgroundImageUrl.Value!, coverImageUrl.Value!, description.Value!, logoImageUrl.Value!, pegiRating.Value!);
         }
 
         /// <summary>
@@ -639,6 +655,11 @@ namespace Beam.Model
             writer.WritePropertyName("pegiContent");
             JsonSerializer.Serialize(writer, regenerateGameApiKeysResponse.PegiContent, jsonSerializerOptions);
             writer.WriteString("updatedAt", regenerateGameApiKeysResponse.UpdatedAt.ToString(UpdatedAtFormat));
+
+            if (regenerateGameApiKeysResponse.BackgroundImageUrl != null)
+                writer.WriteString("backgroundImageUrl", regenerateGameApiKeysResponse.BackgroundImageUrl);
+            else
+                writer.WriteNull("backgroundImageUrl");
 
             if (regenerateGameApiKeysResponse.CoverImageUrl != null)
                 writer.WriteString("coverImageUrl", regenerateGameApiKeysResponse.CoverImageUrl);

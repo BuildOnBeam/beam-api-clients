@@ -37,7 +37,7 @@ namespace Beam.Model
         /// <param name="hash">hash</param>
         /// <param name="interactions">interactions</param>
         [JsonConstructor]
-        public GetTransactionsResponseV2DataInnerIntent(Option<string?> hash = default, Option<List<GetTransactionsResponseDataInnerInteractionsInner>?> interactions = default)
+        public GetTransactionsResponseV2DataInnerIntent(Option<string?> hash = default, Option<List<GetTransactionsResponseV2DataInnerIntentInteractionsInner>?> interactions = default)
         {
             HashOption = hash;
             InteractionsOption = interactions;
@@ -64,13 +64,13 @@ namespace Beam.Model
         /// </summary>
         [JsonIgnore]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<List<GetTransactionsResponseDataInnerInteractionsInner>?> InteractionsOption { get; private set; }
+        public Option<List<GetTransactionsResponseV2DataInnerIntentInteractionsInner>?> InteractionsOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Interactions
         /// </summary>
         [JsonPropertyName("interactions")]
-        public List<GetTransactionsResponseDataInnerInteractionsInner>? Interactions { get { return this. InteractionsOption; } set { this.InteractionsOption = new(value); } }
+        public List<GetTransactionsResponseV2DataInnerIntentInteractionsInner>? Interactions { get { return this. InteractionsOption; } set { this.InteractionsOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -120,7 +120,7 @@ namespace Beam.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<string?> hash = default;
-            Option<List<GetTransactionsResponseDataInnerInteractionsInner>?> interactions = default;
+            Option<List<GetTransactionsResponseV2DataInnerIntentInteractionsInner>?> interactions = default;
 
             while (utf8JsonReader.Read())
             {
@@ -142,7 +142,7 @@ namespace Beam.Model
                             break;
                         case "interactions":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                interactions = new Option<List<GetTransactionsResponseDataInnerInteractionsInner>?>(JsonSerializer.Deserialize<List<GetTransactionsResponseDataInnerInteractionsInner>>(ref utf8JsonReader, jsonSerializerOptions));
+                                interactions = new Option<List<GetTransactionsResponseV2DataInnerIntentInteractionsInner>?>(JsonSerializer.Deserialize<List<GetTransactionsResponseV2DataInnerIntentInteractionsInner>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;

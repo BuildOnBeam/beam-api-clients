@@ -192,7 +192,12 @@ namespace Beam.Model
             /// <summary>
             /// Enum IMX for value: IMX
             /// </summary>
-            IMX = 5
+            IMX = 5,
+
+            /// <summary>
+            /// Enum WIMX for value: WIMX
+            /// </summary>
+            WIMX = 6
         }
 
         /// <summary>
@@ -217,6 +222,9 @@ namespace Beam.Model
 
             if (value.Equals("IMX"))
                 return CurrencyEnum.IMX;
+
+            if (value.Equals("WIMX"))
+                return CurrencyEnum.WIMX;
 
             throw new NotImplementedException($"Could not convert value to type CurrencyEnum: '{value}'");
         }
@@ -243,6 +251,9 @@ namespace Beam.Model
             if (value.Equals("IMX"))
                 return CurrencyEnum.IMX;
 
+            if (value.Equals("WIMX"))
+                return CurrencyEnum.WIMX;
+
             return null;
         }
 
@@ -268,6 +279,9 @@ namespace Beam.Model
 
             if (value == CurrencyEnum.IMX)
                 return "IMX";
+
+            if (value == CurrencyEnum.WIMX)
+                return "WIMX";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }

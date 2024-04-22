@@ -41,6 +41,7 @@ export type GetTransactionsResponse = {
       contract?: string;
       functionName?: string;
       functionArgs?: any[];
+      dataSuffix?: string;
     }>;
   }>;
   pagination: {

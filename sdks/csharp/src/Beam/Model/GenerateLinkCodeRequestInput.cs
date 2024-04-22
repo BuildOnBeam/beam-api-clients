@@ -36,7 +36,7 @@ namespace Beam.Model
         /// </summary>
         /// <param name="callbackUrl">callbackUrl</param>
         [JsonConstructor]
-        public GenerateLinkCodeRequestInput(string callbackUrl)
+        public GenerateLinkCodeRequestInput(string? callbackUrl = default)
         {
             CallbackUrl = callbackUrl;
             OnCreated();
@@ -48,7 +48,7 @@ namespace Beam.Model
         /// Gets or Sets CallbackUrl
         /// </summary>
         [JsonPropertyName("callbackUrl")]
-        public string CallbackUrl { get; set; }
+        public string? CallbackUrl { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -114,7 +114,7 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "callbackUrl":
-                            callbackUrl = new Option<string?>(utf8JsonReader.GetString()!);
+                            callbackUrl = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -124,9 +124,6 @@ namespace Beam.Model
 
             if (!callbackUrl.IsSet)
                 throw new ArgumentException("Property is required for class GenerateLinkCodeRequestInput.", nameof(callbackUrl));
-
-            if (callbackUrl.IsSet && callbackUrl.Value == null)
-                throw new ArgumentNullException(nameof(callbackUrl), "Property is not nullable for class GenerateLinkCodeRequestInput.");
 
             return new GenerateLinkCodeRequestInput(callbackUrl.Value!);
         }
@@ -155,10 +152,10 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GenerateLinkCodeRequestInput generateLinkCodeRequestInput, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (generateLinkCodeRequestInput.CallbackUrl == null)
-                throw new ArgumentNullException(nameof(generateLinkCodeRequestInput.CallbackUrl), "Property is required for class GenerateLinkCodeRequestInput.");
-
-            writer.WriteString("callbackUrl", generateLinkCodeRequestInput.CallbackUrl);
+            if (generateLinkCodeRequestInput.CallbackUrl != null)
+                writer.WriteString("callbackUrl", generateLinkCodeRequestInput.CallbackUrl);
+            else
+                writer.WriteNull("callbackUrl");
         }
     }
 }
