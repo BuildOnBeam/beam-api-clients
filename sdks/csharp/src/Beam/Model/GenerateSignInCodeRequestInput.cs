@@ -36,19 +36,26 @@ namespace Beam.Model
         /// </summary>
         /// <param name="callbackUrl">callbackUrl</param>
         [JsonConstructor]
-        public GenerateSignInCodeRequestInput(string? callbackUrl = default)
+        public GenerateSignInCodeRequestInput(Option<string?> callbackUrl = default)
         {
-            CallbackUrl = callbackUrl;
+            CallbackUrlOption = callbackUrl;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
+        /// Used to track the state of CallbackUrl
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> CallbackUrlOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets CallbackUrl
         /// </summary>
         [JsonPropertyName("callbackUrl")]
-        public string? CallbackUrl { get; set; }
+        public string? CallbackUrl { get { return this. CallbackUrlOption; } set { this.CallbackUrlOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -114,7 +121,7 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "callbackUrl":
-                            callbackUrl = new Option<string?>(utf8JsonReader.GetString());
+                            callbackUrl = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         default:
                             break;
@@ -122,10 +129,10 @@ namespace Beam.Model
                 }
             }
 
-            if (!callbackUrl.IsSet)
-                throw new ArgumentException("Property is required for class GenerateSignInCodeRequestInput.", nameof(callbackUrl));
+            if (callbackUrl.IsSet && callbackUrl.Value == null)
+                throw new ArgumentNullException(nameof(callbackUrl), "Property is not nullable for class GenerateSignInCodeRequestInput.");
 
-            return new GenerateSignInCodeRequestInput(callbackUrl.Value!);
+            return new GenerateSignInCodeRequestInput(callbackUrl);
         }
 
         /// <summary>
@@ -152,10 +159,11 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GenerateSignInCodeRequestInput generateSignInCodeRequestInput, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (generateSignInCodeRequestInput.CallbackUrl != null)
+            if (generateSignInCodeRequestInput.CallbackUrlOption.IsSet && generateSignInCodeRequestInput.CallbackUrl == null)
+                throw new ArgumentNullException(nameof(generateSignInCodeRequestInput.CallbackUrl), "Property is required for class GenerateSignInCodeRequestInput.");
+
+            if (generateSignInCodeRequestInput.CallbackUrlOption.IsSet)
                 writer.WriteString("callbackUrl", generateSignInCodeRequestInput.CallbackUrl);
-            else
-                writer.WriteNull("callbackUrl");
         }
     }
 }
