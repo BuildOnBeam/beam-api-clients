@@ -4,5 +4,5 @@
 /* eslint-disable */
 
 export type GenerateSignInCodeRequestInput = {
-  callbackUrl?: string;
+  callbackUrl?: string | null;
 };

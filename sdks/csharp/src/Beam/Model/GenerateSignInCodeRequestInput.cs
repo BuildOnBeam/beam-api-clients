@@ -121,16 +121,13 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "callbackUrl":
-                            callbackUrl = new Option<string?>(utf8JsonReader.GetString()!);
+                            callbackUrl = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
                     }
                 }
             }
-
-            if (callbackUrl.IsSet && callbackUrl.Value == null)
-                throw new ArgumentNullException(nameof(callbackUrl), "Property is not nullable for class GenerateSignInCodeRequestInput.");
 
             return new GenerateSignInCodeRequestInput(callbackUrl);
         }
@@ -159,11 +156,11 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GenerateSignInCodeRequestInput generateSignInCodeRequestInput, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (generateSignInCodeRequestInput.CallbackUrlOption.IsSet && generateSignInCodeRequestInput.CallbackUrl == null)
-                throw new ArgumentNullException(nameof(generateSignInCodeRequestInput.CallbackUrl), "Property is required for class GenerateSignInCodeRequestInput.");
-
             if (generateSignInCodeRequestInput.CallbackUrlOption.IsSet)
-                writer.WriteString("callbackUrl", generateSignInCodeRequestInput.CallbackUrl);
+                if (generateSignInCodeRequestInput.CallbackUrlOption.Value != null)
+                    writer.WriteString("callbackUrl", generateSignInCodeRequestInput.CallbackUrl);
+                else
+                    writer.WriteNull("callbackUrl");
         }
     }
 }

@@ -121,16 +121,13 @@ namespace Beam.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "callbackUrl":
-                            callbackUrl = new Option<string?>(utf8JsonReader.GetString()!);
+                            callbackUrl = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
                     }
                 }
             }
-
-            if (callbackUrl.IsSet && callbackUrl.Value == null)
-                throw new ArgumentNullException(nameof(callbackUrl), "Property is not nullable for class GenerateLinkCodeRequestInput.");
 
             return new GenerateLinkCodeRequestInput(callbackUrl);
         }
@@ -159,11 +156,11 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GenerateLinkCodeRequestInput generateLinkCodeRequestInput, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (generateLinkCodeRequestInput.CallbackUrlOption.IsSet && generateLinkCodeRequestInput.CallbackUrl == null)
-                throw new ArgumentNullException(nameof(generateLinkCodeRequestInput.CallbackUrl), "Property is required for class GenerateLinkCodeRequestInput.");
-
             if (generateLinkCodeRequestInput.CallbackUrlOption.IsSet)
-                writer.WriteString("callbackUrl", generateLinkCodeRequestInput.CallbackUrl);
+                if (generateLinkCodeRequestInput.CallbackUrlOption.Value != null)
+                    writer.WriteString("callbackUrl", generateLinkCodeRequestInput.CallbackUrl);
+                else
+                    writer.WriteNull("callbackUrl");
         }
     }
 }
