@@ -44,10 +44,9 @@ namespace Beam.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="generateLinkCodeRequestInput"></param>
         /// <param name="entityId"></param>
-        /// <param name="xApiKey"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateConnectionRequestApiResponse"/>&gt;</returns>
-        Task<ICreateConnectionRequestApiResponse> CreateConnectionRequestAsync(GenerateLinkCodeRequestInput generateLinkCodeRequestInput, string entityId, string xApiKey, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICreateConnectionRequestApiResponse> CreateConnectionRequestAsync(GenerateLinkCodeRequestInput generateLinkCodeRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Generates a challenge which can be encoded in a QR code / app link for the user to take control of the profile
@@ -57,10 +56,9 @@ namespace Beam.Api
         /// </remarks>
         /// <param name="generateLinkCodeRequestInput"></param>
         /// <param name="entityId"></param>
-        /// <param name="xApiKey"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateConnectionRequestApiResponse"/>?&gt;</returns>
-        Task<ICreateConnectionRequestApiResponse?> CreateConnectionRequestOrDefaultAsync(GenerateLinkCodeRequestInput generateLinkCodeRequestInput, string entityId, string xApiKey, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICreateConnectionRequestApiResponse?> CreateConnectionRequestOrDefaultAsync(GenerateLinkCodeRequestInput generateLinkCodeRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Creating a profile
@@ -94,10 +92,9 @@ namespace Beam.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="generateSignInCodeRequestInput"></param>
         /// <param name="entityId"></param>
-        /// <param name="xApiKey"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateSignInRequestApiResponse"/>&gt;</returns>
-        Task<ICreateSignInRequestApiResponse> CreateSignInRequestAsync(GenerateSignInCodeRequestInput generateSignInCodeRequestInput, string entityId, string xApiKey, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICreateSignInRequestApiResponse> CreateSignInRequestAsync(GenerateSignInCodeRequestInput generateSignInCodeRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Generates a challenge which can be encoded in a QR code / app link for the user to sign in to the game
@@ -107,10 +104,9 @@ namespace Beam.Api
         /// </remarks>
         /// <param name="generateSignInCodeRequestInput"></param>
         /// <param name="entityId"></param>
-        /// <param name="xApiKey"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateSignInRequestApiResponse"/>?&gt;</returns>
-        Task<ICreateSignInRequestApiResponse?> CreateSignInRequestOrDefaultAsync(GenerateSignInCodeRequestInput generateSignInCodeRequestInput, string entityId, string xApiKey, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICreateSignInRequestApiResponse?> CreateSignInRequestOrDefaultAsync(GenerateSignInCodeRequestInput generateSignInCodeRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Getting all profiles
@@ -431,25 +427,21 @@ namespace Beam.Api
             ApiKeyProvider = apiKeyProvider;
         }
 
-        partial void FormatCreateConnectionRequest(GenerateLinkCodeRequestInput generateLinkCodeRequestInput, ref string entityId, ref string xApiKey);
+        partial void FormatCreateConnectionRequest(GenerateLinkCodeRequestInput generateLinkCodeRequestInput, ref string entityId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
         /// <param name="generateLinkCodeRequestInput"></param>
         /// <param name="entityId"></param>
-        /// <param name="xApiKey"></param>
         /// <returns></returns>
-        private void ValidateCreateConnectionRequest(GenerateLinkCodeRequestInput generateLinkCodeRequestInput, string entityId, string xApiKey)
+        private void ValidateCreateConnectionRequest(GenerateLinkCodeRequestInput generateLinkCodeRequestInput, string entityId)
         {
             if (generateLinkCodeRequestInput == null)
                 throw new ArgumentNullException(nameof(generateLinkCodeRequestInput));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
-
-            if (xApiKey == null)
-                throw new ArgumentNullException(nameof(xApiKey));
         }
 
         /// <summary>
@@ -458,11 +450,10 @@ namespace Beam.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="generateLinkCodeRequestInput"></param>
         /// <param name="entityId"></param>
-        /// <param name="xApiKey"></param>
-        private void AfterCreateConnectionRequestDefaultImplementation(ICreateConnectionRequestApiResponse apiResponseLocalVar, GenerateLinkCodeRequestInput generateLinkCodeRequestInput, string entityId, string xApiKey)
+        private void AfterCreateConnectionRequestDefaultImplementation(ICreateConnectionRequestApiResponse apiResponseLocalVar, GenerateLinkCodeRequestInput generateLinkCodeRequestInput, string entityId)
         {
             bool suppressDefaultLog = false;
-            AfterCreateConnectionRequest(ref suppressDefaultLog, apiResponseLocalVar, generateLinkCodeRequestInput, entityId, xApiKey);
+            AfterCreateConnectionRequest(ref suppressDefaultLog, apiResponseLocalVar, generateLinkCodeRequestInput, entityId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -474,8 +465,7 @@ namespace Beam.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="generateLinkCodeRequestInput"></param>
         /// <param name="entityId"></param>
-        /// <param name="xApiKey"></param>
-        partial void AfterCreateConnectionRequest(ref bool suppressDefaultLog, ICreateConnectionRequestApiResponse apiResponseLocalVar, GenerateLinkCodeRequestInput generateLinkCodeRequestInput, string entityId, string xApiKey);
+        partial void AfterCreateConnectionRequest(ref bool suppressDefaultLog, ICreateConnectionRequestApiResponse apiResponseLocalVar, GenerateLinkCodeRequestInput generateLinkCodeRequestInput, string entityId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -485,11 +475,10 @@ namespace Beam.Api
         /// <param name="path"></param>
         /// <param name="generateLinkCodeRequestInput"></param>
         /// <param name="entityId"></param>
-        /// <param name="xApiKey"></param>
-        private void OnErrorCreateConnectionRequestDefaultImplementation(Exception exception, string pathFormat, string path, GenerateLinkCodeRequestInput generateLinkCodeRequestInput, string entityId, string xApiKey)
+        private void OnErrorCreateConnectionRequestDefaultImplementation(Exception exception, string pathFormat, string path, GenerateLinkCodeRequestInput generateLinkCodeRequestInput, string entityId)
         {
             bool suppressDefaultLog = false;
-            OnErrorCreateConnectionRequest(ref suppressDefaultLog, exception, pathFormat, path, generateLinkCodeRequestInput, entityId, xApiKey);
+            OnErrorCreateConnectionRequest(ref suppressDefaultLog, exception, pathFormat, path, generateLinkCodeRequestInput, entityId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -503,22 +492,20 @@ namespace Beam.Api
         /// <param name="path"></param>
         /// <param name="generateLinkCodeRequestInput"></param>
         /// <param name="entityId"></param>
-        /// <param name="xApiKey"></param>
-        partial void OnErrorCreateConnectionRequest(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, GenerateLinkCodeRequestInput generateLinkCodeRequestInput, string entityId, string xApiKey);
+        partial void OnErrorCreateConnectionRequest(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, GenerateLinkCodeRequestInput generateLinkCodeRequestInput, string entityId);
 
         /// <summary>
         /// Generates a challenge which can be encoded in a QR code / app link for the user to take control of the profile 
         /// </summary>
         /// <param name="generateLinkCodeRequestInput"></param>
         /// <param name="entityId"></param>
-        /// <param name="xApiKey"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateConnectionRequestApiResponse"/>&gt;</returns>
-        public async Task<ICreateConnectionRequestApiResponse?> CreateConnectionRequestOrDefaultAsync(GenerateLinkCodeRequestInput generateLinkCodeRequestInput, string entityId, string xApiKey, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICreateConnectionRequestApiResponse?> CreateConnectionRequestOrDefaultAsync(GenerateLinkCodeRequestInput generateLinkCodeRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await CreateConnectionRequestAsync(generateLinkCodeRequestInput, entityId, xApiKey, cancellationToken).ConfigureAwait(false);
+                return await CreateConnectionRequestAsync(generateLinkCodeRequestInput, entityId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -532,18 +519,17 @@ namespace Beam.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="generateLinkCodeRequestInput"></param>
         /// <param name="entityId"></param>
-        /// <param name="xApiKey"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateConnectionRequestApiResponse"/>&gt;</returns>
-        public async Task<ICreateConnectionRequestApiResponse> CreateConnectionRequestAsync(GenerateLinkCodeRequestInput generateLinkCodeRequestInput, string entityId, string xApiKey, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICreateConnectionRequestApiResponse> CreateConnectionRequestAsync(GenerateLinkCodeRequestInput generateLinkCodeRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateCreateConnectionRequest(generateLinkCodeRequestInput, entityId, xApiKey);
+                ValidateCreateConnectionRequest(generateLinkCodeRequestInput, entityId);
 
-                FormatCreateConnectionRequest(generateLinkCodeRequestInput, ref entityId, ref xApiKey);
+                FormatCreateConnectionRequest(generateLinkCodeRequestInput, ref entityId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -552,8 +538,6 @@ namespace Beam.Api
                     uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/profiles/{entityId}/create-connection-request";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
-
-                    httpRequestMessageLocalVar.Headers.Add("x-api-key", ClientUtils.ParameterToString(xApiKey));
 
                     httpRequestMessageLocalVar.Content = (generateLinkCodeRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
@@ -596,7 +580,7 @@ namespace Beam.Api
 
                         CreateConnectionRequestApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/profiles/{entityId}/create-connection-request", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterCreateConnectionRequestDefaultImplementation(apiResponseLocalVar, generateLinkCodeRequestInput, entityId, xApiKey);
+                        AfterCreateConnectionRequestDefaultImplementation(apiResponseLocalVar, generateLinkCodeRequestInput, entityId);
 
                         Events.ExecuteOnCreateConnectionRequest(apiResponseLocalVar);
 
@@ -610,7 +594,7 @@ namespace Beam.Api
             }
             catch(Exception e)
             {
-                OnErrorCreateConnectionRequestDefaultImplementation(e, "/v1/profiles/{entityId}/create-connection-request", uriBuilderLocalVar.Path, generateLinkCodeRequestInput, entityId, xApiKey);
+                OnErrorCreateConnectionRequestDefaultImplementation(e, "/v1/profiles/{entityId}/create-connection-request", uriBuilderLocalVar.Path, generateLinkCodeRequestInput, entityId);
                 Events.ExecuteOnErrorCreateConnectionRequest(e);
                 throw;
             }
@@ -932,25 +916,21 @@ namespace Beam.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatCreateSignInRequest(GenerateSignInCodeRequestInput generateSignInCodeRequestInput, ref string entityId, ref string xApiKey);
+        partial void FormatCreateSignInRequest(GenerateSignInCodeRequestInput generateSignInCodeRequestInput, ref string entityId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
         /// <param name="generateSignInCodeRequestInput"></param>
         /// <param name="entityId"></param>
-        /// <param name="xApiKey"></param>
         /// <returns></returns>
-        private void ValidateCreateSignInRequest(GenerateSignInCodeRequestInput generateSignInCodeRequestInput, string entityId, string xApiKey)
+        private void ValidateCreateSignInRequest(GenerateSignInCodeRequestInput generateSignInCodeRequestInput, string entityId)
         {
             if (generateSignInCodeRequestInput == null)
                 throw new ArgumentNullException(nameof(generateSignInCodeRequestInput));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
-
-            if (xApiKey == null)
-                throw new ArgumentNullException(nameof(xApiKey));
         }
 
         /// <summary>
@@ -959,11 +939,10 @@ namespace Beam.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="generateSignInCodeRequestInput"></param>
         /// <param name="entityId"></param>
-        /// <param name="xApiKey"></param>
-        private void AfterCreateSignInRequestDefaultImplementation(ICreateSignInRequestApiResponse apiResponseLocalVar, GenerateSignInCodeRequestInput generateSignInCodeRequestInput, string entityId, string xApiKey)
+        private void AfterCreateSignInRequestDefaultImplementation(ICreateSignInRequestApiResponse apiResponseLocalVar, GenerateSignInCodeRequestInput generateSignInCodeRequestInput, string entityId)
         {
             bool suppressDefaultLog = false;
-            AfterCreateSignInRequest(ref suppressDefaultLog, apiResponseLocalVar, generateSignInCodeRequestInput, entityId, xApiKey);
+            AfterCreateSignInRequest(ref suppressDefaultLog, apiResponseLocalVar, generateSignInCodeRequestInput, entityId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -975,8 +954,7 @@ namespace Beam.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="generateSignInCodeRequestInput"></param>
         /// <param name="entityId"></param>
-        /// <param name="xApiKey"></param>
-        partial void AfterCreateSignInRequest(ref bool suppressDefaultLog, ICreateSignInRequestApiResponse apiResponseLocalVar, GenerateSignInCodeRequestInput generateSignInCodeRequestInput, string entityId, string xApiKey);
+        partial void AfterCreateSignInRequest(ref bool suppressDefaultLog, ICreateSignInRequestApiResponse apiResponseLocalVar, GenerateSignInCodeRequestInput generateSignInCodeRequestInput, string entityId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -986,11 +964,10 @@ namespace Beam.Api
         /// <param name="path"></param>
         /// <param name="generateSignInCodeRequestInput"></param>
         /// <param name="entityId"></param>
-        /// <param name="xApiKey"></param>
-        private void OnErrorCreateSignInRequestDefaultImplementation(Exception exception, string pathFormat, string path, GenerateSignInCodeRequestInput generateSignInCodeRequestInput, string entityId, string xApiKey)
+        private void OnErrorCreateSignInRequestDefaultImplementation(Exception exception, string pathFormat, string path, GenerateSignInCodeRequestInput generateSignInCodeRequestInput, string entityId)
         {
             bool suppressDefaultLog = false;
-            OnErrorCreateSignInRequest(ref suppressDefaultLog, exception, pathFormat, path, generateSignInCodeRequestInput, entityId, xApiKey);
+            OnErrorCreateSignInRequest(ref suppressDefaultLog, exception, pathFormat, path, generateSignInCodeRequestInput, entityId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -1004,22 +981,20 @@ namespace Beam.Api
         /// <param name="path"></param>
         /// <param name="generateSignInCodeRequestInput"></param>
         /// <param name="entityId"></param>
-        /// <param name="xApiKey"></param>
-        partial void OnErrorCreateSignInRequest(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, GenerateSignInCodeRequestInput generateSignInCodeRequestInput, string entityId, string xApiKey);
+        partial void OnErrorCreateSignInRequest(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, GenerateSignInCodeRequestInput generateSignInCodeRequestInput, string entityId);
 
         /// <summary>
         /// Generates a challenge which can be encoded in a QR code / app link for the user to sign in to the game 
         /// </summary>
         /// <param name="generateSignInCodeRequestInput"></param>
         /// <param name="entityId"></param>
-        /// <param name="xApiKey"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateSignInRequestApiResponse"/>&gt;</returns>
-        public async Task<ICreateSignInRequestApiResponse?> CreateSignInRequestOrDefaultAsync(GenerateSignInCodeRequestInput generateSignInCodeRequestInput, string entityId, string xApiKey, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICreateSignInRequestApiResponse?> CreateSignInRequestOrDefaultAsync(GenerateSignInCodeRequestInput generateSignInCodeRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await CreateSignInRequestAsync(generateSignInCodeRequestInput, entityId, xApiKey, cancellationToken).ConfigureAwait(false);
+                return await CreateSignInRequestAsync(generateSignInCodeRequestInput, entityId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -1033,18 +1008,17 @@ namespace Beam.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="generateSignInCodeRequestInput"></param>
         /// <param name="entityId"></param>
-        /// <param name="xApiKey"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateSignInRequestApiResponse"/>&gt;</returns>
-        public async Task<ICreateSignInRequestApiResponse> CreateSignInRequestAsync(GenerateSignInCodeRequestInput generateSignInCodeRequestInput, string entityId, string xApiKey, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICreateSignInRequestApiResponse> CreateSignInRequestAsync(GenerateSignInCodeRequestInput generateSignInCodeRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateCreateSignInRequest(generateSignInCodeRequestInput, entityId, xApiKey);
+                ValidateCreateSignInRequest(generateSignInCodeRequestInput, entityId);
 
-                FormatCreateSignInRequest(generateSignInCodeRequestInput, ref entityId, ref xApiKey);
+                FormatCreateSignInRequest(generateSignInCodeRequestInput, ref entityId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -1053,8 +1027,6 @@ namespace Beam.Api
                     uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/profiles/{entityId}/create-sign-in-request";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
-
-                    httpRequestMessageLocalVar.Headers.Add("x-api-key", ClientUtils.ParameterToString(xApiKey));
 
                     httpRequestMessageLocalVar.Content = (generateSignInCodeRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
@@ -1097,7 +1069,7 @@ namespace Beam.Api
 
                         CreateSignInRequestApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/profiles/{entityId}/create-sign-in-request", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterCreateSignInRequestDefaultImplementation(apiResponseLocalVar, generateSignInCodeRequestInput, entityId, xApiKey);
+                        AfterCreateSignInRequestDefaultImplementation(apiResponseLocalVar, generateSignInCodeRequestInput, entityId);
 
                         Events.ExecuteOnCreateSignInRequest(apiResponseLocalVar);
 
@@ -1111,7 +1083,7 @@ namespace Beam.Api
             }
             catch(Exception e)
             {
-                OnErrorCreateSignInRequestDefaultImplementation(e, "/v1/profiles/{entityId}/create-sign-in-request", uriBuilderLocalVar.Path, generateSignInCodeRequestInput, entityId, xApiKey);
+                OnErrorCreateSignInRequestDefaultImplementation(e, "/v1/profiles/{entityId}/create-sign-in-request", uriBuilderLocalVar.Path, generateSignInCodeRequestInput, entityId);
                 Events.ExecuteOnErrorCreateSignInRequest(e);
                 throw;
             }

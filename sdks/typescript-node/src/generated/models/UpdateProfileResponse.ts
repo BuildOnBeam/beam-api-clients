@@ -20,6 +20,6 @@ export type UpdateProfileResponse = {
     address: string;
     chainId: number;
     profileId: string | null;
-    playerProfileId: string | null;
+    userId: string | null;
   }>;
 };

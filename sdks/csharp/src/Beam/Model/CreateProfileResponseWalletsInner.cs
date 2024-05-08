@@ -39,20 +39,20 @@ namespace Beam.Model
         /// <param name="externalId">externalId</param>
         /// <param name="id">id</param>
         /// <param name="createdAt">createdAt</param>
-        /// <param name="playerProfileId">playerProfileId</param>
         /// <param name="profileId">profileId</param>
         /// <param name="updatedAt">updatedAt</param>
+        /// <param name="userId">userId</param>
         [JsonConstructor]
-        public CreateProfileResponseWalletsInner(string address, int chainId, string externalId, string id, Object? createdAt = default, string? playerProfileId = default, string? profileId = default, Object? updatedAt = default)
+        public CreateProfileResponseWalletsInner(string address, int chainId, string externalId, string id, Object? createdAt = default, string? profileId = default, Object? updatedAt = default, string? userId = default)
         {
             Address = address;
             ChainId = chainId;
             ExternalId = externalId;
             Id = id;
             CreatedAt = createdAt;
-            PlayerProfileId = playerProfileId;
             ProfileId = profileId;
             UpdatedAt = updatedAt;
+            UserId = userId;
             OnCreated();
         }
 
@@ -89,12 +89,6 @@ namespace Beam.Model
         public Object? CreatedAt { get; set; }
 
         /// <summary>
-        /// Gets or Sets PlayerProfileId
-        /// </summary>
-        [JsonPropertyName("playerProfileId")]
-        public string? PlayerProfileId { get; set; }
-
-        /// <summary>
         /// Gets or Sets ProfileId
         /// </summary>
         [JsonPropertyName("profileId")]
@@ -105,6 +99,12 @@ namespace Beam.Model
         /// </summary>
         [JsonPropertyName("updatedAt")]
         public Object? UpdatedAt { get; set; }
+
+        /// <summary>
+        /// Gets or Sets UserId
+        /// </summary>
+        [JsonPropertyName("userId")]
+        public string? UserId { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -119,9 +119,9 @@ namespace Beam.Model
             sb.Append("  ExternalId: ").Append(ExternalId).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
-            sb.Append("  PlayerProfileId: ").Append(PlayerProfileId).Append("\n");
             sb.Append("  ProfileId: ").Append(ProfileId).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
+            sb.Append("  UserId: ").Append(UserId).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -164,9 +164,9 @@ namespace Beam.Model
             Option<string?> externalId = default;
             Option<string?> id = default;
             Option<Object?> createdAt = default;
-            Option<string?> playerProfileId = default;
             Option<string?> profileId = default;
             Option<Object?> updatedAt = default;
+            Option<string?> userId = default;
 
             while (utf8JsonReader.Read())
             {
@@ -200,15 +200,15 @@ namespace Beam.Model
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 createdAt = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
-                        case "playerProfileId":
-                            playerProfileId = new Option<string?>(utf8JsonReader.GetString());
-                            break;
                         case "profileId":
                             profileId = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "updatedAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 updatedAt = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "userId":
+                            userId = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -231,14 +231,14 @@ namespace Beam.Model
             if (!createdAt.IsSet)
                 throw new ArgumentException("Property is required for class CreateProfileResponseWalletsInner.", nameof(createdAt));
 
-            if (!playerProfileId.IsSet)
-                throw new ArgumentException("Property is required for class CreateProfileResponseWalletsInner.", nameof(playerProfileId));
-
             if (!profileId.IsSet)
                 throw new ArgumentException("Property is required for class CreateProfileResponseWalletsInner.", nameof(profileId));
 
             if (!updatedAt.IsSet)
                 throw new ArgumentException("Property is required for class CreateProfileResponseWalletsInner.", nameof(updatedAt));
+
+            if (!userId.IsSet)
+                throw new ArgumentException("Property is required for class CreateProfileResponseWalletsInner.", nameof(userId));
 
             if (address.IsSet && address.Value == null)
                 throw new ArgumentNullException(nameof(address), "Property is not nullable for class CreateProfileResponseWalletsInner.");
@@ -252,7 +252,7 @@ namespace Beam.Model
             if (id.IsSet && id.Value == null)
                 throw new ArgumentNullException(nameof(id), "Property is not nullable for class CreateProfileResponseWalletsInner.");
 
-            return new CreateProfileResponseWalletsInner(address.Value!, chainId.Value!.Value!, externalId.Value!, id.Value!, createdAt.Value!, playerProfileId.Value!, profileId.Value!, updatedAt.Value!);
+            return new CreateProfileResponseWalletsInner(address.Value!, chainId.Value!.Value!, externalId.Value!, id.Value!, createdAt.Value!, profileId.Value!, updatedAt.Value!, userId.Value!);
         }
 
         /// <summary>
@@ -303,11 +303,6 @@ namespace Beam.Model
             }
             else
                 writer.WriteNull("createdAt");
-            if (createProfileResponseWalletsInner.PlayerProfileId != null)
-                writer.WriteString("playerProfileId", createProfileResponseWalletsInner.PlayerProfileId);
-            else
-                writer.WriteNull("playerProfileId");
-
             if (createProfileResponseWalletsInner.ProfileId != null)
                 writer.WriteString("profileId", createProfileResponseWalletsInner.ProfileId);
             else
@@ -320,6 +315,10 @@ namespace Beam.Model
             }
             else
                 writer.WriteNull("updatedAt");
+            if (createProfileResponseWalletsInner.UserId != null)
+                writer.WriteString("userId", createProfileResponseWalletsInner.UserId);
+            else
+                writer.WriteNull("userId");
         }
     }
 }

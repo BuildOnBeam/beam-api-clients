@@ -28,9 +28,7 @@ export { CreateAssetOfferRequestInputV2 } from './models/CreateAssetOfferRequest
 export type { CreateOfferResponseV2 } from './models/CreateOfferResponseV2';
 export type { CreateProfileRequestInput } from './models/CreateProfileRequestInput';
 export type { CreateProfileResponse } from './models/CreateProfileResponse';
-export type { CreateTransactionRequestInput } from './models/CreateTransactionRequestInput';
 export type { CreateTransactionRequestInputV2 } from './models/CreateTransactionRequestInputV2';
-export type { CreateTransactionResponse } from './models/CreateTransactionResponse';
 export type { CreateTransactionResponseV2 } from './models/CreateTransactionResponseV2';
 export type { CreateWebhookForGame } from './models/CreateWebhookForGame';
 export type { GenerateLinkCodeRequestInput } from './models/GenerateLinkCodeRequestInput';
@@ -57,9 +55,7 @@ export type { GetProfileCurrenciesResponseV2 } from './models/GetProfileCurrenci
 export type { GetProfileNativeCurrencyResponseV2 } from './models/GetProfileNativeCurrencyResponseV2';
 export type { GetProfileResponse } from './models/GetProfileResponse';
 export type { GetQuoteResponse } from './models/GetQuoteResponse';
-export type { GetTransactionResponse } from './models/GetTransactionResponse';
 export type { GetTransactionResponseV2 } from './models/GetTransactionResponseV2';
-export type { GetTransactionsResponse } from './models/GetTransactionsResponse';
 export type { GetTransactionsResponseV2 } from './models/GetTransactionsResponseV2';
 export type { GetWebhooksForGameResponse } from './models/GetWebhooksForGameResponse';
 export { RegenerateGameApiKeysResponse } from './models/RegenerateGameApiKeysResponse';
@@ -90,6 +86,5 @@ export { PolicyService } from './services/PolicyService';
 export { ProfilesService } from './services/ProfilesService';
 export { ReportingService } from './services/ReportingService';
 export { TradingService } from './services/TradingService';
-export { TransactionsService } from './services/TransactionsService';
 export { TransactionsV2Service } from './services/TransactionsV2Service';
 export { WebhooksService } from './services/WebhooksService';

@@ -37,18 +37,18 @@ namespace Beam.Model
         /// <param name="email">email</param>
         /// <param name="id">id</param>
         /// <param name="createdAt">createdAt</param>
-        /// <param name="externalId">externalId</param>
         /// <param name="lastSeenAt">lastSeenAt</param>
         /// <param name="name">name</param>
+        /// <param name="supabaseId">supabaseId</param>
         [JsonConstructor]
-        public GetGameResponseDevelopersInnerDeveloper(string email, string id, Object? createdAt = default, string? externalId = default, Object? lastSeenAt = default, string? name = default)
+        public GetGameResponseDevelopersInnerDeveloper(string email, string id, Object? createdAt = default, Object? lastSeenAt = default, string? name = default, string? supabaseId = default)
         {
             Email = email;
             Id = id;
             CreatedAt = createdAt;
-            ExternalId = externalId;
             LastSeenAt = lastSeenAt;
             Name = name;
+            SupabaseId = supabaseId;
             OnCreated();
         }
 
@@ -73,12 +73,6 @@ namespace Beam.Model
         public Object? CreatedAt { get; set; }
 
         /// <summary>
-        /// Gets or Sets ExternalId
-        /// </summary>
-        [JsonPropertyName("externalId")]
-        public string? ExternalId { get; set; }
-
-        /// <summary>
         /// Gets or Sets LastSeenAt
         /// </summary>
         [JsonPropertyName("lastSeenAt")]
@@ -91,6 +85,12 @@ namespace Beam.Model
         public string? Name { get; set; }
 
         /// <summary>
+        /// Gets or Sets SupabaseId
+        /// </summary>
+        [JsonPropertyName("supabaseId")]
+        public string? SupabaseId { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -101,9 +101,9 @@ namespace Beam.Model
             sb.Append("  Email: ").Append(Email).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
-            sb.Append("  ExternalId: ").Append(ExternalId).Append("\n");
             sb.Append("  LastSeenAt: ").Append(LastSeenAt).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  SupabaseId: ").Append(SupabaseId).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -144,9 +144,9 @@ namespace Beam.Model
             Option<string?> email = default;
             Option<string?> id = default;
             Option<Object?> createdAt = default;
-            Option<string?> externalId = default;
             Option<Object?> lastSeenAt = default;
             Option<string?> name = default;
+            Option<string?> supabaseId = default;
 
             while (utf8JsonReader.Read())
             {
@@ -173,15 +173,15 @@ namespace Beam.Model
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 createdAt = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
-                        case "externalId":
-                            externalId = new Option<string?>(utf8JsonReader.GetString());
-                            break;
                         case "lastSeenAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 lastSeenAt = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "name":
                             name = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "supabaseId":
+                            supabaseId = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -198,14 +198,14 @@ namespace Beam.Model
             if (!createdAt.IsSet)
                 throw new ArgumentException("Property is required for class GetGameResponseDevelopersInnerDeveloper.", nameof(createdAt));
 
-            if (!externalId.IsSet)
-                throw new ArgumentException("Property is required for class GetGameResponseDevelopersInnerDeveloper.", nameof(externalId));
-
             if (!lastSeenAt.IsSet)
                 throw new ArgumentException("Property is required for class GetGameResponseDevelopersInnerDeveloper.", nameof(lastSeenAt));
 
             if (!name.IsSet)
                 throw new ArgumentException("Property is required for class GetGameResponseDevelopersInnerDeveloper.", nameof(name));
+
+            if (!supabaseId.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponseDevelopersInnerDeveloper.", nameof(supabaseId));
 
             if (email.IsSet && email.Value == null)
                 throw new ArgumentNullException(nameof(email), "Property is not nullable for class GetGameResponseDevelopersInnerDeveloper.");
@@ -213,7 +213,7 @@ namespace Beam.Model
             if (id.IsSet && id.Value == null)
                 throw new ArgumentNullException(nameof(id), "Property is not nullable for class GetGameResponseDevelopersInnerDeveloper.");
 
-            return new GetGameResponseDevelopersInnerDeveloper(email.Value!, id.Value!, createdAt.Value!, externalId.Value!, lastSeenAt.Value!, name.Value!);
+            return new GetGameResponseDevelopersInnerDeveloper(email.Value!, id.Value!, createdAt.Value!, lastSeenAt.Value!, name.Value!, supabaseId.Value!);
         }
 
         /// <summary>
@@ -257,11 +257,6 @@ namespace Beam.Model
             }
             else
                 writer.WriteNull("createdAt");
-            if (getGameResponseDevelopersInnerDeveloper.ExternalId != null)
-                writer.WriteString("externalId", getGameResponseDevelopersInnerDeveloper.ExternalId);
-            else
-                writer.WriteNull("externalId");
-
             if (getGameResponseDevelopersInnerDeveloper.LastSeenAt != null)
             {
                 writer.WritePropertyName("lastSeenAt");
@@ -273,6 +268,11 @@ namespace Beam.Model
                 writer.WriteString("name", getGameResponseDevelopersInnerDeveloper.Name);
             else
                 writer.WriteNull("name");
+
+            if (getGameResponseDevelopersInnerDeveloper.SupabaseId != null)
+                writer.WriteString("supabaseId", getGameResponseDevelopersInnerDeveloper.SupabaseId);
+            else
+                writer.WriteNull("supabaseId");
         }
     }
 }

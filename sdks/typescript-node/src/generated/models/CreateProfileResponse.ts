@@ -20,6 +20,6 @@ export type CreateProfileResponse = {
     address: string;
     chainId: number;
     profileId: string | null;
-    playerProfileId: string | null;
+    userId: string | null;
   }>;
 };

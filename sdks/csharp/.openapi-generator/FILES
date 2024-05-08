@@ -15,7 +15,6 @@ src/Beam/Api/PolicyApi.cs
 src/Beam/Api/ProfilesApi.cs
 src/Beam/Api/ReportingApi.cs
 src/Beam/Api/TradingApi.cs
-src/Beam/Api/TransactionsApi.cs
 src/Beam/Api/TransactionsV2Api.cs
 src/Beam/Api/WebhooksApi.cs
 src/Beam/Client/ApiException.cs
@@ -62,10 +61,8 @@ src/Beam/Model/CreateOfferResponseV2.cs
 src/Beam/Model/CreateProfileRequestInput.cs
 src/Beam/Model/CreateProfileResponse.cs
 src/Beam/Model/CreateProfileResponseWalletsInner.cs
-src/Beam/Model/CreateTransactionRequestInput.cs
 src/Beam/Model/CreateTransactionRequestInputV2.cs
 src/Beam/Model/CreateTransactionRequestInputV2InteractionsInner.cs
-src/Beam/Model/CreateTransactionResponse.cs
 src/Beam/Model/CreateTransactionResponseV2.cs
 src/Beam/Model/CreateWebhookForGame.cs
 src/Beam/Model/GenerateLinkCodeRequestInput.cs
@@ -119,16 +116,10 @@ src/Beam/Model/GetProfileNativeCurrencyResponseV2.cs
 src/Beam/Model/GetProfileNativeCurrencyResponseV2NativeTokenBalance.cs
 src/Beam/Model/GetProfileResponse.cs
 src/Beam/Model/GetQuoteResponse.cs
-src/Beam/Model/GetTransactionResponse.cs
 src/Beam/Model/GetTransactionResponseV2.cs
 src/Beam/Model/GetTransactionResponseV2Policy.cs
 src/Beam/Model/GetTransactionResponseV2Profile.cs
 src/Beam/Model/GetTransactionResponseV2ProfileWallet.cs
-src/Beam/Model/GetTransactionsResponse.cs
-src/Beam/Model/GetTransactionsResponseDataInner.cs
-src/Beam/Model/GetTransactionsResponseDataInnerInteractionsInner.cs
-src/Beam/Model/GetTransactionsResponseDataInnerResponse.cs
-src/Beam/Model/GetTransactionsResponseDataInnerResponseLogsInner.cs
 src/Beam/Model/GetTransactionsResponseV2.cs
 src/Beam/Model/GetTransactionsResponseV2DataInner.cs
 src/Beam/Model/GetTransactionsResponseV2DataInnerIntent.cs

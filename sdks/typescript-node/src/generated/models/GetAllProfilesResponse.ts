@@ -21,7 +21,7 @@ export type GetAllProfilesResponse = {
       address: string;
       chainId: number;
       profileId: string | null;
-      playerProfileId: string | null;
+      userId: string | null;
     }>;
   }>;
   pagination: {

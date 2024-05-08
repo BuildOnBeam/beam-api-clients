@@ -21,8 +21,8 @@ export type GetGameResponse = {
   name: string;
   description: string | null;
   coverImageUrl: string | null;
-  backgroundImageUrl: string | null;
   logoImageUrl: string | null;
+  backgroundImageUrl: string | null;
   chainIds: number[];
   depositor?: {
     id: string;
@@ -43,7 +43,7 @@ export type GetGameResponse = {
       email: string;
       createdAt: any;
       lastSeenAt: any;
-      externalId: string | null;
+      supabaseId: string | null;
     };
   }>;
   contracts: Array<{
