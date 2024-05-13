@@ -2,7 +2,7 @@
   "name": "@onbeam/sdk",
   "scripts": {
     "generate": "pnpm generate:csharp && pnpm generate:node",
-    "generate:csharp": "openapi-generator-cli generate",
+    "generate:csharp": "rm -rf ./sdks/csharp/src/Beam/Api && rm -rf ./sdks/csharp/src/Beam/Model && openapi-generator-cli generate",
     "generate:node": "pnpm --filter @onbeam/node generate && pnpm validate:lint:fix",
     "validate:format": "biome format .",
     "validate:format:fix": "pnpm validate:format --write",
