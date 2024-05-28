@@ -13,4 +13,5 @@ export type ConvertTokenRequestInput = {
   sponsor?: boolean;
   policyId?: string | null;
   chainId?: number;
+  operationId?: string | null;
 };

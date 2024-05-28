@@ -19,7 +19,7 @@ import { TradingService } from './services/TradingService';
 import { TransactionsV2Service } from './services/TransactionsV2Service';
 import { WebhooksService } from './services/WebhooksService';
 
-type HttpRequestConstructor = new (_config: OpenAPIConfig) => BaseHttpRequest;
+type HttpRequestConstructor = new (config: OpenAPIConfig) => BaseHttpRequest;
 
 export class ApiClient {
   public readonly assetsV2: AssetsV2Service;

@@ -3,8 +3,8 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { ConvertTokenRequestInput } from '../models/ConvertTokenRequestInput';
-import type { ConvertTokenResponse } from '../models/ConvertTokenResponse';
 import type { GetQuoteResponse } from '../models/GetQuoteResponse';
+import type { OperationResponse } from '../models/OperationResponse';
 
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -29,7 +29,7 @@ export class ExchangeService {
   ): CancelablePromise<GetQuoteResponse> {
     return this.httpRequest.request({
       method: 'GET',
-      url: '/v1/exchange/quote/input',
+      url: '/v1/self-custody/exchange/quote/input',
       query: {
         tokenIn: tokenIn,
         tokenOut: tokenOut,
@@ -56,7 +56,7 @@ export class ExchangeService {
   ): CancelablePromise<GetQuoteResponse> {
     return this.httpRequest.request({
       method: 'GET',
-      url: '/v1/exchange/quote/output',
+      url: '/v1/self-custody/exchange/quote/output',
       query: {
         tokenIn: tokenIn,
         tokenOut: tokenOut,
@@ -70,16 +70,16 @@ export class ExchangeService {
    * Swap an exact amount of `tokenIn` for a minimum amount of `tokenOut`
    * @param entityId
    * @param requestBody
-   * @returns ConvertTokenResponse
+   * @returns OperationResponse
    * @throws ApiError
    */
   public convertInput(
     entityId: string,
     requestBody: ConvertTokenRequestInput,
-  ): CancelablePromise<ConvertTokenResponse> {
+  ): CancelablePromise<OperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
-      url: '/v1/exchange/profiles/{entityId}/convert/input',
+      url: '/v1/self-custody/exchange/users/{entityId}/convert/input',
       path: {
         entityId: entityId,
       },
@@ -92,16 +92,16 @@ export class ExchangeService {
    * Swap a maximum amount of `tokenIn` for an exact amount of `tokenOut`
    * @param entityId
    * @param requestBody
-   * @returns ConvertTokenResponse
+   * @returns OperationResponse
    * @throws ApiError
    */
   public convertToOutput(
     entityId: string,
     requestBody: ConvertTokenRequestInput,
-  ): CancelablePromise<ConvertTokenResponse> {
+  ): CancelablePromise<OperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
-      url: '/v1/exchange/profiles/{entityId}/convert/output',
+      url: '/v1/self-custody/exchange/users/{entityId}/convert/output',
       path: {
         entityId: entityId,
       },

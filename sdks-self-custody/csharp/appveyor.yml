@@ -6,4 +6,4 @@ build_script:
 - dotnet build -c Release
 - dotnet test -c Release
 after_build:
-- dotnet pack .\src\Beam\Beam.csproj -o ../../output -c Release --no-build
+- dotnet pack .\src\BeamSelfCustody\BeamSelfCustody.csproj -o ../../output -c Release --no-build

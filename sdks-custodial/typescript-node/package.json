@@ -9,9 +9,8 @@
     "./README.md"
   ],
   "scripts": {
-    "generate": "pnpm generate:client && pnpm generate:cleanup && pnpm generate:barrels && pnpm build",
+    "generate": "pnpm generate:client && pnpm generate:barrels && pnpm build",
     "generate:client": "tsx openapi.config.ts",
-    "generate:cleanup": "tsx cleanup-generator-output.ts",
     "generate:barrels": "barrelsby -c ./barrelsby.json --delete",
     "build": "tsup --config ./tsup.config.ts"
   },

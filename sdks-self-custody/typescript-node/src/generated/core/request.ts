@@ -48,7 +48,7 @@ export const isFormData = (value: any): value is FormData => {
 export const base64 = (str: string): string => {
   try {
     return btoa(str);
-  } catch (_err) {
+  } catch (err) {
     // @ts-ignore
     return Buffer.from(str).toString('base64');
   }
@@ -64,8 +64,8 @@ export const getQueryString = (params: Record<string, any>): string => {
   const process = (key: string, value: any) => {
     if (isDefined(value)) {
       if (Array.isArray(value)) {
-        value.forEach((_v) => {
-          process(key, _v);
+        value.forEach((v) => {
+          process(key, v);
         });
       } else if (typeof value === 'object') {
         Object.entries(value).forEach(([k, v]) => {
@@ -295,7 +295,7 @@ export const catchErrorCodes = (
     const errorBody = (() => {
       try {
         return JSON.stringify(result.body, null, 2);
-      } catch (_e) {
+      } catch (e) {
         return undefined;
       }
     })();
