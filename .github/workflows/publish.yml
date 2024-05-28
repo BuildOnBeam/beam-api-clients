@@ -42,9 +42,14 @@ jobs:
           TAG=${{ github.event.release.tag_name }}
           echo "VERSION=${TAG#v}" >> $GITHUB_ENV
 
-      - name: Update node SDK version
-        working-directory: ./sdks/typescript-node
+      - name: Update custodial node SDK version
+        working-directory: ./sdks-custodial/typescript-node
         run: npm version $VERSION --allow-same-version --no-git-tag-version
+
+      - name: Update self custodial node SDK version
+        working-directory: ./sdks-self-custody/typescript-node
+        run: npm version $VERSION --allow-same-version --no-git-tag-version
+
 
       - name: Update main and fast-foward tag
         run: |
@@ -83,10 +88,18 @@ jobs:
         uses: ./.github/actions/pnpm-install
 
       - run: pnpm generate
-        working-directory: ./sdks/typescript-node
+        working-directory: ./sdks-custodial/typescript-node
+
+      - run: pnpm generate
+        working-directory: ./sdks-self-custody/typescript-node
 
       - run: pnpm publish --no-git-checks --access public
-        working-directory: ./sdks/typescript-node
+        working-directory: ./sdks-custodial/typescript-node
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - run: pnpm publish --no-git-checks --access public
+        working-directory: ./sdks-self-custody/typescript-node
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -113,7 +126,10 @@ jobs:
           echo "VERSION=${TAG#v}" >> $GITHUB_ENV
 
       # Create the NuGet package in the folder from the environment variable NUGET_DIRECTORY
-      - run: dotnet pack ./sdks/csharp/Beam.sln --output ${{ env.NUGET_DIRECTORY }}
+      - run: dotnet pack ./sdks-custodial/csharp/Beam.sln --output ${{ env.NUGET_DIRECTORY }}
+
+      # Create the NuGet package in the folder from the environment variable NUGET_DIRECTORY
+      - run: dotnet pack ./sdks-self-custody/csharp/Beam.sln --output ${{ env.NUGET_DIRECTORY }}
 
       # Publish the NuGet package as an artifact, so they can be used in the following jobs
       - uses: actions/upload-artifact@v3
