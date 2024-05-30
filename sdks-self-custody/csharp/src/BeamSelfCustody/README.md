@@ -172,7 +172,7 @@ Authentication schemes defined for the API:
 - packageCompany: OpenAPI
 - packageCopyright: No Copyright
 - packageDescription: A library generated from a OpenAPI doc
-- packageGuid: {6F92AB11-CE37-4154-9F80-235395D4D80E}
+- packageGuid: {05F751F1-29B2-4D8F-987F-96FD6B0A4CFD}
 - packageName: BeamSelfCustody
 - packageTags: 
 - packageTitle: OpenAPI Library
