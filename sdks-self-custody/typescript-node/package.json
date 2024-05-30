@@ -1,0 +1,33 @@
+{
+  "name": "@onbeam/self-custody",
+  "type": "module",
+  "main": "dist/index.js",
+  "description": "",
+  "private": false,
+  "files": [
+    "dist",
+    "./README.md"
+  ],
+  "scripts": {
+    "generate": "pnpm generate:client && pnpm generate:barrels && pnpm build",
+    "generate:client": "tsx openapi.config.ts",
+    "generate:barrels": "barrelsby -c ./barrelsby.json --delete",
+    "build": "tsup --config ./tsup.config.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "barrelsby": "^2.8.1",
+    "openapi-typescript-codegen": "^0.25.0",
+    "tsup": "^8.0.1",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "form-data": "^4.0.0",
+    "node-fetch": "^3.3.1"
+  },
+  "version": "1.1.16"
+}

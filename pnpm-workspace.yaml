@@ -1,2 +1,3 @@
 packages:
-  - "sdks/*"
+  - "sdks-custodial/*"
+  - "sdks-self-custody/*"

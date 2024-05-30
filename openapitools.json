@@ -4,9 +4,9 @@
   "generator-cli": {
     "version": "7.2.0",
     "generators": {
-      "csharp": {
+      "csharp-custodial": {
         "generatorName": "csharp",
-        "output": "./sdks/csharp",
+        "output": "./sdks-custodial/csharp",
         "library": "generichost",
         "inputSpec": "https://api.testnet.onbeam.com/api/game-json",
         "templateDir": "./templates",
@@ -20,6 +20,28 @@
         "additionalProperties": {
           "packageName": "Beam",
           "apiName": "BeamApi",
+          "returnICollection": true,
+          "optionalMethodArgument": false,
+          "nullableReferenceTypes": true,
+          "netCoreProjectFile": true
+        }
+      },
+      "csharp-self-custody": {
+        "generatorName": "csharp",
+        "output": "./sdks-self-custody/csharp",
+        "library": "generichost",
+        "inputSpec": "https://api.testnet.onbeam.com/api/self-custody-json",
+        "templateDir": "./templates",
+        "skipValidateSpec": true,
+        "globalProperty": {
+          "modelTests": false,
+          "apiTests": false,
+          "modelDocs": false,
+          "apiDocs": false
+        },
+        "additionalProperties": {
+          "packageName": "BeamSelfCustody",
+          "apiName": "BeamSelfCustodyApi",
           "returnICollection": true,
           "optionalMethodArgument": false,
           "nullableReferenceTypes": true,

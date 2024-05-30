@@ -1,9 +1,11 @@
 {
   "name": "@onbeam/sdk",
   "scripts": {
-    "generate": "pnpm generate:csharp && pnpm generate:node",
-    "generate:csharp": "rm -rf ./sdks/csharp/src/Beam/Api && rm -rf ./sdks/csharp/src/Beam/Model && openapi-generator-cli generate",
-    "generate:node": "pnpm --filter @onbeam/node generate && pnpm validate:lint:fix",
+    "generate": "pnpm generate:self-custody:csharp && pnpm generate:custodial:node && pnpm generate:self-custody:node",
+    "generate:custodial:csharp": "rm -rf ./sdks-custodial/csharp/src/Beam/Api && rm -rf ./sdks-custodial/csharp/src/Beam/Model && openapi-generator-cli generate",
+    "generate:custodial:node": "pnpm --filter @onbeam/node generate && pnpm validate:lint:fix",
+    "generate:self-custody:csharp": "rm -rf ./sdks-self-custodial/csharp/src/Beam/Api && rm -rf ./sdks-custodial/csharp/src/Beam/Model && openapi-generator-cli generate",
+    "generate:self-custody:node": "pnpm --filter @onbeam/self-custody generate && pnpm validate:lint:fix",
     "validate:format": "biome format .",
     "validate:format:fix": "pnpm validate:format --write",
     "validate:lint": "biome check .",
