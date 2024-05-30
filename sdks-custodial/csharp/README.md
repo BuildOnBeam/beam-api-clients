@@ -64,7 +64,7 @@ namespace YourProject
 
               options.AddApiHttpClients(
                 client: client => {
-                  client.BaseAddress = new Uri("https://api.preview.onbeam.com/");
+                  client.BaseAddress = new Uri("https://api.testnet.onbeam.com/");
                 },
                 builder: builder => {
                   builder
