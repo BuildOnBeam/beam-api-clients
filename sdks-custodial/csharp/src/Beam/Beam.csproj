@@ -16,7 +16,7 @@
     <Authors>Beam Developers</Authors>
     <Company>Merit Circle</Company>
     <AssemblyTitle>Beam SDK</AssemblyTitle>
-    <Description>Official C# Beam SDK</Description>
+    <Description>Official C# Beam SDK for Custodial accounts</Description>
 
     <PackageTags>beam, sdk, library, client</PackageTags>
     <PackageIcon>icon.jpg</PackageIcon>

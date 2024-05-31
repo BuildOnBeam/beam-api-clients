@@ -41,6 +41,9 @@ src/BeamSelfCustody/Model/CancelAssetOfferRequestInput.cs
 src/BeamSelfCustody/Model/Check200Response.cs
 src/BeamSelfCustody/Model/Check200ResponseInfoValue.cs
 src/BeamSelfCustody/Model/Check503Response.cs
+src/BeamSelfCustody/Model/CommonOperationResponse.cs
+src/BeamSelfCustody/Model/CommonOperationResponseTransactionsInner.cs
+src/BeamSelfCustody/Model/CommonOperationResponseTransactionsInnerData.cs
 src/BeamSelfCustody/Model/ConfirmOperationRequest.cs
 src/BeamSelfCustody/Model/ConfirmOperationRequestTransactionsInner.cs
 src/BeamSelfCustody/Model/ConvertTokenRequestInput.cs
@@ -48,8 +51,9 @@ src/BeamSelfCustody/Model/CreateAssetOfferRequestInput.cs
 src/BeamSelfCustody/Model/CreateOperationRequestInput.cs
 src/BeamSelfCustody/Model/CreateTransactionRequestInput.cs
 src/BeamSelfCustody/Model/CreateTransactionRequestInputInteractionsInner.cs
+src/BeamSelfCustody/Model/GenerateSessionRequestResponse.cs
 src/BeamSelfCustody/Model/GenerateSessionUrlRequestInput.cs
-src/BeamSelfCustody/Model/GenerateSessionUrlResponse.cs
+src/BeamSelfCustody/Model/GetActiveSessionResponse.cs
 src/BeamSelfCustody/Model/GetAllUsersResponse.cs
 src/BeamSelfCustody/Model/GetAllUsersResponseDataInner.cs
 src/BeamSelfCustody/Model/GetAllUsersResponseDataInnerWalletsInner.cs
@@ -89,10 +93,6 @@ src/BeamSelfCustody/Model/GetTransactionsResponseDataInnerTransaction.cs
 src/BeamSelfCustody/Model/GetTransactionsResponseDataInnerTransactionLogsInner.cs
 src/BeamSelfCustody/Model/GetTransactionsResponsePagination.cs
 src/BeamSelfCustody/Model/GetUserResponse.cs
-src/BeamSelfCustody/Model/OperationResponse.cs
-src/BeamSelfCustody/Model/OperationResponseGame.cs
-src/BeamSelfCustody/Model/OperationResponseTransactionsInner.cs
-src/BeamSelfCustody/Model/OperationResponseTransactionsInnerData.cs
 src/BeamSelfCustody/Model/SellAssetRequestInput.cs
 src/BeamSelfCustody/Model/TransferAssetRequestInputV3.cs
 src/BeamSelfCustody/Model/TransferAssetRequestInputV3AssetsInner.cs
