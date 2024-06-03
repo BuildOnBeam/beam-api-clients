@@ -25,8 +25,8 @@
 api/**
 
 # due to bug in openapi generator, we need to specify full path to files that are to be ignored
-src/Beam/Beam.csproj
+src/BeamSelfCustody/BeamSelfCustody.csproj
 
-src/Beam/README.md
+src/BeamSelfCustody/README.md
 
 README.md
