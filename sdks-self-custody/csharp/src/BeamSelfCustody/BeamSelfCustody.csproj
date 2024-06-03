@@ -22,7 +22,7 @@
     <PackageIcon>icon.jpg</PackageIcon>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
 
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Beam.xml</DocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\BeamSelfCustody.xml</DocumentationFile>
 
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/Merit-Circle/beam-sdk.git</RepositoryUrl>
