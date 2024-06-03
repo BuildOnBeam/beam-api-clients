@@ -33,10 +33,10 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Beam.Api;
-using Beam.Client;
-using Beam.Model;
-using Beam.Extensions;
+using BeamSelfCustody.Api;
+using BeamSelfCustody.Client;
+using BeamSelfCustody.Model;
+using BeamSelfCustody.Extensions;
 
 namespace YourProject
 {
@@ -82,8 +82,8 @@ namespace YourProject
 or if you use new Web App templates:
 
 ```cs
-using Beam.Client;
-using Beam.Extensions;
+using BeamSelfCustody.Client;
+using BeamSelfCustody.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
