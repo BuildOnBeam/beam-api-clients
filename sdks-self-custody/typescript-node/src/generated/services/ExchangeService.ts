@@ -2,9 +2,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { CommonOperationResponse } from '../models/CommonOperationResponse';
 import type { ConvertTokenRequestInput } from '../models/ConvertTokenRequestInput';
 import type { GetQuoteResponse } from '../models/GetQuoteResponse';
-import type { OperationResponse } from '../models/OperationResponse';
 
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -70,13 +70,13 @@ export class ExchangeService {
    * Swap an exact amount of `tokenIn` for a minimum amount of `tokenOut`
    * @param entityId
    * @param requestBody
-   * @returns OperationResponse
+   * @returns CommonOperationResponse
    * @throws ApiError
    */
   public convertInput(
     entityId: string,
     requestBody: ConvertTokenRequestInput,
-  ): CancelablePromise<OperationResponse> {
+  ): CancelablePromise<CommonOperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v1/self-custody/exchange/users/{entityId}/convert/input',
@@ -92,13 +92,13 @@ export class ExchangeService {
    * Swap a maximum amount of `tokenIn` for an exact amount of `tokenOut`
    * @param entityId
    * @param requestBody
-   * @returns OperationResponse
+   * @returns CommonOperationResponse
    * @throws ApiError
    */
   public convertToOutput(
     entityId: string,
     requestBody: ConvertTokenRequestInput,
-  ): CancelablePromise<OperationResponse> {
+  ): CancelablePromise<CommonOperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v1/self-custody/exchange/users/{entityId}/convert/output',

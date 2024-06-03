@@ -2,9 +2,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { CommonOperationResponse } from '../models/CommonOperationResponse';
 import type { ConfirmOperationRequest } from '../models/ConfirmOperationRequest';
 import type { CreateOperationRequestInput } from '../models/CreateOperationRequestInput';
-import type { OperationResponse } from '../models/OperationResponse';
 
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -15,10 +15,12 @@ export class OperationService {
   /**
    * Returns operation data for given id. Used by Game SDKs to get transaction results.
    * @param opId
-   * @returns OperationResponse
+   * @returns CommonOperationResponse
    * @throws ApiError
    */
-  public getOperation(opId: string): CancelablePromise<OperationResponse> {
+  public getOperation(
+    opId: string,
+  ): CancelablePromise<CommonOperationResponse> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v1/self-custody/operation/{opId}',
@@ -32,13 +34,13 @@ export class OperationService {
    * Updates operation result for given id
    * @param opId
    * @param requestBody
-   * @returns OperationResponse
+   * @returns CommonOperationResponse
    * @throws ApiError
    */
-  public processOperationForSelfCustody(
+  public processOperation(
     opId: string,
     requestBody: ConfirmOperationRequest,
-  ): CancelablePromise<OperationResponse> {
+  ): CancelablePromise<CommonOperationResponse> {
     return this.httpRequest.request({
       method: 'PATCH',
       url: '/v1/self-custody/operation/{opId}',
@@ -53,12 +55,12 @@ export class OperationService {
   /**
    * Initializes an operation. Used by Game SDKs to get transaction results.
    * @param requestBody
-   * @returns OperationResponse
+   * @returns CommonOperationResponse
    * @throws ApiError
    */
   public createOperation(
     requestBody: CreateOperationRequestInput,
-  ): CancelablePromise<OperationResponse> {
+  ): CancelablePromise<CommonOperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v1/self-custody/operation',

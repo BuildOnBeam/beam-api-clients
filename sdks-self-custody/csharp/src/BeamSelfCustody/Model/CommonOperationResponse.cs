@@ -27,27 +27,33 @@ using BeamSelfCustody.Client;
 namespace BeamSelfCustody.Model
 {
     /// <summary>
-    /// GetSessionRequestResponse
+    /// CommonOperationResponse
     /// </summary>
-    public partial class GetSessionRequestResponse : IValidatableObject
+    public partial class CommonOperationResponse : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetSessionRequestResponse" /> class.
+        /// Initializes a new instance of the <see cref="CommonOperationResponse" /> class.
         /// </summary>
         /// <param name="chainId">chainId</param>
         /// <param name="createdAt">createdAt</param>
+        /// <param name="gameId">gameId</param>
         /// <param name="id">id</param>
         /// <param name="status">status</param>
-        /// <param name="openfortId">openfortId</param>
+        /// <param name="transactions">transactions</param>
+        /// <param name="url">url</param>
+        /// <param name="userId">userId</param>
         /// <param name="updatedAt">updatedAt</param>
         [JsonConstructor]
-        public GetSessionRequestResponse(int chainId, DateTime createdAt, string id, StatusEnum status, string? openfortId = default, DateTime? updatedAt = default)
+        public CommonOperationResponse(int chainId, DateTime createdAt, string gameId, string id, StatusEnum status, List<CommonOperationResponseTransactionsInner> transactions, string url, string userId, DateTime? updatedAt = default)
         {
             ChainId = chainId;
             CreatedAt = createdAt;
+            GameId = gameId;
             Id = id;
             Status = status;
-            OpenfortId = openfortId;
+            Transactions = transactions;
+            Url = url;
+            UserId = userId;
             UpdatedAt = updatedAt;
             OnCreated();
         }
@@ -65,14 +71,19 @@ namespace BeamSelfCustody.Model
             Pending = 1,
 
             /// <summary>
-            /// Enum Accepted for value: Accepted
+            /// Enum Rejected for value: Rejected
             /// </summary>
-            Accepted = 2,
+            Rejected = 2,
+
+            /// <summary>
+            /// Enum Executed for value: Executed
+            /// </summary>
+            Executed = 3,
 
             /// <summary>
             /// Enum Error for value: Error
             /// </summary>
-            Error = 3
+            Error = 4
         }
 
         /// <summary>
@@ -86,8 +97,11 @@ namespace BeamSelfCustody.Model
             if (value.Equals("Pending"))
                 return StatusEnum.Pending;
 
-            if (value.Equals("Accepted"))
-                return StatusEnum.Accepted;
+            if (value.Equals("Rejected"))
+                return StatusEnum.Rejected;
+
+            if (value.Equals("Executed"))
+                return StatusEnum.Executed;
 
             if (value.Equals("Error"))
                 return StatusEnum.Error;
@@ -105,8 +119,11 @@ namespace BeamSelfCustody.Model
             if (value.Equals("Pending"))
                 return StatusEnum.Pending;
 
-            if (value.Equals("Accepted"))
-                return StatusEnum.Accepted;
+            if (value.Equals("Rejected"))
+                return StatusEnum.Rejected;
+
+            if (value.Equals("Executed"))
+                return StatusEnum.Executed;
 
             if (value.Equals("Error"))
                 return StatusEnum.Error;
@@ -125,8 +142,11 @@ namespace BeamSelfCustody.Model
             if (value == StatusEnum.Pending)
                 return "Pending";
 
-            if (value == StatusEnum.Accepted)
-                return "Accepted";
+            if (value == StatusEnum.Rejected)
+                return "Rejected";
+
+            if (value == StatusEnum.Executed)
+                return "Executed";
 
             if (value == StatusEnum.Error)
                 return "Error";
@@ -153,16 +173,34 @@ namespace BeamSelfCustody.Model
         public DateTime CreatedAt { get; set; }
 
         /// <summary>
+        /// Gets or Sets GameId
+        /// </summary>
+        [JsonPropertyName("gameId")]
+        public string GameId { get; set; }
+
+        /// <summary>
         /// Gets or Sets Id
         /// </summary>
         [JsonPropertyName("id")]
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets OpenfortId
+        /// Gets or Sets Transactions
         /// </summary>
-        [JsonPropertyName("openfortId")]
-        public string? OpenfortId { get; set; }
+        [JsonPropertyName("transactions")]
+        public List<CommonOperationResponseTransactionsInner> Transactions { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Url
+        /// </summary>
+        [JsonPropertyName("url")]
+        public string Url { get; set; }
+
+        /// <summary>
+        /// Gets or Sets UserId
+        /// </summary>
+        [JsonPropertyName("userId")]
+        public string UserId { get; set; }
 
         /// <summary>
         /// Gets or Sets UpdatedAt
@@ -177,12 +215,15 @@ namespace BeamSelfCustody.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class GetSessionRequestResponse {\n");
+            sb.Append("class CommonOperationResponse {\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
+            sb.Append("  GameId: ").Append(GameId).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
-            sb.Append("  OpenfortId: ").Append(OpenfortId).Append("\n");
+            sb.Append("  Transactions: ").Append(Transactions).Append("\n");
+            sb.Append("  Url: ").Append(Url).Append("\n");
+            sb.Append("  UserId: ").Append(UserId).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -200,9 +241,9 @@ namespace BeamSelfCustody.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="GetSessionRequestResponse" />
+    /// A Json converter for type <see cref="CommonOperationResponse" />
     /// </summary>
-    public class GetSessionRequestResponseJsonConverter : JsonConverter<GetSessionRequestResponse>
+    public class CommonOperationResponseJsonConverter : JsonConverter<CommonOperationResponse>
     {
         /// <summary>
         /// The format to use to serialize CreatedAt
@@ -215,14 +256,14 @@ namespace BeamSelfCustody.Model
         public static string UpdatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
 
         /// <summary>
-        /// Deserializes json to <see cref="GetSessionRequestResponse" />
+        /// Deserializes json to <see cref="CommonOperationResponse" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override GetSessionRequestResponse Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override CommonOperationResponse Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -233,9 +274,12 @@ namespace BeamSelfCustody.Model
 
             Option<int?> chainId = default;
             Option<DateTime?> createdAt = default;
+            Option<string?> gameId = default;
             Option<string?> id = default;
-            Option<GetSessionRequestResponse.StatusEnum?> status = default;
-            Option<string?> openfortId = default;
+            Option<CommonOperationResponse.StatusEnum?> status = default;
+            Option<List<CommonOperationResponseTransactionsInner>?> transactions = default;
+            Option<string?> url = default;
+            Option<string?> userId = default;
             Option<DateTime?> updatedAt = default;
 
             while (utf8JsonReader.Read())
@@ -261,16 +305,26 @@ namespace BeamSelfCustody.Model
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 createdAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
+                        case "gameId":
+                            gameId = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
                         case "id":
                             id = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "status":
                             string? statusRawValue = utf8JsonReader.GetString();
                             if (statusRawValue != null)
-                                status = new Option<GetSessionRequestResponse.StatusEnum?>(GetSessionRequestResponse.StatusEnumFromStringOrDefault(statusRawValue));
+                                status = new Option<CommonOperationResponse.StatusEnum?>(CommonOperationResponse.StatusEnumFromStringOrDefault(statusRawValue));
                             break;
-                        case "openfortId":
-                            openfortId = new Option<string?>(utf8JsonReader.GetString());
+                        case "transactions":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                transactions = new Option<List<CommonOperationResponseTransactionsInner>?>(JsonSerializer.Deserialize<List<CommonOperationResponseTransactionsInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
+                        case "url":
+                            url = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
+                        case "userId":
+                            userId = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "updatedAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
@@ -283,80 +337,116 @@ namespace BeamSelfCustody.Model
             }
 
             if (!chainId.IsSet)
-                throw new ArgumentException("Property is required for class GetSessionRequestResponse.", nameof(chainId));
+                throw new ArgumentException("Property is required for class CommonOperationResponse.", nameof(chainId));
 
             if (!createdAt.IsSet)
-                throw new ArgumentException("Property is required for class GetSessionRequestResponse.", nameof(createdAt));
+                throw new ArgumentException("Property is required for class CommonOperationResponse.", nameof(createdAt));
+
+            if (!gameId.IsSet)
+                throw new ArgumentException("Property is required for class CommonOperationResponse.", nameof(gameId));
 
             if (!id.IsSet)
-                throw new ArgumentException("Property is required for class GetSessionRequestResponse.", nameof(id));
+                throw new ArgumentException("Property is required for class CommonOperationResponse.", nameof(id));
 
             if (!status.IsSet)
-                throw new ArgumentException("Property is required for class GetSessionRequestResponse.", nameof(status));
+                throw new ArgumentException("Property is required for class CommonOperationResponse.", nameof(status));
 
-            if (!openfortId.IsSet)
-                throw new ArgumentException("Property is required for class GetSessionRequestResponse.", nameof(openfortId));
+            if (!transactions.IsSet)
+                throw new ArgumentException("Property is required for class CommonOperationResponse.", nameof(transactions));
+
+            if (!url.IsSet)
+                throw new ArgumentException("Property is required for class CommonOperationResponse.", nameof(url));
+
+            if (!userId.IsSet)
+                throw new ArgumentException("Property is required for class CommonOperationResponse.", nameof(userId));
 
             if (!updatedAt.IsSet)
-                throw new ArgumentException("Property is required for class GetSessionRequestResponse.", nameof(updatedAt));
+                throw new ArgumentException("Property is required for class CommonOperationResponse.", nameof(updatedAt));
 
             if (chainId.IsSet && chainId.Value == null)
-                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class GetSessionRequestResponse.");
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class CommonOperationResponse.");
 
             if (createdAt.IsSet && createdAt.Value == null)
-                throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class GetSessionRequestResponse.");
+                throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class CommonOperationResponse.");
+
+            if (gameId.IsSet && gameId.Value == null)
+                throw new ArgumentNullException(nameof(gameId), "Property is not nullable for class CommonOperationResponse.");
 
             if (id.IsSet && id.Value == null)
-                throw new ArgumentNullException(nameof(id), "Property is not nullable for class GetSessionRequestResponse.");
+                throw new ArgumentNullException(nameof(id), "Property is not nullable for class CommonOperationResponse.");
 
             if (status.IsSet && status.Value == null)
-                throw new ArgumentNullException(nameof(status), "Property is not nullable for class GetSessionRequestResponse.");
+                throw new ArgumentNullException(nameof(status), "Property is not nullable for class CommonOperationResponse.");
 
-            return new GetSessionRequestResponse(chainId.Value!.Value!, createdAt.Value!.Value!, id.Value!, status.Value!.Value!, openfortId.Value!, updatedAt.Value!);
+            if (transactions.IsSet && transactions.Value == null)
+                throw new ArgumentNullException(nameof(transactions), "Property is not nullable for class CommonOperationResponse.");
+
+            if (url.IsSet && url.Value == null)
+                throw new ArgumentNullException(nameof(url), "Property is not nullable for class CommonOperationResponse.");
+
+            if (userId.IsSet && userId.Value == null)
+                throw new ArgumentNullException(nameof(userId), "Property is not nullable for class CommonOperationResponse.");
+
+            return new CommonOperationResponse(chainId.Value!.Value!, createdAt.Value!.Value!, gameId.Value!, id.Value!, status.Value!.Value!, transactions.Value!, url.Value!, userId.Value!, updatedAt.Value!);
         }
 
         /// <summary>
-        /// Serializes a <see cref="GetSessionRequestResponse" />
+        /// Serializes a <see cref="CommonOperationResponse" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="getSessionRequestResponse"></param>
+        /// <param name="commonOperationResponse"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, GetSessionRequestResponse getSessionRequestResponse, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, CommonOperationResponse commonOperationResponse, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(ref writer, getSessionRequestResponse, jsonSerializerOptions);
+            WriteProperties(ref writer, commonOperationResponse, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="GetSessionRequestResponse" />
+        /// Serializes the properties of <see cref="CommonOperationResponse" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="getSessionRequestResponse"></param>
+        /// <param name="commonOperationResponse"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(ref Utf8JsonWriter writer, GetSessionRequestResponse getSessionRequestResponse, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(ref Utf8JsonWriter writer, CommonOperationResponse commonOperationResponse, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (getSessionRequestResponse.Id == null)
-                throw new ArgumentNullException(nameof(getSessionRequestResponse.Id), "Property is required for class GetSessionRequestResponse.");
+            if (commonOperationResponse.GameId == null)
+                throw new ArgumentNullException(nameof(commonOperationResponse.GameId), "Property is required for class CommonOperationResponse.");
 
-            writer.WriteNumber("chainId", getSessionRequestResponse.ChainId);
+            if (commonOperationResponse.Id == null)
+                throw new ArgumentNullException(nameof(commonOperationResponse.Id), "Property is required for class CommonOperationResponse.");
 
-            writer.WriteString("createdAt", getSessionRequestResponse.CreatedAt.ToString(CreatedAtFormat));
+            if (commonOperationResponse.Transactions == null)
+                throw new ArgumentNullException(nameof(commonOperationResponse.Transactions), "Property is required for class CommonOperationResponse.");
 
-            writer.WriteString("id", getSessionRequestResponse.Id);
+            if (commonOperationResponse.Url == null)
+                throw new ArgumentNullException(nameof(commonOperationResponse.Url), "Property is required for class CommonOperationResponse.");
 
-            var statusRawValue = GetSessionRequestResponse.StatusEnumToJsonValue(getSessionRequestResponse.Status);
+            if (commonOperationResponse.UserId == null)
+                throw new ArgumentNullException(nameof(commonOperationResponse.UserId), "Property is required for class CommonOperationResponse.");
+
+            writer.WriteNumber("chainId", commonOperationResponse.ChainId);
+
+            writer.WriteString("createdAt", commonOperationResponse.CreatedAt.ToString(CreatedAtFormat));
+
+            writer.WriteString("gameId", commonOperationResponse.GameId);
+
+            writer.WriteString("id", commonOperationResponse.Id);
+
+            var statusRawValue = CommonOperationResponse.StatusEnumToJsonValue(commonOperationResponse.Status);
             writer.WriteString("status", statusRawValue);
-            if (getSessionRequestResponse.OpenfortId != null)
-                writer.WriteString("openfortId", getSessionRequestResponse.OpenfortId);
-            else
-                writer.WriteNull("openfortId");
+            writer.WritePropertyName("transactions");
+            JsonSerializer.Serialize(writer, commonOperationResponse.Transactions, jsonSerializerOptions);
+            writer.WriteString("url", commonOperationResponse.Url);
 
-            if (getSessionRequestResponse.UpdatedAt != null)
-                writer.WriteString("updatedAt", getSessionRequestResponse.UpdatedAt.Value.ToString(UpdatedAtFormat));
+            writer.WriteString("userId", commonOperationResponse.UserId);
+
+            if (commonOperationResponse.UpdatedAt != null)
+                writer.WriteString("updatedAt", commonOperationResponse.UpdatedAt.Value.ToString(UpdatedAtFormat));
             else
                 writer.WriteNull("updatedAt");
         }

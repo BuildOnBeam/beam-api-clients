@@ -5,4 +5,5 @@
 
 export type GenerateSessionUrlRequestInput = {
   address: string;
+  chainId?: number;
 };

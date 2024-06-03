@@ -3,16 +3,17 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type GetSessionRequestResponse = {
-  status: GetSessionRequestResponse.status;
+export type GenerateSessionRequestResponse = {
+  status: GenerateSessionRequestResponse.status;
   id: string;
   createdAt: string;
   updatedAt: string | null;
   chainId: number;
   openfortId: string | null;
+  url: string;
 };
 
-export namespace GetSessionRequestResponse {
+export namespace GenerateSessionRequestResponse {
   export enum status {
     PENDING = 'Pending',
     ACCEPTED = 'Accepted',

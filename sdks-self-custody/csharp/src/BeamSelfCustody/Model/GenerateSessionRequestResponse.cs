@@ -27,26 +27,28 @@ using BeamSelfCustody.Client;
 namespace BeamSelfCustody.Model
 {
     /// <summary>
-    /// GetSessionRequestResponse
+    /// GenerateSessionRequestResponse
     /// </summary>
-    public partial class GetSessionRequestResponse : IValidatableObject
+    public partial class GenerateSessionRequestResponse : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetSessionRequestResponse" /> class.
+        /// Initializes a new instance of the <see cref="GenerateSessionRequestResponse" /> class.
         /// </summary>
         /// <param name="chainId">chainId</param>
         /// <param name="createdAt">createdAt</param>
         /// <param name="id">id</param>
         /// <param name="status">status</param>
+        /// <param name="url">url</param>
         /// <param name="openfortId">openfortId</param>
         /// <param name="updatedAt">updatedAt</param>
         [JsonConstructor]
-        public GetSessionRequestResponse(int chainId, DateTime createdAt, string id, StatusEnum status, string? openfortId = default, DateTime? updatedAt = default)
+        public GenerateSessionRequestResponse(int chainId, DateTime createdAt, string id, StatusEnum status, string url, string? openfortId = default, DateTime? updatedAt = default)
         {
             ChainId = chainId;
             CreatedAt = createdAt;
             Id = id;
             Status = status;
+            Url = url;
             OpenfortId = openfortId;
             UpdatedAt = updatedAt;
             OnCreated();
@@ -159,6 +161,12 @@ namespace BeamSelfCustody.Model
         public string Id { get; set; }
 
         /// <summary>
+        /// Gets or Sets Url
+        /// </summary>
+        [JsonPropertyName("url")]
+        public string Url { get; set; }
+
+        /// <summary>
         /// Gets or Sets OpenfortId
         /// </summary>
         [JsonPropertyName("openfortId")]
@@ -177,11 +185,12 @@ namespace BeamSelfCustody.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class GetSessionRequestResponse {\n");
+            sb.Append("class GenerateSessionRequestResponse {\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
+            sb.Append("  Url: ").Append(Url).Append("\n");
             sb.Append("  OpenfortId: ").Append(OpenfortId).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
             sb.Append("}\n");
@@ -200,9 +209,9 @@ namespace BeamSelfCustody.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="GetSessionRequestResponse" />
+    /// A Json converter for type <see cref="GenerateSessionRequestResponse" />
     /// </summary>
-    public class GetSessionRequestResponseJsonConverter : JsonConverter<GetSessionRequestResponse>
+    public class GenerateSessionRequestResponseJsonConverter : JsonConverter<GenerateSessionRequestResponse>
     {
         /// <summary>
         /// The format to use to serialize CreatedAt
@@ -215,14 +224,14 @@ namespace BeamSelfCustody.Model
         public static string UpdatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
 
         /// <summary>
-        /// Deserializes json to <see cref="GetSessionRequestResponse" />
+        /// Deserializes json to <see cref="GenerateSessionRequestResponse" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override GetSessionRequestResponse Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override GenerateSessionRequestResponse Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -234,7 +243,8 @@ namespace BeamSelfCustody.Model
             Option<int?> chainId = default;
             Option<DateTime?> createdAt = default;
             Option<string?> id = default;
-            Option<GetSessionRequestResponse.StatusEnum?> status = default;
+            Option<GenerateSessionRequestResponse.StatusEnum?> status = default;
+            Option<string?> url = default;
             Option<string?> openfortId = default;
             Option<DateTime?> updatedAt = default;
 
@@ -267,7 +277,10 @@ namespace BeamSelfCustody.Model
                         case "status":
                             string? statusRawValue = utf8JsonReader.GetString();
                             if (statusRawValue != null)
-                                status = new Option<GetSessionRequestResponse.StatusEnum?>(GetSessionRequestResponse.StatusEnumFromStringOrDefault(statusRawValue));
+                                status = new Option<GenerateSessionRequestResponse.StatusEnum?>(GenerateSessionRequestResponse.StatusEnumFromStringOrDefault(statusRawValue));
+                            break;
+                        case "url":
+                            url = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "openfortId":
                             openfortId = new Option<string?>(utf8JsonReader.GetString());
@@ -283,80 +296,91 @@ namespace BeamSelfCustody.Model
             }
 
             if (!chainId.IsSet)
-                throw new ArgumentException("Property is required for class GetSessionRequestResponse.", nameof(chainId));
+                throw new ArgumentException("Property is required for class GenerateSessionRequestResponse.", nameof(chainId));
 
             if (!createdAt.IsSet)
-                throw new ArgumentException("Property is required for class GetSessionRequestResponse.", nameof(createdAt));
+                throw new ArgumentException("Property is required for class GenerateSessionRequestResponse.", nameof(createdAt));
 
             if (!id.IsSet)
-                throw new ArgumentException("Property is required for class GetSessionRequestResponse.", nameof(id));
+                throw new ArgumentException("Property is required for class GenerateSessionRequestResponse.", nameof(id));
 
             if (!status.IsSet)
-                throw new ArgumentException("Property is required for class GetSessionRequestResponse.", nameof(status));
+                throw new ArgumentException("Property is required for class GenerateSessionRequestResponse.", nameof(status));
+
+            if (!url.IsSet)
+                throw new ArgumentException("Property is required for class GenerateSessionRequestResponse.", nameof(url));
 
             if (!openfortId.IsSet)
-                throw new ArgumentException("Property is required for class GetSessionRequestResponse.", nameof(openfortId));
+                throw new ArgumentException("Property is required for class GenerateSessionRequestResponse.", nameof(openfortId));
 
             if (!updatedAt.IsSet)
-                throw new ArgumentException("Property is required for class GetSessionRequestResponse.", nameof(updatedAt));
+                throw new ArgumentException("Property is required for class GenerateSessionRequestResponse.", nameof(updatedAt));
 
             if (chainId.IsSet && chainId.Value == null)
-                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class GetSessionRequestResponse.");
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class GenerateSessionRequestResponse.");
 
             if (createdAt.IsSet && createdAt.Value == null)
-                throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class GetSessionRequestResponse.");
+                throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class GenerateSessionRequestResponse.");
 
             if (id.IsSet && id.Value == null)
-                throw new ArgumentNullException(nameof(id), "Property is not nullable for class GetSessionRequestResponse.");
+                throw new ArgumentNullException(nameof(id), "Property is not nullable for class GenerateSessionRequestResponse.");
 
             if (status.IsSet && status.Value == null)
-                throw new ArgumentNullException(nameof(status), "Property is not nullable for class GetSessionRequestResponse.");
+                throw new ArgumentNullException(nameof(status), "Property is not nullable for class GenerateSessionRequestResponse.");
 
-            return new GetSessionRequestResponse(chainId.Value!.Value!, createdAt.Value!.Value!, id.Value!, status.Value!.Value!, openfortId.Value!, updatedAt.Value!);
+            if (url.IsSet && url.Value == null)
+                throw new ArgumentNullException(nameof(url), "Property is not nullable for class GenerateSessionRequestResponse.");
+
+            return new GenerateSessionRequestResponse(chainId.Value!.Value!, createdAt.Value!.Value!, id.Value!, status.Value!.Value!, url.Value!, openfortId.Value!, updatedAt.Value!);
         }
 
         /// <summary>
-        /// Serializes a <see cref="GetSessionRequestResponse" />
+        /// Serializes a <see cref="GenerateSessionRequestResponse" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="getSessionRequestResponse"></param>
+        /// <param name="generateSessionRequestResponse"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, GetSessionRequestResponse getSessionRequestResponse, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, GenerateSessionRequestResponse generateSessionRequestResponse, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(ref writer, getSessionRequestResponse, jsonSerializerOptions);
+            WriteProperties(ref writer, generateSessionRequestResponse, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="GetSessionRequestResponse" />
+        /// Serializes the properties of <see cref="GenerateSessionRequestResponse" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="getSessionRequestResponse"></param>
+        /// <param name="generateSessionRequestResponse"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(ref Utf8JsonWriter writer, GetSessionRequestResponse getSessionRequestResponse, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(ref Utf8JsonWriter writer, GenerateSessionRequestResponse generateSessionRequestResponse, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (getSessionRequestResponse.Id == null)
-                throw new ArgumentNullException(nameof(getSessionRequestResponse.Id), "Property is required for class GetSessionRequestResponse.");
+            if (generateSessionRequestResponse.Id == null)
+                throw new ArgumentNullException(nameof(generateSessionRequestResponse.Id), "Property is required for class GenerateSessionRequestResponse.");
 
-            writer.WriteNumber("chainId", getSessionRequestResponse.ChainId);
+            if (generateSessionRequestResponse.Url == null)
+                throw new ArgumentNullException(nameof(generateSessionRequestResponse.Url), "Property is required for class GenerateSessionRequestResponse.");
 
-            writer.WriteString("createdAt", getSessionRequestResponse.CreatedAt.ToString(CreatedAtFormat));
+            writer.WriteNumber("chainId", generateSessionRequestResponse.ChainId);
 
-            writer.WriteString("id", getSessionRequestResponse.Id);
+            writer.WriteString("createdAt", generateSessionRequestResponse.CreatedAt.ToString(CreatedAtFormat));
 
-            var statusRawValue = GetSessionRequestResponse.StatusEnumToJsonValue(getSessionRequestResponse.Status);
+            writer.WriteString("id", generateSessionRequestResponse.Id);
+
+            var statusRawValue = GenerateSessionRequestResponse.StatusEnumToJsonValue(generateSessionRequestResponse.Status);
             writer.WriteString("status", statusRawValue);
-            if (getSessionRequestResponse.OpenfortId != null)
-                writer.WriteString("openfortId", getSessionRequestResponse.OpenfortId);
+            writer.WriteString("url", generateSessionRequestResponse.Url);
+
+            if (generateSessionRequestResponse.OpenfortId != null)
+                writer.WriteString("openfortId", generateSessionRequestResponse.OpenfortId);
             else
                 writer.WriteNull("openfortId");
 
-            if (getSessionRequestResponse.UpdatedAt != null)
-                writer.WriteString("updatedAt", getSessionRequestResponse.UpdatedAt.Value.ToString(UpdatedAtFormat));
+            if (generateSessionRequestResponse.UpdatedAt != null)
+                writer.WriteString("updatedAt", generateSessionRequestResponse.UpdatedAt.Value.ToString(UpdatedAtFormat));
             else
                 writer.WriteNull("updatedAt");
         }

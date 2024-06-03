@@ -84,12 +84,35 @@ namespace BeamSelfCustody.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetActiveSessionApiResponse"/>?&gt;</returns>
         Task<IGetActiveSessionApiResponse?> GetActiveSessionOrDefaultAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="requestId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetSessionRequestApiResponse"/>&gt;</returns>
+        Task<IGetSessionRequestApiResponse> GetSessionRequestAsync(string requestId, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="requestId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetSessionRequestApiResponse"/>?&gt;</returns>
+        Task<IGetSessionRequestApiResponse?> GetSessionRequestOrDefaultAsync(string requestId, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
     /// The <see cref="ICreateSessionRequestApiResponse"/>
     /// </summary>
-    public interface ICreateSessionRequestApiResponse : BeamSelfCustody.Client.IApiResponse, IOk<BeamSelfCustody.Model.GenerateSessionUrlResponse?>
+    public interface ICreateSessionRequestApiResponse : BeamSelfCustody.Client.IApiResponse, IOk<BeamSelfCustody.Model.GenerateSessionRequestResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -101,7 +124,19 @@ namespace BeamSelfCustody.Api
     /// <summary>
     /// The <see cref="IGetActiveSessionApiResponse"/>
     /// </summary>
-    public interface IGetActiveSessionApiResponse : BeamSelfCustody.Client.IApiResponse, IOk<BeamSelfCustody.Model.GetSessionRequestResponse?>
+    public interface IGetActiveSessionApiResponse : BeamSelfCustody.Client.IApiResponse, IOk<BeamSelfCustody.Model.GetActiveSessionResponse?>
+    {
+        /// <summary>
+        /// Returns true if the response is 200 Ok
+        /// </summary>
+        /// <returns></returns>
+        bool IsOk { get; }
+    }
+
+    /// <summary>
+    /// The <see cref="IGetSessionRequestApiResponse"/>
+    /// </summary>
+    public interface IGetSessionRequestApiResponse : BeamSelfCustody.Client.IApiResponse, IOk<BeamSelfCustody.Model.GetSessionRequestResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -153,6 +188,26 @@ namespace BeamSelfCustody.Api
         internal void ExecuteOnErrorGetActiveSession(Exception exception)
         {
             OnErrorGetActiveSession?.Invoke(this, new ExceptionEventArgs(exception));
+        }
+
+        /// <summary>
+        /// The event raised after the server response
+        /// </summary>
+        public event EventHandler<ApiResponseEventArgs>? OnGetSessionRequest;
+
+        /// <summary>
+        /// The event raised after an error querying the server
+        /// </summary>
+        public event EventHandler<ExceptionEventArgs>? OnErrorGetSessionRequest;
+
+        internal void ExecuteOnGetSessionRequest(SessionsApi.GetSessionRequestApiResponse apiResponse)
+        {
+            OnGetSessionRequest?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+        }
+
+        internal void ExecuteOnErrorGetSessionRequest(Exception exception)
+        {
+            OnErrorGetSessionRequest?.Invoke(this, new ExceptionEventArgs(exception));
         }
     }
 
@@ -414,11 +469,11 @@ namespace BeamSelfCustody.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamSelfCustody.Model.GenerateSessionUrlResponse? Ok()
+            public BeamSelfCustody.Model.GenerateSessionRequestResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamSelfCustody.Model.GenerateSessionUrlResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamSelfCustody.Model.GenerateSessionRequestResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -427,7 +482,7 @@ namespace BeamSelfCustody.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamSelfCustody.Model.GenerateSessionUrlResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamSelfCustody.Model.GenerateSessionRequestResponse? result)
             {
                 result = null;
 
@@ -637,6 +692,233 @@ namespace BeamSelfCustody.Api
             /// <param name="requestedAt"></param>
             /// <param name="jsonSerializerOptions"></param>
             public GetActiveSessionApiResponse(ILogger<GetActiveSessionApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public BeamSelfCustody.Model.GetActiveSessionResponse? Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamSelfCustody.Model.GetActiveSessionResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk([NotNullWhen(true)]out BeamSelfCustody.Model.GetActiveSessionResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
+        }
+
+        partial void FormatGetSessionRequest(ref string requestId);
+
+        /// <summary>
+        /// Validates the request parameters
+        /// </summary>
+        /// <param name="requestId"></param>
+        /// <returns></returns>
+        private void ValidateGetSessionRequest(string requestId)
+        {
+            if (requestId == null)
+                throw new ArgumentNullException(nameof(requestId));
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="requestId"></param>
+        private void AfterGetSessionRequestDefaultImplementation(IGetSessionRequestApiResponse apiResponseLocalVar, string requestId)
+        {
+            bool suppressDefaultLog = false;
+            AfterGetSessionRequest(ref suppressDefaultLog, apiResponseLocalVar, requestId);
+            if (!suppressDefaultLog)
+                Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="requestId"></param>
+        partial void AfterGetSessionRequest(ref bool suppressDefaultLog, IGetSessionRequestApiResponse apiResponseLocalVar, string requestId);
+
+        /// <summary>
+        /// Logs exceptions that occur while retrieving the server response
+        /// </summary>
+        /// <param name="exception"></param>
+        /// <param name="pathFormat"></param>
+        /// <param name="path"></param>
+        /// <param name="requestId"></param>
+        private void OnErrorGetSessionRequestDefaultImplementation(Exception exception, string pathFormat, string path, string requestId)
+        {
+            bool suppressDefaultLog = false;
+            OnErrorGetSessionRequest(ref suppressDefaultLog, exception, pathFormat, path, requestId);
+            if (!suppressDefaultLog)
+                Logger.LogError(exception, "An error occurred while sending the request to the server.");
+        }
+
+        /// <summary>
+        /// A partial method that gives developers a way to provide customized exception handling
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="exception"></param>
+        /// <param name="pathFormat"></param>
+        /// <param name="path"></param>
+        /// <param name="requestId"></param>
+        partial void OnErrorGetSessionRequest(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string requestId);
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <param name="requestId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetSessionRequestApiResponse"/>&gt;</returns>
+        public async Task<IGetSessionRequestApiResponse?> GetSessionRequestOrDefaultAsync(string requestId, System.Threading.CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await GetSessionRequestAsync(requestId, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="requestId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetSessionRequestApiResponse"/>&gt;</returns>
+        public async Task<IGetSessionRequestApiResponse> GetSessionRequestAsync(string requestId, System.Threading.CancellationToken cancellationToken = default)
+        {
+            UriBuilder uriBuilderLocalVar = new UriBuilder();
+
+            try
+            {
+                ValidateGetSessionRequest(requestId);
+
+                FormatGetSessionRequest(ref requestId);
+
+                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
+                {
+                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
+                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
+                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
+                    uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/self-custody/sessions/request/{requestId}";
+                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BrequestId%7D", Uri.EscapeDataString(requestId.ToString()));
+
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
+                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    string[] acceptLocalVars = new string[] {
+                        "application/json"
+                    };
+
+                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+
+                    if (acceptLocalVar != null)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+
+                    httpRequestMessageLocalVar.Method = HttpMethod.Get;
+
+                    DateTime requestedAtLocalVar = DateTime.UtcNow;
+
+                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
+                    {
+                        string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+
+                        ILogger<GetSessionRequestApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<GetSessionRequestApiResponse>();
+
+                        GetSessionRequestApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/self-custody/sessions/request/{requestId}", requestedAtLocalVar, _jsonSerializerOptions);
+
+                        AfterGetSessionRequestDefaultImplementation(apiResponseLocalVar, requestId);
+
+                        Events.ExecuteOnGetSessionRequest(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
+
+                        return apiResponseLocalVar;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                OnErrorGetSessionRequestDefaultImplementation(e, "/v1/self-custody/sessions/request/{requestId}", uriBuilderLocalVar.Path, requestId);
+                Events.ExecuteOnErrorGetSessionRequest(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="GetSessionRequestApiResponse"/>
+        /// </summary>
+        public partial class GetSessionRequestApiResponse : BeamSelfCustody.Client.ApiResponse, IGetSessionRequestApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<GetSessionRequestApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="GetSessionRequestApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public GetSessionRequestApiResponse(ILogger<GetSessionRequestApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
             {
                 Logger = logger;
                 OnCreated(httpRequestMessage, httpResponseMessage);

@@ -2,10 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { CommonOperationResponse } from '../models/CommonOperationResponse';
 import type { CreateTransactionRequestInput } from '../models/CreateTransactionRequestInput';
 import type { GetTransactionResponse } from '../models/GetTransactionResponse';
 import type { GetTransactionsResponse } from '../models/GetTransactionsResponse';
-import type { OperationResponse } from '../models/OperationResponse';
 
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -82,13 +82,13 @@ export class TransactionsService {
    * Creating a new transaction on behalf of a user
    * @param entityId
    * @param requestBody
-   * @returns OperationResponse
+   * @returns CommonOperationResponse
    * @throws ApiError
    */
   public createUserTransaction(
     entityId: string,
     requestBody: CreateTransactionRequestInput,
-  ): CancelablePromise<OperationResponse> {
+  ): CancelablePromise<CommonOperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v1/self-custody/transactions/users/{entityId}',

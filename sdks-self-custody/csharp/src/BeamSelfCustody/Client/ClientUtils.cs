@@ -120,10 +120,18 @@ namespace BeamSelfCustody.Client
                 return boolean
                     ? "true"
                     : "false";
+            if (obj is CommonOperationResponse.StatusEnum commonOperationResponseStatusEnum)
+                return CommonOperationResponse.StatusEnumToJsonValue(commonOperationResponseStatusEnum);
+            if (obj is CommonOperationResponseTransactionsInner.StatusEnum commonOperationResponseTransactionsInnerStatusEnum)
+                return CommonOperationResponseTransactionsInner.StatusEnumToJsonValue(commonOperationResponseTransactionsInnerStatusEnum);
+            if (obj is CommonOperationResponseTransactionsInner.TypeEnum commonOperationResponseTransactionsInnerTypeEnum)
+                return CommonOperationResponseTransactionsInner.TypeEnumToJsonValue(commonOperationResponseTransactionsInnerTypeEnum);
             if (obj is ConfirmOperationRequest.StatusEnum confirmOperationRequestStatusEnum)
                 return ConfirmOperationRequest.StatusEnumToJsonValue(confirmOperationRequestStatusEnum);
             if (obj is CreateAssetOfferRequestInput.CurrencyEnum createAssetOfferRequestInputCurrencyEnum)
                 return CreateAssetOfferRequestInput.CurrencyEnumToJsonValue(createAssetOfferRequestInputCurrencyEnum);
+            if (obj is GenerateSessionRequestResponse.StatusEnum generateSessionRequestResponseStatusEnum)
+                return GenerateSessionRequestResponse.StatusEnumToJsonValue(generateSessionRequestResponseStatusEnum);
             if (obj is GetAssetListingsResponseDataInner.StatusEnum getAssetListingsResponseDataInnerStatusEnum)
                 return GetAssetListingsResponseDataInner.StatusEnumToJsonValue(getAssetListingsResponseDataInnerStatusEnum);
             if (obj is GetAssetListingsResponseDataInnerPriceCurrency.SymbolEnum getAssetListingsResponseDataInnerPriceCurrencySymbolEnum)
@@ -148,16 +156,8 @@ namespace BeamSelfCustody.Client
                 return GetListedAssetsBodyInput.SortByEnumToJsonValue(getListedAssetsBodyInputSortByEnum);
             if (obj is GetListedAssetsBodyInput.SortDirectionEnum getListedAssetsBodyInputSortDirectionEnum)
                 return GetListedAssetsBodyInput.SortDirectionEnumToJsonValue(getListedAssetsBodyInputSortDirectionEnum);
-            if (obj is OperationResponse.StatusEnum operationResponseStatusEnum)
-                return OperationResponse.StatusEnumToJsonValue(operationResponseStatusEnum);
-            if (obj is OperationResponseGame.PegiContentEnum operationResponseGamePegiContentEnum)
-                return OperationResponseGame.PegiContentEnumToJsonValue(operationResponseGamePegiContentEnum);
-            if (obj is OperationResponseGame.PegiRatingEnum operationResponseGamePegiRatingEnum)
-                return OperationResponseGame.PegiRatingEnumToJsonValue(operationResponseGamePegiRatingEnum);
-            if (obj is OperationResponseTransactionsInner.StatusEnum operationResponseTransactionsInnerStatusEnum)
-                return OperationResponseTransactionsInner.StatusEnumToJsonValue(operationResponseTransactionsInnerStatusEnum);
-            if (obj is OperationResponseTransactionsInner.TypeEnum operationResponseTransactionsInnerTypeEnum)
-                return OperationResponseTransactionsInner.TypeEnumToJsonValue(operationResponseTransactionsInnerTypeEnum);
+            if (obj is GetSessionRequestResponse.StatusEnum getSessionRequestResponseStatusEnum)
+                return GetSessionRequestResponse.StatusEnumToJsonValue(getSessionRequestResponseStatusEnum);
             if (obj is SellAssetRequestInput.SellTypeEnum sellAssetRequestInputSellTypeEnum)
                 return SellAssetRequestInput.SellTypeEnumToJsonValue(sellAssetRequestInputSellTypeEnum);
             if (obj is SellAssetRequestInput.CurrencyEnum sellAssetRequestInputCurrencyEnum)

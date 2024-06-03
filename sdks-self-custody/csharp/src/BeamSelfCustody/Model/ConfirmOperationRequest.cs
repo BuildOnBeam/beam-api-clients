@@ -37,15 +37,13 @@ namespace BeamSelfCustody.Model
         /// <param name="entityId">entityId</param>
         /// <param name="gameId">gameId</param>
         /// <param name="status">status</param>
-        /// <param name="error">error</param>
         /// <param name="transactions">transactions</param>
         [JsonConstructor]
-        public ConfirmOperationRequest(string entityId, string gameId, StatusEnum status, Option<string?> error = default, Option<List<ConfirmOperationRequestTransactionsInner>?> transactions = default)
+        public ConfirmOperationRequest(string entityId, string gameId, StatusEnum status, Option<List<ConfirmOperationRequestTransactionsInner>?> transactions = default)
         {
             EntityId = entityId;
             GameId = gameId;
             Status = status;
-            ErrorOption = error;
             TransactionsOption = transactions;
             OnCreated();
         }
@@ -165,19 +163,6 @@ namespace BeamSelfCustody.Model
         public string GameId { get; set; }
 
         /// <summary>
-        /// Used to track the state of Error
-        /// </summary>
-        [JsonIgnore]
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> ErrorOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets Error
-        /// </summary>
-        [JsonPropertyName("error")]
-        public string? Error { get { return this. ErrorOption; } set { this.ErrorOption = new(value); } }
-
-        /// <summary>
         /// Used to track the state of Transactions
         /// </summary>
         [JsonIgnore]
@@ -201,7 +186,6 @@ namespace BeamSelfCustody.Model
             sb.Append("  EntityId: ").Append(EntityId).Append("\n");
             sb.Append("  GameId: ").Append(GameId).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
-            sb.Append("  Error: ").Append(Error).Append("\n");
             sb.Append("  Transactions: ").Append(Transactions).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -243,7 +227,6 @@ namespace BeamSelfCustody.Model
             Option<string?> entityId = default;
             Option<string?> gameId = default;
             Option<ConfirmOperationRequest.StatusEnum?> status = default;
-            Option<string?> error = default;
             Option<List<ConfirmOperationRequestTransactionsInner>?> transactions = default;
 
             while (utf8JsonReader.Read())
@@ -271,9 +254,6 @@ namespace BeamSelfCustody.Model
                             string? statusRawValue = utf8JsonReader.GetString();
                             if (statusRawValue != null)
                                 status = new Option<ConfirmOperationRequest.StatusEnum?>(ConfirmOperationRequest.StatusEnumFromStringOrDefault(statusRawValue));
-                            break;
-                        case "error":
-                            error = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "transactions":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
@@ -303,7 +283,7 @@ namespace BeamSelfCustody.Model
             if (status.IsSet && status.Value == null)
                 throw new ArgumentNullException(nameof(status), "Property is not nullable for class ConfirmOperationRequest.");
 
-            return new ConfirmOperationRequest(entityId.Value!, gameId.Value!, status.Value!.Value!, error, transactions);
+            return new ConfirmOperationRequest(entityId.Value!, gameId.Value!, status.Value!.Value!, transactions);
         }
 
         /// <summary>
@@ -342,12 +322,6 @@ namespace BeamSelfCustody.Model
 
             var statusRawValue = ConfirmOperationRequest.StatusEnumToJsonValue(confirmOperationRequest.Status);
             writer.WriteString("status", statusRawValue);
-            if (confirmOperationRequest.ErrorOption.IsSet)
-                if (confirmOperationRequest.ErrorOption.Value != null)
-                    writer.WriteString("error", confirmOperationRequest.Error);
-                else
-                    writer.WriteNull("error");
-
             if (confirmOperationRequest.TransactionsOption.IsSet)
                 if (confirmOperationRequest.TransactionsOption.Value != null)
                 {

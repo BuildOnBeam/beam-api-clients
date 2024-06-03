@@ -35,10 +35,12 @@ namespace BeamSelfCustody.Model
         /// Initializes a new instance of the <see cref="GenerateSessionUrlRequestInput" /> class.
         /// </summary>
         /// <param name="address">address</param>
+        /// <param name="chainId">chainId (default to 13337M)</param>
         [JsonConstructor]
-        public GenerateSessionUrlRequestInput(string address)
+        public GenerateSessionUrlRequestInput(string address, Option<decimal?> chainId = default)
         {
             Address = address;
+            ChainIdOption = chainId;
             OnCreated();
         }
 
@@ -51,6 +53,19 @@ namespace BeamSelfCustody.Model
         public string Address { get; set; }
 
         /// <summary>
+        /// Used to track the state of ChainId
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<decimal?> ChainIdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ChainId
+        /// </summary>
+        [JsonPropertyName("chainId")]
+        public decimal? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -59,6 +74,7 @@ namespace BeamSelfCustody.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class GenerateSessionUrlRequestInput {\n");
             sb.Append("  Address: ").Append(Address).Append("\n");
+            sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -97,6 +113,7 @@ namespace BeamSelfCustody.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<string?> address = default;
+            Option<decimal?> chainId = default;
 
             while (utf8JsonReader.Read())
             {
@@ -116,6 +133,10 @@ namespace BeamSelfCustody.Model
                         case "address":
                             address = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
+                        case "chainId":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                            break;
                         default:
                             break;
                     }
@@ -128,7 +149,10 @@ namespace BeamSelfCustody.Model
             if (address.IsSet && address.Value == null)
                 throw new ArgumentNullException(nameof(address), "Property is not nullable for class GenerateSessionUrlRequestInput.");
 
-            return new GenerateSessionUrlRequestInput(address.Value!);
+            if (chainId.IsSet && chainId.Value == null)
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class GenerateSessionUrlRequestInput.");
+
+            return new GenerateSessionUrlRequestInput(address.Value!, chainId);
         }
 
         /// <summary>
@@ -159,6 +183,9 @@ namespace BeamSelfCustody.Model
                 throw new ArgumentNullException(nameof(generateSessionUrlRequestInput.Address), "Property is required for class GenerateSessionUrlRequestInput.");
 
             writer.WriteString("address", generateSessionUrlRequestInput.Address);
+
+            if (generateSessionUrlRequestInput.ChainIdOption.IsSet)
+                writer.WriteNumber("chainId", generateSessionUrlRequestInput.ChainIdOption.Value!.Value);
         }
     }
 }

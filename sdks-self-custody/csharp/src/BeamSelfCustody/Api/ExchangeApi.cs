@@ -147,7 +147,7 @@ namespace BeamSelfCustody.Api
     /// <summary>
     /// The <see cref="IConvertInputApiResponse"/>
     /// </summary>
-    public interface IConvertInputApiResponse : BeamSelfCustody.Client.IApiResponse, IOk<BeamSelfCustody.Model.OperationResponse?>
+    public interface IConvertInputApiResponse : BeamSelfCustody.Client.IApiResponse, IOk<BeamSelfCustody.Model.CommonOperationResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -159,7 +159,7 @@ namespace BeamSelfCustody.Api
     /// <summary>
     /// The <see cref="IConvertToOutputApiResponse"/>
     /// </summary>
-    public interface IConvertToOutputApiResponse : BeamSelfCustody.Client.IApiResponse, IOk<BeamSelfCustody.Model.OperationResponse?>
+    public interface IConvertToOutputApiResponse : BeamSelfCustody.Client.IApiResponse, IOk<BeamSelfCustody.Model.CommonOperationResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -536,11 +536,11 @@ namespace BeamSelfCustody.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamSelfCustody.Model.OperationResponse? Ok()
+            public BeamSelfCustody.Model.CommonOperationResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamSelfCustody.Model.OperationResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamSelfCustody.Model.CommonOperationResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -549,7 +549,7 @@ namespace BeamSelfCustody.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamSelfCustody.Model.OperationResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamSelfCustody.Model.CommonOperationResponse? result)
             {
                 result = null;
 
@@ -786,11 +786,11 @@ namespace BeamSelfCustody.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamSelfCustody.Model.OperationResponse? Ok()
+            public BeamSelfCustody.Model.CommonOperationResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamSelfCustody.Model.OperationResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamSelfCustody.Model.CommonOperationResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -799,7 +799,7 @@ namespace BeamSelfCustody.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamSelfCustody.Model.OperationResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamSelfCustody.Model.CommonOperationResponse? result)
             {
                 result = null;
 

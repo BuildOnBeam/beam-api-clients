@@ -48,6 +48,9 @@ namespace BeamSelfCustody.Client
             _jsonOptions.Converters.Add(new Check200ResponseJsonConverter());
             _jsonOptions.Converters.Add(new Check200ResponseInfoValueJsonConverter());
             _jsonOptions.Converters.Add(new Check503ResponseJsonConverter());
+            _jsonOptions.Converters.Add(new CommonOperationResponseJsonConverter());
+            _jsonOptions.Converters.Add(new CommonOperationResponseTransactionsInnerJsonConverter());
+            _jsonOptions.Converters.Add(new CommonOperationResponseTransactionsInnerDataJsonConverter());
             _jsonOptions.Converters.Add(new ConfirmOperationRequestJsonConverter());
             _jsonOptions.Converters.Add(new ConfirmOperationRequestTransactionsInnerJsonConverter());
             _jsonOptions.Converters.Add(new ConvertTokenRequestInputJsonConverter());
@@ -55,8 +58,9 @@ namespace BeamSelfCustody.Client
             _jsonOptions.Converters.Add(new CreateOperationRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new CreateTransactionRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new CreateTransactionRequestInputInteractionsInnerJsonConverter());
+            _jsonOptions.Converters.Add(new GenerateSessionRequestResponseJsonConverter());
             _jsonOptions.Converters.Add(new GenerateSessionUrlRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new GenerateSessionUrlResponseJsonConverter());
+            _jsonOptions.Converters.Add(new GetActiveSessionResponseJsonConverter());
             _jsonOptions.Converters.Add(new GetAllUsersResponseJsonConverter());
             _jsonOptions.Converters.Add(new GetAllUsersResponseDataInnerJsonConverter());
             _jsonOptions.Converters.Add(new GetAllUsersResponseDataInnerWalletsInnerJsonConverter());
@@ -96,10 +100,6 @@ namespace BeamSelfCustody.Client
             _jsonOptions.Converters.Add(new GetTransactionsResponseDataInnerTransactionLogsInnerJsonConverter());
             _jsonOptions.Converters.Add(new GetTransactionsResponsePaginationJsonConverter());
             _jsonOptions.Converters.Add(new GetUserResponseJsonConverter());
-            _jsonOptions.Converters.Add(new OperationResponseJsonConverter());
-            _jsonOptions.Converters.Add(new OperationResponseGameJsonConverter());
-            _jsonOptions.Converters.Add(new OperationResponseTransactionsInnerJsonConverter());
-            _jsonOptions.Converters.Add(new OperationResponseTransactionsInnerDataJsonConverter());
             _jsonOptions.Converters.Add(new SellAssetRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new TransferAssetRequestInputV3JsonConverter());
             _jsonOptions.Converters.Add(new TransferAssetRequestInputV3AssetsInnerJsonConverter());

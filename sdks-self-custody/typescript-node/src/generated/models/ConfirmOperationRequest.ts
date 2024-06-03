@@ -9,7 +9,6 @@ export type ConfirmOperationRequest = {
     id: string;
     signature: string;
   }> | null;
-  error?: string | null;
   entityId: string;
   gameId: string;
 };

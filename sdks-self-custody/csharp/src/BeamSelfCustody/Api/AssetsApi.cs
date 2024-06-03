@@ -305,7 +305,7 @@ namespace BeamSelfCustody.Api
     /// <summary>
     /// The <see cref="ITransferAssetV3ApiResponse"/>
     /// </summary>
-    public interface ITransferAssetV3ApiResponse : BeamSelfCustody.Client.IApiResponse, ICreated<BeamSelfCustody.Model.OperationResponse?>
+    public interface ITransferAssetV3ApiResponse : BeamSelfCustody.Client.IApiResponse, ICreated<BeamSelfCustody.Model.CommonOperationResponse?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
@@ -317,7 +317,7 @@ namespace BeamSelfCustody.Api
     /// <summary>
     /// The <see cref="ITransferNativeTokenV3ApiResponse"/>
     /// </summary>
-    public interface ITransferNativeTokenV3ApiResponse : BeamSelfCustody.Client.IApiResponse, ICreated<BeamSelfCustody.Model.OperationResponse?>
+    public interface ITransferNativeTokenV3ApiResponse : BeamSelfCustody.Client.IApiResponse, ICreated<BeamSelfCustody.Model.CommonOperationResponse?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
@@ -329,7 +329,7 @@ namespace BeamSelfCustody.Api
     /// <summary>
     /// The <see cref="ITransferTokenV3ApiResponse"/>
     /// </summary>
-    public interface ITransferTokenV3ApiResponse : BeamSelfCustody.Client.IApiResponse, ICreated<BeamSelfCustody.Model.OperationResponse?>
+    public interface ITransferTokenV3ApiResponse : BeamSelfCustody.Client.IApiResponse, ICreated<BeamSelfCustody.Model.CommonOperationResponse?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
@@ -2015,11 +2015,11 @@ namespace BeamSelfCustody.Api
             /// Deserializes the response if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public BeamSelfCustody.Model.OperationResponse? Created()
+            public BeamSelfCustody.Model.CommonOperationResponse? Created()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsCreated
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamSelfCustody.Model.OperationResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamSelfCustody.Model.CommonOperationResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -2028,7 +2028,7 @@ namespace BeamSelfCustody.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryCreated([NotNullWhen(true)]out BeamSelfCustody.Model.OperationResponse? result)
+            public bool TryCreated([NotNullWhen(true)]out BeamSelfCustody.Model.CommonOperationResponse? result)
             {
                 result = null;
 
@@ -2265,11 +2265,11 @@ namespace BeamSelfCustody.Api
             /// Deserializes the response if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public BeamSelfCustody.Model.OperationResponse? Created()
+            public BeamSelfCustody.Model.CommonOperationResponse? Created()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsCreated
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamSelfCustody.Model.OperationResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamSelfCustody.Model.CommonOperationResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -2278,7 +2278,7 @@ namespace BeamSelfCustody.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryCreated([NotNullWhen(true)]out BeamSelfCustody.Model.OperationResponse? result)
+            public bool TryCreated([NotNullWhen(true)]out BeamSelfCustody.Model.CommonOperationResponse? result)
             {
                 result = null;
 
@@ -2515,11 +2515,11 @@ namespace BeamSelfCustody.Api
             /// Deserializes the response if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public BeamSelfCustody.Model.OperationResponse? Created()
+            public BeamSelfCustody.Model.CommonOperationResponse? Created()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsCreated
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamSelfCustody.Model.OperationResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamSelfCustody.Model.CommonOperationResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -2528,7 +2528,7 @@ namespace BeamSelfCustody.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryCreated([NotNullWhen(true)]out BeamSelfCustody.Model.OperationResponse? result)
+            public bool TryCreated([NotNullWhen(true)]out BeamSelfCustody.Model.CommonOperationResponse? result)
             {
                 result = null;
 

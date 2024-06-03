@@ -1,41 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-<PropertyGroup>
+  <PropertyGroup>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo> <!-- setting GenerateAssemblyInfo to false causes this bug https://github.com/dotnet/project-system/issues/3934 -->
-    <TargetFramework>net6.0</TargetFramework>
-
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>BeamSelfCustody</AssemblyName>
+    <PackageId>BeamSelfCustody</PackageId>
     <OutputType>Library</OutputType>
-    <Version>$(VERSION)</Version>
-
-    <Nullable>annotations</Nullable>
-    <LangVersion>latest</LangVersion>
-
-    <AssemblyName>Beam</AssemblyName>
-    <RootNamespace>Beam</RootNamespace>
-    <PackageId>Beam</PackageId>
-    <Authors>Beam Developers</Authors>
-    <Company>Merit Circle</Company>
-    <AssemblyTitle>Beam SelfCustody SDK</AssemblyTitle>
-    <Description>Official C# Beam SDK for Self-Custodial accounts</Description>
-
-    <PackageTags>beam, sdk, library, client</PackageTags>
-    <PackageIcon>icon.jpg</PackageIcon>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
-
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Beam.xml</DocumentationFile>
-
+    <Authors>OpenAPI</Authors>
+    <Company>OpenAPI</Company>
+    <AssemblyTitle>OpenAPI Library</AssemblyTitle>
+    <Description>A library generated from a OpenAPI doc</Description>
+    <Copyright>No Copyright</Copyright>
+    <RootNamespace>BeamSelfCustody</RootNamespace>
+    <Version>1.0.0</Version>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\BeamSelfCustody.xml</DocumentationFile>
+    <RepositoryUrl>https://github.com/GIT_USER_ID/GIT_REPO_ID.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/Merit-Circle/beam-sdk.git</RepositoryUrl>
-
-    <PackageProjectUrl>https://github.com/Merit-Circle/beam-sdk.git</PackageProjectUrl>
-
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <DebugType>embedded</DebugType>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
-  <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    <PackageReleaseNotes>Minor update</PackageReleaseNotes>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

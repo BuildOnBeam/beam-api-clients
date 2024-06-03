@@ -6,11 +6,11 @@ import type { AcceptAssetOfferRequestInput } from '../models/AcceptAssetOfferReq
 import type { BuyAssetRequestInput } from '../models/BuyAssetRequestInput';
 import type { CancelAssetListingRequestInput } from '../models/CancelAssetListingRequestInput';
 import type { CancelAssetOfferRequestInput } from '../models/CancelAssetOfferRequestInput';
+import type { CommonOperationResponse } from '../models/CommonOperationResponse';
 import type { CreateAssetOfferRequestInput } from '../models/CreateAssetOfferRequestInput';
 import type { GetAssetListingsResponse } from '../models/GetAssetListingsResponse';
 import type { GetChainCurrenciesResponse } from '../models/GetChainCurrenciesResponse';
 import type { GetListedAssetsBodyInput } from '../models/GetListedAssetsBodyInput';
-import type { OperationResponse } from '../models/OperationResponse';
 import type { SellAssetRequestInput } from '../models/SellAssetRequestInput';
 
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
@@ -62,13 +62,13 @@ export class MarketplaceService {
    * List an asset for sale
    * @param entityId
    * @param requestBody
-   * @returns OperationResponse
+   * @returns CommonOperationResponse
    * @throws ApiError
    */
   public listAsset(
     entityId: string,
     requestBody: SellAssetRequestInput,
-  ): CancelablePromise<OperationResponse> {
+  ): CancelablePromise<CommonOperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v1/self-custody/marketplace/users/{entityId}/listing',
@@ -85,14 +85,14 @@ export class MarketplaceService {
    * @param entityId
    * @param orderId
    * @param requestBody
-   * @returns OperationResponse
+   * @returns CommonOperationResponse
    * @throws ApiError
    */
   public buyListedAsset(
     entityId: string,
     orderId: string,
     requestBody: BuyAssetRequestInput,
-  ): CancelablePromise<OperationResponse> {
+  ): CancelablePromise<CommonOperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v1/self-custody/marketplace/users/{entityId}/listing/{orderId}',
@@ -111,7 +111,7 @@ export class MarketplaceService {
    * @param orderId
    * @param requestBody
    * @param chainId
-   * @returns OperationResponse
+   * @returns CommonOperationResponse
    * @throws ApiError
    */
   public cancelListing(
@@ -119,7 +119,7 @@ export class MarketplaceService {
     orderId: string,
     requestBody: CancelAssetListingRequestInput,
     chainId?: number,
-  ): CancelablePromise<OperationResponse> {
+  ): CancelablePromise<CommonOperationResponse> {
     return this.httpRequest.request({
       method: 'DELETE',
       url: '/v1/self-custody/marketplace/users/{entityId}/listing/{orderId}',
@@ -139,13 +139,13 @@ export class MarketplaceService {
    * Make an offer for an asset
    * @param entityId
    * @param requestBody
-   * @returns OperationResponse
+   * @returns CommonOperationResponse
    * @throws ApiError
    */
   public createAssetOffer(
     entityId: string,
     requestBody: CreateAssetOfferRequestInput,
-  ): CancelablePromise<OperationResponse> {
+  ): CancelablePromise<CommonOperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v1/self-custody/marketplace/users/{entityId}/offers',
@@ -219,13 +219,13 @@ export class MarketplaceService {
    * Accept an offer for an asset
    * @param entityId
    * @param requestBody
-   * @returns OperationResponse
+   * @returns CommonOperationResponse
    * @throws ApiError
    */
   public acceptAssetOffer(
     entityId: string,
     requestBody: AcceptAssetOfferRequestInput,
-  ): CancelablePromise<OperationResponse> {
+  ): CancelablePromise<CommonOperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v1/self-custody/marketplace/users/{entityId}/offers/{offerId}/accept',
@@ -241,13 +241,13 @@ export class MarketplaceService {
    * Cancel an offer for an asset
    * @param entityId
    * @param requestBody
-   * @returns OperationResponse
+   * @returns CommonOperationResponse
    * @throws ApiError
    */
   public cancelAssetOffer(
     entityId: string,
     requestBody: CancelAssetOfferRequestInput,
-  ): CancelablePromise<OperationResponse> {
+  ): CancelablePromise<CommonOperationResponse> {
     return this.httpRequest.request({
       method: 'DELETE',
       url: '/v1/self-custody/marketplace/users/{entityId}/offers/{offerId}',

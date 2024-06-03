@@ -91,8 +91,8 @@ namespace BeamSelfCustody.Api
         /// <param name="confirmOperationRequest"></param>
         /// <param name="opId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IProcessOperationForSelfCustodyApiResponse"/>&gt;</returns>
-        Task<IProcessOperationForSelfCustodyApiResponse> ProcessOperationForSelfCustodyAsync(ConfirmOperationRequest confirmOperationRequest, string opId, System.Threading.CancellationToken cancellationToken = default);
+        /// <returns><see cref="Task"/>&lt;<see cref="IProcessOperationApiResponse"/>&gt;</returns>
+        Task<IProcessOperationApiResponse> ProcessOperationAsync(ConfirmOperationRequest confirmOperationRequest, string opId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Updates operation result for given id
@@ -103,14 +103,14 @@ namespace BeamSelfCustody.Api
         /// <param name="confirmOperationRequest"></param>
         /// <param name="opId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IProcessOperationForSelfCustodyApiResponse"/>?&gt;</returns>
-        Task<IProcessOperationForSelfCustodyApiResponse?> ProcessOperationForSelfCustodyOrDefaultAsync(ConfirmOperationRequest confirmOperationRequest, string opId, System.Threading.CancellationToken cancellationToken = default);
+        /// <returns><see cref="Task"/>&lt;<see cref="IProcessOperationApiResponse"/>?&gt;</returns>
+        Task<IProcessOperationApiResponse?> ProcessOperationOrDefaultAsync(ConfirmOperationRequest confirmOperationRequest, string opId, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
     /// The <see cref="ICreateOperationApiResponse"/>
     /// </summary>
-    public interface ICreateOperationApiResponse : BeamSelfCustody.Client.IApiResponse, ICreated<BeamSelfCustody.Model.OperationResponse?>
+    public interface ICreateOperationApiResponse : BeamSelfCustody.Client.IApiResponse, ICreated<BeamSelfCustody.Model.CommonOperationResponse?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
@@ -122,7 +122,7 @@ namespace BeamSelfCustody.Api
     /// <summary>
     /// The <see cref="IGetOperationApiResponse"/>
     /// </summary>
-    public interface IGetOperationApiResponse : BeamSelfCustody.Client.IApiResponse, IOk<BeamSelfCustody.Model.OperationResponse?>
+    public interface IGetOperationApiResponse : BeamSelfCustody.Client.IApiResponse, IOk<BeamSelfCustody.Model.CommonOperationResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -132,9 +132,9 @@ namespace BeamSelfCustody.Api
     }
 
     /// <summary>
-    /// The <see cref="IProcessOperationForSelfCustodyApiResponse"/>
+    /// The <see cref="IProcessOperationApiResponse"/>
     /// </summary>
-    public interface IProcessOperationForSelfCustodyApiResponse : BeamSelfCustody.Client.IApiResponse, IOk<BeamSelfCustody.Model.OperationResponse?>
+    public interface IProcessOperationApiResponse : BeamSelfCustody.Client.IApiResponse, IOk<BeamSelfCustody.Model.CommonOperationResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -191,21 +191,21 @@ namespace BeamSelfCustody.Api
         /// <summary>
         /// The event raised after the server response
         /// </summary>
-        public event EventHandler<ApiResponseEventArgs>? OnProcessOperationForSelfCustody;
+        public event EventHandler<ApiResponseEventArgs>? OnProcessOperation;
 
         /// <summary>
         /// The event raised after an error querying the server
         /// </summary>
-        public event EventHandler<ExceptionEventArgs>? OnErrorProcessOperationForSelfCustody;
+        public event EventHandler<ExceptionEventArgs>? OnErrorProcessOperation;
 
-        internal void ExecuteOnProcessOperationForSelfCustody(OperationApi.ProcessOperationForSelfCustodyApiResponse apiResponse)
+        internal void ExecuteOnProcessOperation(OperationApi.ProcessOperationApiResponse apiResponse)
         {
-            OnProcessOperationForSelfCustody?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+            OnProcessOperation?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
 
-        internal void ExecuteOnErrorProcessOperationForSelfCustody(Exception exception)
+        internal void ExecuteOnErrorProcessOperation(Exception exception)
         {
-            OnErrorProcessOperationForSelfCustody?.Invoke(this, new ExceptionEventArgs(exception));
+            OnErrorProcessOperation?.Invoke(this, new ExceptionEventArgs(exception));
         }
     }
 
@@ -456,11 +456,11 @@ namespace BeamSelfCustody.Api
             /// Deserializes the response if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public BeamSelfCustody.Model.OperationResponse? Created()
+            public BeamSelfCustody.Model.CommonOperationResponse? Created()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsCreated
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamSelfCustody.Model.OperationResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamSelfCustody.Model.CommonOperationResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -469,7 +469,7 @@ namespace BeamSelfCustody.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryCreated([NotNullWhen(true)]out BeamSelfCustody.Model.OperationResponse? result)
+            public bool TryCreated([NotNullWhen(true)]out BeamSelfCustody.Model.CommonOperationResponse? result)
             {
                 result = null;
 
@@ -683,11 +683,11 @@ namespace BeamSelfCustody.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamSelfCustody.Model.OperationResponse? Ok()
+            public BeamSelfCustody.Model.CommonOperationResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamSelfCustody.Model.OperationResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamSelfCustody.Model.CommonOperationResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -696,7 +696,7 @@ namespace BeamSelfCustody.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamSelfCustody.Model.OperationResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamSelfCustody.Model.CommonOperationResponse? result)
             {
                 result = null;
 
@@ -722,7 +722,7 @@ namespace BeamSelfCustody.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatProcessOperationForSelfCustody(ConfirmOperationRequest confirmOperationRequest, ref string opId);
+        partial void FormatProcessOperation(ConfirmOperationRequest confirmOperationRequest, ref string opId);
 
         /// <summary>
         /// Validates the request parameters
@@ -730,7 +730,7 @@ namespace BeamSelfCustody.Api
         /// <param name="confirmOperationRequest"></param>
         /// <param name="opId"></param>
         /// <returns></returns>
-        private void ValidateProcessOperationForSelfCustody(ConfirmOperationRequest confirmOperationRequest, string opId)
+        private void ValidateProcessOperation(ConfirmOperationRequest confirmOperationRequest, string opId)
         {
             if (confirmOperationRequest == null)
                 throw new ArgumentNullException(nameof(confirmOperationRequest));
@@ -745,10 +745,10 @@ namespace BeamSelfCustody.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="confirmOperationRequest"></param>
         /// <param name="opId"></param>
-        private void AfterProcessOperationForSelfCustodyDefaultImplementation(IProcessOperationForSelfCustodyApiResponse apiResponseLocalVar, ConfirmOperationRequest confirmOperationRequest, string opId)
+        private void AfterProcessOperationDefaultImplementation(IProcessOperationApiResponse apiResponseLocalVar, ConfirmOperationRequest confirmOperationRequest, string opId)
         {
             bool suppressDefaultLog = false;
-            AfterProcessOperationForSelfCustody(ref suppressDefaultLog, apiResponseLocalVar, confirmOperationRequest, opId);
+            AfterProcessOperation(ref suppressDefaultLog, apiResponseLocalVar, confirmOperationRequest, opId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -760,7 +760,7 @@ namespace BeamSelfCustody.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="confirmOperationRequest"></param>
         /// <param name="opId"></param>
-        partial void AfterProcessOperationForSelfCustody(ref bool suppressDefaultLog, IProcessOperationForSelfCustodyApiResponse apiResponseLocalVar, ConfirmOperationRequest confirmOperationRequest, string opId);
+        partial void AfterProcessOperation(ref bool suppressDefaultLog, IProcessOperationApiResponse apiResponseLocalVar, ConfirmOperationRequest confirmOperationRequest, string opId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -770,10 +770,10 @@ namespace BeamSelfCustody.Api
         /// <param name="path"></param>
         /// <param name="confirmOperationRequest"></param>
         /// <param name="opId"></param>
-        private void OnErrorProcessOperationForSelfCustodyDefaultImplementation(Exception exception, string pathFormat, string path, ConfirmOperationRequest confirmOperationRequest, string opId)
+        private void OnErrorProcessOperationDefaultImplementation(Exception exception, string pathFormat, string path, ConfirmOperationRequest confirmOperationRequest, string opId)
         {
             bool suppressDefaultLog = false;
-            OnErrorProcessOperationForSelfCustody(ref suppressDefaultLog, exception, pathFormat, path, confirmOperationRequest, opId);
+            OnErrorProcessOperation(ref suppressDefaultLog, exception, pathFormat, path, confirmOperationRequest, opId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -787,7 +787,7 @@ namespace BeamSelfCustody.Api
         /// <param name="path"></param>
         /// <param name="confirmOperationRequest"></param>
         /// <param name="opId"></param>
-        partial void OnErrorProcessOperationForSelfCustody(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, ConfirmOperationRequest confirmOperationRequest, string opId);
+        partial void OnErrorProcessOperation(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, ConfirmOperationRequest confirmOperationRequest, string opId);
 
         /// <summary>
         /// Updates operation result for given id 
@@ -795,12 +795,12 @@ namespace BeamSelfCustody.Api
         /// <param name="confirmOperationRequest"></param>
         /// <param name="opId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IProcessOperationForSelfCustodyApiResponse"/>&gt;</returns>
-        public async Task<IProcessOperationForSelfCustodyApiResponse?> ProcessOperationForSelfCustodyOrDefaultAsync(ConfirmOperationRequest confirmOperationRequest, string opId, System.Threading.CancellationToken cancellationToken = default)
+        /// <returns><see cref="Task"/>&lt;<see cref="IProcessOperationApiResponse"/>&gt;</returns>
+        public async Task<IProcessOperationApiResponse?> ProcessOperationOrDefaultAsync(ConfirmOperationRequest confirmOperationRequest, string opId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await ProcessOperationForSelfCustodyAsync(confirmOperationRequest, opId, cancellationToken).ConfigureAwait(false);
+                return await ProcessOperationAsync(confirmOperationRequest, opId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -815,16 +815,16 @@ namespace BeamSelfCustody.Api
         /// <param name="confirmOperationRequest"></param>
         /// <param name="opId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IProcessOperationForSelfCustodyApiResponse"/>&gt;</returns>
-        public async Task<IProcessOperationForSelfCustodyApiResponse> ProcessOperationForSelfCustodyAsync(ConfirmOperationRequest confirmOperationRequest, string opId, System.Threading.CancellationToken cancellationToken = default)
+        /// <returns><see cref="Task"/>&lt;<see cref="IProcessOperationApiResponse"/>&gt;</returns>
+        public async Task<IProcessOperationApiResponse> ProcessOperationAsync(ConfirmOperationRequest confirmOperationRequest, string opId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateProcessOperationForSelfCustody(confirmOperationRequest, opId);
+                ValidateProcessOperation(confirmOperationRequest, opId);
 
-                FormatProcessOperationForSelfCustody(confirmOperationRequest, ref opId);
+                FormatProcessOperation(confirmOperationRequest, ref opId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -871,13 +871,13 @@ namespace BeamSelfCustody.Api
                     {
                         string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
 
-                        ILogger<ProcessOperationForSelfCustodyApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<ProcessOperationForSelfCustodyApiResponse>();
+                        ILogger<ProcessOperationApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<ProcessOperationApiResponse>();
 
-                        ProcessOperationForSelfCustodyApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/self-custody/operation/{opId}", requestedAtLocalVar, _jsonSerializerOptions);
+                        ProcessOperationApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/self-custody/operation/{opId}", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterProcessOperationForSelfCustodyDefaultImplementation(apiResponseLocalVar, confirmOperationRequest, opId);
+                        AfterProcessOperationDefaultImplementation(apiResponseLocalVar, confirmOperationRequest, opId);
 
-                        Events.ExecuteOnProcessOperationForSelfCustody(apiResponseLocalVar);
+                        Events.ExecuteOnProcessOperation(apiResponseLocalVar);
 
                         if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
                             foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
@@ -889,24 +889,24 @@ namespace BeamSelfCustody.Api
             }
             catch(Exception e)
             {
-                OnErrorProcessOperationForSelfCustodyDefaultImplementation(e, "/v1/self-custody/operation/{opId}", uriBuilderLocalVar.Path, confirmOperationRequest, opId);
-                Events.ExecuteOnErrorProcessOperationForSelfCustody(e);
+                OnErrorProcessOperationDefaultImplementation(e, "/v1/self-custody/operation/{opId}", uriBuilderLocalVar.Path, confirmOperationRequest, opId);
+                Events.ExecuteOnErrorProcessOperation(e);
                 throw;
             }
         }
 
         /// <summary>
-        /// The <see cref="ProcessOperationForSelfCustodyApiResponse"/>
+        /// The <see cref="ProcessOperationApiResponse"/>
         /// </summary>
-        public partial class ProcessOperationForSelfCustodyApiResponse : BeamSelfCustody.Client.ApiResponse, IProcessOperationForSelfCustodyApiResponse
+        public partial class ProcessOperationApiResponse : BeamSelfCustody.Client.ApiResponse, IProcessOperationApiResponse
         {
             /// <summary>
             /// The logger
             /// </summary>
-            public ILogger<ProcessOperationForSelfCustodyApiResponse> Logger { get; }
+            public ILogger<ProcessOperationApiResponse> Logger { get; }
 
             /// <summary>
-            /// The <see cref="ProcessOperationForSelfCustodyApiResponse"/>
+            /// The <see cref="ProcessOperationApiResponse"/>
             /// </summary>
             /// <param name="logger"></param>
             /// <param name="httpRequestMessage"></param>
@@ -915,7 +915,7 @@ namespace BeamSelfCustody.Api
             /// <param name="path"></param>
             /// <param name="requestedAt"></param>
             /// <param name="jsonSerializerOptions"></param>
-            public ProcessOperationForSelfCustodyApiResponse(ILogger<ProcessOperationForSelfCustodyApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            public ProcessOperationApiResponse(ILogger<ProcessOperationApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
             {
                 Logger = logger;
                 OnCreated(httpRequestMessage, httpResponseMessage);
@@ -933,11 +933,11 @@ namespace BeamSelfCustody.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamSelfCustody.Model.OperationResponse? Ok()
+            public BeamSelfCustody.Model.CommonOperationResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamSelfCustody.Model.OperationResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamSelfCustody.Model.CommonOperationResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -946,7 +946,7 @@ namespace BeamSelfCustody.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamSelfCustody.Model.OperationResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamSelfCustody.Model.CommonOperationResponse? result)
             {
                 result = null;
 

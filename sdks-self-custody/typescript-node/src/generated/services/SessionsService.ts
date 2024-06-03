@@ -2,8 +2,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { GenerateSessionRequestResponse } from '../models/GenerateSessionRequestResponse';
 import type { GenerateSessionUrlRequestInput } from '../models/GenerateSessionUrlRequestInput';
-import type { GenerateSessionUrlResponse } from '../models/GenerateSessionUrlResponse';
+import type { GetActiveSessionResponse } from '../models/GetActiveSessionResponse';
 import type { GetSessionRequestResponse } from '../models/GetSessionRequestResponse';
 
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
@@ -15,13 +16,13 @@ export class SessionsService {
   /**
    * @param entityId
    * @param requestBody
-   * @returns GenerateSessionUrlResponse
+   * @returns GenerateSessionRequestResponse
    * @throws ApiError
    */
   public createSessionRequest(
     entityId: string,
     requestBody: GenerateSessionUrlRequestInput,
-  ): CancelablePromise<GenerateSessionUrlResponse> {
+  ): CancelablePromise<GenerateSessionRequestResponse> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v1/self-custody/sessions/users/{entityId}/request',
@@ -34,15 +35,32 @@ export class SessionsService {
   }
 
   /**
+   * @param requestId
+   * @returns GetSessionRequestResponse
+   * @throws ApiError
+   */
+  public getSessionRequest(
+    requestId: string,
+  ): CancelablePromise<GetSessionRequestResponse> {
+    return this.httpRequest.request({
+      method: 'GET',
+      url: '/v1/self-custody/sessions/request/{requestId}',
+      path: {
+        requestId: requestId,
+      },
+    });
+  }
+
+  /**
    * @param entityId
    * @param chainId
-   * @returns GetSessionRequestResponse
+   * @returns GetActiveSessionResponse
    * @throws ApiError
    */
   public getActiveSession(
     entityId: string,
     chainId?: number,
-  ): CancelablePromise<GetSessionRequestResponse> {
+  ): CancelablePromise<GetActiveSessionResponse> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v1/self-custody/sessions/users/{entityId}/active',
