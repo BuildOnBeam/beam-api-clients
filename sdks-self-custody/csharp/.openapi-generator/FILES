@@ -13,7 +13,6 @@ src/BeamSelfCustody/Api/OperationApi.cs
 src/BeamSelfCustody/Api/SessionsApi.cs
 src/BeamSelfCustody/Api/TransactionsApi.cs
 src/BeamSelfCustody/Api/UsersApi.cs
-src/BeamSelfCustody/BeamSelfCustody.csproj
 src/BeamSelfCustody/Client/ApiException.cs
 src/BeamSelfCustody/Client/ApiFactory.cs
 src/BeamSelfCustody/Client/ApiKeyToken.cs
@@ -98,4 +97,3 @@ src/BeamSelfCustody/Model/TransferAssetRequestInputV3.cs
 src/BeamSelfCustody/Model/TransferAssetRequestInputV3AssetsInner.cs
 src/BeamSelfCustody/Model/TransferNativeTokenRequestInputV3.cs
 src/BeamSelfCustody/Model/TransferTokenRequestInputV3.cs
-src/BeamSelfCustody/README.md

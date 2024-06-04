@@ -44,9 +44,10 @@ namespace BeamSelfCustody.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="acceptAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
+        /// <param name="offerId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IAcceptAssetOfferApiResponse"/>&gt;</returns>
-        Task<IAcceptAssetOfferApiResponse> AcceptAssetOfferAsync(AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IAcceptAssetOfferApiResponse> AcceptAssetOfferAsync(AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Accept an offer for an asset
@@ -56,9 +57,10 @@ namespace BeamSelfCustody.Api
         /// </remarks>
         /// <param name="acceptAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
+        /// <param name="offerId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IAcceptAssetOfferApiResponse"/>?&gt;</returns>
-        Task<IAcceptAssetOfferApiResponse?> AcceptAssetOfferOrDefaultAsync(AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IAcceptAssetOfferApiResponse?> AcceptAssetOfferOrDefaultAsync(AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Buy listed asset
@@ -96,9 +98,10 @@ namespace BeamSelfCustody.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancelAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
+        /// <param name="offerId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICancelAssetOfferApiResponse"/>&gt;</returns>
-        Task<ICancelAssetOfferApiResponse> CancelAssetOfferAsync(CancelAssetOfferRequestInput cancelAssetOfferRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICancelAssetOfferApiResponse> CancelAssetOfferAsync(CancelAssetOfferRequestInput cancelAssetOfferRequestInput, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Cancel an offer for an asset
@@ -108,9 +111,10 @@ namespace BeamSelfCustody.Api
         /// </remarks>
         /// <param name="cancelAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
+        /// <param name="offerId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICancelAssetOfferApiResponse"/>?&gt;</returns>
-        Task<ICancelAssetOfferApiResponse?> CancelAssetOfferOrDefaultAsync(CancelAssetOfferRequestInput cancelAssetOfferRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICancelAssetOfferApiResponse?> CancelAssetOfferOrDefaultAsync(CancelAssetOfferRequestInput cancelAssetOfferRequestInput, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Cancel asset listing
@@ -787,21 +791,25 @@ namespace BeamSelfCustody.Api
             ApiKeyProvider = apiKeyProvider;
         }
 
-        partial void FormatAcceptAssetOffer(AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, ref string entityId);
+        partial void FormatAcceptAssetOffer(AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, ref string entityId, ref string offerId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
         /// <param name="acceptAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
+        /// <param name="offerId"></param>
         /// <returns></returns>
-        private void ValidateAcceptAssetOffer(AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, string entityId)
+        private void ValidateAcceptAssetOffer(AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, string entityId, string offerId)
         {
             if (acceptAssetOfferRequestInput == null)
                 throw new ArgumentNullException(nameof(acceptAssetOfferRequestInput));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
+
+            if (offerId == null)
+                throw new ArgumentNullException(nameof(offerId));
         }
 
         /// <summary>
@@ -810,10 +818,11 @@ namespace BeamSelfCustody.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="acceptAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
-        private void AfterAcceptAssetOfferDefaultImplementation(IAcceptAssetOfferApiResponse apiResponseLocalVar, AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, string entityId)
+        /// <param name="offerId"></param>
+        private void AfterAcceptAssetOfferDefaultImplementation(IAcceptAssetOfferApiResponse apiResponseLocalVar, AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, string entityId, string offerId)
         {
             bool suppressDefaultLog = false;
-            AfterAcceptAssetOffer(ref suppressDefaultLog, apiResponseLocalVar, acceptAssetOfferRequestInput, entityId);
+            AfterAcceptAssetOffer(ref suppressDefaultLog, apiResponseLocalVar, acceptAssetOfferRequestInput, entityId, offerId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -825,7 +834,8 @@ namespace BeamSelfCustody.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="acceptAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
-        partial void AfterAcceptAssetOffer(ref bool suppressDefaultLog, IAcceptAssetOfferApiResponse apiResponseLocalVar, AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, string entityId);
+        /// <param name="offerId"></param>
+        partial void AfterAcceptAssetOffer(ref bool suppressDefaultLog, IAcceptAssetOfferApiResponse apiResponseLocalVar, AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, string entityId, string offerId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -835,10 +845,11 @@ namespace BeamSelfCustody.Api
         /// <param name="path"></param>
         /// <param name="acceptAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
-        private void OnErrorAcceptAssetOfferDefaultImplementation(Exception exception, string pathFormat, string path, AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, string entityId)
+        /// <param name="offerId"></param>
+        private void OnErrorAcceptAssetOfferDefaultImplementation(Exception exception, string pathFormat, string path, AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, string entityId, string offerId)
         {
             bool suppressDefaultLog = false;
-            OnErrorAcceptAssetOffer(ref suppressDefaultLog, exception, pathFormat, path, acceptAssetOfferRequestInput, entityId);
+            OnErrorAcceptAssetOffer(ref suppressDefaultLog, exception, pathFormat, path, acceptAssetOfferRequestInput, entityId, offerId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -852,20 +863,22 @@ namespace BeamSelfCustody.Api
         /// <param name="path"></param>
         /// <param name="acceptAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
-        partial void OnErrorAcceptAssetOffer(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, string entityId);
+        /// <param name="offerId"></param>
+        partial void OnErrorAcceptAssetOffer(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, string entityId, string offerId);
 
         /// <summary>
         /// Accept an offer for an asset 
         /// </summary>
         /// <param name="acceptAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
+        /// <param name="offerId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IAcceptAssetOfferApiResponse"/>&gt;</returns>
-        public async Task<IAcceptAssetOfferApiResponse?> AcceptAssetOfferOrDefaultAsync(AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IAcceptAssetOfferApiResponse?> AcceptAssetOfferOrDefaultAsync(AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await AcceptAssetOfferAsync(acceptAssetOfferRequestInput, entityId, cancellationToken).ConfigureAwait(false);
+                return await AcceptAssetOfferAsync(acceptAssetOfferRequestInput, entityId, offerId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -879,17 +892,18 @@ namespace BeamSelfCustody.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="acceptAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
+        /// <param name="offerId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IAcceptAssetOfferApiResponse"/>&gt;</returns>
-        public async Task<IAcceptAssetOfferApiResponse> AcceptAssetOfferAsync(AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IAcceptAssetOfferApiResponse> AcceptAssetOfferAsync(AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateAcceptAssetOffer(acceptAssetOfferRequestInput, entityId);
+                ValidateAcceptAssetOffer(acceptAssetOfferRequestInput, entityId, offerId);
 
-                FormatAcceptAssetOffer(acceptAssetOfferRequestInput, ref entityId);
+                FormatAcceptAssetOffer(acceptAssetOfferRequestInput, ref entityId, ref offerId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -898,6 +912,7 @@ namespace BeamSelfCustody.Api
                     uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/self-custody/marketplace/users/{entityId}/offers/{offerId}/accept";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
+                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BofferId%7D", Uri.EscapeDataString(offerId.ToString()));
 
                     httpRequestMessageLocalVar.Content = (acceptAssetOfferRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
@@ -940,7 +955,7 @@ namespace BeamSelfCustody.Api
 
                         AcceptAssetOfferApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/self-custody/marketplace/users/{entityId}/offers/{offerId}/accept", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterAcceptAssetOfferDefaultImplementation(apiResponseLocalVar, acceptAssetOfferRequestInput, entityId);
+                        AfterAcceptAssetOfferDefaultImplementation(apiResponseLocalVar, acceptAssetOfferRequestInput, entityId, offerId);
 
                         Events.ExecuteOnAcceptAssetOffer(apiResponseLocalVar);
 
@@ -954,7 +969,7 @@ namespace BeamSelfCustody.Api
             }
             catch(Exception e)
             {
-                OnErrorAcceptAssetOfferDefaultImplementation(e, "/v1/self-custody/marketplace/users/{entityId}/offers/{offerId}/accept", uriBuilderLocalVar.Path, acceptAssetOfferRequestInput, entityId);
+                OnErrorAcceptAssetOfferDefaultImplementation(e, "/v1/self-custody/marketplace/users/{entityId}/offers/{offerId}/accept", uriBuilderLocalVar.Path, acceptAssetOfferRequestInput, entityId, offerId);
                 Events.ExecuteOnErrorAcceptAssetOffer(e);
                 throw;
             }
@@ -1298,21 +1313,25 @@ namespace BeamSelfCustody.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatCancelAssetOffer(CancelAssetOfferRequestInput cancelAssetOfferRequestInput, ref string entityId);
+        partial void FormatCancelAssetOffer(CancelAssetOfferRequestInput cancelAssetOfferRequestInput, ref string entityId, ref string offerId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
         /// <param name="cancelAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
+        /// <param name="offerId"></param>
         /// <returns></returns>
-        private void ValidateCancelAssetOffer(CancelAssetOfferRequestInput cancelAssetOfferRequestInput, string entityId)
+        private void ValidateCancelAssetOffer(CancelAssetOfferRequestInput cancelAssetOfferRequestInput, string entityId, string offerId)
         {
             if (cancelAssetOfferRequestInput == null)
                 throw new ArgumentNullException(nameof(cancelAssetOfferRequestInput));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
+
+            if (offerId == null)
+                throw new ArgumentNullException(nameof(offerId));
         }
 
         /// <summary>
@@ -1321,10 +1340,11 @@ namespace BeamSelfCustody.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="cancelAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
-        private void AfterCancelAssetOfferDefaultImplementation(ICancelAssetOfferApiResponse apiResponseLocalVar, CancelAssetOfferRequestInput cancelAssetOfferRequestInput, string entityId)
+        /// <param name="offerId"></param>
+        private void AfterCancelAssetOfferDefaultImplementation(ICancelAssetOfferApiResponse apiResponseLocalVar, CancelAssetOfferRequestInput cancelAssetOfferRequestInput, string entityId, string offerId)
         {
             bool suppressDefaultLog = false;
-            AfterCancelAssetOffer(ref suppressDefaultLog, apiResponseLocalVar, cancelAssetOfferRequestInput, entityId);
+            AfterCancelAssetOffer(ref suppressDefaultLog, apiResponseLocalVar, cancelAssetOfferRequestInput, entityId, offerId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -1336,7 +1356,8 @@ namespace BeamSelfCustody.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="cancelAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
-        partial void AfterCancelAssetOffer(ref bool suppressDefaultLog, ICancelAssetOfferApiResponse apiResponseLocalVar, CancelAssetOfferRequestInput cancelAssetOfferRequestInput, string entityId);
+        /// <param name="offerId"></param>
+        partial void AfterCancelAssetOffer(ref bool suppressDefaultLog, ICancelAssetOfferApiResponse apiResponseLocalVar, CancelAssetOfferRequestInput cancelAssetOfferRequestInput, string entityId, string offerId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -1346,10 +1367,11 @@ namespace BeamSelfCustody.Api
         /// <param name="path"></param>
         /// <param name="cancelAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
-        private void OnErrorCancelAssetOfferDefaultImplementation(Exception exception, string pathFormat, string path, CancelAssetOfferRequestInput cancelAssetOfferRequestInput, string entityId)
+        /// <param name="offerId"></param>
+        private void OnErrorCancelAssetOfferDefaultImplementation(Exception exception, string pathFormat, string path, CancelAssetOfferRequestInput cancelAssetOfferRequestInput, string entityId, string offerId)
         {
             bool suppressDefaultLog = false;
-            OnErrorCancelAssetOffer(ref suppressDefaultLog, exception, pathFormat, path, cancelAssetOfferRequestInput, entityId);
+            OnErrorCancelAssetOffer(ref suppressDefaultLog, exception, pathFormat, path, cancelAssetOfferRequestInput, entityId, offerId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -1363,20 +1385,22 @@ namespace BeamSelfCustody.Api
         /// <param name="path"></param>
         /// <param name="cancelAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
-        partial void OnErrorCancelAssetOffer(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, CancelAssetOfferRequestInput cancelAssetOfferRequestInput, string entityId);
+        /// <param name="offerId"></param>
+        partial void OnErrorCancelAssetOffer(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, CancelAssetOfferRequestInput cancelAssetOfferRequestInput, string entityId, string offerId);
 
         /// <summary>
         /// Cancel an offer for an asset 
         /// </summary>
         /// <param name="cancelAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
+        /// <param name="offerId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICancelAssetOfferApiResponse"/>&gt;</returns>
-        public async Task<ICancelAssetOfferApiResponse?> CancelAssetOfferOrDefaultAsync(CancelAssetOfferRequestInput cancelAssetOfferRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICancelAssetOfferApiResponse?> CancelAssetOfferOrDefaultAsync(CancelAssetOfferRequestInput cancelAssetOfferRequestInput, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await CancelAssetOfferAsync(cancelAssetOfferRequestInput, entityId, cancellationToken).ConfigureAwait(false);
+                return await CancelAssetOfferAsync(cancelAssetOfferRequestInput, entityId, offerId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -1390,17 +1414,18 @@ namespace BeamSelfCustody.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancelAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
+        /// <param name="offerId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICancelAssetOfferApiResponse"/>&gt;</returns>
-        public async Task<ICancelAssetOfferApiResponse> CancelAssetOfferAsync(CancelAssetOfferRequestInput cancelAssetOfferRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICancelAssetOfferApiResponse> CancelAssetOfferAsync(CancelAssetOfferRequestInput cancelAssetOfferRequestInput, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateCancelAssetOffer(cancelAssetOfferRequestInput, entityId);
+                ValidateCancelAssetOffer(cancelAssetOfferRequestInput, entityId, offerId);
 
-                FormatCancelAssetOffer(cancelAssetOfferRequestInput, ref entityId);
+                FormatCancelAssetOffer(cancelAssetOfferRequestInput, ref entityId, ref offerId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -1409,6 +1434,7 @@ namespace BeamSelfCustody.Api
                     uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/self-custody/marketplace/users/{entityId}/offers/{offerId}";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
+                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BofferId%7D", Uri.EscapeDataString(offerId.ToString()));
 
                     httpRequestMessageLocalVar.Content = (cancelAssetOfferRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
@@ -1451,7 +1477,7 @@ namespace BeamSelfCustody.Api
 
                         CancelAssetOfferApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/self-custody/marketplace/users/{entityId}/offers/{offerId}", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterCancelAssetOfferDefaultImplementation(apiResponseLocalVar, cancelAssetOfferRequestInput, entityId);
+                        AfterCancelAssetOfferDefaultImplementation(apiResponseLocalVar, cancelAssetOfferRequestInput, entityId, offerId);
 
                         Events.ExecuteOnCancelAssetOffer(apiResponseLocalVar);
 
@@ -1465,7 +1491,7 @@ namespace BeamSelfCustody.Api
             }
             catch(Exception e)
             {
-                OnErrorCancelAssetOfferDefaultImplementation(e, "/v1/self-custody/marketplace/users/{entityId}/offers/{offerId}", uriBuilderLocalVar.Path, cancelAssetOfferRequestInput, entityId);
+                OnErrorCancelAssetOfferDefaultImplementation(e, "/v1/self-custody/marketplace/users/{entityId}/offers/{offerId}", uriBuilderLocalVar.Path, cancelAssetOfferRequestInput, entityId, offerId);
                 Events.ExecuteOnErrorCancelAssetOffer(e);
                 throw;
             }

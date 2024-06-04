@@ -5,7 +5,6 @@
 
 export type CancelAssetOfferRequestInput = {
   optimistic?: boolean;
-  offerId: string;
   sponsor?: boolean;
   policyId?: string | null;
   chainId?: number;

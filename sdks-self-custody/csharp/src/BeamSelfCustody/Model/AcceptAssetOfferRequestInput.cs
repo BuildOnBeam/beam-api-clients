@@ -34,7 +34,6 @@ namespace BeamSelfCustody.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="AcceptAssetOfferRequestInput" /> class.
         /// </summary>
-        /// <param name="offerId">offerId</param>
         /// <param name="quantity">quantity</param>
         /// <param name="chainId">chainId (default to 13337M)</param>
         /// <param name="operationId">operationId</param>
@@ -42,9 +41,8 @@ namespace BeamSelfCustody.Model
         /// <param name="policyId">policyId</param>
         /// <param name="sponsor">sponsor (default to true)</param>
         [JsonConstructor]
-        public AcceptAssetOfferRequestInput(string offerId, decimal quantity, Option<decimal?> chainId = default, Option<string?> operationId = default, Option<bool?> optimistic = default, Option<string?> policyId = default, Option<bool?> sponsor = default)
+        public AcceptAssetOfferRequestInput(decimal quantity, Option<decimal?> chainId = default, Option<string?> operationId = default, Option<bool?> optimistic = default, Option<string?> policyId = default, Option<bool?> sponsor = default)
         {
-            OfferId = offerId;
             Quantity = quantity;
             ChainIdOption = chainId;
             OperationIdOption = operationId;
@@ -55,12 +53,6 @@ namespace BeamSelfCustody.Model
         }
 
         partial void OnCreated();
-
-        /// <summary>
-        /// Gets or Sets OfferId
-        /// </summary>
-        [JsonPropertyName("offerId")]
-        public string OfferId { get; set; }
 
         /// <summary>
         /// Gets or Sets Quantity
@@ -141,7 +133,6 @@ namespace BeamSelfCustody.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class AcceptAssetOfferRequestInput {\n");
-            sb.Append("  OfferId: ").Append(OfferId).Append("\n");
             sb.Append("  Quantity: ").Append(Quantity).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  OperationId: ").Append(OperationId).Append("\n");
@@ -191,7 +182,6 @@ namespace BeamSelfCustody.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<string?> offerId = default;
             Option<decimal?> quantity = default;
             Option<decimal?> chainId = default;
             Option<string?> operationId = default;
@@ -214,9 +204,6 @@ namespace BeamSelfCustody.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "offerId":
-                            offerId = new Option<string?>(utf8JsonReader.GetString()!);
-                            break;
                         case "quantity":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 quantity = new Option<decimal?>(utf8JsonReader.GetDecimal());
@@ -245,14 +232,8 @@ namespace BeamSelfCustody.Model
                 }
             }
 
-            if (!offerId.IsSet)
-                throw new ArgumentException("Property is required for class AcceptAssetOfferRequestInput.", nameof(offerId));
-
             if (!quantity.IsSet)
                 throw new ArgumentException("Property is required for class AcceptAssetOfferRequestInput.", nameof(quantity));
-
-            if (offerId.IsSet && offerId.Value == null)
-                throw new ArgumentNullException(nameof(offerId), "Property is not nullable for class AcceptAssetOfferRequestInput.");
 
             if (quantity.IsSet && quantity.Value == null)
                 throw new ArgumentNullException(nameof(quantity), "Property is not nullable for class AcceptAssetOfferRequestInput.");
@@ -266,7 +247,7 @@ namespace BeamSelfCustody.Model
             if (sponsor.IsSet && sponsor.Value == null)
                 throw new ArgumentNullException(nameof(sponsor), "Property is not nullable for class AcceptAssetOfferRequestInput.");
 
-            return new AcceptAssetOfferRequestInput(offerId.Value!, quantity.Value!.Value!, chainId, operationId, optimistic, policyId, sponsor);
+            return new AcceptAssetOfferRequestInput(quantity.Value!.Value!, chainId, operationId, optimistic, policyId, sponsor);
         }
 
         /// <summary>
@@ -293,11 +274,6 @@ namespace BeamSelfCustody.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (acceptAssetOfferRequestInput.OfferId == null)
-                throw new ArgumentNullException(nameof(acceptAssetOfferRequestInput.OfferId), "Property is required for class AcceptAssetOfferRequestInput.");
-
-            writer.WriteString("offerId", acceptAssetOfferRequestInput.OfferId);
-
             writer.WriteNumber("quantity", acceptAssetOfferRequestInput.Quantity);
 
             if (acceptAssetOfferRequestInput.ChainIdOption.IsSet)

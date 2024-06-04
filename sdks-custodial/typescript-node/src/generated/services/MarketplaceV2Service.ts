@@ -223,12 +223,14 @@ export class MarketplaceV2Service {
   /**
    * Accept an offer for an asset
    * @param entityId
+   * @param offerId
    * @param requestBody
    * @returns AcceptOfferResponseV2
    * @throws ApiError
    */
   public acceptAssetOfferV2(
     entityId: string,
+    offerId: string,
     requestBody: AcceptAssetOfferRequestInputV2,
   ): CancelablePromise<AcceptOfferResponseV2> {
     return this.httpRequest.request({
@@ -236,6 +238,7 @@ export class MarketplaceV2Service {
       url: '/v2/marketplace/profiles/{entityId}/offers/{offerId}/accept',
       path: {
         entityId: entityId,
+        offerId: offerId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -245,12 +248,14 @@ export class MarketplaceV2Service {
   /**
    * Cancel an offer for an asset
    * @param entityId
+   * @param offerId
    * @param requestBody
    * @returns CancelOfferResponseV2
    * @throws ApiError
    */
   public cancelAssetOfferV2(
     entityId: string,
+    offerId: string,
     requestBody: CancelAssetOfferRequestInputV2,
   ): CancelablePromise<CancelOfferResponseV2> {
     return this.httpRequest.request({
@@ -258,6 +263,7 @@ export class MarketplaceV2Service {
       url: '/v2/marketplace/profiles/{entityId}/offers/{offerId}',
       path: {
         entityId: entityId,
+        offerId: offerId,
       },
       body: requestBody,
       mediaType: 'application/json',

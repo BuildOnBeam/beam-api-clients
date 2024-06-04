@@ -77,7 +77,12 @@ namespace Beam.Model
             /// <summary>
             /// Enum Publishable for value: Publishable
             /// </summary>
-            Publishable = 4
+            Publishable = 4,
+
+            /// <summary>
+            /// Enum Secret for value: Secret
+            /// </summary>
+            Secret = 5
         }
 
         /// <summary>
@@ -99,6 +104,9 @@ namespace Beam.Model
 
             if (value.Equals("Publishable"))
                 return TypeEnum.Publishable;
+
+            if (value.Equals("Secret"))
+                return TypeEnum.Secret;
 
             throw new NotImplementedException($"Could not convert value to type TypeEnum: '{value}'");
         }
@@ -122,6 +130,9 @@ namespace Beam.Model
             if (value.Equals("Publishable"))
                 return TypeEnum.Publishable;
 
+            if (value.Equals("Secret"))
+                return TypeEnum.Secret;
+
             return null;
         }
 
@@ -144,6 +155,9 @@ namespace Beam.Model
 
             if (value == TypeEnum.Publishable)
                 return "Publishable";
+
+            if (value == TypeEnum.Secret)
+                return "Secret";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }

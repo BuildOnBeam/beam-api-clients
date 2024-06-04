@@ -218,12 +218,14 @@ export class MarketplaceService {
   /**
    * Accept an offer for an asset
    * @param entityId
+   * @param offerId
    * @param requestBody
    * @returns CommonOperationResponse
    * @throws ApiError
    */
   public acceptAssetOffer(
     entityId: string,
+    offerId: string,
     requestBody: AcceptAssetOfferRequestInput,
   ): CancelablePromise<CommonOperationResponse> {
     return this.httpRequest.request({
@@ -231,6 +233,7 @@ export class MarketplaceService {
       url: '/v1/self-custody/marketplace/users/{entityId}/offers/{offerId}/accept',
       path: {
         entityId: entityId,
+        offerId: offerId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -240,12 +243,14 @@ export class MarketplaceService {
   /**
    * Cancel an offer for an asset
    * @param entityId
+   * @param offerId
    * @param requestBody
    * @returns CommonOperationResponse
    * @throws ApiError
    */
   public cancelAssetOffer(
     entityId: string,
+    offerId: string,
     requestBody: CancelAssetOfferRequestInput,
   ): CancelablePromise<CommonOperationResponse> {
     return this.httpRequest.request({
@@ -253,6 +258,7 @@ export class MarketplaceService {
       url: '/v1/self-custody/marketplace/users/{entityId}/offers/{offerId}',
       path: {
         entityId: entityId,
+        offerId: offerId,
       },
       body: requestBody,
       mediaType: 'application/json',

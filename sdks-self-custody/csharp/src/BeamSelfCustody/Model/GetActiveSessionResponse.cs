@@ -34,16 +34,14 @@ namespace BeamSelfCustody.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="GetActiveSessionResponse" /> class.
         /// </summary>
-        /// <param name="accountAddress">accountAddress</param>
         /// <param name="id">id</param>
         /// <param name="isActive">isActive</param>
         /// <param name="sessionAddress">sessionAddress</param>
         /// <param name="endTime">endTime</param>
         /// <param name="startTime">startTime</param>
         [JsonConstructor]
-        public GetActiveSessionResponse(string accountAddress, string id, bool isActive, string sessionAddress, Option<string?> endTime = default, Option<string?> startTime = default)
+        public GetActiveSessionResponse(string id, bool isActive, string sessionAddress, Option<string?> endTime = default, Option<string?> startTime = default)
         {
-            AccountAddress = accountAddress;
             Id = id;
             IsActive = isActive;
             SessionAddress = sessionAddress;
@@ -53,12 +51,6 @@ namespace BeamSelfCustody.Model
         }
 
         partial void OnCreated();
-
-        /// <summary>
-        /// Gets or Sets AccountAddress
-        /// </summary>
-        [JsonPropertyName("accountAddress")]
-        public string AccountAddress { get; set; }
 
         /// <summary>
         /// Gets or Sets Id
@@ -112,7 +104,6 @@ namespace BeamSelfCustody.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class GetActiveSessionResponse {\n");
-            sb.Append("  AccountAddress: ").Append(AccountAddress).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  IsActive: ").Append(IsActive).Append("\n");
             sb.Append("  SessionAddress: ").Append(SessionAddress).Append("\n");
@@ -155,7 +146,6 @@ namespace BeamSelfCustody.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<string?> accountAddress = default;
             Option<string?> id = default;
             Option<bool?> isActive = default;
             Option<string?> sessionAddress = default;
@@ -177,9 +167,6 @@ namespace BeamSelfCustody.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "accountAddress":
-                            accountAddress = new Option<string?>(utf8JsonReader.GetString()!);
-                            break;
                         case "id":
                             id = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
@@ -202,9 +189,6 @@ namespace BeamSelfCustody.Model
                 }
             }
 
-            if (!accountAddress.IsSet)
-                throw new ArgumentException("Property is required for class GetActiveSessionResponse.", nameof(accountAddress));
-
             if (!id.IsSet)
                 throw new ArgumentException("Property is required for class GetActiveSessionResponse.", nameof(id));
 
@@ -213,9 +197,6 @@ namespace BeamSelfCustody.Model
 
             if (!sessionAddress.IsSet)
                 throw new ArgumentException("Property is required for class GetActiveSessionResponse.", nameof(sessionAddress));
-
-            if (accountAddress.IsSet && accountAddress.Value == null)
-                throw new ArgumentNullException(nameof(accountAddress), "Property is not nullable for class GetActiveSessionResponse.");
 
             if (id.IsSet && id.Value == null)
                 throw new ArgumentNullException(nameof(id), "Property is not nullable for class GetActiveSessionResponse.");
@@ -226,7 +207,7 @@ namespace BeamSelfCustody.Model
             if (sessionAddress.IsSet && sessionAddress.Value == null)
                 throw new ArgumentNullException(nameof(sessionAddress), "Property is not nullable for class GetActiveSessionResponse.");
 
-            return new GetActiveSessionResponse(accountAddress.Value!, id.Value!, isActive.Value!.Value!, sessionAddress.Value!, endTime, startTime);
+            return new GetActiveSessionResponse(id.Value!, isActive.Value!.Value!, sessionAddress.Value!, endTime, startTime);
         }
 
         /// <summary>
@@ -253,16 +234,11 @@ namespace BeamSelfCustody.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetActiveSessionResponse getActiveSessionResponse, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (getActiveSessionResponse.AccountAddress == null)
-                throw new ArgumentNullException(nameof(getActiveSessionResponse.AccountAddress), "Property is required for class GetActiveSessionResponse.");
-
             if (getActiveSessionResponse.Id == null)
                 throw new ArgumentNullException(nameof(getActiveSessionResponse.Id), "Property is required for class GetActiveSessionResponse.");
 
             if (getActiveSessionResponse.SessionAddress == null)
                 throw new ArgumentNullException(nameof(getActiveSessionResponse.SessionAddress), "Property is required for class GetActiveSessionResponse.");
-
-            writer.WriteString("accountAddress", getActiveSessionResponse.AccountAddress);
 
             writer.WriteString("id", getActiveSessionResponse.Id);
 

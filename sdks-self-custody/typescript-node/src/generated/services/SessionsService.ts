@@ -53,19 +53,22 @@ export class SessionsService {
 
   /**
    * @param entityId
+   * @param accountAddress
    * @param chainId
    * @returns GetActiveSessionResponse
    * @throws ApiError
    */
   public getActiveSession(
     entityId: string,
+    accountAddress: string,
     chainId?: number,
   ): CancelablePromise<GetActiveSessionResponse> {
     return this.httpRequest.request({
       method: 'GET',
-      url: '/v1/self-custody/sessions/users/{entityId}/active',
+      url: '/v1/self-custody/sessions/users/{entityId}/{accountAddress}/active',
       path: {
         entityId: entityId,
+        accountAddress: accountAddress,
       },
       query: {
         chainId: chainId,

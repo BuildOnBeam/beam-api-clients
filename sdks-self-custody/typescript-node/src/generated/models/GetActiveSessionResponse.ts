@@ -8,6 +8,5 @@ export type GetActiveSessionResponse = {
   isActive: boolean;
   startTime?: string | null;
   endTime?: string | null;
-  accountAddress: string;
   sessionAddress: string;
 };

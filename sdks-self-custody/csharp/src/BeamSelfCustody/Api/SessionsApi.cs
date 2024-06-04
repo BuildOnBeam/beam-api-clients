@@ -68,10 +68,11 @@ namespace BeamSelfCustody.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
+        /// <param name="accountAddress"></param>
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetActiveSessionApiResponse"/>&gt;</returns>
-        Task<IGetActiveSessionApiResponse> GetActiveSessionAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetActiveSessionApiResponse> GetActiveSessionAsync(string entityId, string accountAddress, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -80,10 +81,11 @@ namespace BeamSelfCustody.Api
         /// 
         /// </remarks>
         /// <param name="entityId"></param>
+        /// <param name="accountAddress"></param>
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetActiveSessionApiResponse"/>?&gt;</returns>
-        Task<IGetActiveSessionApiResponse?> GetActiveSessionOrDefaultAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetActiveSessionApiResponse?> GetActiveSessionOrDefaultAsync(string entityId, string accountAddress, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -508,17 +510,21 @@ namespace BeamSelfCustody.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetActiveSession(ref string entityId, ref Option<decimal> chainId);
+        partial void FormatGetActiveSession(ref string entityId, ref string accountAddress, ref Option<decimal> chainId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
         /// <param name="entityId"></param>
+        /// <param name="accountAddress"></param>
         /// <returns></returns>
-        private void ValidateGetActiveSession(string entityId)
+        private void ValidateGetActiveSession(string entityId, string accountAddress)
         {
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
+
+            if (accountAddress == null)
+                throw new ArgumentNullException(nameof(accountAddress));
         }
 
         /// <summary>
@@ -526,11 +532,12 @@ namespace BeamSelfCustody.Api
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="entityId"></param>
+        /// <param name="accountAddress"></param>
         /// <param name="chainId"></param>
-        private void AfterGetActiveSessionDefaultImplementation(IGetActiveSessionApiResponse apiResponseLocalVar, string entityId, Option<decimal> chainId)
+        private void AfterGetActiveSessionDefaultImplementation(IGetActiveSessionApiResponse apiResponseLocalVar, string entityId, string accountAddress, Option<decimal> chainId)
         {
             bool suppressDefaultLog = false;
-            AfterGetActiveSession(ref suppressDefaultLog, apiResponseLocalVar, entityId, chainId);
+            AfterGetActiveSession(ref suppressDefaultLog, apiResponseLocalVar, entityId, accountAddress, chainId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -541,8 +548,9 @@ namespace BeamSelfCustody.Api
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="entityId"></param>
+        /// <param name="accountAddress"></param>
         /// <param name="chainId"></param>
-        partial void AfterGetActiveSession(ref bool suppressDefaultLog, IGetActiveSessionApiResponse apiResponseLocalVar, string entityId, Option<decimal> chainId);
+        partial void AfterGetActiveSession(ref bool suppressDefaultLog, IGetActiveSessionApiResponse apiResponseLocalVar, string entityId, string accountAddress, Option<decimal> chainId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -551,11 +559,12 @@ namespace BeamSelfCustody.Api
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
         /// <param name="entityId"></param>
+        /// <param name="accountAddress"></param>
         /// <param name="chainId"></param>
-        private void OnErrorGetActiveSessionDefaultImplementation(Exception exception, string pathFormat, string path, string entityId, Option<decimal> chainId)
+        private void OnErrorGetActiveSessionDefaultImplementation(Exception exception, string pathFormat, string path, string entityId, string accountAddress, Option<decimal> chainId)
         {
             bool suppressDefaultLog = false;
-            OnErrorGetActiveSession(ref suppressDefaultLog, exception, pathFormat, path, entityId, chainId);
+            OnErrorGetActiveSession(ref suppressDefaultLog, exception, pathFormat, path, entityId, accountAddress, chainId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -568,21 +577,23 @@ namespace BeamSelfCustody.Api
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
         /// <param name="entityId"></param>
+        /// <param name="accountAddress"></param>
         /// <param name="chainId"></param>
-        partial void OnErrorGetActiveSession(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string entityId, Option<decimal> chainId);
+        partial void OnErrorGetActiveSession(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string entityId, string accountAddress, Option<decimal> chainId);
 
         /// <summary>
         ///  
         /// </summary>
         /// <param name="entityId"></param>
+        /// <param name="accountAddress"></param>
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetActiveSessionApiResponse"/>&gt;</returns>
-        public async Task<IGetActiveSessionApiResponse?> GetActiveSessionOrDefaultAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetActiveSessionApiResponse?> GetActiveSessionOrDefaultAsync(string entityId, string accountAddress, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await GetActiveSessionAsync(entityId, chainId, cancellationToken).ConfigureAwait(false);
+                return await GetActiveSessionAsync(entityId, accountAddress, chainId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -595,26 +606,28 @@ namespace BeamSelfCustody.Api
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>
+        /// <param name="accountAddress"></param>
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetActiveSessionApiResponse"/>&gt;</returns>
-        public async Task<IGetActiveSessionApiResponse> GetActiveSessionAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetActiveSessionApiResponse> GetActiveSessionAsync(string entityId, string accountAddress, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateGetActiveSession(entityId);
+                ValidateGetActiveSession(entityId, accountAddress);
 
-                FormatGetActiveSession(ref entityId, ref chainId);
+                FormatGetActiveSession(ref entityId, ref accountAddress, ref chainId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
                     uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
                     uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
                     uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
-                    uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/self-custody/sessions/users/{entityId}/active";
+                    uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/self-custody/sessions/users/{entityId}/{accountAddress}/active";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
+                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BaccountAddress%7D", Uri.EscapeDataString(accountAddress.ToString()));
 
                     System.Collections.Specialized.NameValueCollection parseQueryStringLocalVar = System.Web.HttpUtility.ParseQueryString(string.Empty);
 
@@ -649,9 +662,9 @@ namespace BeamSelfCustody.Api
 
                         ILogger<GetActiveSessionApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<GetActiveSessionApiResponse>();
 
-                        GetActiveSessionApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/self-custody/sessions/users/{entityId}/active", requestedAtLocalVar, _jsonSerializerOptions);
+                        GetActiveSessionApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/self-custody/sessions/users/{entityId}/{accountAddress}/active", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterGetActiveSessionDefaultImplementation(apiResponseLocalVar, entityId, chainId);
+                        AfterGetActiveSessionDefaultImplementation(apiResponseLocalVar, entityId, accountAddress, chainId);
 
                         Events.ExecuteOnGetActiveSession(apiResponseLocalVar);
 
@@ -665,7 +678,7 @@ namespace BeamSelfCustody.Api
             }
             catch(Exception e)
             {
-                OnErrorGetActiveSessionDefaultImplementation(e, "/v1/self-custody/sessions/users/{entityId}/active", uriBuilderLocalVar.Path, entityId, chainId);
+                OnErrorGetActiveSessionDefaultImplementation(e, "/v1/self-custody/sessions/users/{entityId}/{accountAddress}/active", uriBuilderLocalVar.Path, entityId, accountAddress, chainId);
                 Events.ExecuteOnErrorGetActiveSession(e);
                 throw;
             }
