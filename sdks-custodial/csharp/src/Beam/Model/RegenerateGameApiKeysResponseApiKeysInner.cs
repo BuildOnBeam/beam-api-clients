@@ -60,29 +60,19 @@ namespace Beam.Model
         public enum TypeEnum
         {
             /// <summary>
-            /// Enum ReadOnly for value: ReadOnly
-            /// </summary>
-            ReadOnly = 1,
-
-            /// <summary>
-            /// Enum ReadAndWrite for value: ReadAndWrite
-            /// </summary>
-            ReadAndWrite = 2,
-
-            /// <summary>
             /// Enum Regenerate for value: Regenerate
             /// </summary>
-            Regenerate = 3,
+            Regenerate = 1,
 
             /// <summary>
             /// Enum Publishable for value: Publishable
             /// </summary>
-            Publishable = 4,
+            Publishable = 2,
 
             /// <summary>
             /// Enum Secret for value: Secret
             /// </summary>
-            Secret = 5
+            Secret = 3
         }
 
         /// <summary>
@@ -93,12 +83,6 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public static TypeEnum TypeEnumFromString(string value)
         {
-            if (value.Equals("ReadOnly"))
-                return TypeEnum.ReadOnly;
-
-            if (value.Equals("ReadAndWrite"))
-                return TypeEnum.ReadAndWrite;
-
             if (value.Equals("Regenerate"))
                 return TypeEnum.Regenerate;
 
@@ -118,12 +102,6 @@ namespace Beam.Model
         /// <returns></returns>
         public static TypeEnum? TypeEnumFromStringOrDefault(string value)
         {
-            if (value.Equals("ReadOnly"))
-                return TypeEnum.ReadOnly;
-
-            if (value.Equals("ReadAndWrite"))
-                return TypeEnum.ReadAndWrite;
-
             if (value.Equals("Regenerate"))
                 return TypeEnum.Regenerate;
 
@@ -144,12 +122,6 @@ namespace Beam.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string TypeEnumToJsonValue(TypeEnum value)
         {
-            if (value == TypeEnum.ReadOnly)
-                return "ReadOnly";
-
-            if (value == TypeEnum.ReadAndWrite)
-                return "ReadAndWrite";
-
             if (value == TypeEnum.Regenerate)
                 return "Regenerate";
 
