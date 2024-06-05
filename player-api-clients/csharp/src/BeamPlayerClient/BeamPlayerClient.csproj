@@ -21,6 +21,7 @@
     <PackageTags>beam, sdk, library, client</PackageTags>
     <PackageIcon>icon.jpg</PackageIcon>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <IncludeContentInPack>true</IncludeContentInPack>
 
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\BeamPlayerClient.xml</DocumentationFile>
 
