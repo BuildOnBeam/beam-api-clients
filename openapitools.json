@@ -8,7 +8,7 @@
         "generatorName": "csharp",
         "output": "./automation-api-clients/csharp",
         "library": "generichost",
-        "inputSpec": "https://api.testnet.onbeam.com/api/game-json",
+        "inputSpec": "https://api.testnet.onbeam.com/api/automation-json",
         "templateDir": "./templates",
         "skipValidateSpec": true,
         "globalProperty": {
@@ -30,7 +30,7 @@
         "generatorName": "csharp",
         "output": "./player-api-clients/csharp",
         "library": "generichost",
-        "inputSpec": "https://api.testnet.onbeam.com/api/self-custody-json",
+        "inputSpec": "https://api.testnet.onbeam.com/api/player-json",
         "templateDir": "./templates",
         "skipValidateSpec": true,
         "globalProperty": {
