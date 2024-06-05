@@ -4,9 +4,9 @@
   "generator-cli": {
     "version": "7.2.0",
     "generators": {
-      "csharp-custodial": {
+      "csharp-automation-client": {
         "generatorName": "csharp",
-        "output": "./sdks-custodial/csharp",
+        "output": "./automation-api-clients/csharp",
         "library": "generichost",
         "inputSpec": "https://api.testnet.onbeam.com/api/game-json",
         "templateDir": "./templates",
@@ -18,17 +18,17 @@
           "apiDocs": false
         },
         "additionalProperties": {
-          "packageName": "Beam",
-          "apiName": "BeamApi",
+          "packageName": "BeamAutomationClient",
+          "apiName": "BeamAutomationApi",
           "returnICollection": true,
           "optionalMethodArgument": false,
           "nullableReferenceTypes": true,
           "netCoreProjectFile": true
         }
       },
-      "csharp-self-custody": {
+      "csharp-player-client": {
         "generatorName": "csharp",
-        "output": "./sdks-self-custody/csharp",
+        "output": "./player-api-clients/csharp",
         "library": "generichost",
         "inputSpec": "https://api.testnet.onbeam.com/api/self-custody-json",
         "templateDir": "./templates",
@@ -40,8 +40,8 @@
           "apiDocs": false
         },
         "additionalProperties": {
-          "packageName": "BeamSelfCustody",
-          "apiName": "BeamSelfCustodyApi",
+          "packageName": "BeamPlayerClient",
+          "apiName": "BeamPlayerApi",
           "returnICollection": true,
           "optionalMethodArgument": false,
           "nullableReferenceTypes": true,

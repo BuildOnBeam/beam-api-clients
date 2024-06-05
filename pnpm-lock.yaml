@@ -18,7 +18,7 @@ importers:
         specifier: ^2.7.0
         version: 2.7.0
 
-  sdks-custodial/typescript-node:
+  automation-api-clients/typescript-node:
     dependencies:
       form-data:
         specifier: ^4.0.0
@@ -46,7 +46,7 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
 
-  sdks-self-custody/typescript-node:
+  player-api-clients/typescript-node:
     dependencies:
       form-data:
         specifier: ^4.0.0
