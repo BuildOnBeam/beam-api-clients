@@ -1,57 +1,42 @@
-# Created with Openapi Generator
+# Beam for C#
 
-<a id="cli"></a>
-## Run the following powershell command to generate the library
+[![license](https://img.shields.io/badge/License-GPLv3-blue)](./LICENSE)
+[![nuget](https://img.shields.io/nuget/v/BeamSelfCustody)](https://www.nuget.org/packages/BeamSelfCustody)
+![npm](https://img.shields.io/npm/v/%40onbeam%2Fnode)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/Merit-Circle/beam-sdk/publish.yml)
 
-```ps1
-$properties = @(
-    'apiName=BeamPlayerApi',
-    'targetFramework=net8.0',
-    'validatable=true',
-    'nullableReferenceTypes=true',
-    'hideGenerationTimestamp=true',
-    'packageVersion=1.0.0',
-    'packageAuthors=OpenAPI',
-    'packageCompany=OpenAPI',
-    'packageCopyright=No Copyright',
-    'packageDescription=A library generated from a OpenAPI doc',
-    'packageName=BeamPlayerClient',
-    'packageTags=',
-    'packageTitle=OpenAPI Library'
-) -join ","
 
-$global = @(
-    'apiDocs=false',
-    'modelDocs=false',
-    'apiTests=false',
-    'modelTests=false'
-) -join ","
+---
+The Beam client for the .NET ecosystem provides a type-safe interface for consuming the Beam Self Custody API. Please note that this client is meant to be used in server side applications, as following these instructions in a client-side environment would expose your API key to all users.
 
-java -jar "<path>/openapi-generator/modules/openapi-generator-cli/target/openapi-generator-cli.jar" generate `
-    -g csharp-netcore `
-    -i <your-swagger-file>.yaml `
-    -o <your-output-folder> `
-    --library generichost `
-    --additional-properties $properties `
-    --global-property $global `
-    --git-host "github.com" `
-    --git-repo-id "GIT_REPO_ID" `
-    --git-user-id "GIT_USER_ID" `
-    --release-note "Minor update"
-    # -t templates
-```
+## Connecting with Beam
+In order to get started with Beam, you will need an API key. The API key for your game will be provided by your partner at Merit Circle.
 
-<a id="usage"></a>
 ## Using the library in your project
+You have to register necessary services in your dependency injection container, then all Api Clients can be used easily by injecting them into your classes.
 
+### Package reference
+Simply include our Nuget from https://www.nuget.org/packages/BeamSelfCustody in your .csproj file like any other dependency:
+```xml
+<PackageReference Include="BeamSelfCustody" Version="1.0.*" />
+```
+Our deployment pipeline increments **patch** version on every deployment. You can either use a concrete version number or a wildcard(`*`) to always use newest SDK. We try to limit breaking changes but as this is still a new product, these might happen.
+
+### Important changes:
+#### 1.0.31
+- Deprecated `RateLimitProvider` for tokens as it might cause high CPU usage in high throughput cases. Please use `SimpleApiKeyTokenProvider`` or simply remove `options.UseProvider<RateLimitProvider<ApiKeyToken>, ApiKeyToken>();` from `.AddApi()` if used before. `SimpleApiKeyTokenProvider` is the new default.
+
+### DI registration
+In case of generic host applications:
 ```cs
 using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using BeamPlayerClient.Api;
-using BeamPlayerClient.Client;
-using BeamPlayerClient.Model;
+using BeamSelfCustody.Api;
+using BeamSelfCustody.Client;
+using BeamSelfCustody.Model;
+using BeamSelfCustody.Extensions;
 
 namespace YourProject
 {
@@ -61,58 +46,120 @@ namespace YourProject
         {
             var host = CreateHostBuilder(args).Build();
             var api = host.Services.GetRequiredService<IAssetsApi>();
-            GetAssetV3ApiResponse apiResponse = await api.GetAssetV3Async("todo");
-            GetAssetResponseV3 model = apiResponse.Ok();
+            GetAssetApiResponse apiResponse = await api.GetAssetAsync("todo");
+            GetAssetResponse model = apiResponse.Ok();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args)
-          .ConfigureBeamPlayerApi((context, options) =>
+          .ConfigureApi((context, services, options) =>
           {
               // the type of token here depends on the api security specifications
-              ApiKeyToken token = new("<your token>", ClientUtils.ApiKeyHeader.Authorization);
+              ApiKeyToken token = new("<your token>");
               options.AddTokens(token);
-
-              // optionally choose the method the tokens will be provided with, default is RateLimitProvider
-              options.UseProvider<RateLimitProvider<ApiKeyToken>, ApiKeyToken>();
 
               options.ConfigureJsonOptions((jsonOptions) =>
               {
                   // your custom converters if any
               });
 
-              options.AddBeamPlayerApiHttpClients(builder: builder => builder
-                .AddRetryPolicy(2)
-                .AddTimeoutPolicy(TimeSpan.FromSeconds(5))
-                .AddCircuitBreakerPolicy(10, TimeSpan.FromSeconds(30))
-                // add whatever middleware you prefer
+              options.AddApiHttpClients(
+                client: client => {
+                  client.BaseAddress = new Uri("https://api.testnet.onbeam.com/");
+                },
+                builder: builder => {
+                  builder
+                  .AddRetryPolicy(2)
+                  .AddTimeoutPolicy(TimeSpan.FromSeconds(5))
+                  .AddCircuitBreakerPolicy(10, TimeSpan.FromSeconds(30));
+                  // add whatever middleware you prefer
+                }
               );
           });
     }
 }
 ```
+
+or if you use new Web App templates:
+
+```cs
+using BeamSelfCustody.Client;
+using BeamSelfCustody.Extensions;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddBeamApi(options =>
+{
+    // the type of token here depends on the api security specifications
+    var token = new ApiKeyToken("<your token>");
+    options.AddTokens(token);
+
+    options.ConfigureJsonOptions((jsonOptions) =>
+    {
+        // your custom converters if any
+    });
+
+    options.AddApiHttpClients(
+        client: client =>
+        {
+            client.BaseAddress = new Uri("https://api.preview.onbeam.com/");
+        },
+        builder: builder => {
+            builder
+            .AddRetryPolicy(2)
+            .AddTimeoutPolicy(TimeSpan.FromSeconds(5))
+            .AddCircuitBreakerPolicy(10, TimeSpan.FromSeconds(30));
+            // add whatever middleware you prefer
+        }
+    );
+});
+
+// Add other services to the container.
+
+var app = builder.Build();
+
+(...)
+
+app.Run();
+
+```
+
+## Usage
+To use Api clients provided by this SDK, simply inject them into your class:
+  ```cs
+  public class MyService
+  {
+      private readonly IGameApi _gameApi;
+
+      public MyService(IGameApi gameApi)
+      {
+          _gameApi = gameApi;
+      }
+
+      public async Task GetMyGame()
+      {
+        var myGame = await _gameApi.GetGameAsync();
+        (...)
+      }
+  }
+  ```
+
 <a id="questions"></a>
 ## Questions
 
 - What about HttpRequest failures and retries?
-  If supportsRetry is enabled, you can configure Polly in the ConfigureClients method.
+  You can configure Polly in the AddApiHttpClients((...), builder: (x) => ...) method.
 - How are tokens used?
   Tokens are provided by a TokenProvider class. The default is RateLimitProvider which will perform client side rate limiting.
-  Other providers can be used with the UseProvider method.
+  Other providers can be used with the UseProvider method, you can implement your own if you don't want to get rate limited as well.
 - Does an HttpRequest throw an error when the server response is not Ok?
-  It depends how you made the request. If the return type is ApiResponse<T> no error will be thrown, though the Content property will be null. 
+  It depends how you made the request. If the return type is ApiResponse<T> no error will be thrown, though the Content property will be null.
   StatusCode and ReasonPhrase will contain information about the error.
   If the return type is T, then it will throw. If the return type is TOrDefault, it will return null.
-- How do I validate requests and process responses?
-  Use the provided On and After methods in the Api class from the namespace BeamPlayerClient.Rest.DefaultApi.
-  Or provide your own class by using the generic ConfigureBeamPlayerApi method.
-
-<a id="dependencies"></a>
-## Dependencies
-
-- [Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting/) - 5.0.0 or later
-- [Microsoft.Extensions.Http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) - 5.0.0 or later
-- [Microsoft.Extensions.Http.Polly](https://www.nuget.org/packages/Microsoft.Extensions.Http.Polly/) - 5.0.1 or later
-- [System.ComponentModel.Annotations](https://www.nuget.org/packages/System.ComponentModel.Annotations) - 4.7.0 or later
+- How do I specify different ApiKeyToken for different ApiClients?
+  You can now use exposed ApiKeyTokenProvider one each client to set custom ApiKey if needed. That token will only be used for that ApiClient instance.
+  ```cs
+    _gameApi.ApiKeyProvider.SetToken(new ApiKeyToken("<your token>"));
+  ```
 
 <a id="documentation-for-authorization"></a>
 ## Documentation for Authorization
@@ -127,64 +174,6 @@ Authentication schemes defined for the API:
 - **Location**: HTTP header
 
 
-## Build
-- SDK version: 1.0.0
-- Build package: org.openapitools.codegen.languages.CSharpClientCodegen
-
-## Api Information
-- appName: Beam self custody API
-- appVersion: 1.0.0
-- appDescription: The Beam self custody API is a service to integrate your game with Beam
-
-## [OpenApi Global properties](https://openapi-generator.tech/docs/globals)
-- generateAliasAsModel: 
-- supportingFiles: 
-- models: omitted for brevity
-- apis: omitted for brevity
-- apiDocs: false
-- modelDocs: false
-- apiTests: false
-- modelTests: false
-- withXml: 
-
-## [OpenApi Generator Parameters](https://openapi-generator.tech/docs/generators/csharp-netcore)
-- allowUnicodeIdentifiers: 
-- apiName: BeamPlayerApi
-- caseInsensitiveResponseHeaders: 
-- conditionalSerialization: false
-- disallowAdditionalPropertiesIfNotPresent: 
-- gitHost: github.com
-- gitRepoId: GIT_REPO_ID
-- gitUserId: GIT_USER_ID
-- hideGenerationTimestamp: true
-- interfacePrefix: I
-- library: generichost
-- licenseId: 
-- modelPropertyNaming: 
-- netCoreProjectFile: true
-- nonPublicApi: false
-- nullableReferenceTypes: true
-- optionalAssemblyInfo: 
-- optionalEmitDefaultValues: false
-- optionalMethodArgument: false
-- optionalProjectFile: 
-- packageAuthors: OpenAPI
-- packageCompany: OpenAPI
-- packageCopyright: No Copyright
-- packageDescription: A library generated from a OpenAPI doc
-- packageGuid: {80B6BD99-0A5D-4761-B08F-9DB3E516097C}
-- packageName: BeamPlayerClient
-- packageTags: 
-- packageTitle: OpenAPI Library
-- packageVersion: 1.0.0
-- releaseNote: Minor update
-- returnICollection: true
-- sortParamsByRequiredFlag: 
-- sourceFolder: src
-- targetFramework: net8.0
-- useCollection: false
-- useDateTimeOffset: false
-- useOneOfDiscriminatorLookup: false
-- validatable: true
+---
 
 This C# SDK is automatically generated by the [OpenAPI Generator](https://openapi-generator.tech) project.

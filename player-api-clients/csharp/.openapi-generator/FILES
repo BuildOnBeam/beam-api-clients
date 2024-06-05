@@ -13,7 +13,6 @@ src/BeamPlayerClient/Api/OperationApi.cs
 src/BeamPlayerClient/Api/SessionsApi.cs
 src/BeamPlayerClient/Api/TransactionsApi.cs
 src/BeamPlayerClient/Api/UsersApi.cs
-src/BeamPlayerClient/BeamPlayerClient.csproj
 src/BeamPlayerClient/Client/ApiException.cs
 src/BeamPlayerClient/Client/ApiFactory.cs
 src/BeamPlayerClient/Client/ApiKeyToken.cs
@@ -98,4 +97,3 @@ src/BeamPlayerClient/Model/TransferAssetRequestInputV3.cs
 src/BeamPlayerClient/Model/TransferAssetRequestInputV3AssetsInner.cs
 src/BeamPlayerClient/Model/TransferNativeTokenRequestInputV3.cs
 src/BeamPlayerClient/Model/TransferTokenRequestInputV3.cs
-src/BeamPlayerClient/README.md

@@ -17,7 +17,6 @@ src/BeamAutomationClient/Api/ReportingApi.cs
 src/BeamAutomationClient/Api/TradingApi.cs
 src/BeamAutomationClient/Api/TransactionsV2Api.cs
 src/BeamAutomationClient/Api/WebhooksApi.cs
-src/BeamAutomationClient/BeamAutomationClient.csproj
 src/BeamAutomationClient/Client/ApiException.cs
 src/BeamAutomationClient/Client/ApiFactory.cs
 src/BeamAutomationClient/Client/ApiKeyToken.cs
@@ -151,4 +150,3 @@ src/BeamAutomationClient/Model/UpdateGameResponsePoliciesInner.cs
 src/BeamAutomationClient/Model/UpdateProfileRequestInput.cs
 src/BeamAutomationClient/Model/UpdateProfileResponse.cs
 src/BeamAutomationClient/Model/WebhookForGameResponse.cs
-src/BeamAutomationClient/README.md
