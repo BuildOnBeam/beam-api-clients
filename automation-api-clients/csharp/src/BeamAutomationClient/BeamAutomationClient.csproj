@@ -10,12 +10,12 @@
     <Nullable>annotations</Nullable>
     <LangVersion>latest</LangVersion>
 
-    <AssemblyName>Beam</AssemblyName>
-    <RootNamespace>Beam</RootNamespace>
-    <PackageId>Beam</PackageId>
+    <AssemblyName>BeamAutomationClient</AssemblyName>
+    <RootNamespace>BeamAutomationClient</RootNamespace>
+    <PackageId>BeamAutomationClient</PackageId>
     <Authors>Beam Developers</Authors>
     <Company>Merit Circle</Company>
-    <AssemblyTitle>Beam SDK</AssemblyTitle>
+    <AssemblyTitle>Beam Automation SDK</AssemblyTitle>
     <Description>Official C# Beam Automation SDK for Custodial accounts</Description>
 
     <PackageTags>beam, sdk, library, client</PackageTags>
@@ -25,9 +25,9 @@
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Beam.xml</DocumentationFile>
 
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/Merit-Circle/beam-sdk.git</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Merit-Circle/beam-api-clients.git</RepositoryUrl>
 
-    <PackageProjectUrl>https://github.com/Merit-Circle/beam-sdk.git</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/Merit-Circle/beam-api-clients.git</PackageProjectUrl>
 
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>

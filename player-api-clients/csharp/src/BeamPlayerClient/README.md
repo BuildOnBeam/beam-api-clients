@@ -16,9 +16,9 @@ In order to get started with Beam, you will need an API key. The API key for you
 You have to register necessary services in your dependency injection container, then all Api Clients can be used easily by injecting them into your classes.
 
 ### Package reference
-Simply include our Nuget from https://www.nuget.org/packages/BeamSelfCustody in your .csproj file like any other dependency:
+Simply include our Nuget from https://www.nuget.org/packages/BeamPlayerClient in your .csproj file like any other dependency:
 ```xml
-<PackageReference Include="BeamSelfCustody" Version="1.0.*" />
+<PackageReference Include="BeamPlayerClient" Version="1.0.*" />
 ```
 Our deployment pipeline increments **patch** version on every deployment. You can either use a concrete version number or a wildcard(`*`) to always use newest SDK. We try to limit breaking changes but as this is still a new product, these might happen.
 

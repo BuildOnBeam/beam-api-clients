@@ -10,13 +10,13 @@
     <Nullable>annotations</Nullable>
     <LangVersion>latest</LangVersion>
 
-    <AssemblyName>Beam</AssemblyName>
-    <RootNamespace>Beam</RootNamespace>
-    <PackageId>Beam</PackageId>
+    <AssemblyName>BeamPlayerClient</AssemblyName>
+    <RootNamespace>BeamPlayerClient</RootNamespace>
+    <PackageId>BeamPlayerClient</PackageId>
     <Authors>Beam Developers</Authors>
     <Company>Merit Circle</Company>
-    <AssemblyTitle>Beam SelfCustody SDK</AssemblyTitle>
-    <Description>Official C# Beam SDK for Self-Custodial accounts</Description>
+    <AssemblyTitle>Beam Player SDK</AssemblyTitle>
+    <Description>Official C# Beam Player SDK for Self-Custodial accounts</Description>
 
     <PackageTags>beam, sdk, library, client</PackageTags>
     <PackageIcon>icon.jpg</PackageIcon>
@@ -25,9 +25,9 @@
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\BeamSelfCustody.xml</DocumentationFile>
 
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/Merit-Circle/beam-sdk.git</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Merit-Circle/beam-api-clients.git</RepositoryUrl>
 
-    <PackageProjectUrl>https://github.com/Merit-Circle/beam-sdk.git</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/Merit-Circle/beam-api-clients.git</PackageProjectUrl>
 
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>

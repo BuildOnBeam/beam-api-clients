@@ -42,11 +42,11 @@ jobs:
           TAG=${{ github.event.release.tag_name }}
           echo "VERSION=${TAG#v}" >> $GITHUB_ENV
 
-      - name: Update custodial node SDK version
+      - name: Update automation node SDK version
         working-directory: ./automation-api-clients/typescript-node
         run: npm version $VERSION --allow-same-version --no-git-tag-version
 
-      - name: Update self custodial node SDK version
+      - name: Update player node SDK version
         working-directory: ./player-api-clients/typescript-node
         run: npm version $VERSION --allow-same-version --no-git-tag-version
 
