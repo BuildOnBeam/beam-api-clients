@@ -16,5 +16,5 @@ In order to get started with Beam, you will need an API key. The API key for you
 
 ---
 Currently supported languages:
-- [Typescript](./sdks-custodial/typescript-node/README.md)
-- [C#](./sdks-custodial/csharp/README.md)
+- [Typescript](./automation-api-clients/typescript-node/README.md)
+- [C#](./automation-api-clients/csharp/README.md)

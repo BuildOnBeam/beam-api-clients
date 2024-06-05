@@ -3,12 +3,12 @@
   "files": {
     "ignore": [
       "pnpm-lock.yaml",
-      "./sdks-custodial/typescript-node/src/generated/core/request.ts",
-      "./sdks-custodial/typescript-node/src/generated/core/NodeHttpRequest.ts",
-      "./sdks-custodial/csharp/src/Beam/bin/*",
-      "./sdks-custodial/csharp/src/Beam/obj/*",
-      "./sdks-custodial/csharp/src/Beam.Test/bin/*",
-      "./sdks-custodial/csharp/src/Beam.Test/obj/*"
+      "./automation-api-clients/typescript-node/src/generated/core/request.ts",
+      "./automation-api-clients/typescript-node/src/generated/core/NodeHttpRequest.ts",
+      "./automation-api-clients/csharp/src/Beam/bin/*",
+      "./automation-api-clients/csharp/src/Beam/obj/*",
+      "./automation-api-clients/csharp/src/Beam.Test/bin/*",
+      "./automation-api-clients/csharp/src/Beam.Test/obj/*"
     ]
   },
   "formatter": {
