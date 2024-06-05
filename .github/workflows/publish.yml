@@ -126,10 +126,10 @@ jobs:
           echo "VERSION=${TAG#v}" >> $GITHUB_ENV
 
       # Create the NuGet package in the folder from the environment variable NUGET_DIRECTORY
-      - run: dotnet pack ./automation-api-clients/csharp/Beam.sln --output ${{ env.NUGET_DIRECTORY }}
+      - run: dotnet pack ./automation-api-clients/csharp/BeamAutomationClient.sln --output ${{ env.NUGET_DIRECTORY }}
 
       # Create the NuGet package in the folder from the environment variable NUGET_DIRECTORY
-      - run: dotnet pack ./player-api-clients/csharp/BeamSelfCustody.sln --output ${{ env.NUGET_DIRECTORY }}
+      - run: dotnet pack ./player-api-clients/csharp/BeamPlayerClient.sln --output ${{ env.NUGET_DIRECTORY }}
 
       # Publish the NuGet package as an artifact, so they can be used in the following jobs
       - uses: actions/upload-artifact@v3
