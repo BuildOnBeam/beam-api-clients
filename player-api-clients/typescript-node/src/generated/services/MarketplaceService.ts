@@ -30,7 +30,7 @@ export class MarketplaceService {
   ): CancelablePromise<GetAssetListingsResponse> {
     return this.httpRequest.request({
       method: 'POST',
-      url: '/v1/self-custody/marketplace',
+      url: '/v1/player/marketplace',
       body: requestBody,
       mediaType: 'application/json',
     });
@@ -43,13 +43,13 @@ export class MarketplaceService {
    * @returns GetAssetListingsResponse
    * @throws ApiError
    */
-  public getListedAssetsForProfile(
+  public getListedAssetsForUser(
     entityId: string,
     requestBody: GetListedAssetsBodyInput,
   ): CancelablePromise<GetAssetListingsResponse> {
     return this.httpRequest.request({
       method: 'POST',
-      url: '/v1/self-custody/marketplace/users/{entityId}',
+      url: '/v1/player/marketplace/users/{entityId}',
       path: {
         entityId: entityId,
       },
@@ -71,7 +71,7 @@ export class MarketplaceService {
   ): CancelablePromise<CommonOperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
-      url: '/v1/self-custody/marketplace/users/{entityId}/listing',
+      url: '/v1/player/marketplace/users/{entityId}/listing',
       path: {
         entityId: entityId,
       },
@@ -95,7 +95,7 @@ export class MarketplaceService {
   ): CancelablePromise<CommonOperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
-      url: '/v1/self-custody/marketplace/users/{entityId}/listing/{orderId}',
+      url: '/v1/player/marketplace/users/{entityId}/listing/{orderId}',
       path: {
         entityId: entityId,
         orderId: orderId,
@@ -122,7 +122,7 @@ export class MarketplaceService {
   ): CancelablePromise<CommonOperationResponse> {
     return this.httpRequest.request({
       method: 'DELETE',
-      url: '/v1/self-custody/marketplace/users/{entityId}/listing/{orderId}',
+      url: '/v1/player/marketplace/users/{entityId}/listing/{orderId}',
       path: {
         entityId: entityId,
         orderId: orderId,
@@ -148,7 +148,7 @@ export class MarketplaceService {
   ): CancelablePromise<CommonOperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
-      url: '/v1/self-custody/marketplace/users/{entityId}/offers',
+      url: '/v1/player/marketplace/users/{entityId}/offers',
       path: {
         entityId: entityId,
       },
@@ -158,21 +158,21 @@ export class MarketplaceService {
   }
 
   /**
-   * Get all offers that player created
+   * Get all offers that a user created
    * @param entityId
    * @param chainId
    * @param continuation
    * @returns GetAssetListingsResponse
    * @throws ApiError
    */
-  public getPlayerOffers(
+  public getUserOffers(
     entityId: string,
     chainId?: number,
     continuation?: string,
   ): CancelablePromise<GetAssetListingsResponse> {
     return this.httpRequest.request({
       method: 'GET',
-      url: '/v1/self-custody/marketplace/users/{entityId}/offers',
+      url: '/v1/player/marketplace/users/{entityId}/offers',
       path: {
         entityId: entityId,
       },
@@ -184,7 +184,7 @@ export class MarketplaceService {
   }
 
   /**
-   * Get all asset offers that player created
+   * Get all asset offers that a user created for a specific asset
    * @param entityId
    * @param assetAddress
    * @param assetId
@@ -193,7 +193,7 @@ export class MarketplaceService {
    * @returns GetAssetListingsResponse
    * @throws ApiError
    */
-  public getPlayerAssetOffers(
+  public getUserAssetOffers(
     entityId: string,
     assetAddress: string,
     assetId: string,
@@ -202,7 +202,7 @@ export class MarketplaceService {
   ): CancelablePromise<GetAssetListingsResponse> {
     return this.httpRequest.request({
       method: 'GET',
-      url: '/v1/self-custody/marketplace/users/{entityId}/offers/asset/{assetAddress}/{assetId}',
+      url: '/v1/player/marketplace/users/{entityId}/offers/asset/{assetAddress}/{assetId}',
       path: {
         entityId: entityId,
         assetAddress: assetAddress,
@@ -218,19 +218,22 @@ export class MarketplaceService {
   /**
    * Accept an offer for an asset
    * @param entityId
+   * @param offerId
    * @param requestBody
    * @returns CommonOperationResponse
    * @throws ApiError
    */
   public acceptAssetOffer(
     entityId: string,
+    offerId: string,
     requestBody: AcceptAssetOfferRequestInput,
   ): CancelablePromise<CommonOperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
-      url: '/v1/self-custody/marketplace/users/{entityId}/offers/{offerId}/accept',
+      url: '/v1/player/marketplace/users/{entityId}/offers/{offerId}/accept',
       path: {
         entityId: entityId,
+        offerId: offerId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -240,19 +243,22 @@ export class MarketplaceService {
   /**
    * Cancel an offer for an asset
    * @param entityId
+   * @param offerId
    * @param requestBody
    * @returns CommonOperationResponse
    * @throws ApiError
    */
   public cancelAssetOffer(
     entityId: string,
+    offerId: string,
     requestBody: CancelAssetOfferRequestInput,
   ): CancelablePromise<CommonOperationResponse> {
     return this.httpRequest.request({
       method: 'DELETE',
-      url: '/v1/self-custody/marketplace/users/{entityId}/offers/{offerId}',
+      url: '/v1/player/marketplace/users/{entityId}/offers/{offerId}',
       path: {
         entityId: entityId,
+        offerId: offerId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -276,7 +282,7 @@ export class MarketplaceService {
   ): CancelablePromise<GetAssetListingsResponse> {
     return this.httpRequest.request({
       method: 'GET',
-      url: '/v1/self-custody/marketplace/offers/asset/{assetAddress}/{assetId}',
+      url: '/v1/player/marketplace/offers/asset/{assetAddress}/{assetId}',
       path: {
         assetAddress: assetAddress,
         assetId: assetId,
@@ -299,7 +305,7 @@ export class MarketplaceService {
   ): CancelablePromise<GetChainCurrenciesResponse> {
     return this.httpRequest.request({
       method: 'GET',
-      url: '/v1/self-custody/marketplace/chain-currencies/{chainId}',
+      url: '/v1/player/marketplace/chain-currencies/{chainId}',
       path: {
         chainId: chainId,
       },

@@ -23,7 +23,7 @@ export class OperationService {
   ): CancelablePromise<CommonOperationResponse> {
     return this.httpRequest.request({
       method: 'GET',
-      url: '/v1/self-custody/operation/{opId}',
+      url: '/v1/player/operation/{opId}',
       path: {
         opId: opId,
       },
@@ -43,12 +43,30 @@ export class OperationService {
   ): CancelablePromise<CommonOperationResponse> {
     return this.httpRequest.request({
       method: 'PATCH',
-      url: '/v1/self-custody/operation/{opId}',
+      url: '/v1/player/operation/{opId}',
       path: {
         opId: opId,
       },
       body: requestBody,
       mediaType: 'application/json',
+    });
+  }
+
+  /**
+   * Delete an operation
+   * @param opId
+   * @returns CommonOperationResponse
+   * @throws ApiError
+   */
+  public deleteOperation(
+    opId: string,
+  ): CancelablePromise<CommonOperationResponse> {
+    return this.httpRequest.request({
+      method: 'DELETE',
+      url: '/v1/player/operation/{opId}',
+      path: {
+        opId: opId,
+      },
     });
   }
 
@@ -63,7 +81,7 @@ export class OperationService {
   ): CancelablePromise<CommonOperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
-      url: '/v1/self-custody/operation',
+      url: '/v1/player/operation',
       body: requestBody,
       mediaType: 'application/json',
     });

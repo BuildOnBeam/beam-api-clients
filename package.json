@@ -3,9 +3,9 @@
   "scripts": {
     "generate": "pnpm generate:self-custody:csharp && pnpm generate:custodial:node && pnpm generate:self-custody:node",
     "generate:custodial:csharp": "rm -rf ./automation-api-clients/csharp/src/BeamAutomationApi/Api && rm -rf ./automation-api-clients/csharp/src/BeamAutomationApi/Model && openapi-generator-cli generate",
-    "generate:custodial:node": "pnpm --filter @onbeam/node generate && pnpm validate:lint:fix",
+    "generate:custodial:node": "pnpm --filter @onbeam/automation-api-client generate && pnpm validate:lint:fix",
     "generate:self-custody:csharp": "rm -rf ./player-api-clients/csharp/src/BeamPlayerApi/Api && rm -rf ./player-api-clients/csharp/src/BeamPlayerApi/Model && openapi-generator-cli generate",
-    "generate:self-custody:node": "pnpm --filter @onbeam/self-custody generate && pnpm validate:lint:fix",
+    "generate:self-custody:node": "pnpm --filter @onbeam/player-api-client generate && pnpm validate:lint:fix",
     "validate:format": "biome format .",
     "validate:format:fix": "pnpm validate:format --write",
     "validate:lint": "biome check .",

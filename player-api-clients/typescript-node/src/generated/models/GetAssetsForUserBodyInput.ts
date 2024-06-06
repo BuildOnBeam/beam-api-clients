@@ -3,9 +3,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type GetAssetsForProfileBodyInputV3 = {
-  sortDirection?: GetAssetsForProfileBodyInputV3.sortDirection;
-  sortBy?: GetAssetsForProfileBodyInputV3.sortBy;
+export type GetAssetsForUserBodyInput = {
+  sortDirection?: GetAssetsForUserBodyInput.sortDirection;
+  sortBy?: GetAssetsForUserBodyInput.sortBy;
   contract?: string | null;
   includeAttributes?: boolean | null;
   continuation?: string | null;
@@ -13,7 +13,7 @@ export type GetAssetsForProfileBodyInputV3 = {
   limit?: number;
 };
 
-export namespace GetAssetsForProfileBodyInputV3 {
+export namespace GetAssetsForUserBodyInput {
   export enum sortDirection {
     ASC = 'asc',
     DESC = 'desc',

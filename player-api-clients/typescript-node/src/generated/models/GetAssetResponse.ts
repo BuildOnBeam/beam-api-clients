@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type GetAssetResponseV3 = {
+export type GetAssetResponse = {
   name: string;
   imageUrl: string;
   assetType: string;
@@ -15,7 +15,7 @@ export type GetAssetResponseV3 = {
     quantity: number;
     entityId?: string;
   }> | null;
-  rarity?: GetAssetResponseV3.rarity | null;
+  rarity?: GetAssetResponse.rarity | null;
   rarityScore?: number | null;
   attributes?: Array<{
     displayType?: string | null;
@@ -27,7 +27,7 @@ export type GetAssetResponseV3 = {
   chainId?: number;
 };
 
-export namespace GetAssetResponseV3 {
+export namespace GetAssetResponse {
   export enum rarity {
     COMMON = 'Common',
     UNCOMMON = 'Uncommon',

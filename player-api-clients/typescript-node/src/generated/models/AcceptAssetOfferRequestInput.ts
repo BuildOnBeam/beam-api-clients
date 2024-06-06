@@ -6,7 +6,6 @@
 export type AcceptAssetOfferRequestInput = {
   quantity: number;
   optimistic?: boolean;
-  offerId: string;
   sponsor?: boolean;
   policyId?: string | null;
   chainId?: number;

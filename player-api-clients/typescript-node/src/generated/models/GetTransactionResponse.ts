@@ -48,7 +48,7 @@ export type GetTransactionResponse = {
     id?: string | null;
   };
   /**
-   * Profile and wallet information related to the transaction
+   * User and wallet information related to the transaction
    */
   profile: {
     id?: string | null;

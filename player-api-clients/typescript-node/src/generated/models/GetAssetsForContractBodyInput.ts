@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type GetAssetsForContractBodyInputV3 = {
+export type GetAssetsForContractBodyInput = {
   continuation?: string | null;
   chainId?: number;
   minRarityRank?: number | null;
@@ -15,12 +15,12 @@ export type GetAssetsForContractBodyInputV3 = {
     key: string;
     value: string;
   }> | null;
-  sortDirection?: GetAssetsForContractBodyInputV3.sortDirection;
-  sortBy?: GetAssetsForContractBodyInputV3.sortBy;
+  sortDirection?: GetAssetsForContractBodyInput.sortDirection;
+  sortBy?: GetAssetsForContractBodyInput.sortBy;
   limit?: number;
 };
 
-export namespace GetAssetsForContractBodyInputV3 {
+export namespace GetAssetsForContractBodyInput {
   export enum sortDirection {
     ASC = 'asc',
     DESC = 'desc',

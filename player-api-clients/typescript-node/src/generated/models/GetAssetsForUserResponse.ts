@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type GetAssetsForProfileResponseV3 = {
+export type GetAssetsForUserResponse = {
   data: Array<{
     name: string;
     imageUrl: string;

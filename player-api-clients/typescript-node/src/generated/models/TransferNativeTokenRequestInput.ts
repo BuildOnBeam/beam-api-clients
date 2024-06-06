@@ -3,10 +3,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type TransferTokenRequestInputV3 = {
+export type TransferNativeTokenRequestInput = {
   receiverEntityId?: string;
   receiverWalletAddress?: string;
-  assetAddress: string;
   amountToTransfer: string;
   optimistic?: boolean;
   sponsor?: boolean;

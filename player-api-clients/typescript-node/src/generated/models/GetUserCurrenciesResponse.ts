@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type GetProfileCurrenciesResponseV3 = {
+export type GetUserCurrenciesResponse = {
   data: Array<{
     address: string;
     name: string;

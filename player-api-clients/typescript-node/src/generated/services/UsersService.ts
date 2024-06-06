@@ -24,7 +24,7 @@ export class UsersService {
   ): CancelablePromise<GetAllUsersResponse> {
     return this.httpRequest.request({
       method: 'GET',
-      url: '/v1/self-custody/users',
+      url: '/v1/player/users',
       query: {
         limit: limit,
         offset: offset,
@@ -41,7 +41,7 @@ export class UsersService {
   public getUser(entityId: string): CancelablePromise<GetUserResponse> {
     return this.httpRequest.request({
       method: 'GET',
-      url: '/v1/self-custody/users/{entityId}',
+      url: '/v1/player/users/{entityId}',
       path: {
         entityId: entityId,
       },

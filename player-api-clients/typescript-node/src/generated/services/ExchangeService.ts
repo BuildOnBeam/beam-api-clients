@@ -29,7 +29,7 @@ export class ExchangeService {
   ): CancelablePromise<GetQuoteResponse> {
     return this.httpRequest.request({
       method: 'GET',
-      url: '/v1/self-custody/exchange/quote/input',
+      url: '/v1/player/exchange/quote/input',
       query: {
         tokenIn: tokenIn,
         tokenOut: tokenOut,
@@ -56,7 +56,7 @@ export class ExchangeService {
   ): CancelablePromise<GetQuoteResponse> {
     return this.httpRequest.request({
       method: 'GET',
-      url: '/v1/self-custody/exchange/quote/output',
+      url: '/v1/player/exchange/quote/output',
       query: {
         tokenIn: tokenIn,
         tokenOut: tokenOut,
@@ -79,7 +79,7 @@ export class ExchangeService {
   ): CancelablePromise<CommonOperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
-      url: '/v1/self-custody/exchange/users/{entityId}/convert/input',
+      url: '/v1/player/exchange/users/{entityId}/convert/input',
       path: {
         entityId: entityId,
       },
@@ -101,7 +101,7 @@ export class ExchangeService {
   ): CancelablePromise<CommonOperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
-      url: '/v1/self-custody/exchange/users/{entityId}/convert/output',
+      url: '/v1/player/exchange/users/{entityId}/convert/output',
       path: {
         entityId: entityId,
       },

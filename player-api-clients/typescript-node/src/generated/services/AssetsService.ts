@@ -3,16 +3,16 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { CommonOperationResponse } from '../models/CommonOperationResponse';
-import type { GetAssetResponseV3 } from '../models/GetAssetResponseV3';
-import type { GetAssetsForContractBodyInputV3 } from '../models/GetAssetsForContractBodyInputV3';
-import type { GetAssetsForContractResponseV3 } from '../models/GetAssetsForContractResponseV3';
-import type { GetAssetsForProfileBodyInputV3 } from '../models/GetAssetsForProfileBodyInputV3';
-import type { GetAssetsForProfileResponseV3 } from '../models/GetAssetsForProfileResponseV3';
-import type { GetProfileCurrenciesResponseV3 } from '../models/GetProfileCurrenciesResponseV3';
-import type { GetProfileNativeCurrencyResponseV3 } from '../models/GetProfileNativeCurrencyResponseV3';
-import type { TransferAssetRequestInputV3 } from '../models/TransferAssetRequestInputV3';
-import type { TransferNativeTokenRequestInputV3 } from '../models/TransferNativeTokenRequestInputV3';
-import type { TransferTokenRequestInputV3 } from '../models/TransferTokenRequestInputV3';
+import type { GetAssetResponse } from '../models/GetAssetResponse';
+import type { GetAssetsForContractBodyInput } from '../models/GetAssetsForContractBodyInput';
+import type { GetAssetsForContractResponse } from '../models/GetAssetsForContractResponse';
+import type { GetAssetsForUserBodyInput } from '../models/GetAssetsForUserBodyInput';
+import type { GetAssetsForUserResponse } from '../models/GetAssetsForUserResponse';
+import type { GetUserCurrenciesResponse } from '../models/GetUserCurrenciesResponse';
+import type { GetUserNativeCurrencyResponse } from '../models/GetUserNativeCurrencyResponse';
+import type { TransferAssetRequestInput } from '../models/TransferAssetRequestInput';
+import type { TransferNativeTokenRequestInput } from '../models/TransferNativeTokenRequestInput';
+import type { TransferTokenRequestInput } from '../models/TransferTokenRequestInput';
 
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -24,16 +24,16 @@ export class AssetsService {
    * Get all the assets of a profile (NFT assets, e.g. ERC721 / ERC1155)
    * @param entityId
    * @param requestBody
-   * @returns GetAssetsForProfileResponseV3
+   * @returns GetAssetsForUserResponse
    * @throws ApiError
    */
-  public getProfileAssetsForGamePostV3(
+  public getUserAssetsForGamePost(
     entityId: string,
-    requestBody: GetAssetsForProfileBodyInputV3,
-  ): CancelablePromise<GetAssetsForProfileResponseV3> {
+    requestBody: GetAssetsForUserBodyInput,
+  ): CancelablePromise<GetAssetsForUserResponse> {
     return this.httpRequest.request({
       method: 'POST',
-      url: '/v1/self-custody/assets/users/{entityId}',
+      url: '/v1/player/assets/users/{entityId}',
       path: {
         entityId: entityId,
       },
@@ -46,16 +46,16 @@ export class AssetsService {
    * Get all the currencies owned by an account (ERC20)
    * @param entityId
    * @param chainId
-   * @returns GetProfileCurrenciesResponseV3
+   * @returns GetUserCurrenciesResponse
    * @throws ApiError
    */
-  public getProfileCurrenciesV3(
+  public getUserCurrencies(
     entityId: string,
     chainId?: number,
-  ): CancelablePromise<GetProfileCurrenciesResponseV3> {
+  ): CancelablePromise<GetUserCurrenciesResponse> {
     return this.httpRequest.request({
       method: 'GET',
-      url: '/v1/self-custody/assets/users/{entityId}/currencies',
+      url: '/v1/player/assets/users/{entityId}/currencies',
       path: {
         entityId: entityId,
       },
@@ -69,16 +69,16 @@ export class AssetsService {
    * Get the native token balance
    * @param entityId
    * @param chainId
-   * @returns GetProfileNativeCurrencyResponseV3
+   * @returns GetUserNativeCurrencyResponse
    * @throws ApiError
    */
-  public getProfileNativeCurrencyV3(
+  public getUserNativeCurrency(
     entityId: string,
     chainId?: number,
-  ): CancelablePromise<GetProfileNativeCurrencyResponseV3> {
+  ): CancelablePromise<GetUserNativeCurrencyResponse> {
     return this.httpRequest.request({
       method: 'GET',
-      url: '/v1/self-custody/assets/users/{entityId}/native',
+      url: '/v1/player/assets/users/{entityId}/native',
       path: {
         entityId: entityId,
       },
@@ -95,13 +95,13 @@ export class AssetsService {
    * @returns CommonOperationResponse
    * @throws ApiError
    */
-  public transferAssetV3(
+  public transferAsset(
     entityId: string,
-    requestBody: TransferAssetRequestInputV3,
+    requestBody: TransferAssetRequestInput,
   ): CancelablePromise<CommonOperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
-      url: '/v1/self-custody/assets/users/{entityId}/transfer-asset',
+      url: '/v1/player/assets/users/{entityId}/transfer-asset',
       path: {
         entityId: entityId,
       },
@@ -117,13 +117,13 @@ export class AssetsService {
    * @returns CommonOperationResponse
    * @throws ApiError
    */
-  public transferTokenV3(
+  public transferToken(
     entityId: string,
-    requestBody: TransferTokenRequestInputV3,
+    requestBody: TransferTokenRequestInput,
   ): CancelablePromise<CommonOperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
-      url: '/v1/self-custody/assets/users/{entityId}/transfer-token',
+      url: '/v1/player/assets/users/{entityId}/transfer-token',
       path: {
         entityId: entityId,
       },
@@ -139,13 +139,13 @@ export class AssetsService {
    * @returns CommonOperationResponse
    * @throws ApiError
    */
-  public transferNativeTokenV3(
+  public transferNativeToken(
     entityId: string,
-    requestBody: TransferNativeTokenRequestInputV3,
+    requestBody: TransferNativeTokenRequestInput,
   ): CancelablePromise<CommonOperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
-      url: '/v1/self-custody/assets/users/{entityId}/transfer-native',
+      url: '/v1/player/assets/users/{entityId}/transfer-native',
       path: {
         entityId: entityId,
       },
@@ -158,16 +158,16 @@ export class AssetsService {
    * Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155)
    * @param assetAddress
    * @param requestBody
-   * @returns GetAssetsForContractResponseV3
+   * @returns GetAssetsForContractResponse
    * @throws ApiError
    */
-  public getContractAssetsPostV3(
+  public getContractAssetsPost(
     assetAddress: string,
-    requestBody: GetAssetsForContractBodyInputV3,
-  ): CancelablePromise<GetAssetsForContractResponseV3> {
+    requestBody: GetAssetsForContractBodyInput,
+  ): CancelablePromise<GetAssetsForContractResponse> {
     return this.httpRequest.request({
       method: 'POST',
-      url: '/v1/self-custody/assets/{assetAddress}',
+      url: '/v1/player/assets/{assetAddress}',
       path: {
         assetAddress: assetAddress,
       },
@@ -183,19 +183,19 @@ export class AssetsService {
    * @param chainId
    * @param entityId
    * @param owners If true, will return owners of the token
-   * @returns GetAssetResponseV3
+   * @returns GetAssetResponse
    * @throws ApiError
    */
-  public getAssetV3(
+  public getAsset(
     assetAddress: string,
     assetId: string,
     chainId?: number,
     entityId?: string,
     owners?: boolean,
-  ): CancelablePromise<GetAssetResponseV3> {
+  ): CancelablePromise<GetAssetResponse> {
     return this.httpRequest.request({
       method: 'GET',
-      url: '/v1/self-custody/assets/{assetAddress}/{assetId}',
+      url: '/v1/player/assets/{assetAddress}/{assetId}',
       path: {
         assetAddress: assetAddress,
         assetId: assetId,

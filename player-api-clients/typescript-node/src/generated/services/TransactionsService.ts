@@ -26,7 +26,7 @@ export class TransactionsService {
   ): CancelablePromise<GetTransactionsResponse> {
     return this.httpRequest.request({
       method: 'GET',
-      url: '/v1/self-custody/transactions',
+      url: '/v1/player/transactions',
       query: {
         limit: limit,
         offset: offset,
@@ -45,7 +45,7 @@ export class TransactionsService {
   ): CancelablePromise<GetTransactionResponse> {
     return this.httpRequest.request({
       method: 'GET',
-      url: '/v1/self-custody/transactions/{transactionId}',
+      url: '/v1/player/transactions/{transactionId}',
       path: {
         transactionId: transactionId,
       },
@@ -67,7 +67,7 @@ export class TransactionsService {
   ): CancelablePromise<GetTransactionsResponse> {
     return this.httpRequest.request({
       method: 'GET',
-      url: '/v1/self-custody/transactions/users/{entityId}',
+      url: '/v1/player/transactions/users/{entityId}',
       path: {
         entityId: entityId,
       },
@@ -91,7 +91,7 @@ export class TransactionsService {
   ): CancelablePromise<CommonOperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
-      url: '/v1/self-custody/transactions/users/{entityId}',
+      url: '/v1/player/transactions/users/{entityId}',
       path: {
         entityId: entityId,
       },

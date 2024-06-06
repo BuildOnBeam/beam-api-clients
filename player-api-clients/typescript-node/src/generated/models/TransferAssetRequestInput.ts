@@ -3,10 +3,14 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type TransferNativeTokenRequestInputV3 = {
-  receiverEntityId?: string;
-  receiverWalletAddress?: string;
-  amountToTransfer: string;
+export type TransferAssetRequestInput = {
+  assets: Array<{
+    receiverEntityId?: string;
+    receiverWalletAddress?: string;
+    assetAddress: string;
+    assetId: string;
+    amountToTransfer?: number;
+  }>;
   optimistic?: boolean;
   sponsor?: boolean;
   policyId?: string | null;

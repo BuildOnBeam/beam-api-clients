@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type GetProfileNativeCurrencyResponseV3 = {
+export type GetUserNativeCurrencyResponse = {
   nativeTokenBalance: {
     name: string;
     symbol: string;

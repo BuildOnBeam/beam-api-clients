@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type GetAssetsForContractResponseV3 = {
+export type GetAssetsForContractResponse = {
   data: Array<{
     name: string;
     imageUrl: string;
