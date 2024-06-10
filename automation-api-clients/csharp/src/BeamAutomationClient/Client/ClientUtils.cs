@@ -124,10 +124,12 @@ namespace BeamAutomationClient.Client
                 return AddContractRequestInput.TypeEnumToJsonValue(addContractRequestInputTypeEnum);
             if (obj is AddContractResponse.TypeEnum addContractResponseTypeEnum)
                 return AddContractResponse.TypeEnumToJsonValue(addContractResponseTypeEnum);
-            if (obj is AddPolicyRequestInput.RateTypeEnum addPolicyRequestInputRateTypeEnum)
-                return AddPolicyRequestInput.RateTypeEnumToJsonValue(addPolicyRequestInputRateTypeEnum);
-            if (obj is AddPolicyResponse.RateTypeEnum addPolicyResponseRateTypeEnum)
-                return AddPolicyResponse.RateTypeEnumToJsonValue(addPolicyResponseRateTypeEnum);
+            if (obj is CommonAddPolicyRequestInput.RateTypeEnum commonAddPolicyRequestInputRateTypeEnum)
+                return CommonAddPolicyRequestInput.RateTypeEnumToJsonValue(commonAddPolicyRequestInputRateTypeEnum);
+            if (obj is CommonAddPolicyResponse.RateTypeEnum commonAddPolicyResponseRateTypeEnum)
+                return CommonAddPolicyResponse.RateTypeEnumToJsonValue(commonAddPolicyResponseRateTypeEnum);
+            if (obj is CommonGetPoliciesResponseDataInner.RateTypeEnum commonGetPoliciesResponseDataInnerRateTypeEnum)
+                return CommonGetPoliciesResponseDataInner.RateTypeEnumToJsonValue(commonGetPoliciesResponseDataInnerRateTypeEnum);
             if (obj is ConvertTokenResponse.StatusEnum convertTokenResponseStatusEnum)
                 return ConvertTokenResponse.StatusEnumToJsonValue(convertTokenResponseStatusEnum);
             if (obj is ConvertTokenResponse.TypeEnum convertTokenResponseTypeEnum)
@@ -176,8 +178,6 @@ namespace BeamAutomationClient.Client
                 return GetListedAssetsBodyInputV2.SortByEnumToJsonValue(getListedAssetsBodyInputV2SortByEnum);
             if (obj is GetListedAssetsBodyInputV2.SortDirectionEnum getListedAssetsBodyInputV2SortDirectionEnum)
                 return GetListedAssetsBodyInputV2.SortDirectionEnumToJsonValue(getListedAssetsBodyInputV2SortDirectionEnum);
-            if (obj is GetPoliciesResponseDataInner.RateTypeEnum getPoliciesResponseDataInnerRateTypeEnum)
-                return GetPoliciesResponseDataInner.RateTypeEnumToJsonValue(getPoliciesResponseDataInnerRateTypeEnum);
             if (obj is GetWebhooksForGameResponseWebhooksInner.EventsEnum getWebhooksForGameResponseWebhooksInnerEventsEnum)
                 return GetWebhooksForGameResponseWebhooksInner.EventsEnumToJsonValue(getWebhooksForGameResponseWebhooksInnerEventsEnum);
             if (obj is RegenerateGameApiKeysResponse.PegiContentEnum regenerateGameApiKeysResponsePegiContentEnum)

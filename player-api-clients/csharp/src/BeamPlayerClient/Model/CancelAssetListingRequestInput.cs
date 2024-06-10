@@ -35,13 +35,15 @@ namespace BeamPlayerClient.Model
         /// Initializes a new instance of the <see cref="CancelAssetListingRequestInput" /> class.
         /// </summary>
         /// <param name="operationId">operationId</param>
+        /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute)</param>
         /// <param name="optimistic">optimistic (default to false)</param>
         /// <param name="policyId">policyId</param>
         /// <param name="sponsor">sponsor (default to true)</param>
         [JsonConstructor]
-        public CancelAssetListingRequestInput(Option<string?> operationId = default, Option<bool?> optimistic = default, Option<string?> policyId = default, Option<bool?> sponsor = default)
+        public CancelAssetListingRequestInput(Option<string?> operationId = default, Option<OperationProcessingEnum?> operationProcessing = default, Option<bool?> optimistic = default, Option<string?> policyId = default, Option<bool?> sponsor = default)
         {
             OperationIdOption = operationId;
+            OperationProcessingOption = operationProcessing;
             OptimisticOption = optimistic;
             PolicyIdOption = policyId;
             SponsorOption = sponsor;
@@ -49,6 +51,85 @@ namespace BeamPlayerClient.Model
         }
 
         partial void OnCreated();
+
+        /// <summary>
+        /// Defines OperationProcessing
+        /// </summary>
+        public enum OperationProcessingEnum
+        {
+            /// <summary>
+            /// Enum SignOnly for value: SignOnly
+            /// </summary>
+            SignOnly = 1,
+
+            /// <summary>
+            /// Enum Execute for value: Execute
+            /// </summary>
+            Execute = 2
+        }
+
+        /// <summary>
+        /// Returns a <see cref="OperationProcessingEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static OperationProcessingEnum OperationProcessingEnumFromString(string value)
+        {
+            if (value.Equals("SignOnly"))
+                return OperationProcessingEnum.SignOnly;
+
+            if (value.Equals("Execute"))
+                return OperationProcessingEnum.Execute;
+
+            throw new NotImplementedException($"Could not convert value to type OperationProcessingEnum: '{value}'");
+        }
+
+        /// <summary>
+        /// Returns a <see cref="OperationProcessingEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static OperationProcessingEnum? OperationProcessingEnumFromStringOrDefault(string value)
+        {
+            if (value.Equals("SignOnly"))
+                return OperationProcessingEnum.SignOnly;
+
+            if (value.Equals("Execute"))
+                return OperationProcessingEnum.Execute;
+
+            return null;
+        }
+
+        /// <summary>
+        /// Converts the <see cref="OperationProcessingEnum"/> to the json value
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static string OperationProcessingEnumToJsonValue(OperationProcessingEnum? value)
+        {
+            if (value == OperationProcessingEnum.SignOnly)
+                return "SignOnly";
+
+            if (value == OperationProcessingEnum.Execute)
+                return "Execute";
+
+            throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Used to track the state of OperationProcessing
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<OperationProcessingEnum?> OperationProcessingOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets OperationProcessing
+        /// </summary>
+        [JsonPropertyName("operationProcessing")]
+        public OperationProcessingEnum? OperationProcessing { get { return this.OperationProcessingOption; } set { this.OperationProcessingOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of OperationId
@@ -111,6 +192,7 @@ namespace BeamPlayerClient.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class CancelAssetListingRequestInput {\n");
             sb.Append("  OperationId: ").Append(OperationId).Append("\n");
+            sb.Append("  OperationProcessing: ").Append(OperationProcessing).Append("\n");
             sb.Append("  Optimistic: ").Append(Optimistic).Append("\n");
             sb.Append("  PolicyId: ").Append(PolicyId).Append("\n");
             sb.Append("  Sponsor: ").Append(Sponsor).Append("\n");
@@ -152,6 +234,7 @@ namespace BeamPlayerClient.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<string?> operationId = default;
+            Option<CancelAssetListingRequestInput.OperationProcessingEnum?> operationProcessing = default;
             Option<bool?> optimistic = default;
             Option<string?> policyId = default;
             Option<bool?> sponsor = default;
@@ -174,6 +257,11 @@ namespace BeamPlayerClient.Model
                         case "operationId":
                             operationId = new Option<string?>(utf8JsonReader.GetString());
                             break;
+                        case "operationProcessing":
+                            string? operationProcessingRawValue = utf8JsonReader.GetString();
+                            if (operationProcessingRawValue != null)
+                                operationProcessing = new Option<CancelAssetListingRequestInput.OperationProcessingEnum?>(CancelAssetListingRequestInput.OperationProcessingEnumFromStringOrDefault(operationProcessingRawValue));
+                            break;
                         case "optimistic":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 optimistic = new Option<bool?>(utf8JsonReader.GetBoolean());
@@ -191,13 +279,16 @@ namespace BeamPlayerClient.Model
                 }
             }
 
+            if (operationProcessing.IsSet && operationProcessing.Value == null)
+                throw new ArgumentNullException(nameof(operationProcessing), "Property is not nullable for class CancelAssetListingRequestInput.");
+
             if (optimistic.IsSet && optimistic.Value == null)
                 throw new ArgumentNullException(nameof(optimistic), "Property is not nullable for class CancelAssetListingRequestInput.");
 
             if (sponsor.IsSet && sponsor.Value == null)
                 throw new ArgumentNullException(nameof(sponsor), "Property is not nullable for class CancelAssetListingRequestInput.");
 
-            return new CancelAssetListingRequestInput(operationId, optimistic, policyId, sponsor);
+            return new CancelAssetListingRequestInput(operationId, operationProcessing, optimistic, policyId, sponsor);
         }
 
         /// <summary>
@@ -230,6 +321,8 @@ namespace BeamPlayerClient.Model
                 else
                     writer.WriteNull("operationId");
 
+            var operationProcessingRawValue = CancelAssetListingRequestInput.OperationProcessingEnumToJsonValue(cancelAssetListingRequestInput.OperationProcessingOption.Value!.Value);
+            writer.WriteString("operationProcessing", operationProcessingRawValue);
             if (cancelAssetListingRequestInput.OptimisticOption.IsSet)
                 writer.WriteBoolean("optimistic", cancelAssetListingRequestInput.OptimisticOption.Value!.Value);
 

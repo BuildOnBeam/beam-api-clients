@@ -36,15 +36,98 @@ namespace BeamPlayerClient.Model
         /// </summary>
         /// <param name="chainId">chainId</param>
         /// <param name="entityId">entityId</param>
+        /// <param name="operationId">operationId</param>
+        /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute)</param>
         [JsonConstructor]
-        public CreateOperationRequestInput(decimal chainId, string entityId)
+        public CreateOperationRequestInput(decimal chainId, string entityId, Option<string?> operationId = default, Option<OperationProcessingEnum?> operationProcessing = default)
         {
             ChainId = chainId;
             EntityId = entityId;
+            OperationIdOption = operationId;
+            OperationProcessingOption = operationProcessing;
             OnCreated();
         }
 
         partial void OnCreated();
+
+        /// <summary>
+        /// Defines OperationProcessing
+        /// </summary>
+        public enum OperationProcessingEnum
+        {
+            /// <summary>
+            /// Enum SignOnly for value: SignOnly
+            /// </summary>
+            SignOnly = 1,
+
+            /// <summary>
+            /// Enum Execute for value: Execute
+            /// </summary>
+            Execute = 2
+        }
+
+        /// <summary>
+        /// Returns a <see cref="OperationProcessingEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static OperationProcessingEnum OperationProcessingEnumFromString(string value)
+        {
+            if (value.Equals("SignOnly"))
+                return OperationProcessingEnum.SignOnly;
+
+            if (value.Equals("Execute"))
+                return OperationProcessingEnum.Execute;
+
+            throw new NotImplementedException($"Could not convert value to type OperationProcessingEnum: '{value}'");
+        }
+
+        /// <summary>
+        /// Returns a <see cref="OperationProcessingEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static OperationProcessingEnum? OperationProcessingEnumFromStringOrDefault(string value)
+        {
+            if (value.Equals("SignOnly"))
+                return OperationProcessingEnum.SignOnly;
+
+            if (value.Equals("Execute"))
+                return OperationProcessingEnum.Execute;
+
+            return null;
+        }
+
+        /// <summary>
+        /// Converts the <see cref="OperationProcessingEnum"/> to the json value
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static string OperationProcessingEnumToJsonValue(OperationProcessingEnum? value)
+        {
+            if (value == OperationProcessingEnum.SignOnly)
+                return "SignOnly";
+
+            if (value == OperationProcessingEnum.Execute)
+                return "Execute";
+
+            throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Used to track the state of OperationProcessing
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<OperationProcessingEnum?> OperationProcessingOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets OperationProcessing
+        /// </summary>
+        [JsonPropertyName("operationProcessing")]
+        public OperationProcessingEnum? OperationProcessing { get { return this.OperationProcessingOption; } set { this.OperationProcessingOption = new(value); } }
 
         /// <summary>
         /// Gets or Sets ChainId
@@ -59,6 +142,19 @@ namespace BeamPlayerClient.Model
         public string EntityId { get; set; }
 
         /// <summary>
+        /// Used to track the state of OperationId
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> OperationIdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets OperationId
+        /// </summary>
+        [JsonPropertyName("operationId")]
+        public string? OperationId { get { return this. OperationIdOption; } set { this.OperationIdOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -68,6 +164,8 @@ namespace BeamPlayerClient.Model
             sb.Append("class CreateOperationRequestInput {\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  EntityId: ").Append(EntityId).Append("\n");
+            sb.Append("  OperationId: ").Append(OperationId).Append("\n");
+            sb.Append("  OperationProcessing: ").Append(OperationProcessing).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -107,6 +205,8 @@ namespace BeamPlayerClient.Model
 
             Option<decimal?> chainId = default;
             Option<string?> entityId = default;
+            Option<string?> operationId = default;
+            Option<CreateOperationRequestInput.OperationProcessingEnum?> operationProcessing = default;
 
             while (utf8JsonReader.Read())
             {
@@ -130,6 +230,14 @@ namespace BeamPlayerClient.Model
                         case "entityId":
                             entityId = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
+                        case "operationId":
+                            operationId = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "operationProcessing":
+                            string? operationProcessingRawValue = utf8JsonReader.GetString();
+                            if (operationProcessingRawValue != null)
+                                operationProcessing = new Option<CreateOperationRequestInput.OperationProcessingEnum?>(CreateOperationRequestInput.OperationProcessingEnumFromStringOrDefault(operationProcessingRawValue));
+                            break;
                         default:
                             break;
                     }
@@ -148,7 +256,10 @@ namespace BeamPlayerClient.Model
             if (entityId.IsSet && entityId.Value == null)
                 throw new ArgumentNullException(nameof(entityId), "Property is not nullable for class CreateOperationRequestInput.");
 
-            return new CreateOperationRequestInput(chainId.Value!.Value!, entityId.Value!);
+            if (operationProcessing.IsSet && operationProcessing.Value == null)
+                throw new ArgumentNullException(nameof(operationProcessing), "Property is not nullable for class CreateOperationRequestInput.");
+
+            return new CreateOperationRequestInput(chainId.Value!.Value!, entityId.Value!, operationId, operationProcessing);
         }
 
         /// <summary>
@@ -181,6 +292,15 @@ namespace BeamPlayerClient.Model
             writer.WriteNumber("chainId", createOperationRequestInput.ChainId);
 
             writer.WriteString("entityId", createOperationRequestInput.EntityId);
+
+            if (createOperationRequestInput.OperationIdOption.IsSet)
+                if (createOperationRequestInput.OperationIdOption.Value != null)
+                    writer.WriteString("operationId", createOperationRequestInput.OperationId);
+                else
+                    writer.WriteNull("operationId");
+
+            var operationProcessingRawValue = CreateOperationRequestInput.OperationProcessingEnumToJsonValue(createOperationRequestInput.OperationProcessingOption.Value!.Value);
+            writer.WriteString("operationProcessing", operationProcessingRawValue);
         }
     }
 }

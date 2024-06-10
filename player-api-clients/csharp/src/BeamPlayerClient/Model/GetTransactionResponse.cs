@@ -39,19 +39,19 @@ namespace BeamPlayerClient.Model
         /// <param name="id">id</param>
         /// <param name="intent">intent</param>
         /// <param name="policy">policy</param>
-        /// <param name="profile">profile</param>
         /// <param name="updatedAt">updatedAt</param>
+        /// <param name="user">user</param>
         /// <param name="transaction">transaction</param>
         [JsonConstructor]
-        public GetTransactionResponse(decimal chainId, DateTime createdAt, string id, GetTransactionsResponseDataInnerIntent intent, GetTransactionResponsePolicy policy, GetTransactionResponseProfile profile, DateTime updatedAt, Option<GetTransactionsResponseDataInnerTransaction?> transaction = default)
+        public GetTransactionResponse(decimal chainId, DateTime createdAt, string id, GetTransactionsResponseDataInnerIntent intent, GetTransactionResponsePolicy policy, DateTime updatedAt, GetTransactionResponseUser user, Option<GetTransactionsResponseDataInnerTransaction?> transaction = default)
         {
             ChainId = chainId;
             CreatedAt = createdAt;
             Id = id;
             Intent = intent;
             Policy = policy;
-            Profile = profile;
             UpdatedAt = updatedAt;
+            User = user;
             TransactionOption = transaction;
             OnCreated();
         }
@@ -89,16 +89,16 @@ namespace BeamPlayerClient.Model
         public GetTransactionResponsePolicy Policy { get; set; }
 
         /// <summary>
-        /// Gets or Sets Profile
-        /// </summary>
-        [JsonPropertyName("profile")]
-        public GetTransactionResponseProfile Profile { get; set; }
-
-        /// <summary>
         /// Gets or Sets UpdatedAt
         /// </summary>
         [JsonPropertyName("updatedAt")]
         public DateTime UpdatedAt { get; set; }
+
+        /// <summary>
+        /// Gets or Sets User
+        /// </summary>
+        [JsonPropertyName("user")]
+        public GetTransactionResponseUser User { get; set; }
 
         /// <summary>
         /// Used to track the state of Transaction
@@ -126,8 +126,8 @@ namespace BeamPlayerClient.Model
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Intent: ").Append(Intent).Append("\n");
             sb.Append("  Policy: ").Append(Policy).Append("\n");
-            sb.Append("  Profile: ").Append(Profile).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
+            sb.Append("  User: ").Append(User).Append("\n");
             sb.Append("  Transaction: ").Append(Transaction).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -181,8 +181,8 @@ namespace BeamPlayerClient.Model
             Option<string?> id = default;
             Option<GetTransactionsResponseDataInnerIntent?> intent = default;
             Option<GetTransactionResponsePolicy?> policy = default;
-            Option<GetTransactionResponseProfile?> profile = default;
             Option<DateTime?> updatedAt = default;
+            Option<GetTransactionResponseUser?> user = default;
             Option<GetTransactionsResponseDataInnerTransaction?> transaction = default;
 
             while (utf8JsonReader.Read())
@@ -219,13 +219,13 @@ namespace BeamPlayerClient.Model
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 policy = new Option<GetTransactionResponsePolicy?>(JsonSerializer.Deserialize<GetTransactionResponsePolicy>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
-                        case "profile":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                profile = new Option<GetTransactionResponseProfile?>(JsonSerializer.Deserialize<GetTransactionResponseProfile>(ref utf8JsonReader, jsonSerializerOptions)!);
-                            break;
                         case "updatedAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 updatedAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "user":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                user = new Option<GetTransactionResponseUser?>(JsonSerializer.Deserialize<GetTransactionResponseUser>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "transaction":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
@@ -252,11 +252,11 @@ namespace BeamPlayerClient.Model
             if (!policy.IsSet)
                 throw new ArgumentException("Property is required for class GetTransactionResponse.", nameof(policy));
 
-            if (!profile.IsSet)
-                throw new ArgumentException("Property is required for class GetTransactionResponse.", nameof(profile));
-
             if (!updatedAt.IsSet)
                 throw new ArgumentException("Property is required for class GetTransactionResponse.", nameof(updatedAt));
+
+            if (!user.IsSet)
+                throw new ArgumentException("Property is required for class GetTransactionResponse.", nameof(user));
 
             if (chainId.IsSet && chainId.Value == null)
                 throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class GetTransactionResponse.");
@@ -273,13 +273,13 @@ namespace BeamPlayerClient.Model
             if (policy.IsSet && policy.Value == null)
                 throw new ArgumentNullException(nameof(policy), "Property is not nullable for class GetTransactionResponse.");
 
-            if (profile.IsSet && profile.Value == null)
-                throw new ArgumentNullException(nameof(profile), "Property is not nullable for class GetTransactionResponse.");
-
             if (updatedAt.IsSet && updatedAt.Value == null)
                 throw new ArgumentNullException(nameof(updatedAt), "Property is not nullable for class GetTransactionResponse.");
 
-            return new GetTransactionResponse(chainId.Value!.Value!, createdAt.Value!.Value!, id.Value!, intent.Value!, policy.Value!, profile.Value!, updatedAt.Value!.Value!, transaction);
+            if (user.IsSet && user.Value == null)
+                throw new ArgumentNullException(nameof(user), "Property is not nullable for class GetTransactionResponse.");
+
+            return new GetTransactionResponse(chainId.Value!.Value!, createdAt.Value!.Value!, id.Value!, intent.Value!, policy.Value!, updatedAt.Value!.Value!, user.Value!, transaction);
         }
 
         /// <summary>
@@ -315,8 +315,8 @@ namespace BeamPlayerClient.Model
             if (getTransactionResponse.Policy == null)
                 throw new ArgumentNullException(nameof(getTransactionResponse.Policy), "Property is required for class GetTransactionResponse.");
 
-            if (getTransactionResponse.Profile == null)
-                throw new ArgumentNullException(nameof(getTransactionResponse.Profile), "Property is required for class GetTransactionResponse.");
+            if (getTransactionResponse.User == null)
+                throw new ArgumentNullException(nameof(getTransactionResponse.User), "Property is required for class GetTransactionResponse.");
 
             writer.WriteNumber("chainId", getTransactionResponse.ChainId);
 
@@ -328,10 +328,10 @@ namespace BeamPlayerClient.Model
             JsonSerializer.Serialize(writer, getTransactionResponse.Intent, jsonSerializerOptions);
             writer.WritePropertyName("policy");
             JsonSerializer.Serialize(writer, getTransactionResponse.Policy, jsonSerializerOptions);
-            writer.WritePropertyName("profile");
-            JsonSerializer.Serialize(writer, getTransactionResponse.Profile, jsonSerializerOptions);
             writer.WriteString("updatedAt", getTransactionResponse.UpdatedAt.ToString(UpdatedAtFormat));
 
+            writer.WritePropertyName("user");
+            JsonSerializer.Serialize(writer, getTransactionResponse.User, jsonSerializerOptions);
             if (getTransactionResponse.TransactionOption.IsSet)
                 if (getTransactionResponse.TransactionOption.Value != null)
                 {

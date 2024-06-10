@@ -56,24 +56,29 @@ namespace BeamPlayerClient.Model
         public enum StatusEnum
         {
             /// <summary>
+            /// Enum Signed for value: Signed
+            /// </summary>
+            Signed = 1,
+
+            /// <summary>
             /// Enum Pending for value: Pending
             /// </summary>
-            Pending = 1,
+            Pending = 2,
 
             /// <summary>
             /// Enum Rejected for value: Rejected
             /// </summary>
-            Rejected = 2,
+            Rejected = 3,
 
             /// <summary>
             /// Enum Executed for value: Executed
             /// </summary>
-            Executed = 3,
+            Executed = 4,
 
             /// <summary>
             /// Enum Error for value: Error
             /// </summary>
-            Error = 4
+            Error = 5
         }
 
         /// <summary>
@@ -84,6 +89,9 @@ namespace BeamPlayerClient.Model
         /// <exception cref="NotImplementedException"></exception>
         public static StatusEnum StatusEnumFromString(string value)
         {
+            if (value.Equals("Signed"))
+                return StatusEnum.Signed;
+
             if (value.Equals("Pending"))
                 return StatusEnum.Pending;
 
@@ -106,6 +114,9 @@ namespace BeamPlayerClient.Model
         /// <returns></returns>
         public static StatusEnum? StatusEnumFromStringOrDefault(string value)
         {
+            if (value.Equals("Signed"))
+                return StatusEnum.Signed;
+
             if (value.Equals("Pending"))
                 return StatusEnum.Pending;
 
@@ -129,6 +140,9 @@ namespace BeamPlayerClient.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string StatusEnumToJsonValue(StatusEnum value)
         {
+            if (value == StatusEnum.Signed)
+                return "Signed";
+
             if (value == StatusEnum.Pending)
                 return "Pending";
 

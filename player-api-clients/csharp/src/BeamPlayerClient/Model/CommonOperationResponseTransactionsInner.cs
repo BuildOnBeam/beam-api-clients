@@ -69,19 +69,24 @@ namespace BeamPlayerClient.Model
             Pending = 1,
 
             /// <summary>
+            /// Enum Signed for value: Signed
+            /// </summary>
+            Signed = 2,
+
+            /// <summary>
             /// Enum Rejected for value: Rejected
             /// </summary>
-            Rejected = 2,
+            Rejected = 3,
 
             /// <summary>
             /// Enum Executed for value: Executed
             /// </summary>
-            Executed = 3,
+            Executed = 4,
 
             /// <summary>
             /// Enum Error for value: Error
             /// </summary>
-            Error = 4
+            Error = 5
         }
 
         /// <summary>
@@ -94,6 +99,9 @@ namespace BeamPlayerClient.Model
         {
             if (value.Equals("Pending"))
                 return StatusEnum.Pending;
+
+            if (value.Equals("Signed"))
+                return StatusEnum.Signed;
 
             if (value.Equals("Rejected"))
                 return StatusEnum.Rejected;
@@ -117,6 +125,9 @@ namespace BeamPlayerClient.Model
             if (value.Equals("Pending"))
                 return StatusEnum.Pending;
 
+            if (value.Equals("Signed"))
+                return StatusEnum.Signed;
+
             if (value.Equals("Rejected"))
                 return StatusEnum.Rejected;
 
@@ -139,6 +150,9 @@ namespace BeamPlayerClient.Model
         {
             if (value == StatusEnum.Pending)
                 return "Pending";
+
+            if (value == StatusEnum.Signed)
+                return "Signed";
 
             if (value == StatusEnum.Rejected)
                 return "Rejected";

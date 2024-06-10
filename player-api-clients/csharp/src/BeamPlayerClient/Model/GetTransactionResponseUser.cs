@@ -29,15 +29,15 @@ namespace BeamPlayerClient.Model
     /// <summary>
     /// User and wallet information related to the transaction
     /// </summary>
-    public partial class GetTransactionResponseProfile : IValidatableObject
+    public partial class GetTransactionResponseUser : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetTransactionResponseProfile" /> class.
+        /// Initializes a new instance of the <see cref="GetTransactionResponseUser" /> class.
         /// </summary>
         /// <param name="wallet">wallet</param>
         /// <param name="id">id</param>
         [JsonConstructor]
-        public GetTransactionResponseProfile(GetTransactionResponseProfileWallet wallet, Option<string?> id = default)
+        public GetTransactionResponseUser(GetTransactionResponseUserWallet wallet, Option<string?> id = default)
         {
             Wallet = wallet;
             IdOption = id;
@@ -50,7 +50,7 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Wallet
         /// </summary>
         [JsonPropertyName("wallet")]
-        public GetTransactionResponseProfileWallet Wallet { get; set; }
+        public GetTransactionResponseUserWallet Wallet { get; set; }
 
         /// <summary>
         /// Used to track the state of Id
@@ -72,7 +72,7 @@ namespace BeamPlayerClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class GetTransactionResponseProfile {\n");
+            sb.Append("class GetTransactionResponseUser {\n");
             sb.Append("  Wallet: ").Append(Wallet).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("}\n");
@@ -91,19 +91,19 @@ namespace BeamPlayerClient.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="GetTransactionResponseProfile" />
+    /// A Json converter for type <see cref="GetTransactionResponseUser" />
     /// </summary>
-    public class GetTransactionResponseProfileJsonConverter : JsonConverter<GetTransactionResponseProfile>
+    public class GetTransactionResponseUserJsonConverter : JsonConverter<GetTransactionResponseUser>
     {
         /// <summary>
-        /// Deserializes json to <see cref="GetTransactionResponseProfile" />
+        /// Deserializes json to <see cref="GetTransactionResponseUser" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override GetTransactionResponseProfile Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override GetTransactionResponseUser Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -112,7 +112,7 @@ namespace BeamPlayerClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<GetTransactionResponseProfileWallet?> wallet = default;
+            Option<GetTransactionResponseUserWallet?> wallet = default;
             Option<string?> id = default;
 
             while (utf8JsonReader.Read())
@@ -132,7 +132,7 @@ namespace BeamPlayerClient.Model
                     {
                         case "wallet":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                wallet = new Option<GetTransactionResponseProfileWallet?>(JsonSerializer.Deserialize<GetTransactionResponseProfileWallet>(ref utf8JsonReader, jsonSerializerOptions)!);
+                                wallet = new Option<GetTransactionResponseUserWallet?>(JsonSerializer.Deserialize<GetTransactionResponseUserWallet>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "id":
                             id = new Option<string?>(utf8JsonReader.GetString());
@@ -144,46 +144,46 @@ namespace BeamPlayerClient.Model
             }
 
             if (!wallet.IsSet)
-                throw new ArgumentException("Property is required for class GetTransactionResponseProfile.", nameof(wallet));
+                throw new ArgumentException("Property is required for class GetTransactionResponseUser.", nameof(wallet));
 
             if (wallet.IsSet && wallet.Value == null)
-                throw new ArgumentNullException(nameof(wallet), "Property is not nullable for class GetTransactionResponseProfile.");
+                throw new ArgumentNullException(nameof(wallet), "Property is not nullable for class GetTransactionResponseUser.");
 
-            return new GetTransactionResponseProfile(wallet.Value!, id);
+            return new GetTransactionResponseUser(wallet.Value!, id);
         }
 
         /// <summary>
-        /// Serializes a <see cref="GetTransactionResponseProfile" />
+        /// Serializes a <see cref="GetTransactionResponseUser" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="getTransactionResponseProfile"></param>
+        /// <param name="getTransactionResponseUser"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, GetTransactionResponseProfile getTransactionResponseProfile, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, GetTransactionResponseUser getTransactionResponseUser, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(ref writer, getTransactionResponseProfile, jsonSerializerOptions);
+            WriteProperties(ref writer, getTransactionResponseUser, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="GetTransactionResponseProfile" />
+        /// Serializes the properties of <see cref="GetTransactionResponseUser" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="getTransactionResponseProfile"></param>
+        /// <param name="getTransactionResponseUser"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(ref Utf8JsonWriter writer, GetTransactionResponseProfile getTransactionResponseProfile, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(ref Utf8JsonWriter writer, GetTransactionResponseUser getTransactionResponseUser, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (getTransactionResponseProfile.Wallet == null)
-                throw new ArgumentNullException(nameof(getTransactionResponseProfile.Wallet), "Property is required for class GetTransactionResponseProfile.");
+            if (getTransactionResponseUser.Wallet == null)
+                throw new ArgumentNullException(nameof(getTransactionResponseUser.Wallet), "Property is required for class GetTransactionResponseUser.");
 
             writer.WritePropertyName("wallet");
-            JsonSerializer.Serialize(writer, getTransactionResponseProfile.Wallet, jsonSerializerOptions);
-            if (getTransactionResponseProfile.IdOption.IsSet)
-                if (getTransactionResponseProfile.IdOption.Value != null)
-                    writer.WriteString("id", getTransactionResponseProfile.Id);
+            JsonSerializer.Serialize(writer, getTransactionResponseUser.Wallet, jsonSerializerOptions);
+            if (getTransactionResponseUser.IdOption.IsSet)
+                if (getTransactionResponseUser.IdOption.Value != null)
+                    writer.WriteString("id", getTransactionResponseUser.Id);
                 else
                     writer.WriteNull("id");
         }

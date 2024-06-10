@@ -40,12 +40,13 @@ namespace BeamPlayerClient.Model
         /// <param name="tokenOut">tokenOut</param>
         /// <param name="chainId">chainId (default to 13337M)</param>
         /// <param name="operationId">operationId</param>
+        /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute)</param>
         /// <param name="optimistic">optimistic (default to false)</param>
         /// <param name="policyId">policyId</param>
         /// <param name="receiverEntityId">receiverEntityId</param>
         /// <param name="sponsor">sponsor (default to true)</param>
         [JsonConstructor]
-        public ConvertTokenRequestInput(string amountIn, string amountOut, string tokenIn, string tokenOut, Option<decimal?> chainId = default, Option<string?> operationId = default, Option<bool?> optimistic = default, Option<string?> policyId = default, Option<string?> receiverEntityId = default, Option<bool?> sponsor = default)
+        public ConvertTokenRequestInput(string amountIn, string amountOut, string tokenIn, string tokenOut, Option<decimal?> chainId = default, Option<string?> operationId = default, Option<OperationProcessingEnum?> operationProcessing = default, Option<bool?> optimistic = default, Option<string?> policyId = default, Option<string?> receiverEntityId = default, Option<bool?> sponsor = default)
         {
             AmountIn = amountIn;
             AmountOut = amountOut;
@@ -53,6 +54,7 @@ namespace BeamPlayerClient.Model
             TokenOut = tokenOut;
             ChainIdOption = chainId;
             OperationIdOption = operationId;
+            OperationProcessingOption = operationProcessing;
             OptimisticOption = optimistic;
             PolicyIdOption = policyId;
             ReceiverEntityIdOption = receiverEntityId;
@@ -61,6 +63,85 @@ namespace BeamPlayerClient.Model
         }
 
         partial void OnCreated();
+
+        /// <summary>
+        /// Defines OperationProcessing
+        /// </summary>
+        public enum OperationProcessingEnum
+        {
+            /// <summary>
+            /// Enum SignOnly for value: SignOnly
+            /// </summary>
+            SignOnly = 1,
+
+            /// <summary>
+            /// Enum Execute for value: Execute
+            /// </summary>
+            Execute = 2
+        }
+
+        /// <summary>
+        /// Returns a <see cref="OperationProcessingEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static OperationProcessingEnum OperationProcessingEnumFromString(string value)
+        {
+            if (value.Equals("SignOnly"))
+                return OperationProcessingEnum.SignOnly;
+
+            if (value.Equals("Execute"))
+                return OperationProcessingEnum.Execute;
+
+            throw new NotImplementedException($"Could not convert value to type OperationProcessingEnum: '{value}'");
+        }
+
+        /// <summary>
+        /// Returns a <see cref="OperationProcessingEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static OperationProcessingEnum? OperationProcessingEnumFromStringOrDefault(string value)
+        {
+            if (value.Equals("SignOnly"))
+                return OperationProcessingEnum.SignOnly;
+
+            if (value.Equals("Execute"))
+                return OperationProcessingEnum.Execute;
+
+            return null;
+        }
+
+        /// <summary>
+        /// Converts the <see cref="OperationProcessingEnum"/> to the json value
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static string OperationProcessingEnumToJsonValue(OperationProcessingEnum? value)
+        {
+            if (value == OperationProcessingEnum.SignOnly)
+                return "SignOnly";
+
+            if (value == OperationProcessingEnum.Execute)
+                return "Execute";
+
+            throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Used to track the state of OperationProcessing
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<OperationProcessingEnum?> OperationProcessingOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets OperationProcessing
+        /// </summary>
+        [JsonPropertyName("operationProcessing")]
+        public OperationProcessingEnum? OperationProcessing { get { return this.OperationProcessingOption; } set { this.OperationProcessingOption = new(value); } }
 
         /// <summary>
         /// Gets or Sets AmountIn
@@ -178,6 +259,7 @@ namespace BeamPlayerClient.Model
             sb.Append("  TokenOut: ").Append(TokenOut).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  OperationId: ").Append(OperationId).Append("\n");
+            sb.Append("  OperationProcessing: ").Append(OperationProcessing).Append("\n");
             sb.Append("  Optimistic: ").Append(Optimistic).Append("\n");
             sb.Append("  PolicyId: ").Append(PolicyId).Append("\n");
             sb.Append("  ReceiverEntityId: ").Append(ReceiverEntityId).Append("\n");
@@ -225,6 +307,7 @@ namespace BeamPlayerClient.Model
             Option<string?> tokenOut = default;
             Option<decimal?> chainId = default;
             Option<string?> operationId = default;
+            Option<ConvertTokenRequestInput.OperationProcessingEnum?> operationProcessing = default;
             Option<bool?> optimistic = default;
             Option<string?> policyId = default;
             Option<string?> receiverEntityId = default;
@@ -263,6 +346,11 @@ namespace BeamPlayerClient.Model
                             break;
                         case "operationId":
                             operationId = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "operationProcessing":
+                            string? operationProcessingRawValue = utf8JsonReader.GetString();
+                            if (operationProcessingRawValue != null)
+                                operationProcessing = new Option<ConvertTokenRequestInput.OperationProcessingEnum?>(ConvertTokenRequestInput.OperationProcessingEnumFromStringOrDefault(operationProcessingRawValue));
                             break;
                         case "optimistic":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
@@ -311,6 +399,9 @@ namespace BeamPlayerClient.Model
             if (chainId.IsSet && chainId.Value == null)
                 throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class ConvertTokenRequestInput.");
 
+            if (operationProcessing.IsSet && operationProcessing.Value == null)
+                throw new ArgumentNullException(nameof(operationProcessing), "Property is not nullable for class ConvertTokenRequestInput.");
+
             if (optimistic.IsSet && optimistic.Value == null)
                 throw new ArgumentNullException(nameof(optimistic), "Property is not nullable for class ConvertTokenRequestInput.");
 
@@ -320,7 +411,7 @@ namespace BeamPlayerClient.Model
             if (sponsor.IsSet && sponsor.Value == null)
                 throw new ArgumentNullException(nameof(sponsor), "Property is not nullable for class ConvertTokenRequestInput.");
 
-            return new ConvertTokenRequestInput(amountIn.Value!, amountOut.Value!, tokenIn.Value!, tokenOut.Value!, chainId, operationId, optimistic, policyId, receiverEntityId, sponsor);
+            return new ConvertTokenRequestInput(amountIn.Value!, amountOut.Value!, tokenIn.Value!, tokenOut.Value!, chainId, operationId, operationProcessing, optimistic, policyId, receiverEntityId, sponsor);
         }
 
         /// <summary>
@@ -379,6 +470,8 @@ namespace BeamPlayerClient.Model
                 else
                     writer.WriteNull("operationId");
 
+            var operationProcessingRawValue = ConvertTokenRequestInput.OperationProcessingEnumToJsonValue(convertTokenRequestInput.OperationProcessingOption.Value!.Value);
+            writer.WriteString("operationProcessing", operationProcessingRawValue);
             if (convertTokenRequestInput.OptimisticOption.IsSet)
                 writer.WriteBoolean("optimistic", convertTokenRequestInput.OptimisticOption.Value!.Value);
 

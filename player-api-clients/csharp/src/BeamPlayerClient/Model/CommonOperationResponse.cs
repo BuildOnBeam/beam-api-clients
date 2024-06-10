@@ -38,18 +38,20 @@ namespace BeamPlayerClient.Model
         /// <param name="createdAt">createdAt</param>
         /// <param name="gameId">gameId</param>
         /// <param name="id">id</param>
+        /// <param name="processing">processing</param>
         /// <param name="status">status</param>
         /// <param name="transactions">transactions</param>
         /// <param name="url">url</param>
         /// <param name="userId">userId</param>
         /// <param name="updatedAt">updatedAt</param>
         [JsonConstructor]
-        public CommonOperationResponse(int chainId, DateTime createdAt, string gameId, string id, StatusEnum status, List<CommonOperationResponseTransactionsInner> transactions, string url, string userId, DateTime? updatedAt = default)
+        public CommonOperationResponse(int chainId, DateTime createdAt, string gameId, string id, ProcessingEnum processing, StatusEnum status, List<CommonOperationResponseTransactionsInner> transactions, string url, string userId, DateTime? updatedAt = default)
         {
             ChainId = chainId;
             CreatedAt = createdAt;
             GameId = gameId;
             Id = id;
+            Processing = processing;
             Status = status;
             Transactions = transactions;
             Url = url;
@@ -61,29 +63,106 @@ namespace BeamPlayerClient.Model
         partial void OnCreated();
 
         /// <summary>
+        /// Defines Processing
+        /// </summary>
+        public enum ProcessingEnum
+        {
+            /// <summary>
+            /// Enum SignOnly for value: SignOnly
+            /// </summary>
+            SignOnly = 1,
+
+            /// <summary>
+            /// Enum Execute for value: Execute
+            /// </summary>
+            Execute = 2
+        }
+
+        /// <summary>
+        /// Returns a <see cref="ProcessingEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static ProcessingEnum ProcessingEnumFromString(string value)
+        {
+            if (value.Equals("SignOnly"))
+                return ProcessingEnum.SignOnly;
+
+            if (value.Equals("Execute"))
+                return ProcessingEnum.Execute;
+
+            throw new NotImplementedException($"Could not convert value to type ProcessingEnum: '{value}'");
+        }
+
+        /// <summary>
+        /// Returns a <see cref="ProcessingEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static ProcessingEnum? ProcessingEnumFromStringOrDefault(string value)
+        {
+            if (value.Equals("SignOnly"))
+                return ProcessingEnum.SignOnly;
+
+            if (value.Equals("Execute"))
+                return ProcessingEnum.Execute;
+
+            return null;
+        }
+
+        /// <summary>
+        /// Converts the <see cref="ProcessingEnum"/> to the json value
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static string ProcessingEnumToJsonValue(ProcessingEnum value)
+        {
+            if (value == ProcessingEnum.SignOnly)
+                return "SignOnly";
+
+            if (value == ProcessingEnum.Execute)
+                return "Execute";
+
+            throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Gets or Sets Processing
+        /// </summary>
+        [JsonPropertyName("processing")]
+        public ProcessingEnum Processing { get; set; }
+
+        /// <summary>
         /// Defines Status
         /// </summary>
         public enum StatusEnum
         {
             /// <summary>
+            /// Enum Signed for value: Signed
+            /// </summary>
+            Signed = 1,
+
+            /// <summary>
             /// Enum Pending for value: Pending
             /// </summary>
-            Pending = 1,
+            Pending = 2,
 
             /// <summary>
             /// Enum Rejected for value: Rejected
             /// </summary>
-            Rejected = 2,
+            Rejected = 3,
 
             /// <summary>
             /// Enum Executed for value: Executed
             /// </summary>
-            Executed = 3,
+            Executed = 4,
 
             /// <summary>
             /// Enum Error for value: Error
             /// </summary>
-            Error = 4
+            Error = 5
         }
 
         /// <summary>
@@ -94,6 +173,9 @@ namespace BeamPlayerClient.Model
         /// <exception cref="NotImplementedException"></exception>
         public static StatusEnum StatusEnumFromString(string value)
         {
+            if (value.Equals("Signed"))
+                return StatusEnum.Signed;
+
             if (value.Equals("Pending"))
                 return StatusEnum.Pending;
 
@@ -116,6 +198,9 @@ namespace BeamPlayerClient.Model
         /// <returns></returns>
         public static StatusEnum? StatusEnumFromStringOrDefault(string value)
         {
+            if (value.Equals("Signed"))
+                return StatusEnum.Signed;
+
             if (value.Equals("Pending"))
                 return StatusEnum.Pending;
 
@@ -139,6 +224,9 @@ namespace BeamPlayerClient.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string StatusEnumToJsonValue(StatusEnum value)
         {
+            if (value == StatusEnum.Signed)
+                return "Signed";
+
             if (value == StatusEnum.Pending)
                 return "Pending";
 
@@ -220,6 +308,7 @@ namespace BeamPlayerClient.Model
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  GameId: ").Append(GameId).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
+            sb.Append("  Processing: ").Append(Processing).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  Transactions: ").Append(Transactions).Append("\n");
             sb.Append("  Url: ").Append(Url).Append("\n");
@@ -276,6 +365,7 @@ namespace BeamPlayerClient.Model
             Option<DateTime?> createdAt = default;
             Option<string?> gameId = default;
             Option<string?> id = default;
+            Option<CommonOperationResponse.ProcessingEnum?> processing = default;
             Option<CommonOperationResponse.StatusEnum?> status = default;
             Option<List<CommonOperationResponseTransactionsInner>?> transactions = default;
             Option<string?> url = default;
@@ -310,6 +400,11 @@ namespace BeamPlayerClient.Model
                             break;
                         case "id":
                             id = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
+                        case "processing":
+                            string? processingRawValue = utf8JsonReader.GetString();
+                            if (processingRawValue != null)
+                                processing = new Option<CommonOperationResponse.ProcessingEnum?>(CommonOperationResponse.ProcessingEnumFromStringOrDefault(processingRawValue));
                             break;
                         case "status":
                             string? statusRawValue = utf8JsonReader.GetString();
@@ -348,6 +443,9 @@ namespace BeamPlayerClient.Model
             if (!id.IsSet)
                 throw new ArgumentException("Property is required for class CommonOperationResponse.", nameof(id));
 
+            if (!processing.IsSet)
+                throw new ArgumentException("Property is required for class CommonOperationResponse.", nameof(processing));
+
             if (!status.IsSet)
                 throw new ArgumentException("Property is required for class CommonOperationResponse.", nameof(status));
 
@@ -375,6 +473,9 @@ namespace BeamPlayerClient.Model
             if (id.IsSet && id.Value == null)
                 throw new ArgumentNullException(nameof(id), "Property is not nullable for class CommonOperationResponse.");
 
+            if (processing.IsSet && processing.Value == null)
+                throw new ArgumentNullException(nameof(processing), "Property is not nullable for class CommonOperationResponse.");
+
             if (status.IsSet && status.Value == null)
                 throw new ArgumentNullException(nameof(status), "Property is not nullable for class CommonOperationResponse.");
 
@@ -387,7 +488,7 @@ namespace BeamPlayerClient.Model
             if (userId.IsSet && userId.Value == null)
                 throw new ArgumentNullException(nameof(userId), "Property is not nullable for class CommonOperationResponse.");
 
-            return new CommonOperationResponse(chainId.Value!.Value!, createdAt.Value!.Value!, gameId.Value!, id.Value!, status.Value!.Value!, transactions.Value!, url.Value!, userId.Value!, updatedAt.Value!);
+            return new CommonOperationResponse(chainId.Value!.Value!, createdAt.Value!.Value!, gameId.Value!, id.Value!, processing.Value!.Value!, status.Value!.Value!, transactions.Value!, url.Value!, userId.Value!, updatedAt.Value!);
         }
 
         /// <summary>
@@ -437,6 +538,8 @@ namespace BeamPlayerClient.Model
 
             writer.WriteString("id", commonOperationResponse.Id);
 
+            var processingRawValue = CommonOperationResponse.ProcessingEnumToJsonValue(commonOperationResponse.Processing);
+            writer.WriteString("processing", processingRawValue);
             var statusRawValue = CommonOperationResponse.StatusEnumToJsonValue(commonOperationResponse.Status);
             writer.WriteString("status", statusRawValue);
             writer.WritePropertyName("transactions");

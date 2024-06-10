@@ -120,6 +120,16 @@ namespace BeamPlayerClient.Client
                 return boolean
                     ? "true"
                     : "false";
+            if (obj is AcceptAssetOfferRequestInput.OperationProcessingEnum acceptAssetOfferRequestInputOperationProcessingEnum)
+                return AcceptAssetOfferRequestInput.OperationProcessingEnumToJsonValue(acceptAssetOfferRequestInputOperationProcessingEnum);
+            if (obj is BuyAssetRequestInput.OperationProcessingEnum buyAssetRequestInputOperationProcessingEnum)
+                return BuyAssetRequestInput.OperationProcessingEnumToJsonValue(buyAssetRequestInputOperationProcessingEnum);
+            if (obj is CancelAssetListingRequestInput.OperationProcessingEnum cancelAssetListingRequestInputOperationProcessingEnum)
+                return CancelAssetListingRequestInput.OperationProcessingEnumToJsonValue(cancelAssetListingRequestInputOperationProcessingEnum);
+            if (obj is CancelAssetOfferRequestInput.OperationProcessingEnum cancelAssetOfferRequestInputOperationProcessingEnum)
+                return CancelAssetOfferRequestInput.OperationProcessingEnumToJsonValue(cancelAssetOfferRequestInputOperationProcessingEnum);
+            if (obj is CommonOperationResponse.ProcessingEnum commonOperationResponseProcessingEnum)
+                return CommonOperationResponse.ProcessingEnumToJsonValue(commonOperationResponseProcessingEnum);
             if (obj is CommonOperationResponse.StatusEnum commonOperationResponseStatusEnum)
                 return CommonOperationResponse.StatusEnumToJsonValue(commonOperationResponseStatusEnum);
             if (obj is CommonOperationResponseTransactionsInner.StatusEnum commonOperationResponseTransactionsInnerStatusEnum)
@@ -128,8 +138,16 @@ namespace BeamPlayerClient.Client
                 return CommonOperationResponseTransactionsInner.TypeEnumToJsonValue(commonOperationResponseTransactionsInnerTypeEnum);
             if (obj is ConfirmOperationRequest.StatusEnum confirmOperationRequestStatusEnum)
                 return ConfirmOperationRequest.StatusEnumToJsonValue(confirmOperationRequestStatusEnum);
+            if (obj is ConvertTokenRequestInput.OperationProcessingEnum convertTokenRequestInputOperationProcessingEnum)
+                return ConvertTokenRequestInput.OperationProcessingEnumToJsonValue(convertTokenRequestInputOperationProcessingEnum);
             if (obj is CreateAssetOfferRequestInput.CurrencyEnum createAssetOfferRequestInputCurrencyEnum)
                 return CreateAssetOfferRequestInput.CurrencyEnumToJsonValue(createAssetOfferRequestInputCurrencyEnum);
+            if (obj is CreateAssetOfferRequestInput.OperationProcessingEnum createAssetOfferRequestInputOperationProcessingEnum)
+                return CreateAssetOfferRequestInput.OperationProcessingEnumToJsonValue(createAssetOfferRequestInputOperationProcessingEnum);
+            if (obj is CreateOperationRequestInput.OperationProcessingEnum createOperationRequestInputOperationProcessingEnum)
+                return CreateOperationRequestInput.OperationProcessingEnumToJsonValue(createOperationRequestInputOperationProcessingEnum);
+            if (obj is CreateTransactionRequestInput.OperationProcessingEnum createTransactionRequestInputOperationProcessingEnum)
+                return CreateTransactionRequestInput.OperationProcessingEnumToJsonValue(createTransactionRequestInputOperationProcessingEnum);
             if (obj is GenerateSessionRequestResponse.StatusEnum generateSessionRequestResponseStatusEnum)
                 return GenerateSessionRequestResponse.StatusEnumToJsonValue(generateSessionRequestResponseStatusEnum);
             if (obj is GetAssetListingsResponseDataInner.StatusEnum getAssetListingsResponseDataInnerStatusEnum)
@@ -162,6 +180,14 @@ namespace BeamPlayerClient.Client
                 return SellAssetRequestInput.SellTypeEnumToJsonValue(sellAssetRequestInputSellTypeEnum);
             if (obj is SellAssetRequestInput.CurrencyEnum sellAssetRequestInputCurrencyEnum)
                 return SellAssetRequestInput.CurrencyEnumToJsonValue(sellAssetRequestInputCurrencyEnum);
+            if (obj is SellAssetRequestInput.OperationProcessingEnum sellAssetRequestInputOperationProcessingEnum)
+                return SellAssetRequestInput.OperationProcessingEnumToJsonValue(sellAssetRequestInputOperationProcessingEnum);
+            if (obj is TransferAssetRequestInput.OperationProcessingEnum transferAssetRequestInputOperationProcessingEnum)
+                return TransferAssetRequestInput.OperationProcessingEnumToJsonValue(transferAssetRequestInputOperationProcessingEnum);
+            if (obj is TransferNativeTokenRequestInput.OperationProcessingEnum transferNativeTokenRequestInputOperationProcessingEnum)
+                return TransferNativeTokenRequestInput.OperationProcessingEnumToJsonValue(transferNativeTokenRequestInputOperationProcessingEnum);
+            if (obj is TransferTokenRequestInput.OperationProcessingEnum transferTokenRequestInputOperationProcessingEnum)
+                return TransferTokenRequestInput.OperationProcessingEnumToJsonValue(transferTokenRequestInputOperationProcessingEnum);
             if (obj is ICollection collection)
             {
                 List<string?> entries = new();

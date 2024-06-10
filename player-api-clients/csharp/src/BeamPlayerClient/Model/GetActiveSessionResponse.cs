@@ -34,23 +34,29 @@ namespace BeamPlayerClient.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="GetActiveSessionResponse" /> class.
         /// </summary>
+        /// <param name="endTime">endTime</param>
         /// <param name="id">id</param>
         /// <param name="isActive">isActive</param>
         /// <param name="sessionAddress">sessionAddress</param>
-        /// <param name="endTime">endTime</param>
         /// <param name="startTime">startTime</param>
         [JsonConstructor]
-        public GetActiveSessionResponse(string id, bool isActive, string sessionAddress, Option<string?> endTime = default, Option<string?> startTime = default)
+        public GetActiveSessionResponse(string endTime, string id, bool isActive, string sessionAddress, string startTime)
         {
+            EndTime = endTime;
             Id = id;
             IsActive = isActive;
             SessionAddress = sessionAddress;
-            EndTimeOption = endTime;
-            StartTimeOption = startTime;
+            StartTime = startTime;
             OnCreated();
         }
 
         partial void OnCreated();
+
+        /// <summary>
+        /// Gets or Sets EndTime
+        /// </summary>
+        [JsonPropertyName("endTime")]
+        public string EndTime { get; set; }
 
         /// <summary>
         /// Gets or Sets Id
@@ -71,30 +77,10 @@ namespace BeamPlayerClient.Model
         public string SessionAddress { get; set; }
 
         /// <summary>
-        /// Used to track the state of EndTime
-        /// </summary>
-        [JsonIgnore]
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> EndTimeOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets EndTime
-        /// </summary>
-        [JsonPropertyName("endTime")]
-        public string? EndTime { get { return this. EndTimeOption; } set { this.EndTimeOption = new(value); } }
-
-        /// <summary>
-        /// Used to track the state of StartTime
-        /// </summary>
-        [JsonIgnore]
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> StartTimeOption { get; private set; }
-
-        /// <summary>
         /// Gets or Sets StartTime
         /// </summary>
         [JsonPropertyName("startTime")]
-        public string? StartTime { get { return this. StartTimeOption; } set { this.StartTimeOption = new(value); } }
+        public string StartTime { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -104,10 +90,10 @@ namespace BeamPlayerClient.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class GetActiveSessionResponse {\n");
+            sb.Append("  EndTime: ").Append(EndTime).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  IsActive: ").Append(IsActive).Append("\n");
             sb.Append("  SessionAddress: ").Append(SessionAddress).Append("\n");
-            sb.Append("  EndTime: ").Append(EndTime).Append("\n");
             sb.Append("  StartTime: ").Append(StartTime).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -146,10 +132,10 @@ namespace BeamPlayerClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
+            Option<string?> endTime = default;
             Option<string?> id = default;
             Option<bool?> isActive = default;
             Option<string?> sessionAddress = default;
-            Option<string?> endTime = default;
             Option<string?> startTime = default;
 
             while (utf8JsonReader.Read())
@@ -167,6 +153,9 @@ namespace BeamPlayerClient.Model
 
                     switch (localVarJsonPropertyName)
                     {
+                        case "endTime":
+                            endTime = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
                         case "id":
                             id = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
@@ -177,17 +166,17 @@ namespace BeamPlayerClient.Model
                         case "sessionAddress":
                             sessionAddress = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "endTime":
-                            endTime = new Option<string?>(utf8JsonReader.GetString());
-                            break;
                         case "startTime":
-                            startTime = new Option<string?>(utf8JsonReader.GetString());
+                            startTime = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         default:
                             break;
                     }
                 }
             }
+
+            if (!endTime.IsSet)
+                throw new ArgumentException("Property is required for class GetActiveSessionResponse.", nameof(endTime));
 
             if (!id.IsSet)
                 throw new ArgumentException("Property is required for class GetActiveSessionResponse.", nameof(id));
@@ -198,6 +187,12 @@ namespace BeamPlayerClient.Model
             if (!sessionAddress.IsSet)
                 throw new ArgumentException("Property is required for class GetActiveSessionResponse.", nameof(sessionAddress));
 
+            if (!startTime.IsSet)
+                throw new ArgumentException("Property is required for class GetActiveSessionResponse.", nameof(startTime));
+
+            if (endTime.IsSet && endTime.Value == null)
+                throw new ArgumentNullException(nameof(endTime), "Property is not nullable for class GetActiveSessionResponse.");
+
             if (id.IsSet && id.Value == null)
                 throw new ArgumentNullException(nameof(id), "Property is not nullable for class GetActiveSessionResponse.");
 
@@ -207,7 +202,10 @@ namespace BeamPlayerClient.Model
             if (sessionAddress.IsSet && sessionAddress.Value == null)
                 throw new ArgumentNullException(nameof(sessionAddress), "Property is not nullable for class GetActiveSessionResponse.");
 
-            return new GetActiveSessionResponse(id.Value!, isActive.Value!.Value!, sessionAddress.Value!, endTime, startTime);
+            if (startTime.IsSet && startTime.Value == null)
+                throw new ArgumentNullException(nameof(startTime), "Property is not nullable for class GetActiveSessionResponse.");
+
+            return new GetActiveSessionResponse(endTime.Value!, id.Value!, isActive.Value!.Value!, sessionAddress.Value!, startTime.Value!);
         }
 
         /// <summary>
@@ -234,11 +232,19 @@ namespace BeamPlayerClient.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetActiveSessionResponse getActiveSessionResponse, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (getActiveSessionResponse.EndTime == null)
+                throw new ArgumentNullException(nameof(getActiveSessionResponse.EndTime), "Property is required for class GetActiveSessionResponse.");
+
             if (getActiveSessionResponse.Id == null)
                 throw new ArgumentNullException(nameof(getActiveSessionResponse.Id), "Property is required for class GetActiveSessionResponse.");
 
             if (getActiveSessionResponse.SessionAddress == null)
                 throw new ArgumentNullException(nameof(getActiveSessionResponse.SessionAddress), "Property is required for class GetActiveSessionResponse.");
+
+            if (getActiveSessionResponse.StartTime == null)
+                throw new ArgumentNullException(nameof(getActiveSessionResponse.StartTime), "Property is required for class GetActiveSessionResponse.");
+
+            writer.WriteString("endTime", getActiveSessionResponse.EndTime);
 
             writer.WriteString("id", getActiveSessionResponse.Id);
 
@@ -246,17 +252,7 @@ namespace BeamPlayerClient.Model
 
             writer.WriteString("sessionAddress", getActiveSessionResponse.SessionAddress);
 
-            if (getActiveSessionResponse.EndTimeOption.IsSet)
-                if (getActiveSessionResponse.EndTimeOption.Value != null)
-                    writer.WriteString("endTime", getActiveSessionResponse.EndTime);
-                else
-                    writer.WriteNull("endTime");
-
-            if (getActiveSessionResponse.StartTimeOption.IsSet)
-                if (getActiveSessionResponse.StartTimeOption.Value != null)
-                    writer.WriteString("startTime", getActiveSessionResponse.StartTime);
-                else
-                    writer.WriteNull("startTime");
+            writer.WriteString("startTime", getActiveSessionResponse.StartTime);
         }
     }
 }

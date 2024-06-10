@@ -43,11 +43,12 @@ namespace BeamPlayerClient.Model
         /// <param name="currency">currency (default to CurrencyEnum.BEAM)</param>
         /// <param name="endTime">Date time string with YYYY-MM-DDTHH:mm:ss.sssZ format or Unix timestamp in milliseconds</param>
         /// <param name="operationId">operationId</param>
+        /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute)</param>
         /// <param name="policyId">policyId</param>
         /// <param name="sponsor">sponsor (default to true)</param>
         /// <param name="startTime">Date time string with YYYY-MM-DDTHH:mm:ss.sssZ format or Unix timestamp in milliseconds</param>
         [JsonConstructor]
-        public SellAssetRequestInput(string assetAddress, string assetId, string price, decimal quantity, SellTypeEnum sellType, Option<decimal?> chainId = default, Option<CurrencyEnum?> currency = default, Option<string?> endTime = default, Option<string?> operationId = default, Option<string?> policyId = default, Option<bool?> sponsor = default, Option<string?> startTime = default)
+        public SellAssetRequestInput(string assetAddress, string assetId, string price, decimal quantity, SellTypeEnum sellType, Option<decimal?> chainId = default, Option<CurrencyEnum?> currency = default, Option<string?> endTime = default, Option<string?> operationId = default, Option<OperationProcessingEnum?> operationProcessing = default, Option<string?> policyId = default, Option<bool?> sponsor = default, Option<string?> startTime = default)
         {
             AssetAddress = assetAddress;
             AssetId = assetId;
@@ -58,6 +59,7 @@ namespace BeamPlayerClient.Model
             CurrencyOption = currency;
             EndTimeOption = endTime;
             OperationIdOption = operationId;
+            OperationProcessingOption = operationProcessing;
             PolicyIdOption = policyId;
             SponsorOption = sponsor;
             StartTimeOption = startTime;
@@ -302,6 +304,85 @@ namespace BeamPlayerClient.Model
         public CurrencyEnum? Currency { get { return this.CurrencyOption; } set { this.CurrencyOption = new(value); } }
 
         /// <summary>
+        /// Defines OperationProcessing
+        /// </summary>
+        public enum OperationProcessingEnum
+        {
+            /// <summary>
+            /// Enum SignOnly for value: SignOnly
+            /// </summary>
+            SignOnly = 1,
+
+            /// <summary>
+            /// Enum Execute for value: Execute
+            /// </summary>
+            Execute = 2
+        }
+
+        /// <summary>
+        /// Returns a <see cref="OperationProcessingEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static OperationProcessingEnum OperationProcessingEnumFromString(string value)
+        {
+            if (value.Equals("SignOnly"))
+                return OperationProcessingEnum.SignOnly;
+
+            if (value.Equals("Execute"))
+                return OperationProcessingEnum.Execute;
+
+            throw new NotImplementedException($"Could not convert value to type OperationProcessingEnum: '{value}'");
+        }
+
+        /// <summary>
+        /// Returns a <see cref="OperationProcessingEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static OperationProcessingEnum? OperationProcessingEnumFromStringOrDefault(string value)
+        {
+            if (value.Equals("SignOnly"))
+                return OperationProcessingEnum.SignOnly;
+
+            if (value.Equals("Execute"))
+                return OperationProcessingEnum.Execute;
+
+            return null;
+        }
+
+        /// <summary>
+        /// Converts the <see cref="OperationProcessingEnum"/> to the json value
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static string OperationProcessingEnumToJsonValue(OperationProcessingEnum? value)
+        {
+            if (value == OperationProcessingEnum.SignOnly)
+                return "SignOnly";
+
+            if (value == OperationProcessingEnum.Execute)
+                return "Execute";
+
+            throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Used to track the state of OperationProcessing
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<OperationProcessingEnum?> OperationProcessingOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets OperationProcessing
+        /// </summary>
+        [JsonPropertyName("operationProcessing")]
+        public OperationProcessingEnum? OperationProcessing { get { return this.OperationProcessingOption; } set { this.OperationProcessingOption = new(value); } }
+
+        /// <summary>
         /// Gets or Sets AssetAddress
         /// </summary>
         [JsonPropertyName("assetAddress")]
@@ -422,6 +503,7 @@ namespace BeamPlayerClient.Model
             sb.Append("  Currency: ").Append(Currency).Append("\n");
             sb.Append("  EndTime: ").Append(EndTime).Append("\n");
             sb.Append("  OperationId: ").Append(OperationId).Append("\n");
+            sb.Append("  OperationProcessing: ").Append(OperationProcessing).Append("\n");
             sb.Append("  PolicyId: ").Append(PolicyId).Append("\n");
             sb.Append("  Sponsor: ").Append(Sponsor).Append("\n");
             sb.Append("  StartTime: ").Append(StartTime).Append("\n");
@@ -471,6 +553,7 @@ namespace BeamPlayerClient.Model
             Option<SellAssetRequestInput.CurrencyEnum?> currency = default;
             Option<string?> endTime = default;
             Option<string?> operationId = default;
+            Option<SellAssetRequestInput.OperationProcessingEnum?> operationProcessing = default;
             Option<string?> policyId = default;
             Option<bool?> sponsor = default;
             Option<string?> startTime = default;
@@ -522,6 +605,11 @@ namespace BeamPlayerClient.Model
                             break;
                         case "operationId":
                             operationId = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "operationProcessing":
+                            string? operationProcessingRawValue = utf8JsonReader.GetString();
+                            if (operationProcessingRawValue != null)
+                                operationProcessing = new Option<SellAssetRequestInput.OperationProcessingEnum?>(SellAssetRequestInput.OperationProcessingEnumFromStringOrDefault(operationProcessingRawValue));
                             break;
                         case "policyId":
                             policyId = new Option<string?>(utf8JsonReader.GetString());
@@ -575,10 +663,13 @@ namespace BeamPlayerClient.Model
             if (currency.IsSet && currency.Value == null)
                 throw new ArgumentNullException(nameof(currency), "Property is not nullable for class SellAssetRequestInput.");
 
+            if (operationProcessing.IsSet && operationProcessing.Value == null)
+                throw new ArgumentNullException(nameof(operationProcessing), "Property is not nullable for class SellAssetRequestInput.");
+
             if (sponsor.IsSet && sponsor.Value == null)
                 throw new ArgumentNullException(nameof(sponsor), "Property is not nullable for class SellAssetRequestInput.");
 
-            return new SellAssetRequestInput(assetAddress.Value!, assetId.Value!, price.Value!, quantity.Value!.Value!, sellType.Value!.Value!, chainId, currency, endTime, operationId, policyId, sponsor, startTime);
+            return new SellAssetRequestInput(assetAddress.Value!, assetId.Value!, price.Value!, quantity.Value!.Value!, sellType.Value!.Value!, chainId, currency, endTime, operationId, operationProcessing, policyId, sponsor, startTime);
         }
 
         /// <summary>
@@ -641,6 +732,8 @@ namespace BeamPlayerClient.Model
                 else
                     writer.WriteNull("operationId");
 
+            var operationProcessingRawValue = SellAssetRequestInput.OperationProcessingEnumToJsonValue(sellAssetRequestInput.OperationProcessingOption.Value!.Value);
+            writer.WriteString("operationProcessing", operationProcessingRawValue);
             if (sellAssetRequestInput.PolicyIdOption.IsSet)
                 if (sellAssetRequestInput.PolicyIdOption.Value != null)
                     writer.WriteString("policyId", sellAssetRequestInput.PolicyId);

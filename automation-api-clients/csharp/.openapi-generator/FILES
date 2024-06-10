@@ -43,8 +43,6 @@ src/BeamAutomationClient/Model/AddContractRequestInput.cs
 src/BeamAutomationClient/Model/AddContractRequestInputAbiInner.cs
 src/BeamAutomationClient/Model/AddContractRequestInputAbiInnerInputsInner.cs
 src/BeamAutomationClient/Model/AddContractResponse.cs
-src/BeamAutomationClient/Model/AddPolicyRequestInput.cs
-src/BeamAutomationClient/Model/AddPolicyResponse.cs
 src/BeamAutomationClient/Model/BuyAssetRequestInputV2.cs
 src/BeamAutomationClient/Model/BuyAssetResponseV2.cs
 src/BeamAutomationClient/Model/CancelAssetListingRequestInputV2.cs
@@ -54,6 +52,11 @@ src/BeamAutomationClient/Model/CancelOfferResponseV2.cs
 src/BeamAutomationClient/Model/Check200Response.cs
 src/BeamAutomationClient/Model/Check200ResponseInfoValue.cs
 src/BeamAutomationClient/Model/Check503Response.cs
+src/BeamAutomationClient/Model/CommonAddPolicyRequestInput.cs
+src/BeamAutomationClient/Model/CommonAddPolicyResponse.cs
+src/BeamAutomationClient/Model/CommonGetPoliciesResponse.cs
+src/BeamAutomationClient/Model/CommonGetPoliciesResponseDataInner.cs
+src/BeamAutomationClient/Model/CommonRemovePolicyResponse.cs
 src/BeamAutomationClient/Model/ConvertTokenRequestInput.cs
 src/BeamAutomationClient/Model/ConvertTokenResponse.cs
 src/BeamAutomationClient/Model/CreateAssetOfferRequestInputV2.cs
@@ -107,8 +110,6 @@ src/BeamAutomationClient/Model/GetGameResponseDevelopersInnerDeveloper.cs
 src/BeamAutomationClient/Model/GetGameResponsePoliciesInner.cs
 src/BeamAutomationClient/Model/GetGasUsageResponse.cs
 src/BeamAutomationClient/Model/GetListedAssetsBodyInputV2.cs
-src/BeamAutomationClient/Model/GetPoliciesResponse.cs
-src/BeamAutomationClient/Model/GetPoliciesResponseDataInner.cs
 src/BeamAutomationClient/Model/GetPolicyUsageResponse.cs
 src/BeamAutomationClient/Model/GetProfileCurrenciesResponseV2.cs
 src/BeamAutomationClient/Model/GetProfileCurrenciesResponseV2DataInner.cs
@@ -131,7 +132,6 @@ src/BeamAutomationClient/Model/GetWebhooksForGameResponseWebhooksInner.cs
 src/BeamAutomationClient/Model/RegenerateGameApiKeysResponse.cs
 src/BeamAutomationClient/Model/RegenerateGameApiKeysResponseApiKeysInner.cs
 src/BeamAutomationClient/Model/RemoveContractResponse.cs
-src/BeamAutomationClient/Model/RemovePolicyResponse.cs
 src/BeamAutomationClient/Model/SellAssetRequestInputV2.cs
 src/BeamAutomationClient/Model/SellAssetResponseV2.cs
 src/BeamAutomationClient/Model/TradeTokensRequestInput.cs

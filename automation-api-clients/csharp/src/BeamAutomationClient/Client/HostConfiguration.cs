@@ -47,8 +47,6 @@ namespace BeamAutomationClient.Client
             _jsonOptions.Converters.Add(new AddContractRequestInputAbiInnerJsonConverter());
             _jsonOptions.Converters.Add(new AddContractRequestInputAbiInnerInputsInnerJsonConverter());
             _jsonOptions.Converters.Add(new AddContractResponseJsonConverter());
-            _jsonOptions.Converters.Add(new AddPolicyRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new AddPolicyResponseJsonConverter());
             _jsonOptions.Converters.Add(new BuyAssetRequestInputV2JsonConverter());
             _jsonOptions.Converters.Add(new BuyAssetResponseV2JsonConverter());
             _jsonOptions.Converters.Add(new CancelAssetListingRequestInputV2JsonConverter());
@@ -58,6 +56,11 @@ namespace BeamAutomationClient.Client
             _jsonOptions.Converters.Add(new Check200ResponseJsonConverter());
             _jsonOptions.Converters.Add(new Check200ResponseInfoValueJsonConverter());
             _jsonOptions.Converters.Add(new Check503ResponseJsonConverter());
+            _jsonOptions.Converters.Add(new CommonAddPolicyRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new CommonAddPolicyResponseJsonConverter());
+            _jsonOptions.Converters.Add(new CommonGetPoliciesResponseJsonConverter());
+            _jsonOptions.Converters.Add(new CommonGetPoliciesResponseDataInnerJsonConverter());
+            _jsonOptions.Converters.Add(new CommonRemovePolicyResponseJsonConverter());
             _jsonOptions.Converters.Add(new ConvertTokenRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new ConvertTokenResponseJsonConverter());
             _jsonOptions.Converters.Add(new CreateAssetOfferRequestInputV2JsonConverter());
@@ -111,8 +114,6 @@ namespace BeamAutomationClient.Client
             _jsonOptions.Converters.Add(new GetGameResponsePoliciesInnerJsonConverter());
             _jsonOptions.Converters.Add(new GetGasUsageResponseJsonConverter());
             _jsonOptions.Converters.Add(new GetListedAssetsBodyInputV2JsonConverter());
-            _jsonOptions.Converters.Add(new GetPoliciesResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetPoliciesResponseDataInnerJsonConverter());
             _jsonOptions.Converters.Add(new GetPolicyUsageResponseJsonConverter());
             _jsonOptions.Converters.Add(new GetProfileCurrenciesResponseV2JsonConverter());
             _jsonOptions.Converters.Add(new GetProfileCurrenciesResponseV2DataInnerJsonConverter());
@@ -135,7 +136,6 @@ namespace BeamAutomationClient.Client
             _jsonOptions.Converters.Add(new RegenerateGameApiKeysResponseJsonConverter());
             _jsonOptions.Converters.Add(new RegenerateGameApiKeysResponseApiKeysInnerJsonConverter());
             _jsonOptions.Converters.Add(new RemoveContractResponseJsonConverter());
-            _jsonOptions.Converters.Add(new RemovePolicyResponseJsonConverter());
             _jsonOptions.Converters.Add(new SellAssetRequestInputV2JsonConverter());
             _jsonOptions.Converters.Add(new SellAssetResponseV2JsonConverter());
             _jsonOptions.Converters.Add(new TradeTokensRequestInputJsonConverter());
