@@ -1,17 +1,22 @@
-# Beam for node
-The Beam client for the node.js ecosystem provides a type-safe interface for consuming the Beam API. Please note that this client is not meant to be used in client side javascript, as following these instructions in a client-side environment would expose your API key to all users.
+# Beam Automation API
 
-## Connecting with Beam
-In order to get started with Beam, you will need an API key. The API key for your game will be provided by your partner at Merit Circle.
+The Beam Automation API request client is meant to be implemented in **server side environments**. It allows you to create (managed) account abstractions and manage assets for said accounts accordingly, all authorized through an API key. 
 
-## Quick Start
-By importing the class and passing your API key while creating a new class instance, you will have have access to all requests.
+## User accounts and assets
 
+If you're looking to implement Beam for managing **user assets**, for example: to create accounts and drop assets (NFTs) that are earned by your users, please refer to the [Beam Player API](https://docs.onbeam.com/service/introduction-player-api).
+
+If you're looking to get started with the Beam implementation for your users in an client side environment (eg; a web application or a Unity-based game), please refer to the [Beam Player API implementation](https://docs.onbeam.com/service/implementation-player-api) documentation.
+
+
+## Getting started
+
+In order to get started with the Automation API request client, we highly recommend you to read [our documentation](https://docs.onbeam.com/service/introduction-automation-api). If you can't wait to get your hands dirty, here's an easy-going snippet that should get you going. 
 
 ```typescript
-import { Beam } from '@onbeam/node'
+import { Beam } from '@onbeam/automation-api-client'
 
-const beam = new Beam('your-api-key');
+const beam = new Beam('your-secret-api-key');
 
-const game = await beam.games.getGame();
+const game = await beam.operations.getGame('your-game-id');
 ```
