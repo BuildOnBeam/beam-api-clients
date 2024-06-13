@@ -34,36 +34,29 @@ namespace BeamPlayerClient.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="GetTransactionResponseUser" /> class.
         /// </summary>
+        /// <param name="entities">entities</param>
         /// <param name="wallet">wallet</param>
-        /// <param name="id">id</param>
         [JsonConstructor]
-        public GetTransactionResponseUser(GetTransactionResponseUserWallet wallet, Option<string?> id = default)
+        public GetTransactionResponseUser(List<GetTransactionResponseUserEntitiesInner> entities, GetTransactionResponseUserWallet wallet)
         {
+            Entities = entities;
             Wallet = wallet;
-            IdOption = id;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
+        /// Gets or Sets Entities
+        /// </summary>
+        [JsonPropertyName("entities")]
+        public List<GetTransactionResponseUserEntitiesInner> Entities { get; set; }
+
+        /// <summary>
         /// Gets or Sets Wallet
         /// </summary>
         [JsonPropertyName("wallet")]
         public GetTransactionResponseUserWallet Wallet { get; set; }
-
-        /// <summary>
-        /// Used to track the state of Id
-        /// </summary>
-        [JsonIgnore]
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> IdOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets Id
-        /// </summary>
-        [JsonPropertyName("id")]
-        public string? Id { get { return this. IdOption; } set { this.IdOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -73,8 +66,8 @@ namespace BeamPlayerClient.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class GetTransactionResponseUser {\n");
+            sb.Append("  Entities: ").Append(Entities).Append("\n");
             sb.Append("  Wallet: ").Append(Wallet).Append("\n");
-            sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -112,8 +105,8 @@ namespace BeamPlayerClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
+            Option<List<GetTransactionResponseUserEntitiesInner>?> entities = default;
             Option<GetTransactionResponseUserWallet?> wallet = default;
-            Option<string?> id = default;
 
             while (utf8JsonReader.Read())
             {
@@ -130,12 +123,13 @@ namespace BeamPlayerClient.Model
 
                     switch (localVarJsonPropertyName)
                     {
+                        case "entities":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                entities = new Option<List<GetTransactionResponseUserEntitiesInner>?>(JsonSerializer.Deserialize<List<GetTransactionResponseUserEntitiesInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
                         case "wallet":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 wallet = new Option<GetTransactionResponseUserWallet?>(JsonSerializer.Deserialize<GetTransactionResponseUserWallet>(ref utf8JsonReader, jsonSerializerOptions)!);
-                            break;
-                        case "id":
-                            id = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -143,13 +137,19 @@ namespace BeamPlayerClient.Model
                 }
             }
 
+            if (!entities.IsSet)
+                throw new ArgumentException("Property is required for class GetTransactionResponseUser.", nameof(entities));
+
             if (!wallet.IsSet)
                 throw new ArgumentException("Property is required for class GetTransactionResponseUser.", nameof(wallet));
+
+            if (entities.IsSet && entities.Value == null)
+                throw new ArgumentNullException(nameof(entities), "Property is not nullable for class GetTransactionResponseUser.");
 
             if (wallet.IsSet && wallet.Value == null)
                 throw new ArgumentNullException(nameof(wallet), "Property is not nullable for class GetTransactionResponseUser.");
 
-            return new GetTransactionResponseUser(wallet.Value!, id);
+            return new GetTransactionResponseUser(entities.Value!, wallet.Value!);
         }
 
         /// <summary>
@@ -176,16 +176,16 @@ namespace BeamPlayerClient.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetTransactionResponseUser getTransactionResponseUser, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (getTransactionResponseUser.Entities == null)
+                throw new ArgumentNullException(nameof(getTransactionResponseUser.Entities), "Property is required for class GetTransactionResponseUser.");
+
             if (getTransactionResponseUser.Wallet == null)
                 throw new ArgumentNullException(nameof(getTransactionResponseUser.Wallet), "Property is required for class GetTransactionResponseUser.");
 
+            writer.WritePropertyName("entities");
+            JsonSerializer.Serialize(writer, getTransactionResponseUser.Entities, jsonSerializerOptions);
             writer.WritePropertyName("wallet");
             JsonSerializer.Serialize(writer, getTransactionResponseUser.Wallet, jsonSerializerOptions);
-            if (getTransactionResponseUser.IdOption.IsSet)
-                if (getTransactionResponseUser.IdOption.Value != null)
-                    writer.WriteString("id", getTransactionResponseUser.Id);
-                else
-                    writer.WriteNull("id");
         }
     }
 }

@@ -79,6 +79,7 @@ src/BeamPlayerClient/Model/GetSessionRequestResponse.cs
 src/BeamPlayerClient/Model/GetTransactionResponse.cs
 src/BeamPlayerClient/Model/GetTransactionResponsePolicy.cs
 src/BeamPlayerClient/Model/GetTransactionResponseUser.cs
+src/BeamPlayerClient/Model/GetTransactionResponseUserEntitiesInner.cs
 src/BeamPlayerClient/Model/GetTransactionResponseUserWallet.cs
 src/BeamPlayerClient/Model/GetTransactionsResponse.cs
 src/BeamPlayerClient/Model/GetTransactionsResponseDataInner.cs

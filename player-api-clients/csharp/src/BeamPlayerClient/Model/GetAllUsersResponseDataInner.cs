@@ -34,16 +34,14 @@ namespace BeamPlayerClient.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="GetAllUsersResponseDataInner" /> class.
         /// </summary>
-        /// <param name="externalEntityId">externalEntityId</param>
-        /// <param name="gameId">gameId</param>
-        /// <param name="userId">userId</param>
+        /// <param name="entities">entities</param>
+        /// <param name="id">id</param>
         /// <param name="wallets">wallets</param>
         [JsonConstructor]
-        public GetAllUsersResponseDataInner(string externalEntityId, string gameId, string userId, List<GetAllUsersResponseDataInnerWalletsInner> wallets)
+        public GetAllUsersResponseDataInner(List<GetTransactionResponseUserEntitiesInner> entities, string id, List<GetAllUsersResponseDataInnerWalletsInner> wallets)
         {
-            ExternalEntityId = externalEntityId;
-            GameId = gameId;
-            UserId = userId;
+            Entities = entities;
+            Id = id;
             Wallets = wallets;
             OnCreated();
         }
@@ -51,22 +49,16 @@ namespace BeamPlayerClient.Model
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets ExternalEntityId
+        /// Gets or Sets Entities
         /// </summary>
-        [JsonPropertyName("externalEntityId")]
-        public string ExternalEntityId { get; set; }
+        [JsonPropertyName("entities")]
+        public List<GetTransactionResponseUserEntitiesInner> Entities { get; set; }
 
         /// <summary>
-        /// Gets or Sets GameId
+        /// Gets or Sets Id
         /// </summary>
-        [JsonPropertyName("gameId")]
-        public string GameId { get; set; }
-
-        /// <summary>
-        /// Gets or Sets UserId
-        /// </summary>
-        [JsonPropertyName("userId")]
-        public string UserId { get; set; }
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Wallets
@@ -82,9 +74,8 @@ namespace BeamPlayerClient.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class GetAllUsersResponseDataInner {\n");
-            sb.Append("  ExternalEntityId: ").Append(ExternalEntityId).Append("\n");
-            sb.Append("  GameId: ").Append(GameId).Append("\n");
-            sb.Append("  UserId: ").Append(UserId).Append("\n");
+            sb.Append("  Entities: ").Append(Entities).Append("\n");
+            sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Wallets: ").Append(Wallets).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -123,9 +114,8 @@ namespace BeamPlayerClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<string?> externalEntityId = default;
-            Option<string?> gameId = default;
-            Option<string?> userId = default;
+            Option<List<GetTransactionResponseUserEntitiesInner>?> entities = default;
+            Option<string?> id = default;
             Option<List<GetAllUsersResponseDataInnerWalletsInner>?> wallets = default;
 
             while (utf8JsonReader.Read())
@@ -143,14 +133,12 @@ namespace BeamPlayerClient.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "externalEntityId":
-                            externalEntityId = new Option<string?>(utf8JsonReader.GetString()!);
+                        case "entities":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                entities = new Option<List<GetTransactionResponseUserEntitiesInner>?>(JsonSerializer.Deserialize<List<GetTransactionResponseUserEntitiesInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
-                        case "gameId":
-                            gameId = new Option<string?>(utf8JsonReader.GetString()!);
-                            break;
-                        case "userId":
-                            userId = new Option<string?>(utf8JsonReader.GetString()!);
+                        case "id":
+                            id = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "wallets":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
@@ -162,31 +150,25 @@ namespace BeamPlayerClient.Model
                 }
             }
 
-            if (!externalEntityId.IsSet)
-                throw new ArgumentException("Property is required for class GetAllUsersResponseDataInner.", nameof(externalEntityId));
+            if (!entities.IsSet)
+                throw new ArgumentException("Property is required for class GetAllUsersResponseDataInner.", nameof(entities));
 
-            if (!gameId.IsSet)
-                throw new ArgumentException("Property is required for class GetAllUsersResponseDataInner.", nameof(gameId));
-
-            if (!userId.IsSet)
-                throw new ArgumentException("Property is required for class GetAllUsersResponseDataInner.", nameof(userId));
+            if (!id.IsSet)
+                throw new ArgumentException("Property is required for class GetAllUsersResponseDataInner.", nameof(id));
 
             if (!wallets.IsSet)
                 throw new ArgumentException("Property is required for class GetAllUsersResponseDataInner.", nameof(wallets));
 
-            if (externalEntityId.IsSet && externalEntityId.Value == null)
-                throw new ArgumentNullException(nameof(externalEntityId), "Property is not nullable for class GetAllUsersResponseDataInner.");
+            if (entities.IsSet && entities.Value == null)
+                throw new ArgumentNullException(nameof(entities), "Property is not nullable for class GetAllUsersResponseDataInner.");
 
-            if (gameId.IsSet && gameId.Value == null)
-                throw new ArgumentNullException(nameof(gameId), "Property is not nullable for class GetAllUsersResponseDataInner.");
-
-            if (userId.IsSet && userId.Value == null)
-                throw new ArgumentNullException(nameof(userId), "Property is not nullable for class GetAllUsersResponseDataInner.");
+            if (id.IsSet && id.Value == null)
+                throw new ArgumentNullException(nameof(id), "Property is not nullable for class GetAllUsersResponseDataInner.");
 
             if (wallets.IsSet && wallets.Value == null)
                 throw new ArgumentNullException(nameof(wallets), "Property is not nullable for class GetAllUsersResponseDataInner.");
 
-            return new GetAllUsersResponseDataInner(externalEntityId.Value!, gameId.Value!, userId.Value!, wallets.Value!);
+            return new GetAllUsersResponseDataInner(entities.Value!, id.Value!, wallets.Value!);
         }
 
         /// <summary>
@@ -213,23 +195,18 @@ namespace BeamPlayerClient.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, GetAllUsersResponseDataInner getAllUsersResponseDataInner, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (getAllUsersResponseDataInner.ExternalEntityId == null)
-                throw new ArgumentNullException(nameof(getAllUsersResponseDataInner.ExternalEntityId), "Property is required for class GetAllUsersResponseDataInner.");
+            if (getAllUsersResponseDataInner.Entities == null)
+                throw new ArgumentNullException(nameof(getAllUsersResponseDataInner.Entities), "Property is required for class GetAllUsersResponseDataInner.");
 
-            if (getAllUsersResponseDataInner.GameId == null)
-                throw new ArgumentNullException(nameof(getAllUsersResponseDataInner.GameId), "Property is required for class GetAllUsersResponseDataInner.");
-
-            if (getAllUsersResponseDataInner.UserId == null)
-                throw new ArgumentNullException(nameof(getAllUsersResponseDataInner.UserId), "Property is required for class GetAllUsersResponseDataInner.");
+            if (getAllUsersResponseDataInner.Id == null)
+                throw new ArgumentNullException(nameof(getAllUsersResponseDataInner.Id), "Property is required for class GetAllUsersResponseDataInner.");
 
             if (getAllUsersResponseDataInner.Wallets == null)
                 throw new ArgumentNullException(nameof(getAllUsersResponseDataInner.Wallets), "Property is required for class GetAllUsersResponseDataInner.");
 
-            writer.WriteString("externalEntityId", getAllUsersResponseDataInner.ExternalEntityId);
-
-            writer.WriteString("gameId", getAllUsersResponseDataInner.GameId);
-
-            writer.WriteString("userId", getAllUsersResponseDataInner.UserId);
+            writer.WritePropertyName("entities");
+            JsonSerializer.Serialize(writer, getAllUsersResponseDataInner.Entities, jsonSerializerOptions);
+            writer.WriteString("id", getAllUsersResponseDataInner.Id);
 
             writer.WritePropertyName("wallets");
             JsonSerializer.Serialize(writer, getAllUsersResponseDataInner.Wallets, jsonSerializerOptions);
