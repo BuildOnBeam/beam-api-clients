@@ -48,7 +48,7 @@ namespace BeamPlayerClient.Model
         /// <param name="sponsor">sponsor (default to true)</param>
         /// <param name="startTime">Date time string with YYYY-MM-DDTHH:mm:ss.sssZ format or Unix timestamp in milliseconds</param>
         [JsonConstructor]
-        public SellAssetRequestInput(string assetAddress, string assetId, string price, decimal quantity, SellTypeEnum sellType, Option<decimal?> chainId = default, Option<CurrencyEnum?> currency = default, Option<string?> endTime = default, Option<string?> operationId = default, Option<OperationProcessingEnum?> operationProcessing = default, Option<string?> policyId = default, Option<bool?> sponsor = default, Option<string?> startTime = default)
+        public SellAssetRequestInput(string assetAddress, string assetId, string price, decimal quantity, SellTypeEnum sellType, Option<decimal?> chainId = default, Option<CurrencyEnum?> currency = default, Option<DateTime?> endTime = default, Option<string?> operationId = default, Option<OperationProcessingEnum?> operationProcessing = default, Option<string?> policyId = default, Option<bool?> sponsor = default, Option<DateTime?> startTime = default)
         {
             AssetAddress = assetAddress;
             AssetId = assetId;
@@ -424,14 +424,14 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [JsonIgnore]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> EndTimeOption { get; private set; }
+        public Option<DateTime?> EndTimeOption { get; private set; }
 
         /// <summary>
         /// Date time string with YYYY-MM-DDTHH:mm:ss.sssZ format or Unix timestamp in milliseconds
         /// </summary>
         /// <value>Date time string with YYYY-MM-DDTHH:mm:ss.sssZ format or Unix timestamp in milliseconds</value>
         [JsonPropertyName("endTime")]
-        public string? EndTime { get { return this. EndTimeOption; } set { this.EndTimeOption = new(value); } }
+        public DateTime? EndTime { get { return this. EndTimeOption; } set { this.EndTimeOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of OperationId
@@ -477,14 +477,14 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [JsonIgnore]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> StartTimeOption { get; private set; }
+        public Option<DateTime?> StartTimeOption { get; private set; }
 
         /// <summary>
         /// Date time string with YYYY-MM-DDTHH:mm:ss.sssZ format or Unix timestamp in milliseconds
         /// </summary>
         /// <value>Date time string with YYYY-MM-DDTHH:mm:ss.sssZ format or Unix timestamp in milliseconds</value>
         [JsonPropertyName("startTime")]
-        public string? StartTime { get { return this. StartTimeOption; } set { this.StartTimeOption = new(value); } }
+        public DateTime? StartTime { get { return this. StartTimeOption; } set { this.StartTimeOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -528,6 +528,16 @@ namespace BeamPlayerClient.Model
     public class SellAssetRequestInputJsonConverter : JsonConverter<SellAssetRequestInput>
     {
         /// <summary>
+        /// The format to use to serialize EndTime
+        /// </summary>
+        public static string EndTimeFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
+        /// The format to use to serialize StartTime
+        /// </summary>
+        public static string StartTimeFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
         /// Deserializes json to <see cref="SellAssetRequestInput" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
@@ -551,12 +561,12 @@ namespace BeamPlayerClient.Model
             Option<SellAssetRequestInput.SellTypeEnum?> sellType = default;
             Option<decimal?> chainId = default;
             Option<SellAssetRequestInput.CurrencyEnum?> currency = default;
-            Option<string?> endTime = default;
+            Option<DateTime?> endTime = default;
             Option<string?> operationId = default;
             Option<SellAssetRequestInput.OperationProcessingEnum?> operationProcessing = default;
             Option<string?> policyId = default;
             Option<bool?> sponsor = default;
-            Option<string?> startTime = default;
+            Option<DateTime?> startTime = default;
 
             while (utf8JsonReader.Read())
             {
@@ -601,7 +611,8 @@ namespace BeamPlayerClient.Model
                                 currency = new Option<SellAssetRequestInput.CurrencyEnum?>(SellAssetRequestInput.CurrencyEnumFromStringOrDefault(currencyRawValue));
                             break;
                         case "endTime":
-                            endTime = new Option<string?>(utf8JsonReader.GetString());
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                endTime = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime?>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "operationId":
                             operationId = new Option<string?>(utf8JsonReader.GetString());
@@ -619,7 +630,8 @@ namespace BeamPlayerClient.Model
                                 sponsor = new Option<bool?>(utf8JsonReader.GetBoolean());
                             break;
                         case "startTime":
-                            startTime = new Option<string?>(utf8JsonReader.GetString());
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                startTime = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime?>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -722,7 +734,7 @@ namespace BeamPlayerClient.Model
             writer.WriteString("currency", currencyRawValue);
             if (sellAssetRequestInput.EndTimeOption.IsSet)
                 if (sellAssetRequestInput.EndTimeOption.Value != null)
-                    writer.WriteString("endTime", sellAssetRequestInput.EndTime);
+                    writer.WriteString("endTime", sellAssetRequestInput.EndTimeOption.Value!.Value.ToString(EndTimeFormat));
                 else
                     writer.WriteNull("endTime");
 
@@ -745,7 +757,7 @@ namespace BeamPlayerClient.Model
 
             if (sellAssetRequestInput.StartTimeOption.IsSet)
                 if (sellAssetRequestInput.StartTimeOption.Value != null)
-                    writer.WriteString("startTime", sellAssetRequestInput.StartTime);
+                    writer.WriteString("startTime", sellAssetRequestInput.StartTimeOption.Value!.Value.ToString(StartTimeFormat));
                 else
                     writer.WriteNull("startTime");
         }
