@@ -46,6 +46,7 @@ namespace BeamAutomationClient.Api
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateConnectionRequestApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<ICreateConnectionRequestApiResponse> CreateConnectionRequestAsync(GenerateLinkCodeRequestInput generateLinkCodeRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -58,6 +59,7 @@ namespace BeamAutomationClient.Api
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateConnectionRequestApiResponse"/>?&gt;</returns>
+        [Obsolete]
         Task<ICreateConnectionRequestApiResponse?> CreateConnectionRequestOrDefaultAsync(GenerateLinkCodeRequestInput generateLinkCodeRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -94,6 +96,7 @@ namespace BeamAutomationClient.Api
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateSignInRequestApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<ICreateSignInRequestApiResponse> CreateSignInRequestAsync(GenerateSignInCodeRequestInput generateSignInCodeRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -106,6 +109,7 @@ namespace BeamAutomationClient.Api
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateSignInRequestApiResponse"/>?&gt;</returns>
+        [Obsolete]
         Task<ICreateSignInRequestApiResponse?> CreateSignInRequestOrDefaultAsync(GenerateSignInCodeRequestInput generateSignInCodeRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>

@@ -27,16 +27,16 @@ using BeamPlayerClient.Client;
 namespace BeamPlayerClient.Model
 {
     /// <summary>
-    /// GenerateLoginRequestResponse
+    /// WebConnectionRequestResponse
     /// </summary>
-    public partial class GenerateLoginRequestResponse : IValidatableObject
+    public partial class WebConnectionRequestResponse : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GenerateLoginRequestResponse" /> class.
+        /// Initializes a new instance of the <see cref="WebConnectionRequestResponse" /> class.
         /// </summary>
         /// <param name="url">url</param>
         [JsonConstructor]
-        public GenerateLoginRequestResponse(string url)
+        public WebConnectionRequestResponse(string url)
         {
             Url = url;
             OnCreated();
@@ -57,7 +57,7 @@ namespace BeamPlayerClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class GenerateLoginRequestResponse {\n");
+            sb.Append("class WebConnectionRequestResponse {\n");
             sb.Append("  Url: ").Append(Url).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -75,19 +75,19 @@ namespace BeamPlayerClient.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="GenerateLoginRequestResponse" />
+    /// A Json converter for type <see cref="WebConnectionRequestResponse" />
     /// </summary>
-    public class GenerateLoginRequestResponseJsonConverter : JsonConverter<GenerateLoginRequestResponse>
+    public class WebConnectionRequestResponseJsonConverter : JsonConverter<WebConnectionRequestResponse>
     {
         /// <summary>
-        /// Deserializes json to <see cref="GenerateLoginRequestResponse" />
+        /// Deserializes json to <see cref="WebConnectionRequestResponse" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override GenerateLoginRequestResponse Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override WebConnectionRequestResponse Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -123,42 +123,42 @@ namespace BeamPlayerClient.Model
             }
 
             if (!url.IsSet)
-                throw new ArgumentException("Property is required for class GenerateLoginRequestResponse.", nameof(url));
+                throw new ArgumentException("Property is required for class WebConnectionRequestResponse.", nameof(url));
 
             if (url.IsSet && url.Value == null)
-                throw new ArgumentNullException(nameof(url), "Property is not nullable for class GenerateLoginRequestResponse.");
+                throw new ArgumentNullException(nameof(url), "Property is not nullable for class WebConnectionRequestResponse.");
 
-            return new GenerateLoginRequestResponse(url.Value!);
+            return new WebConnectionRequestResponse(url.Value!);
         }
 
         /// <summary>
-        /// Serializes a <see cref="GenerateLoginRequestResponse" />
+        /// Serializes a <see cref="WebConnectionRequestResponse" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="generateLoginRequestResponse"></param>
+        /// <param name="webConnectionRequestResponse"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, GenerateLoginRequestResponse generateLoginRequestResponse, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, WebConnectionRequestResponse webConnectionRequestResponse, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(ref writer, generateLoginRequestResponse, jsonSerializerOptions);
+            WriteProperties(ref writer, webConnectionRequestResponse, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="GenerateLoginRequestResponse" />
+        /// Serializes the properties of <see cref="WebConnectionRequestResponse" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="generateLoginRequestResponse"></param>
+        /// <param name="webConnectionRequestResponse"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(ref Utf8JsonWriter writer, GenerateLoginRequestResponse generateLoginRequestResponse, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(ref Utf8JsonWriter writer, WebConnectionRequestResponse webConnectionRequestResponse, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (generateLoginRequestResponse.Url == null)
-                throw new ArgumentNullException(nameof(generateLoginRequestResponse.Url), "Property is required for class GenerateLoginRequestResponse.");
+            if (webConnectionRequestResponse.Url == null)
+                throw new ArgumentNullException(nameof(webConnectionRequestResponse.Url), "Property is required for class WebConnectionRequestResponse.");
 
-            writer.WriteString("url", generateLoginRequestResponse.Url);
+            writer.WriteString("url", webConnectionRequestResponse.Url);
         }
     }
 }

@@ -27,19 +27,21 @@ using BeamPlayerClient.Client;
 namespace BeamPlayerClient.Model
 {
     /// <summary>
-    /// GenerateLoginRequestInput
+    /// WebConnectionVerifyRequestInput
     /// </summary>
-    public partial class GenerateLoginRequestInput : IValidatableObject
+    public partial class WebConnectionVerifyRequestInput : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GenerateLoginRequestInput" /> class.
+        /// Initializes a new instance of the <see cref="WebConnectionVerifyRequestInput" /> class.
         /// </summary>
-        /// <param name="message">message</param>
+        /// <param name="accountAddress">accountAddress</param>
+        /// <param name="ownerAddress">ownerAddress</param>
         /// <param name="chainId">chainId (default to 13337M)</param>
         [JsonConstructor]
-        public GenerateLoginRequestInput(string message, Option<decimal?> chainId = default)
+        public WebConnectionVerifyRequestInput(string accountAddress, string ownerAddress, Option<decimal?> chainId = default)
         {
-            Message = message;
+            AccountAddress = accountAddress;
+            OwnerAddress = ownerAddress;
             ChainIdOption = chainId;
             OnCreated();
         }
@@ -47,10 +49,16 @@ namespace BeamPlayerClient.Model
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets Message
+        /// Gets or Sets AccountAddress
         /// </summary>
-        [JsonPropertyName("message")]
-        public string Message { get; set; }
+        [JsonPropertyName("accountAddress")]
+        public string AccountAddress { get; set; }
+
+        /// <summary>
+        /// Gets or Sets OwnerAddress
+        /// </summary>
+        [JsonPropertyName("ownerAddress")]
+        public string OwnerAddress { get; set; }
 
         /// <summary>
         /// Used to track the state of ChainId
@@ -72,8 +80,9 @@ namespace BeamPlayerClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class GenerateLoginRequestInput {\n");
-            sb.Append("  Message: ").Append(Message).Append("\n");
+            sb.Append("class WebConnectionVerifyRequestInput {\n");
+            sb.Append("  AccountAddress: ").Append(AccountAddress).Append("\n");
+            sb.Append("  OwnerAddress: ").Append(OwnerAddress).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -91,19 +100,19 @@ namespace BeamPlayerClient.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="GenerateLoginRequestInput" />
+    /// A Json converter for type <see cref="WebConnectionVerifyRequestInput" />
     /// </summary>
-    public class GenerateLoginRequestInputJsonConverter : JsonConverter<GenerateLoginRequestInput>
+    public class WebConnectionVerifyRequestInputJsonConverter : JsonConverter<WebConnectionVerifyRequestInput>
     {
         /// <summary>
-        /// Deserializes json to <see cref="GenerateLoginRequestInput" />
+        /// Deserializes json to <see cref="WebConnectionVerifyRequestInput" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override GenerateLoginRequestInput Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override WebConnectionVerifyRequestInput Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -112,7 +121,8 @@ namespace BeamPlayerClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<string?> message = default;
+            Option<string?> accountAddress = default;
+            Option<string?> ownerAddress = default;
             Option<decimal?> chainId = default;
 
             while (utf8JsonReader.Read())
@@ -130,8 +140,11 @@ namespace BeamPlayerClient.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "message":
-                            message = new Option<string?>(utf8JsonReader.GetString()!);
+                        case "accountAddress":
+                            accountAddress = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
+                        case "ownerAddress":
+                            ownerAddress = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
@@ -143,49 +156,60 @@ namespace BeamPlayerClient.Model
                 }
             }
 
-            if (!message.IsSet)
-                throw new ArgumentException("Property is required for class GenerateLoginRequestInput.", nameof(message));
+            if (!accountAddress.IsSet)
+                throw new ArgumentException("Property is required for class WebConnectionVerifyRequestInput.", nameof(accountAddress));
 
-            if (message.IsSet && message.Value == null)
-                throw new ArgumentNullException(nameof(message), "Property is not nullable for class GenerateLoginRequestInput.");
+            if (!ownerAddress.IsSet)
+                throw new ArgumentException("Property is required for class WebConnectionVerifyRequestInput.", nameof(ownerAddress));
+
+            if (accountAddress.IsSet && accountAddress.Value == null)
+                throw new ArgumentNullException(nameof(accountAddress), "Property is not nullable for class WebConnectionVerifyRequestInput.");
+
+            if (ownerAddress.IsSet && ownerAddress.Value == null)
+                throw new ArgumentNullException(nameof(ownerAddress), "Property is not nullable for class WebConnectionVerifyRequestInput.");
 
             if (chainId.IsSet && chainId.Value == null)
-                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class GenerateLoginRequestInput.");
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class WebConnectionVerifyRequestInput.");
 
-            return new GenerateLoginRequestInput(message.Value!, chainId);
+            return new WebConnectionVerifyRequestInput(accountAddress.Value!, ownerAddress.Value!, chainId);
         }
 
         /// <summary>
-        /// Serializes a <see cref="GenerateLoginRequestInput" />
+        /// Serializes a <see cref="WebConnectionVerifyRequestInput" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="generateLoginRequestInput"></param>
+        /// <param name="webConnectionVerifyRequestInput"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, GenerateLoginRequestInput generateLoginRequestInput, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, WebConnectionVerifyRequestInput webConnectionVerifyRequestInput, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(ref writer, generateLoginRequestInput, jsonSerializerOptions);
+            WriteProperties(ref writer, webConnectionVerifyRequestInput, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="GenerateLoginRequestInput" />
+        /// Serializes the properties of <see cref="WebConnectionVerifyRequestInput" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="generateLoginRequestInput"></param>
+        /// <param name="webConnectionVerifyRequestInput"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(ref Utf8JsonWriter writer, GenerateLoginRequestInput generateLoginRequestInput, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(ref Utf8JsonWriter writer, WebConnectionVerifyRequestInput webConnectionVerifyRequestInput, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (generateLoginRequestInput.Message == null)
-                throw new ArgumentNullException(nameof(generateLoginRequestInput.Message), "Property is required for class GenerateLoginRequestInput.");
+            if (webConnectionVerifyRequestInput.AccountAddress == null)
+                throw new ArgumentNullException(nameof(webConnectionVerifyRequestInput.AccountAddress), "Property is required for class WebConnectionVerifyRequestInput.");
 
-            writer.WriteString("message", generateLoginRequestInput.Message);
+            if (webConnectionVerifyRequestInput.OwnerAddress == null)
+                throw new ArgumentNullException(nameof(webConnectionVerifyRequestInput.OwnerAddress), "Property is required for class WebConnectionVerifyRequestInput.");
 
-            if (generateLoginRequestInput.ChainIdOption.IsSet)
-                writer.WriteNumber("chainId", generateLoginRequestInput.ChainIdOption.Value!.Value);
+            writer.WriteString("accountAddress", webConnectionVerifyRequestInput.AccountAddress);
+
+            writer.WriteString("ownerAddress", webConnectionVerifyRequestInput.OwnerAddress);
+
+            if (webConnectionVerifyRequestInput.ChainIdOption.IsSet)
+                writer.WriteNumber("chainId", webConnectionVerifyRequestInput.ChainIdOption.Value!.Value);
         }
     }
 }

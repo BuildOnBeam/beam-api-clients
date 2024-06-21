@@ -94,6 +94,31 @@ namespace BeamPlayerClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="chainId"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetAllActiveSessionsApiResponse"/>&gt;</returns>
+        Task<IGetAllActiveSessionsApiResponse> GetAllActiveSessionsAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="entityId"></param>
+        /// <param name="chainId"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetAllActiveSessionsApiResponse"/>?&gt;</returns>
+        Task<IGetAllActiveSessionsApiResponse?> GetAllActiveSessionsOrDefaultAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="requestId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetSessionRequestApiResponse"/>&gt;</returns>
@@ -109,6 +134,31 @@ namespace BeamPlayerClient.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetSessionRequestApiResponse"/>?&gt;</returns>
         Task<IGetSessionRequestApiResponse?> GetSessionRequestOrDefaultAsync(string requestId, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="revokeSessionRequestInput"></param>
+        /// <param name="entityId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IRevokeSessionApiResponse"/>&gt;</returns>
+        Task<IRevokeSessionApiResponse> RevokeSessionAsync(RevokeSessionRequestInput revokeSessionRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="revokeSessionRequestInput"></param>
+        /// <param name="entityId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IRevokeSessionApiResponse"/>?&gt;</returns>
+        Task<IRevokeSessionApiResponse?> RevokeSessionOrDefaultAsync(RevokeSessionRequestInput revokeSessionRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
@@ -136,9 +186,33 @@ namespace BeamPlayerClient.Api
     }
 
     /// <summary>
+    /// The <see cref="IGetAllActiveSessionsApiResponse"/>
+    /// </summary>
+    public interface IGetAllActiveSessionsApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.GetActiveSessionsResponse?>
+    {
+        /// <summary>
+        /// Returns true if the response is 200 Ok
+        /// </summary>
+        /// <returns></returns>
+        bool IsOk { get; }
+    }
+
+    /// <summary>
     /// The <see cref="IGetSessionRequestApiResponse"/>
     /// </summary>
     public interface IGetSessionRequestApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.GetSessionRequestResponse?>
+    {
+        /// <summary>
+        /// Returns true if the response is 200 Ok
+        /// </summary>
+        /// <returns></returns>
+        bool IsOk { get; }
+    }
+
+    /// <summary>
+    /// The <see cref="IRevokeSessionApiResponse"/>
+    /// </summary>
+    public interface IRevokeSessionApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.CommonOperationResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -195,6 +269,26 @@ namespace BeamPlayerClient.Api
         /// <summary>
         /// The event raised after the server response
         /// </summary>
+        public event EventHandler<ApiResponseEventArgs>? OnGetAllActiveSessions;
+
+        /// <summary>
+        /// The event raised after an error querying the server
+        /// </summary>
+        public event EventHandler<ExceptionEventArgs>? OnErrorGetAllActiveSessions;
+
+        internal void ExecuteOnGetAllActiveSessions(SessionsApi.GetAllActiveSessionsApiResponse apiResponse)
+        {
+            OnGetAllActiveSessions?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+        }
+
+        internal void ExecuteOnErrorGetAllActiveSessions(Exception exception)
+        {
+            OnErrorGetAllActiveSessions?.Invoke(this, new ExceptionEventArgs(exception));
+        }
+
+        /// <summary>
+        /// The event raised after the server response
+        /// </summary>
         public event EventHandler<ApiResponseEventArgs>? OnGetSessionRequest;
 
         /// <summary>
@@ -210,6 +304,26 @@ namespace BeamPlayerClient.Api
         internal void ExecuteOnErrorGetSessionRequest(Exception exception)
         {
             OnErrorGetSessionRequest?.Invoke(this, new ExceptionEventArgs(exception));
+        }
+
+        /// <summary>
+        /// The event raised after the server response
+        /// </summary>
+        public event EventHandler<ApiResponseEventArgs>? OnRevokeSession;
+
+        /// <summary>
+        /// The event raised after an error querying the server
+        /// </summary>
+        public event EventHandler<ExceptionEventArgs>? OnErrorRevokeSession;
+
+        internal void ExecuteOnRevokeSession(SessionsApi.RevokeSessionApiResponse apiResponse)
+        {
+            OnRevokeSession?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+        }
+
+        internal void ExecuteOnErrorRevokeSession(Exception exception)
+        {
+            OnErrorRevokeSession?.Invoke(this, new ExceptionEventArgs(exception));
         }
     }
 
@@ -761,6 +875,246 @@ namespace BeamPlayerClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
+        partial void FormatGetAllActiveSessions(ref string entityId, ref Option<decimal> chainId);
+
+        /// <summary>
+        /// Validates the request parameters
+        /// </summary>
+        /// <param name="entityId"></param>
+        /// <returns></returns>
+        private void ValidateGetAllActiveSessions(string entityId)
+        {
+            if (entityId == null)
+                throw new ArgumentNullException(nameof(entityId));
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="entityId"></param>
+        /// <param name="chainId"></param>
+        private void AfterGetAllActiveSessionsDefaultImplementation(IGetAllActiveSessionsApiResponse apiResponseLocalVar, string entityId, Option<decimal> chainId)
+        {
+            bool suppressDefaultLog = false;
+            AfterGetAllActiveSessions(ref suppressDefaultLog, apiResponseLocalVar, entityId, chainId);
+            if (!suppressDefaultLog)
+                Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="entityId"></param>
+        /// <param name="chainId"></param>
+        partial void AfterGetAllActiveSessions(ref bool suppressDefaultLog, IGetAllActiveSessionsApiResponse apiResponseLocalVar, string entityId, Option<decimal> chainId);
+
+        /// <summary>
+        /// Logs exceptions that occur while retrieving the server response
+        /// </summary>
+        /// <param name="exception"></param>
+        /// <param name="pathFormat"></param>
+        /// <param name="path"></param>
+        /// <param name="entityId"></param>
+        /// <param name="chainId"></param>
+        private void OnErrorGetAllActiveSessionsDefaultImplementation(Exception exception, string pathFormat, string path, string entityId, Option<decimal> chainId)
+        {
+            bool suppressDefaultLog = false;
+            OnErrorGetAllActiveSessions(ref suppressDefaultLog, exception, pathFormat, path, entityId, chainId);
+            if (!suppressDefaultLog)
+                Logger.LogError(exception, "An error occurred while sending the request to the server.");
+        }
+
+        /// <summary>
+        /// A partial method that gives developers a way to provide customized exception handling
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="exception"></param>
+        /// <param name="pathFormat"></param>
+        /// <param name="path"></param>
+        /// <param name="entityId"></param>
+        /// <param name="chainId"></param>
+        partial void OnErrorGetAllActiveSessions(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string entityId, Option<decimal> chainId);
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <param name="entityId"></param>
+        /// <param name="chainId"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetAllActiveSessionsApiResponse"/>&gt;</returns>
+        public async Task<IGetAllActiveSessionsApiResponse?> GetAllActiveSessionsOrDefaultAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await GetAllActiveSessionsAsync(entityId, chainId, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="chainId"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetAllActiveSessionsApiResponse"/>&gt;</returns>
+        public async Task<IGetAllActiveSessionsApiResponse> GetAllActiveSessionsAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
+        {
+            UriBuilder uriBuilderLocalVar = new UriBuilder();
+
+            try
+            {
+                ValidateGetAllActiveSessions(entityId);
+
+                FormatGetAllActiveSessions(ref entityId, ref chainId);
+
+                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
+                {
+                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
+                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
+                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
+                    uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/player/sessions/users/{entityId}/active";
+                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
+
+                    System.Collections.Specialized.NameValueCollection parseQueryStringLocalVar = System.Web.HttpUtility.ParseQueryString(string.Empty);
+
+                    if (chainId.IsSet)
+                        parseQueryStringLocalVar["chainId"] = chainId.Value.ToString();
+
+                    uriBuilderLocalVar.Query = parseQueryStringLocalVar.ToString();
+
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
+                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    string[] acceptLocalVars = new string[] {
+                        "application/json"
+                    };
+
+                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+
+                    if (acceptLocalVar != null)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+
+                    httpRequestMessageLocalVar.Method = HttpMethod.Get;
+
+                    DateTime requestedAtLocalVar = DateTime.UtcNow;
+
+                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
+                    {
+                        string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+
+                        ILogger<GetAllActiveSessionsApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<GetAllActiveSessionsApiResponse>();
+
+                        GetAllActiveSessionsApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/player/sessions/users/{entityId}/active", requestedAtLocalVar, _jsonSerializerOptions);
+
+                        AfterGetAllActiveSessionsDefaultImplementation(apiResponseLocalVar, entityId, chainId);
+
+                        Events.ExecuteOnGetAllActiveSessions(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
+
+                        return apiResponseLocalVar;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                OnErrorGetAllActiveSessionsDefaultImplementation(e, "/v1/player/sessions/users/{entityId}/active", uriBuilderLocalVar.Path, entityId, chainId);
+                Events.ExecuteOnErrorGetAllActiveSessions(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="GetAllActiveSessionsApiResponse"/>
+        /// </summary>
+        public partial class GetAllActiveSessionsApiResponse : BeamPlayerClient.Client.ApiResponse, IGetAllActiveSessionsApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<GetAllActiveSessionsApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="GetAllActiveSessionsApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public GetAllActiveSessionsApiResponse(ILogger<GetAllActiveSessionsApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.GetActiveSessionsResponse? Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.GetActiveSessionsResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.GetActiveSessionsResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
+        }
+
         partial void FormatGetSessionRequest(ref string requestId);
 
         /// <summary>
@@ -963,6 +1317,256 @@ namespace BeamPlayerClient.Api
             /// <param name="result"></param>
             /// <returns></returns>
             public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.GetSessionRequestResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
+        }
+
+        partial void FormatRevokeSession(RevokeSessionRequestInput revokeSessionRequestInput, ref string entityId);
+
+        /// <summary>
+        /// Validates the request parameters
+        /// </summary>
+        /// <param name="revokeSessionRequestInput"></param>
+        /// <param name="entityId"></param>
+        /// <returns></returns>
+        private void ValidateRevokeSession(RevokeSessionRequestInput revokeSessionRequestInput, string entityId)
+        {
+            if (revokeSessionRequestInput == null)
+                throw new ArgumentNullException(nameof(revokeSessionRequestInput));
+
+            if (entityId == null)
+                throw new ArgumentNullException(nameof(entityId));
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="revokeSessionRequestInput"></param>
+        /// <param name="entityId"></param>
+        private void AfterRevokeSessionDefaultImplementation(IRevokeSessionApiResponse apiResponseLocalVar, RevokeSessionRequestInput revokeSessionRequestInput, string entityId)
+        {
+            bool suppressDefaultLog = false;
+            AfterRevokeSession(ref suppressDefaultLog, apiResponseLocalVar, revokeSessionRequestInput, entityId);
+            if (!suppressDefaultLog)
+                Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="revokeSessionRequestInput"></param>
+        /// <param name="entityId"></param>
+        partial void AfterRevokeSession(ref bool suppressDefaultLog, IRevokeSessionApiResponse apiResponseLocalVar, RevokeSessionRequestInput revokeSessionRequestInput, string entityId);
+
+        /// <summary>
+        /// Logs exceptions that occur while retrieving the server response
+        /// </summary>
+        /// <param name="exception"></param>
+        /// <param name="pathFormat"></param>
+        /// <param name="path"></param>
+        /// <param name="revokeSessionRequestInput"></param>
+        /// <param name="entityId"></param>
+        private void OnErrorRevokeSessionDefaultImplementation(Exception exception, string pathFormat, string path, RevokeSessionRequestInput revokeSessionRequestInput, string entityId)
+        {
+            bool suppressDefaultLog = false;
+            OnErrorRevokeSession(ref suppressDefaultLog, exception, pathFormat, path, revokeSessionRequestInput, entityId);
+            if (!suppressDefaultLog)
+                Logger.LogError(exception, "An error occurred while sending the request to the server.");
+        }
+
+        /// <summary>
+        /// A partial method that gives developers a way to provide customized exception handling
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="exception"></param>
+        /// <param name="pathFormat"></param>
+        /// <param name="path"></param>
+        /// <param name="revokeSessionRequestInput"></param>
+        /// <param name="entityId"></param>
+        partial void OnErrorRevokeSession(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, RevokeSessionRequestInput revokeSessionRequestInput, string entityId);
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <param name="revokeSessionRequestInput"></param>
+        /// <param name="entityId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IRevokeSessionApiResponse"/>&gt;</returns>
+        public async Task<IRevokeSessionApiResponse?> RevokeSessionOrDefaultAsync(RevokeSessionRequestInput revokeSessionRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await RevokeSessionAsync(revokeSessionRequestInput, entityId, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="revokeSessionRequestInput"></param>
+        /// <param name="entityId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IRevokeSessionApiResponse"/>&gt;</returns>
+        public async Task<IRevokeSessionApiResponse> RevokeSessionAsync(RevokeSessionRequestInput revokeSessionRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        {
+            UriBuilder uriBuilderLocalVar = new UriBuilder();
+
+            try
+            {
+                ValidateRevokeSession(revokeSessionRequestInput, entityId);
+
+                FormatRevokeSession(revokeSessionRequestInput, ref entityId);
+
+                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
+                {
+                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
+                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
+                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
+                    uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/player/sessions/users/{entityId}/revoke";
+                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
+
+                    httpRequestMessageLocalVar.Content = (revokeSessionRequestInput as object) is System.IO.Stream stream
+                        ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(revokeSessionRequestInput, _jsonSerializerOptions));
+
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
+                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    string[] contentTypes = new string[] {
+                        "application/json"
+                    };
+
+                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
+
+                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
+                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
+
+                    string[] acceptLocalVars = new string[] {
+                        "application/json"
+                    };
+
+                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+
+                    if (acceptLocalVar != null)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+
+                    httpRequestMessageLocalVar.Method = HttpMethod.Post;
+
+                    DateTime requestedAtLocalVar = DateTime.UtcNow;
+
+                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
+                    {
+                        string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+
+                        ILogger<RevokeSessionApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<RevokeSessionApiResponse>();
+
+                        RevokeSessionApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/player/sessions/users/{entityId}/revoke", requestedAtLocalVar, _jsonSerializerOptions);
+
+                        AfterRevokeSessionDefaultImplementation(apiResponseLocalVar, revokeSessionRequestInput, entityId);
+
+                        Events.ExecuteOnRevokeSession(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
+
+                        return apiResponseLocalVar;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                OnErrorRevokeSessionDefaultImplementation(e, "/v1/player/sessions/users/{entityId}/revoke", uriBuilderLocalVar.Path, revokeSessionRequestInput, entityId);
+                Events.ExecuteOnErrorRevokeSession(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="RevokeSessionApiResponse"/>
+        /// </summary>
+        public partial class RevokeSessionApiResponse : BeamPlayerClient.Client.ApiResponse, IRevokeSessionApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<RevokeSessionApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="RevokeSessionApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public RevokeSessionApiResponse(ILogger<RevokeSessionApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.CommonOperationResponse? Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.CommonOperationResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.CommonOperationResponse? result)
             {
                 result = null;
 

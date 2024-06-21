@@ -27,23 +27,23 @@ using BeamPlayerClient.Client;
 namespace BeamPlayerClient.Model
 {
     /// <summary>
-    /// CreateOperationRequestInput
+    /// WebConnectionCreateOperationInput
     /// </summary>
-    public partial class CreateOperationRequestInput : IValidatableObject
+    public partial class WebConnectionCreateOperationInput : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CreateOperationRequestInput" /> class.
+        /// Initializes a new instance of the <see cref="WebConnectionCreateOperationInput" /> class.
         /// </summary>
+        /// <param name="accountAddress">accountAddress</param>
         /// <param name="chainId">chainId</param>
-        /// <param name="entityId">entityId</param>
         /// <param name="operationId">operationId</param>
         /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute)</param>
         /// <param name="transactions">transactions</param>
         [JsonConstructor]
-        public CreateOperationRequestInput(decimal chainId, string entityId, Option<string?> operationId = default, Option<OperationProcessingEnum?> operationProcessing = default, List<CreateOperationRequestInputTransactionsInner>? transactions = default)
+        public WebConnectionCreateOperationInput(string accountAddress, decimal chainId, Option<string?> operationId = default, Option<OperationProcessingEnum?> operationProcessing = default, List<CreateOperationRequestInputTransactionsInner>? transactions = default)
         {
+            AccountAddress = accountAddress;
             ChainId = chainId;
-            EntityId = entityId;
             OperationIdOption = operationId;
             OperationProcessingOption = operationProcessing;
             Transactions = transactions;
@@ -132,16 +132,16 @@ namespace BeamPlayerClient.Model
         public OperationProcessingEnum? OperationProcessing { get { return this.OperationProcessingOption; } set { this.OperationProcessingOption = new(value); } }
 
         /// <summary>
+        /// Gets or Sets AccountAddress
+        /// </summary>
+        [JsonPropertyName("accountAddress")]
+        public string AccountAddress { get; set; }
+
+        /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [JsonPropertyName("chainId")]
         public decimal ChainId { get; set; }
-
-        /// <summary>
-        /// Gets or Sets EntityId
-        /// </summary>
-        [JsonPropertyName("entityId")]
-        public string EntityId { get; set; }
 
         /// <summary>
         /// Used to track the state of OperationId
@@ -169,9 +169,9 @@ namespace BeamPlayerClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class CreateOperationRequestInput {\n");
+            sb.Append("class WebConnectionCreateOperationInput {\n");
+            sb.Append("  AccountAddress: ").Append(AccountAddress).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
-            sb.Append("  EntityId: ").Append(EntityId).Append("\n");
             sb.Append("  OperationId: ").Append(OperationId).Append("\n");
             sb.Append("  OperationProcessing: ").Append(OperationProcessing).Append("\n");
             sb.Append("  Transactions: ").Append(Transactions).Append("\n");
@@ -191,19 +191,19 @@ namespace BeamPlayerClient.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="CreateOperationRequestInput" />
+    /// A Json converter for type <see cref="WebConnectionCreateOperationInput" />
     /// </summary>
-    public class CreateOperationRequestInputJsonConverter : JsonConverter<CreateOperationRequestInput>
+    public class WebConnectionCreateOperationInputJsonConverter : JsonConverter<WebConnectionCreateOperationInput>
     {
         /// <summary>
-        /// Deserializes json to <see cref="CreateOperationRequestInput" />
+        /// Deserializes json to <see cref="WebConnectionCreateOperationInput" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override CreateOperationRequestInput Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override WebConnectionCreateOperationInput Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -212,10 +212,10 @@ namespace BeamPlayerClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
+            Option<string?> accountAddress = default;
             Option<decimal?> chainId = default;
-            Option<string?> entityId = default;
             Option<string?> operationId = default;
-            Option<CreateOperationRequestInput.OperationProcessingEnum?> operationProcessing = default;
+            Option<WebConnectionCreateOperationInput.OperationProcessingEnum?> operationProcessing = default;
             Option<List<CreateOperationRequestInputTransactionsInner>?> transactions = default;
 
             while (utf8JsonReader.Read())
@@ -233,12 +233,12 @@ namespace BeamPlayerClient.Model
 
                     switch (localVarJsonPropertyName)
                     {
+                        case "accountAddress":
+                            accountAddress = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
-                            break;
-                        case "entityId":
-                            entityId = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "operationId":
                             operationId = new Option<string?>(utf8JsonReader.GetString());
@@ -246,7 +246,7 @@ namespace BeamPlayerClient.Model
                         case "operationProcessing":
                             string? operationProcessingRawValue = utf8JsonReader.GetString();
                             if (operationProcessingRawValue != null)
-                                operationProcessing = new Option<CreateOperationRequestInput.OperationProcessingEnum?>(CreateOperationRequestInput.OperationProcessingEnumFromStringOrDefault(operationProcessingRawValue));
+                                operationProcessing = new Option<WebConnectionCreateOperationInput.OperationProcessingEnum?>(WebConnectionCreateOperationInput.OperationProcessingEnumFromStringOrDefault(operationProcessingRawValue));
                             break;
                         case "transactions":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
@@ -258,70 +258,70 @@ namespace BeamPlayerClient.Model
                 }
             }
 
-            if (!chainId.IsSet)
-                throw new ArgumentException("Property is required for class CreateOperationRequestInput.", nameof(chainId));
+            if (!accountAddress.IsSet)
+                throw new ArgumentException("Property is required for class WebConnectionCreateOperationInput.", nameof(accountAddress));
 
-            if (!entityId.IsSet)
-                throw new ArgumentException("Property is required for class CreateOperationRequestInput.", nameof(entityId));
+            if (!chainId.IsSet)
+                throw new ArgumentException("Property is required for class WebConnectionCreateOperationInput.", nameof(chainId));
 
             if (!transactions.IsSet)
-                throw new ArgumentException("Property is required for class CreateOperationRequestInput.", nameof(transactions));
+                throw new ArgumentException("Property is required for class WebConnectionCreateOperationInput.", nameof(transactions));
+
+            if (accountAddress.IsSet && accountAddress.Value == null)
+                throw new ArgumentNullException(nameof(accountAddress), "Property is not nullable for class WebConnectionCreateOperationInput.");
 
             if (chainId.IsSet && chainId.Value == null)
-                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class CreateOperationRequestInput.");
-
-            if (entityId.IsSet && entityId.Value == null)
-                throw new ArgumentNullException(nameof(entityId), "Property is not nullable for class CreateOperationRequestInput.");
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class WebConnectionCreateOperationInput.");
 
             if (operationProcessing.IsSet && operationProcessing.Value == null)
-                throw new ArgumentNullException(nameof(operationProcessing), "Property is not nullable for class CreateOperationRequestInput.");
+                throw new ArgumentNullException(nameof(operationProcessing), "Property is not nullable for class WebConnectionCreateOperationInput.");
 
-            return new CreateOperationRequestInput(chainId.Value!.Value!, entityId.Value!, operationId, operationProcessing, transactions.Value!);
+            return new WebConnectionCreateOperationInput(accountAddress.Value!, chainId.Value!.Value!, operationId, operationProcessing, transactions.Value!);
         }
 
         /// <summary>
-        /// Serializes a <see cref="CreateOperationRequestInput" />
+        /// Serializes a <see cref="WebConnectionCreateOperationInput" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="createOperationRequestInput"></param>
+        /// <param name="webConnectionCreateOperationInput"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, CreateOperationRequestInput createOperationRequestInput, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, WebConnectionCreateOperationInput webConnectionCreateOperationInput, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(ref writer, createOperationRequestInput, jsonSerializerOptions);
+            WriteProperties(ref writer, webConnectionCreateOperationInput, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="CreateOperationRequestInput" />
+        /// Serializes the properties of <see cref="WebConnectionCreateOperationInput" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="createOperationRequestInput"></param>
+        /// <param name="webConnectionCreateOperationInput"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(ref Utf8JsonWriter writer, CreateOperationRequestInput createOperationRequestInput, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(ref Utf8JsonWriter writer, WebConnectionCreateOperationInput webConnectionCreateOperationInput, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (createOperationRequestInput.EntityId == null)
-                throw new ArgumentNullException(nameof(createOperationRequestInput.EntityId), "Property is required for class CreateOperationRequestInput.");
+            if (webConnectionCreateOperationInput.AccountAddress == null)
+                throw new ArgumentNullException(nameof(webConnectionCreateOperationInput.AccountAddress), "Property is required for class WebConnectionCreateOperationInput.");
 
-            writer.WriteNumber("chainId", createOperationRequestInput.ChainId);
+            writer.WriteString("accountAddress", webConnectionCreateOperationInput.AccountAddress);
 
-            writer.WriteString("entityId", createOperationRequestInput.EntityId);
+            writer.WriteNumber("chainId", webConnectionCreateOperationInput.ChainId);
 
-            if (createOperationRequestInput.OperationIdOption.IsSet)
-                if (createOperationRequestInput.OperationIdOption.Value != null)
-                    writer.WriteString("operationId", createOperationRequestInput.OperationId);
+            if (webConnectionCreateOperationInput.OperationIdOption.IsSet)
+                if (webConnectionCreateOperationInput.OperationIdOption.Value != null)
+                    writer.WriteString("operationId", webConnectionCreateOperationInput.OperationId);
                 else
                     writer.WriteNull("operationId");
 
-            var operationProcessingRawValue = CreateOperationRequestInput.OperationProcessingEnumToJsonValue(createOperationRequestInput.OperationProcessingOption.Value!.Value);
+            var operationProcessingRawValue = WebConnectionCreateOperationInput.OperationProcessingEnumToJsonValue(webConnectionCreateOperationInput.OperationProcessingOption.Value!.Value);
             writer.WriteString("operationProcessing", operationProcessingRawValue);
-            if (createOperationRequestInput.Transactions != null)
+            if (webConnectionCreateOperationInput.Transactions != null)
             {
                 writer.WritePropertyName("transactions");
-                JsonSerializer.Serialize(writer, createOperationRequestInput.Transactions, jsonSerializerOptions);
+                JsonSerializer.Serialize(writer, webConnectionCreateOperationInput.Transactions, jsonSerializerOptions);
             }
             else
                 writer.WriteNull("transactions");

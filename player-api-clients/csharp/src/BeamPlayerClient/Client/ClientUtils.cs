@@ -146,8 +146,12 @@ namespace BeamPlayerClient.Client
                 return CreateAssetOfferRequestInput.OperationProcessingEnumToJsonValue(createAssetOfferRequestInputOperationProcessingEnum);
             if (obj is CreateOperationRequestInput.OperationProcessingEnum createOperationRequestInputOperationProcessingEnum)
                 return CreateOperationRequestInput.OperationProcessingEnumToJsonValue(createOperationRequestInputOperationProcessingEnum);
+            if (obj is CreateOperationRequestInputTransactionsInner.TypeEnum createOperationRequestInputTransactionsInnerTypeEnum)
+                return CreateOperationRequestInputTransactionsInner.TypeEnumToJsonValue(createOperationRequestInputTransactionsInnerTypeEnum);
             if (obj is CreateTransactionRequestInput.OperationProcessingEnum createTransactionRequestInputOperationProcessingEnum)
                 return CreateTransactionRequestInput.OperationProcessingEnumToJsonValue(createTransactionRequestInputOperationProcessingEnum);
+            if (obj is GenerateConnectionRequestResponse.StatusEnum generateConnectionRequestResponseStatusEnum)
+                return GenerateConnectionRequestResponse.StatusEnumToJsonValue(generateConnectionRequestResponseStatusEnum);
             if (obj is GenerateSessionRequestResponse.StatusEnum generateSessionRequestResponseStatusEnum)
                 return GenerateSessionRequestResponse.StatusEnumToJsonValue(generateSessionRequestResponseStatusEnum);
             if (obj is GetAssetListingsResponseDataInner.StatusEnum getAssetListingsResponseDataInnerStatusEnum)
@@ -170,12 +174,16 @@ namespace BeamPlayerClient.Client
                 return GetAssetsForUserResponseDataInner.RarityEnumToJsonValue(getAssetsForUserResponseDataInnerRarityEnum);
             if (obj is GetChainCurrenciesResponseDataInner.SymbolEnum getChainCurrenciesResponseDataInnerSymbolEnum)
                 return GetChainCurrenciesResponseDataInner.SymbolEnumToJsonValue(getChainCurrenciesResponseDataInnerSymbolEnum);
+            if (obj is GetConnectionRequestResponse.StatusEnum getConnectionRequestResponseStatusEnum)
+                return GetConnectionRequestResponse.StatusEnumToJsonValue(getConnectionRequestResponseStatusEnum);
             if (obj is GetListedAssetsBodyInput.SortByEnum getListedAssetsBodyInputSortByEnum)
                 return GetListedAssetsBodyInput.SortByEnumToJsonValue(getListedAssetsBodyInputSortByEnum);
             if (obj is GetListedAssetsBodyInput.SortDirectionEnum getListedAssetsBodyInputSortDirectionEnum)
                 return GetListedAssetsBodyInput.SortDirectionEnumToJsonValue(getListedAssetsBodyInputSortDirectionEnum);
             if (obj is GetSessionRequestResponse.StatusEnum getSessionRequestResponseStatusEnum)
                 return GetSessionRequestResponse.StatusEnumToJsonValue(getSessionRequestResponseStatusEnum);
+            if (obj is RevokeSessionRequestInput.OperationProcessingEnum revokeSessionRequestInputOperationProcessingEnum)
+                return RevokeSessionRequestInput.OperationProcessingEnumToJsonValue(revokeSessionRequestInputOperationProcessingEnum);
             if (obj is SellAssetRequestInput.SellTypeEnum sellAssetRequestInputSellTypeEnum)
                 return SellAssetRequestInput.SellTypeEnumToJsonValue(sellAssetRequestInputSellTypeEnum);
             if (obj is SellAssetRequestInput.CurrencyEnum sellAssetRequestInputCurrencyEnum)
@@ -188,6 +196,12 @@ namespace BeamPlayerClient.Client
                 return TransferNativeTokenRequestInput.OperationProcessingEnumToJsonValue(transferNativeTokenRequestInputOperationProcessingEnum);
             if (obj is TransferTokenRequestInput.OperationProcessingEnum transferTokenRequestInputOperationProcessingEnum)
                 return TransferTokenRequestInput.OperationProcessingEnumToJsonValue(transferTokenRequestInputOperationProcessingEnum);
+            if (obj is WebConnectionCreateOperationInput.OperationProcessingEnum webConnectionCreateOperationInputOperationProcessingEnum)
+                return WebConnectionCreateOperationInput.OperationProcessingEnumToJsonValue(webConnectionCreateOperationInputOperationProcessingEnum);
+            if (obj is WebConnectionRevokeSessionInput.OperationProcessingEnum webConnectionRevokeSessionInputOperationProcessingEnum)
+                return WebConnectionRevokeSessionInput.OperationProcessingEnumToJsonValue(webConnectionRevokeSessionInputOperationProcessingEnum);
+            if (obj is WebConnectionTransactionInput.OperationProcessingEnum webConnectionTransactionInputOperationProcessingEnum)
+                return WebConnectionTransactionInput.OperationProcessingEnumToJsonValue(webConnectionTransactionInputOperationProcessingEnum);
             if (obj is ICollection collection)
             {
                 List<string?> entries = new();

@@ -185,7 +185,12 @@ namespace BeamPlayerClient.Model
             /// <summary>
             /// Enum OpenfortReservoirOrder for value: OpenfortReservoirOrder
             /// </summary>
-            OpenfortReservoirOrder = 2
+            OpenfortReservoirOrder = 2,
+
+            /// <summary>
+            /// Enum OpenfortRevokeSession for value: OpenfortRevokeSession
+            /// </summary>
+            OpenfortRevokeSession = 3
         }
 
         /// <summary>
@@ -201,6 +206,9 @@ namespace BeamPlayerClient.Model
 
             if (value.Equals("OpenfortReservoirOrder"))
                 return TypeEnum.OpenfortReservoirOrder;
+
+            if (value.Equals("OpenfortRevokeSession"))
+                return TypeEnum.OpenfortRevokeSession;
 
             throw new NotImplementedException($"Could not convert value to type TypeEnum: '{value}'");
         }
@@ -218,6 +226,9 @@ namespace BeamPlayerClient.Model
             if (value.Equals("OpenfortReservoirOrder"))
                 return TypeEnum.OpenfortReservoirOrder;
 
+            if (value.Equals("OpenfortRevokeSession"))
+                return TypeEnum.OpenfortRevokeSession;
+
             return null;
         }
 
@@ -234,6 +245,9 @@ namespace BeamPlayerClient.Model
 
             if (value == TypeEnum.OpenfortReservoirOrder)
                 return "OpenfortReservoirOrder";
+
+            if (value == TypeEnum.OpenfortRevokeSession)
+                return "OpenfortRevokeSession";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }
