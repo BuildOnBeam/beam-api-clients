@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 VisualStudioVersion = 12.0.0.0
 MinimumVisualStudioVersion = 10.0.0.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeamPlayerClient", "src\BeamPlayerClient\BeamPlayerClient.csproj", "{C53A00E8-3EF3-4514-8898-90A43A84FACD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeamPlayerClient", "src\BeamPlayerClient\BeamPlayerClient.csproj", "{68FD52D6-1139-492B-A286-5ACACA713E12}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -10,10 +10,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C53A00E8-3EF3-4514-8898-90A43A84FACD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C53A00E8-3EF3-4514-8898-90A43A84FACD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C53A00E8-3EF3-4514-8898-90A43A84FACD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C53A00E8-3EF3-4514-8898-90A43A84FACD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68FD52D6-1139-492B-A286-5ACACA713E12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68FD52D6-1139-492B-A286-5ACACA713E12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68FD52D6-1139-492B-A286-5ACACA713E12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68FD52D6-1139-492B-A286-5ACACA713E12}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.ActiveCfg = Release|Any CPU
