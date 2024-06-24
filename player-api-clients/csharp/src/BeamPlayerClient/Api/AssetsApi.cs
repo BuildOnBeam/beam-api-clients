@@ -192,7 +192,7 @@ namespace BeamPlayerClient.Api
         Task<ITransferAssetApiResponse?> TransferAssetOrDefaultAsync(TransferAssetRequestInput transferAssetRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Transfer the native token (BEAM)
+        /// Transfer the native token
         /// </summary>
         /// <remarks>
         /// 
@@ -205,7 +205,7 @@ namespace BeamPlayerClient.Api
         Task<ITransferNativeTokenApiResponse> TransferNativeTokenAsync(TransferNativeTokenRequestInput transferNativeTokenRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Transfer the native token (BEAM)
+        /// Transfer the native token
         /// </summary>
         /// <remarks>
         /// 
@@ -2122,7 +2122,7 @@ namespace BeamPlayerClient.Api
         partial void OnErrorTransferNativeToken(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, TransferNativeTokenRequestInput transferNativeTokenRequestInput, string entityId);
 
         /// <summary>
-        /// Transfer the native token (BEAM) 
+        /// Transfer the native token 
         /// </summary>
         /// <param name="transferNativeTokenRequestInput"></param>
         /// <param name="entityId"></param>
@@ -2141,7 +2141,7 @@ namespace BeamPlayerClient.Api
         }
 
         /// <summary>
-        /// Transfer the native token (BEAM) 
+        /// Transfer the native token 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="transferNativeTokenRequestInput"></param>

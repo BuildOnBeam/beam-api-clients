@@ -5,7 +5,6 @@ docs/scripts/git_push.ps1
 docs/scripts/git_push.sh
 src/BeamPlayerClient.Test/README.md
 src/BeamPlayerClient/Api/AssetsApi.cs
-src/BeamPlayerClient/Api/ConnectorApi.cs
 src/BeamPlayerClient/Api/ExchangeApi.cs
 src/BeamPlayerClient/Api/HealthApi.cs
 src/BeamPlayerClient/Api/IApi.cs
@@ -52,8 +51,6 @@ src/BeamPlayerClient/Model/CreateOperationRequestInput.cs
 src/BeamPlayerClient/Model/CreateOperationRequestInputTransactionsInner.cs
 src/BeamPlayerClient/Model/CreateTransactionRequestInput.cs
 src/BeamPlayerClient/Model/CreateTransactionRequestInputInteractionsInner.cs
-src/BeamPlayerClient/Model/GenerateConnectionRequestInput.cs
-src/BeamPlayerClient/Model/GenerateConnectionRequestResponse.cs
 src/BeamPlayerClient/Model/GenerateSessionRequestResponse.cs
 src/BeamPlayerClient/Model/GenerateSessionUrlRequestInput.cs
 src/BeamPlayerClient/Model/GetActiveSessionResponse.cs
@@ -79,7 +76,6 @@ src/BeamPlayerClient/Model/GetAssetsForUserResponseDataInner.cs
 src/BeamPlayerClient/Model/GetAssetsForUserResponseDataInnerAttributesInner.cs
 src/BeamPlayerClient/Model/GetChainCurrenciesResponse.cs
 src/BeamPlayerClient/Model/GetChainCurrenciesResponseDataInner.cs
-src/BeamPlayerClient/Model/GetConnectionRequestResponse.cs
 src/BeamPlayerClient/Model/GetListedAssetsBodyInput.cs
 src/BeamPlayerClient/Model/GetQuoteResponse.cs
 src/BeamPlayerClient/Model/GetSessionRequestResponse.cs
@@ -106,11 +102,3 @@ src/BeamPlayerClient/Model/TransferAssetRequestInput.cs
 src/BeamPlayerClient/Model/TransferAssetRequestInputAssetsInner.cs
 src/BeamPlayerClient/Model/TransferNativeTokenRequestInput.cs
 src/BeamPlayerClient/Model/TransferTokenRequestInput.cs
-src/BeamPlayerClient/Model/WebConnectionCreateOperationInput.cs
-src/BeamPlayerClient/Model/WebConnectionRequestInput.cs
-src/BeamPlayerClient/Model/WebConnectionRequestResponse.cs
-src/BeamPlayerClient/Model/WebConnectionRevokeSessionInput.cs
-src/BeamPlayerClient/Model/WebConnectionTransactionInput.cs
-src/BeamPlayerClient/Model/WebConnectionTransactionInputInteractionsInner.cs
-src/BeamPlayerClient/Model/WebConnectionVerifyRequestInput.cs
-src/BeamPlayerClient/Model/WebConnectionVerifyRequestResponse.cs

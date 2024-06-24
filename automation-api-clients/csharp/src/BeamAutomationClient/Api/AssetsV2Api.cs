@@ -192,7 +192,7 @@ namespace BeamAutomationClient.Api
         Task<ITransferAssetV2ApiResponse?> TransferAssetV2OrDefaultAsync(TransferAssetRequestInputV2 transferAssetRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Transfer the native token (BEAM)
+        /// Transfer the native token
         /// </summary>
         /// <remarks>
         /// 
@@ -205,7 +205,7 @@ namespace BeamAutomationClient.Api
         Task<ITransferNativeTokenV2ApiResponse> TransferNativeTokenV2Async(TransferNativeTokenRequestInputV2 transferNativeTokenRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Transfer the native token (BEAM)
+        /// Transfer the native token
         /// </summary>
         /// <remarks>
         /// 
@@ -2122,7 +2122,7 @@ namespace BeamAutomationClient.Api
         partial void OnErrorTransferNativeTokenV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, TransferNativeTokenRequestInputV2 transferNativeTokenRequestInputV2, string entityId);
 
         /// <summary>
-        /// Transfer the native token (BEAM) 
+        /// Transfer the native token 
         /// </summary>
         /// <param name="transferNativeTokenRequestInputV2"></param>
         /// <param name="entityId"></param>
@@ -2141,7 +2141,7 @@ namespace BeamAutomationClient.Api
         }
 
         /// <summary>
-        /// Transfer the native token (BEAM) 
+        /// Transfer the native token 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="transferNativeTokenRequestInputV2"></param>

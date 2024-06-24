@@ -42,8 +42,9 @@ namespace BeamPlayerClient.Model
         /// <param name="externalId">externalId</param>
         /// <param name="operationId">operationId</param>
         /// <param name="signature">signature</param>
+        /// <param name="transactionHash">transactionHash</param>
         [JsonConstructor]
-        public CommonOperationResponseTransactionsInner(string hash, string id, StatusEnum status, TypeEnum type, Option<CommonOperationResponseTransactionsInnerData?> data = default, string? externalId = default, string? operationId = default, string? signature = default)
+        public CommonOperationResponseTransactionsInner(string hash, string id, StatusEnum status, TypeEnum type, Option<CommonOperationResponseTransactionsInnerData?> data = default, string? externalId = default, string? operationId = default, string? signature = default, string? transactionHash = default)
         {
             Hash = hash;
             Id = id;
@@ -53,6 +54,7 @@ namespace BeamPlayerClient.Model
             ExternalId = externalId;
             OperationId = operationId;
             Signature = signature;
+            TransactionHash = transactionHash;
             OnCreated();
         }
 
@@ -302,6 +304,12 @@ namespace BeamPlayerClient.Model
         public string? Signature { get; set; }
 
         /// <summary>
+        /// Gets or Sets TransactionHash
+        /// </summary>
+        [JsonPropertyName("transactionHash")]
+        public string? TransactionHash { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -317,6 +325,7 @@ namespace BeamPlayerClient.Model
             sb.Append("  ExternalId: ").Append(ExternalId).Append("\n");
             sb.Append("  OperationId: ").Append(OperationId).Append("\n");
             sb.Append("  Signature: ").Append(Signature).Append("\n");
+            sb.Append("  TransactionHash: ").Append(TransactionHash).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -362,6 +371,7 @@ namespace BeamPlayerClient.Model
             Option<string?> externalId = default;
             Option<string?> operationId = default;
             Option<string?> signature = default;
+            Option<string?> transactionHash = default;
 
             while (utf8JsonReader.Read())
             {
@@ -407,6 +417,9 @@ namespace BeamPlayerClient.Model
                         case "signature":
                             signature = new Option<string?>(utf8JsonReader.GetString());
                             break;
+                        case "transactionHash":
+                            transactionHash = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         default:
                             break;
                     }
@@ -434,6 +447,9 @@ namespace BeamPlayerClient.Model
             if (!signature.IsSet)
                 throw new ArgumentException("Property is required for class CommonOperationResponseTransactionsInner.", nameof(signature));
 
+            if (!transactionHash.IsSet)
+                throw new ArgumentException("Property is required for class CommonOperationResponseTransactionsInner.", nameof(transactionHash));
+
             if (hash.IsSet && hash.Value == null)
                 throw new ArgumentNullException(nameof(hash), "Property is not nullable for class CommonOperationResponseTransactionsInner.");
 
@@ -446,7 +462,7 @@ namespace BeamPlayerClient.Model
             if (type.IsSet && type.Value == null)
                 throw new ArgumentNullException(nameof(type), "Property is not nullable for class CommonOperationResponseTransactionsInner.");
 
-            return new CommonOperationResponseTransactionsInner(hash.Value!, id.Value!, status.Value!.Value!, type.Value!.Value!, data, externalId.Value!, operationId.Value!, signature.Value!);
+            return new CommonOperationResponseTransactionsInner(hash.Value!, id.Value!, status.Value!.Value!, type.Value!.Value!, data, externalId.Value!, operationId.Value!, signature.Value!, transactionHash.Value!);
         }
 
         /// <summary>
@@ -509,6 +525,11 @@ namespace BeamPlayerClient.Model
                 writer.WriteString("signature", commonOperationResponseTransactionsInner.Signature);
             else
                 writer.WriteNull("signature");
+
+            if (commonOperationResponseTransactionsInner.TransactionHash != null)
+                writer.WriteString("transactionHash", commonOperationResponseTransactionsInner.TransactionHash);
+            else
+                writer.WriteNull("transactionHash");
         }
     }
 }
