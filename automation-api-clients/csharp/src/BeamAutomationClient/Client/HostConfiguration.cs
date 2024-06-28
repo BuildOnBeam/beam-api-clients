@@ -44,8 +44,6 @@ namespace BeamAutomationClient.Client
             _jsonOptions.Converters.Add(new AcceptAssetOfferRequestInputV2JsonConverter());
             _jsonOptions.Converters.Add(new AcceptOfferResponseV2JsonConverter());
             _jsonOptions.Converters.Add(new AddContractRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new AddContractRequestInputAbiInnerJsonConverter());
-            _jsonOptions.Converters.Add(new AddContractRequestInputAbiInnerInputsInnerJsonConverter());
             _jsonOptions.Converters.Add(new AddContractResponseJsonConverter());
             _jsonOptions.Converters.Add(new BuyAssetRequestInputV2JsonConverter());
             _jsonOptions.Converters.Add(new BuyAssetResponseV2JsonConverter());

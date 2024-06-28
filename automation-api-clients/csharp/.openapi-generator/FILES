@@ -40,8 +40,6 @@ src/BeamAutomationClient/Extensions/IServiceCollectionExtensions.cs
 src/BeamAutomationClient/Model/AcceptAssetOfferRequestInputV2.cs
 src/BeamAutomationClient/Model/AcceptOfferResponseV2.cs
 src/BeamAutomationClient/Model/AddContractRequestInput.cs
-src/BeamAutomationClient/Model/AddContractRequestInputAbiInner.cs
-src/BeamAutomationClient/Model/AddContractRequestInputAbiInnerInputsInner.cs
 src/BeamAutomationClient/Model/AddContractResponse.cs
 src/BeamAutomationClient/Model/BuyAssetRequestInputV2.cs
 src/BeamAutomationClient/Model/BuyAssetResponseV2.cs

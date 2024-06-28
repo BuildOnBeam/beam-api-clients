@@ -5,6 +5,7 @@ docs/scripts/git_push.ps1
 docs/scripts/git_push.sh
 src/BeamPlayerClient.Test/README.md
 src/BeamPlayerClient/Api/AssetsApi.cs
+src/BeamPlayerClient/Api/ConnectorApi.cs
 src/BeamPlayerClient/Api/ExchangeApi.cs
 src/BeamPlayerClient/Api/HealthApi.cs
 src/BeamPlayerClient/Api/IApi.cs
@@ -47,6 +48,8 @@ src/BeamPlayerClient/Model/ConfirmOperationRequest.cs
 src/BeamPlayerClient/Model/ConfirmOperationRequestTransactionsInner.cs
 src/BeamPlayerClient/Model/ConvertTokenRequestInput.cs
 src/BeamPlayerClient/Model/CreateAssetOfferRequestInput.cs
+src/BeamPlayerClient/Model/CreateConnectionRequestInput.cs
+src/BeamPlayerClient/Model/CreateConnectionRequestResponse.cs
 src/BeamPlayerClient/Model/CreateOperationRequestInput.cs
 src/BeamPlayerClient/Model/CreateOperationRequestInputTransactionsInner.cs
 src/BeamPlayerClient/Model/CreateTransactionRequestInput.cs
@@ -76,6 +79,7 @@ src/BeamPlayerClient/Model/GetAssetsForUserResponseDataInner.cs
 src/BeamPlayerClient/Model/GetAssetsForUserResponseDataInnerAttributesInner.cs
 src/BeamPlayerClient/Model/GetChainCurrenciesResponse.cs
 src/BeamPlayerClient/Model/GetChainCurrenciesResponseDataInner.cs
+src/BeamPlayerClient/Model/GetConnectionRequestResponse.cs
 src/BeamPlayerClient/Model/GetListedAssetsBodyInput.cs
 src/BeamPlayerClient/Model/GetQuoteResponse.cs
 src/BeamPlayerClient/Model/GetSessionRequestResponse.cs

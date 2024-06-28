@@ -144,6 +144,8 @@ namespace BeamPlayerClient.Client
                 return CreateAssetOfferRequestInput.CurrencyEnumToJsonValue(createAssetOfferRequestInputCurrencyEnum);
             if (obj is CreateAssetOfferRequestInput.OperationProcessingEnum createAssetOfferRequestInputOperationProcessingEnum)
                 return CreateAssetOfferRequestInput.OperationProcessingEnumToJsonValue(createAssetOfferRequestInputOperationProcessingEnum);
+            if (obj is CreateConnectionRequestResponse.StatusEnum createConnectionRequestResponseStatusEnum)
+                return CreateConnectionRequestResponse.StatusEnumToJsonValue(createConnectionRequestResponseStatusEnum);
             if (obj is CreateOperationRequestInput.OperationProcessingEnum createOperationRequestInputOperationProcessingEnum)
                 return CreateOperationRequestInput.OperationProcessingEnumToJsonValue(createOperationRequestInputOperationProcessingEnum);
             if (obj is CreateOperationRequestInputTransactionsInner.TypeEnum createOperationRequestInputTransactionsInnerTypeEnum)
@@ -172,6 +174,8 @@ namespace BeamPlayerClient.Client
                 return GetAssetsForUserResponseDataInner.RarityEnumToJsonValue(getAssetsForUserResponseDataInnerRarityEnum);
             if (obj is GetChainCurrenciesResponseDataInner.SymbolEnum getChainCurrenciesResponseDataInnerSymbolEnum)
                 return GetChainCurrenciesResponseDataInner.SymbolEnumToJsonValue(getChainCurrenciesResponseDataInnerSymbolEnum);
+            if (obj is GetConnectionRequestResponse.StatusEnum getConnectionRequestResponseStatusEnum)
+                return GetConnectionRequestResponse.StatusEnumToJsonValue(getConnectionRequestResponseStatusEnum);
             if (obj is GetListedAssetsBodyInput.SortByEnum getListedAssetsBodyInputSortByEnum)
                 return GetListedAssetsBodyInput.SortByEnumToJsonValue(getListedAssetsBodyInputSortByEnum);
             if (obj is GetListedAssetsBodyInput.SortDirectionEnum getListedAssetsBodyInputSortDirectionEnum)

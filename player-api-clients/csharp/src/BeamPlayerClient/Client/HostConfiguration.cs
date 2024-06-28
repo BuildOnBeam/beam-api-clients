@@ -55,6 +55,8 @@ namespace BeamPlayerClient.Client
             _jsonOptions.Converters.Add(new ConfirmOperationRequestTransactionsInnerJsonConverter());
             _jsonOptions.Converters.Add(new ConvertTokenRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new CreateAssetOfferRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new CreateConnectionRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new CreateConnectionRequestResponseJsonConverter());
             _jsonOptions.Converters.Add(new CreateOperationRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new CreateOperationRequestInputTransactionsInnerJsonConverter());
             _jsonOptions.Converters.Add(new CreateTransactionRequestInputJsonConverter());
@@ -84,6 +86,7 @@ namespace BeamPlayerClient.Client
             _jsonOptions.Converters.Add(new GetAssetsForUserResponseDataInnerAttributesInnerJsonConverter());
             _jsonOptions.Converters.Add(new GetChainCurrenciesResponseJsonConverter());
             _jsonOptions.Converters.Add(new GetChainCurrenciesResponseDataInnerJsonConverter());
+            _jsonOptions.Converters.Add(new GetConnectionRequestResponseJsonConverter());
             _jsonOptions.Converters.Add(new GetListedAssetsBodyInputJsonConverter());
             _jsonOptions.Converters.Add(new GetQuoteResponseJsonConverter());
             _jsonOptions.Converters.Add(new GetSessionRequestResponseJsonConverter());
@@ -115,6 +118,8 @@ namespace BeamPlayerClient.Client
             _services.AddSingleton<IApiFactory, ApiFactory>();
             _services.AddSingleton<AssetsApiEvents>();
             _services.AddTransient<IAssetsApi, AssetsApi>();
+            _services.AddSingleton<ConnectorApiEvents>();
+            _services.AddTransient<IConnectorApi, ConnectorApi>();
             _services.AddSingleton<ExchangeApiEvents>();
             _services.AddTransient<IExchangeApi, ExchangeApi>();
             _services.AddSingleton<HealthApiEvents>();
@@ -147,6 +152,7 @@ namespace BeamPlayerClient.Client
             List<IHttpClientBuilder> builders = new List<IHttpClientBuilder>();
 
             builders.Add(_services.AddHttpClient<IAssetsApi, AssetsApi>(client));
+            builders.Add(_services.AddHttpClient<IConnectorApi, ConnectorApi>(client));
             builders.Add(_services.AddHttpClient<IExchangeApi, ExchangeApi>(client));
             builders.Add(_services.AddHttpClient<IHealthApi, HealthApi>(client));
             builders.Add(_services.AddHttpClient<IMarketplaceApi, MarketplaceApi>(client));

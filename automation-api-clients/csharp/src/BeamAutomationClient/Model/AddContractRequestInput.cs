@@ -34,15 +34,13 @@ namespace BeamAutomationClient.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="AddContractRequestInput" /> class.
         /// </summary>
-        /// <param name="abi">abi</param>
         /// <param name="address">address</param>
         /// <param name="chainId">chainId</param>
         /// <param name="name">name</param>
         /// <param name="type">type</param>
         [JsonConstructor]
-        public AddContractRequestInput(List<AddContractRequestInputAbiInner> abi, string address, int chainId, string name, TypeEnum type)
+        public AddContractRequestInput(string address, int chainId, string name, TypeEnum type)
         {
-            Abi = abi;
             Address = address;
             ChainId = chainId;
             Name = name;
@@ -181,12 +179,6 @@ namespace BeamAutomationClient.Model
         public TypeEnum Type { get; set; }
 
         /// <summary>
-        /// Gets or Sets Abi
-        /// </summary>
-        [JsonPropertyName("abi")]
-        public List<AddContractRequestInputAbiInner> Abi { get; set; }
-
-        /// <summary>
         /// Gets or Sets Address
         /// </summary>
         [JsonPropertyName("address")]
@@ -212,7 +204,6 @@ namespace BeamAutomationClient.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class AddContractRequestInput {\n");
-            sb.Append("  Abi: ").Append(Abi).Append("\n");
             sb.Append("  Address: ").Append(Address).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
@@ -254,7 +245,6 @@ namespace BeamAutomationClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<List<AddContractRequestInputAbiInner>?> abi = default;
             Option<string?> address = default;
             Option<int?> chainId = default;
             Option<string?> name = default;
@@ -275,10 +265,6 @@ namespace BeamAutomationClient.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "abi":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                abi = new Option<List<AddContractRequestInputAbiInner>?>(JsonSerializer.Deserialize<List<AddContractRequestInputAbiInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
-                            break;
                         case "address":
                             address = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
@@ -300,9 +286,6 @@ namespace BeamAutomationClient.Model
                 }
             }
 
-            if (!abi.IsSet)
-                throw new ArgumentException("Property is required for class AddContractRequestInput.", nameof(abi));
-
             if (!address.IsSet)
                 throw new ArgumentException("Property is required for class AddContractRequestInput.", nameof(address));
 
@@ -314,9 +297,6 @@ namespace BeamAutomationClient.Model
 
             if (!type.IsSet)
                 throw new ArgumentException("Property is required for class AddContractRequestInput.", nameof(type));
-
-            if (abi.IsSet && abi.Value == null)
-                throw new ArgumentNullException(nameof(abi), "Property is not nullable for class AddContractRequestInput.");
 
             if (address.IsSet && address.Value == null)
                 throw new ArgumentNullException(nameof(address), "Property is not nullable for class AddContractRequestInput.");
@@ -330,7 +310,7 @@ namespace BeamAutomationClient.Model
             if (type.IsSet && type.Value == null)
                 throw new ArgumentNullException(nameof(type), "Property is not nullable for class AddContractRequestInput.");
 
-            return new AddContractRequestInput(abi.Value!, address.Value!, chainId.Value!.Value!, name.Value!, type.Value!.Value!);
+            return new AddContractRequestInput(address.Value!, chainId.Value!.Value!, name.Value!, type.Value!.Value!);
         }
 
         /// <summary>
@@ -357,17 +337,12 @@ namespace BeamAutomationClient.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, AddContractRequestInput addContractRequestInput, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (addContractRequestInput.Abi == null)
-                throw new ArgumentNullException(nameof(addContractRequestInput.Abi), "Property is required for class AddContractRequestInput.");
-
             if (addContractRequestInput.Address == null)
                 throw new ArgumentNullException(nameof(addContractRequestInput.Address), "Property is required for class AddContractRequestInput.");
 
             if (addContractRequestInput.Name == null)
                 throw new ArgumentNullException(nameof(addContractRequestInput.Name), "Property is required for class AddContractRequestInput.");
 
-            writer.WritePropertyName("abi");
-            JsonSerializer.Serialize(writer, addContractRequestInput.Abi, jsonSerializerOptions);
             writer.WriteString("address", addContractRequestInput.Address);
 
             writer.WriteNumber("chainId", addContractRequestInput.ChainId);
