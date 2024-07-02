@@ -35,19 +35,19 @@ namespace BeamAutomationClient.Model
         /// Initializes a new instance of the <see cref="RegenerateGameApiKeysResponseApiKeysInner" /> class.
         /// </summary>
         /// <param name="apiKey">apiKey</param>
+        /// <param name="createdAt">createdAt</param>
         /// <param name="gameId">gameId</param>
         /// <param name="id">id</param>
         /// <param name="type">type</param>
-        /// <param name="createdAt">createdAt</param>
         /// <param name="updatedAt">updatedAt</param>
         [JsonConstructor]
-        public RegenerateGameApiKeysResponseApiKeysInner(string apiKey, string gameId, string id, TypeEnum type, Object? createdAt = default, Object? updatedAt = default)
+        public RegenerateGameApiKeysResponseApiKeysInner(string apiKey, DateTime createdAt, string gameId, string id, TypeEnum type, DateTime updatedAt)
         {
             ApiKey = apiKey;
+            CreatedAt = createdAt;
             GameId = gameId;
             Id = id;
             Type = type;
-            CreatedAt = createdAt;
             UpdatedAt = updatedAt;
             OnCreated();
         }
@@ -147,6 +147,12 @@ namespace BeamAutomationClient.Model
         public string ApiKey { get; set; }
 
         /// <summary>
+        /// Gets or Sets CreatedAt
+        /// </summary>
+        [JsonPropertyName("createdAt")]
+        public DateTime CreatedAt { get; set; }
+
+        /// <summary>
         /// Gets or Sets GameId
         /// </summary>
         [JsonPropertyName("gameId")]
@@ -159,16 +165,10 @@ namespace BeamAutomationClient.Model
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets CreatedAt
-        /// </summary>
-        [JsonPropertyName("createdAt")]
-        public Object? CreatedAt { get; set; }
-
-        /// <summary>
         /// Gets or Sets UpdatedAt
         /// </summary>
         [JsonPropertyName("updatedAt")]
-        public Object? UpdatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -179,10 +179,10 @@ namespace BeamAutomationClient.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class RegenerateGameApiKeysResponseApiKeysInner {\n");
             sb.Append("  ApiKey: ").Append(ApiKey).Append("\n");
+            sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  GameId: ").Append(GameId).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -205,6 +205,16 @@ namespace BeamAutomationClient.Model
     public class RegenerateGameApiKeysResponseApiKeysInnerJsonConverter : JsonConverter<RegenerateGameApiKeysResponseApiKeysInner>
     {
         /// <summary>
+        /// The format to use to serialize CreatedAt
+        /// </summary>
+        public static string CreatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
+        /// The format to use to serialize UpdatedAt
+        /// </summary>
+        public static string UpdatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
         /// Deserializes json to <see cref="RegenerateGameApiKeysResponseApiKeysInner" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
@@ -222,11 +232,11 @@ namespace BeamAutomationClient.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<string?> apiKey = default;
+            Option<DateTime?> createdAt = default;
             Option<string?> gameId = default;
             Option<string?> id = default;
             Option<RegenerateGameApiKeysResponseApiKeysInner.TypeEnum?> type = default;
-            Option<Object?> createdAt = default;
-            Option<Object?> updatedAt = default;
+            Option<DateTime?> updatedAt = default;
 
             while (utf8JsonReader.Read())
             {
@@ -246,6 +256,10 @@ namespace BeamAutomationClient.Model
                         case "apiKey":
                             apiKey = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
+                        case "createdAt":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                createdAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
                         case "gameId":
                             gameId = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
@@ -257,13 +271,9 @@ namespace BeamAutomationClient.Model
                             if (typeRawValue != null)
                                 type = new Option<RegenerateGameApiKeysResponseApiKeysInner.TypeEnum?>(RegenerateGameApiKeysResponseApiKeysInner.TypeEnumFromStringOrDefault(typeRawValue));
                             break;
-                        case "createdAt":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                createdAt = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
-                            break;
                         case "updatedAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                updatedAt = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
+                                updatedAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -274,6 +284,9 @@ namespace BeamAutomationClient.Model
             if (!apiKey.IsSet)
                 throw new ArgumentException("Property is required for class RegenerateGameApiKeysResponseApiKeysInner.", nameof(apiKey));
 
+            if (!createdAt.IsSet)
+                throw new ArgumentException("Property is required for class RegenerateGameApiKeysResponseApiKeysInner.", nameof(createdAt));
+
             if (!gameId.IsSet)
                 throw new ArgumentException("Property is required for class RegenerateGameApiKeysResponseApiKeysInner.", nameof(gameId));
 
@@ -283,14 +296,14 @@ namespace BeamAutomationClient.Model
             if (!type.IsSet)
                 throw new ArgumentException("Property is required for class RegenerateGameApiKeysResponseApiKeysInner.", nameof(type));
 
-            if (!createdAt.IsSet)
-                throw new ArgumentException("Property is required for class RegenerateGameApiKeysResponseApiKeysInner.", nameof(createdAt));
-
             if (!updatedAt.IsSet)
                 throw new ArgumentException("Property is required for class RegenerateGameApiKeysResponseApiKeysInner.", nameof(updatedAt));
 
             if (apiKey.IsSet && apiKey.Value == null)
                 throw new ArgumentNullException(nameof(apiKey), "Property is not nullable for class RegenerateGameApiKeysResponseApiKeysInner.");
+
+            if (createdAt.IsSet && createdAt.Value == null)
+                throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class RegenerateGameApiKeysResponseApiKeysInner.");
 
             if (gameId.IsSet && gameId.Value == null)
                 throw new ArgumentNullException(nameof(gameId), "Property is not nullable for class RegenerateGameApiKeysResponseApiKeysInner.");
@@ -301,7 +314,10 @@ namespace BeamAutomationClient.Model
             if (type.IsSet && type.Value == null)
                 throw new ArgumentNullException(nameof(type), "Property is not nullable for class RegenerateGameApiKeysResponseApiKeysInner.");
 
-            return new RegenerateGameApiKeysResponseApiKeysInner(apiKey.Value!, gameId.Value!, id.Value!, type.Value!.Value!, createdAt.Value!, updatedAt.Value!);
+            if (updatedAt.IsSet && updatedAt.Value == null)
+                throw new ArgumentNullException(nameof(updatedAt), "Property is not nullable for class RegenerateGameApiKeysResponseApiKeysInner.");
+
+            return new RegenerateGameApiKeysResponseApiKeysInner(apiKey.Value!, createdAt.Value!.Value!, gameId.Value!, id.Value!, type.Value!.Value!, updatedAt.Value!.Value!);
         }
 
         /// <summary>
@@ -339,26 +355,15 @@ namespace BeamAutomationClient.Model
 
             writer.WriteString("apiKey", regenerateGameApiKeysResponseApiKeysInner.ApiKey);
 
+            writer.WriteString("createdAt", regenerateGameApiKeysResponseApiKeysInner.CreatedAt.ToString(CreatedAtFormat));
+
             writer.WriteString("gameId", regenerateGameApiKeysResponseApiKeysInner.GameId);
 
             writer.WriteString("id", regenerateGameApiKeysResponseApiKeysInner.Id);
 
             var typeRawValue = RegenerateGameApiKeysResponseApiKeysInner.TypeEnumToJsonValue(regenerateGameApiKeysResponseApiKeysInner.Type);
             writer.WriteString("type", typeRawValue);
-            if (regenerateGameApiKeysResponseApiKeysInner.CreatedAt != null)
-            {
-                writer.WritePropertyName("createdAt");
-                JsonSerializer.Serialize(writer, regenerateGameApiKeysResponseApiKeysInner.CreatedAt, jsonSerializerOptions);
-            }
-            else
-                writer.WriteNull("createdAt");
-            if (regenerateGameApiKeysResponseApiKeysInner.UpdatedAt != null)
-            {
-                writer.WritePropertyName("updatedAt");
-                JsonSerializer.Serialize(writer, regenerateGameApiKeysResponseApiKeysInner.UpdatedAt, jsonSerializerOptions);
-            }
-            else
-                writer.WriteNull("updatedAt");
+            writer.WriteString("updatedAt", regenerateGameApiKeysResponseApiKeysInner.UpdatedAt.ToString(UpdatedAtFormat));
         }
     }
 }

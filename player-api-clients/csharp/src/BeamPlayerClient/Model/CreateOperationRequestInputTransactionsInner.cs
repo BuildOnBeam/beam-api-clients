@@ -37,10 +37,10 @@ namespace BeamPlayerClient.Model
         /// <param name="type">type</param>
         /// <param name="data">data</param>
         [JsonConstructor]
-        public CreateOperationRequestInputTransactionsInner(TypeEnum type, Object? data = default)
+        public CreateOperationRequestInputTransactionsInner(TypeEnum type, Option<Object?> data = default)
         {
             Type = type;
-            Data = data;
+            DataOption = data;
             OnCreated();
         }
 
@@ -133,10 +133,17 @@ namespace BeamPlayerClient.Model
         public TypeEnum Type { get; set; }
 
         /// <summary>
+        /// Used to track the state of Data
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<Object?> DataOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets Data
         /// </summary>
         [JsonPropertyName("data")]
-        public Object? Data { get; set; }
+        public Object? Data { get { return this. DataOption; } set { this.DataOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -221,13 +228,10 @@ namespace BeamPlayerClient.Model
             if (!type.IsSet)
                 throw new ArgumentException("Property is required for class CreateOperationRequestInputTransactionsInner.", nameof(type));
 
-            if (!data.IsSet)
-                throw new ArgumentException("Property is required for class CreateOperationRequestInputTransactionsInner.", nameof(data));
-
             if (type.IsSet && type.Value == null)
                 throw new ArgumentNullException(nameof(type), "Property is not nullable for class CreateOperationRequestInputTransactionsInner.");
 
-            return new CreateOperationRequestInputTransactionsInner(type.Value!.Value!, data.Value!);
+            return new CreateOperationRequestInputTransactionsInner(type.Value!.Value!, data);
         }
 
         /// <summary>
@@ -256,13 +260,14 @@ namespace BeamPlayerClient.Model
         {
             var typeRawValue = CreateOperationRequestInputTransactionsInner.TypeEnumToJsonValue(createOperationRequestInputTransactionsInner.Type);
             writer.WriteString("type", typeRawValue);
-            if (createOperationRequestInputTransactionsInner.Data != null)
-            {
-                writer.WritePropertyName("data");
-                JsonSerializer.Serialize(writer, createOperationRequestInputTransactionsInner.Data, jsonSerializerOptions);
-            }
-            else
-                writer.WriteNull("data");
+            if (createOperationRequestInputTransactionsInner.DataOption.IsSet)
+                if (createOperationRequestInputTransactionsInner.DataOption.Value != null)
+                {
+                    writer.WritePropertyName("data");
+                    JsonSerializer.Serialize(writer, createOperationRequestInputTransactionsInner.Data, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("data");
         }
     }
 }

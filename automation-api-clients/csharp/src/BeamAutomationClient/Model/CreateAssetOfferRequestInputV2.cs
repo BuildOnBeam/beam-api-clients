@@ -43,7 +43,7 @@ namespace BeamAutomationClient.Model
         /// <param name="endTime">endTime</param>
         /// <param name="startTime">startTime</param>
         [JsonConstructor]
-        public CreateAssetOfferRequestInputV2(string assetAddress, string assetId, string price, decimal quantity, Option<decimal?> chainId = default, Option<CurrencyEnum?> currency = default, Option<DateTime?> endTime = default, Option<DateTime?> startTime = default)
+        public CreateAssetOfferRequestInputV2(string assetAddress, string assetId, string price, decimal quantity, Option<decimal?> chainId = default, Option<CurrencyEnum?> currency = default, Option<string?> endTime = default, Option<string?> startTime = default)
         {
             AssetAddress = assetAddress;
             AssetId = assetId;
@@ -193,26 +193,26 @@ namespace BeamAutomationClient.Model
         /// </summary>
         [JsonIgnore]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<DateTime?> EndTimeOption { get; private set; }
+        public Option<string?> EndTimeOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets EndTime
         /// </summary>
         [JsonPropertyName("endTime")]
-        public DateTime? EndTime { get { return this. EndTimeOption; } set { this.EndTimeOption = new(value); } }
+        public string? EndTime { get { return this. EndTimeOption; } set { this.EndTimeOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of StartTime
         /// </summary>
         [JsonIgnore]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<DateTime?> StartTimeOption { get; private set; }
+        public Option<string?> StartTimeOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets StartTime
         /// </summary>
         [JsonPropertyName("startTime")]
-        public DateTime? StartTime { get { return this. StartTimeOption; } set { this.StartTimeOption = new(value); } }
+        public string? StartTime { get { return this. StartTimeOption; } set { this.StartTimeOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -257,16 +257,6 @@ namespace BeamAutomationClient.Model
     public class CreateAssetOfferRequestInputV2JsonConverter : JsonConverter<CreateAssetOfferRequestInputV2>
     {
         /// <summary>
-        /// The format to use to serialize EndTime
-        /// </summary>
-        public static string EndTimeFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
-
-        /// <summary>
-        /// The format to use to serialize StartTime
-        /// </summary>
-        public static string StartTimeFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
-
-        /// <summary>
         /// Deserializes json to <see cref="CreateAssetOfferRequestInputV2" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
@@ -289,8 +279,8 @@ namespace BeamAutomationClient.Model
             Option<decimal?> quantity = default;
             Option<decimal?> chainId = default;
             Option<CreateAssetOfferRequestInputV2.CurrencyEnum?> currency = default;
-            Option<DateTime?> endTime = default;
-            Option<DateTime?> startTime = default;
+            Option<string?> endTime = default;
+            Option<string?> startTime = default;
 
             while (utf8JsonReader.Read())
             {
@@ -330,12 +320,10 @@ namespace BeamAutomationClient.Model
                                 currency = new Option<CreateAssetOfferRequestInputV2.CurrencyEnum?>(CreateAssetOfferRequestInputV2.CurrencyEnumFromStringOrDefault(currencyRawValue));
                             break;
                         case "endTime":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                endTime = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
+                            endTime = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "startTime":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                startTime = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
+                            startTime = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         default:
                             break;
@@ -415,6 +403,12 @@ namespace BeamAutomationClient.Model
             if (createAssetOfferRequestInputV2.Price == null)
                 throw new ArgumentNullException(nameof(createAssetOfferRequestInputV2.Price), "Property is required for class CreateAssetOfferRequestInputV2.");
 
+            if (createAssetOfferRequestInputV2.EndTimeOption.IsSet && createAssetOfferRequestInputV2.EndTime == null)
+                throw new ArgumentNullException(nameof(createAssetOfferRequestInputV2.EndTime), "Property is required for class CreateAssetOfferRequestInputV2.");
+
+            if (createAssetOfferRequestInputV2.StartTimeOption.IsSet && createAssetOfferRequestInputV2.StartTime == null)
+                throw new ArgumentNullException(nameof(createAssetOfferRequestInputV2.StartTime), "Property is required for class CreateAssetOfferRequestInputV2.");
+
             writer.WriteString("assetAddress", createAssetOfferRequestInputV2.AssetAddress);
 
             writer.WriteString("assetId", createAssetOfferRequestInputV2.AssetId);
@@ -429,10 +423,10 @@ namespace BeamAutomationClient.Model
             var currencyRawValue = CreateAssetOfferRequestInputV2.CurrencyEnumToJsonValue(createAssetOfferRequestInputV2.CurrencyOption.Value!.Value);
             writer.WriteString("currency", currencyRawValue);
             if (createAssetOfferRequestInputV2.EndTimeOption.IsSet)
-                writer.WriteString("endTime", createAssetOfferRequestInputV2.EndTimeOption.Value!.Value.ToString(EndTimeFormat));
+                writer.WriteString("endTime", createAssetOfferRequestInputV2.EndTime);
 
             if (createAssetOfferRequestInputV2.StartTimeOption.IsSet)
-                writer.WriteString("startTime", createAssetOfferRequestInputV2.StartTimeOption.Value!.Value.ToString(StartTimeFormat));
+                writer.WriteString("startTime", createAssetOfferRequestInputV2.StartTime);
         }
     }
 }

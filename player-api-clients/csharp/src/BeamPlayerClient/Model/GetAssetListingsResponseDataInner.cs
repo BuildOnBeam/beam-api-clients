@@ -50,7 +50,7 @@ namespace BeamPlayerClient.Model
         /// <param name="validFrom">validFrom</param>
         /// <param name="validUntil">validUntil</param>
         [JsonConstructor]
-        public GetAssetListingsResponseDataInner(string assetAddress, string assetId, string contractKind, string id, string maker, string side, Option<Object?> createdAt = default, Option<Object?> expiresAt = default, Option<GetAssetListingsResponseDataInnerPrice?> price = default, Option<decimal?> quantityFilled = default, Option<decimal?> quantityRemaining = default, Option<StatusEnum?> status = default, Option<Object?> updatedAt = default, Option<Object?> validFrom = default, Option<Object?> validUntil = default)
+        public GetAssetListingsResponseDataInner(string assetAddress, string assetId, string contractKind, string id, string maker, string side, Option<DateTime?> createdAt = default, Option<DateTime?> expiresAt = default, Option<GetAssetListingsResponseDataInnerPrice?> price = default, Option<decimal?> quantityFilled = default, Option<decimal?> quantityRemaining = default, Option<StatusEnum?> status = default, Option<DateTime?> updatedAt = default, Option<DateTime?> validFrom = default, Option<DateTime?> validUntil = default)
         {
             AssetAddress = assetAddress;
             AssetId = assetId;
@@ -237,26 +237,26 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [JsonIgnore]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<Object?> CreatedAtOption { get; private set; }
+        public Option<DateTime?> CreatedAtOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets CreatedAt
         /// </summary>
         [JsonPropertyName("createdAt")]
-        public Object? CreatedAt { get { return this. CreatedAtOption; } set { this.CreatedAtOption = new(value); } }
+        public DateTime? CreatedAt { get { return this. CreatedAtOption; } set { this.CreatedAtOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of ExpiresAt
         /// </summary>
         [JsonIgnore]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<Object?> ExpiresAtOption { get; private set; }
+        public Option<DateTime?> ExpiresAtOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets ExpiresAt
         /// </summary>
         [JsonPropertyName("expiresAt")]
-        public Object? ExpiresAt { get { return this. ExpiresAtOption; } set { this.ExpiresAtOption = new(value); } }
+        public DateTime? ExpiresAt { get { return this. ExpiresAtOption; } set { this.ExpiresAtOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Price
@@ -302,39 +302,39 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [JsonIgnore]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<Object?> UpdatedAtOption { get; private set; }
+        public Option<DateTime?> UpdatedAtOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets UpdatedAt
         /// </summary>
         [JsonPropertyName("updatedAt")]
-        public Object? UpdatedAt { get { return this. UpdatedAtOption; } set { this.UpdatedAtOption = new(value); } }
+        public DateTime? UpdatedAt { get { return this. UpdatedAtOption; } set { this.UpdatedAtOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of ValidFrom
         /// </summary>
         [JsonIgnore]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<Object?> ValidFromOption { get; private set; }
+        public Option<DateTime?> ValidFromOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets ValidFrom
         /// </summary>
         [JsonPropertyName("validFrom")]
-        public Object? ValidFrom { get { return this. ValidFromOption; } set { this.ValidFromOption = new(value); } }
+        public DateTime? ValidFrom { get { return this. ValidFromOption; } set { this.ValidFromOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of ValidUntil
         /// </summary>
         [JsonIgnore]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<Object?> ValidUntilOption { get; private set; }
+        public Option<DateTime?> ValidUntilOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets ValidUntil
         /// </summary>
         [JsonPropertyName("validUntil")]
-        public Object? ValidUntil { get { return this. ValidUntilOption; } set { this.ValidUntilOption = new(value); } }
+        public DateTime? ValidUntil { get { return this. ValidUntilOption; } set { this.ValidUntilOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -380,6 +380,31 @@ namespace BeamPlayerClient.Model
     public class GetAssetListingsResponseDataInnerJsonConverter : JsonConverter<GetAssetListingsResponseDataInner>
     {
         /// <summary>
+        /// The format to use to serialize CreatedAt
+        /// </summary>
+        public static string CreatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
+        /// The format to use to serialize ExpiresAt
+        /// </summary>
+        public static string ExpiresAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
+        /// The format to use to serialize UpdatedAt
+        /// </summary>
+        public static string UpdatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
+        /// The format to use to serialize ValidFrom
+        /// </summary>
+        public static string ValidFromFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
+        /// The format to use to serialize ValidUntil
+        /// </summary>
+        public static string ValidUntilFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
         /// Deserializes json to <see cref="GetAssetListingsResponseDataInner" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
@@ -402,15 +427,15 @@ namespace BeamPlayerClient.Model
             Option<string?> id = default;
             Option<string?> maker = default;
             Option<string?> side = default;
-            Option<Object?> createdAt = default;
-            Option<Object?> expiresAt = default;
+            Option<DateTime?> createdAt = default;
+            Option<DateTime?> expiresAt = default;
             Option<GetAssetListingsResponseDataInnerPrice?> price = default;
             Option<decimal?> quantityFilled = default;
             Option<decimal?> quantityRemaining = default;
             Option<GetAssetListingsResponseDataInner.StatusEnum?> status = default;
-            Option<Object?> updatedAt = default;
-            Option<Object?> validFrom = default;
-            Option<Object?> validUntil = default;
+            Option<DateTime?> updatedAt = default;
+            Option<DateTime?> validFrom = default;
+            Option<DateTime?> validUntil = default;
 
             while (utf8JsonReader.Read())
             {
@@ -447,11 +472,11 @@ namespace BeamPlayerClient.Model
                             break;
                         case "createdAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                createdAt = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
+                                createdAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime?>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "expiresAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                expiresAt = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
+                                expiresAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime?>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "price":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
@@ -472,15 +497,15 @@ namespace BeamPlayerClient.Model
                             break;
                         case "updatedAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                updatedAt = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
+                                updatedAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime?>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "validFrom":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                validFrom = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
+                                validFrom = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime?>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "validUntil":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                validUntil = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
+                                validUntil = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime?>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -589,20 +614,16 @@ namespace BeamPlayerClient.Model
 
             if (getAssetListingsResponseDataInner.CreatedAtOption.IsSet)
                 if (getAssetListingsResponseDataInner.CreatedAtOption.Value != null)
-                {
-                    writer.WritePropertyName("createdAt");
-                    JsonSerializer.Serialize(writer, getAssetListingsResponseDataInner.CreatedAt, jsonSerializerOptions);
-                }
+                    writer.WriteString("createdAt", getAssetListingsResponseDataInner.CreatedAtOption.Value!.Value.ToString(CreatedAtFormat));
                 else
                     writer.WriteNull("createdAt");
+
             if (getAssetListingsResponseDataInner.ExpiresAtOption.IsSet)
                 if (getAssetListingsResponseDataInner.ExpiresAtOption.Value != null)
-                {
-                    writer.WritePropertyName("expiresAt");
-                    JsonSerializer.Serialize(writer, getAssetListingsResponseDataInner.ExpiresAt, jsonSerializerOptions);
-                }
+                    writer.WriteString("expiresAt", getAssetListingsResponseDataInner.ExpiresAtOption.Value!.Value.ToString(ExpiresAtFormat));
                 else
                     writer.WriteNull("expiresAt");
+
             if (getAssetListingsResponseDataInner.PriceOption.IsSet)
                 if (getAssetListingsResponseDataInner.PriceOption.Value != null)
                 {
@@ -625,26 +646,19 @@ namespace BeamPlayerClient.Model
 
             if (getAssetListingsResponseDataInner.UpdatedAtOption.IsSet)
                 if (getAssetListingsResponseDataInner.UpdatedAtOption.Value != null)
-                {
-                    writer.WritePropertyName("updatedAt");
-                    JsonSerializer.Serialize(writer, getAssetListingsResponseDataInner.UpdatedAt, jsonSerializerOptions);
-                }
+                    writer.WriteString("updatedAt", getAssetListingsResponseDataInner.UpdatedAtOption.Value!.Value.ToString(UpdatedAtFormat));
                 else
                     writer.WriteNull("updatedAt");
+
             if (getAssetListingsResponseDataInner.ValidFromOption.IsSet)
                 if (getAssetListingsResponseDataInner.ValidFromOption.Value != null)
-                {
-                    writer.WritePropertyName("validFrom");
-                    JsonSerializer.Serialize(writer, getAssetListingsResponseDataInner.ValidFrom, jsonSerializerOptions);
-                }
+                    writer.WriteString("validFrom", getAssetListingsResponseDataInner.ValidFromOption.Value!.Value.ToString(ValidFromFormat));
                 else
                     writer.WriteNull("validFrom");
+
             if (getAssetListingsResponseDataInner.ValidUntilOption.IsSet)
                 if (getAssetListingsResponseDataInner.ValidUntilOption.Value != null)
-                {
-                    writer.WritePropertyName("validUntil");
-                    JsonSerializer.Serialize(writer, getAssetListingsResponseDataInner.ValidUntil, jsonSerializerOptions);
-                }
+                    writer.WriteString("validUntil", getAssetListingsResponseDataInner.ValidUntilOption.Value!.Value.ToString(ValidUntilFormat));
                 else
                     writer.WriteNull("validUntil");
         }

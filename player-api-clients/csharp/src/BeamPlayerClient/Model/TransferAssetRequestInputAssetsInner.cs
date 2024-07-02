@@ -128,9 +128,9 @@ namespace BeamPlayerClient.Model
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             // AmountToTransfer (decimal) minimum
-            if (this.AmountToTransferOption.IsSet && this.AmountToTransferOption.Value < (decimal)0)
+            if (this.AmountToTransferOption.IsSet && this.AmountToTransferOption.Value < (decimal)1)
             {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for AmountToTransfer, must be a value greater than or equal to 0.", new [] { "AmountToTransfer" });
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for AmountToTransfer, must be a value greater than or equal to 1.", new [] { "AmountToTransfer" });
             }
 
             yield break;

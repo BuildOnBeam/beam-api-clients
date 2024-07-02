@@ -36,22 +36,22 @@ namespace BeamPlayerClient.Model
         /// </summary>
         /// <param name="address">address</param>
         /// <param name="chainId">chainId</param>
+        /// <param name="createdAt">createdAt</param>
         /// <param name="externalId">externalId</param>
         /// <param name="id">id</param>
-        /// <param name="createdAt">createdAt</param>
-        /// <param name="profileId">profileId</param>
         /// <param name="updatedAt">updatedAt</param>
+        /// <param name="profileId">profileId</param>
         /// <param name="userId">userId</param>
         [JsonConstructor]
-        public GetAllUsersResponseDataInnerWalletsInner(string address, int chainId, string externalId, string id, Object? createdAt = default, string? profileId = default, Object? updatedAt = default, string? userId = default)
+        public GetAllUsersResponseDataInnerWalletsInner(string address, int chainId, DateTime createdAt, string externalId, string id, DateTime updatedAt, string? profileId = default, string? userId = default)
         {
             Address = address;
             ChainId = chainId;
+            CreatedAt = createdAt;
             ExternalId = externalId;
             Id = id;
-            CreatedAt = createdAt;
-            ProfileId = profileId;
             UpdatedAt = updatedAt;
+            ProfileId = profileId;
             UserId = userId;
             OnCreated();
         }
@@ -71,6 +71,12 @@ namespace BeamPlayerClient.Model
         public int ChainId { get; set; }
 
         /// <summary>
+        /// Gets or Sets CreatedAt
+        /// </summary>
+        [JsonPropertyName("createdAt")]
+        public DateTime CreatedAt { get; set; }
+
+        /// <summary>
         /// Gets or Sets ExternalId
         /// </summary>
         [JsonPropertyName("externalId")]
@@ -83,22 +89,16 @@ namespace BeamPlayerClient.Model
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets CreatedAt
+        /// Gets or Sets UpdatedAt
         /// </summary>
-        [JsonPropertyName("createdAt")]
-        public Object? CreatedAt { get; set; }
+        [JsonPropertyName("updatedAt")]
+        public DateTime UpdatedAt { get; set; }
 
         /// <summary>
         /// Gets or Sets ProfileId
         /// </summary>
         [JsonPropertyName("profileId")]
         public string? ProfileId { get; set; }
-
-        /// <summary>
-        /// Gets or Sets UpdatedAt
-        /// </summary>
-        [JsonPropertyName("updatedAt")]
-        public Object? UpdatedAt { get; set; }
 
         /// <summary>
         /// Gets or Sets UserId
@@ -116,11 +116,11 @@ namespace BeamPlayerClient.Model
             sb.Append("class GetAllUsersResponseDataInnerWalletsInner {\n");
             sb.Append("  Address: ").Append(Address).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
+            sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  ExternalId: ").Append(ExternalId).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
-            sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
-            sb.Append("  ProfileId: ").Append(ProfileId).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
+            sb.Append("  ProfileId: ").Append(ProfileId).Append("\n");
             sb.Append("  UserId: ").Append(UserId).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -143,6 +143,16 @@ namespace BeamPlayerClient.Model
     public class GetAllUsersResponseDataInnerWalletsInnerJsonConverter : JsonConverter<GetAllUsersResponseDataInnerWalletsInner>
     {
         /// <summary>
+        /// The format to use to serialize CreatedAt
+        /// </summary>
+        public static string CreatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
+        /// The format to use to serialize UpdatedAt
+        /// </summary>
+        public static string UpdatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
         /// Deserializes json to <see cref="GetAllUsersResponseDataInnerWalletsInner" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
@@ -161,11 +171,11 @@ namespace BeamPlayerClient.Model
 
             Option<string?> address = default;
             Option<int?> chainId = default;
+            Option<DateTime?> createdAt = default;
             Option<string?> externalId = default;
             Option<string?> id = default;
-            Option<Object?> createdAt = default;
+            Option<DateTime?> updatedAt = default;
             Option<string?> profileId = default;
-            Option<Object?> updatedAt = default;
             Option<string?> userId = default;
 
             while (utf8JsonReader.Read())
@@ -190,22 +200,22 @@ namespace BeamPlayerClient.Model
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 chainId = new Option<int?>(utf8JsonReader.GetInt32());
                             break;
+                        case "createdAt":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                createdAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
                         case "externalId":
                             externalId = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "id":
                             id = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "createdAt":
+                        case "updatedAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                createdAt = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
+                                updatedAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "profileId":
                             profileId = new Option<string?>(utf8JsonReader.GetString());
-                            break;
-                        case "updatedAt":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                updatedAt = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "userId":
                             userId = new Option<string?>(utf8JsonReader.GetString());
@@ -222,20 +232,20 @@ namespace BeamPlayerClient.Model
             if (!chainId.IsSet)
                 throw new ArgumentException("Property is required for class GetAllUsersResponseDataInnerWalletsInner.", nameof(chainId));
 
+            if (!createdAt.IsSet)
+                throw new ArgumentException("Property is required for class GetAllUsersResponseDataInnerWalletsInner.", nameof(createdAt));
+
             if (!externalId.IsSet)
                 throw new ArgumentException("Property is required for class GetAllUsersResponseDataInnerWalletsInner.", nameof(externalId));
 
             if (!id.IsSet)
                 throw new ArgumentException("Property is required for class GetAllUsersResponseDataInnerWalletsInner.", nameof(id));
 
-            if (!createdAt.IsSet)
-                throw new ArgumentException("Property is required for class GetAllUsersResponseDataInnerWalletsInner.", nameof(createdAt));
+            if (!updatedAt.IsSet)
+                throw new ArgumentException("Property is required for class GetAllUsersResponseDataInnerWalletsInner.", nameof(updatedAt));
 
             if (!profileId.IsSet)
                 throw new ArgumentException("Property is required for class GetAllUsersResponseDataInnerWalletsInner.", nameof(profileId));
-
-            if (!updatedAt.IsSet)
-                throw new ArgumentException("Property is required for class GetAllUsersResponseDataInnerWalletsInner.", nameof(updatedAt));
 
             if (!userId.IsSet)
                 throw new ArgumentException("Property is required for class GetAllUsersResponseDataInnerWalletsInner.", nameof(userId));
@@ -246,13 +256,19 @@ namespace BeamPlayerClient.Model
             if (chainId.IsSet && chainId.Value == null)
                 throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class GetAllUsersResponseDataInnerWalletsInner.");
 
+            if (createdAt.IsSet && createdAt.Value == null)
+                throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class GetAllUsersResponseDataInnerWalletsInner.");
+
             if (externalId.IsSet && externalId.Value == null)
                 throw new ArgumentNullException(nameof(externalId), "Property is not nullable for class GetAllUsersResponseDataInnerWalletsInner.");
 
             if (id.IsSet && id.Value == null)
                 throw new ArgumentNullException(nameof(id), "Property is not nullable for class GetAllUsersResponseDataInnerWalletsInner.");
 
-            return new GetAllUsersResponseDataInnerWalletsInner(address.Value!, chainId.Value!.Value!, externalId.Value!, id.Value!, createdAt.Value!, profileId.Value!, updatedAt.Value!, userId.Value!);
+            if (updatedAt.IsSet && updatedAt.Value == null)
+                throw new ArgumentNullException(nameof(updatedAt), "Property is not nullable for class GetAllUsersResponseDataInnerWalletsInner.");
+
+            return new GetAllUsersResponseDataInnerWalletsInner(address.Value!, chainId.Value!.Value!, createdAt.Value!.Value!, externalId.Value!, id.Value!, updatedAt.Value!.Value!, profileId.Value!, userId.Value!);
         }
 
         /// <summary>
@@ -292,29 +308,19 @@ namespace BeamPlayerClient.Model
 
             writer.WriteNumber("chainId", getAllUsersResponseDataInnerWalletsInner.ChainId);
 
+            writer.WriteString("createdAt", getAllUsersResponseDataInnerWalletsInner.CreatedAt.ToString(CreatedAtFormat));
+
             writer.WriteString("externalId", getAllUsersResponseDataInnerWalletsInner.ExternalId);
 
             writer.WriteString("id", getAllUsersResponseDataInnerWalletsInner.Id);
 
-            if (getAllUsersResponseDataInnerWalletsInner.CreatedAt != null)
-            {
-                writer.WritePropertyName("createdAt");
-                JsonSerializer.Serialize(writer, getAllUsersResponseDataInnerWalletsInner.CreatedAt, jsonSerializerOptions);
-            }
-            else
-                writer.WriteNull("createdAt");
+            writer.WriteString("updatedAt", getAllUsersResponseDataInnerWalletsInner.UpdatedAt.ToString(UpdatedAtFormat));
+
             if (getAllUsersResponseDataInnerWalletsInner.ProfileId != null)
                 writer.WriteString("profileId", getAllUsersResponseDataInnerWalletsInner.ProfileId);
             else
                 writer.WriteNull("profileId");
 
-            if (getAllUsersResponseDataInnerWalletsInner.UpdatedAt != null)
-            {
-                writer.WritePropertyName("updatedAt");
-                JsonSerializer.Serialize(writer, getAllUsersResponseDataInnerWalletsInner.UpdatedAt, jsonSerializerOptions);
-            }
-            else
-                writer.WriteNull("updatedAt");
             if (getAllUsersResponseDataInnerWalletsInner.UserId != null)
                 writer.WriteString("userId", getAllUsersResponseDataInnerWalletsInner.UserId);
             else

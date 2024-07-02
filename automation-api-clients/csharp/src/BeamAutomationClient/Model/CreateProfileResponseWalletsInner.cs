@@ -36,22 +36,22 @@ namespace BeamAutomationClient.Model
         /// </summary>
         /// <param name="address">address</param>
         /// <param name="chainId">chainId</param>
+        /// <param name="createdAt">createdAt</param>
         /// <param name="externalId">externalId</param>
         /// <param name="id">id</param>
-        /// <param name="createdAt">createdAt</param>
-        /// <param name="profileId">profileId</param>
         /// <param name="updatedAt">updatedAt</param>
+        /// <param name="profileId">profileId</param>
         /// <param name="userId">userId</param>
         [JsonConstructor]
-        public CreateProfileResponseWalletsInner(string address, int chainId, string externalId, string id, Object? createdAt = default, string? profileId = default, Object? updatedAt = default, string? userId = default)
+        public CreateProfileResponseWalletsInner(string address, int chainId, DateTime createdAt, string externalId, string id, DateTime updatedAt, string? profileId = default, string? userId = default)
         {
             Address = address;
             ChainId = chainId;
+            CreatedAt = createdAt;
             ExternalId = externalId;
             Id = id;
-            CreatedAt = createdAt;
-            ProfileId = profileId;
             UpdatedAt = updatedAt;
+            ProfileId = profileId;
             UserId = userId;
             OnCreated();
         }
@@ -71,6 +71,12 @@ namespace BeamAutomationClient.Model
         public int ChainId { get; set; }
 
         /// <summary>
+        /// Gets or Sets CreatedAt
+        /// </summary>
+        [JsonPropertyName("createdAt")]
+        public DateTime CreatedAt { get; set; }
+
+        /// <summary>
         /// Gets or Sets ExternalId
         /// </summary>
         [JsonPropertyName("externalId")]
@@ -83,22 +89,16 @@ namespace BeamAutomationClient.Model
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets CreatedAt
+        /// Gets or Sets UpdatedAt
         /// </summary>
-        [JsonPropertyName("createdAt")]
-        public Object? CreatedAt { get; set; }
+        [JsonPropertyName("updatedAt")]
+        public DateTime UpdatedAt { get; set; }
 
         /// <summary>
         /// Gets or Sets ProfileId
         /// </summary>
         [JsonPropertyName("profileId")]
         public string? ProfileId { get; set; }
-
-        /// <summary>
-        /// Gets or Sets UpdatedAt
-        /// </summary>
-        [JsonPropertyName("updatedAt")]
-        public Object? UpdatedAt { get; set; }
 
         /// <summary>
         /// Gets or Sets UserId
@@ -116,11 +116,11 @@ namespace BeamAutomationClient.Model
             sb.Append("class CreateProfileResponseWalletsInner {\n");
             sb.Append("  Address: ").Append(Address).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
+            sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  ExternalId: ").Append(ExternalId).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
-            sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
-            sb.Append("  ProfileId: ").Append(ProfileId).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
+            sb.Append("  ProfileId: ").Append(ProfileId).Append("\n");
             sb.Append("  UserId: ").Append(UserId).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -143,6 +143,16 @@ namespace BeamAutomationClient.Model
     public class CreateProfileResponseWalletsInnerJsonConverter : JsonConverter<CreateProfileResponseWalletsInner>
     {
         /// <summary>
+        /// The format to use to serialize CreatedAt
+        /// </summary>
+        public static string CreatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
+        /// The format to use to serialize UpdatedAt
+        /// </summary>
+        public static string UpdatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
         /// Deserializes json to <see cref="CreateProfileResponseWalletsInner" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
@@ -161,11 +171,11 @@ namespace BeamAutomationClient.Model
 
             Option<string?> address = default;
             Option<int?> chainId = default;
+            Option<DateTime?> createdAt = default;
             Option<string?> externalId = default;
             Option<string?> id = default;
-            Option<Object?> createdAt = default;
+            Option<DateTime?> updatedAt = default;
             Option<string?> profileId = default;
-            Option<Object?> updatedAt = default;
             Option<string?> userId = default;
 
             while (utf8JsonReader.Read())
@@ -190,22 +200,22 @@ namespace BeamAutomationClient.Model
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 chainId = new Option<int?>(utf8JsonReader.GetInt32());
                             break;
+                        case "createdAt":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                createdAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
                         case "externalId":
                             externalId = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "id":
                             id = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "createdAt":
+                        case "updatedAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                createdAt = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
+                                updatedAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "profileId":
                             profileId = new Option<string?>(utf8JsonReader.GetString());
-                            break;
-                        case "updatedAt":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                updatedAt = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "userId":
                             userId = new Option<string?>(utf8JsonReader.GetString());
@@ -222,20 +232,20 @@ namespace BeamAutomationClient.Model
             if (!chainId.IsSet)
                 throw new ArgumentException("Property is required for class CreateProfileResponseWalletsInner.", nameof(chainId));
 
+            if (!createdAt.IsSet)
+                throw new ArgumentException("Property is required for class CreateProfileResponseWalletsInner.", nameof(createdAt));
+
             if (!externalId.IsSet)
                 throw new ArgumentException("Property is required for class CreateProfileResponseWalletsInner.", nameof(externalId));
 
             if (!id.IsSet)
                 throw new ArgumentException("Property is required for class CreateProfileResponseWalletsInner.", nameof(id));
 
-            if (!createdAt.IsSet)
-                throw new ArgumentException("Property is required for class CreateProfileResponseWalletsInner.", nameof(createdAt));
+            if (!updatedAt.IsSet)
+                throw new ArgumentException("Property is required for class CreateProfileResponseWalletsInner.", nameof(updatedAt));
 
             if (!profileId.IsSet)
                 throw new ArgumentException("Property is required for class CreateProfileResponseWalletsInner.", nameof(profileId));
-
-            if (!updatedAt.IsSet)
-                throw new ArgumentException("Property is required for class CreateProfileResponseWalletsInner.", nameof(updatedAt));
 
             if (!userId.IsSet)
                 throw new ArgumentException("Property is required for class CreateProfileResponseWalletsInner.", nameof(userId));
@@ -246,13 +256,19 @@ namespace BeamAutomationClient.Model
             if (chainId.IsSet && chainId.Value == null)
                 throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class CreateProfileResponseWalletsInner.");
 
+            if (createdAt.IsSet && createdAt.Value == null)
+                throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class CreateProfileResponseWalletsInner.");
+
             if (externalId.IsSet && externalId.Value == null)
                 throw new ArgumentNullException(nameof(externalId), "Property is not nullable for class CreateProfileResponseWalletsInner.");
 
             if (id.IsSet && id.Value == null)
                 throw new ArgumentNullException(nameof(id), "Property is not nullable for class CreateProfileResponseWalletsInner.");
 
-            return new CreateProfileResponseWalletsInner(address.Value!, chainId.Value!.Value!, externalId.Value!, id.Value!, createdAt.Value!, profileId.Value!, updatedAt.Value!, userId.Value!);
+            if (updatedAt.IsSet && updatedAt.Value == null)
+                throw new ArgumentNullException(nameof(updatedAt), "Property is not nullable for class CreateProfileResponseWalletsInner.");
+
+            return new CreateProfileResponseWalletsInner(address.Value!, chainId.Value!.Value!, createdAt.Value!.Value!, externalId.Value!, id.Value!, updatedAt.Value!.Value!, profileId.Value!, userId.Value!);
         }
 
         /// <summary>
@@ -292,29 +308,19 @@ namespace BeamAutomationClient.Model
 
             writer.WriteNumber("chainId", createProfileResponseWalletsInner.ChainId);
 
+            writer.WriteString("createdAt", createProfileResponseWalletsInner.CreatedAt.ToString(CreatedAtFormat));
+
             writer.WriteString("externalId", createProfileResponseWalletsInner.ExternalId);
 
             writer.WriteString("id", createProfileResponseWalletsInner.Id);
 
-            if (createProfileResponseWalletsInner.CreatedAt != null)
-            {
-                writer.WritePropertyName("createdAt");
-                JsonSerializer.Serialize(writer, createProfileResponseWalletsInner.CreatedAt, jsonSerializerOptions);
-            }
-            else
-                writer.WriteNull("createdAt");
+            writer.WriteString("updatedAt", createProfileResponseWalletsInner.UpdatedAt.ToString(UpdatedAtFormat));
+
             if (createProfileResponseWalletsInner.ProfileId != null)
                 writer.WriteString("profileId", createProfileResponseWalletsInner.ProfileId);
             else
                 writer.WriteNull("profileId");
 
-            if (createProfileResponseWalletsInner.UpdatedAt != null)
-            {
-                writer.WritePropertyName("updatedAt");
-                JsonSerializer.Serialize(writer, createProfileResponseWalletsInner.UpdatedAt, jsonSerializerOptions);
-            }
-            else
-                writer.WriteNull("updatedAt");
             if (createProfileResponseWalletsInner.UserId != null)
                 writer.WriteString("userId", createProfileResponseWalletsInner.UserId);
             else

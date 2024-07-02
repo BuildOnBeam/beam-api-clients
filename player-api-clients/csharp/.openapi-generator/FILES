@@ -43,7 +43,6 @@ src/BeamPlayerClient/Model/Check200ResponseInfoValue.cs
 src/BeamPlayerClient/Model/Check503Response.cs
 src/BeamPlayerClient/Model/CommonOperationResponse.cs
 src/BeamPlayerClient/Model/CommonOperationResponseTransactionsInner.cs
-src/BeamPlayerClient/Model/CommonOperationResponseTransactionsInnerData.cs
 src/BeamPlayerClient/Model/ConfirmOperationRequest.cs
 src/BeamPlayerClient/Model/ConfirmOperationRequestTransactionsInner.cs
 src/BeamPlayerClient/Model/ConvertTokenRequestInput.cs

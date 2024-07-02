@@ -35,22 +35,22 @@ namespace BeamAutomationClient.Model
         /// Initializes a new instance of the <see cref="GetWebhooksForGameResponseWebhooksInner" /> class.
         /// </summary>
         /// <param name="contract">contract</param>
+        /// <param name="createdAt">createdAt</param>
         /// <param name="events">events</param>
         /// <param name="id">id</param>
         /// <param name="signature">Signature that can be used to validate whether data comes from Beam API</param>
         /// <param name="url">url</param>
         /// <param name="chainId">chainId (default to 13337M)</param>
-        /// <param name="createdAt">createdAt</param>
         [JsonConstructor]
-        public GetWebhooksForGameResponseWebhooksInner(string contract, List<GetWebhooksForGameResponseWebhooksInner.EventsEnum> events, string id, string signature, string url, Option<decimal?> chainId = default, Object? createdAt = default)
+        public GetWebhooksForGameResponseWebhooksInner(string contract, DateTime createdAt, List<GetWebhooksForGameResponseWebhooksInner.EventsEnum> events, string id, string signature, string url, Option<decimal?> chainId = default)
         {
             Contract = contract;
+            CreatedAt = createdAt;
             Events = events;
             Id = id;
             Signature = signature;
             Url = url;
             ChainIdOption = chainId;
-            CreatedAt = createdAt;
             OnCreated();
         }
 
@@ -115,6 +115,12 @@ namespace BeamAutomationClient.Model
         public string Contract { get; set; }
 
         /// <summary>
+        /// Gets or Sets CreatedAt
+        /// </summary>
+        [JsonPropertyName("createdAt")]
+        public DateTime CreatedAt { get; set; }
+
+        /// <summary>
         /// Gets or Sets Events
         /// </summary>
         [JsonPropertyName("events")]
@@ -153,12 +159,6 @@ namespace BeamAutomationClient.Model
         public decimal? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
 
         /// <summary>
-        /// Gets or Sets CreatedAt
-        /// </summary>
-        [JsonPropertyName("createdAt")]
-        public Object? CreatedAt { get; set; }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -167,12 +167,12 @@ namespace BeamAutomationClient.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class GetWebhooksForGameResponseWebhooksInner {\n");
             sb.Append("  Contract: ").Append(Contract).Append("\n");
+            sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  Events: ").Append(Events).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Signature: ").Append(Signature).Append("\n");
             sb.Append("  Url: ").Append(Url).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
-            sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -194,6 +194,11 @@ namespace BeamAutomationClient.Model
     public class GetWebhooksForGameResponseWebhooksInnerJsonConverter : JsonConverter<GetWebhooksForGameResponseWebhooksInner>
     {
         /// <summary>
+        /// The format to use to serialize CreatedAt
+        /// </summary>
+        public static string CreatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
         /// Deserializes json to <see cref="GetWebhooksForGameResponseWebhooksInner" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
@@ -211,12 +216,12 @@ namespace BeamAutomationClient.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<string?> contract = default;
+            Option<DateTime?> createdAt = default;
             Option<List<GetWebhooksForGameResponseWebhooksInner.EventsEnum>?> events = default;
             Option<string?> id = default;
             Option<string?> signature = default;
             Option<string?> url = default;
             Option<decimal?> chainId = default;
-            Option<Object?> createdAt = default;
 
             while (utf8JsonReader.Read())
             {
@@ -236,6 +241,10 @@ namespace BeamAutomationClient.Model
                         case "contract":
                             contract = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
+                        case "createdAt":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                createdAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
                         case "events":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 events = new Option<List<GetWebhooksForGameResponseWebhooksInner.EventsEnum>?>(JsonSerializer.Deserialize<List<GetWebhooksForGameResponseWebhooksInner.EventsEnum>>(ref utf8JsonReader, jsonSerializerOptions)!);
@@ -253,10 +262,6 @@ namespace BeamAutomationClient.Model
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
-                        case "createdAt":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                createdAt = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
-                            break;
                         default:
                             break;
                     }
@@ -265,6 +270,9 @@ namespace BeamAutomationClient.Model
 
             if (!contract.IsSet)
                 throw new ArgumentException("Property is required for class GetWebhooksForGameResponseWebhooksInner.", nameof(contract));
+
+            if (!createdAt.IsSet)
+                throw new ArgumentException("Property is required for class GetWebhooksForGameResponseWebhooksInner.", nameof(createdAt));
 
             if (!events.IsSet)
                 throw new ArgumentException("Property is required for class GetWebhooksForGameResponseWebhooksInner.", nameof(events));
@@ -278,11 +286,11 @@ namespace BeamAutomationClient.Model
             if (!url.IsSet)
                 throw new ArgumentException("Property is required for class GetWebhooksForGameResponseWebhooksInner.", nameof(url));
 
-            if (!createdAt.IsSet)
-                throw new ArgumentException("Property is required for class GetWebhooksForGameResponseWebhooksInner.", nameof(createdAt));
-
             if (contract.IsSet && contract.Value == null)
                 throw new ArgumentNullException(nameof(contract), "Property is not nullable for class GetWebhooksForGameResponseWebhooksInner.");
+
+            if (createdAt.IsSet && createdAt.Value == null)
+                throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class GetWebhooksForGameResponseWebhooksInner.");
 
             if (events.IsSet && events.Value == null)
                 throw new ArgumentNullException(nameof(events), "Property is not nullable for class GetWebhooksForGameResponseWebhooksInner.");
@@ -299,7 +307,7 @@ namespace BeamAutomationClient.Model
             if (chainId.IsSet && chainId.Value == null)
                 throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class GetWebhooksForGameResponseWebhooksInner.");
 
-            return new GetWebhooksForGameResponseWebhooksInner(contract.Value!, events.Value!, id.Value!, signature.Value!, url.Value!, chainId, createdAt.Value!);
+            return new GetWebhooksForGameResponseWebhooksInner(contract.Value!, createdAt.Value!.Value!, events.Value!, id.Value!, signature.Value!, url.Value!, chainId);
         }
 
         /// <summary>
@@ -343,6 +351,8 @@ namespace BeamAutomationClient.Model
 
             writer.WriteString("contract", getWebhooksForGameResponseWebhooksInner.Contract);
 
+            writer.WriteString("createdAt", getWebhooksForGameResponseWebhooksInner.CreatedAt.ToString(CreatedAtFormat));
+
             writer.WritePropertyName("events");
             JsonSerializer.Serialize(writer, getWebhooksForGameResponseWebhooksInner.Events, jsonSerializerOptions);
             writer.WriteString("id", getWebhooksForGameResponseWebhooksInner.Id);
@@ -353,14 +363,6 @@ namespace BeamAutomationClient.Model
 
             if (getWebhooksForGameResponseWebhooksInner.ChainIdOption.IsSet)
                 writer.WriteNumber("chainId", getWebhooksForGameResponseWebhooksInner.ChainIdOption.Value!.Value);
-
-            if (getWebhooksForGameResponseWebhooksInner.CreatedAt != null)
-            {
-                writer.WritePropertyName("createdAt");
-                JsonSerializer.Serialize(writer, getWebhooksForGameResponseWebhooksInner.CreatedAt, jsonSerializerOptions);
-            }
-            else
-                writer.WriteNull("createdAt");
         }
     }
 }

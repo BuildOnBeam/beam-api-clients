@@ -44,7 +44,7 @@ namespace BeamPlayerClient.Model
         /// <param name="signature">signature</param>
         /// <param name="transactionHash">transactionHash</param>
         [JsonConstructor]
-        public CommonOperationResponseTransactionsInner(string hash, string id, StatusEnum status, TypeEnum type, Option<CommonOperationResponseTransactionsInnerData?> data = default, string? externalId = default, string? operationId = default, string? signature = default, string? transactionHash = default)
+        public CommonOperationResponseTransactionsInner(string hash, string id, StatusEnum status, TypeEnum type, Option<Object?> data = default, string? externalId = default, string? operationId = default, string? signature = default, string? transactionHash = default)
         {
             Hash = hash;
             Id = id;
@@ -277,13 +277,13 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [JsonIgnore]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<CommonOperationResponseTransactionsInnerData?> DataOption { get; private set; }
+        public Option<Object?> DataOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Data
         /// </summary>
         [JsonPropertyName("data")]
-        public CommonOperationResponseTransactionsInnerData? Data { get { return this. DataOption; } set { this.DataOption = new(value); } }
+        public Object? Data { get { return this. DataOption; } set { this.DataOption = new(value); } }
 
         /// <summary>
         /// Gets or Sets ExternalId
@@ -367,7 +367,7 @@ namespace BeamPlayerClient.Model
             Option<string?> id = default;
             Option<CommonOperationResponseTransactionsInner.StatusEnum?> status = default;
             Option<CommonOperationResponseTransactionsInner.TypeEnum?> type = default;
-            Option<CommonOperationResponseTransactionsInnerData?> data = default;
+            Option<Object?> data = default;
             Option<string?> externalId = default;
             Option<string?> operationId = default;
             Option<string?> signature = default;
@@ -406,7 +406,7 @@ namespace BeamPlayerClient.Model
                             break;
                         case "data":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                data = new Option<CommonOperationResponseTransactionsInnerData?>(JsonSerializer.Deserialize<CommonOperationResponseTransactionsInnerData>(ref utf8JsonReader, jsonSerializerOptions));
+                                data = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "externalId":
                             externalId = new Option<string?>(utf8JsonReader.GetString());

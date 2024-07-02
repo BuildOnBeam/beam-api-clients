@@ -35,20 +35,20 @@ namespace BeamAutomationClient.Model
         /// Initializes a new instance of the <see cref="GetTransactionsResponseV2DataInner" /> class.
         /// </summary>
         /// <param name="chainId">chainId</param>
+        /// <param name="createdAt">createdAt</param>
         /// <param name="id">id</param>
         /// <param name="intent">intent</param>
-        /// <param name="createdAt">createdAt</param>
-        /// <param name="transaction">transaction</param>
         /// <param name="updatedAt">updatedAt</param>
+        /// <param name="transaction">transaction</param>
         [JsonConstructor]
-        public GetTransactionsResponseV2DataInner(decimal chainId, string id, GetTransactionsResponseV2DataInnerIntent intent, Object? createdAt = default, Option<GetTransactionsResponseV2DataInnerTransaction?> transaction = default, Object? updatedAt = default)
+        public GetTransactionsResponseV2DataInner(decimal chainId, DateTime createdAt, string id, GetTransactionsResponseV2DataInnerIntent intent, DateTime updatedAt, Option<GetTransactionsResponseV2DataInnerTransaction?> transaction = default)
         {
             ChainId = chainId;
+            CreatedAt = createdAt;
             Id = id;
             Intent = intent;
-            CreatedAt = createdAt;
-            TransactionOption = transaction;
             UpdatedAt = updatedAt;
+            TransactionOption = transaction;
             OnCreated();
         }
 
@@ -59,6 +59,12 @@ namespace BeamAutomationClient.Model
         /// </summary>
         [JsonPropertyName("chainId")]
         public decimal ChainId { get; set; }
+
+        /// <summary>
+        /// Gets or Sets CreatedAt
+        /// </summary>
+        [JsonPropertyName("createdAt")]
+        public DateTime CreatedAt { get; set; }
 
         /// <summary>
         /// Gets or Sets Id
@@ -73,10 +79,10 @@ namespace BeamAutomationClient.Model
         public GetTransactionsResponseV2DataInnerIntent Intent { get; set; }
 
         /// <summary>
-        /// Gets or Sets CreatedAt
+        /// Gets or Sets UpdatedAt
         /// </summary>
-        [JsonPropertyName("createdAt")]
-        public Object? CreatedAt { get; set; }
+        [JsonPropertyName("updatedAt")]
+        public DateTime UpdatedAt { get; set; }
 
         /// <summary>
         /// Used to track the state of Transaction
@@ -92,12 +98,6 @@ namespace BeamAutomationClient.Model
         public GetTransactionsResponseV2DataInnerTransaction? Transaction { get { return this. TransactionOption; } set { this.TransactionOption = new(value); } }
 
         /// <summary>
-        /// Gets or Sets UpdatedAt
-        /// </summary>
-        [JsonPropertyName("updatedAt")]
-        public Object? UpdatedAt { get; set; }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -106,11 +106,11 @@ namespace BeamAutomationClient.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class GetTransactionsResponseV2DataInner {\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
+            sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Intent: ").Append(Intent).Append("\n");
-            sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
-            sb.Append("  Transaction: ").Append(Transaction).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
+            sb.Append("  Transaction: ").Append(Transaction).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -132,6 +132,16 @@ namespace BeamAutomationClient.Model
     public class GetTransactionsResponseV2DataInnerJsonConverter : JsonConverter<GetTransactionsResponseV2DataInner>
     {
         /// <summary>
+        /// The format to use to serialize CreatedAt
+        /// </summary>
+        public static string CreatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
+        /// The format to use to serialize UpdatedAt
+        /// </summary>
+        public static string UpdatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
         /// Deserializes json to <see cref="GetTransactionsResponseV2DataInner" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
@@ -149,11 +159,11 @@ namespace BeamAutomationClient.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<decimal?> chainId = default;
+            Option<DateTime?> createdAt = default;
             Option<string?> id = default;
             Option<GetTransactionsResponseV2DataInnerIntent?> intent = default;
-            Option<Object?> createdAt = default;
+            Option<DateTime?> updatedAt = default;
             Option<GetTransactionsResponseV2DataInnerTransaction?> transaction = default;
-            Option<Object?> updatedAt = default;
 
             while (utf8JsonReader.Read())
             {
@@ -174,6 +184,10 @@ namespace BeamAutomationClient.Model
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
+                        case "createdAt":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                createdAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
                         case "id":
                             id = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
@@ -181,17 +195,13 @@ namespace BeamAutomationClient.Model
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 intent = new Option<GetTransactionsResponseV2DataInnerIntent?>(JsonSerializer.Deserialize<GetTransactionsResponseV2DataInnerIntent>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
-                        case "createdAt":
+                        case "updatedAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                createdAt = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
+                                updatedAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "transaction":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 transaction = new Option<GetTransactionsResponseV2DataInnerTransaction?>(JsonSerializer.Deserialize<GetTransactionsResponseV2DataInnerTransaction>(ref utf8JsonReader, jsonSerializerOptions));
-                            break;
-                        case "updatedAt":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                updatedAt = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -202,14 +212,14 @@ namespace BeamAutomationClient.Model
             if (!chainId.IsSet)
                 throw new ArgumentException("Property is required for class GetTransactionsResponseV2DataInner.", nameof(chainId));
 
+            if (!createdAt.IsSet)
+                throw new ArgumentException("Property is required for class GetTransactionsResponseV2DataInner.", nameof(createdAt));
+
             if (!id.IsSet)
                 throw new ArgumentException("Property is required for class GetTransactionsResponseV2DataInner.", nameof(id));
 
             if (!intent.IsSet)
                 throw new ArgumentException("Property is required for class GetTransactionsResponseV2DataInner.", nameof(intent));
-
-            if (!createdAt.IsSet)
-                throw new ArgumentException("Property is required for class GetTransactionsResponseV2DataInner.", nameof(createdAt));
 
             if (!updatedAt.IsSet)
                 throw new ArgumentException("Property is required for class GetTransactionsResponseV2DataInner.", nameof(updatedAt));
@@ -217,13 +227,19 @@ namespace BeamAutomationClient.Model
             if (chainId.IsSet && chainId.Value == null)
                 throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class GetTransactionsResponseV2DataInner.");
 
+            if (createdAt.IsSet && createdAt.Value == null)
+                throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class GetTransactionsResponseV2DataInner.");
+
             if (id.IsSet && id.Value == null)
                 throw new ArgumentNullException(nameof(id), "Property is not nullable for class GetTransactionsResponseV2DataInner.");
 
             if (intent.IsSet && intent.Value == null)
                 throw new ArgumentNullException(nameof(intent), "Property is not nullable for class GetTransactionsResponseV2DataInner.");
 
-            return new GetTransactionsResponseV2DataInner(chainId.Value!.Value!, id.Value!, intent.Value!, createdAt.Value!, transaction, updatedAt.Value!);
+            if (updatedAt.IsSet && updatedAt.Value == null)
+                throw new ArgumentNullException(nameof(updatedAt), "Property is not nullable for class GetTransactionsResponseV2DataInner.");
+
+            return new GetTransactionsResponseV2DataInner(chainId.Value!.Value!, createdAt.Value!.Value!, id.Value!, intent.Value!, updatedAt.Value!.Value!, transaction);
         }
 
         /// <summary>
@@ -258,17 +274,14 @@ namespace BeamAutomationClient.Model
 
             writer.WriteNumber("chainId", getTransactionsResponseV2DataInner.ChainId);
 
+            writer.WriteString("createdAt", getTransactionsResponseV2DataInner.CreatedAt.ToString(CreatedAtFormat));
+
             writer.WriteString("id", getTransactionsResponseV2DataInner.Id);
 
             writer.WritePropertyName("intent");
             JsonSerializer.Serialize(writer, getTransactionsResponseV2DataInner.Intent, jsonSerializerOptions);
-            if (getTransactionsResponseV2DataInner.CreatedAt != null)
-            {
-                writer.WritePropertyName("createdAt");
-                JsonSerializer.Serialize(writer, getTransactionsResponseV2DataInner.CreatedAt, jsonSerializerOptions);
-            }
-            else
-                writer.WriteNull("createdAt");
+            writer.WriteString("updatedAt", getTransactionsResponseV2DataInner.UpdatedAt.ToString(UpdatedAtFormat));
+
             if (getTransactionsResponseV2DataInner.TransactionOption.IsSet)
                 if (getTransactionsResponseV2DataInner.TransactionOption.Value != null)
                 {
@@ -277,13 +290,6 @@ namespace BeamAutomationClient.Model
                 }
                 else
                     writer.WriteNull("transaction");
-            if (getTransactionsResponseV2DataInner.UpdatedAt != null)
-            {
-                writer.WritePropertyName("updatedAt");
-                JsonSerializer.Serialize(writer, getTransactionsResponseV2DataInner.UpdatedAt, jsonSerializerOptions);
-            }
-            else
-                writer.WriteNull("updatedAt");
         }
     }
 }

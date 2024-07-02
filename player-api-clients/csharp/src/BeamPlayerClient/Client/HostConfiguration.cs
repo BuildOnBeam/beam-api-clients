@@ -50,7 +50,6 @@ namespace BeamPlayerClient.Client
             _jsonOptions.Converters.Add(new Check503ResponseJsonConverter());
             _jsonOptions.Converters.Add(new CommonOperationResponseJsonConverter());
             _jsonOptions.Converters.Add(new CommonOperationResponseTransactionsInnerJsonConverter());
-            _jsonOptions.Converters.Add(new CommonOperationResponseTransactionsInnerDataJsonConverter());
             _jsonOptions.Converters.Add(new ConfirmOperationRequestJsonConverter());
             _jsonOptions.Converters.Add(new ConfirmOperationRequestTransactionsInnerJsonConverter());
             _jsonOptions.Converters.Add(new ConvertTokenRequestInputJsonConverter());

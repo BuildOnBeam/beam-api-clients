@@ -35,19 +35,19 @@ namespace BeamAutomationClient.Model
         /// Initializes a new instance of the <see cref="GetGameResponseDepositor" /> class.
         /// </summary>
         /// <param name="address">address</param>
+        /// <param name="createdAt">createdAt</param>
         /// <param name="externalId">externalId</param>
         /// <param name="gameId">gameId</param>
         /// <param name="id">id</param>
-        /// <param name="createdAt">createdAt</param>
         /// <param name="updatedAt">updatedAt</param>
         [JsonConstructor]
-        public GetGameResponseDepositor(string address, string externalId, string gameId, string id, Object? createdAt = default, Object? updatedAt = default)
+        public GetGameResponseDepositor(string address, DateTime createdAt, string externalId, string gameId, string id, DateTime updatedAt)
         {
             Address = address;
+            CreatedAt = createdAt;
             ExternalId = externalId;
             GameId = gameId;
             Id = id;
-            CreatedAt = createdAt;
             UpdatedAt = updatedAt;
             OnCreated();
         }
@@ -59,6 +59,12 @@ namespace BeamAutomationClient.Model
         /// </summary>
         [JsonPropertyName("address")]
         public string Address { get; set; }
+
+        /// <summary>
+        /// Gets or Sets CreatedAt
+        /// </summary>
+        [JsonPropertyName("createdAt")]
+        public DateTime CreatedAt { get; set; }
 
         /// <summary>
         /// Gets or Sets ExternalId
@@ -79,16 +85,10 @@ namespace BeamAutomationClient.Model
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets CreatedAt
-        /// </summary>
-        [JsonPropertyName("createdAt")]
-        public Object? CreatedAt { get; set; }
-
-        /// <summary>
         /// Gets or Sets UpdatedAt
         /// </summary>
         [JsonPropertyName("updatedAt")]
-        public Object? UpdatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -99,10 +99,10 @@ namespace BeamAutomationClient.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class GetGameResponseDepositor {\n");
             sb.Append("  Address: ").Append(Address).Append("\n");
+            sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  ExternalId: ").Append(ExternalId).Append("\n");
             sb.Append("  GameId: ").Append(GameId).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
-            sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -125,6 +125,16 @@ namespace BeamAutomationClient.Model
     public class GetGameResponseDepositorJsonConverter : JsonConverter<GetGameResponseDepositor>
     {
         /// <summary>
+        /// The format to use to serialize CreatedAt
+        /// </summary>
+        public static string CreatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
+        /// The format to use to serialize UpdatedAt
+        /// </summary>
+        public static string UpdatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
         /// Deserializes json to <see cref="GetGameResponseDepositor" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
@@ -142,11 +152,11 @@ namespace BeamAutomationClient.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<string?> address = default;
+            Option<DateTime?> createdAt = default;
             Option<string?> externalId = default;
             Option<string?> gameId = default;
             Option<string?> id = default;
-            Option<Object?> createdAt = default;
-            Option<Object?> updatedAt = default;
+            Option<DateTime?> updatedAt = default;
 
             while (utf8JsonReader.Read())
             {
@@ -166,6 +176,10 @@ namespace BeamAutomationClient.Model
                         case "address":
                             address = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
+                        case "createdAt":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                createdAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
                         case "externalId":
                             externalId = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
@@ -175,13 +189,9 @@ namespace BeamAutomationClient.Model
                         case "id":
                             id = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "createdAt":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                createdAt = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
-                            break;
                         case "updatedAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                updatedAt = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
+                                updatedAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -192,6 +202,9 @@ namespace BeamAutomationClient.Model
             if (!address.IsSet)
                 throw new ArgumentException("Property is required for class GetGameResponseDepositor.", nameof(address));
 
+            if (!createdAt.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponseDepositor.", nameof(createdAt));
+
             if (!externalId.IsSet)
                 throw new ArgumentException("Property is required for class GetGameResponseDepositor.", nameof(externalId));
 
@@ -201,14 +214,14 @@ namespace BeamAutomationClient.Model
             if (!id.IsSet)
                 throw new ArgumentException("Property is required for class GetGameResponseDepositor.", nameof(id));
 
-            if (!createdAt.IsSet)
-                throw new ArgumentException("Property is required for class GetGameResponseDepositor.", nameof(createdAt));
-
             if (!updatedAt.IsSet)
                 throw new ArgumentException("Property is required for class GetGameResponseDepositor.", nameof(updatedAt));
 
             if (address.IsSet && address.Value == null)
                 throw new ArgumentNullException(nameof(address), "Property is not nullable for class GetGameResponseDepositor.");
+
+            if (createdAt.IsSet && createdAt.Value == null)
+                throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class GetGameResponseDepositor.");
 
             if (externalId.IsSet && externalId.Value == null)
                 throw new ArgumentNullException(nameof(externalId), "Property is not nullable for class GetGameResponseDepositor.");
@@ -219,7 +232,10 @@ namespace BeamAutomationClient.Model
             if (id.IsSet && id.Value == null)
                 throw new ArgumentNullException(nameof(id), "Property is not nullable for class GetGameResponseDepositor.");
 
-            return new GetGameResponseDepositor(address.Value!, externalId.Value!, gameId.Value!, id.Value!, createdAt.Value!, updatedAt.Value!);
+            if (updatedAt.IsSet && updatedAt.Value == null)
+                throw new ArgumentNullException(nameof(updatedAt), "Property is not nullable for class GetGameResponseDepositor.");
+
+            return new GetGameResponseDepositor(address.Value!, createdAt.Value!.Value!, externalId.Value!, gameId.Value!, id.Value!, updatedAt.Value!.Value!);
         }
 
         /// <summary>
@@ -260,26 +276,15 @@ namespace BeamAutomationClient.Model
 
             writer.WriteString("address", getGameResponseDepositor.Address);
 
+            writer.WriteString("createdAt", getGameResponseDepositor.CreatedAt.ToString(CreatedAtFormat));
+
             writer.WriteString("externalId", getGameResponseDepositor.ExternalId);
 
             writer.WriteString("gameId", getGameResponseDepositor.GameId);
 
             writer.WriteString("id", getGameResponseDepositor.Id);
 
-            if (getGameResponseDepositor.CreatedAt != null)
-            {
-                writer.WritePropertyName("createdAt");
-                JsonSerializer.Serialize(writer, getGameResponseDepositor.CreatedAt, jsonSerializerOptions);
-            }
-            else
-                writer.WriteNull("createdAt");
-            if (getGameResponseDepositor.UpdatedAt != null)
-            {
-                writer.WritePropertyName("updatedAt");
-                JsonSerializer.Serialize(writer, getGameResponseDepositor.UpdatedAt, jsonSerializerOptions);
-            }
-            else
-                writer.WriteNull("updatedAt");
+            writer.WriteString("updatedAt", getGameResponseDepositor.UpdatedAt.ToString(UpdatedAtFormat));
         }
     }
 }

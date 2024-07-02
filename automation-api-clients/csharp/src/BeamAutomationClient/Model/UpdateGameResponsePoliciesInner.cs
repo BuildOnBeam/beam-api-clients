@@ -35,34 +35,34 @@ namespace BeamAutomationClient.Model
         /// Initializes a new instance of the <see cref="UpdateGameResponsePoliciesInner" /> class.
         /// </summary>
         /// <param name="chainId">chainId</param>
+        /// <param name="createdAt">createdAt</param>
         /// <param name="externalId">externalId</param>
         /// <param name="gameId">gameId</param>
         /// <param name="id">id</param>
         /// <param name="model">model</param>
         /// <param name="name">name</param>
         /// <param name="type">type</param>
+        /// <param name="updatedAt">updatedAt</param>
         /// <param name="amount">amount</param>
-        /// <param name="createdAt">createdAt</param>
         /// <param name="depositorId">depositorId</param>
         /// <param name="rateType">rateType</param>
         /// <param name="token">token</param>
-        /// <param name="updatedAt">updatedAt</param>
         [JsonConstructor]
-        public UpdateGameResponsePoliciesInner(int chainId, string externalId, string gameId, string id, ModelEnum model, string name, TypeEnum type, string? amount = default, Object? createdAt = default, string? depositorId = default, RateTypeEnum? rateType = default, string? token = default, Object? updatedAt = default)
+        public UpdateGameResponsePoliciesInner(int chainId, DateTime createdAt, string externalId, string gameId, string id, ModelEnum model, string name, TypeEnum type, DateTime updatedAt, string? amount = default, string? depositorId = default, RateTypeEnum? rateType = default, string? token = default)
         {
             ChainId = chainId;
+            CreatedAt = createdAt;
             ExternalId = externalId;
             GameId = gameId;
             Id = id;
             Model = model;
             Name = name;
             Type = type;
+            UpdatedAt = updatedAt;
             Amount = amount;
-            CreatedAt = createdAt;
             DepositorId = depositorId;
             RateType = rateType;
             Token = token;
-            UpdatedAt = updatedAt;
             OnCreated();
         }
 
@@ -294,6 +294,12 @@ namespace BeamAutomationClient.Model
         public int ChainId { get; set; }
 
         /// <summary>
+        /// Gets or Sets CreatedAt
+        /// </summary>
+        [JsonPropertyName("createdAt")]
+        public DateTime CreatedAt { get; set; }
+
+        /// <summary>
         /// Gets or Sets ExternalId
         /// </summary>
         [JsonPropertyName("externalId")]
@@ -318,16 +324,16 @@ namespace BeamAutomationClient.Model
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or Sets UpdatedAt
+        /// </summary>
+        [JsonPropertyName("updatedAt")]
+        public DateTime UpdatedAt { get; set; }
+
+        /// <summary>
         /// Gets or Sets Amount
         /// </summary>
         [JsonPropertyName("amount")]
         public string? Amount { get; set; }
-
-        /// <summary>
-        /// Gets or Sets CreatedAt
-        /// </summary>
-        [JsonPropertyName("createdAt")]
-        public Object? CreatedAt { get; set; }
 
         /// <summary>
         /// Gets or Sets DepositorId
@@ -342,12 +348,6 @@ namespace BeamAutomationClient.Model
         public string? Token { get; set; }
 
         /// <summary>
-        /// Gets or Sets UpdatedAt
-        /// </summary>
-        [JsonPropertyName("updatedAt")]
-        public Object? UpdatedAt { get; set; }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -356,18 +356,18 @@ namespace BeamAutomationClient.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class UpdateGameResponsePoliciesInner {\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
+            sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  ExternalId: ").Append(ExternalId).Append("\n");
             sb.Append("  GameId: ").Append(GameId).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Model: ").Append(Model).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
             sb.Append("  Amount: ").Append(Amount).Append("\n");
-            sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  DepositorId: ").Append(DepositorId).Append("\n");
             sb.Append("  RateType: ").Append(RateType).Append("\n");
             sb.Append("  Token: ").Append(Token).Append("\n");
-            sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -389,6 +389,16 @@ namespace BeamAutomationClient.Model
     public class UpdateGameResponsePoliciesInnerJsonConverter : JsonConverter<UpdateGameResponsePoliciesInner>
     {
         /// <summary>
+        /// The format to use to serialize CreatedAt
+        /// </summary>
+        public static string CreatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
+        /// The format to use to serialize UpdatedAt
+        /// </summary>
+        public static string UpdatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
         /// Deserializes json to <see cref="UpdateGameResponsePoliciesInner" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
@@ -406,18 +416,18 @@ namespace BeamAutomationClient.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<int?> chainId = default;
+            Option<DateTime?> createdAt = default;
             Option<string?> externalId = default;
             Option<string?> gameId = default;
             Option<string?> id = default;
             Option<UpdateGameResponsePoliciesInner.ModelEnum?> model = default;
             Option<string?> name = default;
             Option<UpdateGameResponsePoliciesInner.TypeEnum?> type = default;
+            Option<DateTime?> updatedAt = default;
             Option<string?> amount = default;
-            Option<Object?> createdAt = default;
             Option<string?> depositorId = default;
             Option<UpdateGameResponsePoliciesInner.RateTypeEnum?> rateType = default;
             Option<string?> token = default;
-            Option<Object?> updatedAt = default;
 
             while (utf8JsonReader.Read())
             {
@@ -437,6 +447,10 @@ namespace BeamAutomationClient.Model
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 chainId = new Option<int?>(utf8JsonReader.GetInt32());
+                            break;
+                        case "createdAt":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                createdAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "externalId":
                             externalId = new Option<string?>(utf8JsonReader.GetString()!);
@@ -460,12 +474,12 @@ namespace BeamAutomationClient.Model
                             if (typeRawValue != null)
                                 type = new Option<UpdateGameResponsePoliciesInner.TypeEnum?>(UpdateGameResponsePoliciesInner.TypeEnumFromStringOrDefault(typeRawValue));
                             break;
+                        case "updatedAt":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                updatedAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
                         case "amount":
                             amount = new Option<string?>(utf8JsonReader.GetString());
-                            break;
-                        case "createdAt":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                createdAt = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "depositorId":
                             depositorId = new Option<string?>(utf8JsonReader.GetString());
@@ -478,10 +492,6 @@ namespace BeamAutomationClient.Model
                         case "token":
                             token = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "updatedAt":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                updatedAt = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
-                            break;
                         default:
                             break;
                     }
@@ -490,6 +500,9 @@ namespace BeamAutomationClient.Model
 
             if (!chainId.IsSet)
                 throw new ArgumentException("Property is required for class UpdateGameResponsePoliciesInner.", nameof(chainId));
+
+            if (!createdAt.IsSet)
+                throw new ArgumentException("Property is required for class UpdateGameResponsePoliciesInner.", nameof(createdAt));
 
             if (!externalId.IsSet)
                 throw new ArgumentException("Property is required for class UpdateGameResponsePoliciesInner.", nameof(externalId));
@@ -509,11 +522,11 @@ namespace BeamAutomationClient.Model
             if (!type.IsSet)
                 throw new ArgumentException("Property is required for class UpdateGameResponsePoliciesInner.", nameof(type));
 
+            if (!updatedAt.IsSet)
+                throw new ArgumentException("Property is required for class UpdateGameResponsePoliciesInner.", nameof(updatedAt));
+
             if (!amount.IsSet)
                 throw new ArgumentException("Property is required for class UpdateGameResponsePoliciesInner.", nameof(amount));
-
-            if (!createdAt.IsSet)
-                throw new ArgumentException("Property is required for class UpdateGameResponsePoliciesInner.", nameof(createdAt));
 
             if (!depositorId.IsSet)
                 throw new ArgumentException("Property is required for class UpdateGameResponsePoliciesInner.", nameof(depositorId));
@@ -524,11 +537,11 @@ namespace BeamAutomationClient.Model
             if (!token.IsSet)
                 throw new ArgumentException("Property is required for class UpdateGameResponsePoliciesInner.", nameof(token));
 
-            if (!updatedAt.IsSet)
-                throw new ArgumentException("Property is required for class UpdateGameResponsePoliciesInner.", nameof(updatedAt));
-
             if (chainId.IsSet && chainId.Value == null)
                 throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class UpdateGameResponsePoliciesInner.");
+
+            if (createdAt.IsSet && createdAt.Value == null)
+                throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class UpdateGameResponsePoliciesInner.");
 
             if (externalId.IsSet && externalId.Value == null)
                 throw new ArgumentNullException(nameof(externalId), "Property is not nullable for class UpdateGameResponsePoliciesInner.");
@@ -548,7 +561,10 @@ namespace BeamAutomationClient.Model
             if (type.IsSet && type.Value == null)
                 throw new ArgumentNullException(nameof(type), "Property is not nullable for class UpdateGameResponsePoliciesInner.");
 
-            return new UpdateGameResponsePoliciesInner(chainId.Value!.Value!, externalId.Value!, gameId.Value!, id.Value!, model.Value!.Value!, name.Value!, type.Value!.Value!, amount.Value!, createdAt.Value!, depositorId.Value!, rateType.Value!, token.Value!, updatedAt.Value!);
+            if (updatedAt.IsSet && updatedAt.Value == null)
+                throw new ArgumentNullException(nameof(updatedAt), "Property is not nullable for class UpdateGameResponsePoliciesInner.");
+
+            return new UpdateGameResponsePoliciesInner(chainId.Value!.Value!, createdAt.Value!.Value!, externalId.Value!, gameId.Value!, id.Value!, model.Value!.Value!, name.Value!, type.Value!.Value!, updatedAt.Value!.Value!, amount.Value!, depositorId.Value!, rateType.Value!, token.Value!);
         }
 
         /// <summary>
@@ -589,6 +605,8 @@ namespace BeamAutomationClient.Model
 
             writer.WriteNumber("chainId", updateGameResponsePoliciesInner.ChainId);
 
+            writer.WriteString("createdAt", updateGameResponsePoliciesInner.CreatedAt.ToString(CreatedAtFormat));
+
             writer.WriteString("externalId", updateGameResponsePoliciesInner.ExternalId);
 
             writer.WriteString("gameId", updateGameResponsePoliciesInner.GameId);
@@ -601,18 +619,13 @@ namespace BeamAutomationClient.Model
 
             var typeRawValue = UpdateGameResponsePoliciesInner.TypeEnumToJsonValue(updateGameResponsePoliciesInner.Type);
             writer.WriteString("type", typeRawValue);
+            writer.WriteString("updatedAt", updateGameResponsePoliciesInner.UpdatedAt.ToString(UpdatedAtFormat));
+
             if (updateGameResponsePoliciesInner.Amount != null)
                 writer.WriteString("amount", updateGameResponsePoliciesInner.Amount);
             else
                 writer.WriteNull("amount");
 
-            if (updateGameResponsePoliciesInner.CreatedAt != null)
-            {
-                writer.WritePropertyName("createdAt");
-                JsonSerializer.Serialize(writer, updateGameResponsePoliciesInner.CreatedAt, jsonSerializerOptions);
-            }
-            else
-                writer.WriteNull("createdAt");
             if (updateGameResponsePoliciesInner.DepositorId != null)
                 writer.WriteString("depositorId", updateGameResponsePoliciesInner.DepositorId);
             else
@@ -628,14 +641,6 @@ namespace BeamAutomationClient.Model
                 writer.WriteString("token", updateGameResponsePoliciesInner.Token);
             else
                 writer.WriteNull("token");
-
-            if (updateGameResponsePoliciesInner.UpdatedAt != null)
-            {
-                writer.WritePropertyName("updatedAt");
-                JsonSerializer.Serialize(writer, updateGameResponsePoliciesInner.UpdatedAt, jsonSerializerOptions);
-            }
-            else
-                writer.WriteNull("updatedAt");
         }
     }
 }

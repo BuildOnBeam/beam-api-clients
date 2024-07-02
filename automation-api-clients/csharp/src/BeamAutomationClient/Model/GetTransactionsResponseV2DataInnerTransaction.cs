@@ -34,18 +34,18 @@ namespace BeamAutomationClient.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="GetTransactionsResponseV2DataInnerTransaction" /> class.
         /// </summary>
-        /// <param name="blockNumber">blockNumber</param>
         /// <param name="createdAt">createdAt</param>
+        /// <param name="blockNumber">blockNumber</param>
         /// <param name="gasFee">gasFee</param>
         /// <param name="gasUsed">gasUsed</param>
         /// <param name="hash">hash</param>
         /// <param name="logs">logs</param>
         /// <param name="status">status</param>
         [JsonConstructor]
-        public GetTransactionsResponseV2DataInnerTransaction(Option<decimal?> blockNumber = default, Object? createdAt = default, Option<string?> gasFee = default, Option<string?> gasUsed = default, Option<string?> hash = default, Option<List<GetTransactionsResponseV2DataInnerTransactionLogsInner>?> logs = default, Option<decimal?> status = default)
+        public GetTransactionsResponseV2DataInnerTransaction(DateTime createdAt, Option<decimal?> blockNumber = default, Option<string?> gasFee = default, Option<string?> gasUsed = default, Option<string?> hash = default, Option<List<GetTransactionsResponseV2DataInnerTransactionLogsInner>?> logs = default, Option<decimal?> status = default)
         {
-            BlockNumberOption = blockNumber;
             CreatedAt = createdAt;
+            BlockNumberOption = blockNumber;
             GasFeeOption = gasFee;
             GasUsedOption = gasUsed;
             HashOption = hash;
@@ -55,6 +55,12 @@ namespace BeamAutomationClient.Model
         }
 
         partial void OnCreated();
+
+        /// <summary>
+        /// Gets or Sets CreatedAt
+        /// </summary>
+        [JsonPropertyName("createdAt")]
+        public DateTime CreatedAt { get; set; }
 
         /// <summary>
         /// Used to track the state of BlockNumber
@@ -68,12 +74,6 @@ namespace BeamAutomationClient.Model
         /// </summary>
         [JsonPropertyName("blockNumber")]
         public decimal? BlockNumber { get { return this. BlockNumberOption; } set { this.BlockNumberOption = new(value); } }
-
-        /// <summary>
-        /// Gets or Sets CreatedAt
-        /// </summary>
-        [JsonPropertyName("createdAt")]
-        public Object? CreatedAt { get; set; }
 
         /// <summary>
         /// Used to track the state of GasFee
@@ -148,8 +148,8 @@ namespace BeamAutomationClient.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class GetTransactionsResponseV2DataInnerTransaction {\n");
-            sb.Append("  BlockNumber: ").Append(BlockNumber).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
+            sb.Append("  BlockNumber: ").Append(BlockNumber).Append("\n");
             sb.Append("  GasFee: ").Append(GasFee).Append("\n");
             sb.Append("  GasUsed: ").Append(GasUsed).Append("\n");
             sb.Append("  Hash: ").Append(Hash).Append("\n");
@@ -176,6 +176,11 @@ namespace BeamAutomationClient.Model
     public class GetTransactionsResponseV2DataInnerTransactionJsonConverter : JsonConverter<GetTransactionsResponseV2DataInnerTransaction>
     {
         /// <summary>
+        /// The format to use to serialize CreatedAt
+        /// </summary>
+        public static string CreatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
         /// Deserializes json to <see cref="GetTransactionsResponseV2DataInnerTransaction" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
@@ -192,8 +197,8 @@ namespace BeamAutomationClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
+            Option<DateTime?> createdAt = default;
             Option<decimal?> blockNumber = default;
-            Option<Object?> createdAt = default;
             Option<string?> gasFee = default;
             Option<string?> gasUsed = default;
             Option<string?> hash = default;
@@ -215,13 +220,13 @@ namespace BeamAutomationClient.Model
 
                     switch (localVarJsonPropertyName)
                     {
+                        case "createdAt":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                createdAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
                         case "blockNumber":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 blockNumber = new Option<decimal?>(utf8JsonReader.GetDecimal());
-                            break;
-                        case "createdAt":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                createdAt = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "gasFee":
                             gasFee = new Option<string?>(utf8JsonReader.GetString()!);
@@ -249,6 +254,9 @@ namespace BeamAutomationClient.Model
             if (!createdAt.IsSet)
                 throw new ArgumentException("Property is required for class GetTransactionsResponseV2DataInnerTransaction.", nameof(createdAt));
 
+            if (createdAt.IsSet && createdAt.Value == null)
+                throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class GetTransactionsResponseV2DataInnerTransaction.");
+
             if (blockNumber.IsSet && blockNumber.Value == null)
                 throw new ArgumentNullException(nameof(blockNumber), "Property is not nullable for class GetTransactionsResponseV2DataInnerTransaction.");
 
@@ -267,7 +275,7 @@ namespace BeamAutomationClient.Model
             if (status.IsSet && status.Value == null)
                 throw new ArgumentNullException(nameof(status), "Property is not nullable for class GetTransactionsResponseV2DataInnerTransaction.");
 
-            return new GetTransactionsResponseV2DataInnerTransaction(blockNumber, createdAt.Value!, gasFee, gasUsed, hash, logs, status);
+            return new GetTransactionsResponseV2DataInnerTransaction(createdAt.Value!.Value!, blockNumber, gasFee, gasUsed, hash, logs, status);
         }
 
         /// <summary>
@@ -306,16 +314,11 @@ namespace BeamAutomationClient.Model
             if (getTransactionsResponseV2DataInnerTransaction.LogsOption.IsSet && getTransactionsResponseV2DataInnerTransaction.Logs == null)
                 throw new ArgumentNullException(nameof(getTransactionsResponseV2DataInnerTransaction.Logs), "Property is required for class GetTransactionsResponseV2DataInnerTransaction.");
 
+            writer.WriteString("createdAt", getTransactionsResponseV2DataInnerTransaction.CreatedAt.ToString(CreatedAtFormat));
+
             if (getTransactionsResponseV2DataInnerTransaction.BlockNumberOption.IsSet)
                 writer.WriteNumber("blockNumber", getTransactionsResponseV2DataInnerTransaction.BlockNumberOption.Value!.Value);
 
-            if (getTransactionsResponseV2DataInnerTransaction.CreatedAt != null)
-            {
-                writer.WritePropertyName("createdAt");
-                JsonSerializer.Serialize(writer, getTransactionsResponseV2DataInnerTransaction.CreatedAt, jsonSerializerOptions);
-            }
-            else
-                writer.WriteNull("createdAt");
             if (getTransactionsResponseV2DataInnerTransaction.GasFeeOption.IsSet)
                 writer.WriteString("gasFee", getTransactionsResponseV2DataInnerTransaction.GasFee);
 

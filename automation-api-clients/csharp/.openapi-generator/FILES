@@ -101,7 +101,6 @@ src/BeamAutomationClient/Model/GetChainResponseNativeCurrency.cs
 src/BeamAutomationClient/Model/GetEstimateResponse.cs
 src/BeamAutomationClient/Model/GetGameResponse.cs
 src/BeamAutomationClient/Model/GetGameResponseContractsInner.cs
-src/BeamAutomationClient/Model/GetGameResponseContractsInnerAbi.cs
 src/BeamAutomationClient/Model/GetGameResponseDepositor.cs
 src/BeamAutomationClient/Model/GetGameResponseDevelopersInner.cs
 src/BeamAutomationClient/Model/GetGameResponseDevelopersInnerDeveloper.cs

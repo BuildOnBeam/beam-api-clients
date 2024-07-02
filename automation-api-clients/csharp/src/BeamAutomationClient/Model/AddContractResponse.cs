@@ -45,7 +45,7 @@ namespace BeamAutomationClient.Model
         /// <param name="gameId">gameId</param>
         /// <param name="name">name</param>
         [JsonConstructor]
-        public AddContractResponse(string address, int chainId, DateTime createdAt, string externalId, string id, TypeEnum type, DateTime updatedAt, GetGameResponseContractsInnerAbi? abi = default, string? gameId = default, string? name = default)
+        public AddContractResponse(string address, int chainId, DateTime createdAt, string externalId, string id, TypeEnum type, DateTime updatedAt, Object? abi = default, string? gameId = default, string? name = default)
         {
             Address = address;
             ChainId = chainId;
@@ -230,7 +230,7 @@ namespace BeamAutomationClient.Model
         /// Gets or Sets Abi
         /// </summary>
         [JsonPropertyName("abi")]
-        public GetGameResponseContractsInnerAbi? Abi { get; set; }
+        public Object? Abi { get; set; }
 
         /// <summary>
         /// Gets or Sets GameId
@@ -316,7 +316,7 @@ namespace BeamAutomationClient.Model
             Option<string?> id = default;
             Option<AddContractResponse.TypeEnum?> type = default;
             Option<DateTime?> updatedAt = default;
-            Option<GetGameResponseContractsInnerAbi?> abi = default;
+            Option<Object?> abi = default;
             Option<string?> gameId = default;
             Option<string?> name = default;
 
@@ -363,7 +363,7 @@ namespace BeamAutomationClient.Model
                             break;
                         case "abi":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                abi = new Option<GetGameResponseContractsInnerAbi?>(JsonSerializer.Deserialize<GetGameResponseContractsInnerAbi>(ref utf8JsonReader, jsonSerializerOptions));
+                                abi = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "gameId":
                             gameId = new Option<string?>(utf8JsonReader.GetString());

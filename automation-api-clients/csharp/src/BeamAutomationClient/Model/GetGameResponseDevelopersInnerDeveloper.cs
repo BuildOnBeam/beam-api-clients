@@ -34,18 +34,18 @@ namespace BeamAutomationClient.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="GetGameResponseDevelopersInnerDeveloper" /> class.
         /// </summary>
+        /// <param name="createdAt">createdAt</param>
         /// <param name="email">email</param>
         /// <param name="id">id</param>
-        /// <param name="createdAt">createdAt</param>
         /// <param name="lastSeenAt">lastSeenAt</param>
         /// <param name="name">name</param>
         /// <param name="supabaseId">supabaseId</param>
         [JsonConstructor]
-        public GetGameResponseDevelopersInnerDeveloper(string email, string id, Object? createdAt = default, Object? lastSeenAt = default, string? name = default, string? supabaseId = default)
+        public GetGameResponseDevelopersInnerDeveloper(DateTime createdAt, string email, string id, DateTime? lastSeenAt = default, string? name = default, string? supabaseId = default)
         {
+            CreatedAt = createdAt;
             Email = email;
             Id = id;
-            CreatedAt = createdAt;
             LastSeenAt = lastSeenAt;
             Name = name;
             SupabaseId = supabaseId;
@@ -53,6 +53,12 @@ namespace BeamAutomationClient.Model
         }
 
         partial void OnCreated();
+
+        /// <summary>
+        /// Gets or Sets CreatedAt
+        /// </summary>
+        [JsonPropertyName("createdAt")]
+        public DateTime CreatedAt { get; set; }
 
         /// <summary>
         /// Gets or Sets Email
@@ -67,16 +73,10 @@ namespace BeamAutomationClient.Model
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets CreatedAt
-        /// </summary>
-        [JsonPropertyName("createdAt")]
-        public Object? CreatedAt { get; set; }
-
-        /// <summary>
         /// Gets or Sets LastSeenAt
         /// </summary>
         [JsonPropertyName("lastSeenAt")]
-        public Object? LastSeenAt { get; set; }
+        public DateTime? LastSeenAt { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
@@ -98,9 +98,9 @@ namespace BeamAutomationClient.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class GetGameResponseDevelopersInnerDeveloper {\n");
+            sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  Email: ").Append(Email).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
-            sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  LastSeenAt: ").Append(LastSeenAt).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  SupabaseId: ").Append(SupabaseId).Append("\n");
@@ -125,6 +125,16 @@ namespace BeamAutomationClient.Model
     public class GetGameResponseDevelopersInnerDeveloperJsonConverter : JsonConverter<GetGameResponseDevelopersInnerDeveloper>
     {
         /// <summary>
+        /// The format to use to serialize CreatedAt
+        /// </summary>
+        public static string CreatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
+        /// The format to use to serialize LastSeenAt
+        /// </summary>
+        public static string LastSeenAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
         /// Deserializes json to <see cref="GetGameResponseDevelopersInnerDeveloper" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
@@ -141,10 +151,10 @@ namespace BeamAutomationClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
+            Option<DateTime?> createdAt = default;
             Option<string?> email = default;
             Option<string?> id = default;
-            Option<Object?> createdAt = default;
-            Option<Object?> lastSeenAt = default;
+            Option<DateTime?> lastSeenAt = default;
             Option<string?> name = default;
             Option<string?> supabaseId = default;
 
@@ -163,19 +173,19 @@ namespace BeamAutomationClient.Model
 
                     switch (localVarJsonPropertyName)
                     {
+                        case "createdAt":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                createdAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
                         case "email":
                             email = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "id":
                             id = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "createdAt":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                createdAt = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
-                            break;
                         case "lastSeenAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                lastSeenAt = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
+                                lastSeenAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime?>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "name":
                             name = new Option<string?>(utf8JsonReader.GetString());
@@ -189,14 +199,14 @@ namespace BeamAutomationClient.Model
                 }
             }
 
+            if (!createdAt.IsSet)
+                throw new ArgumentException("Property is required for class GetGameResponseDevelopersInnerDeveloper.", nameof(createdAt));
+
             if (!email.IsSet)
                 throw new ArgumentException("Property is required for class GetGameResponseDevelopersInnerDeveloper.", nameof(email));
 
             if (!id.IsSet)
                 throw new ArgumentException("Property is required for class GetGameResponseDevelopersInnerDeveloper.", nameof(id));
-
-            if (!createdAt.IsSet)
-                throw new ArgumentException("Property is required for class GetGameResponseDevelopersInnerDeveloper.", nameof(createdAt));
 
             if (!lastSeenAt.IsSet)
                 throw new ArgumentException("Property is required for class GetGameResponseDevelopersInnerDeveloper.", nameof(lastSeenAt));
@@ -207,13 +217,16 @@ namespace BeamAutomationClient.Model
             if (!supabaseId.IsSet)
                 throw new ArgumentException("Property is required for class GetGameResponseDevelopersInnerDeveloper.", nameof(supabaseId));
 
+            if (createdAt.IsSet && createdAt.Value == null)
+                throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class GetGameResponseDevelopersInnerDeveloper.");
+
             if (email.IsSet && email.Value == null)
                 throw new ArgumentNullException(nameof(email), "Property is not nullable for class GetGameResponseDevelopersInnerDeveloper.");
 
             if (id.IsSet && id.Value == null)
                 throw new ArgumentNullException(nameof(id), "Property is not nullable for class GetGameResponseDevelopersInnerDeveloper.");
 
-            return new GetGameResponseDevelopersInnerDeveloper(email.Value!, id.Value!, createdAt.Value!, lastSeenAt.Value!, name.Value!, supabaseId.Value!);
+            return new GetGameResponseDevelopersInnerDeveloper(createdAt.Value!.Value!, email.Value!, id.Value!, lastSeenAt.Value!, name.Value!, supabaseId.Value!);
         }
 
         /// <summary>
@@ -246,24 +259,17 @@ namespace BeamAutomationClient.Model
             if (getGameResponseDevelopersInnerDeveloper.Id == null)
                 throw new ArgumentNullException(nameof(getGameResponseDevelopersInnerDeveloper.Id), "Property is required for class GetGameResponseDevelopersInnerDeveloper.");
 
+            writer.WriteString("createdAt", getGameResponseDevelopersInnerDeveloper.CreatedAt.ToString(CreatedAtFormat));
+
             writer.WriteString("email", getGameResponseDevelopersInnerDeveloper.Email);
 
             writer.WriteString("id", getGameResponseDevelopersInnerDeveloper.Id);
 
-            if (getGameResponseDevelopersInnerDeveloper.CreatedAt != null)
-            {
-                writer.WritePropertyName("createdAt");
-                JsonSerializer.Serialize(writer, getGameResponseDevelopersInnerDeveloper.CreatedAt, jsonSerializerOptions);
-            }
-            else
-                writer.WriteNull("createdAt");
             if (getGameResponseDevelopersInnerDeveloper.LastSeenAt != null)
-            {
-                writer.WritePropertyName("lastSeenAt");
-                JsonSerializer.Serialize(writer, getGameResponseDevelopersInnerDeveloper.LastSeenAt, jsonSerializerOptions);
-            }
+                writer.WriteString("lastSeenAt", getGameResponseDevelopersInnerDeveloper.LastSeenAt.Value.ToString(LastSeenAtFormat));
             else
                 writer.WriteNull("lastSeenAt");
+
             if (getGameResponseDevelopersInnerDeveloper.Name != null)
                 writer.WriteString("name", getGameResponseDevelopersInnerDeveloper.Name);
             else
