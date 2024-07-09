@@ -99,6 +99,8 @@ src/BeamPlayerClient/Model/GetUserCurrenciesResponseDataInner.cs
 src/BeamPlayerClient/Model/GetUserNativeCurrencyResponse.cs
 src/BeamPlayerClient/Model/GetUserNativeCurrencyResponseNativeTokenBalance.cs
 src/BeamPlayerClient/Model/GetUserResponse.cs
+src/BeamPlayerClient/Model/RefreshContractRequestBody.cs
+src/BeamPlayerClient/Model/RefreshTokenRequestBody.cs
 src/BeamPlayerClient/Model/RevokeSessionRequestInput.cs
 src/BeamPlayerClient/Model/SellAssetRequestInput.cs
 src/BeamPlayerClient/Model/TransferAssetRequestInput.cs

@@ -130,6 +130,8 @@ namespace BeamAutomationClient.Client
             _jsonOptions.Converters.Add(new GetTransactionsResponseV2DataInnerTransactionLogsInnerJsonConverter());
             _jsonOptions.Converters.Add(new GetWebhooksForGameResponseJsonConverter());
             _jsonOptions.Converters.Add(new GetWebhooksForGameResponseWebhooksInnerJsonConverter());
+            _jsonOptions.Converters.Add(new RefreshContractRequestBodyJsonConverter());
+            _jsonOptions.Converters.Add(new RefreshTokenRequestBodyJsonConverter());
             _jsonOptions.Converters.Add(new RegenerateGameApiKeysResponseJsonConverter());
             _jsonOptions.Converters.Add(new RegenerateGameApiKeysResponseApiKeysInnerJsonConverter());
             _jsonOptions.Converters.Add(new RemoveContractResponseJsonConverter());

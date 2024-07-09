@@ -352,6 +352,52 @@ namespace BeamPlayerClient.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IListAssetApiResponse"/>?&gt;</returns>
         Task<IListAssetApiResponse?> ListAssetOrDefaultAsync(SellAssetRequestInput sellAssetRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Schedule a contract refresh in the indexer
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="refreshContractRequestBody"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IRefreshContractApiResponse"/>&gt;</returns>
+        Task<IRefreshContractApiResponse> RefreshContractAsync(RefreshContractRequestBody refreshContractRequestBody, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Schedule a contract refresh in the indexer
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="refreshContractRequestBody"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IRefreshContractApiResponse"/>?&gt;</returns>
+        Task<IRefreshContractApiResponse?> RefreshContractOrDefaultAsync(RefreshContractRequestBody refreshContractRequestBody, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Schedule a token refresh in the indexer
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="refreshTokenRequestBody"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IRefreshTokenApiResponse"/>&gt;</returns>
+        Task<IRefreshTokenApiResponse> RefreshTokenAsync(RefreshTokenRequestBody refreshTokenRequestBody, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Schedule a token refresh in the indexer
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="refreshTokenRequestBody"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IRefreshTokenApiResponse"/>?&gt;</returns>
+        Task<IRefreshTokenApiResponse?> RefreshTokenOrDefaultAsync(RefreshTokenRequestBody refreshTokenRequestBody, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
@@ -490,6 +536,30 @@ namespace BeamPlayerClient.Api
     /// The <see cref="IListAssetApiResponse"/>
     /// </summary>
     public interface IListAssetApiResponse : BeamPlayerClient.Client.IApiResponse, ICreated<BeamPlayerClient.Model.CommonOperationResponse?>
+    {
+        /// <summary>
+        /// Returns true if the response is 201 Created
+        /// </summary>
+        /// <returns></returns>
+        bool IsCreated { get; }
+    }
+
+    /// <summary>
+    /// The <see cref="IRefreshContractApiResponse"/>
+    /// </summary>
+    public interface IRefreshContractApiResponse : BeamPlayerClient.Client.IApiResponse
+    {
+        /// <summary>
+        /// Returns true if the response is 201 Created
+        /// </summary>
+        /// <returns></returns>
+        bool IsCreated { get; }
+    }
+
+    /// <summary>
+    /// The <see cref="IRefreshTokenApiResponse"/>
+    /// </summary>
+    public interface IRefreshTokenApiResponse : BeamPlayerClient.Client.IApiResponse
     {
         /// <summary>
         /// Returns true if the response is 201 Created
@@ -741,6 +811,46 @@ namespace BeamPlayerClient.Api
         internal void ExecuteOnErrorListAsset(Exception exception)
         {
             OnErrorListAsset?.Invoke(this, new ExceptionEventArgs(exception));
+        }
+
+        /// <summary>
+        /// The event raised after the server response
+        /// </summary>
+        public event EventHandler<ApiResponseEventArgs>? OnRefreshContract;
+
+        /// <summary>
+        /// The event raised after an error querying the server
+        /// </summary>
+        public event EventHandler<ExceptionEventArgs>? OnErrorRefreshContract;
+
+        internal void ExecuteOnRefreshContract(MarketplaceApi.RefreshContractApiResponse apiResponse)
+        {
+            OnRefreshContract?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+        }
+
+        internal void ExecuteOnErrorRefreshContract(Exception exception)
+        {
+            OnErrorRefreshContract?.Invoke(this, new ExceptionEventArgs(exception));
+        }
+
+        /// <summary>
+        /// The event raised after the server response
+        /// </summary>
+        public event EventHandler<ApiResponseEventArgs>? OnRefreshToken;
+
+        /// <summary>
+        /// The event raised after an error querying the server
+        /// </summary>
+        public event EventHandler<ExceptionEventArgs>? OnErrorRefreshToken;
+
+        internal void ExecuteOnRefreshToken(MarketplaceApi.RefreshTokenApiResponse apiResponse)
+        {
+            OnRefreshToken?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+        }
+
+        internal void ExecuteOnErrorRefreshToken(Exception exception)
+        {
+            OnErrorRefreshToken?.Invoke(this, new ExceptionEventArgs(exception));
         }
     }
 
@@ -3831,6 +3941,402 @@ namespace BeamPlayerClient.Api
 
                 return result != null;
             }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
+        }
+
+        partial void FormatRefreshContract(RefreshContractRequestBody refreshContractRequestBody);
+
+        /// <summary>
+        /// Validates the request parameters
+        /// </summary>
+        /// <param name="refreshContractRequestBody"></param>
+        /// <returns></returns>
+        private void ValidateRefreshContract(RefreshContractRequestBody refreshContractRequestBody)
+        {
+            if (refreshContractRequestBody == null)
+                throw new ArgumentNullException(nameof(refreshContractRequestBody));
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="refreshContractRequestBody"></param>
+        private void AfterRefreshContractDefaultImplementation(IRefreshContractApiResponse apiResponseLocalVar, RefreshContractRequestBody refreshContractRequestBody)
+        {
+            bool suppressDefaultLog = false;
+            AfterRefreshContract(ref suppressDefaultLog, apiResponseLocalVar, refreshContractRequestBody);
+            if (!suppressDefaultLog)
+                Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="refreshContractRequestBody"></param>
+        partial void AfterRefreshContract(ref bool suppressDefaultLog, IRefreshContractApiResponse apiResponseLocalVar, RefreshContractRequestBody refreshContractRequestBody);
+
+        /// <summary>
+        /// Logs exceptions that occur while retrieving the server response
+        /// </summary>
+        /// <param name="exception"></param>
+        /// <param name="pathFormat"></param>
+        /// <param name="path"></param>
+        /// <param name="refreshContractRequestBody"></param>
+        private void OnErrorRefreshContractDefaultImplementation(Exception exception, string pathFormat, string path, RefreshContractRequestBody refreshContractRequestBody)
+        {
+            bool suppressDefaultLog = false;
+            OnErrorRefreshContract(ref suppressDefaultLog, exception, pathFormat, path, refreshContractRequestBody);
+            if (!suppressDefaultLog)
+                Logger.LogError(exception, "An error occurred while sending the request to the server.");
+        }
+
+        /// <summary>
+        /// A partial method that gives developers a way to provide customized exception handling
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="exception"></param>
+        /// <param name="pathFormat"></param>
+        /// <param name="path"></param>
+        /// <param name="refreshContractRequestBody"></param>
+        partial void OnErrorRefreshContract(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, RefreshContractRequestBody refreshContractRequestBody);
+
+        /// <summary>
+        /// Schedule a contract refresh in the indexer 
+        /// </summary>
+        /// <param name="refreshContractRequestBody"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IRefreshContractApiResponse"/>&gt;</returns>
+        public async Task<IRefreshContractApiResponse?> RefreshContractOrDefaultAsync(RefreshContractRequestBody refreshContractRequestBody, System.Threading.CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await RefreshContractAsync(refreshContractRequestBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Schedule a contract refresh in the indexer 
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="refreshContractRequestBody"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IRefreshContractApiResponse"/>&gt;</returns>
+        public async Task<IRefreshContractApiResponse> RefreshContractAsync(RefreshContractRequestBody refreshContractRequestBody, System.Threading.CancellationToken cancellationToken = default)
+        {
+            UriBuilder uriBuilderLocalVar = new UriBuilder();
+
+            try
+            {
+                ValidateRefreshContract(refreshContractRequestBody);
+
+                FormatRefreshContract(refreshContractRequestBody);
+
+                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
+                {
+                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
+                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
+                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
+                    uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/player/marketplace/refresh/contract";
+
+                    httpRequestMessageLocalVar.Content = (refreshContractRequestBody as object) is System.IO.Stream stream
+                        ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(refreshContractRequestBody, _jsonSerializerOptions));
+
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
+                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    string[] contentTypes = new string[] {
+                        "application/json"
+                    };
+
+                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
+
+                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
+                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
+
+                    httpRequestMessageLocalVar.Method = HttpMethod.Post;
+
+                    DateTime requestedAtLocalVar = DateTime.UtcNow;
+
+                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
+                    {
+                        string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+
+                        ILogger<RefreshContractApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<RefreshContractApiResponse>();
+
+                        RefreshContractApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/player/marketplace/refresh/contract", requestedAtLocalVar, _jsonSerializerOptions);
+
+                        AfterRefreshContractDefaultImplementation(apiResponseLocalVar, refreshContractRequestBody);
+
+                        Events.ExecuteOnRefreshContract(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
+
+                        return apiResponseLocalVar;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                OnErrorRefreshContractDefaultImplementation(e, "/v1/player/marketplace/refresh/contract", uriBuilderLocalVar.Path, refreshContractRequestBody);
+                Events.ExecuteOnErrorRefreshContract(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="RefreshContractApiResponse"/>
+        /// </summary>
+        public partial class RefreshContractApiResponse : BeamPlayerClient.Client.ApiResponse, IRefreshContractApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<RefreshContractApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="RefreshContractApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public RefreshContractApiResponse(ILogger<RefreshContractApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 201 Created
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCreated => 201 == (int)StatusCode;
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
+        }
+
+        partial void FormatRefreshToken(RefreshTokenRequestBody refreshTokenRequestBody);
+
+        /// <summary>
+        /// Validates the request parameters
+        /// </summary>
+        /// <param name="refreshTokenRequestBody"></param>
+        /// <returns></returns>
+        private void ValidateRefreshToken(RefreshTokenRequestBody refreshTokenRequestBody)
+        {
+            if (refreshTokenRequestBody == null)
+                throw new ArgumentNullException(nameof(refreshTokenRequestBody));
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="refreshTokenRequestBody"></param>
+        private void AfterRefreshTokenDefaultImplementation(IRefreshTokenApiResponse apiResponseLocalVar, RefreshTokenRequestBody refreshTokenRequestBody)
+        {
+            bool suppressDefaultLog = false;
+            AfterRefreshToken(ref suppressDefaultLog, apiResponseLocalVar, refreshTokenRequestBody);
+            if (!suppressDefaultLog)
+                Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="refreshTokenRequestBody"></param>
+        partial void AfterRefreshToken(ref bool suppressDefaultLog, IRefreshTokenApiResponse apiResponseLocalVar, RefreshTokenRequestBody refreshTokenRequestBody);
+
+        /// <summary>
+        /// Logs exceptions that occur while retrieving the server response
+        /// </summary>
+        /// <param name="exception"></param>
+        /// <param name="pathFormat"></param>
+        /// <param name="path"></param>
+        /// <param name="refreshTokenRequestBody"></param>
+        private void OnErrorRefreshTokenDefaultImplementation(Exception exception, string pathFormat, string path, RefreshTokenRequestBody refreshTokenRequestBody)
+        {
+            bool suppressDefaultLog = false;
+            OnErrorRefreshToken(ref suppressDefaultLog, exception, pathFormat, path, refreshTokenRequestBody);
+            if (!suppressDefaultLog)
+                Logger.LogError(exception, "An error occurred while sending the request to the server.");
+        }
+
+        /// <summary>
+        /// A partial method that gives developers a way to provide customized exception handling
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="exception"></param>
+        /// <param name="pathFormat"></param>
+        /// <param name="path"></param>
+        /// <param name="refreshTokenRequestBody"></param>
+        partial void OnErrorRefreshToken(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, RefreshTokenRequestBody refreshTokenRequestBody);
+
+        /// <summary>
+        /// Schedule a token refresh in the indexer 
+        /// </summary>
+        /// <param name="refreshTokenRequestBody"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IRefreshTokenApiResponse"/>&gt;</returns>
+        public async Task<IRefreshTokenApiResponse?> RefreshTokenOrDefaultAsync(RefreshTokenRequestBody refreshTokenRequestBody, System.Threading.CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await RefreshTokenAsync(refreshTokenRequestBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Schedule a token refresh in the indexer 
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="refreshTokenRequestBody"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IRefreshTokenApiResponse"/>&gt;</returns>
+        public async Task<IRefreshTokenApiResponse> RefreshTokenAsync(RefreshTokenRequestBody refreshTokenRequestBody, System.Threading.CancellationToken cancellationToken = default)
+        {
+            UriBuilder uriBuilderLocalVar = new UriBuilder();
+
+            try
+            {
+                ValidateRefreshToken(refreshTokenRequestBody);
+
+                FormatRefreshToken(refreshTokenRequestBody);
+
+                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
+                {
+                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
+                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
+                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
+                    uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/player/marketplace/refresh/token";
+
+                    httpRequestMessageLocalVar.Content = (refreshTokenRequestBody as object) is System.IO.Stream stream
+                        ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(refreshTokenRequestBody, _jsonSerializerOptions));
+
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
+                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    string[] contentTypes = new string[] {
+                        "application/json"
+                    };
+
+                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
+
+                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
+                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
+
+                    httpRequestMessageLocalVar.Method = HttpMethod.Post;
+
+                    DateTime requestedAtLocalVar = DateTime.UtcNow;
+
+                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
+                    {
+                        string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+
+                        ILogger<RefreshTokenApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<RefreshTokenApiResponse>();
+
+                        RefreshTokenApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/player/marketplace/refresh/token", requestedAtLocalVar, _jsonSerializerOptions);
+
+                        AfterRefreshTokenDefaultImplementation(apiResponseLocalVar, refreshTokenRequestBody);
+
+                        Events.ExecuteOnRefreshToken(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
+
+                        return apiResponseLocalVar;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                OnErrorRefreshTokenDefaultImplementation(e, "/v1/player/marketplace/refresh/token", uriBuilderLocalVar.Path, refreshTokenRequestBody);
+                Events.ExecuteOnErrorRefreshToken(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="RefreshTokenApiResponse"/>
+        /// </summary>
+        public partial class RefreshTokenApiResponse : BeamPlayerClient.Client.ApiResponse, IRefreshTokenApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<RefreshTokenApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="RefreshTokenApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public RefreshTokenApiResponse(ILogger<RefreshTokenApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 201 Created
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCreated => 201 == (int)StatusCode;
 
             private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
             {

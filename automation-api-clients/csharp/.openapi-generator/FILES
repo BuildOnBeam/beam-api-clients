@@ -126,6 +126,8 @@ src/BeamAutomationClient/Model/GetTransactionsResponseV2DataInnerTransaction.cs
 src/BeamAutomationClient/Model/GetTransactionsResponseV2DataInnerTransactionLogsInner.cs
 src/BeamAutomationClient/Model/GetWebhooksForGameResponse.cs
 src/BeamAutomationClient/Model/GetWebhooksForGameResponseWebhooksInner.cs
+src/BeamAutomationClient/Model/RefreshContractRequestBody.cs
+src/BeamAutomationClient/Model/RefreshTokenRequestBody.cs
 src/BeamAutomationClient/Model/RegenerateGameApiKeysResponse.cs
 src/BeamAutomationClient/Model/RegenerateGameApiKeysResponseApiKeysInner.cs
 src/BeamAutomationClient/Model/RemoveContractResponse.cs

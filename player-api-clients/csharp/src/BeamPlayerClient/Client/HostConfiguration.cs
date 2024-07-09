@@ -106,6 +106,8 @@ namespace BeamPlayerClient.Client
             _jsonOptions.Converters.Add(new GetUserNativeCurrencyResponseJsonConverter());
             _jsonOptions.Converters.Add(new GetUserNativeCurrencyResponseNativeTokenBalanceJsonConverter());
             _jsonOptions.Converters.Add(new GetUserResponseJsonConverter());
+            _jsonOptions.Converters.Add(new RefreshContractRequestBodyJsonConverter());
+            _jsonOptions.Converters.Add(new RefreshTokenRequestBodyJsonConverter());
             _jsonOptions.Converters.Add(new RevokeSessionRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new SellAssetRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new TransferAssetRequestInputJsonConverter());
