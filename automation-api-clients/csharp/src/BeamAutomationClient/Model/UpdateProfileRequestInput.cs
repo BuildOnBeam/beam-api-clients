@@ -70,6 +70,18 @@ namespace BeamAutomationClient.Model
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // NewEntityId (string) maxLength
+            if (this.NewEntityId != null && this.NewEntityId.Length > 250)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for NewEntityId, length must be less than 250.", new [] { "NewEntityId" });
+            }
+
+            // NewEntityId (string) minLength
+            if (this.NewEntityId != null && this.NewEntityId.Length < 3)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for NewEntityId, length must be greater than 3.", new [] { "NewEntityId" });
+            }
+
             yield break;
         }
     }

@@ -86,6 +86,18 @@ namespace BeamPlayerClient.Model
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // EntityId (string) maxLength
+            if (this.EntityId != null && this.EntityId.Length > 250)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for EntityId, length must be less than 250.", new [] { "EntityId" });
+            }
+
+            // EntityId (string) minLength
+            if (this.EntityId != null && this.EntityId.Length < 3)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for EntityId, length must be greater than 3.", new [] { "EntityId" });
+            }
+
             yield break;
         }
     }
