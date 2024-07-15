@@ -172,6 +172,8 @@ namespace BeamPlayerClient.Client
                 return GetAssetsForUserBodyInput.SortDirectionEnumToJsonValue(getAssetsForUserBodyInputSortDirectionEnum);
             if (obj is GetAssetsForUserResponseDataInner.RarityEnum getAssetsForUserResponseDataInnerRarityEnum)
                 return GetAssetsForUserResponseDataInner.RarityEnumToJsonValue(getAssetsForUserResponseDataInnerRarityEnum);
+            if (obj is GetAttributesResponseDataInner.KindEnum getAttributesResponseDataInnerKindEnum)
+                return GetAttributesResponseDataInner.KindEnumToJsonValue(getAttributesResponseDataInnerKindEnum);
             if (obj is GetChainCurrenciesResponseDataInner.SymbolEnum getChainCurrenciesResponseDataInnerSymbolEnum)
                 return GetChainCurrenciesResponseDataInner.SymbolEnumToJsonValue(getChainCurrenciesResponseDataInnerSymbolEnum);
             if (obj is GetConnectionRequestResponse.StatusEnum getConnectionRequestResponseStatusEnum)

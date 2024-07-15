@@ -76,10 +76,15 @@ src/BeamPlayerClient/Model/GetAssetsForUserBodyInput.cs
 src/BeamPlayerClient/Model/GetAssetsForUserResponse.cs
 src/BeamPlayerClient/Model/GetAssetsForUserResponseDataInner.cs
 src/BeamPlayerClient/Model/GetAssetsForUserResponseDataInnerAttributesInner.cs
+src/BeamPlayerClient/Model/GetAttributesResponse.cs
+src/BeamPlayerClient/Model/GetAttributesResponseDataInner.cs
+src/BeamPlayerClient/Model/GetAttributesResponseDataInnerValuesInner.cs
 src/BeamPlayerClient/Model/GetChainCurrenciesResponse.cs
 src/BeamPlayerClient/Model/GetChainCurrenciesResponseDataInner.cs
 src/BeamPlayerClient/Model/GetConnectionRequestResponse.cs
 src/BeamPlayerClient/Model/GetListedAssetsBodyInput.cs
+src/BeamPlayerClient/Model/GetOwnersResponse.cs
+src/BeamPlayerClient/Model/GetOwnersResponseDataInner.cs
 src/BeamPlayerClient/Model/GetQuoteResponse.cs
 src/BeamPlayerClient/Model/GetSessionRequestResponse.cs
 src/BeamPlayerClient/Model/GetTransactionResponse.cs
