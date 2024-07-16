@@ -182,6 +182,10 @@ namespace BeamPlayerClient.Client
                 return GetListedAssetsBodyInput.SortByEnumToJsonValue(getListedAssetsBodyInputSortByEnum);
             if (obj is GetListedAssetsBodyInput.SortDirectionEnum getListedAssetsBodyInputSortDirectionEnum)
                 return GetListedAssetsBodyInput.SortDirectionEnumToJsonValue(getListedAssetsBodyInputSortDirectionEnum);
+            if (obj is GetOwnerAssetsBodyInput.SortByEnum getOwnerAssetsBodyInputSortByEnum)
+                return GetOwnerAssetsBodyInput.SortByEnumToJsonValue(getOwnerAssetsBodyInputSortByEnum);
+            if (obj is GetOwnerAssetsBodyInput.SortDirectionEnum getOwnerAssetsBodyInputSortDirectionEnum)
+                return GetOwnerAssetsBodyInput.SortDirectionEnumToJsonValue(getOwnerAssetsBodyInputSortDirectionEnum);
             if (obj is GetSessionRequestResponse.StatusEnum getSessionRequestResponseStatusEnum)
                 return GetSessionRequestResponse.StatusEnumToJsonValue(getSessionRequestResponseStatusEnum);
             if (obj is RevokeSessionRequestInput.OperationProcessingEnum revokeSessionRequestInputOperationProcessingEnum)

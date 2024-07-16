@@ -123,6 +123,33 @@ namespace BeamPlayerClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="getOwnerAssetsBodyInput"></param>
+        /// <param name="assetAddress"></param>
+        /// <param name="ownerAddress"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetOwnerAssetsApiResponse"/>&gt;</returns>
+        Task<IGetOwnerAssetsApiResponse> GetOwnerAssetsAsync(GetOwnerAssetsBodyInput getOwnerAssetsBodyInput, string assetAddress, string ownerAddress, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="getOwnerAssetsBodyInput"></param>
+        /// <param name="assetAddress"></param>
+        /// <param name="ownerAddress"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetOwnerAssetsApiResponse"/>?&gt;</returns>
+        Task<IGetOwnerAssetsApiResponse?> GetOwnerAssetsOrDefaultAsync(GetOwnerAssetsBodyInput getOwnerAssetsBodyInput, string assetAddress, string ownerAddress, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chainId"></param>
         /// <param name="assetAddress"></param>
         /// <param name="limit"> (optional, default to &quot;10&quot;)</param>
@@ -333,6 +360,18 @@ namespace BeamPlayerClient.Api
     }
 
     /// <summary>
+    /// The <see cref="IGetOwnerAssetsApiResponse"/>
+    /// </summary>
+    public interface IGetOwnerAssetsApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.GetOwnerAssetsResponse?>
+    {
+        /// <summary>
+        /// Returns true if the response is 200 Ok
+        /// </summary>
+        /// <returns></returns>
+        bool IsOk { get; }
+    }
+
+    /// <summary>
     /// The <see cref="IGetOwnersApiResponse"/>
     /// </summary>
     public interface IGetOwnersApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.GetOwnersResponse?>
@@ -479,6 +518,26 @@ namespace BeamPlayerClient.Api
         internal void ExecuteOnErrorGetAttributes(Exception exception)
         {
             OnErrorGetAttributes?.Invoke(this, new ExceptionEventArgs(exception));
+        }
+
+        /// <summary>
+        /// The event raised after the server response
+        /// </summary>
+        public event EventHandler<ApiResponseEventArgs>? OnGetOwnerAssets;
+
+        /// <summary>
+        /// The event raised after an error querying the server
+        /// </summary>
+        public event EventHandler<ExceptionEventArgs>? OnErrorGetOwnerAssets;
+
+        internal void ExecuteOnGetOwnerAssets(AssetsApi.GetOwnerAssetsApiResponse apiResponse)
+        {
+            OnGetOwnerAssets?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+        }
+
+        internal void ExecuteOnErrorGetOwnerAssets(Exception exception)
+        {
+            OnErrorGetOwnerAssets?.Invoke(this, new ExceptionEventArgs(exception));
         }
 
         /// <summary>
@@ -1406,6 +1465,267 @@ namespace BeamPlayerClient.Api
             /// <param name="result"></param>
             /// <returns></returns>
             public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.GetAttributesResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
+        }
+
+        partial void FormatGetOwnerAssets(GetOwnerAssetsBodyInput getOwnerAssetsBodyInput, ref string assetAddress, ref string ownerAddress);
+
+        /// <summary>
+        /// Validates the request parameters
+        /// </summary>
+        /// <param name="getOwnerAssetsBodyInput"></param>
+        /// <param name="assetAddress"></param>
+        /// <param name="ownerAddress"></param>
+        /// <returns></returns>
+        private void ValidateGetOwnerAssets(GetOwnerAssetsBodyInput getOwnerAssetsBodyInput, string assetAddress, string ownerAddress)
+        {
+            if (getOwnerAssetsBodyInput == null)
+                throw new ArgumentNullException(nameof(getOwnerAssetsBodyInput));
+
+            if (assetAddress == null)
+                throw new ArgumentNullException(nameof(assetAddress));
+
+            if (ownerAddress == null)
+                throw new ArgumentNullException(nameof(ownerAddress));
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="getOwnerAssetsBodyInput"></param>
+        /// <param name="assetAddress"></param>
+        /// <param name="ownerAddress"></param>
+        private void AfterGetOwnerAssetsDefaultImplementation(IGetOwnerAssetsApiResponse apiResponseLocalVar, GetOwnerAssetsBodyInput getOwnerAssetsBodyInput, string assetAddress, string ownerAddress)
+        {
+            bool suppressDefaultLog = false;
+            AfterGetOwnerAssets(ref suppressDefaultLog, apiResponseLocalVar, getOwnerAssetsBodyInput, assetAddress, ownerAddress);
+            if (!suppressDefaultLog)
+                Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="getOwnerAssetsBodyInput"></param>
+        /// <param name="assetAddress"></param>
+        /// <param name="ownerAddress"></param>
+        partial void AfterGetOwnerAssets(ref bool suppressDefaultLog, IGetOwnerAssetsApiResponse apiResponseLocalVar, GetOwnerAssetsBodyInput getOwnerAssetsBodyInput, string assetAddress, string ownerAddress);
+
+        /// <summary>
+        /// Logs exceptions that occur while retrieving the server response
+        /// </summary>
+        /// <param name="exception"></param>
+        /// <param name="pathFormat"></param>
+        /// <param name="path"></param>
+        /// <param name="getOwnerAssetsBodyInput"></param>
+        /// <param name="assetAddress"></param>
+        /// <param name="ownerAddress"></param>
+        private void OnErrorGetOwnerAssetsDefaultImplementation(Exception exception, string pathFormat, string path, GetOwnerAssetsBodyInput getOwnerAssetsBodyInput, string assetAddress, string ownerAddress)
+        {
+            bool suppressDefaultLog = false;
+            OnErrorGetOwnerAssets(ref suppressDefaultLog, exception, pathFormat, path, getOwnerAssetsBodyInput, assetAddress, ownerAddress);
+            if (!suppressDefaultLog)
+                Logger.LogError(exception, "An error occurred while sending the request to the server.");
+        }
+
+        /// <summary>
+        /// A partial method that gives developers a way to provide customized exception handling
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="exception"></param>
+        /// <param name="pathFormat"></param>
+        /// <param name="path"></param>
+        /// <param name="getOwnerAssetsBodyInput"></param>
+        /// <param name="assetAddress"></param>
+        /// <param name="ownerAddress"></param>
+        partial void OnErrorGetOwnerAssets(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, GetOwnerAssetsBodyInput getOwnerAssetsBodyInput, string assetAddress, string ownerAddress);
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <param name="getOwnerAssetsBodyInput"></param>
+        /// <param name="assetAddress"></param>
+        /// <param name="ownerAddress"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetOwnerAssetsApiResponse"/>&gt;</returns>
+        public async Task<IGetOwnerAssetsApiResponse?> GetOwnerAssetsOrDefaultAsync(GetOwnerAssetsBodyInput getOwnerAssetsBodyInput, string assetAddress, string ownerAddress, System.Threading.CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await GetOwnerAssetsAsync(getOwnerAssetsBodyInput, assetAddress, ownerAddress, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="getOwnerAssetsBodyInput"></param>
+        /// <param name="assetAddress"></param>
+        /// <param name="ownerAddress"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetOwnerAssetsApiResponse"/>&gt;</returns>
+        public async Task<IGetOwnerAssetsApiResponse> GetOwnerAssetsAsync(GetOwnerAssetsBodyInput getOwnerAssetsBodyInput, string assetAddress, string ownerAddress, System.Threading.CancellationToken cancellationToken = default)
+        {
+            UriBuilder uriBuilderLocalVar = new UriBuilder();
+
+            try
+            {
+                ValidateGetOwnerAssets(getOwnerAssetsBodyInput, assetAddress, ownerAddress);
+
+                FormatGetOwnerAssets(getOwnerAssetsBodyInput, ref assetAddress, ref ownerAddress);
+
+                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
+                {
+                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
+                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
+                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
+                    uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/player/assets/{assetAddress}/owners/{ownerAddress}/assets";
+                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BassetAddress%7D", Uri.EscapeDataString(assetAddress.ToString()));
+                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BownerAddress%7D", Uri.EscapeDataString(ownerAddress.ToString()));
+
+                    httpRequestMessageLocalVar.Content = (getOwnerAssetsBodyInput as object) is System.IO.Stream stream
+                        ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(getOwnerAssetsBodyInput, _jsonSerializerOptions));
+
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
+                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    string[] contentTypes = new string[] {
+                        "application/json"
+                    };
+
+                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
+
+                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
+                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
+
+                    string[] acceptLocalVars = new string[] {
+                        "application/json"
+                    };
+
+                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+
+                    if (acceptLocalVar != null)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+
+                    httpRequestMessageLocalVar.Method = HttpMethod.Post;
+
+                    DateTime requestedAtLocalVar = DateTime.UtcNow;
+
+                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
+                    {
+                        string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+
+                        ILogger<GetOwnerAssetsApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<GetOwnerAssetsApiResponse>();
+
+                        GetOwnerAssetsApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/player/assets/{assetAddress}/owners/{ownerAddress}/assets", requestedAtLocalVar, _jsonSerializerOptions);
+
+                        AfterGetOwnerAssetsDefaultImplementation(apiResponseLocalVar, getOwnerAssetsBodyInput, assetAddress, ownerAddress);
+
+                        Events.ExecuteOnGetOwnerAssets(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
+
+                        return apiResponseLocalVar;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                OnErrorGetOwnerAssetsDefaultImplementation(e, "/v1/player/assets/{assetAddress}/owners/{ownerAddress}/assets", uriBuilderLocalVar.Path, getOwnerAssetsBodyInput, assetAddress, ownerAddress);
+                Events.ExecuteOnErrorGetOwnerAssets(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="GetOwnerAssetsApiResponse"/>
+        /// </summary>
+        public partial class GetOwnerAssetsApiResponse : BeamPlayerClient.Client.ApiResponse, IGetOwnerAssetsApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<GetOwnerAssetsApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="GetOwnerAssetsApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public GetOwnerAssetsApiResponse(ILogger<GetOwnerAssetsApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.GetOwnerAssetsResponse? Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.GetOwnerAssetsResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.GetOwnerAssetsResponse? result)
             {
                 result = null;
 

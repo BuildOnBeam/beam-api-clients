@@ -90,6 +90,8 @@ namespace BeamPlayerClient.Client
             _jsonOptions.Converters.Add(new GetChainCurrenciesResponseDataInnerJsonConverter());
             _jsonOptions.Converters.Add(new GetConnectionRequestResponseJsonConverter());
             _jsonOptions.Converters.Add(new GetListedAssetsBodyInputJsonConverter());
+            _jsonOptions.Converters.Add(new GetOwnerAssetsBodyInputJsonConverter());
+            _jsonOptions.Converters.Add(new GetOwnerAssetsResponseJsonConverter());
             _jsonOptions.Converters.Add(new GetOwnersResponseJsonConverter());
             _jsonOptions.Converters.Add(new GetOwnersResponseDataInnerJsonConverter());
             _jsonOptions.Converters.Add(new GetOwnersResponsePaginationJsonConverter());

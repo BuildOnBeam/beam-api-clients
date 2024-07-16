@@ -83,6 +83,8 @@ src/BeamPlayerClient/Model/GetChainCurrenciesResponse.cs
 src/BeamPlayerClient/Model/GetChainCurrenciesResponseDataInner.cs
 src/BeamPlayerClient/Model/GetConnectionRequestResponse.cs
 src/BeamPlayerClient/Model/GetListedAssetsBodyInput.cs
+src/BeamPlayerClient/Model/GetOwnerAssetsBodyInput.cs
+src/BeamPlayerClient/Model/GetOwnerAssetsResponse.cs
 src/BeamPlayerClient/Model/GetOwnersResponse.cs
 src/BeamPlayerClient/Model/GetOwnersResponseDataInner.cs
 src/BeamPlayerClient/Model/GetOwnersResponsePagination.cs
