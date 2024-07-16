@@ -35,10 +35,12 @@ namespace BeamPlayerClient.Model
         /// Initializes a new instance of the <see cref="GetOwnersResponse" /> class.
         /// </summary>
         /// <param name="data">data</param>
+        /// <param name="pagination">pagination</param>
         [JsonConstructor]
-        public GetOwnersResponse(List<GetOwnersResponseDataInner> data)
+        public GetOwnersResponse(List<GetOwnersResponseDataInner> data, GetOwnersResponsePagination pagination)
         {
             Data = data;
+            Pagination = pagination;
             OnCreated();
         }
 
@@ -51,6 +53,12 @@ namespace BeamPlayerClient.Model
         public List<GetOwnersResponseDataInner> Data { get; set; }
 
         /// <summary>
+        /// Gets or Sets Pagination
+        /// </summary>
+        [JsonPropertyName("pagination")]
+        public GetOwnersResponsePagination Pagination { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -59,6 +67,7 @@ namespace BeamPlayerClient.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class GetOwnersResponse {\n");
             sb.Append("  Data: ").Append(Data).Append("\n");
+            sb.Append("  Pagination: ").Append(Pagination).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -97,6 +106,7 @@ namespace BeamPlayerClient.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<List<GetOwnersResponseDataInner>?> data = default;
+            Option<GetOwnersResponsePagination?> pagination = default;
 
             while (utf8JsonReader.Read())
             {
@@ -117,6 +127,10 @@ namespace BeamPlayerClient.Model
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 data = new Option<List<GetOwnersResponseDataInner>?>(JsonSerializer.Deserialize<List<GetOwnersResponseDataInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
+                        case "pagination":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                pagination = new Option<GetOwnersResponsePagination?>(JsonSerializer.Deserialize<GetOwnersResponsePagination>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
                         default:
                             break;
                     }
@@ -126,10 +140,16 @@ namespace BeamPlayerClient.Model
             if (!data.IsSet)
                 throw new ArgumentException("Property is required for class GetOwnersResponse.", nameof(data));
 
+            if (!pagination.IsSet)
+                throw new ArgumentException("Property is required for class GetOwnersResponse.", nameof(pagination));
+
             if (data.IsSet && data.Value == null)
                 throw new ArgumentNullException(nameof(data), "Property is not nullable for class GetOwnersResponse.");
 
-            return new GetOwnersResponse(data.Value!);
+            if (pagination.IsSet && pagination.Value == null)
+                throw new ArgumentNullException(nameof(pagination), "Property is not nullable for class GetOwnersResponse.");
+
+            return new GetOwnersResponse(data.Value!, pagination.Value!);
         }
 
         /// <summary>
@@ -159,8 +179,13 @@ namespace BeamPlayerClient.Model
             if (getOwnersResponse.Data == null)
                 throw new ArgumentNullException(nameof(getOwnersResponse.Data), "Property is required for class GetOwnersResponse.");
 
+            if (getOwnersResponse.Pagination == null)
+                throw new ArgumentNullException(nameof(getOwnersResponse.Pagination), "Property is required for class GetOwnersResponse.");
+
             writer.WritePropertyName("data");
             JsonSerializer.Serialize(writer, getOwnersResponse.Data, jsonSerializerOptions);
+            writer.WritePropertyName("pagination");
+            JsonSerializer.Serialize(writer, getOwnersResponse.Pagination, jsonSerializerOptions);
         }
     }
 }

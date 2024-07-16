@@ -85,6 +85,7 @@ src/BeamPlayerClient/Model/GetConnectionRequestResponse.cs
 src/BeamPlayerClient/Model/GetListedAssetsBodyInput.cs
 src/BeamPlayerClient/Model/GetOwnersResponse.cs
 src/BeamPlayerClient/Model/GetOwnersResponseDataInner.cs
+src/BeamPlayerClient/Model/GetOwnersResponsePagination.cs
 src/BeamPlayerClient/Model/GetQuoteResponse.cs
 src/BeamPlayerClient/Model/GetSessionRequestResponse.cs
 src/BeamPlayerClient/Model/GetTransactionResponse.cs
@@ -98,7 +99,6 @@ src/BeamPlayerClient/Model/GetTransactionsResponseDataInnerIntent.cs
 src/BeamPlayerClient/Model/GetTransactionsResponseDataInnerIntentInteractionsInner.cs
 src/BeamPlayerClient/Model/GetTransactionsResponseDataInnerTransaction.cs
 src/BeamPlayerClient/Model/GetTransactionsResponseDataInnerTransactionLogsInner.cs
-src/BeamPlayerClient/Model/GetTransactionsResponsePagination.cs
 src/BeamPlayerClient/Model/GetUserCurrenciesResponse.cs
 src/BeamPlayerClient/Model/GetUserCurrenciesResponseDataInner.cs
 src/BeamPlayerClient/Model/GetUserNativeCurrencyResponse.cs

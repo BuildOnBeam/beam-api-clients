@@ -37,7 +37,7 @@ namespace BeamPlayerClient.Model
         /// <param name="data">data</param>
         /// <param name="pagination">pagination</param>
         [JsonConstructor]
-        public GetAllUsersResponse(List<GetAllUsersResponseDataInner> data, GetTransactionsResponsePagination pagination)
+        public GetAllUsersResponse(List<GetAllUsersResponseDataInner> data, GetOwnersResponsePagination pagination)
         {
             Data = data;
             Pagination = pagination;
@@ -56,7 +56,7 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Pagination
         /// </summary>
         [JsonPropertyName("pagination")]
-        public GetTransactionsResponsePagination Pagination { get; set; }
+        public GetOwnersResponsePagination Pagination { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -106,7 +106,7 @@ namespace BeamPlayerClient.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<List<GetAllUsersResponseDataInner>?> data = default;
-            Option<GetTransactionsResponsePagination?> pagination = default;
+            Option<GetOwnersResponsePagination?> pagination = default;
 
             while (utf8JsonReader.Read())
             {
@@ -129,7 +129,7 @@ namespace BeamPlayerClient.Model
                             break;
                         case "pagination":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                pagination = new Option<GetTransactionsResponsePagination?>(JsonSerializer.Deserialize<GetTransactionsResponsePagination>(ref utf8JsonReader, jsonSerializerOptions)!);
+                                pagination = new Option<GetOwnersResponsePagination?>(JsonSerializer.Deserialize<GetOwnersResponsePagination>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         default:
                             break;

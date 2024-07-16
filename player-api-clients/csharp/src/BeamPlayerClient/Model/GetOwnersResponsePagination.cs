@@ -27,18 +27,18 @@ using BeamPlayerClient.Client;
 namespace BeamPlayerClient.Model
 {
     /// <summary>
-    /// GetTransactionsResponsePagination
+    /// GetOwnersResponsePagination
     /// </summary>
-    public partial class GetTransactionsResponsePagination : IValidatableObject
+    public partial class GetOwnersResponsePagination : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetTransactionsResponsePagination" /> class.
+        /// Initializes a new instance of the <see cref="GetOwnersResponsePagination" /> class.
         /// </summary>
         /// <param name="count">count</param>
         /// <param name="limit">limit (default to 10M)</param>
         /// <param name="offset">offset (default to 0M)</param>
         [JsonConstructor]
-        public GetTransactionsResponsePagination(decimal count, Option<decimal?> limit = default, Option<decimal?> offset = default)
+        public GetOwnersResponsePagination(decimal count, Option<decimal?> limit = default, Option<decimal?> offset = default)
         {
             Count = count;
             LimitOption = limit;
@@ -87,7 +87,7 @@ namespace BeamPlayerClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class GetTransactionsResponsePagination {\n");
+            sb.Append("class GetOwnersResponsePagination {\n");
             sb.Append("  Count: ").Append(Count).Append("\n");
             sb.Append("  Limit: ").Append(Limit).Append("\n");
             sb.Append("  Offset: ").Append(Offset).Append("\n");
@@ -107,19 +107,19 @@ namespace BeamPlayerClient.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="GetTransactionsResponsePagination" />
+    /// A Json converter for type <see cref="GetOwnersResponsePagination" />
     /// </summary>
-    public class GetTransactionsResponsePaginationJsonConverter : JsonConverter<GetTransactionsResponsePagination>
+    public class GetOwnersResponsePaginationJsonConverter : JsonConverter<GetOwnersResponsePagination>
     {
         /// <summary>
-        /// Deserializes json to <see cref="GetTransactionsResponsePagination" />
+        /// Deserializes json to <see cref="GetOwnersResponsePagination" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override GetTransactionsResponsePagination Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override GetOwnersResponsePagination Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -166,51 +166,51 @@ namespace BeamPlayerClient.Model
             }
 
             if (!count.IsSet)
-                throw new ArgumentException("Property is required for class GetTransactionsResponsePagination.", nameof(count));
+                throw new ArgumentException("Property is required for class GetOwnersResponsePagination.", nameof(count));
 
             if (count.IsSet && count.Value == null)
-                throw new ArgumentNullException(nameof(count), "Property is not nullable for class GetTransactionsResponsePagination.");
+                throw new ArgumentNullException(nameof(count), "Property is not nullable for class GetOwnersResponsePagination.");
 
             if (limit.IsSet && limit.Value == null)
-                throw new ArgumentNullException(nameof(limit), "Property is not nullable for class GetTransactionsResponsePagination.");
+                throw new ArgumentNullException(nameof(limit), "Property is not nullable for class GetOwnersResponsePagination.");
 
             if (offset.IsSet && offset.Value == null)
-                throw new ArgumentNullException(nameof(offset), "Property is not nullable for class GetTransactionsResponsePagination.");
+                throw new ArgumentNullException(nameof(offset), "Property is not nullable for class GetOwnersResponsePagination.");
 
-            return new GetTransactionsResponsePagination(count.Value!.Value!, limit, offset);
+            return new GetOwnersResponsePagination(count.Value!.Value!, limit, offset);
         }
 
         /// <summary>
-        /// Serializes a <see cref="GetTransactionsResponsePagination" />
+        /// Serializes a <see cref="GetOwnersResponsePagination" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="getTransactionsResponsePagination"></param>
+        /// <param name="getOwnersResponsePagination"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, GetTransactionsResponsePagination getTransactionsResponsePagination, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, GetOwnersResponsePagination getOwnersResponsePagination, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(ref writer, getTransactionsResponsePagination, jsonSerializerOptions);
+            WriteProperties(ref writer, getOwnersResponsePagination, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="GetTransactionsResponsePagination" />
+        /// Serializes the properties of <see cref="GetOwnersResponsePagination" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="getTransactionsResponsePagination"></param>
+        /// <param name="getOwnersResponsePagination"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(ref Utf8JsonWriter writer, GetTransactionsResponsePagination getTransactionsResponsePagination, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(ref Utf8JsonWriter writer, GetOwnersResponsePagination getOwnersResponsePagination, JsonSerializerOptions jsonSerializerOptions)
         {
-            writer.WriteNumber("count", getTransactionsResponsePagination.Count);
+            writer.WriteNumber("count", getOwnersResponsePagination.Count);
 
-            if (getTransactionsResponsePagination.LimitOption.IsSet)
-                writer.WriteNumber("limit", getTransactionsResponsePagination.LimitOption.Value!.Value);
+            if (getOwnersResponsePagination.LimitOption.IsSet)
+                writer.WriteNumber("limit", getOwnersResponsePagination.LimitOption.Value!.Value);
 
-            if (getTransactionsResponsePagination.OffsetOption.IsSet)
-                writer.WriteNumber("offset", getTransactionsResponsePagination.OffsetOption.Value!.Value);
+            if (getOwnersResponsePagination.OffsetOption.IsSet)
+                writer.WriteNumber("offset", getOwnersResponsePagination.OffsetOption.Value!.Value);
         }
     }
 }
