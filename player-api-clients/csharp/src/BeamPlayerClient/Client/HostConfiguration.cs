@@ -117,6 +117,9 @@ namespace BeamPlayerClient.Client
             _jsonOptions.Converters.Add(new RefreshTokenRequestBodyJsonConverter());
             _jsonOptions.Converters.Add(new RevokeSessionRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new SellAssetRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new StatsRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new StatsResponseJsonConverter());
+            _jsonOptions.Converters.Add(new StatsResponseCountJsonConverter());
             _jsonOptions.Converters.Add(new TransferAssetRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new TransferAssetRequestInputAssetsInnerJsonConverter());
             _jsonOptions.Converters.Add(new TransferNativeTokenRequestInputJsonConverter());
@@ -138,6 +141,8 @@ namespace BeamPlayerClient.Client
             _services.AddTransient<IOperationApi, OperationApi>();
             _services.AddSingleton<SessionsApiEvents>();
             _services.AddTransient<ISessionsApi, SessionsApi>();
+            _services.AddSingleton<StatsApiEvents>();
+            _services.AddTransient<IStatsApi, StatsApi>();
             _services.AddSingleton<TransactionsApiEvents>();
             _services.AddTransient<ITransactionsApi, TransactionsApi>();
             _services.AddSingleton<UsersApiEvents>();
@@ -166,6 +171,7 @@ namespace BeamPlayerClient.Client
             builders.Add(_services.AddHttpClient<IMarketplaceApi, MarketplaceApi>(client));
             builders.Add(_services.AddHttpClient<IOperationApi, OperationApi>(client));
             builders.Add(_services.AddHttpClient<ISessionsApi, SessionsApi>(client));
+            builders.Add(_services.AddHttpClient<IStatsApi, StatsApi>(client));
             builders.Add(_services.AddHttpClient<ITransactionsApi, TransactionsApi>(client));
             builders.Add(_services.AddHttpClient<IUsersApi, UsersApi>(client));
             

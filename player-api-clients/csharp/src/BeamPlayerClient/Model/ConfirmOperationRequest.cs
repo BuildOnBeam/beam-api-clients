@@ -34,15 +34,11 @@ namespace BeamPlayerClient.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="ConfirmOperationRequest" /> class.
         /// </summary>
-        /// <param name="entityId">entityId</param>
-        /// <param name="gameId">gameId</param>
         /// <param name="status">status</param>
         /// <param name="transactions">transactions</param>
         [JsonConstructor]
-        public ConfirmOperationRequest(string entityId, string gameId, StatusEnum status, Option<List<ConfirmOperationRequestTransactionsInner>?> transactions = default)
+        public ConfirmOperationRequest(StatusEnum status, Option<List<ConfirmOperationRequestTransactionsInner>?> transactions = default)
         {
-            EntityId = entityId;
-            GameId = gameId;
             Status = status;
             TransactionsOption = transactions;
             OnCreated();
@@ -165,18 +161,6 @@ namespace BeamPlayerClient.Model
         public StatusEnum Status { get; set; }
 
         /// <summary>
-        /// Gets or Sets EntityId
-        /// </summary>
-        [JsonPropertyName("entityId")]
-        public string EntityId { get; set; }
-
-        /// <summary>
-        /// Gets or Sets GameId
-        /// </summary>
-        [JsonPropertyName("gameId")]
-        public string GameId { get; set; }
-
-        /// <summary>
         /// Used to track the state of Transactions
         /// </summary>
         [JsonIgnore]
@@ -197,8 +181,6 @@ namespace BeamPlayerClient.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class ConfirmOperationRequest {\n");
-            sb.Append("  EntityId: ").Append(EntityId).Append("\n");
-            sb.Append("  GameId: ").Append(GameId).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  Transactions: ").Append(Transactions).Append("\n");
             sb.Append("}\n");
@@ -238,8 +220,6 @@ namespace BeamPlayerClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<string?> entityId = default;
-            Option<string?> gameId = default;
             Option<ConfirmOperationRequest.StatusEnum?> status = default;
             Option<List<ConfirmOperationRequestTransactionsInner>?> transactions = default;
 
@@ -258,12 +238,6 @@ namespace BeamPlayerClient.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "entityId":
-                            entityId = new Option<string?>(utf8JsonReader.GetString()!);
-                            break;
-                        case "gameId":
-                            gameId = new Option<string?>(utf8JsonReader.GetString()!);
-                            break;
                         case "status":
                             string? statusRawValue = utf8JsonReader.GetString();
                             if (statusRawValue != null)
@@ -279,25 +253,13 @@ namespace BeamPlayerClient.Model
                 }
             }
 
-            if (!entityId.IsSet)
-                throw new ArgumentException("Property is required for class ConfirmOperationRequest.", nameof(entityId));
-
-            if (!gameId.IsSet)
-                throw new ArgumentException("Property is required for class ConfirmOperationRequest.", nameof(gameId));
-
             if (!status.IsSet)
                 throw new ArgumentException("Property is required for class ConfirmOperationRequest.", nameof(status));
-
-            if (entityId.IsSet && entityId.Value == null)
-                throw new ArgumentNullException(nameof(entityId), "Property is not nullable for class ConfirmOperationRequest.");
-
-            if (gameId.IsSet && gameId.Value == null)
-                throw new ArgumentNullException(nameof(gameId), "Property is not nullable for class ConfirmOperationRequest.");
 
             if (status.IsSet && status.Value == null)
                 throw new ArgumentNullException(nameof(status), "Property is not nullable for class ConfirmOperationRequest.");
 
-            return new ConfirmOperationRequest(entityId.Value!, gameId.Value!, status.Value!.Value!, transactions);
+            return new ConfirmOperationRequest(status.Value!.Value!, transactions);
         }
 
         /// <summary>
@@ -324,16 +286,6 @@ namespace BeamPlayerClient.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, ConfirmOperationRequest confirmOperationRequest, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (confirmOperationRequest.EntityId == null)
-                throw new ArgumentNullException(nameof(confirmOperationRequest.EntityId), "Property is required for class ConfirmOperationRequest.");
-
-            if (confirmOperationRequest.GameId == null)
-                throw new ArgumentNullException(nameof(confirmOperationRequest.GameId), "Property is required for class ConfirmOperationRequest.");
-
-            writer.WriteString("entityId", confirmOperationRequest.EntityId);
-
-            writer.WriteString("gameId", confirmOperationRequest.GameId);
-
             var statusRawValue = ConfirmOperationRequest.StatusEnumToJsonValue(confirmOperationRequest.Status);
             writer.WriteString("status", statusRawValue);
             if (confirmOperationRequest.TransactionsOption.IsSet)

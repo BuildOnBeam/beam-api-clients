@@ -44,9 +44,9 @@ namespace BeamPlayerClient.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        /// <param name="owners">If true, will return owners of the token (optional)</param>
+        /// <param name="owners">If true, will return all owners of the asset (optional)</param>
         /// <param name="chainId"> (optional)</param>
-        /// <param name="entityId"> (optional)</param>
+        /// <param name="entityId">If true, will always return &#39;owners&#39; record for this User if he owns the asset (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAssetApiResponse"/>&gt;</returns>
         Task<IGetAssetApiResponse> GetAssetAsync(string assetAddress, string assetId, Option<bool> owners = default, Option<decimal> chainId = default, Option<string> entityId = default, System.Threading.CancellationToken cancellationToken = default);
@@ -59,9 +59,9 @@ namespace BeamPlayerClient.Api
         /// </remarks>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        /// <param name="owners">If true, will return owners of the token (optional)</param>
+        /// <param name="owners">If true, will return all owners of the asset (optional)</param>
         /// <param name="chainId"> (optional)</param>
-        /// <param name="entityId"> (optional)</param>
+        /// <param name="entityId">If true, will always return &#39;owners&#39; record for this User if he owns the asset (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAssetApiResponse"/>?&gt;</returns>
         Task<IGetAssetApiResponse?> GetAssetOrDefaultAsync(string assetAddress, string assetId, Option<bool> owners = default, Option<decimal> chainId = default, Option<string> entityId = default, System.Threading.CancellationToken cancellationToken = default);
@@ -152,11 +152,11 @@ namespace BeamPlayerClient.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chainId"></param>
         /// <param name="assetAddress"></param>
-        /// <param name="limit"> (optional, default to &quot;10&quot;)</param>
-        /// <param name="offset"> (optional, default to &quot;0&quot;)</param>
+        /// <param name="limit"> (optional)</param>
+        /// <param name="offset"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetOwnersApiResponse"/>&gt;</returns>
-        Task<IGetOwnersApiResponse> GetOwnersAsync(decimal chainId, string assetAddress, Option<string> limit = default, Option<string> offset = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetOwnersApiResponse> GetOwnersAsync(decimal chainId, string assetAddress, Option<decimal> limit = default, Option<decimal> offset = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -166,11 +166,11 @@ namespace BeamPlayerClient.Api
         /// </remarks>
         /// <param name="chainId"></param>
         /// <param name="assetAddress"></param>
-        /// <param name="limit"> (optional, default to &quot;10&quot;)</param>
-        /// <param name="offset"> (optional, default to &quot;0&quot;)</param>
+        /// <param name="limit"> (optional)</param>
+        /// <param name="offset"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetOwnersApiResponse"/>?&gt;</returns>
-        Task<IGetOwnersApiResponse?> GetOwnersOrDefaultAsync(decimal chainId, string assetAddress, Option<string> limit = default, Option<string> offset = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetOwnersApiResponse?> GetOwnersOrDefaultAsync(decimal chainId, string assetAddress, Option<decimal> limit = default, Option<decimal> offset = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all the assets of a profile (NFT assets, e.g. ERC721 / ERC1155)
@@ -816,9 +816,9 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        /// <param name="owners">If true, will return owners of the token (optional)</param>
+        /// <param name="owners">If true, will return all owners of the asset (optional)</param>
         /// <param name="chainId"> (optional)</param>
-        /// <param name="entityId"> (optional)</param>
+        /// <param name="entityId">If true, will always return &#39;owners&#39; record for this User if he owns the asset (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAssetApiResponse"/>&gt;</returns>
         public async Task<IGetAssetApiResponse?> GetAssetOrDefaultAsync(string assetAddress, string assetId, Option<bool> owners = default, Option<decimal> chainId = default, Option<string> entityId = default, System.Threading.CancellationToken cancellationToken = default)
@@ -839,9 +839,9 @@ namespace BeamPlayerClient.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        /// <param name="owners">If true, will return owners of the token (optional)</param>
+        /// <param name="owners">If true, will return all owners of the asset (optional)</param>
         /// <param name="chainId"> (optional)</param>
-        /// <param name="entityId"> (optional)</param>
+        /// <param name="entityId">If true, will always return &#39;owners&#39; record for this User if he owns the asset (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAssetApiResponse"/>&gt;</returns>
         public async Task<IGetAssetApiResponse> GetAssetAsync(string assetAddress, string assetId, Option<bool> owners = default, Option<decimal> chainId = default, Option<string> entityId = default, System.Threading.CancellationToken cancellationToken = default)
@@ -1751,25 +1751,17 @@ namespace BeamPlayerClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetOwners(ref decimal chainId, ref string assetAddress, ref Option<string> limit, ref Option<string> offset);
+        partial void FormatGetOwners(ref decimal chainId, ref string assetAddress, ref Option<decimal> limit, ref Option<decimal> offset);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
         /// <param name="assetAddress"></param>
-        /// <param name="limit"></param>
-        /// <param name="offset"></param>
         /// <returns></returns>
-        private void ValidateGetOwners(string assetAddress, Option<string> limit, Option<string> offset)
+        private void ValidateGetOwners(string assetAddress)
         {
             if (assetAddress == null)
                 throw new ArgumentNullException(nameof(assetAddress));
-
-            if (limit.IsSet && limit.Value == null)
-                throw new ArgumentNullException(nameof(limit));
-
-            if (offset.IsSet && offset.Value == null)
-                throw new ArgumentNullException(nameof(offset));
         }
 
         /// <summary>
@@ -1780,7 +1772,7 @@ namespace BeamPlayerClient.Api
         /// <param name="assetAddress"></param>
         /// <param name="limit"></param>
         /// <param name="offset"></param>
-        private void AfterGetOwnersDefaultImplementation(IGetOwnersApiResponse apiResponseLocalVar, decimal chainId, string assetAddress, Option<string> limit, Option<string> offset)
+        private void AfterGetOwnersDefaultImplementation(IGetOwnersApiResponse apiResponseLocalVar, decimal chainId, string assetAddress, Option<decimal> limit, Option<decimal> offset)
         {
             bool suppressDefaultLog = false;
             AfterGetOwners(ref suppressDefaultLog, apiResponseLocalVar, chainId, assetAddress, limit, offset);
@@ -1797,7 +1789,7 @@ namespace BeamPlayerClient.Api
         /// <param name="assetAddress"></param>
         /// <param name="limit"></param>
         /// <param name="offset"></param>
-        partial void AfterGetOwners(ref bool suppressDefaultLog, IGetOwnersApiResponse apiResponseLocalVar, decimal chainId, string assetAddress, Option<string> limit, Option<string> offset);
+        partial void AfterGetOwners(ref bool suppressDefaultLog, IGetOwnersApiResponse apiResponseLocalVar, decimal chainId, string assetAddress, Option<decimal> limit, Option<decimal> offset);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -1809,7 +1801,7 @@ namespace BeamPlayerClient.Api
         /// <param name="assetAddress"></param>
         /// <param name="limit"></param>
         /// <param name="offset"></param>
-        private void OnErrorGetOwnersDefaultImplementation(Exception exception, string pathFormat, string path, decimal chainId, string assetAddress, Option<string> limit, Option<string> offset)
+        private void OnErrorGetOwnersDefaultImplementation(Exception exception, string pathFormat, string path, decimal chainId, string assetAddress, Option<decimal> limit, Option<decimal> offset)
         {
             bool suppressDefaultLog = false;
             OnErrorGetOwners(ref suppressDefaultLog, exception, pathFormat, path, chainId, assetAddress, limit, offset);
@@ -1828,18 +1820,18 @@ namespace BeamPlayerClient.Api
         /// <param name="assetAddress"></param>
         /// <param name="limit"></param>
         /// <param name="offset"></param>
-        partial void OnErrorGetOwners(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, decimal chainId, string assetAddress, Option<string> limit, Option<string> offset);
+        partial void OnErrorGetOwners(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, decimal chainId, string assetAddress, Option<decimal> limit, Option<decimal> offset);
 
         /// <summary>
         ///  
         /// </summary>
         /// <param name="chainId"></param>
         /// <param name="assetAddress"></param>
-        /// <param name="limit"> (optional, default to &quot;10&quot;)</param>
-        /// <param name="offset"> (optional, default to &quot;0&quot;)</param>
+        /// <param name="limit"> (optional)</param>
+        /// <param name="offset"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetOwnersApiResponse"/>&gt;</returns>
-        public async Task<IGetOwnersApiResponse?> GetOwnersOrDefaultAsync(decimal chainId, string assetAddress, Option<string> limit = default, Option<string> offset = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetOwnersApiResponse?> GetOwnersOrDefaultAsync(decimal chainId, string assetAddress, Option<decimal> limit = default, Option<decimal> offset = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -1857,17 +1849,17 @@ namespace BeamPlayerClient.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="chainId"></param>
         /// <param name="assetAddress"></param>
-        /// <param name="limit"> (optional, default to &quot;10&quot;)</param>
-        /// <param name="offset"> (optional, default to &quot;0&quot;)</param>
+        /// <param name="limit"> (optional)</param>
+        /// <param name="offset"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetOwnersApiResponse"/>&gt;</returns>
-        public async Task<IGetOwnersApiResponse> GetOwnersAsync(decimal chainId, string assetAddress, Option<string> limit = default, Option<string> offset = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetOwnersApiResponse> GetOwnersAsync(decimal chainId, string assetAddress, Option<decimal> limit = default, Option<decimal> offset = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateGetOwners(assetAddress, limit, offset);
+                ValidateGetOwners(assetAddress);
 
                 FormatGetOwners(ref chainId, ref assetAddress, ref limit, ref offset);
 

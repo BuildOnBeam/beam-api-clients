@@ -12,6 +12,7 @@ src/BeamPlayerClient/Api/IApi.cs
 src/BeamPlayerClient/Api/MarketplaceApi.cs
 src/BeamPlayerClient/Api/OperationApi.cs
 src/BeamPlayerClient/Api/SessionsApi.cs
+src/BeamPlayerClient/Api/StatsApi.cs
 src/BeamPlayerClient/Api/TransactionsApi.cs
 src/BeamPlayerClient/Api/UsersApi.cs
 src/BeamPlayerClient/Client/ApiException.cs
@@ -110,6 +111,9 @@ src/BeamPlayerClient/Model/RefreshContractRequestBody.cs
 src/BeamPlayerClient/Model/RefreshTokenRequestBody.cs
 src/BeamPlayerClient/Model/RevokeSessionRequestInput.cs
 src/BeamPlayerClient/Model/SellAssetRequestInput.cs
+src/BeamPlayerClient/Model/StatsRequestInput.cs
+src/BeamPlayerClient/Model/StatsResponse.cs
+src/BeamPlayerClient/Model/StatsResponseCount.cs
 src/BeamPlayerClient/Model/TransferAssetRequestInput.cs
 src/BeamPlayerClient/Model/TransferAssetRequestInputAssetsInner.cs
 src/BeamPlayerClient/Model/TransferNativeTokenRequestInput.cs
