@@ -4,6 +4,7 @@ appveyor.yml
 docs/scripts/git_push.ps1
 docs/scripts/git_push.sh
 src/BeamPlayerClient.Test/README.md
+src/BeamPlayerClient/Api/ActivityApi.cs
 src/BeamPlayerClient/Api/AssetsApi.cs
 src/BeamPlayerClient/Api/ConnectorApi.cs
 src/BeamPlayerClient/Api/ExchangeApi.cs
@@ -42,8 +43,18 @@ src/BeamPlayerClient/Model/CancelAssetOfferRequestInput.cs
 src/BeamPlayerClient/Model/Check200Response.cs
 src/BeamPlayerClient/Model/Check200ResponseInfoValue.cs
 src/BeamPlayerClient/Model/Check503Response.cs
+src/BeamPlayerClient/Model/CommonActivityRequestInput.cs
+src/BeamPlayerClient/Model/CommonActivityResponse.cs
+src/BeamPlayerClient/Model/CommonActivityResponseDataInner.cs
+src/BeamPlayerClient/Model/CommonActivityResponseDataInnerAsset.cs
+src/BeamPlayerClient/Model/CommonActivityResponseDataInnerContract.cs
+src/BeamPlayerClient/Model/CommonActivityResponseDataInnerOrder.cs
+src/BeamPlayerClient/Model/CommonActivityResponseDataInnerTransaction.cs
 src/BeamPlayerClient/Model/CommonOperationResponse.cs
 src/BeamPlayerClient/Model/CommonOperationResponseTransactionsInner.cs
+src/BeamPlayerClient/Model/CommonStatsRequestInput.cs
+src/BeamPlayerClient/Model/CommonStatsResponse.cs
+src/BeamPlayerClient/Model/CommonStatsResponseCount.cs
 src/BeamPlayerClient/Model/ConfirmOperationRequest.cs
 src/BeamPlayerClient/Model/ConfirmOperationRequestTransactionsInner.cs
 src/BeamPlayerClient/Model/ConvertTokenRequestInput.cs
@@ -111,9 +122,6 @@ src/BeamPlayerClient/Model/RefreshContractRequestBody.cs
 src/BeamPlayerClient/Model/RefreshTokenRequestBody.cs
 src/BeamPlayerClient/Model/RevokeSessionRequestInput.cs
 src/BeamPlayerClient/Model/SellAssetRequestInput.cs
-src/BeamPlayerClient/Model/StatsRequestInput.cs
-src/BeamPlayerClient/Model/StatsResponse.cs
-src/BeamPlayerClient/Model/StatsResponseCount.cs
 src/BeamPlayerClient/Model/TransferAssetRequestInput.cs
 src/BeamPlayerClient/Model/TransferAssetRequestInputAssetsInner.cs
 src/BeamPlayerClient/Model/TransferNativeTokenRequestInput.cs

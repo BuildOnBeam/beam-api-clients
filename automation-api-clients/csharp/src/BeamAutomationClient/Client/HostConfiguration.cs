@@ -54,11 +54,21 @@ namespace BeamAutomationClient.Client
             _jsonOptions.Converters.Add(new Check200ResponseJsonConverter());
             _jsonOptions.Converters.Add(new Check200ResponseInfoValueJsonConverter());
             _jsonOptions.Converters.Add(new Check503ResponseJsonConverter());
+            _jsonOptions.Converters.Add(new CommonActivityRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new CommonActivityResponseJsonConverter());
+            _jsonOptions.Converters.Add(new CommonActivityResponseDataInnerJsonConverter());
+            _jsonOptions.Converters.Add(new CommonActivityResponseDataInnerAssetJsonConverter());
+            _jsonOptions.Converters.Add(new CommonActivityResponseDataInnerContractJsonConverter());
+            _jsonOptions.Converters.Add(new CommonActivityResponseDataInnerOrderJsonConverter());
+            _jsonOptions.Converters.Add(new CommonActivityResponseDataInnerTransactionJsonConverter());
             _jsonOptions.Converters.Add(new CommonAddPolicyRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new CommonAddPolicyResponseJsonConverter());
             _jsonOptions.Converters.Add(new CommonGetPoliciesResponseJsonConverter());
             _jsonOptions.Converters.Add(new CommonGetPoliciesResponseDataInnerJsonConverter());
             _jsonOptions.Converters.Add(new CommonRemovePolicyResponseJsonConverter());
+            _jsonOptions.Converters.Add(new CommonStatsRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new CommonStatsResponseJsonConverter());
+            _jsonOptions.Converters.Add(new CommonStatsResponseCountJsonConverter());
             _jsonOptions.Converters.Add(new ConvertTokenRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new ConvertTokenResponseJsonConverter());
             _jsonOptions.Converters.Add(new CreateAssetOfferRequestInputV2JsonConverter());
@@ -156,6 +166,8 @@ namespace BeamAutomationClient.Client
             JsonSerializerOptionsProvider jsonSerializerOptionsProvider = new(_jsonOptions);
             _services.AddSingleton(jsonSerializerOptionsProvider);
             _services.AddSingleton<IApiFactory, ApiFactory>();
+            _services.AddSingleton<ActivityApiEvents>();
+            _services.AddTransient<IActivityApi, ActivityApi>();
             _services.AddSingleton<AssetsV2ApiEvents>();
             _services.AddTransient<IAssetsV2Api, AssetsV2Api>();
             _services.AddSingleton<ChainApiEvents>();
@@ -174,6 +186,8 @@ namespace BeamAutomationClient.Client
             _services.AddTransient<IProfilesApi, ProfilesApi>();
             _services.AddSingleton<ReportingApiEvents>();
             _services.AddTransient<IReportingApi, ReportingApi>();
+            _services.AddSingleton<StatsApiEvents>();
+            _services.AddTransient<IStatsApi, StatsApi>();
             _services.AddSingleton<TradingApiEvents>();
             _services.AddTransient<ITradingApi, TradingApi>();
             _services.AddSingleton<TransactionsV2ApiEvents>();
@@ -197,6 +211,7 @@ namespace BeamAutomationClient.Client
 
             List<IHttpClientBuilder> builders = new List<IHttpClientBuilder>();
 
+            builders.Add(_services.AddHttpClient<IActivityApi, ActivityApi>(client));
             builders.Add(_services.AddHttpClient<IAssetsV2Api, AssetsV2Api>(client));
             builders.Add(_services.AddHttpClient<IChainApi, ChainApi>(client));
             builders.Add(_services.AddHttpClient<IExchangeApi, ExchangeApi>(client));
@@ -206,6 +221,7 @@ namespace BeamAutomationClient.Client
             builders.Add(_services.AddHttpClient<IPolicyApi, PolicyApi>(client));
             builders.Add(_services.AddHttpClient<IProfilesApi, ProfilesApi>(client));
             builders.Add(_services.AddHttpClient<IReportingApi, ReportingApi>(client));
+            builders.Add(_services.AddHttpClient<IStatsApi, StatsApi>(client));
             builders.Add(_services.AddHttpClient<ITradingApi, TradingApi>(client));
             builders.Add(_services.AddHttpClient<ITransactionsV2Api, TransactionsV2Api>(client));
             builders.Add(_services.AddHttpClient<IWebhooksApi, WebhooksApi>(client));

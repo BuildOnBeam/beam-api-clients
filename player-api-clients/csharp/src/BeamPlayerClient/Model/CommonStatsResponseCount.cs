@@ -27,28 +27,36 @@ using BeamPlayerClient.Client;
 namespace BeamPlayerClient.Model
 {
     /// <summary>
-    /// StatsResponse
+    /// CommonStatsResponseCount
     /// </summary>
-    public partial class StatsResponse : IValidatableObject
+    public partial class CommonStatsResponseCount : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="StatsResponse" /> class.
+        /// Initializes a new instance of the <see cref="CommonStatsResponseCount" /> class.
         /// </summary>
-        /// <param name="count">count</param>
+        /// <param name="listed">listed</param>
+        /// <param name="tokens">tokens</param>
         [JsonConstructor]
-        public StatsResponse(StatsResponseCount count)
+        public CommonStatsResponseCount(decimal listed, decimal tokens)
         {
-            Count = count;
+            Listed = listed;
+            Tokens = tokens;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets Count
+        /// Gets or Sets Listed
         /// </summary>
-        [JsonPropertyName("count")]
-        public StatsResponseCount Count { get; set; }
+        [JsonPropertyName("listed")]
+        public decimal Listed { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Tokens
+        /// </summary>
+        [JsonPropertyName("tokens")]
+        public decimal Tokens { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -57,8 +65,9 @@ namespace BeamPlayerClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class StatsResponse {\n");
-            sb.Append("  Count: ").Append(Count).Append("\n");
+            sb.Append("class CommonStatsResponseCount {\n");
+            sb.Append("  Listed: ").Append(Listed).Append("\n");
+            sb.Append("  Tokens: ").Append(Tokens).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,19 +84,19 @@ namespace BeamPlayerClient.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="StatsResponse" />
+    /// A Json converter for type <see cref="CommonStatsResponseCount" />
     /// </summary>
-    public class StatsResponseJsonConverter : JsonConverter<StatsResponse>
+    public class CommonStatsResponseCountJsonConverter : JsonConverter<CommonStatsResponseCount>
     {
         /// <summary>
-        /// Deserializes json to <see cref="StatsResponse" />
+        /// Deserializes json to <see cref="CommonStatsResponseCount" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override StatsResponse Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override CommonStatsResponseCount Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -96,7 +105,8 @@ namespace BeamPlayerClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<StatsResponseCount?> count = default;
+            Option<decimal?> listed = default;
+            Option<decimal?> tokens = default;
 
             while (utf8JsonReader.Read())
             {
@@ -113,9 +123,13 @@ namespace BeamPlayerClient.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "count":
+                        case "listed":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                count = new Option<StatsResponseCount?>(JsonSerializer.Deserialize<StatsResponseCount>(ref utf8JsonReader, jsonSerializerOptions)!);
+                                listed = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                            break;
+                        case "tokens":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                tokens = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         default:
                             break;
@@ -123,44 +137,48 @@ namespace BeamPlayerClient.Model
                 }
             }
 
-            if (!count.IsSet)
-                throw new ArgumentException("Property is required for class StatsResponse.", nameof(count));
+            if (!listed.IsSet)
+                throw new ArgumentException("Property is required for class CommonStatsResponseCount.", nameof(listed));
 
-            if (count.IsSet && count.Value == null)
-                throw new ArgumentNullException(nameof(count), "Property is not nullable for class StatsResponse.");
+            if (!tokens.IsSet)
+                throw new ArgumentException("Property is required for class CommonStatsResponseCount.", nameof(tokens));
 
-            return new StatsResponse(count.Value!);
+            if (listed.IsSet && listed.Value == null)
+                throw new ArgumentNullException(nameof(listed), "Property is not nullable for class CommonStatsResponseCount.");
+
+            if (tokens.IsSet && tokens.Value == null)
+                throw new ArgumentNullException(nameof(tokens), "Property is not nullable for class CommonStatsResponseCount.");
+
+            return new CommonStatsResponseCount(listed.Value!.Value!, tokens.Value!.Value!);
         }
 
         /// <summary>
-        /// Serializes a <see cref="StatsResponse" />
+        /// Serializes a <see cref="CommonStatsResponseCount" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="statsResponse"></param>
+        /// <param name="commonStatsResponseCount"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, StatsResponse statsResponse, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, CommonStatsResponseCount commonStatsResponseCount, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(ref writer, statsResponse, jsonSerializerOptions);
+            WriteProperties(ref writer, commonStatsResponseCount, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="StatsResponse" />
+        /// Serializes the properties of <see cref="CommonStatsResponseCount" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="statsResponse"></param>
+        /// <param name="commonStatsResponseCount"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(ref Utf8JsonWriter writer, StatsResponse statsResponse, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(ref Utf8JsonWriter writer, CommonStatsResponseCount commonStatsResponseCount, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (statsResponse.Count == null)
-                throw new ArgumentNullException(nameof(statsResponse.Count), "Property is required for class StatsResponse.");
+            writer.WriteNumber("listed", commonStatsResponseCount.Listed);
 
-            writer.WritePropertyName("count");
-            JsonSerializer.Serialize(writer, statsResponse.Count, jsonSerializerOptions);
+            writer.WriteNumber("tokens", commonStatsResponseCount.Tokens);
         }
     }
 }

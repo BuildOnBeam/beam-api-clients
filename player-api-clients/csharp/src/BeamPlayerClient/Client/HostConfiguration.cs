@@ -48,8 +48,18 @@ namespace BeamPlayerClient.Client
             _jsonOptions.Converters.Add(new Check200ResponseJsonConverter());
             _jsonOptions.Converters.Add(new Check200ResponseInfoValueJsonConverter());
             _jsonOptions.Converters.Add(new Check503ResponseJsonConverter());
+            _jsonOptions.Converters.Add(new CommonActivityRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new CommonActivityResponseJsonConverter());
+            _jsonOptions.Converters.Add(new CommonActivityResponseDataInnerJsonConverter());
+            _jsonOptions.Converters.Add(new CommonActivityResponseDataInnerAssetJsonConverter());
+            _jsonOptions.Converters.Add(new CommonActivityResponseDataInnerContractJsonConverter());
+            _jsonOptions.Converters.Add(new CommonActivityResponseDataInnerOrderJsonConverter());
+            _jsonOptions.Converters.Add(new CommonActivityResponseDataInnerTransactionJsonConverter());
             _jsonOptions.Converters.Add(new CommonOperationResponseJsonConverter());
             _jsonOptions.Converters.Add(new CommonOperationResponseTransactionsInnerJsonConverter());
+            _jsonOptions.Converters.Add(new CommonStatsRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new CommonStatsResponseJsonConverter());
+            _jsonOptions.Converters.Add(new CommonStatsResponseCountJsonConverter());
             _jsonOptions.Converters.Add(new ConfirmOperationRequestJsonConverter());
             _jsonOptions.Converters.Add(new ConfirmOperationRequestTransactionsInnerJsonConverter());
             _jsonOptions.Converters.Add(new ConvertTokenRequestInputJsonConverter());
@@ -117,9 +127,6 @@ namespace BeamPlayerClient.Client
             _jsonOptions.Converters.Add(new RefreshTokenRequestBodyJsonConverter());
             _jsonOptions.Converters.Add(new RevokeSessionRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new SellAssetRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new StatsRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new StatsResponseJsonConverter());
-            _jsonOptions.Converters.Add(new StatsResponseCountJsonConverter());
             _jsonOptions.Converters.Add(new TransferAssetRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new TransferAssetRequestInputAssetsInnerJsonConverter());
             _jsonOptions.Converters.Add(new TransferNativeTokenRequestInputJsonConverter());
@@ -127,6 +134,8 @@ namespace BeamPlayerClient.Client
             JsonSerializerOptionsProvider jsonSerializerOptionsProvider = new(_jsonOptions);
             _services.AddSingleton(jsonSerializerOptionsProvider);
             _services.AddSingleton<IApiFactory, ApiFactory>();
+            _services.AddSingleton<ActivityApiEvents>();
+            _services.AddTransient<IActivityApi, ActivityApi>();
             _services.AddSingleton<AssetsApiEvents>();
             _services.AddTransient<IAssetsApi, AssetsApi>();
             _services.AddSingleton<ConnectorApiEvents>();
@@ -164,6 +173,7 @@ namespace BeamPlayerClient.Client
 
             List<IHttpClientBuilder> builders = new List<IHttpClientBuilder>();
 
+            builders.Add(_services.AddHttpClient<IActivityApi, ActivityApi>(client));
             builders.Add(_services.AddHttpClient<IAssetsApi, AssetsApi>(client));
             builders.Add(_services.AddHttpClient<IConnectorApi, ConnectorApi>(client));
             builders.Add(_services.AddHttpClient<IExchangeApi, ExchangeApi>(client));

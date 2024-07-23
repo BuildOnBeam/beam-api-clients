@@ -128,6 +128,10 @@ namespace BeamPlayerClient.Client
                 return CancelAssetListingRequestInput.OperationProcessingEnumToJsonValue(cancelAssetListingRequestInputOperationProcessingEnum);
             if (obj is CancelAssetOfferRequestInput.OperationProcessingEnum cancelAssetOfferRequestInputOperationProcessingEnum)
                 return CancelAssetOfferRequestInput.OperationProcessingEnumToJsonValue(cancelAssetOfferRequestInputOperationProcessingEnum);
+            if (obj is CommonActivityRequestInput.TypesEnum commonActivityRequestInputTypesEnum)
+                return CommonActivityRequestInput.TypesEnumToJsonValue(commonActivityRequestInputTypesEnum);
+            if (obj is CommonActivityResponseDataInner.TypeEnum commonActivityResponseDataInnerTypeEnum)
+                return CommonActivityResponseDataInner.TypeEnumToJsonValue(commonActivityResponseDataInnerTypeEnum);
             if (obj is CommonOperationResponse.ProcessingEnum commonOperationResponseProcessingEnum)
                 return CommonOperationResponse.ProcessingEnumToJsonValue(commonOperationResponseProcessingEnum);
             if (obj is CommonOperationResponse.StatusEnum commonOperationResponseStatusEnum)

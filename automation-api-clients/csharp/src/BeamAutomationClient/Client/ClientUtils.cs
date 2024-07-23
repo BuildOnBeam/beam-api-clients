@@ -124,6 +124,10 @@ namespace BeamAutomationClient.Client
                 return AddContractRequestInput.TypeEnumToJsonValue(addContractRequestInputTypeEnum);
             if (obj is AddContractResponse.TypeEnum addContractResponseTypeEnum)
                 return AddContractResponse.TypeEnumToJsonValue(addContractResponseTypeEnum);
+            if (obj is CommonActivityRequestInput.TypesEnum commonActivityRequestInputTypesEnum)
+                return CommonActivityRequestInput.TypesEnumToJsonValue(commonActivityRequestInputTypesEnum);
+            if (obj is CommonActivityResponseDataInner.TypeEnum commonActivityResponseDataInnerTypeEnum)
+                return CommonActivityResponseDataInner.TypeEnumToJsonValue(commonActivityResponseDataInnerTypeEnum);
             if (obj is CommonAddPolicyRequestInput.RateTypeEnum commonAddPolicyRequestInputRateTypeEnum)
                 return CommonAddPolicyRequestInput.RateTypeEnumToJsonValue(commonAddPolicyRequestInputRateTypeEnum);
             if (obj is CommonAddPolicyResponse.RateTypeEnum commonAddPolicyResponseRateTypeEnum)
