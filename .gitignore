@@ -49,3 +49,5 @@ tsconfig.tsbuildinfo
 
 local.sqlite
 local.db
+
+beam-sdk-csharp-example

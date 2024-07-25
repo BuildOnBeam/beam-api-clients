@@ -70,9 +70,9 @@ namespace {{packageName}}.Extensions
 
             services.AddSingleton<CookieContainer>();
 
-            services.AddSingleton<SimpleApiKeyTokenProvider<ApiKeyToken>>();
-            services.AddTransient(typeof(TokenProvider<>).MakeGenericType(typeof(ApiKeyToken)),
-                        s => s.GetRequiredService(typeof(SimpleApiKeyTokenProvider<>).MakeGenericType(typeof(ApiKeyToken))));
+            services.AddSingleton<SimpleApiKeyTokenProvider<{{classPrefix}}ApiKeyToken>>();
+            services.AddTransient(typeof(TokenProvider<>).MakeGenericType(typeof({{classPrefix}}ApiKeyToken)),
+                        s => s.GetRequiredService(typeof(SimpleApiKeyTokenProvider<>).MakeGenericType(typeof({{classPrefix}}ApiKeyToken))));
         }
     }
 }

@@ -178,7 +178,7 @@ namespace {{packageName}}.{{apiPackage}}
         /// <summary>
         /// A token provider of type <see cref="ApiKeyProvider"/>
         /// </summary>
-        public TokenProvider<ApiKeyToken> ApiKeyProvider { get; }{{/hasApiKeyMethods}}{{#hasHttpBearerMethods}}
+        public TokenProvider<{{classPrefix}}ApiKeyToken> ApiKeyProvider { get; }{{/hasApiKeyMethods}}{{#hasHttpBearerMethods}}
 
         /// <summary>
         /// A token provider of type <see cref="BearerToken"/>
@@ -218,7 +218,7 @@ namespace {{packageName}}.{{apiPackage}}
         /// </summary>
         /// <returns></returns>
         public {{classPrefix}}{{classname}}(ILogger<{{classPrefix}}{{classname}}> logger, ILoggerFactory loggerFactory, HttpClient httpClient, {{classPrefix}}JsonSerializerOptionsProvider jsonSerializerOptionsProvider, {{classPrefix}}{{classname}}Events {{#lambda.camelcase_param}}{{classPrefix}}{{classname}}Events{{/lambda.camelcase_param}}{{#hasApiKeyMethods}},
-            TokenProvider<ApiKeyToken> apiKeyProvider{{/hasApiKeyMethods}}{{#hasHttpBearerMethods}},
+            TokenProvider<{{classPrefix}}ApiKeyToken> apiKeyProvider{{/hasApiKeyMethods}}{{#hasHttpBearerMethods}},
             TokenProvider<BearerToken> bearerTokenProvider{{/hasHttpBearerMethods}}{{#hasHttpBasicMethods}},
             TokenProvider<BasicToken> basicTokenProvider{{/hasHttpBasicMethods}}{{#hasHttpSignatureMethods}},
             TokenProvider<HttpSignatureToken> httpSignatureTokenProvider{{/hasHttpSignatureMethods}}{{#hasOAuthMethods}},
@@ -503,7 +503,7 @@ namespace {{packageName}}.{{apiPackage}}
                     {{/-first}}
                     {{#isApiKey}}
                     {{^isKeyInCookie}}
-                    ApiKeyToken apiKeyTokenLocalVar{{-index}} = (ApiKeyToken) await ApiKeyProvider.GetAsync("{{keyParamName}}", cancellationToken).ConfigureAwait(false);
+                    {{classPrefix}}ApiKeyToken apiKeyTokenLocalVar{{-index}} = ({{classPrefix}}ApiKeyToken) await ApiKeyProvider.GetAsync("{{keyParamName}}", cancellationToken).ConfigureAwait(false);
                     tokenBaseLocalVars.Add(apiKeyTokenLocalVar{{-index}});
                     {{#isKeyInHeader}}
                     apiKeyTokenLocalVar{{-index}}.UseInHeader(httpRequestMessageLocalVar);

@@ -53,9 +53,9 @@ namespace BeamAutomationClient.Extensions
 
             services.AddSingleton<CookieContainer>();
 
-            services.AddSingleton<SimpleApiKeyTokenProvider<ApiKeyToken>>();
-            services.AddTransient(typeof(TokenProvider<>).MakeGenericType(typeof(ApiKeyToken)),
-                        s => s.GetRequiredService(typeof(SimpleApiKeyTokenProvider<>).MakeGenericType(typeof(ApiKeyToken))));
+            services.AddSingleton<SimpleApiKeyTokenProvider<AutomationApiKeyToken>>();
+            services.AddTransient(typeof(TokenProvider<>).MakeGenericType(typeof(AutomationApiKeyToken)),
+                        s => s.GetRequiredService(typeof(SimpleApiKeyTokenProvider<>).MakeGenericType(typeof(AutomationApiKeyToken))));
         }
     }
 }

@@ -9,18 +9,18 @@ namespace BeamAutomationClient.Client
     /// <summary>
     /// A token constructed from an apiKey.
     /// </summary>
-    public class ApiKeyToken : TokenBase
+    public class AutomationApiKeyToken : TokenBase
     {
         private string _raw;
         public string Header;
 
         /// <summary>
-        /// Constructs an ApiKeyToken object.
+        /// Constructs an AutomationApiKeyToken object.
         /// </summary>
         /// <param name="value"></param>
         /// <param name="prefix"></param>
         /// <param name="timeout"></param>
-        public ApiKeyToken(string value, string prefix = "", TimeSpan? timeout = null, string header = "x-api-key") : base(timeout)
+        public AutomationApiKeyToken(string value, string prefix = "", TimeSpan? timeout = null, string header = "x-api-key") : base(timeout)
         {
             _raw = $"{ prefix }{ value }";
             Header = header;

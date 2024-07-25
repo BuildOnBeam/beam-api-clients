@@ -45,7 +45,7 @@ namespace {{packageName}}
     /// Provides a token to the api clients. Your tokens will be used directly.
     /// </summary>
     /// <typeparam name="TTokenBase"></typeparam>
-    {{>visibility}} class SimpleApiKeyTokenProvider<TTokenBase> : TokenProvider<TTokenBase> where TTokenBase : ApiKeyToken
+    {{>visibility}} class SimpleApiKeyTokenProvider<TTokenBase> : TokenProvider<TTokenBase> where TTokenBase : {{classPrefix}}ApiKeyToken
     {
         /// <summary>
         /// Instantiates a SimpleTokenProvider. Your tokens will be used directly.

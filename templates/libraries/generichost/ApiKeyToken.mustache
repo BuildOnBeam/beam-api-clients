@@ -11,18 +11,18 @@ namespace {{packageName}}.{{clientPackage}}
     /// <summary>
     /// A token constructed from an apiKey.
     /// </summary>
-    {{>visibility}} class ApiKeyToken : TokenBase
+    {{>visibility}} class {{classPrefix}}ApiKeyToken : TokenBase
     {
         private string _raw;
         public string Header;
 
         /// <summary>
-        /// Constructs an ApiKeyToken object.
+        /// Constructs an {{classPrefix}}ApiKeyToken object.
         /// </summary>
         /// <param name="value"></param>
         /// <param name="prefix"></param>
         /// <param name="timeout"></param>
-        public ApiKeyToken(string value, string prefix = "", TimeSpan? timeout = null, string header = "x-api-key") : base(timeout)
+        public {{classPrefix}}ApiKeyToken(string value, string prefix = "", TimeSpan? timeout = null, string header = "x-api-key") : base(timeout)
         {
             _raw = $"{ prefix }{ value }";
             Header = header;

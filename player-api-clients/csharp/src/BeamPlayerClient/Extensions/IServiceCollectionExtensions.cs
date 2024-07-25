@@ -53,9 +53,9 @@ namespace BeamPlayerClient.Extensions
 
             services.AddSingleton<CookieContainer>();
 
-            services.AddSingleton<SimpleApiKeyTokenProvider<ApiKeyToken>>();
-            services.AddTransient(typeof(TokenProvider<>).MakeGenericType(typeof(ApiKeyToken)),
-                        s => s.GetRequiredService(typeof(SimpleApiKeyTokenProvider<>).MakeGenericType(typeof(ApiKeyToken))));
+            services.AddSingleton<SimpleApiKeyTokenProvider<PlayerApiKeyToken>>();
+            services.AddTransient(typeof(TokenProvider<>).MakeGenericType(typeof(PlayerApiKeyToken)),
+                        s => s.GetRequiredService(typeof(SimpleApiKeyTokenProvider<>).MakeGenericType(typeof(PlayerApiKeyToken))));
         }
     }
 }

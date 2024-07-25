@@ -51,7 +51,7 @@ namespace BeamAutomationClient
     /// Provides a token to the api clients. Your tokens will be used directly.
     /// </summary>
     /// <typeparam name="TTokenBase"></typeparam>
-    public class SimpleApiKeyTokenProvider<TTokenBase> : TokenProvider<TTokenBase> where TTokenBase : ApiKeyToken
+    public class SimpleApiKeyTokenProvider<TTokenBase> : TokenProvider<TTokenBase> where TTokenBase : AutomationApiKeyToken
     {
         /// <summary>
         /// Instantiates a SimpleTokenProvider. Your tokens will be used directly.

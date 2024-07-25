@@ -87,7 +87,7 @@ namespace YourProject
               options.AddTokens(token);
 
               // optionally choose the method the tokens will be provided with, default is RateLimitProvider
-              options.UseProvider<RateLimitProvider<ApiKeyToken>, ApiKeyToken>();
+              options.UseProvider<RateLimitProvider<{{classPrefix}}ApiKeyToken>, ApiKeyToken>();
 
               {{/-first}}
               {{/authMethods}}
@@ -115,7 +115,7 @@ namespace YourProject
   Tokens are provided by a TokenProvider class. The default is RateLimitProvider which will perform client side rate limiting.
   Other providers can be used with the UseProvider method.
 - Does an HttpRequest throw an error when the server response is not Ok?
-  It depends how you made the request. If the return type is ApiResponse<T> no error will be thrown, though the Content property will be null. 
+  It depends how you made the request. If the return type is ApiResponse<T> no error will be thrown, though the Content property will be null.
   StatusCode and ReasonPhrase will contain information about the error.
   If the return type is T, then it will throw. If the return type is TOrDefault, it will return null.
 - How do I validate requests and process responses?
@@ -172,7 +172,7 @@ Class | Method | HTTP request | Description
 - **Type**: OAuth
 - **Flow**: {{flow}}
 - **Authorization URL**: {{authorizationUrl}}
-- **Scopes**: {{^scopes}}N/A{{/scopes}}{{#scopes}}  
+- **Scopes**: {{^scopes}}N/A{{/scopes}}{{#scopes}}
 - {{scope}}: {{description}}{{/scopes}}
 {{/isOAuth}}
 

@@ -131,14 +131,14 @@ namespace BeamPlayerClient.Api
         /// <summary>
         /// A token provider of type <see cref="ApiKeyProvider"/>
         /// </summary>
-        public TokenProvider<ApiKeyToken> ApiKeyProvider { get; }
+        public TokenProvider<PlayerApiKeyToken> ApiKeyProvider { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PlayerHealthApi"/> class.
         /// </summary>
         /// <returns></returns>
         public PlayerHealthApi(ILogger<PlayerHealthApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, PlayerJsonSerializerOptionsProvider jsonSerializerOptionsProvider, PlayerHealthApiEvents playerHealthApiEvents,
-            TokenProvider<ApiKeyToken> apiKeyProvider)
+            TokenProvider<PlayerApiKeyToken> apiKeyProvider)
         {
             _jsonSerializerOptions = jsonSerializerOptionsProvider.Options;
             LoggerFactory = loggerFactory;

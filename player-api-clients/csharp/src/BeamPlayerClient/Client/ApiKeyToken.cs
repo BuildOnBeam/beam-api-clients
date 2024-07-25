@@ -9,18 +9,18 @@ namespace BeamPlayerClient.Client
     /// <summary>
     /// A token constructed from an apiKey.
     /// </summary>
-    public class ApiKeyToken : TokenBase
+    public class PlayerApiKeyToken : TokenBase
     {
         private string _raw;
         public string Header;
 
         /// <summary>
-        /// Constructs an ApiKeyToken object.
+        /// Constructs an PlayerApiKeyToken object.
         /// </summary>
         /// <param name="value"></param>
         /// <param name="prefix"></param>
         /// <param name="timeout"></param>
-        public ApiKeyToken(string value, string prefix = "", TimeSpan? timeout = null, string header = "x-api-key") : base(timeout)
+        public PlayerApiKeyToken(string value, string prefix = "", TimeSpan? timeout = null, string header = "x-api-key") : base(timeout)
         {
             _raw = $"{ prefix }{ value }";
             Header = header;

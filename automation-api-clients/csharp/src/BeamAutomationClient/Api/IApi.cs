@@ -16,6 +16,6 @@ namespace BeamAutomationClient.Api
         /// <summary>
         /// A token provider of type <see cref="ApiKeyProvider"/>
         /// </summary>
-        TokenProvider<ApiKeyToken> ApiKeyProvider { get; }
+        TokenProvider<AutomationApiKeyToken> ApiKeyProvider { get; }
     }
 }
