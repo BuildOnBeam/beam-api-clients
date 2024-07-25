@@ -28,12 +28,12 @@ namespace BeamPlayerClient.Api
     /// Represents a collection of functions to interact with the API endpoints
     /// This class is registered as transient.
     /// </summary>
-    public interface IUsersApi : IApi
+    public interface IPlayerUsersApi : IPlayerApi
     {
         /// <summary>
         /// The class containing the events
         /// </summary>
-        UsersApiEvents Events { get; }
+        PlayerUsersApiEvents Events { get; }
 
         /// <summary>
         /// Returns a list of users
@@ -87,7 +87,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="IGetAllUsersApiResponse"/>
     /// </summary>
-    public interface IGetAllUsersApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.GetAllUsersResponse?>
+    public interface IGetAllUsersApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetAllUsersResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -99,7 +99,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="IGetUserApiResponse"/>
     /// </summary>
-    public interface IGetUserApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.GetUserResponse?>
+    public interface IGetUserApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetUserResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -111,7 +111,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public class UsersApiEvents
+    public class PlayerUsersApiEvents
     {
         /// <summary>
         /// The event raised after the server response
@@ -123,7 +123,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetAllUsers;
 
-        internal void ExecuteOnGetAllUsers(UsersApi.GetAllUsersApiResponse apiResponse)
+        internal void ExecuteOnGetAllUsers(PlayerUsersApi.GetAllUsersApiResponse apiResponse)
         {
             OnGetAllUsers?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -143,7 +143,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetUser;
 
-        internal void ExecuteOnGetUser(UsersApi.GetUserApiResponse apiResponse)
+        internal void ExecuteOnGetUser(PlayerUsersApi.GetUserApiResponse apiResponse)
         {
             OnGetUser?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -157,7 +157,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public sealed partial class UsersApi : IUsersApi
+    public sealed partial class PlayerUsersApi : IPlayerUsersApi
     {
         private JsonSerializerOptions _jsonSerializerOptions;
 
@@ -169,7 +169,7 @@ namespace BeamPlayerClient.Api
         /// <summary>
         /// The logger
         /// </summary>
-        public ILogger<UsersApi> Logger { get; }
+        public ILogger<PlayerUsersApi> Logger { get; }
 
         /// <summary>
         /// The HttpClient
@@ -179,7 +179,7 @@ namespace BeamPlayerClient.Api
         /// <summary>
         /// The class containing the events
         /// </summary>
-        public UsersApiEvents Events { get; }
+        public PlayerUsersApiEvents Events { get; }
 
         /// <summary>
         /// A token provider of type <see cref="ApiKeyProvider"/>
@@ -187,17 +187,17 @@ namespace BeamPlayerClient.Api
         public TokenProvider<ApiKeyToken> ApiKeyProvider { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UsersApi"/> class.
+        /// Initializes a new instance of the <see cref="PlayerUsersApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public UsersApi(ILogger<UsersApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, UsersApiEvents usersApiEvents,
+        public PlayerUsersApi(ILogger<PlayerUsersApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, PlayerJsonSerializerOptionsProvider jsonSerializerOptionsProvider, PlayerUsersApiEvents playerUsersApiEvents,
             TokenProvider<ApiKeyToken> apiKeyProvider)
         {
             _jsonSerializerOptions = jsonSerializerOptionsProvider.Options;
             LoggerFactory = loggerFactory;
-            Logger = LoggerFactory.CreateLogger<UsersApi>();
+            Logger = LoggerFactory.CreateLogger<PlayerUsersApi>();
             HttpClient = httpClient;
-            Events = usersApiEvents;
+            Events = playerUsersApiEvents;
             ApiKeyProvider = apiKeyProvider;
         }
 
@@ -391,11 +391,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.GetAllUsersResponse? Ok()
+            public BeamPlayerClient.Model.PlayerGetAllUsersResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.GetAllUsersResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerGetAllUsersResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -404,7 +404,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.GetAllUsersResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerGetAllUsersResponse? result)
             {
                 result = null;
 
@@ -618,11 +618,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.GetUserResponse? Ok()
+            public BeamPlayerClient.Model.PlayerGetUserResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.GetUserResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerGetUserResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -631,7 +631,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.GetUserResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerGetUserResponse? result)
             {
                 result = null;
 

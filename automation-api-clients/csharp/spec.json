@@ -1,0 +1,6499 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/v1/health/services": {
+      "get": {
+        "operationId": "check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "required": ["status"],
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": true
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "required": ["status"],
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": true
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "required": ["status"],
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "required": ["status"],
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": true
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "required": ["status"],
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": true
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "required": ["status"],
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Health"]
+      }
+    },
+    "/v2/assets/profiles/{entityId}": {
+      "post": {
+        "operationId": "getProfileAssetsForGamePostV2",
+        "summary": "Get all the assets of a profile (NFT assets, e.g. ERC721 / ERC1155)",
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationGetAssetsForProfileBodyInputV2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationGetAssetsForProfileResponseV2"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Assets V2"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/assets/profiles/{entityId}/currencies": {
+      "get": {
+        "operationId": "getProfileCurrenciesV2",
+        "summary": "Get all the currencies owned by an account (ERC20)",
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chainId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationGetProfileCurrenciesResponseV2"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Assets V2"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/assets/profiles/{entityId}/native": {
+      "get": {
+        "operationId": "getProfileNativeCurrencyV2",
+        "summary": "Get the native token balance",
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chainId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationGetProfileNativeCurrencyResponseV2"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Assets V2"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/assets/profiles/{entityId}/transfer-asset": {
+      "post": {
+        "operationId": "TransferAssetV2",
+        "summary": "Transfer an asset (NFT assets, ERC721 / ERC1155)",
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationTransferAssetRequestInputV2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationTransferAssetResponseV2"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Assets V2"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/assets/profiles/{entityId}/transfer-token": {
+      "post": {
+        "operationId": "TransferTokenV2",
+        "summary": "Transfer a token (token assets, ERC20)",
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationTransferTokenRequestInputV2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationTransferTokenResponseV2"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Assets V2"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/assets/profiles/{entityId}/transfer-native": {
+      "post": {
+        "operationId": "TransferNativeTokenV2",
+        "summary": "Transfer the native token",
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationTransferNativeTokenRequestInputV2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationTransferTokenResponseV2"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Assets V2"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/assets/{assetAddress}": {
+      "post": {
+        "operationId": "getContractAssetsPostV2",
+        "summary": "Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155)",
+        "parameters": [
+          {
+            "name": "assetAddress",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationGetAssetsForContractBodyInputV2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationGetAssetsForContractResponseV2"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Assets V2"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/assets/{assetAddress}/{assetId}": {
+      "get": {
+        "operationId": "getAssetV2",
+        "summary": "Get a single NFT (e.g. ERC721 / ERC1155)",
+        "parameters": [
+          {
+            "name": "chainId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "assetAddress",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "assetId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "entityId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "owners",
+            "required": false,
+            "in": "query",
+            "description": "If true, will return owners of the token",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationGetAssetResponseV2"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Assets V2"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v1/chain": {
+      "get": {
+        "operationId": "chain",
+        "parameters": [
+          {
+            "name": "chainId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationGetChainResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Chain"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v1/chain/estimate/profiles/{entityId}/transaction": {
+      "post": {
+        "operationId": "estimateProfileTransactionGas",
+        "summary": "Estimate gas fee for a transaction on behalf of a profile",
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationCreateTransactionRequestInputV2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationGetEstimateResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Chain"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v1/exchange/quote/input": {
+      "get": {
+        "operationId": "getQuoteForInput",
+        "summary": "Returns the maximum necessary input amount for a token trade, given a desired output amount",
+        "parameters": [
+          {
+            "name": "tokenIn",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenOut",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "amountOut",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chainId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationGetQuoteResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Exchange"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v1/exchange/quote/output": {
+      "get": {
+        "operationId": "getQuoteForOutput",
+        "summary": "Returns the minimum expected output amount for a token trade, given an input amount",
+        "parameters": [
+          {
+            "name": "tokenIn",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tokenOut",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "amountIn",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chainId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationGetQuoteResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Exchange"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v1/exchange/profiles/{entityId}/convert/input": {
+      "post": {
+        "operationId": "convertInput",
+        "summary": "Swap an exact amount of `tokenIn` for a minimum amount of `tokenOut`",
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationConvertTokenRequestInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationConvertTokenResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Exchange"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v1/exchange/profiles/{entityId}/convert/output": {
+      "post": {
+        "operationId": "convertToOutput",
+        "summary": "Swap a maximum amount of `tokenIn` for an exact amount of `tokenOut`",
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationConvertTokenRequestInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationConvertTokenResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Exchange"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v1/game": {
+      "get": {
+        "operationId": "getGame",
+        "summary": "Get information about your game",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Game response (including contracts & policies)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationGetGameResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Game"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      },
+      "patch": {
+        "operationId": "updateGame",
+        "summary": "Updating name, description and/or coverImageUrl",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationUpdateGameRequestInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Game was successfully updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationUpdateGameResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Game"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v1/game/regenerate-api-keys": {
+      "post": {
+        "operationId": "regenerateApiKeys",
+        "summary": "Regenerate all your API keys through the provided regenerate key. Note that existing keys will be invalidated immediately",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Old keys were revoked and new ones were generated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationRegenerateGameApiKeysResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Game"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v1/game/contracts": {
+      "post": {
+        "operationId": "addContractToGame",
+        "summary": "Add a new contract to the game",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationAddContractRequestInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The contract was successfully added to the game",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationAddContractResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Game"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v1/game/contracts/{address}/{chainId}": {
+      "delete": {
+        "operationId": "removeContractFromGame",
+        "summary": "Delete a contract from a game",
+        "parameters": [
+          {
+            "name": "chainId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The contract was successfully deleted from the game",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationRemoveContractResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Game"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/marketplace": {
+      "post": {
+        "operationId": "getListedAssetsPostV2",
+        "summary": "Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155)",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationGetListedAssetsBodyInputV2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationGetAssetListingsResponseV2"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Marketplace V2"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/marketplace/profiles/{entityId}": {
+      "post": {
+        "operationId": "getListedAssetsForProfilePostV2",
+        "summary": "Get all the assets listed by a profile (NFT assets, e.g. ERC721 / ERC1155)",
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationGetListedAssetsBodyInputV2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationGetAssetListingsResponseV2"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Marketplace V2"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/marketplace/profiles/{entityId}/listing": {
+      "post": {
+        "operationId": "listAssetV2",
+        "summary": "List an asset for sale",
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationSellAssetRequestInputV2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationSellAssetResponseV2"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Marketplace V2"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/marketplace/profiles/{entityId}/listing/{orderId}": {
+      "post": {
+        "operationId": "buyListedAssetV2",
+        "summary": "Buy listed asset",
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationBuyAssetRequestInputV2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBuyAssetResponseV2"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Marketplace V2"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "cancelListingV2",
+        "summary": "Cancel asset listing",
+        "parameters": [
+          {
+            "name": "chainId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationCancelAssetListingRequestInputV2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationCancelAssetListingResponseV2"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Marketplace V2"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/marketplace/profiles/{entityId}/offers": {
+      "post": {
+        "operationId": "createAssetOfferV2",
+        "summary": "Make an offer for an asset",
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationCreateAssetOfferRequestInputV2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationCreateOfferResponseV2"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Marketplace V2"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "getPlayerOffersV2",
+        "summary": "Get all offers that player created",
+        "parameters": [
+          {
+            "name": "chainId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "continuation",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationGetAssetListingsResponseV2"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Marketplace V2"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/marketplace/profiles/{entityId}/offers/asset/{assetAddress}/{assetId}": {
+      "get": {
+        "operationId": "getPlayerAssetOffersV2",
+        "summary": "Get all asset offers that player created",
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "assetAddress",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "assetId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chainId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "continuation",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationGetAssetListingsResponseV2"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Marketplace V2"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/marketplace/profiles/{entityId}/offers/{offerId}/accept": {
+      "post": {
+        "operationId": "acceptAssetOfferV2",
+        "summary": "Accept an offer for an asset",
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationAcceptAssetOfferRequestInputV2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationAcceptOfferResponseV2"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Marketplace V2"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/marketplace/profiles/{entityId}/offers/{offerId}": {
+      "delete": {
+        "operationId": "cancelAssetOfferV2",
+        "summary": "Cancel an offer for an asset",
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationCancelAssetOfferRequestInputV2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationCancelOfferResponseV2"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Marketplace V2"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/marketplace/offers/asset/{assetAddress}/{assetId}": {
+      "get": {
+        "operationId": "getAssetOffersV2",
+        "summary": "Get all offers for an asset",
+        "parameters": [
+          {
+            "name": "assetAddress",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "assetId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chainId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "continuation",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationGetAssetListingsResponseV2"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Marketplace V2"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/marketplace/chain-currencies/{chainId}": {
+      "get": {
+        "operationId": "getChainCurrenciesV2",
+        "summary": "Get available currencies for given chain",
+        "parameters": [
+          {
+            "name": "chainId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationGetChainCurrenciesResponseV2"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Marketplace V2"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/marketplace/refresh/token": {
+      "post": {
+        "operationId": "refreshToken",
+        "summary": "Schedule a token refresh in the indexer",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationRefreshTokenRequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": ["Marketplace V2"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/marketplace/refresh/contract": {
+      "post": {
+        "operationId": "refreshContract",
+        "summary": "Schedule a contract refresh in the indexer",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationRefreshContractRequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": ["Marketplace V2"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v1/policies": {
+      "post": {
+        "operationId": "createPolicy",
+        "summary": "Add a new policy to sponsor web3 actions",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationCommonAddPolicyRequestInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Policy was successfully created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationCommonAddPolicyResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Policy"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "getPolicies",
+        "summary": "Get a list of policies",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationCommonGetPoliciesResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Policy"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v1/policies/{policyId}": {
+      "delete": {
+        "operationId": "deletePolicy",
+        "summary": "Removing a policy that sponsors web3 actions",
+        "parameters": [
+          {
+            "name": "policyId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Policy was successfully deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationCommonRemovePolicyResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Policy"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v1/profiles": {
+      "post": {
+        "operationId": "createProfile",
+        "summary": "Creating a profile",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationCreateProfileRequestInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationCreateProfileResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Profiles"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "getAllProfiles",
+        "summary": "Getting all profiles",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "10",
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "0",
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationGetAllProfilesResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Profiles"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v1/profiles/{entityId}": {
+      "get": {
+        "operationId": "getProfile",
+        "summary": "Getting information on a profile",
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationGetProfileResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Profiles"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      },
+      "patch": {
+        "operationId": "updateProfile",
+        "summary": "Update a profile",
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationUpdateProfileRequestInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationUpdateProfileResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Profiles"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v1/profiles/{entityId}/create-connection-request": {
+      "post": {
+        "operationId": "createConnectionRequest",
+        "summary": "Generates a challenge which can be encoded in a QR code / app link for the user to take control of the profile",
+        "deprecated": true,
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationGenerateLinkCodeRequestInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Challenge to link up an anonymous profile to a user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationGenerateLinkCodeResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Profiles"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v1/profiles/{entityId}/create-sign-in-request": {
+      "post": {
+        "operationId": "createSignInRequest",
+        "summary": "Generates a challenge which can be encoded in a QR code / app link for the user to sign in to the game",
+        "deprecated": true,
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationGenerateSignInCodeRequestInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Challenge to sign in a player to the game",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationGenerateSignInCodeResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Profiles"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v1/reporting/gas": {
+      "get": {
+        "operationId": "getTotalGameUsage",
+        "summary": "Get the total gas usage for your game",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationGetAllGasUsageResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Reporting"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v1/reporting/gas/{chainId}": {
+      "get": {
+        "operationId": "getTotalGameUsageByChain",
+        "summary": "Get total gas usage for single chain",
+        "parameters": [
+          {
+            "name": "chainId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationGetGasUsageResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Reporting"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v1/reporting/gas/policies/{policyId}": {
+      "get": {
+        "operationId": "getPolicyUsage",
+        "summary": "Get gas usage from a single policy",
+        "parameters": [
+          {
+            "name": "policyId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationGetPolicyUsageResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Reporting"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/transactions": {
+      "get": {
+        "operationId": "getTransactionsV2",
+        "summary": "Get a paginated list of transactions from your game",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "10",
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "0",
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationGetTransactionsResponseV2"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Transactions V2"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/transactions/{transactionId}": {
+      "get": {
+        "operationId": "getTransactionV2",
+        "summary": "Getting a transaction",
+        "parameters": [
+          {
+            "name": "transactionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationGetTransactionResponseV2"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Transactions V2"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/transactions/profiles/{entityId}": {
+      "get": {
+        "operationId": "getProfileTransactionsV2",
+        "summary": "Get a paginated list of transactions created on behalf of a profile",
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "10",
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "0",
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationGetTransactionsResponseV2"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Transactions V2"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      },
+      "post": {
+        "operationId": "createProfileTransactionV2",
+        "summary": "Creating a new transaction on behalf of a profile",
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationCreateTransactionRequestInputV2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationCreateTransactionResponseV2"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Transactions V2"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v1/trading/trade": {
+      "post": {
+        "operationId": "tradeAssets",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationTradeTokensRequestInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationTradeTokensResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Trading"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v1/webhook": {
+      "get": {
+        "operationId": "getWebhooksForGame",
+        "summary": "Get webhooks registered by your game",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "List of webhooks registered for your game",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationGetWebhooksForGameResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Webhooks"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      },
+      "post": {
+        "operationId": "createWebhook",
+        "summary": "Create webhook for your game",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationCreateWebhookForGame"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Create webhook for your game.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationWebhookForGameResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Webhooks"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v1/webhook/{webhookId}": {
+      "delete": {
+        "operationId": "deleteWebhook",
+        "summary": "Delete webhook from your game",
+        "parameters": [
+          {
+            "name": "webhookId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": ["Webhooks"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v1/automation/stats/{assetAddress}": {
+      "post": {
+        "operationId": "getContractStats",
+        "summary": "Get contract stats",
+        "parameters": [
+          {
+            "name": "assetAddress",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationCommonStatsRequestInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationCommonStatsResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Stats"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v1/automation/stats/{assetAddress}/assets/{assetId}": {
+      "post": {
+        "operationId": "getAssetStats",
+        "summary": "Get asset stats",
+        "parameters": [
+          {
+            "name": "assetAddress",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "assetId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationCommonStatsRequestInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationCommonStatsResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Stats"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v1/automation/activity/profiles/{entityId}": {
+      "post": {
+        "operationId": "getProfileActivity",
+        "summary": "Get profile activity",
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationCommonActivityRequestInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationCommonActivityResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Activity"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v1/automation/activity/assets/{assetAddress}": {
+      "post": {
+        "operationId": "getContractActivity",
+        "summary": "Get contract activity",
+        "parameters": [
+          {
+            "name": "assetAddress",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationCommonActivityRequestInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationCommonActivityResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Activity"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v1/automation/activity/assets/{assetAddress}/asset/{assetId}": {
+      "post": {
+        "operationId": "getAssetActivity",
+        "summary": "Get asset activity",
+        "parameters": [
+          {
+            "name": "assetAddress",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "assetId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationCommonActivityRequestInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationCommonActivityResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Activity"],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Automation API",
+    "description": "The Automation API is a service to integrate your game with Beam",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "Game",
+      "description": "Retrieve and manage information about your game in Beam"
+    },
+    {
+      "name": "Webhooks",
+      "description": "Manage webhook to listen for on-chain events"
+    },
+    {
+      "name": "Profiles",
+      "description": "Retrieve and manage profiles in Beam"
+    },
+    {
+      "name": "Assets V2",
+      "description": "Retrieve assets (ERC-20, ERC-721 and ERC1155) for profiles in your game"
+    },
+    {
+      "name": "Transactions V2",
+      "description": "Retrieve and create transactions on behalf of the profiles in your game"
+    },
+    {
+      "name": "Exchange",
+      "description": "Convert tokens using an exchange for profiles in your game"
+    },
+    {
+      "name": "Marketplace V2",
+      "description": "Manage listings and buy assets through the Beam marketplace"
+    },
+    {
+      "name": "Trading",
+      "description": "Trade assets and tokens between two profiles securely"
+    },
+    {
+      "name": "Reporting",
+      "description": "Get reports on the amount of gas expenditure in your game"
+    },
+    {
+      "name": "Chain",
+      "description": "Directly interact with the chain in order to estimate gas transactions"
+    },
+    {
+      "name": "Policy",
+      "description": "Create policies to charge users in in-game ERC20 tokens to fulfil transactions"
+    },
+    {
+      "name": "Health",
+      "description": "Allows you to validate health of the running services"
+    },
+    {
+      "name": "Activity",
+      "description": "Retrieve activity for the profiles and tokens in your game"
+    }
+  ],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "beam-api-key": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-api-key"
+      }
+    },
+    "schemas": {
+      "AutomationGetAssetsForProfileBodyInputV2": {
+        "type": "object",
+        "properties": {
+          "sortDirection": {
+            "default": "asc",
+            "type": "string",
+            "enum": ["asc", "desc"]
+          },
+          "sortBy": {
+            "default": "acquiredAt",
+            "type": "string",
+            "enum": ["acquiredAt", "lastAppraisalValue"]
+          },
+          "contract": {
+            "default": null,
+            "type": "string",
+            "nullable": true
+          },
+          "includeAttributes": {
+            "default": false,
+            "type": "boolean",
+            "nullable": true
+          },
+          "continuation": {
+            "default": null,
+            "type": "string",
+            "nullable": true
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          },
+          "limit": {
+            "default": 20,
+            "type": "number",
+            "minimum": 1,
+            "maximum": 100
+          }
+        }
+      },
+      "AutomationGetAssetsForProfileResponseV2": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "imageUrl": {
+                  "type": "string"
+                },
+                "assetType": {
+                  "type": "string"
+                },
+                "assetAddress": {
+                  "type": "string"
+                },
+                "assetId": {
+                  "type": "string"
+                },
+                "supply": {
+                  "type": "number"
+                },
+                "rarity": {
+                  "type": "string",
+                  "enum": [
+                    "Common",
+                    "Uncommon",
+                    "Rare",
+                    "VeryRare",
+                    "ExtremelyRare"
+                  ],
+                  "nullable": true
+                },
+                "rarityScore": {
+                  "type": "number",
+                  "nullable": true
+                },
+                "attributes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "displayType": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "maxValue": {
+                        "type": "number",
+                        "nullable": true
+                      },
+                      "rarity": {
+                        "type": "number",
+                        "nullable": true
+                      },
+                      "type": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "value": {
+                        "type": "string",
+                        "nullable": true
+                      }
+                    }
+                  },
+                  "nullable": true
+                },
+                "chainId": {
+                  "default": 13337,
+                  "type": "number"
+                },
+                "ownedQuantity": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "name",
+                "imageUrl",
+                "assetType",
+                "assetAddress",
+                "assetId",
+                "supply",
+                "ownedQuantity"
+              ]
+            }
+          },
+          "continuation": {
+            "default": null,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": ["data"]
+      },
+      "AutomationGetProfileCurrenciesResponseV2": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "address": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "symbol": {
+                  "type": "string"
+                },
+                "decimals": {
+                  "type": "number"
+                },
+                "logoUri": {
+                  "type": "string"
+                },
+                "chainId": {
+                  "type": "number"
+                },
+                "balance": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "address",
+                "name",
+                "symbol",
+                "decimals",
+                "chainId",
+                "balance"
+              ]
+            }
+          }
+        },
+        "required": ["data"]
+      },
+      "AutomationGetProfileNativeCurrencyResponseV2": {
+        "type": "object",
+        "properties": {
+          "nativeTokenBalance": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "symbol": {
+                "type": "string"
+              },
+              "decimals": {
+                "type": "number"
+              },
+              "logoUri": {
+                "type": "string"
+              },
+              "chainId": {
+                "type": "number"
+              },
+              "balance": {
+                "type": "string"
+              }
+            },
+            "required": ["name", "symbol", "decimals", "chainId", "balance"]
+          }
+        },
+        "required": ["nativeTokenBalance"]
+      },
+      "AutomationTransferAssetRequestInputV2": {
+        "type": "object",
+        "properties": {
+          "assets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "receiverEntityId": {
+                  "type": "string"
+                },
+                "receiverWalletAddress": {
+                  "type": "string"
+                },
+                "assetAddress": {
+                  "type": "string"
+                },
+                "assetId": {
+                  "type": "string"
+                },
+                "amountToTransfer": {
+                  "default": 1,
+                  "type": "number",
+                  "multipleOf": 1,
+                  "minimum": 1
+                }
+              },
+              "required": ["assetAddress", "assetId"]
+            },
+            "minItems": 1
+          },
+          "optimistic": {
+            "default": false,
+            "type": "boolean"
+          },
+          "sponsor": {
+            "default": true,
+            "type": "boolean"
+          },
+          "policyId": {
+            "default": null,
+            "type": "string",
+            "format": "cuid",
+            "nullable": true
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          }
+        },
+        "required": ["assets"]
+      },
+      "AutomationTransferAssetResponseV2": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": ["pending", "success"]
+          },
+          "type": {
+            "type": "string",
+            "enum": ["custodial", "self-custodial"]
+          },
+          "payloadToSign": {
+            "type": "string"
+          },
+          "transactionHash": {
+            "type": "string"
+          },
+          "explorerUrl": {
+            "type": "string"
+          }
+        },
+        "required": ["status", "type"]
+      },
+      "AutomationTransferTokenRequestInputV2": {
+        "type": "object",
+        "properties": {
+          "receiverEntityId": {
+            "type": "string"
+          },
+          "receiverWalletAddress": {
+            "type": "string"
+          },
+          "assetAddress": {
+            "type": "string"
+          },
+          "amountToTransfer": {
+            "type": "string"
+          },
+          "optimistic": {
+            "default": false,
+            "type": "boolean"
+          },
+          "sponsor": {
+            "default": true,
+            "type": "boolean"
+          },
+          "policyId": {
+            "default": null,
+            "type": "string",
+            "format": "cuid",
+            "nullable": true
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          }
+        },
+        "required": ["assetAddress", "amountToTransfer"]
+      },
+      "AutomationTransferTokenResponseV2": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": ["pending", "success"]
+          },
+          "type": {
+            "type": "string",
+            "enum": ["custodial", "self-custodial"]
+          },
+          "payloadToSign": {
+            "type": "string"
+          },
+          "transactionHash": {
+            "type": "string"
+          },
+          "explorerUrl": {
+            "type": "string"
+          }
+        },
+        "required": ["status", "type"]
+      },
+      "AutomationTransferNativeTokenRequestInputV2": {
+        "type": "object",
+        "properties": {
+          "receiverEntityId": {
+            "type": "string"
+          },
+          "receiverWalletAddress": {
+            "type": "string"
+          },
+          "amountToTransfer": {
+            "type": "string"
+          },
+          "optimistic": {
+            "default": false,
+            "type": "boolean"
+          },
+          "sponsor": {
+            "default": true,
+            "type": "boolean"
+          },
+          "policyId": {
+            "default": null,
+            "type": "string",
+            "format": "cuid",
+            "nullable": true
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          }
+        },
+        "required": ["amountToTransfer"]
+      },
+      "AutomationGetAssetsForContractBodyInputV2": {
+        "type": "object",
+        "properties": {
+          "continuation": {
+            "default": null,
+            "type": "string",
+            "nullable": true
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          },
+          "minRarityRank": {
+            "default": null,
+            "type": "integer",
+            "nullable": true
+          },
+          "maxRarityRank": {
+            "default": null,
+            "type": "integer",
+            "nullable": true
+          },
+          "minFloorAskPrice": {
+            "default": null,
+            "type": "number",
+            "nullable": true
+          },
+          "maxFloorAskPrice": {
+            "default": null,
+            "type": "number",
+            "nullable": true
+          },
+          "includeAttributes": {
+            "default": false,
+            "type": "boolean",
+            "nullable": true
+          },
+          "attributes": {
+            "default": null,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": ["key", "value"]
+            },
+            "nullable": true
+          },
+          "sortDirection": {
+            "default": "asc",
+            "type": "string",
+            "enum": ["asc", "desc"]
+          },
+          "sortBy": {
+            "default": "floorAskPrice",
+            "type": "string",
+            "enum": ["floorAskPrice", "tokenId", "rarity", "updatedAt"]
+          },
+          "limit": {
+            "default": 20,
+            "type": "number",
+            "minimum": 1,
+            "maximum": 100
+          }
+        }
+      },
+      "AutomationGetAssetsForContractResponseV2": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "imageUrl": {
+                  "type": "string"
+                },
+                "assetType": {
+                  "type": "string"
+                },
+                "assetAddress": {
+                  "type": "string"
+                },
+                "assetId": {
+                  "type": "string"
+                },
+                "supply": {
+                  "type": "number"
+                },
+                "rarity": {
+                  "type": "string",
+                  "enum": [
+                    "Common",
+                    "Uncommon",
+                    "Rare",
+                    "VeryRare",
+                    "ExtremelyRare"
+                  ],
+                  "nullable": true
+                },
+                "rarityScore": {
+                  "type": "number",
+                  "nullable": true
+                },
+                "attributes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "displayType": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "maxValue": {
+                        "type": "number",
+                        "nullable": true
+                      },
+                      "rarity": {
+                        "type": "number",
+                        "nullable": true
+                      },
+                      "type": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "value": {
+                        "type": "string",
+                        "nullable": true
+                      }
+                    }
+                  },
+                  "nullable": true
+                },
+                "chainId": {
+                  "default": 13337,
+                  "type": "number"
+                }
+              },
+              "required": [
+                "name",
+                "imageUrl",
+                "assetType",
+                "assetAddress",
+                "assetId",
+                "supply"
+              ]
+            }
+          },
+          "continuation": {
+            "default": null,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": ["data"]
+      },
+      "AutomationGetAssetResponseV2": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": "string"
+          },
+          "assetType": {
+            "type": "string"
+          },
+          "assetAddress": {
+            "type": "string"
+          },
+          "assetId": {
+            "type": "string"
+          },
+          "supply": {
+            "type": "number"
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "address": {
+                  "type": "string"
+                },
+                "quantity": {
+                  "type": "number"
+                },
+                "entityId": {
+                  "type": "string"
+                }
+              },
+              "required": ["address", "quantity"]
+            },
+            "nullable": true
+          },
+          "rarity": {
+            "type": "string",
+            "enum": ["Common", "Uncommon", "Rare", "VeryRare", "ExtremelyRare"],
+            "nullable": true
+          },
+          "rarityScore": {
+            "type": "number",
+            "nullable": true
+          },
+          "attributes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "displayType": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "maxValue": {
+                  "type": "number",
+                  "nullable": true
+                },
+                "rarity": {
+                  "type": "number",
+                  "nullable": true
+                },
+                "type": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "value": {
+                  "type": "string",
+                  "nullable": true
+                }
+              }
+            },
+            "nullable": true
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          }
+        },
+        "required": [
+          "name",
+          "imageUrl",
+          "assetType",
+          "assetAddress",
+          "assetId",
+          "supply",
+          "owners"
+        ]
+      },
+      "AutomationGetChainResponse": {
+        "type": "object",
+        "properties": {
+          "chainId": {
+            "type": "number"
+          },
+          "blockNumber": {
+            "type": "number"
+          },
+          "nativeCurrency": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "symbol": {
+                "type": "string"
+              },
+              "decimals": {
+                "type": "number"
+              }
+            },
+            "required": ["name", "symbol", "decimals"]
+          }
+        },
+        "required": ["chainId", "blockNumber", "nativeCurrency"]
+      },
+      "AutomationCreateTransactionRequestInputV2": {
+        "type": "object",
+        "properties": {
+          "interactions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "contractAddress": {
+                  "type": "string"
+                },
+                "functionName": {
+                  "type": "string"
+                },
+                "functionArgs": {
+                  "default": [],
+                  "type": "array",
+                  "items": {}
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": ["contractAddress", "functionName"]
+            },
+            "minItems": 1,
+            "maxItems": 9
+          },
+          "optimistic": {
+            "default": false,
+            "type": "boolean"
+          },
+          "sponsor": {
+            "default": true,
+            "type": "boolean"
+          },
+          "policyId": {
+            "default": null,
+            "type": "string",
+            "format": "cuid",
+            "nullable": true
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          }
+        },
+        "required": ["interactions"]
+      },
+      "AutomationGetEstimateResponse": {
+        "type": "object",
+        "properties": {
+          "estimatedGas": {
+            "type": "string"
+          }
+        },
+        "required": ["estimatedGas"]
+      },
+      "AutomationGetQuoteResponse": {
+        "type": "object",
+        "properties": {
+          "tokenIn": {
+            "type": "string"
+          },
+          "tokenOut": {
+            "type": "string"
+          },
+          "amountIn": {
+            "type": "string"
+          },
+          "amountOut": {
+            "type": "string"
+          }
+        },
+        "required": ["tokenIn", "tokenOut", "amountIn", "amountOut"]
+      },
+      "AutomationConvertTokenRequestInput": {
+        "type": "object",
+        "properties": {
+          "tokenIn": {
+            "type": "string"
+          },
+          "tokenOut": {
+            "type": "string"
+          },
+          "amountIn": {
+            "type": "string"
+          },
+          "amountOut": {
+            "type": "string"
+          },
+          "receiverEntityId": {
+            "type": "string"
+          },
+          "optimistic": {
+            "default": false,
+            "type": "boolean"
+          },
+          "sponsor": {
+            "default": true,
+            "type": "boolean"
+          },
+          "policyId": {
+            "default": null,
+            "type": "string",
+            "format": "cuid",
+            "nullable": true
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          }
+        },
+        "required": ["tokenIn", "tokenOut", "amountIn", "amountOut"]
+      },
+      "AutomationConvertTokenResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": ["pending", "success"]
+          },
+          "type": {
+            "type": "string",
+            "enum": ["custodial", "self-custodial"]
+          },
+          "transactionHash": {
+            "type": "string"
+          },
+          "explorerUrl": {
+            "type": "string"
+          }
+        },
+        "required": ["status", "type"]
+      },
+      "AutomationGetGameResponse": {
+        "type": "object",
+        "properties": {
+          "pegiRating": {
+            "type": "string",
+            "enum": ["Three", "Seven", "Twelve", "Sixteen", "Eighteen"],
+            "nullable": true
+          },
+          "pegiContent": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "BadLanguage",
+                "Discrimination",
+                "Drugs",
+                "Fear",
+                "Gambling",
+                "Sex",
+                "Violence",
+                "InGamePurchases"
+              ]
+            }
+          },
+          "id": {
+            "type": "string",
+            "format": "cuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "coverImageUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "logoImageUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "backgroundImageUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "chainIds": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "depositor": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "cuid"
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "externalId": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string"
+              },
+              "gameId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "createdAt",
+              "updatedAt",
+              "externalId",
+              "address",
+              "gameId"
+            ],
+            "nullable": true
+          },
+          "developers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string",
+                  "enum": ["Owner", "Admin", "Viewer"],
+                  "nullable": true
+                },
+                "id": {
+                  "type": "string",
+                  "format": "cuid"
+                },
+                "developerId": {
+                  "type": "string"
+                },
+                "gameId": {
+                  "type": "string"
+                },
+                "developer": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "cuid"
+                    },
+                    "name": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "lastSeenAt": {
+                      "type": "string",
+                      "format": "date-time",
+                      "nullable": true
+                    },
+                    "supabaseId": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "name",
+                    "email",
+                    "createdAt",
+                    "lastSeenAt",
+                    "supabaseId"
+                  ]
+                }
+              },
+              "required": ["role", "id", "developerId", "gameId", "developer"]
+            }
+          },
+          "contracts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "ERC20",
+                    "ERC721",
+                    "ERC1155",
+                    "SEAPORT",
+                    "UNISWAPV2",
+                    "WETH"
+                  ]
+                },
+                "id": {
+                  "type": "string",
+                  "format": "cuid"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "externalId": {
+                  "type": "string"
+                },
+                "address": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "chainId": {
+                  "type": "integer"
+                },
+                "gameId": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "abi": {}
+              },
+              "required": [
+                "type",
+                "id",
+                "createdAt",
+                "updatedAt",
+                "externalId",
+                "address",
+                "name",
+                "chainId",
+                "gameId",
+                "abi"
+              ]
+            }
+          },
+          "policies": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "model": {
+                  "type": "string",
+                  "enum": ["ContractFunctions", "AccountFunctions"]
+                },
+                "type": {
+                  "type": "string",
+                  "enum": ["PayForUser", "ChargeCustomToken"]
+                },
+                "rateType": {
+                  "type": "string",
+                  "enum": ["Fixed", "Dynamic"],
+                  "nullable": true
+                },
+                "id": {
+                  "type": "string",
+                  "format": "cuid"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "externalId": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "chainId": {
+                  "type": "integer"
+                },
+                "gameId": {
+                  "type": "string"
+                },
+                "token": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "amount": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "depositorId": {
+                  "type": "string",
+                  "nullable": true
+                }
+              },
+              "required": [
+                "model",
+                "type",
+                "id",
+                "createdAt",
+                "updatedAt",
+                "externalId",
+                "name",
+                "chainId",
+                "gameId",
+                "token",
+                "amount",
+                "depositorId"
+              ]
+            }
+          }
+        },
+        "required": [
+          "pegiRating",
+          "pegiContent",
+          "id",
+          "createdAt",
+          "updatedAt",
+          "name",
+          "description",
+          "coverImageUrl",
+          "logoImageUrl",
+          "backgroundImageUrl",
+          "chainIds",
+          "developers",
+          "contracts",
+          "policies"
+        ]
+      },
+      "AutomationUpdateGameRequestInput": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "coverImageUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "backgroundImageUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "logoImageUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "pegiRating": {
+            "type": "string",
+            "enum": ["Three", "Seven", "Twelve", "Sixteen", "Eighteen"],
+            "nullable": true
+          },
+          "pegiContent": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "BadLanguage",
+                "Discrimination",
+                "Drugs",
+                "Fear",
+                "Gambling",
+                "Sex",
+                "Violence",
+                "InGamePurchases"
+              ]
+            }
+          }
+        }
+      },
+      "AutomationUpdateGameResponse": {
+        "type": "object",
+        "properties": {
+          "pegiRating": {
+            "type": "string",
+            "enum": ["Three", "Seven", "Twelve", "Sixteen", "Eighteen"],
+            "nullable": true
+          },
+          "pegiContent": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "BadLanguage",
+                "Discrimination",
+                "Drugs",
+                "Fear",
+                "Gambling",
+                "Sex",
+                "Violence",
+                "InGamePurchases"
+              ]
+            }
+          },
+          "id": {
+            "type": "string",
+            "format": "cuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "coverImageUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "logoImageUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "backgroundImageUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "chainIds": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "contracts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "ERC20",
+                    "ERC721",
+                    "ERC1155",
+                    "SEAPORT",
+                    "UNISWAPV2",
+                    "WETH"
+                  ]
+                },
+                "id": {
+                  "type": "string",
+                  "format": "cuid"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "externalId": {
+                  "type": "string"
+                },
+                "address": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "chainId": {
+                  "type": "integer"
+                },
+                "gameId": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "abi": {}
+              },
+              "required": [
+                "type",
+                "id",
+                "createdAt",
+                "updatedAt",
+                "externalId",
+                "address",
+                "name",
+                "chainId",
+                "gameId",
+                "abi"
+              ]
+            }
+          },
+          "policies": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "model": {
+                  "type": "string",
+                  "enum": ["ContractFunctions", "AccountFunctions"]
+                },
+                "type": {
+                  "type": "string",
+                  "enum": ["PayForUser", "ChargeCustomToken"]
+                },
+                "rateType": {
+                  "type": "string",
+                  "enum": ["Fixed", "Dynamic"],
+                  "nullable": true
+                },
+                "id": {
+                  "type": "string",
+                  "format": "cuid"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "externalId": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "chainId": {
+                  "type": "integer"
+                },
+                "gameId": {
+                  "type": "string"
+                },
+                "token": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "amount": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "depositorId": {
+                  "type": "string",
+                  "nullable": true
+                }
+              },
+              "required": [
+                "model",
+                "type",
+                "rateType",
+                "id",
+                "createdAt",
+                "updatedAt",
+                "externalId",
+                "name",
+                "chainId",
+                "gameId",
+                "token",
+                "amount",
+                "depositorId"
+              ]
+            }
+          }
+        },
+        "required": [
+          "pegiRating",
+          "pegiContent",
+          "id",
+          "createdAt",
+          "updatedAt",
+          "name",
+          "description",
+          "coverImageUrl",
+          "logoImageUrl",
+          "backgroundImageUrl",
+          "chainIds",
+          "contracts",
+          "policies"
+        ]
+      },
+      "AutomationRegenerateGameApiKeysResponse": {
+        "type": "object",
+        "properties": {
+          "pegiRating": {
+            "type": "string",
+            "enum": ["Three", "Seven", "Twelve", "Sixteen", "Eighteen"],
+            "nullable": true
+          },
+          "pegiContent": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "BadLanguage",
+                "Discrimination",
+                "Drugs",
+                "Fear",
+                "Gambling",
+                "Sex",
+                "Violence",
+                "InGamePurchases"
+              ]
+            }
+          },
+          "id": {
+            "type": "string",
+            "format": "cuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "coverImageUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "logoImageUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "backgroundImageUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "chainIds": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "apiKeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": ["Regenerate", "Publishable", "Secret"]
+                },
+                "id": {
+                  "type": "string",
+                  "format": "cuid"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "apiKey": {
+                  "type": "string"
+                },
+                "gameId": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "id",
+                "createdAt",
+                "updatedAt",
+                "apiKey",
+                "gameId"
+              ]
+            }
+          }
+        },
+        "required": [
+          "pegiRating",
+          "pegiContent",
+          "id",
+          "createdAt",
+          "updatedAt",
+          "name",
+          "description",
+          "coverImageUrl",
+          "logoImageUrl",
+          "backgroundImageUrl",
+          "chainIds",
+          "apiKeys"
+        ]
+      },
+      "AutomationAddContractRequestInput": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "ERC20",
+              "ERC721",
+              "ERC1155",
+              "SEAPORT",
+              "UNISWAPV2",
+              "WETH"
+            ]
+          },
+          "chainId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": ["address", "type", "chainId", "name"]
+      },
+      "AutomationAddContractResponse": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "ERC20",
+              "ERC721",
+              "ERC1155",
+              "SEAPORT",
+              "UNISWAPV2",
+              "WETH"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "format": "cuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalId": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "chainId": {
+            "type": "integer"
+          },
+          "gameId": {
+            "type": "string",
+            "nullable": true
+          },
+          "abi": {}
+        },
+        "required": [
+          "type",
+          "id",
+          "createdAt",
+          "updatedAt",
+          "externalId",
+          "address",
+          "name",
+          "chainId",
+          "gameId",
+          "abi"
+        ]
+      },
+      "AutomationRemoveContractResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          }
+        },
+        "required": ["success"]
+      },
+      "AutomationGetListedAssetsBodyInputV2": {
+        "type": "object",
+        "properties": {
+          "assetAddresses": {
+            "default": null,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "sortBy": {
+            "default": "createdAt",
+            "type": "string",
+            "enum": ["createdAt", "updatedAt", "price"]
+          },
+          "sortDirection": {
+            "default": "desc",
+            "type": "string",
+            "enum": ["asc", "desc"],
+            "description": "If using `createdAt` for sorting, only `desc` is allowed."
+          },
+          "limit": {
+            "default": 50,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          },
+          "continuation": {
+            "default": null,
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "AutomationGetAssetListingsResponseV2": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "side": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "active",
+                    "inactive",
+                    "expired",
+                    "canceled",
+                    "filled"
+                  ],
+                  "nullable": true
+                },
+                "assetAddress": {
+                  "type": "string"
+                },
+                "assetId": {
+                  "type": "string"
+                },
+                "contractKind": {
+                  "type": "string"
+                },
+                "maker": {
+                  "type": "string"
+                },
+                "price": {
+                  "type": "object",
+                  "properties": {
+                    "currency": {
+                      "type": "object",
+                      "properties": {
+                        "address": {
+                          "type": "string"
+                        },
+                        "symbol": {
+                          "type": "string",
+                          "enum": [
+                            "BEAM",
+                            "WBEAM",
+                            "USDC",
+                            "USDT",
+                            "IMX",
+                            "WIMX"
+                          ],
+                          "nullable": true
+                        },
+                        "decimals": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": ["address", "decimals"],
+                      "nullable": true
+                    },
+                    "amount": {
+                      "type": "object",
+                      "properties": {
+                        "raw": {
+                          "type": "string"
+                        },
+                        "decimal": {
+                          "type": "number"
+                        },
+                        "usd": {
+                          "type": "number"
+                        },
+                        "native": {
+                          "type": "number"
+                        }
+                      },
+                      "required": ["raw", "decimal", "usd", "native"],
+                      "nullable": true
+                    },
+                    "netAmount": {
+                      "type": "object",
+                      "properties": {
+                        "raw": {
+                          "type": "string"
+                        },
+                        "decimal": {
+                          "type": "number"
+                        },
+                        "usd": {
+                          "type": "number"
+                        },
+                        "native": {
+                          "type": "number"
+                        }
+                      },
+                      "required": ["raw", "decimal", "usd", "native"],
+                      "nullable": true
+                    }
+                  },
+                  "nullable": true
+                },
+                "validFrom": {
+                  "type": "string",
+                  "format": "date-time",
+                  "nullable": true
+                },
+                "validUntil": {
+                  "type": "string",
+                  "format": "date-time",
+                  "nullable": true
+                },
+                "quantityFilled": {
+                  "type": "number"
+                },
+                "quantityRemaining": {
+                  "type": "number"
+                },
+                "expiresAt": {
+                  "type": "string",
+                  "format": "date-time",
+                  "nullable": true
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time",
+                  "nullable": true
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time",
+                  "nullable": true
+                }
+              },
+              "required": [
+                "id",
+                "side",
+                "assetAddress",
+                "assetId",
+                "contractKind",
+                "maker"
+              ]
+            }
+          },
+          "continuation": {
+            "default": null,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": ["data"]
+      },
+      "AutomationSellAssetRequestInputV2": {
+        "type": "object",
+        "properties": {
+          "assetAddress": {
+            "type": "string"
+          },
+          "assetId": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "number"
+          },
+          "price": {
+            "type": "string"
+          },
+          "startTime": {
+            "type": "string",
+            "nullable": true,
+            "description": "Date time string with YYYY-MM-DDTHH:mm:ss.sssZ format or Unix timestamp in milliseconds"
+          },
+          "endTime": {
+            "type": "string",
+            "nullable": true,
+            "description": "Date time string with YYYY-MM-DDTHH:mm:ss.sssZ format or Unix timestamp in milliseconds"
+          },
+          "sellType": {
+            "type": "string",
+            "enum": [
+              "FixedPrice",
+              "DescendingAuction",
+              "AscendingAuction",
+              "NotForSale"
+            ]
+          },
+          "currency": {
+            "default": "BEAM",
+            "type": "string",
+            "enum": ["BEAM", "WBEAM", "USDC", "USDT", "IMX", "WIMX"]
+          },
+          "sponsor": {
+            "default": true,
+            "type": "boolean"
+          },
+          "policyId": {
+            "default": null,
+            "type": "string",
+            "format": "cuid",
+            "nullable": true
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          }
+        },
+        "required": ["assetAddress", "assetId", "quantity", "price", "sellType"]
+      },
+      "AutomationSellAssetResponseV2": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string"
+          }
+        },
+        "required": ["orderId"]
+      },
+      "AutomationBuyAssetRequestInputV2": {
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "number"
+          },
+          "optimistic": {
+            "default": false,
+            "type": "boolean"
+          },
+          "sponsor": {
+            "default": true,
+            "type": "boolean"
+          },
+          "policyId": {
+            "default": null,
+            "type": "string",
+            "format": "cuid",
+            "nullable": true
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          }
+        },
+        "required": ["quantity"]
+      },
+      "AutomationBuyAssetResponseV2": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "transactionHash": {
+            "type": "string"
+          },
+          "explorerUrl": {
+            "type": "string"
+          }
+        },
+        "required": ["success"]
+      },
+      "AutomationCancelAssetListingRequestInputV2": {
+        "type": "object",
+        "properties": {
+          "optimistic": {
+            "default": false,
+            "type": "boolean"
+          },
+          "sponsor": {
+            "default": true,
+            "type": "boolean"
+          },
+          "policyId": {
+            "default": null,
+            "type": "string",
+            "format": "cuid",
+            "nullable": true
+          }
+        }
+      },
+      "AutomationCancelAssetListingResponseV2": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          }
+        },
+        "required": ["success"]
+      },
+      "AutomationCreateAssetOfferRequestInputV2": {
+        "type": "object",
+        "properties": {
+          "assetAddress": {
+            "type": "string"
+          },
+          "assetId": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "number",
+            "minimum": 1
+          },
+          "price": {
+            "type": "string"
+          },
+          "startTime": {
+            "type": "string"
+          },
+          "endTime": {
+            "type": "string"
+          },
+          "currency": {
+            "default": "WBEAM",
+            "type": "string",
+            "enum": ["WBEAM", "USDC", "USDT"]
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          }
+        },
+        "required": ["assetAddress", "assetId", "quantity", "price"]
+      },
+      "AutomationCreateOfferResponseV2": {
+        "type": "object",
+        "properties": {
+          "offerId": {
+            "type": "string"
+          }
+        },
+        "required": ["offerId"]
+      },
+      "AutomationAcceptAssetOfferRequestInputV2": {
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "number",
+            "minimum": 1
+          },
+          "optimistic": {
+            "default": false,
+            "type": "boolean"
+          },
+          "offerId": {
+            "type": "string"
+          },
+          "sponsor": {
+            "default": true,
+            "type": "boolean"
+          },
+          "policyId": {
+            "default": null,
+            "type": "string",
+            "format": "cuid",
+            "nullable": true
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          }
+        },
+        "required": ["quantity", "offerId"]
+      },
+      "AutomationAcceptOfferResponseV2": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "transactionHash": {
+            "type": "string"
+          },
+          "explorerUrl": {
+            "type": "string"
+          }
+        },
+        "required": ["success"]
+      },
+      "AutomationCancelAssetOfferRequestInputV2": {
+        "type": "object",
+        "properties": {
+          "optimistic": {
+            "default": false,
+            "type": "boolean"
+          },
+          "offerId": {
+            "type": "string"
+          },
+          "sponsor": {
+            "default": true,
+            "type": "boolean"
+          },
+          "policyId": {
+            "default": null,
+            "type": "string",
+            "format": "cuid",
+            "nullable": true
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          }
+        },
+        "required": ["offerId"]
+      },
+      "AutomationCancelOfferResponseV2": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "transactionHash": {
+            "type": "string"
+          },
+          "explorerUrl": {
+            "type": "string"
+          }
+        },
+        "required": ["success"]
+      },
+      "AutomationGetChainCurrenciesResponseV2": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "decimals": {
+                  "type": "number"
+                },
+                "symbol": {
+                  "type": "string",
+                  "enum": ["BEAM", "WBEAM", "USDC", "USDT", "IMX", "WIMX"]
+                },
+                "address": {
+                  "type": "string"
+                }
+              },
+              "required": ["decimals", "symbol", "address"]
+            }
+          }
+        },
+        "required": ["data"]
+      },
+      "AutomationRefreshTokenRequestBody": {
+        "type": "object",
+        "properties": {
+          "assetAddress": {
+            "type": "string"
+          },
+          "tokenId": {
+            "type": "string"
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          }
+        },
+        "required": ["assetAddress", "tokenId"]
+      },
+      "AutomationRefreshContractRequestBody": {
+        "type": "object",
+        "properties": {
+          "assetAddress": {
+            "type": "string"
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          }
+        },
+        "required": ["assetAddress"]
+      },
+      "AutomationCommonAddPolicyRequestInput": {
+        "type": "object",
+        "properties": {
+          "tokenAddress": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number",
+            "minimum": 1
+          },
+          "rateType": {
+            "type": "string",
+            "enum": ["Fixed", "Dynamic"]
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          }
+        },
+        "required": ["tokenAddress", "amount", "rateType"]
+      },
+      "AutomationCommonAddPolicyResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "cuid"
+          },
+          "chainId": {
+            "type": "integer"
+          },
+          "token": {
+            "type": "string",
+            "nullable": true
+          },
+          "amount": {
+            "type": "string",
+            "nullable": true
+          },
+          "rateType": {
+            "type": "string",
+            "enum": ["Fixed", "Dynamic"],
+            "nullable": true
+          },
+          "depositorId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "id",
+          "chainId",
+          "token",
+          "amount",
+          "rateType",
+          "depositorId"
+        ]
+      },
+      "AutomationCommonRemovePolicyResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          }
+        },
+        "required": ["success"]
+      },
+      "AutomationCommonGetPoliciesResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "format": "cuid"
+                },
+                "rateType": {
+                  "type": "string",
+                  "enum": ["Fixed", "Dynamic"],
+                  "nullable": true
+                },
+                "amount": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "token": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "depositorId": {
+                  "type": "string",
+                  "nullable": true
+                }
+              },
+              "required": ["id", "rateType", "amount", "token", "depositorId"]
+            }
+          }
+        },
+        "required": ["data"]
+      },
+      "AutomationCreateProfileRequestInput": {
+        "type": "object",
+        "properties": {
+          "entityId": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 250
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          }
+        },
+        "required": ["entityId"]
+      },
+      "AutomationCreateProfileResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "cuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalId": {
+            "type": "string"
+          },
+          "externalEntityId": {
+            "type": "string"
+          },
+          "gameId": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string",
+            "nullable": true
+          },
+          "userConnectionCreatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "wallets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "format": "cuid"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "externalId": {
+                  "type": "string"
+                },
+                "address": {
+                  "type": "string"
+                },
+                "chainId": {
+                  "type": "integer"
+                },
+                "profileId": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "userId": {
+                  "type": "string",
+                  "nullable": true
+                }
+              },
+              "required": [
+                "id",
+                "createdAt",
+                "updatedAt",
+                "externalId",
+                "address",
+                "chainId",
+                "profileId",
+                "userId"
+              ]
+            }
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "externalId",
+          "externalEntityId",
+          "gameId",
+          "userId",
+          "wallets"
+        ]
+      },
+      "AutomationGetAllProfilesResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "format": "cuid"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "externalId": {
+                  "type": "string"
+                },
+                "externalEntityId": {
+                  "type": "string"
+                },
+                "gameId": {
+                  "type": "string"
+                },
+                "userId": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "userConnectionCreatedAt": {
+                  "type": "string",
+                  "format": "date-time",
+                  "nullable": true
+                },
+                "wallets": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "format": "cuid"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "externalId": {
+                        "type": "string"
+                      },
+                      "address": {
+                        "type": "string"
+                      },
+                      "chainId": {
+                        "type": "integer"
+                      },
+                      "profileId": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "userId": {
+                        "type": "string",
+                        "nullable": true
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "createdAt",
+                      "updatedAt",
+                      "externalId",
+                      "address",
+                      "chainId",
+                      "profileId",
+                      "userId"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "id",
+                "createdAt",
+                "updatedAt",
+                "externalId",
+                "externalEntityId",
+                "gameId",
+                "userId",
+                "wallets"
+              ]
+            }
+          },
+          "pagination": {
+            "type": "object",
+            "properties": {
+              "count": {
+                "type": "number"
+              },
+              "limit": {
+                "default": 10,
+                "type": "number"
+              },
+              "offset": {
+                "default": 0,
+                "type": "number"
+              }
+            },
+            "required": ["count"]
+          }
+        },
+        "required": ["data", "pagination"]
+      },
+      "AutomationGetProfileResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "cuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalId": {
+            "type": "string"
+          },
+          "externalEntityId": {
+            "type": "string"
+          },
+          "gameId": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string",
+            "nullable": true
+          },
+          "userConnectionCreatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "wallets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "format": "cuid"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "externalId": {
+                  "type": "string"
+                },
+                "address": {
+                  "type": "string"
+                },
+                "chainId": {
+                  "type": "integer"
+                },
+                "profileId": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "userId": {
+                  "type": "string",
+                  "nullable": true
+                }
+              },
+              "required": [
+                "id",
+                "createdAt",
+                "updatedAt",
+                "externalId",
+                "address",
+                "chainId",
+                "profileId",
+                "userId"
+              ]
+            }
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "externalId",
+          "externalEntityId",
+          "gameId",
+          "userId",
+          "wallets"
+        ]
+      },
+      "AutomationUpdateProfileRequestInput": {
+        "type": "object",
+        "properties": {
+          "newEntityId": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 250
+          }
+        },
+        "required": ["newEntityId"]
+      },
+      "AutomationUpdateProfileResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "cuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalId": {
+            "type": "string"
+          },
+          "externalEntityId": {
+            "type": "string"
+          },
+          "gameId": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string",
+            "nullable": true
+          },
+          "userConnectionCreatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "wallets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "format": "cuid"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "externalId": {
+                  "type": "string"
+                },
+                "address": {
+                  "type": "string"
+                },
+                "chainId": {
+                  "type": "integer"
+                },
+                "profileId": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "userId": {
+                  "type": "string",
+                  "nullable": true
+                }
+              },
+              "required": [
+                "id",
+                "createdAt",
+                "updatedAt",
+                "externalId",
+                "address",
+                "chainId",
+                "profileId",
+                "userId"
+              ]
+            }
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "externalId",
+          "externalEntityId",
+          "gameId",
+          "userId",
+          "wallets"
+        ]
+      },
+      "AutomationGenerateLinkCodeRequestInput": {
+        "type": "object",
+        "properties": {
+          "callbackUrl": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          }
+        }
+      },
+      "AutomationGenerateLinkCodeResponse": {
+        "type": "object",
+        "properties": {
+          "challenge": {
+            "type": "string"
+          }
+        },
+        "required": ["challenge"]
+      },
+      "AutomationGenerateSignInCodeRequestInput": {
+        "type": "object",
+        "properties": {
+          "callbackUrl": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          }
+        }
+      },
+      "AutomationGenerateSignInCodeResponse": {
+        "type": "object",
+        "properties": {
+          "challenge": {
+            "type": "string"
+          }
+        },
+        "required": ["challenge"]
+      },
+      "AutomationGetAllGasUsageResponse": {
+        "type": "object",
+        "properties": {
+          "chains": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "policies": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "totalTransactionFeeInUSD": {
+                        "type": "string"
+                      },
+                      "totalTransactionFee": {
+                        "type": "string"
+                      },
+                      "averageTransactionFee": {
+                        "type": "string"
+                      },
+                      "transactionCount": {
+                        "type": "number"
+                      },
+                      "chainId": {
+                        "default": 13337,
+                        "type": "number"
+                      },
+                      "policy": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "format": "cuid"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "model": {
+                            "type": "string",
+                            "enum": ["ContractFunctions", "AccountFunctions"]
+                          },
+                          "chainId": {
+                            "type": "integer"
+                          }
+                        },
+                        "required": ["id", "name", "model", "chainId"]
+                      },
+                      "periods": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "totalTransactionFeeInUSD": {
+                              "type": "string"
+                            },
+                            "totalTransactionFee": {
+                              "type": "string"
+                            },
+                            "averageTransactionFee": {
+                              "type": "string"
+                            },
+                            "transactionCount": {
+                              "type": "number"
+                            },
+                            "start": {
+                              "type": "number"
+                            },
+                            "end": {
+                              "type": "number"
+                            }
+                          },
+                          "required": [
+                            "totalTransactionFeeInUSD",
+                            "totalTransactionFee",
+                            "averageTransactionFee",
+                            "transactionCount",
+                            "start",
+                            "end"
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "totalTransactionFeeInUSD",
+                      "totalTransactionFee",
+                      "averageTransactionFee",
+                      "transactionCount",
+                      "policy",
+                      "periods"
+                    ]
+                  }
+                },
+                "summary": {
+                  "type": "object",
+                  "properties": {
+                    "totalTransactionFeeInUSD": {
+                      "type": "string"
+                    },
+                    "totalTransactionFee": {
+                      "type": "string"
+                    },
+                    "averageTransactionFee": {
+                      "type": "string"
+                    },
+                    "transactionCount": {
+                      "type": "number"
+                    },
+                    "chainId": {
+                      "default": 13337,
+                      "type": "number"
+                    },
+                    "profilesCount": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "totalTransactionFeeInUSD",
+                    "totalTransactionFee",
+                    "averageTransactionFee",
+                    "transactionCount",
+                    "profilesCount"
+                  ]
+                }
+              },
+              "required": ["policies", "summary"]
+            }
+          }
+        },
+        "required": ["chains"]
+      },
+      "AutomationGetGasUsageResponse": {
+        "type": "object",
+        "properties": {
+          "policies": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "totalTransactionFeeInUSD": {
+                  "type": "string"
+                },
+                "totalTransactionFee": {
+                  "type": "string"
+                },
+                "averageTransactionFee": {
+                  "type": "string"
+                },
+                "transactionCount": {
+                  "type": "number"
+                },
+                "chainId": {
+                  "default": 13337,
+                  "type": "number"
+                },
+                "policy": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "cuid"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "model": {
+                      "type": "string",
+                      "enum": ["ContractFunctions", "AccountFunctions"]
+                    },
+                    "chainId": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": ["id", "name", "model", "chainId"]
+                },
+                "periods": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "totalTransactionFeeInUSD": {
+                        "type": "string"
+                      },
+                      "totalTransactionFee": {
+                        "type": "string"
+                      },
+                      "averageTransactionFee": {
+                        "type": "string"
+                      },
+                      "transactionCount": {
+                        "type": "number"
+                      },
+                      "start": {
+                        "type": "number"
+                      },
+                      "end": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "totalTransactionFeeInUSD",
+                      "totalTransactionFee",
+                      "averageTransactionFee",
+                      "transactionCount",
+                      "start",
+                      "end"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "totalTransactionFeeInUSD",
+                "totalTransactionFee",
+                "averageTransactionFee",
+                "transactionCount",
+                "policy",
+                "periods"
+              ]
+            }
+          },
+          "summary": {
+            "type": "object",
+            "properties": {
+              "totalTransactionFeeInUSD": {
+                "type": "string"
+              },
+              "totalTransactionFee": {
+                "type": "string"
+              },
+              "averageTransactionFee": {
+                "type": "string"
+              },
+              "transactionCount": {
+                "type": "number"
+              },
+              "chainId": {
+                "default": 13337,
+                "type": "number"
+              },
+              "profilesCount": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "totalTransactionFeeInUSD",
+              "totalTransactionFee",
+              "averageTransactionFee",
+              "transactionCount",
+              "profilesCount"
+            ]
+          }
+        },
+        "required": ["policies", "summary"]
+      },
+      "AutomationGetPolicyUsageResponse": {
+        "type": "object",
+        "properties": {
+          "totalTransactionFeeInUSD": {
+            "type": "string"
+          },
+          "totalTransactionFee": {
+            "type": "string"
+          },
+          "averageTransactionFee": {
+            "type": "string"
+          },
+          "transactionCount": {
+            "type": "number"
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          },
+          "policy": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "cuid"
+              },
+              "name": {
+                "type": "string"
+              },
+              "model": {
+                "type": "string",
+                "enum": ["ContractFunctions", "AccountFunctions"]
+              },
+              "chainId": {
+                "type": "integer"
+              }
+            },
+            "required": ["id", "name", "model", "chainId"]
+          },
+          "periods": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "totalTransactionFeeInUSD": {
+                  "type": "string"
+                },
+                "totalTransactionFee": {
+                  "type": "string"
+                },
+                "averageTransactionFee": {
+                  "type": "string"
+                },
+                "transactionCount": {
+                  "type": "number"
+                },
+                "start": {
+                  "type": "number"
+                },
+                "end": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "totalTransactionFeeInUSD",
+                "totalTransactionFee",
+                "averageTransactionFee",
+                "transactionCount",
+                "start",
+                "end"
+              ]
+            }
+          }
+        },
+        "required": [
+          "totalTransactionFeeInUSD",
+          "totalTransactionFee",
+          "averageTransactionFee",
+          "transactionCount",
+          "policy",
+          "periods"
+        ]
+      },
+      "AutomationGetTransactionsResponseV2": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "chainId": {
+                  "type": "number"
+                },
+                "intent": {
+                  "type": "object",
+                  "properties": {
+                    "interactions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "to": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "string"
+                          },
+                          "contract": {
+                            "type": "string"
+                          },
+                          "functionName": {
+                            "type": "string"
+                          },
+                          "functionArgs": {
+                            "type": "array",
+                            "items": {}
+                          }
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "hash": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
+                },
+                "transaction": {
+                  "type": "object",
+                  "properties": {
+                    "createdAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "blockNumber": {
+                      "type": "number"
+                    },
+                    "hash": {
+                      "type": "string"
+                    },
+                    "gasUsed": {
+                      "type": "string"
+                    },
+                    "gasFee": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "number"
+                    },
+                    "logs": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "blockNumber": {
+                            "type": "number"
+                          },
+                          "blockHash": {
+                            "type": "string"
+                          },
+                          "transactionIndex": {
+                            "type": "number"
+                          },
+                          "removed": {
+                            "type": "boolean"
+                          },
+                          "address": {
+                            "type": "string"
+                          },
+                          "data": {
+                            "type": "string"
+                          },
+                          "topics": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "transactionHash": {
+                            "type": "string"
+                          },
+                          "logIndex": {
+                            "type": "number"
+                          },
+                          "orphaned": {
+                            "type": "boolean",
+                            "nullable": true
+                          }
+                        },
+                        "required": [
+                          "blockNumber",
+                          "blockHash",
+                          "transactionIndex",
+                          "removed",
+                          "address",
+                          "data",
+                          "topics",
+                          "transactionHash",
+                          "logIndex"
+                        ]
+                      }
+                    }
+                  },
+                  "required": ["createdAt"],
+                  "nullable": true,
+                  "description": "The transaction object exists if you created the transaction deterministically and contains information about the on-chain transaction"
+                }
+              },
+              "required": ["id", "createdAt", "updatedAt", "chainId", "intent"]
+            }
+          },
+          "pagination": {
+            "type": "object",
+            "properties": {
+              "count": {
+                "type": "number"
+              },
+              "limit": {
+                "default": 10,
+                "type": "number"
+              },
+              "offset": {
+                "default": 0,
+                "type": "number"
+              }
+            },
+            "required": ["count"]
+          }
+        },
+        "required": ["data", "pagination"]
+      },
+      "AutomationGetTransactionResponseV2": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "chainId": {
+            "type": "number"
+          },
+          "intent": {
+            "type": "object",
+            "properties": {
+              "interactions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "to": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    },
+                    "contract": {
+                      "type": "string"
+                    },
+                    "functionName": {
+                      "type": "string"
+                    },
+                    "functionArgs": {
+                      "type": "array",
+                      "items": {}
+                    }
+                  }
+                },
+                "nullable": true
+              },
+              "hash": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          },
+          "transaction": {
+            "type": "object",
+            "properties": {
+              "createdAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "blockNumber": {
+                "type": "number"
+              },
+              "hash": {
+                "type": "string"
+              },
+              "gasUsed": {
+                "type": "string"
+              },
+              "gasFee": {
+                "type": "string"
+              },
+              "status": {
+                "type": "number"
+              },
+              "logs": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "blockNumber": {
+                      "type": "number"
+                    },
+                    "blockHash": {
+                      "type": "string"
+                    },
+                    "transactionIndex": {
+                      "type": "number"
+                    },
+                    "removed": {
+                      "type": "boolean"
+                    },
+                    "address": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "string"
+                    },
+                    "topics": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "transactionHash": {
+                      "type": "string"
+                    },
+                    "logIndex": {
+                      "type": "number"
+                    },
+                    "orphaned": {
+                      "type": "boolean",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "blockNumber",
+                    "blockHash",
+                    "transactionIndex",
+                    "removed",
+                    "address",
+                    "data",
+                    "topics",
+                    "transactionHash",
+                    "logIndex"
+                  ]
+                }
+              }
+            },
+            "required": ["createdAt"],
+            "nullable": true,
+            "description": "The transaction object exists if you created the transaction deterministically and contains information about the on-chain transaction"
+          },
+          "policy": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "nullable": true
+              }
+            },
+            "description": "Policy information related to the transaction"
+          },
+          "profile": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "nullable": true
+              },
+              "wallet": {
+                "type": "object",
+                "properties": {
+                  "address": {
+                    "type": "string"
+                  }
+                },
+                "required": ["address"]
+              }
+            },
+            "required": ["wallet"],
+            "description": "Profile and wallet information related to the transaction"
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "chainId",
+          "intent",
+          "policy",
+          "profile"
+        ]
+      },
+      "AutomationCreateTransactionResponseV2": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "chainId": {
+            "type": "number"
+          },
+          "intent": {
+            "type": "object",
+            "properties": {
+              "interactions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "to": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    },
+                    "contract": {
+                      "type": "string"
+                    },
+                    "functionName": {
+                      "type": "string"
+                    },
+                    "functionArgs": {
+                      "type": "array",
+                      "items": {}
+                    }
+                  }
+                },
+                "nullable": true
+              },
+              "hash": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          },
+          "transaction": {
+            "type": "object",
+            "properties": {
+              "createdAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "blockNumber": {
+                "type": "number"
+              },
+              "hash": {
+                "type": "string"
+              },
+              "gasUsed": {
+                "type": "string"
+              },
+              "gasFee": {
+                "type": "string"
+              },
+              "status": {
+                "type": "number"
+              },
+              "logs": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "blockNumber": {
+                      "type": "number"
+                    },
+                    "blockHash": {
+                      "type": "string"
+                    },
+                    "transactionIndex": {
+                      "type": "number"
+                    },
+                    "removed": {
+                      "type": "boolean"
+                    },
+                    "address": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "string"
+                    },
+                    "topics": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "transactionHash": {
+                      "type": "string"
+                    },
+                    "logIndex": {
+                      "type": "number"
+                    },
+                    "orphaned": {
+                      "type": "boolean",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "blockNumber",
+                    "blockHash",
+                    "transactionIndex",
+                    "removed",
+                    "address",
+                    "data",
+                    "topics",
+                    "transactionHash",
+                    "logIndex"
+                  ]
+                }
+              }
+            },
+            "required": ["createdAt"],
+            "nullable": true,
+            "description": "The transaction object exists if you created the transaction deterministically and contains information about the on-chain transaction"
+          },
+          "policy": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "nullable": true
+              }
+            },
+            "description": "Policy information related to the transaction"
+          },
+          "profile": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "nullable": true
+              },
+              "wallet": {
+                "type": "object",
+                "properties": {
+                  "address": {
+                    "type": "string"
+                  }
+                },
+                "required": ["address"]
+              }
+            },
+            "required": ["wallet"],
+            "description": "Profile and wallet information related to the transaction"
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "chainId",
+          "intent",
+          "policy",
+          "profile"
+        ]
+      },
+      "AutomationTradeTokensRequestInput": {
+        "type": "object",
+        "properties": {
+          "initiator": {
+            "type": "object",
+            "properties": {
+              "entityId": {
+                "type": "string"
+              },
+              "tokens": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "assetAddress": {
+                      "type": "string"
+                    },
+                    "amount": {
+                      "type": "string"
+                    },
+                    "tokenId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["assetAddress", "amount"]
+                }
+              }
+            },
+            "required": ["entityId", "tokens"]
+          },
+          "counterparty": {
+            "type": "object",
+            "properties": {
+              "entityId": {
+                "type": "string"
+              },
+              "tokens": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "assetAddress": {
+                      "type": "string"
+                    },
+                    "amount": {
+                      "type": "string"
+                    },
+                    "tokenId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["assetAddress", "amount"]
+                }
+              }
+            },
+            "required": ["entityId", "tokens"]
+          },
+          "sponsor": {
+            "default": true,
+            "type": "boolean"
+          },
+          "policyId": {
+            "default": null,
+            "type": "string",
+            "format": "cuid",
+            "nullable": true
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          }
+        },
+        "required": ["initiator", "counterparty"]
+      },
+      "AutomationTradeTokensResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": ["pending", "success"]
+          },
+          "type": {
+            "type": "string",
+            "enum": ["custodial", "self-custodial"]
+          },
+          "transactionHash": {
+            "type": "string"
+          },
+          "explorerUrl": {
+            "type": "string"
+          }
+        },
+        "required": ["status", "type"]
+      },
+      "AutomationGetWebhooksForGameResponse": {
+        "type": "object",
+        "properties": {
+          "webhooks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "events": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": ["TokenTransfers"]
+                  }
+                },
+                "contract": {
+                  "type": "string"
+                },
+                "signature": {
+                  "type": "string",
+                  "description": "Signature that can be used to validate whether data comes from Beam API"
+                },
+                "chainId": {
+                  "default": 13337,
+                  "type": "number"
+                }
+              },
+              "required": [
+                "id",
+                "url",
+                "createdAt",
+                "events",
+                "contract",
+                "signature"
+              ]
+            }
+          }
+        },
+        "required": ["webhooks"]
+      },
+      "AutomationCreateWebhookForGame": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "contract": {
+            "type": "string"
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["TokenTransfers"]
+            }
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          }
+        },
+        "required": ["url", "contract", "events"]
+      },
+      "AutomationWebhookForGameResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["TokenTransfers"]
+            }
+          },
+          "contract": {
+            "type": "string"
+          },
+          "signature": {
+            "type": "string",
+            "description": "Signature that can be used to validate whether data comes from Beam API"
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "url",
+          "createdAt",
+          "events",
+          "contract",
+          "signature"
+        ]
+      },
+      "AutomationCommonStatsRequestInput": {
+        "type": "object",
+        "properties": {
+          "attributes": {
+            "default": null,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": ["key", "value"]
+            },
+            "nullable": true
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          }
+        }
+      },
+      "AutomationCommonStatsResponse": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "object",
+            "properties": {
+              "tokens": {
+                "type": "number"
+              },
+              "listed": {
+                "type": "number"
+              }
+            },
+            "required": ["tokens", "listed"]
+          }
+        },
+        "required": ["count"]
+      },
+      "AutomationCommonActivityRequestInput": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "default": 20,
+            "type": "number",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "types": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ask",
+                "ask_cancel",
+                "bid",
+                "bid_cancel",
+                "sale",
+                "mint",
+                "transfer"
+              ]
+            },
+            "nullable": true
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          }
+        }
+      },
+      "AutomationCommonActivityResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "createdAt": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "contract": {
+                  "type": "object",
+                  "properties": {
+                    "address": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
+                },
+                "transaction": {
+                  "type": "object",
+                  "properties": {
+                    "timestamp": {
+                      "type": "number",
+                      "nullable": true
+                    },
+                    "from": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "to": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "hash": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
+                },
+                "asset": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
+                },
+                "order": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  },
+                  "nullable": true
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "ask",
+                    "ask_cancel",
+                    "bid",
+                    "bid_cancel",
+                    "sale",
+                    "mint",
+                    "transfer"
+                  ],
+                  "nullable": true
+                }
+              },
+              "required": ["contract", "transaction", "asset"]
+            }
+          },
+          "continuation": {
+            "default": null,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": ["data"]
+      }
+    }
+  }
+}

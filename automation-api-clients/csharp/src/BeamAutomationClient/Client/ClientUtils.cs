@@ -120,108 +120,108 @@ namespace BeamAutomationClient.Client
                 return boolean
                     ? "true"
                     : "false";
-            if (obj is AddContractRequestInput.TypeEnum addContractRequestInputTypeEnum)
-                return AddContractRequestInput.TypeEnumToJsonValue(addContractRequestInputTypeEnum);
-            if (obj is AddContractResponse.TypeEnum addContractResponseTypeEnum)
-                return AddContractResponse.TypeEnumToJsonValue(addContractResponseTypeEnum);
-            if (obj is CommonActivityRequestInput.TypesEnum commonActivityRequestInputTypesEnum)
-                return CommonActivityRequestInput.TypesEnumToJsonValue(commonActivityRequestInputTypesEnum);
-            if (obj is CommonActivityResponseDataInner.TypeEnum commonActivityResponseDataInnerTypeEnum)
-                return CommonActivityResponseDataInner.TypeEnumToJsonValue(commonActivityResponseDataInnerTypeEnum);
-            if (obj is CommonAddPolicyRequestInput.RateTypeEnum commonAddPolicyRequestInputRateTypeEnum)
-                return CommonAddPolicyRequestInput.RateTypeEnumToJsonValue(commonAddPolicyRequestInputRateTypeEnum);
-            if (obj is CommonAddPolicyResponse.RateTypeEnum commonAddPolicyResponseRateTypeEnum)
-                return CommonAddPolicyResponse.RateTypeEnumToJsonValue(commonAddPolicyResponseRateTypeEnum);
-            if (obj is CommonGetPoliciesResponseDataInner.RateTypeEnum commonGetPoliciesResponseDataInnerRateTypeEnum)
-                return CommonGetPoliciesResponseDataInner.RateTypeEnumToJsonValue(commonGetPoliciesResponseDataInnerRateTypeEnum);
-            if (obj is ConvertTokenResponse.StatusEnum convertTokenResponseStatusEnum)
-                return ConvertTokenResponse.StatusEnumToJsonValue(convertTokenResponseStatusEnum);
-            if (obj is ConvertTokenResponse.TypeEnum convertTokenResponseTypeEnum)
-                return ConvertTokenResponse.TypeEnumToJsonValue(convertTokenResponseTypeEnum);
-            if (obj is CreateAssetOfferRequestInputV2.CurrencyEnum createAssetOfferRequestInputV2CurrencyEnum)
-                return CreateAssetOfferRequestInputV2.CurrencyEnumToJsonValue(createAssetOfferRequestInputV2CurrencyEnum);
-            if (obj is CreateWebhookForGame.EventsEnum createWebhookForGameEventsEnum)
-                return CreateWebhookForGame.EventsEnumToJsonValue(createWebhookForGameEventsEnum);
-            if (obj is GetAllGasUsageResponseChainsInnerPoliciesInnerPolicy.ModelEnum getAllGasUsageResponseChainsInnerPoliciesInnerPolicyModelEnum)
-                return GetAllGasUsageResponseChainsInnerPoliciesInnerPolicy.ModelEnumToJsonValue(getAllGasUsageResponseChainsInnerPoliciesInnerPolicyModelEnum);
-            if (obj is GetAssetListingsResponseV2DataInner.StatusEnum getAssetListingsResponseV2DataInnerStatusEnum)
-                return GetAssetListingsResponseV2DataInner.StatusEnumToJsonValue(getAssetListingsResponseV2DataInnerStatusEnum);
-            if (obj is GetAssetListingsResponseV2DataInnerPriceCurrency.SymbolEnum getAssetListingsResponseV2DataInnerPriceCurrencySymbolEnum)
-                return GetAssetListingsResponseV2DataInnerPriceCurrency.SymbolEnumToJsonValue(getAssetListingsResponseV2DataInnerPriceCurrencySymbolEnum);
-            if (obj is GetAssetResponseV2.RarityEnum getAssetResponseV2RarityEnum)
-                return GetAssetResponseV2.RarityEnumToJsonValue(getAssetResponseV2RarityEnum);
-            if (obj is GetAssetsForContractBodyInputV2.SortByEnum getAssetsForContractBodyInputV2SortByEnum)
-                return GetAssetsForContractBodyInputV2.SortByEnumToJsonValue(getAssetsForContractBodyInputV2SortByEnum);
-            if (obj is GetAssetsForContractBodyInputV2.SortDirectionEnum getAssetsForContractBodyInputV2SortDirectionEnum)
-                return GetAssetsForContractBodyInputV2.SortDirectionEnumToJsonValue(getAssetsForContractBodyInputV2SortDirectionEnum);
-            if (obj is GetAssetsForContractResponseV2DataInner.RarityEnum getAssetsForContractResponseV2DataInnerRarityEnum)
-                return GetAssetsForContractResponseV2DataInner.RarityEnumToJsonValue(getAssetsForContractResponseV2DataInnerRarityEnum);
-            if (obj is GetAssetsForProfileBodyInputV2.SortByEnum getAssetsForProfileBodyInputV2SortByEnum)
-                return GetAssetsForProfileBodyInputV2.SortByEnumToJsonValue(getAssetsForProfileBodyInputV2SortByEnum);
-            if (obj is GetAssetsForProfileBodyInputV2.SortDirectionEnum getAssetsForProfileBodyInputV2SortDirectionEnum)
-                return GetAssetsForProfileBodyInputV2.SortDirectionEnumToJsonValue(getAssetsForProfileBodyInputV2SortDirectionEnum);
-            if (obj is GetAssetsForProfileResponseV2DataInner.RarityEnum getAssetsForProfileResponseV2DataInnerRarityEnum)
-                return GetAssetsForProfileResponseV2DataInner.RarityEnumToJsonValue(getAssetsForProfileResponseV2DataInnerRarityEnum);
-            if (obj is GetChainCurrenciesResponseV2DataInner.SymbolEnum getChainCurrenciesResponseV2DataInnerSymbolEnum)
-                return GetChainCurrenciesResponseV2DataInner.SymbolEnumToJsonValue(getChainCurrenciesResponseV2DataInnerSymbolEnum);
-            if (obj is GetGameResponse.PegiContentEnum getGameResponsePegiContentEnum)
-                return GetGameResponse.PegiContentEnumToJsonValue(getGameResponsePegiContentEnum);
-            if (obj is GetGameResponse.PegiRatingEnum getGameResponsePegiRatingEnum)
-                return GetGameResponse.PegiRatingEnumToJsonValue(getGameResponsePegiRatingEnum);
-            if (obj is GetGameResponseContractsInner.TypeEnum getGameResponseContractsInnerTypeEnum)
-                return GetGameResponseContractsInner.TypeEnumToJsonValue(getGameResponseContractsInnerTypeEnum);
-            if (obj is GetGameResponseDevelopersInner.RoleEnum getGameResponseDevelopersInnerRoleEnum)
-                return GetGameResponseDevelopersInner.RoleEnumToJsonValue(getGameResponseDevelopersInnerRoleEnum);
-            if (obj is GetGameResponsePoliciesInner.ModelEnum getGameResponsePoliciesInnerModelEnum)
-                return GetGameResponsePoliciesInner.ModelEnumToJsonValue(getGameResponsePoliciesInnerModelEnum);
-            if (obj is GetGameResponsePoliciesInner.TypeEnum getGameResponsePoliciesInnerTypeEnum)
-                return GetGameResponsePoliciesInner.TypeEnumToJsonValue(getGameResponsePoliciesInnerTypeEnum);
-            if (obj is GetGameResponsePoliciesInner.RateTypeEnum getGameResponsePoliciesInnerRateTypeEnum)
-                return GetGameResponsePoliciesInner.RateTypeEnumToJsonValue(getGameResponsePoliciesInnerRateTypeEnum);
-            if (obj is GetListedAssetsBodyInputV2.SortByEnum getListedAssetsBodyInputV2SortByEnum)
-                return GetListedAssetsBodyInputV2.SortByEnumToJsonValue(getListedAssetsBodyInputV2SortByEnum);
-            if (obj is GetListedAssetsBodyInputV2.SortDirectionEnum getListedAssetsBodyInputV2SortDirectionEnum)
-                return GetListedAssetsBodyInputV2.SortDirectionEnumToJsonValue(getListedAssetsBodyInputV2SortDirectionEnum);
-            if (obj is GetWebhooksForGameResponseWebhooksInner.EventsEnum getWebhooksForGameResponseWebhooksInnerEventsEnum)
-                return GetWebhooksForGameResponseWebhooksInner.EventsEnumToJsonValue(getWebhooksForGameResponseWebhooksInnerEventsEnum);
-            if (obj is RegenerateGameApiKeysResponse.PegiContentEnum regenerateGameApiKeysResponsePegiContentEnum)
-                return RegenerateGameApiKeysResponse.PegiContentEnumToJsonValue(regenerateGameApiKeysResponsePegiContentEnum);
-            if (obj is RegenerateGameApiKeysResponse.PegiRatingEnum regenerateGameApiKeysResponsePegiRatingEnum)
-                return RegenerateGameApiKeysResponse.PegiRatingEnumToJsonValue(regenerateGameApiKeysResponsePegiRatingEnum);
-            if (obj is RegenerateGameApiKeysResponseApiKeysInner.TypeEnum regenerateGameApiKeysResponseApiKeysInnerTypeEnum)
-                return RegenerateGameApiKeysResponseApiKeysInner.TypeEnumToJsonValue(regenerateGameApiKeysResponseApiKeysInnerTypeEnum);
-            if (obj is SellAssetRequestInputV2.SellTypeEnum sellAssetRequestInputV2SellTypeEnum)
-                return SellAssetRequestInputV2.SellTypeEnumToJsonValue(sellAssetRequestInputV2SellTypeEnum);
-            if (obj is SellAssetRequestInputV2.CurrencyEnum sellAssetRequestInputV2CurrencyEnum)
-                return SellAssetRequestInputV2.CurrencyEnumToJsonValue(sellAssetRequestInputV2CurrencyEnum);
-            if (obj is TradeTokensResponse.StatusEnum tradeTokensResponseStatusEnum)
-                return TradeTokensResponse.StatusEnumToJsonValue(tradeTokensResponseStatusEnum);
-            if (obj is TradeTokensResponse.TypeEnum tradeTokensResponseTypeEnum)
-                return TradeTokensResponse.TypeEnumToJsonValue(tradeTokensResponseTypeEnum);
-            if (obj is TransferAssetResponseV2.StatusEnum transferAssetResponseV2StatusEnum)
-                return TransferAssetResponseV2.StatusEnumToJsonValue(transferAssetResponseV2StatusEnum);
-            if (obj is TransferAssetResponseV2.TypeEnum transferAssetResponseV2TypeEnum)
-                return TransferAssetResponseV2.TypeEnumToJsonValue(transferAssetResponseV2TypeEnum);
-            if (obj is TransferTokenResponseV2.StatusEnum transferTokenResponseV2StatusEnum)
-                return TransferTokenResponseV2.StatusEnumToJsonValue(transferTokenResponseV2StatusEnum);
-            if (obj is TransferTokenResponseV2.TypeEnum transferTokenResponseV2TypeEnum)
-                return TransferTokenResponseV2.TypeEnumToJsonValue(transferTokenResponseV2TypeEnum);
-            if (obj is UpdateGameRequestInput.PegiContentEnum updateGameRequestInputPegiContentEnum)
-                return UpdateGameRequestInput.PegiContentEnumToJsonValue(updateGameRequestInputPegiContentEnum);
-            if (obj is UpdateGameRequestInput.PegiRatingEnum updateGameRequestInputPegiRatingEnum)
-                return UpdateGameRequestInput.PegiRatingEnumToJsonValue(updateGameRequestInputPegiRatingEnum);
-            if (obj is UpdateGameResponse.PegiContentEnum updateGameResponsePegiContentEnum)
-                return UpdateGameResponse.PegiContentEnumToJsonValue(updateGameResponsePegiContentEnum);
-            if (obj is UpdateGameResponse.PegiRatingEnum updateGameResponsePegiRatingEnum)
-                return UpdateGameResponse.PegiRatingEnumToJsonValue(updateGameResponsePegiRatingEnum);
-            if (obj is UpdateGameResponsePoliciesInner.ModelEnum updateGameResponsePoliciesInnerModelEnum)
-                return UpdateGameResponsePoliciesInner.ModelEnumToJsonValue(updateGameResponsePoliciesInnerModelEnum);
-            if (obj is UpdateGameResponsePoliciesInner.TypeEnum updateGameResponsePoliciesInnerTypeEnum)
-                return UpdateGameResponsePoliciesInner.TypeEnumToJsonValue(updateGameResponsePoliciesInnerTypeEnum);
-            if (obj is UpdateGameResponsePoliciesInner.RateTypeEnum updateGameResponsePoliciesInnerRateTypeEnum)
-                return UpdateGameResponsePoliciesInner.RateTypeEnumToJsonValue(updateGameResponsePoliciesInnerRateTypeEnum);
-            if (obj is WebhookForGameResponse.EventsEnum webhookForGameResponseEventsEnum)
-                return WebhookForGameResponse.EventsEnumToJsonValue(webhookForGameResponseEventsEnum);
+            if (obj is AutomationAddContractRequestInput.TypeEnum automationAddContractRequestInputTypeEnum)
+                return AutomationAddContractRequestInput.TypeEnumToJsonValue(automationAddContractRequestInputTypeEnum);
+            if (obj is AutomationAddContractResponse.TypeEnum automationAddContractResponseTypeEnum)
+                return AutomationAddContractResponse.TypeEnumToJsonValue(automationAddContractResponseTypeEnum);
+            if (obj is AutomationCommonActivityRequestInput.TypesEnum automationCommonActivityRequestInputTypesEnum)
+                return AutomationCommonActivityRequestInput.TypesEnumToJsonValue(automationCommonActivityRequestInputTypesEnum);
+            if (obj is AutomationCommonActivityResponseDataInner.TypeEnum automationCommonActivityResponseDataInnerTypeEnum)
+                return AutomationCommonActivityResponseDataInner.TypeEnumToJsonValue(automationCommonActivityResponseDataInnerTypeEnum);
+            if (obj is AutomationCommonAddPolicyRequestInput.RateTypeEnum automationCommonAddPolicyRequestInputRateTypeEnum)
+                return AutomationCommonAddPolicyRequestInput.RateTypeEnumToJsonValue(automationCommonAddPolicyRequestInputRateTypeEnum);
+            if (obj is AutomationCommonAddPolicyResponse.RateTypeEnum automationCommonAddPolicyResponseRateTypeEnum)
+                return AutomationCommonAddPolicyResponse.RateTypeEnumToJsonValue(automationCommonAddPolicyResponseRateTypeEnum);
+            if (obj is AutomationCommonGetPoliciesResponseDataInner.RateTypeEnum automationCommonGetPoliciesResponseDataInnerRateTypeEnum)
+                return AutomationCommonGetPoliciesResponseDataInner.RateTypeEnumToJsonValue(automationCommonGetPoliciesResponseDataInnerRateTypeEnum);
+            if (obj is AutomationConvertTokenResponse.StatusEnum automationConvertTokenResponseStatusEnum)
+                return AutomationConvertTokenResponse.StatusEnumToJsonValue(automationConvertTokenResponseStatusEnum);
+            if (obj is AutomationConvertTokenResponse.TypeEnum automationConvertTokenResponseTypeEnum)
+                return AutomationConvertTokenResponse.TypeEnumToJsonValue(automationConvertTokenResponseTypeEnum);
+            if (obj is AutomationCreateAssetOfferRequestInputV2.CurrencyEnum automationCreateAssetOfferRequestInputV2CurrencyEnum)
+                return AutomationCreateAssetOfferRequestInputV2.CurrencyEnumToJsonValue(automationCreateAssetOfferRequestInputV2CurrencyEnum);
+            if (obj is AutomationCreateWebhookForGame.EventsEnum automationCreateWebhookForGameEventsEnum)
+                return AutomationCreateWebhookForGame.EventsEnumToJsonValue(automationCreateWebhookForGameEventsEnum);
+            if (obj is AutomationGetAllGasUsageResponseChainsInnerPoliciesInnerPolicy.ModelEnum automationGetAllGasUsageResponseChainsInnerPoliciesInnerPolicyModelEnum)
+                return AutomationGetAllGasUsageResponseChainsInnerPoliciesInnerPolicy.ModelEnumToJsonValue(automationGetAllGasUsageResponseChainsInnerPoliciesInnerPolicyModelEnum);
+            if (obj is AutomationGetAssetListingsResponseV2DataInner.StatusEnum automationGetAssetListingsResponseV2DataInnerStatusEnum)
+                return AutomationGetAssetListingsResponseV2DataInner.StatusEnumToJsonValue(automationGetAssetListingsResponseV2DataInnerStatusEnum);
+            if (obj is AutomationGetAssetListingsResponseV2DataInnerPriceCurrency.SymbolEnum automationGetAssetListingsResponseV2DataInnerPriceCurrencySymbolEnum)
+                return AutomationGetAssetListingsResponseV2DataInnerPriceCurrency.SymbolEnumToJsonValue(automationGetAssetListingsResponseV2DataInnerPriceCurrencySymbolEnum);
+            if (obj is AutomationGetAssetResponseV2.RarityEnum automationGetAssetResponseV2RarityEnum)
+                return AutomationGetAssetResponseV2.RarityEnumToJsonValue(automationGetAssetResponseV2RarityEnum);
+            if (obj is AutomationGetAssetsForContractBodyInputV2.SortByEnum automationGetAssetsForContractBodyInputV2SortByEnum)
+                return AutomationGetAssetsForContractBodyInputV2.SortByEnumToJsonValue(automationGetAssetsForContractBodyInputV2SortByEnum);
+            if (obj is AutomationGetAssetsForContractBodyInputV2.SortDirectionEnum automationGetAssetsForContractBodyInputV2SortDirectionEnum)
+                return AutomationGetAssetsForContractBodyInputV2.SortDirectionEnumToJsonValue(automationGetAssetsForContractBodyInputV2SortDirectionEnum);
+            if (obj is AutomationGetAssetsForContractResponseV2DataInner.RarityEnum automationGetAssetsForContractResponseV2DataInnerRarityEnum)
+                return AutomationGetAssetsForContractResponseV2DataInner.RarityEnumToJsonValue(automationGetAssetsForContractResponseV2DataInnerRarityEnum);
+            if (obj is AutomationGetAssetsForProfileBodyInputV2.SortByEnum automationGetAssetsForProfileBodyInputV2SortByEnum)
+                return AutomationGetAssetsForProfileBodyInputV2.SortByEnumToJsonValue(automationGetAssetsForProfileBodyInputV2SortByEnum);
+            if (obj is AutomationGetAssetsForProfileBodyInputV2.SortDirectionEnum automationGetAssetsForProfileBodyInputV2SortDirectionEnum)
+                return AutomationGetAssetsForProfileBodyInputV2.SortDirectionEnumToJsonValue(automationGetAssetsForProfileBodyInputV2SortDirectionEnum);
+            if (obj is AutomationGetAssetsForProfileResponseV2DataInner.RarityEnum automationGetAssetsForProfileResponseV2DataInnerRarityEnum)
+                return AutomationGetAssetsForProfileResponseV2DataInner.RarityEnumToJsonValue(automationGetAssetsForProfileResponseV2DataInnerRarityEnum);
+            if (obj is AutomationGetChainCurrenciesResponseV2DataInner.SymbolEnum automationGetChainCurrenciesResponseV2DataInnerSymbolEnum)
+                return AutomationGetChainCurrenciesResponseV2DataInner.SymbolEnumToJsonValue(automationGetChainCurrenciesResponseV2DataInnerSymbolEnum);
+            if (obj is AutomationGetGameResponse.PegiContentEnum automationGetGameResponsePegiContentEnum)
+                return AutomationGetGameResponse.PegiContentEnumToJsonValue(automationGetGameResponsePegiContentEnum);
+            if (obj is AutomationGetGameResponse.PegiRatingEnum automationGetGameResponsePegiRatingEnum)
+                return AutomationGetGameResponse.PegiRatingEnumToJsonValue(automationGetGameResponsePegiRatingEnum);
+            if (obj is AutomationGetGameResponseContractsInner.TypeEnum automationGetGameResponseContractsInnerTypeEnum)
+                return AutomationGetGameResponseContractsInner.TypeEnumToJsonValue(automationGetGameResponseContractsInnerTypeEnum);
+            if (obj is AutomationGetGameResponseDevelopersInner.RoleEnum automationGetGameResponseDevelopersInnerRoleEnum)
+                return AutomationGetGameResponseDevelopersInner.RoleEnumToJsonValue(automationGetGameResponseDevelopersInnerRoleEnum);
+            if (obj is AutomationGetGameResponsePoliciesInner.ModelEnum automationGetGameResponsePoliciesInnerModelEnum)
+                return AutomationGetGameResponsePoliciesInner.ModelEnumToJsonValue(automationGetGameResponsePoliciesInnerModelEnum);
+            if (obj is AutomationGetGameResponsePoliciesInner.TypeEnum automationGetGameResponsePoliciesInnerTypeEnum)
+                return AutomationGetGameResponsePoliciesInner.TypeEnumToJsonValue(automationGetGameResponsePoliciesInnerTypeEnum);
+            if (obj is AutomationGetGameResponsePoliciesInner.RateTypeEnum automationGetGameResponsePoliciesInnerRateTypeEnum)
+                return AutomationGetGameResponsePoliciesInner.RateTypeEnumToJsonValue(automationGetGameResponsePoliciesInnerRateTypeEnum);
+            if (obj is AutomationGetListedAssetsBodyInputV2.SortByEnum automationGetListedAssetsBodyInputV2SortByEnum)
+                return AutomationGetListedAssetsBodyInputV2.SortByEnumToJsonValue(automationGetListedAssetsBodyInputV2SortByEnum);
+            if (obj is AutomationGetListedAssetsBodyInputV2.SortDirectionEnum automationGetListedAssetsBodyInputV2SortDirectionEnum)
+                return AutomationGetListedAssetsBodyInputV2.SortDirectionEnumToJsonValue(automationGetListedAssetsBodyInputV2SortDirectionEnum);
+            if (obj is AutomationGetWebhooksForGameResponseWebhooksInner.EventsEnum automationGetWebhooksForGameResponseWebhooksInnerEventsEnum)
+                return AutomationGetWebhooksForGameResponseWebhooksInner.EventsEnumToJsonValue(automationGetWebhooksForGameResponseWebhooksInnerEventsEnum);
+            if (obj is AutomationRegenerateGameApiKeysResponse.PegiContentEnum automationRegenerateGameApiKeysResponsePegiContentEnum)
+                return AutomationRegenerateGameApiKeysResponse.PegiContentEnumToJsonValue(automationRegenerateGameApiKeysResponsePegiContentEnum);
+            if (obj is AutomationRegenerateGameApiKeysResponse.PegiRatingEnum automationRegenerateGameApiKeysResponsePegiRatingEnum)
+                return AutomationRegenerateGameApiKeysResponse.PegiRatingEnumToJsonValue(automationRegenerateGameApiKeysResponsePegiRatingEnum);
+            if (obj is AutomationRegenerateGameApiKeysResponseApiKeysInner.TypeEnum automationRegenerateGameApiKeysResponseApiKeysInnerTypeEnum)
+                return AutomationRegenerateGameApiKeysResponseApiKeysInner.TypeEnumToJsonValue(automationRegenerateGameApiKeysResponseApiKeysInnerTypeEnum);
+            if (obj is AutomationSellAssetRequestInputV2.SellTypeEnum automationSellAssetRequestInputV2SellTypeEnum)
+                return AutomationSellAssetRequestInputV2.SellTypeEnumToJsonValue(automationSellAssetRequestInputV2SellTypeEnum);
+            if (obj is AutomationSellAssetRequestInputV2.CurrencyEnum automationSellAssetRequestInputV2CurrencyEnum)
+                return AutomationSellAssetRequestInputV2.CurrencyEnumToJsonValue(automationSellAssetRequestInputV2CurrencyEnum);
+            if (obj is AutomationTradeTokensResponse.StatusEnum automationTradeTokensResponseStatusEnum)
+                return AutomationTradeTokensResponse.StatusEnumToJsonValue(automationTradeTokensResponseStatusEnum);
+            if (obj is AutomationTradeTokensResponse.TypeEnum automationTradeTokensResponseTypeEnum)
+                return AutomationTradeTokensResponse.TypeEnumToJsonValue(automationTradeTokensResponseTypeEnum);
+            if (obj is AutomationTransferAssetResponseV2.StatusEnum automationTransferAssetResponseV2StatusEnum)
+                return AutomationTransferAssetResponseV2.StatusEnumToJsonValue(automationTransferAssetResponseV2StatusEnum);
+            if (obj is AutomationTransferAssetResponseV2.TypeEnum automationTransferAssetResponseV2TypeEnum)
+                return AutomationTransferAssetResponseV2.TypeEnumToJsonValue(automationTransferAssetResponseV2TypeEnum);
+            if (obj is AutomationTransferTokenResponseV2.StatusEnum automationTransferTokenResponseV2StatusEnum)
+                return AutomationTransferTokenResponseV2.StatusEnumToJsonValue(automationTransferTokenResponseV2StatusEnum);
+            if (obj is AutomationTransferTokenResponseV2.TypeEnum automationTransferTokenResponseV2TypeEnum)
+                return AutomationTransferTokenResponseV2.TypeEnumToJsonValue(automationTransferTokenResponseV2TypeEnum);
+            if (obj is AutomationUpdateGameRequestInput.PegiContentEnum automationUpdateGameRequestInputPegiContentEnum)
+                return AutomationUpdateGameRequestInput.PegiContentEnumToJsonValue(automationUpdateGameRequestInputPegiContentEnum);
+            if (obj is AutomationUpdateGameRequestInput.PegiRatingEnum automationUpdateGameRequestInputPegiRatingEnum)
+                return AutomationUpdateGameRequestInput.PegiRatingEnumToJsonValue(automationUpdateGameRequestInputPegiRatingEnum);
+            if (obj is AutomationUpdateGameResponse.PegiContentEnum automationUpdateGameResponsePegiContentEnum)
+                return AutomationUpdateGameResponse.PegiContentEnumToJsonValue(automationUpdateGameResponsePegiContentEnum);
+            if (obj is AutomationUpdateGameResponse.PegiRatingEnum automationUpdateGameResponsePegiRatingEnum)
+                return AutomationUpdateGameResponse.PegiRatingEnumToJsonValue(automationUpdateGameResponsePegiRatingEnum);
+            if (obj is AutomationUpdateGameResponsePoliciesInner.ModelEnum automationUpdateGameResponsePoliciesInnerModelEnum)
+                return AutomationUpdateGameResponsePoliciesInner.ModelEnumToJsonValue(automationUpdateGameResponsePoliciesInnerModelEnum);
+            if (obj is AutomationUpdateGameResponsePoliciesInner.TypeEnum automationUpdateGameResponsePoliciesInnerTypeEnum)
+                return AutomationUpdateGameResponsePoliciesInner.TypeEnumToJsonValue(automationUpdateGameResponsePoliciesInnerTypeEnum);
+            if (obj is AutomationUpdateGameResponsePoliciesInner.RateTypeEnum automationUpdateGameResponsePoliciesInnerRateTypeEnum)
+                return AutomationUpdateGameResponsePoliciesInner.RateTypeEnumToJsonValue(automationUpdateGameResponsePoliciesInnerRateTypeEnum);
+            if (obj is AutomationWebhookForGameResponse.EventsEnum automationWebhookForGameResponseEventsEnum)
+                return AutomationWebhookForGameResponse.EventsEnumToJsonValue(automationWebhookForGameResponseEventsEnum);
             if (obj is ICollection collection)
             {
                 List<string?> entries = new();

@@ -26,9 +26,9 @@ namespace BeamPlayerClient.Extensions
         /// </summary>
         /// <param name="services"></param>
         /// <param name="options"></param>
-        public static void AddBeamPlayerApi(this IServiceCollection services, Action<HostConfiguration> options)
+        public static void AddBeamPlayerApi(this IServiceCollection services, Action<PlayerHostConfiguration> options)
         {
-            HostConfiguration config = new(services);
+            PlayerHostConfiguration config = new(services);
             options(config);
             AddBeamPlayerApi(services, config);
         }
@@ -39,14 +39,14 @@ namespace BeamPlayerClient.Extensions
         /// <param name="services"></param>
         /// <param name="options"></param>
         [Obsolete("Use AddBeamPlayerApi")]
-        public static void AddApi(this IServiceCollection services, Action<HostConfiguration> options)
+        public static void AddApi(this IServiceCollection services, Action<PlayerHostConfiguration> options)
         {
-            HostConfiguration config = new(services);
+            PlayerHostConfiguration config = new(services);
             options(config);
             AddBeamPlayerApi(services, config);
         }
 
-        internal static void AddBeamPlayerApi(IServiceCollection services, HostConfiguration host)
+        internal static void AddBeamPlayerApi(IServiceCollection services, PlayerHostConfiguration host)
         {
             if (!host.HttpClientsAdded)
                 host.AddBeamPlayerApiHttpClients();

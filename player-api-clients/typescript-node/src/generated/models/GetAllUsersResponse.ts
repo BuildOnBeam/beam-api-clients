@@ -5,18 +5,19 @@
 
 export type GetAllUsersResponse = {
   data: Array<{
-    externalEntityId: string;
-    userId: string;
-    gameId: string;
+    id: string;
     wallets: Array<{
       id: string;
-      createdAt: any;
-      updatedAt: any;
+      createdAt: string;
+      updatedAt: string;
       externalId: string;
       address: string;
       chainId: number;
       profileId: string | null;
       userId: string | null;
+    }>;
+    entities: Array<{
+      entityId: string;
     }>;
   }>;
   pagination: {

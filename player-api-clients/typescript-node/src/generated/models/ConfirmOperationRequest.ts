@@ -9,12 +9,11 @@ export type ConfirmOperationRequest = {
     id: string;
     signature: string;
   }> | null;
-  entityId: string;
-  gameId: string;
 };
 
 export namespace ConfirmOperationRequest {
   export enum status {
+    SIGNED = 'Signed',
     PENDING = 'Pending',
     REJECTED = 'Rejected',
     EXECUTED = 'Executed',

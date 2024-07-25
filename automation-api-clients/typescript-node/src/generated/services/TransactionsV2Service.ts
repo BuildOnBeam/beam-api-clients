@@ -21,8 +21,8 @@ export class TransactionsV2Service {
    * @throws ApiError
    */
   public getTransactionsV2(
-    limit?: number,
-    offset?: number,
+    limit = 10,
+    offset = 0,
   ): CancelablePromise<GetTransactionsResponseV2> {
     return this.httpRequest.request({
       method: 'GET',
@@ -62,8 +62,8 @@ export class TransactionsV2Service {
    */
   public getProfileTransactionsV2(
     entityId: string,
-    limit?: number,
-    offset?: number,
+    limit = 10,
+    offset = 0,
   ): CancelablePromise<GetTransactionsResponseV2> {
     return this.httpRequest.request({
       method: 'GET',

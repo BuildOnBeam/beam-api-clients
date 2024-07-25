@@ -7,7 +7,7 @@ export type GetWebhooksForGameResponse = {
   webhooks: Array<{
     id: string;
     url: string;
-    createdAt: any;
+    createdAt: string;
     events: 'TokenTransfers'[];
     contract: string;
     /**

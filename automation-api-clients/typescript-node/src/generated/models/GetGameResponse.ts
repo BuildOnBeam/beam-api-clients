@@ -26,8 +26,8 @@ export type GetGameResponse = {
   chainIds: number[];
   depositor?: {
     id: string;
-    createdAt: any;
-    updatedAt: any;
+    createdAt: string;
+    updatedAt: string;
     externalId: string;
     address: string;
     gameId: string;
@@ -41,30 +41,30 @@ export type GetGameResponse = {
       id: string;
       name: string | null;
       email: string;
-      createdAt: any;
-      lastSeenAt: any;
+      createdAt: string;
+      lastSeenAt: string | null;
       supabaseId: string | null;
     };
   }>;
   contracts: Array<{
     type: 'ERC20' | 'ERC721' | 'ERC1155' | 'SEAPORT' | 'UNISWAPV2' | 'WETH';
     id: string;
-    createdAt: any;
-    updatedAt: any;
+    createdAt: string;
+    updatedAt: string;
     externalId: string;
     address: string;
     name: string | null;
     chainId: number;
     gameId: string | null;
-    abi: string | number | boolean | Record<string, any>;
+    abi: any;
   }>;
   policies: Array<{
     model: 'ContractFunctions' | 'AccountFunctions';
     type: 'PayForUser' | 'ChargeCustomToken';
     rateType?: 'Fixed' | 'Dynamic' | null;
     id: string;
-    createdAt: any;
-    updatedAt: any;
+    createdAt: string;
+    updatedAt: string;
     externalId: string;
     name: string;
     chainId: number;

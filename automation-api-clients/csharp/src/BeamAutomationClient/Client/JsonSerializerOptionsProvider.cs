@@ -9,7 +9,7 @@ namespace BeamAutomationClient.Client
     /// <summary>
     /// Provides the JsonSerializerOptions
     /// </summary>
-    public class JsonSerializerOptionsProvider
+    public class AutomationJsonSerializerOptionsProvider
     {
         /// <summary>
         /// the JsonSerializerOptions
@@ -19,7 +19,7 @@ namespace BeamAutomationClient.Client
         /// <summary>
         /// Instantiates a JsonSerializerOptionsProvider
         /// </summary>
-        public JsonSerializerOptionsProvider(JsonSerializerOptions options)
+        public AutomationJsonSerializerOptionsProvider(JsonSerializerOptions options)
         {
             Options = options;
         }

@@ -13,7 +13,7 @@ export type AddContractResponse = {
   name: string | null;
   chainId: number;
   gameId: string | null;
-  abi: string | number | boolean | Record<string, any>;
+  abi: any;
 };
 
 export namespace AddContractResponse {

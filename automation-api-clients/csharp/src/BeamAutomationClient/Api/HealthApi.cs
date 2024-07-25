@@ -28,12 +28,12 @@ namespace BeamAutomationClient.Api
     /// Represents a collection of functions to interact with the API endpoints
     /// This class is registered as transient.
     /// </summary>
-    public interface IHealthApi : IApi
+    public interface IAutomationHealthApi : IAutomationApi
     {
         /// <summary>
         /// The class containing the events
         /// </summary>
-        HealthApiEvents Events { get; }
+        AutomationHealthApiEvents Events { get; }
 
         /// <summary>
         /// 
@@ -78,7 +78,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public class HealthApiEvents
+    public class AutomationHealthApiEvents
     {
         /// <summary>
         /// The event raised after the server response
@@ -90,7 +90,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorCheck;
 
-        internal void ExecuteOnCheck(HealthApi.CheckApiResponse apiResponse)
+        internal void ExecuteOnCheck(AutomationHealthApi.CheckApiResponse apiResponse)
         {
             OnCheck?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -104,7 +104,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public sealed partial class HealthApi : IHealthApi
+    public sealed partial class AutomationHealthApi : IAutomationHealthApi
     {
         private JsonSerializerOptions _jsonSerializerOptions;
 
@@ -116,7 +116,7 @@ namespace BeamAutomationClient.Api
         /// <summary>
         /// The logger
         /// </summary>
-        public ILogger<HealthApi> Logger { get; }
+        public ILogger<AutomationHealthApi> Logger { get; }
 
         /// <summary>
         /// The HttpClient
@@ -126,7 +126,7 @@ namespace BeamAutomationClient.Api
         /// <summary>
         /// The class containing the events
         /// </summary>
-        public HealthApiEvents Events { get; }
+        public AutomationHealthApiEvents Events { get; }
 
         /// <summary>
         /// A token provider of type <see cref="ApiKeyProvider"/>
@@ -134,17 +134,17 @@ namespace BeamAutomationClient.Api
         public TokenProvider<ApiKeyToken> ApiKeyProvider { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HealthApi"/> class.
+        /// Initializes a new instance of the <see cref="AutomationHealthApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public HealthApi(ILogger<HealthApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, HealthApiEvents healthApiEvents,
+        public AutomationHealthApi(ILogger<AutomationHealthApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, AutomationJsonSerializerOptionsProvider jsonSerializerOptionsProvider, AutomationHealthApiEvents automationHealthApiEvents,
             TokenProvider<ApiKeyToken> apiKeyProvider)
         {
             _jsonSerializerOptions = jsonSerializerOptionsProvider.Options;
             LoggerFactory = loggerFactory;
-            Logger = LoggerFactory.CreateLogger<HealthApi>();
+            Logger = LoggerFactory.CreateLogger<AutomationHealthApi>();
             HttpClient = httpClient;
-            Events = healthApiEvents;
+            Events = automationHealthApiEvents;
             ApiKeyProvider = apiKeyProvider;
         }
 

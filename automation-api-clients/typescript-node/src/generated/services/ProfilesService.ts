@@ -44,8 +44,8 @@ export class ProfilesService {
    * @throws ApiError
    */
   public getAllProfiles(
-    limit?: number,
-    offset?: number,
+    limit = 10,
+    offset = 0,
   ): CancelablePromise<GetAllProfilesResponse> {
     return this.httpRequest.request({
       method: 'GET',
@@ -96,6 +96,7 @@ export class ProfilesService {
   }
 
   /**
+   * @deprecated
    * Generates a challenge which can be encoded in a QR code / app link for the user to take control of the profile
    * @param entityId
    * @param requestBody
@@ -118,6 +119,7 @@ export class ProfilesService {
   }
 
   /**
+   * @deprecated
    * Generates a challenge which can be encoded in a QR code / app link for the user to sign in to the game
    * @param entityId
    * @param requestBody

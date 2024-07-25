@@ -31,13 +31,13 @@ export type GetAssetListingsResponse = {
         native: number;
       } | null;
     } | null;
-    validFrom?: any;
-    validUntil?: any;
+    validFrom?: string | null;
+    validUntil?: string | null;
     quantityFilled?: number;
     quantityRemaining?: number;
-    expiresAt?: any;
-    createdAt?: any;
-    updatedAt?: any;
+    expiresAt?: string | null;
+    createdAt?: string | null;
+    updatedAt?: string | null;
   }>;
   continuation?: string | null;
 };

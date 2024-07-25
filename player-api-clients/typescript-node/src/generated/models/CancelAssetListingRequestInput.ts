@@ -7,5 +7,13 @@ export type CancelAssetListingRequestInput = {
   optimistic?: boolean;
   sponsor?: boolean;
   policyId?: string | null;
+  operationProcessing?: CancelAssetListingRequestInput.operationProcessing;
   operationId?: string | null;
 };
+
+export namespace CancelAssetListingRequestInput {
+  export enum operationProcessing {
+    SIGN_ONLY = 'SignOnly',
+    EXECUTE = 'Execute',
+  }
+}

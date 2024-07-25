@@ -6,7 +6,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// Any Api client
     /// </summary>
-    public interface IApi
+    public interface IAutomationApi
     {
         /// <summary>
         /// The HttpClient

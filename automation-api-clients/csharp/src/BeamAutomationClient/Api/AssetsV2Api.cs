@@ -28,12 +28,12 @@ namespace BeamAutomationClient.Api
     /// Represents a collection of functions to interact with the API endpoints
     /// This class is registered as transient.
     /// </summary>
-    public interface IAssetsV2Api : IApi
+    public interface IAutomationAssetsV2Api : IAutomationApi
     {
         /// <summary>
         /// The class containing the events
         /// </summary>
-        AssetsV2ApiEvents Events { get; }
+        AutomationAssetsV2ApiEvents Events { get; }
 
         /// <summary>
         /// Get a single NFT (e.g. ERC721 / ERC1155)
@@ -73,11 +73,11 @@ namespace BeamAutomationClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="getAssetsForContractBodyInputV2"></param>
+        /// <param name="automationGetAssetsForContractBodyInputV2"></param>
         /// <param name="assetAddress"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetContractAssetsPostV2ApiResponse"/>&gt;</returns>
-        Task<IGetContractAssetsPostV2ApiResponse> GetContractAssetsPostV2Async(GetAssetsForContractBodyInputV2 getAssetsForContractBodyInputV2, string assetAddress, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetContractAssetsPostV2ApiResponse> GetContractAssetsPostV2Async(AutomationGetAssetsForContractBodyInputV2 automationGetAssetsForContractBodyInputV2, string assetAddress, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155)
@@ -85,11 +85,11 @@ namespace BeamAutomationClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="getAssetsForContractBodyInputV2"></param>
+        /// <param name="automationGetAssetsForContractBodyInputV2"></param>
         /// <param name="assetAddress"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetContractAssetsPostV2ApiResponse"/>?&gt;</returns>
-        Task<IGetContractAssetsPostV2ApiResponse?> GetContractAssetsPostV2OrDefaultAsync(GetAssetsForContractBodyInputV2 getAssetsForContractBodyInputV2, string assetAddress, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetContractAssetsPostV2ApiResponse?> GetContractAssetsPostV2OrDefaultAsync(AutomationGetAssetsForContractBodyInputV2 automationGetAssetsForContractBodyInputV2, string assetAddress, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all the assets of a profile (NFT assets, e.g. ERC721 / ERC1155)
@@ -98,11 +98,11 @@ namespace BeamAutomationClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="getAssetsForProfileBodyInputV2"></param>
+        /// <param name="automationGetAssetsForProfileBodyInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetProfileAssetsForGamePostV2ApiResponse"/>&gt;</returns>
-        Task<IGetProfileAssetsForGamePostV2ApiResponse> GetProfileAssetsForGamePostV2Async(GetAssetsForProfileBodyInputV2 getAssetsForProfileBodyInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetProfileAssetsForGamePostV2ApiResponse> GetProfileAssetsForGamePostV2Async(AutomationGetAssetsForProfileBodyInputV2 automationGetAssetsForProfileBodyInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all the assets of a profile (NFT assets, e.g. ERC721 / ERC1155)
@@ -110,11 +110,11 @@ namespace BeamAutomationClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="getAssetsForProfileBodyInputV2"></param>
+        /// <param name="automationGetAssetsForProfileBodyInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetProfileAssetsForGamePostV2ApiResponse"/>?&gt;</returns>
-        Task<IGetProfileAssetsForGamePostV2ApiResponse?> GetProfileAssetsForGamePostV2OrDefaultAsync(GetAssetsForProfileBodyInputV2 getAssetsForProfileBodyInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetProfileAssetsForGamePostV2ApiResponse?> GetProfileAssetsForGamePostV2OrDefaultAsync(AutomationGetAssetsForProfileBodyInputV2 automationGetAssetsForProfileBodyInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all the currencies owned by an account (ERC20)
@@ -173,11 +173,11 @@ namespace BeamAutomationClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="transferAssetRequestInputV2"></param>
+        /// <param name="automationTransferAssetRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ITransferAssetV2ApiResponse"/>&gt;</returns>
-        Task<ITransferAssetV2ApiResponse> TransferAssetV2Async(TransferAssetRequestInputV2 transferAssetRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<ITransferAssetV2ApiResponse> TransferAssetV2Async(AutomationTransferAssetRequestInputV2 automationTransferAssetRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Transfer an asset (NFT assets, ERC721 / ERC1155)
@@ -185,11 +185,11 @@ namespace BeamAutomationClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="transferAssetRequestInputV2"></param>
+        /// <param name="automationTransferAssetRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ITransferAssetV2ApiResponse"/>?&gt;</returns>
-        Task<ITransferAssetV2ApiResponse?> TransferAssetV2OrDefaultAsync(TransferAssetRequestInputV2 transferAssetRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<ITransferAssetV2ApiResponse?> TransferAssetV2OrDefaultAsync(AutomationTransferAssetRequestInputV2 automationTransferAssetRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Transfer the native token
@@ -198,11 +198,11 @@ namespace BeamAutomationClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="transferNativeTokenRequestInputV2"></param>
+        /// <param name="automationTransferNativeTokenRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ITransferNativeTokenV2ApiResponse"/>&gt;</returns>
-        Task<ITransferNativeTokenV2ApiResponse> TransferNativeTokenV2Async(TransferNativeTokenRequestInputV2 transferNativeTokenRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<ITransferNativeTokenV2ApiResponse> TransferNativeTokenV2Async(AutomationTransferNativeTokenRequestInputV2 automationTransferNativeTokenRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Transfer the native token
@@ -210,11 +210,11 @@ namespace BeamAutomationClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="transferNativeTokenRequestInputV2"></param>
+        /// <param name="automationTransferNativeTokenRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ITransferNativeTokenV2ApiResponse"/>?&gt;</returns>
-        Task<ITransferNativeTokenV2ApiResponse?> TransferNativeTokenV2OrDefaultAsync(TransferNativeTokenRequestInputV2 transferNativeTokenRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<ITransferNativeTokenV2ApiResponse?> TransferNativeTokenV2OrDefaultAsync(AutomationTransferNativeTokenRequestInputV2 automationTransferNativeTokenRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Transfer a token (token assets, ERC20)
@@ -223,11 +223,11 @@ namespace BeamAutomationClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="transferTokenRequestInputV2"></param>
+        /// <param name="automationTransferTokenRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ITransferTokenV2ApiResponse"/>&gt;</returns>
-        Task<ITransferTokenV2ApiResponse> TransferTokenV2Async(TransferTokenRequestInputV2 transferTokenRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<ITransferTokenV2ApiResponse> TransferTokenV2Async(AutomationTransferTokenRequestInputV2 automationTransferTokenRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Transfer a token (token assets, ERC20)
@@ -235,17 +235,17 @@ namespace BeamAutomationClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="transferTokenRequestInputV2"></param>
+        /// <param name="automationTransferTokenRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ITransferTokenV2ApiResponse"/>?&gt;</returns>
-        Task<ITransferTokenV2ApiResponse?> TransferTokenV2OrDefaultAsync(TransferTokenRequestInputV2 transferTokenRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<ITransferTokenV2ApiResponse?> TransferTokenV2OrDefaultAsync(AutomationTransferTokenRequestInputV2 automationTransferTokenRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
     /// The <see cref="IGetAssetV2ApiResponse"/>
     /// </summary>
-    public interface IGetAssetV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.GetAssetResponseV2?>
+    public interface IGetAssetV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetAssetResponseV2?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -257,7 +257,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IGetContractAssetsPostV2ApiResponse"/>
     /// </summary>
-    public interface IGetContractAssetsPostV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.GetAssetsForContractResponseV2?>
+    public interface IGetContractAssetsPostV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetAssetsForContractResponseV2?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -269,7 +269,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IGetProfileAssetsForGamePostV2ApiResponse"/>
     /// </summary>
-    public interface IGetProfileAssetsForGamePostV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.GetAssetsForProfileResponseV2?>
+    public interface IGetProfileAssetsForGamePostV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetAssetsForProfileResponseV2?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -281,7 +281,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IGetProfileCurrenciesV2ApiResponse"/>
     /// </summary>
-    public interface IGetProfileCurrenciesV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.GetProfileCurrenciesResponseV2?>
+    public interface IGetProfileCurrenciesV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetProfileCurrenciesResponseV2?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -293,7 +293,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IGetProfileNativeCurrencyV2ApiResponse"/>
     /// </summary>
-    public interface IGetProfileNativeCurrencyV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.GetProfileNativeCurrencyResponseV2?>
+    public interface IGetProfileNativeCurrencyV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetProfileNativeCurrencyResponseV2?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -305,7 +305,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="ITransferAssetV2ApiResponse"/>
     /// </summary>
-    public interface ITransferAssetV2ApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.TransferAssetResponseV2?>
+    public interface ITransferAssetV2ApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.AutomationTransferAssetResponseV2?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
@@ -317,7 +317,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="ITransferNativeTokenV2ApiResponse"/>
     /// </summary>
-    public interface ITransferNativeTokenV2ApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.TransferTokenResponseV2?>
+    public interface ITransferNativeTokenV2ApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.AutomationTransferTokenResponseV2?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
@@ -329,7 +329,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="ITransferTokenV2ApiResponse"/>
     /// </summary>
-    public interface ITransferTokenV2ApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.TransferTokenResponseV2?>
+    public interface ITransferTokenV2ApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.AutomationTransferTokenResponseV2?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
@@ -341,7 +341,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public class AssetsV2ApiEvents
+    public class AutomationAssetsV2ApiEvents
     {
         /// <summary>
         /// The event raised after the server response
@@ -353,7 +353,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetAssetV2;
 
-        internal void ExecuteOnGetAssetV2(AssetsV2Api.GetAssetV2ApiResponse apiResponse)
+        internal void ExecuteOnGetAssetV2(AutomationAssetsV2Api.GetAssetV2ApiResponse apiResponse)
         {
             OnGetAssetV2?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -373,7 +373,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetContractAssetsPostV2;
 
-        internal void ExecuteOnGetContractAssetsPostV2(AssetsV2Api.GetContractAssetsPostV2ApiResponse apiResponse)
+        internal void ExecuteOnGetContractAssetsPostV2(AutomationAssetsV2Api.GetContractAssetsPostV2ApiResponse apiResponse)
         {
             OnGetContractAssetsPostV2?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -393,7 +393,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetProfileAssetsForGamePostV2;
 
-        internal void ExecuteOnGetProfileAssetsForGamePostV2(AssetsV2Api.GetProfileAssetsForGamePostV2ApiResponse apiResponse)
+        internal void ExecuteOnGetProfileAssetsForGamePostV2(AutomationAssetsV2Api.GetProfileAssetsForGamePostV2ApiResponse apiResponse)
         {
             OnGetProfileAssetsForGamePostV2?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -413,7 +413,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetProfileCurrenciesV2;
 
-        internal void ExecuteOnGetProfileCurrenciesV2(AssetsV2Api.GetProfileCurrenciesV2ApiResponse apiResponse)
+        internal void ExecuteOnGetProfileCurrenciesV2(AutomationAssetsV2Api.GetProfileCurrenciesV2ApiResponse apiResponse)
         {
             OnGetProfileCurrenciesV2?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -433,7 +433,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetProfileNativeCurrencyV2;
 
-        internal void ExecuteOnGetProfileNativeCurrencyV2(AssetsV2Api.GetProfileNativeCurrencyV2ApiResponse apiResponse)
+        internal void ExecuteOnGetProfileNativeCurrencyV2(AutomationAssetsV2Api.GetProfileNativeCurrencyV2ApiResponse apiResponse)
         {
             OnGetProfileNativeCurrencyV2?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -453,7 +453,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorTransferAssetV2;
 
-        internal void ExecuteOnTransferAssetV2(AssetsV2Api.TransferAssetV2ApiResponse apiResponse)
+        internal void ExecuteOnTransferAssetV2(AutomationAssetsV2Api.TransferAssetV2ApiResponse apiResponse)
         {
             OnTransferAssetV2?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -473,7 +473,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorTransferNativeTokenV2;
 
-        internal void ExecuteOnTransferNativeTokenV2(AssetsV2Api.TransferNativeTokenV2ApiResponse apiResponse)
+        internal void ExecuteOnTransferNativeTokenV2(AutomationAssetsV2Api.TransferNativeTokenV2ApiResponse apiResponse)
         {
             OnTransferNativeTokenV2?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -493,7 +493,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorTransferTokenV2;
 
-        internal void ExecuteOnTransferTokenV2(AssetsV2Api.TransferTokenV2ApiResponse apiResponse)
+        internal void ExecuteOnTransferTokenV2(AutomationAssetsV2Api.TransferTokenV2ApiResponse apiResponse)
         {
             OnTransferTokenV2?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -507,7 +507,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public sealed partial class AssetsV2Api : IAssetsV2Api
+    public sealed partial class AutomationAssetsV2Api : IAutomationAssetsV2Api
     {
         private JsonSerializerOptions _jsonSerializerOptions;
 
@@ -519,7 +519,7 @@ namespace BeamAutomationClient.Api
         /// <summary>
         /// The logger
         /// </summary>
-        public ILogger<AssetsV2Api> Logger { get; }
+        public ILogger<AutomationAssetsV2Api> Logger { get; }
 
         /// <summary>
         /// The HttpClient
@@ -529,7 +529,7 @@ namespace BeamAutomationClient.Api
         /// <summary>
         /// The class containing the events
         /// </summary>
-        public AssetsV2ApiEvents Events { get; }
+        public AutomationAssetsV2ApiEvents Events { get; }
 
         /// <summary>
         /// A token provider of type <see cref="ApiKeyProvider"/>
@@ -537,17 +537,17 @@ namespace BeamAutomationClient.Api
         public TokenProvider<ApiKeyToken> ApiKeyProvider { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AssetsV2Api"/> class.
+        /// Initializes a new instance of the <see cref="AutomationAssetsV2Api"/> class.
         /// </summary>
         /// <returns></returns>
-        public AssetsV2Api(ILogger<AssetsV2Api> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, AssetsV2ApiEvents assetsV2ApiEvents,
+        public AutomationAssetsV2Api(ILogger<AutomationAssetsV2Api> logger, ILoggerFactory loggerFactory, HttpClient httpClient, AutomationJsonSerializerOptionsProvider jsonSerializerOptionsProvider, AutomationAssetsV2ApiEvents automationAssetsV2ApiEvents,
             TokenProvider<ApiKeyToken> apiKeyProvider)
         {
             _jsonSerializerOptions = jsonSerializerOptionsProvider.Options;
             LoggerFactory = loggerFactory;
-            Logger = LoggerFactory.CreateLogger<AssetsV2Api>();
+            Logger = LoggerFactory.CreateLogger<AutomationAssetsV2Api>();
             HttpClient = httpClient;
-            Events = assetsV2ApiEvents;
+            Events = automationAssetsV2ApiEvents;
             ApiKeyProvider = apiKeyProvider;
         }
 
@@ -785,11 +785,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.GetAssetResponseV2? Ok()
+            public BeamAutomationClient.Model.AutomationGetAssetResponseV2? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.GetAssetResponseV2>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationGetAssetResponseV2>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -798,7 +798,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.GetAssetResponseV2? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationGetAssetResponseV2? result)
             {
                 result = null;
 
@@ -824,18 +824,18 @@ namespace BeamAutomationClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetContractAssetsPostV2(GetAssetsForContractBodyInputV2 getAssetsForContractBodyInputV2, ref string assetAddress);
+        partial void FormatGetContractAssetsPostV2(AutomationGetAssetsForContractBodyInputV2 automationGetAssetsForContractBodyInputV2, ref string assetAddress);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="getAssetsForContractBodyInputV2"></param>
+        /// <param name="automationGetAssetsForContractBodyInputV2"></param>
         /// <param name="assetAddress"></param>
         /// <returns></returns>
-        private void ValidateGetContractAssetsPostV2(GetAssetsForContractBodyInputV2 getAssetsForContractBodyInputV2, string assetAddress)
+        private void ValidateGetContractAssetsPostV2(AutomationGetAssetsForContractBodyInputV2 automationGetAssetsForContractBodyInputV2, string assetAddress)
         {
-            if (getAssetsForContractBodyInputV2 == null)
-                throw new ArgumentNullException(nameof(getAssetsForContractBodyInputV2));
+            if (automationGetAssetsForContractBodyInputV2 == null)
+                throw new ArgumentNullException(nameof(automationGetAssetsForContractBodyInputV2));
 
             if (assetAddress == null)
                 throw new ArgumentNullException(nameof(assetAddress));
@@ -845,12 +845,12 @@ namespace BeamAutomationClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="getAssetsForContractBodyInputV2"></param>
+        /// <param name="automationGetAssetsForContractBodyInputV2"></param>
         /// <param name="assetAddress"></param>
-        private void AfterGetContractAssetsPostV2DefaultImplementation(IGetContractAssetsPostV2ApiResponse apiResponseLocalVar, GetAssetsForContractBodyInputV2 getAssetsForContractBodyInputV2, string assetAddress)
+        private void AfterGetContractAssetsPostV2DefaultImplementation(IGetContractAssetsPostV2ApiResponse apiResponseLocalVar, AutomationGetAssetsForContractBodyInputV2 automationGetAssetsForContractBodyInputV2, string assetAddress)
         {
             bool suppressDefaultLog = false;
-            AfterGetContractAssetsPostV2(ref suppressDefaultLog, apiResponseLocalVar, getAssetsForContractBodyInputV2, assetAddress);
+            AfterGetContractAssetsPostV2(ref suppressDefaultLog, apiResponseLocalVar, automationGetAssetsForContractBodyInputV2, assetAddress);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -860,9 +860,9 @@ namespace BeamAutomationClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="getAssetsForContractBodyInputV2"></param>
+        /// <param name="automationGetAssetsForContractBodyInputV2"></param>
         /// <param name="assetAddress"></param>
-        partial void AfterGetContractAssetsPostV2(ref bool suppressDefaultLog, IGetContractAssetsPostV2ApiResponse apiResponseLocalVar, GetAssetsForContractBodyInputV2 getAssetsForContractBodyInputV2, string assetAddress);
+        partial void AfterGetContractAssetsPostV2(ref bool suppressDefaultLog, IGetContractAssetsPostV2ApiResponse apiResponseLocalVar, AutomationGetAssetsForContractBodyInputV2 automationGetAssetsForContractBodyInputV2, string assetAddress);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -870,12 +870,12 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="getAssetsForContractBodyInputV2"></param>
+        /// <param name="automationGetAssetsForContractBodyInputV2"></param>
         /// <param name="assetAddress"></param>
-        private void OnErrorGetContractAssetsPostV2DefaultImplementation(Exception exception, string pathFormat, string path, GetAssetsForContractBodyInputV2 getAssetsForContractBodyInputV2, string assetAddress)
+        private void OnErrorGetContractAssetsPostV2DefaultImplementation(Exception exception, string pathFormat, string path, AutomationGetAssetsForContractBodyInputV2 automationGetAssetsForContractBodyInputV2, string assetAddress)
         {
             bool suppressDefaultLog = false;
-            OnErrorGetContractAssetsPostV2(ref suppressDefaultLog, exception, pathFormat, path, getAssetsForContractBodyInputV2, assetAddress);
+            OnErrorGetContractAssetsPostV2(ref suppressDefaultLog, exception, pathFormat, path, automationGetAssetsForContractBodyInputV2, assetAddress);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -887,22 +887,22 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="getAssetsForContractBodyInputV2"></param>
+        /// <param name="automationGetAssetsForContractBodyInputV2"></param>
         /// <param name="assetAddress"></param>
-        partial void OnErrorGetContractAssetsPostV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, GetAssetsForContractBodyInputV2 getAssetsForContractBodyInputV2, string assetAddress);
+        partial void OnErrorGetContractAssetsPostV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationGetAssetsForContractBodyInputV2 automationGetAssetsForContractBodyInputV2, string assetAddress);
 
         /// <summary>
         /// Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155) 
         /// </summary>
-        /// <param name="getAssetsForContractBodyInputV2"></param>
+        /// <param name="automationGetAssetsForContractBodyInputV2"></param>
         /// <param name="assetAddress"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetContractAssetsPostV2ApiResponse"/>&gt;</returns>
-        public async Task<IGetContractAssetsPostV2ApiResponse?> GetContractAssetsPostV2OrDefaultAsync(GetAssetsForContractBodyInputV2 getAssetsForContractBodyInputV2, string assetAddress, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetContractAssetsPostV2ApiResponse?> GetContractAssetsPostV2OrDefaultAsync(AutomationGetAssetsForContractBodyInputV2 automationGetAssetsForContractBodyInputV2, string assetAddress, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await GetContractAssetsPostV2Async(getAssetsForContractBodyInputV2, assetAddress, cancellationToken).ConfigureAwait(false);
+                return await GetContractAssetsPostV2Async(automationGetAssetsForContractBodyInputV2, assetAddress, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -914,19 +914,19 @@ namespace BeamAutomationClient.Api
         /// Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155) 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="getAssetsForContractBodyInputV2"></param>
+        /// <param name="automationGetAssetsForContractBodyInputV2"></param>
         /// <param name="assetAddress"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetContractAssetsPostV2ApiResponse"/>&gt;</returns>
-        public async Task<IGetContractAssetsPostV2ApiResponse> GetContractAssetsPostV2Async(GetAssetsForContractBodyInputV2 getAssetsForContractBodyInputV2, string assetAddress, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetContractAssetsPostV2ApiResponse> GetContractAssetsPostV2Async(AutomationGetAssetsForContractBodyInputV2 automationGetAssetsForContractBodyInputV2, string assetAddress, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateGetContractAssetsPostV2(getAssetsForContractBodyInputV2, assetAddress);
+                ValidateGetContractAssetsPostV2(automationGetAssetsForContractBodyInputV2, assetAddress);
 
-                FormatGetContractAssetsPostV2(getAssetsForContractBodyInputV2, ref assetAddress);
+                FormatGetContractAssetsPostV2(automationGetAssetsForContractBodyInputV2, ref assetAddress);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -936,9 +936,9 @@ namespace BeamAutomationClient.Api
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v2/assets/{assetAddress}";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BassetAddress%7D", Uri.EscapeDataString(assetAddress.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (getAssetsForContractBodyInputV2 as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (automationGetAssetsForContractBodyInputV2 as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(getAssetsForContractBodyInputV2, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationGetAssetsForContractBodyInputV2, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -977,7 +977,7 @@ namespace BeamAutomationClient.Api
 
                         GetContractAssetsPostV2ApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v2/assets/{assetAddress}", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterGetContractAssetsPostV2DefaultImplementation(apiResponseLocalVar, getAssetsForContractBodyInputV2, assetAddress);
+                        AfterGetContractAssetsPostV2DefaultImplementation(apiResponseLocalVar, automationGetAssetsForContractBodyInputV2, assetAddress);
 
                         Events.ExecuteOnGetContractAssetsPostV2(apiResponseLocalVar);
 
@@ -991,7 +991,7 @@ namespace BeamAutomationClient.Api
             }
             catch(Exception e)
             {
-                OnErrorGetContractAssetsPostV2DefaultImplementation(e, "/v2/assets/{assetAddress}", uriBuilderLocalVar.Path, getAssetsForContractBodyInputV2, assetAddress);
+                OnErrorGetContractAssetsPostV2DefaultImplementation(e, "/v2/assets/{assetAddress}", uriBuilderLocalVar.Path, automationGetAssetsForContractBodyInputV2, assetAddress);
                 Events.ExecuteOnErrorGetContractAssetsPostV2(e);
                 throw;
             }
@@ -1035,11 +1035,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.GetAssetsForContractResponseV2? Ok()
+            public BeamAutomationClient.Model.AutomationGetAssetsForContractResponseV2? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.GetAssetsForContractResponseV2>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationGetAssetsForContractResponseV2>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1048,7 +1048,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.GetAssetsForContractResponseV2? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationGetAssetsForContractResponseV2? result)
             {
                 result = null;
 
@@ -1074,18 +1074,18 @@ namespace BeamAutomationClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetProfileAssetsForGamePostV2(GetAssetsForProfileBodyInputV2 getAssetsForProfileBodyInputV2, ref string entityId);
+        partial void FormatGetProfileAssetsForGamePostV2(AutomationGetAssetsForProfileBodyInputV2 automationGetAssetsForProfileBodyInputV2, ref string entityId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="getAssetsForProfileBodyInputV2"></param>
+        /// <param name="automationGetAssetsForProfileBodyInputV2"></param>
         /// <param name="entityId"></param>
         /// <returns></returns>
-        private void ValidateGetProfileAssetsForGamePostV2(GetAssetsForProfileBodyInputV2 getAssetsForProfileBodyInputV2, string entityId)
+        private void ValidateGetProfileAssetsForGamePostV2(AutomationGetAssetsForProfileBodyInputV2 automationGetAssetsForProfileBodyInputV2, string entityId)
         {
-            if (getAssetsForProfileBodyInputV2 == null)
-                throw new ArgumentNullException(nameof(getAssetsForProfileBodyInputV2));
+            if (automationGetAssetsForProfileBodyInputV2 == null)
+                throw new ArgumentNullException(nameof(automationGetAssetsForProfileBodyInputV2));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -1095,12 +1095,12 @@ namespace BeamAutomationClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="getAssetsForProfileBodyInputV2"></param>
+        /// <param name="automationGetAssetsForProfileBodyInputV2"></param>
         /// <param name="entityId"></param>
-        private void AfterGetProfileAssetsForGamePostV2DefaultImplementation(IGetProfileAssetsForGamePostV2ApiResponse apiResponseLocalVar, GetAssetsForProfileBodyInputV2 getAssetsForProfileBodyInputV2, string entityId)
+        private void AfterGetProfileAssetsForGamePostV2DefaultImplementation(IGetProfileAssetsForGamePostV2ApiResponse apiResponseLocalVar, AutomationGetAssetsForProfileBodyInputV2 automationGetAssetsForProfileBodyInputV2, string entityId)
         {
             bool suppressDefaultLog = false;
-            AfterGetProfileAssetsForGamePostV2(ref suppressDefaultLog, apiResponseLocalVar, getAssetsForProfileBodyInputV2, entityId);
+            AfterGetProfileAssetsForGamePostV2(ref suppressDefaultLog, apiResponseLocalVar, automationGetAssetsForProfileBodyInputV2, entityId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -1110,9 +1110,9 @@ namespace BeamAutomationClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="getAssetsForProfileBodyInputV2"></param>
+        /// <param name="automationGetAssetsForProfileBodyInputV2"></param>
         /// <param name="entityId"></param>
-        partial void AfterGetProfileAssetsForGamePostV2(ref bool suppressDefaultLog, IGetProfileAssetsForGamePostV2ApiResponse apiResponseLocalVar, GetAssetsForProfileBodyInputV2 getAssetsForProfileBodyInputV2, string entityId);
+        partial void AfterGetProfileAssetsForGamePostV2(ref bool suppressDefaultLog, IGetProfileAssetsForGamePostV2ApiResponse apiResponseLocalVar, AutomationGetAssetsForProfileBodyInputV2 automationGetAssetsForProfileBodyInputV2, string entityId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -1120,12 +1120,12 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="getAssetsForProfileBodyInputV2"></param>
+        /// <param name="automationGetAssetsForProfileBodyInputV2"></param>
         /// <param name="entityId"></param>
-        private void OnErrorGetProfileAssetsForGamePostV2DefaultImplementation(Exception exception, string pathFormat, string path, GetAssetsForProfileBodyInputV2 getAssetsForProfileBodyInputV2, string entityId)
+        private void OnErrorGetProfileAssetsForGamePostV2DefaultImplementation(Exception exception, string pathFormat, string path, AutomationGetAssetsForProfileBodyInputV2 automationGetAssetsForProfileBodyInputV2, string entityId)
         {
             bool suppressDefaultLog = false;
-            OnErrorGetProfileAssetsForGamePostV2(ref suppressDefaultLog, exception, pathFormat, path, getAssetsForProfileBodyInputV2, entityId);
+            OnErrorGetProfileAssetsForGamePostV2(ref suppressDefaultLog, exception, pathFormat, path, automationGetAssetsForProfileBodyInputV2, entityId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -1137,22 +1137,22 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="getAssetsForProfileBodyInputV2"></param>
+        /// <param name="automationGetAssetsForProfileBodyInputV2"></param>
         /// <param name="entityId"></param>
-        partial void OnErrorGetProfileAssetsForGamePostV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, GetAssetsForProfileBodyInputV2 getAssetsForProfileBodyInputV2, string entityId);
+        partial void OnErrorGetProfileAssetsForGamePostV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationGetAssetsForProfileBodyInputV2 automationGetAssetsForProfileBodyInputV2, string entityId);
 
         /// <summary>
         /// Get all the assets of a profile (NFT assets, e.g. ERC721 / ERC1155) 
         /// </summary>
-        /// <param name="getAssetsForProfileBodyInputV2"></param>
+        /// <param name="automationGetAssetsForProfileBodyInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetProfileAssetsForGamePostV2ApiResponse"/>&gt;</returns>
-        public async Task<IGetProfileAssetsForGamePostV2ApiResponse?> GetProfileAssetsForGamePostV2OrDefaultAsync(GetAssetsForProfileBodyInputV2 getAssetsForProfileBodyInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetProfileAssetsForGamePostV2ApiResponse?> GetProfileAssetsForGamePostV2OrDefaultAsync(AutomationGetAssetsForProfileBodyInputV2 automationGetAssetsForProfileBodyInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await GetProfileAssetsForGamePostV2Async(getAssetsForProfileBodyInputV2, entityId, cancellationToken).ConfigureAwait(false);
+                return await GetProfileAssetsForGamePostV2Async(automationGetAssetsForProfileBodyInputV2, entityId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -1164,19 +1164,19 @@ namespace BeamAutomationClient.Api
         /// Get all the assets of a profile (NFT assets, e.g. ERC721 / ERC1155) 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="getAssetsForProfileBodyInputV2"></param>
+        /// <param name="automationGetAssetsForProfileBodyInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetProfileAssetsForGamePostV2ApiResponse"/>&gt;</returns>
-        public async Task<IGetProfileAssetsForGamePostV2ApiResponse> GetProfileAssetsForGamePostV2Async(GetAssetsForProfileBodyInputV2 getAssetsForProfileBodyInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetProfileAssetsForGamePostV2ApiResponse> GetProfileAssetsForGamePostV2Async(AutomationGetAssetsForProfileBodyInputV2 automationGetAssetsForProfileBodyInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateGetProfileAssetsForGamePostV2(getAssetsForProfileBodyInputV2, entityId);
+                ValidateGetProfileAssetsForGamePostV2(automationGetAssetsForProfileBodyInputV2, entityId);
 
-                FormatGetProfileAssetsForGamePostV2(getAssetsForProfileBodyInputV2, ref entityId);
+                FormatGetProfileAssetsForGamePostV2(automationGetAssetsForProfileBodyInputV2, ref entityId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -1186,9 +1186,9 @@ namespace BeamAutomationClient.Api
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v2/assets/profiles/{entityId}";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (getAssetsForProfileBodyInputV2 as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (automationGetAssetsForProfileBodyInputV2 as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(getAssetsForProfileBodyInputV2, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationGetAssetsForProfileBodyInputV2, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -1227,7 +1227,7 @@ namespace BeamAutomationClient.Api
 
                         GetProfileAssetsForGamePostV2ApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v2/assets/profiles/{entityId}", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterGetProfileAssetsForGamePostV2DefaultImplementation(apiResponseLocalVar, getAssetsForProfileBodyInputV2, entityId);
+                        AfterGetProfileAssetsForGamePostV2DefaultImplementation(apiResponseLocalVar, automationGetAssetsForProfileBodyInputV2, entityId);
 
                         Events.ExecuteOnGetProfileAssetsForGamePostV2(apiResponseLocalVar);
 
@@ -1241,7 +1241,7 @@ namespace BeamAutomationClient.Api
             }
             catch(Exception e)
             {
-                OnErrorGetProfileAssetsForGamePostV2DefaultImplementation(e, "/v2/assets/profiles/{entityId}", uriBuilderLocalVar.Path, getAssetsForProfileBodyInputV2, entityId);
+                OnErrorGetProfileAssetsForGamePostV2DefaultImplementation(e, "/v2/assets/profiles/{entityId}", uriBuilderLocalVar.Path, automationGetAssetsForProfileBodyInputV2, entityId);
                 Events.ExecuteOnErrorGetProfileAssetsForGamePostV2(e);
                 throw;
             }
@@ -1285,11 +1285,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.GetAssetsForProfileResponseV2? Ok()
+            public BeamAutomationClient.Model.AutomationGetAssetsForProfileResponseV2? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.GetAssetsForProfileResponseV2>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationGetAssetsForProfileResponseV2>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1298,7 +1298,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.GetAssetsForProfileResponseV2? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationGetAssetsForProfileResponseV2? result)
             {
                 result = null;
 
@@ -1525,11 +1525,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.GetProfileCurrenciesResponseV2? Ok()
+            public BeamAutomationClient.Model.AutomationGetProfileCurrenciesResponseV2? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.GetProfileCurrenciesResponseV2>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationGetProfileCurrenciesResponseV2>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1538,7 +1538,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.GetProfileCurrenciesResponseV2? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationGetProfileCurrenciesResponseV2? result)
             {
                 result = null;
 
@@ -1765,11 +1765,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.GetProfileNativeCurrencyResponseV2? Ok()
+            public BeamAutomationClient.Model.AutomationGetProfileNativeCurrencyResponseV2? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.GetProfileNativeCurrencyResponseV2>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationGetProfileNativeCurrencyResponseV2>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1778,7 +1778,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.GetProfileNativeCurrencyResponseV2? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationGetProfileNativeCurrencyResponseV2? result)
             {
                 result = null;
 
@@ -1804,18 +1804,18 @@ namespace BeamAutomationClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatTransferAssetV2(TransferAssetRequestInputV2 transferAssetRequestInputV2, ref string entityId);
+        partial void FormatTransferAssetV2(AutomationTransferAssetRequestInputV2 automationTransferAssetRequestInputV2, ref string entityId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="transferAssetRequestInputV2"></param>
+        /// <param name="automationTransferAssetRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <returns></returns>
-        private void ValidateTransferAssetV2(TransferAssetRequestInputV2 transferAssetRequestInputV2, string entityId)
+        private void ValidateTransferAssetV2(AutomationTransferAssetRequestInputV2 automationTransferAssetRequestInputV2, string entityId)
         {
-            if (transferAssetRequestInputV2 == null)
-                throw new ArgumentNullException(nameof(transferAssetRequestInputV2));
+            if (automationTransferAssetRequestInputV2 == null)
+                throw new ArgumentNullException(nameof(automationTransferAssetRequestInputV2));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -1825,12 +1825,12 @@ namespace BeamAutomationClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="transferAssetRequestInputV2"></param>
+        /// <param name="automationTransferAssetRequestInputV2"></param>
         /// <param name="entityId"></param>
-        private void AfterTransferAssetV2DefaultImplementation(ITransferAssetV2ApiResponse apiResponseLocalVar, TransferAssetRequestInputV2 transferAssetRequestInputV2, string entityId)
+        private void AfterTransferAssetV2DefaultImplementation(ITransferAssetV2ApiResponse apiResponseLocalVar, AutomationTransferAssetRequestInputV2 automationTransferAssetRequestInputV2, string entityId)
         {
             bool suppressDefaultLog = false;
-            AfterTransferAssetV2(ref suppressDefaultLog, apiResponseLocalVar, transferAssetRequestInputV2, entityId);
+            AfterTransferAssetV2(ref suppressDefaultLog, apiResponseLocalVar, automationTransferAssetRequestInputV2, entityId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -1840,9 +1840,9 @@ namespace BeamAutomationClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="transferAssetRequestInputV2"></param>
+        /// <param name="automationTransferAssetRequestInputV2"></param>
         /// <param name="entityId"></param>
-        partial void AfterTransferAssetV2(ref bool suppressDefaultLog, ITransferAssetV2ApiResponse apiResponseLocalVar, TransferAssetRequestInputV2 transferAssetRequestInputV2, string entityId);
+        partial void AfterTransferAssetV2(ref bool suppressDefaultLog, ITransferAssetV2ApiResponse apiResponseLocalVar, AutomationTransferAssetRequestInputV2 automationTransferAssetRequestInputV2, string entityId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -1850,12 +1850,12 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="transferAssetRequestInputV2"></param>
+        /// <param name="automationTransferAssetRequestInputV2"></param>
         /// <param name="entityId"></param>
-        private void OnErrorTransferAssetV2DefaultImplementation(Exception exception, string pathFormat, string path, TransferAssetRequestInputV2 transferAssetRequestInputV2, string entityId)
+        private void OnErrorTransferAssetV2DefaultImplementation(Exception exception, string pathFormat, string path, AutomationTransferAssetRequestInputV2 automationTransferAssetRequestInputV2, string entityId)
         {
             bool suppressDefaultLog = false;
-            OnErrorTransferAssetV2(ref suppressDefaultLog, exception, pathFormat, path, transferAssetRequestInputV2, entityId);
+            OnErrorTransferAssetV2(ref suppressDefaultLog, exception, pathFormat, path, automationTransferAssetRequestInputV2, entityId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -1867,22 +1867,22 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="transferAssetRequestInputV2"></param>
+        /// <param name="automationTransferAssetRequestInputV2"></param>
         /// <param name="entityId"></param>
-        partial void OnErrorTransferAssetV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, TransferAssetRequestInputV2 transferAssetRequestInputV2, string entityId);
+        partial void OnErrorTransferAssetV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationTransferAssetRequestInputV2 automationTransferAssetRequestInputV2, string entityId);
 
         /// <summary>
         /// Transfer an asset (NFT assets, ERC721 / ERC1155) 
         /// </summary>
-        /// <param name="transferAssetRequestInputV2"></param>
+        /// <param name="automationTransferAssetRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ITransferAssetV2ApiResponse"/>&gt;</returns>
-        public async Task<ITransferAssetV2ApiResponse?> TransferAssetV2OrDefaultAsync(TransferAssetRequestInputV2 transferAssetRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ITransferAssetV2ApiResponse?> TransferAssetV2OrDefaultAsync(AutomationTransferAssetRequestInputV2 automationTransferAssetRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await TransferAssetV2Async(transferAssetRequestInputV2, entityId, cancellationToken).ConfigureAwait(false);
+                return await TransferAssetV2Async(automationTransferAssetRequestInputV2, entityId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -1894,19 +1894,19 @@ namespace BeamAutomationClient.Api
         /// Transfer an asset (NFT assets, ERC721 / ERC1155) 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="transferAssetRequestInputV2"></param>
+        /// <param name="automationTransferAssetRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ITransferAssetV2ApiResponse"/>&gt;</returns>
-        public async Task<ITransferAssetV2ApiResponse> TransferAssetV2Async(TransferAssetRequestInputV2 transferAssetRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ITransferAssetV2ApiResponse> TransferAssetV2Async(AutomationTransferAssetRequestInputV2 automationTransferAssetRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateTransferAssetV2(transferAssetRequestInputV2, entityId);
+                ValidateTransferAssetV2(automationTransferAssetRequestInputV2, entityId);
 
-                FormatTransferAssetV2(transferAssetRequestInputV2, ref entityId);
+                FormatTransferAssetV2(automationTransferAssetRequestInputV2, ref entityId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -1916,9 +1916,9 @@ namespace BeamAutomationClient.Api
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v2/assets/profiles/{entityId}/transfer-asset";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (transferAssetRequestInputV2 as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (automationTransferAssetRequestInputV2 as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(transferAssetRequestInputV2, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationTransferAssetRequestInputV2, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -1957,7 +1957,7 @@ namespace BeamAutomationClient.Api
 
                         TransferAssetV2ApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v2/assets/profiles/{entityId}/transfer-asset", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterTransferAssetV2DefaultImplementation(apiResponseLocalVar, transferAssetRequestInputV2, entityId);
+                        AfterTransferAssetV2DefaultImplementation(apiResponseLocalVar, automationTransferAssetRequestInputV2, entityId);
 
                         Events.ExecuteOnTransferAssetV2(apiResponseLocalVar);
 
@@ -1971,7 +1971,7 @@ namespace BeamAutomationClient.Api
             }
             catch(Exception e)
             {
-                OnErrorTransferAssetV2DefaultImplementation(e, "/v2/assets/profiles/{entityId}/transfer-asset", uriBuilderLocalVar.Path, transferAssetRequestInputV2, entityId);
+                OnErrorTransferAssetV2DefaultImplementation(e, "/v2/assets/profiles/{entityId}/transfer-asset", uriBuilderLocalVar.Path, automationTransferAssetRequestInputV2, entityId);
                 Events.ExecuteOnErrorTransferAssetV2(e);
                 throw;
             }
@@ -2015,11 +2015,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.TransferAssetResponseV2? Created()
+            public BeamAutomationClient.Model.AutomationTransferAssetResponseV2? Created()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsCreated
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.TransferAssetResponseV2>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationTransferAssetResponseV2>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -2028,7 +2028,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryCreated([NotNullWhen(true)]out BeamAutomationClient.Model.TransferAssetResponseV2? result)
+            public bool TryCreated([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationTransferAssetResponseV2? result)
             {
                 result = null;
 
@@ -2054,18 +2054,18 @@ namespace BeamAutomationClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatTransferNativeTokenV2(TransferNativeTokenRequestInputV2 transferNativeTokenRequestInputV2, ref string entityId);
+        partial void FormatTransferNativeTokenV2(AutomationTransferNativeTokenRequestInputV2 automationTransferNativeTokenRequestInputV2, ref string entityId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="transferNativeTokenRequestInputV2"></param>
+        /// <param name="automationTransferNativeTokenRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <returns></returns>
-        private void ValidateTransferNativeTokenV2(TransferNativeTokenRequestInputV2 transferNativeTokenRequestInputV2, string entityId)
+        private void ValidateTransferNativeTokenV2(AutomationTransferNativeTokenRequestInputV2 automationTransferNativeTokenRequestInputV2, string entityId)
         {
-            if (transferNativeTokenRequestInputV2 == null)
-                throw new ArgumentNullException(nameof(transferNativeTokenRequestInputV2));
+            if (automationTransferNativeTokenRequestInputV2 == null)
+                throw new ArgumentNullException(nameof(automationTransferNativeTokenRequestInputV2));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -2075,12 +2075,12 @@ namespace BeamAutomationClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="transferNativeTokenRequestInputV2"></param>
+        /// <param name="automationTransferNativeTokenRequestInputV2"></param>
         /// <param name="entityId"></param>
-        private void AfterTransferNativeTokenV2DefaultImplementation(ITransferNativeTokenV2ApiResponse apiResponseLocalVar, TransferNativeTokenRequestInputV2 transferNativeTokenRequestInputV2, string entityId)
+        private void AfterTransferNativeTokenV2DefaultImplementation(ITransferNativeTokenV2ApiResponse apiResponseLocalVar, AutomationTransferNativeTokenRequestInputV2 automationTransferNativeTokenRequestInputV2, string entityId)
         {
             bool suppressDefaultLog = false;
-            AfterTransferNativeTokenV2(ref suppressDefaultLog, apiResponseLocalVar, transferNativeTokenRequestInputV2, entityId);
+            AfterTransferNativeTokenV2(ref suppressDefaultLog, apiResponseLocalVar, automationTransferNativeTokenRequestInputV2, entityId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -2090,9 +2090,9 @@ namespace BeamAutomationClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="transferNativeTokenRequestInputV2"></param>
+        /// <param name="automationTransferNativeTokenRequestInputV2"></param>
         /// <param name="entityId"></param>
-        partial void AfterTransferNativeTokenV2(ref bool suppressDefaultLog, ITransferNativeTokenV2ApiResponse apiResponseLocalVar, TransferNativeTokenRequestInputV2 transferNativeTokenRequestInputV2, string entityId);
+        partial void AfterTransferNativeTokenV2(ref bool suppressDefaultLog, ITransferNativeTokenV2ApiResponse apiResponseLocalVar, AutomationTransferNativeTokenRequestInputV2 automationTransferNativeTokenRequestInputV2, string entityId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -2100,12 +2100,12 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="transferNativeTokenRequestInputV2"></param>
+        /// <param name="automationTransferNativeTokenRequestInputV2"></param>
         /// <param name="entityId"></param>
-        private void OnErrorTransferNativeTokenV2DefaultImplementation(Exception exception, string pathFormat, string path, TransferNativeTokenRequestInputV2 transferNativeTokenRequestInputV2, string entityId)
+        private void OnErrorTransferNativeTokenV2DefaultImplementation(Exception exception, string pathFormat, string path, AutomationTransferNativeTokenRequestInputV2 automationTransferNativeTokenRequestInputV2, string entityId)
         {
             bool suppressDefaultLog = false;
-            OnErrorTransferNativeTokenV2(ref suppressDefaultLog, exception, pathFormat, path, transferNativeTokenRequestInputV2, entityId);
+            OnErrorTransferNativeTokenV2(ref suppressDefaultLog, exception, pathFormat, path, automationTransferNativeTokenRequestInputV2, entityId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -2117,22 +2117,22 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="transferNativeTokenRequestInputV2"></param>
+        /// <param name="automationTransferNativeTokenRequestInputV2"></param>
         /// <param name="entityId"></param>
-        partial void OnErrorTransferNativeTokenV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, TransferNativeTokenRequestInputV2 transferNativeTokenRequestInputV2, string entityId);
+        partial void OnErrorTransferNativeTokenV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationTransferNativeTokenRequestInputV2 automationTransferNativeTokenRequestInputV2, string entityId);
 
         /// <summary>
         /// Transfer the native token 
         /// </summary>
-        /// <param name="transferNativeTokenRequestInputV2"></param>
+        /// <param name="automationTransferNativeTokenRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ITransferNativeTokenV2ApiResponse"/>&gt;</returns>
-        public async Task<ITransferNativeTokenV2ApiResponse?> TransferNativeTokenV2OrDefaultAsync(TransferNativeTokenRequestInputV2 transferNativeTokenRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ITransferNativeTokenV2ApiResponse?> TransferNativeTokenV2OrDefaultAsync(AutomationTransferNativeTokenRequestInputV2 automationTransferNativeTokenRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await TransferNativeTokenV2Async(transferNativeTokenRequestInputV2, entityId, cancellationToken).ConfigureAwait(false);
+                return await TransferNativeTokenV2Async(automationTransferNativeTokenRequestInputV2, entityId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -2144,19 +2144,19 @@ namespace BeamAutomationClient.Api
         /// Transfer the native token 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="transferNativeTokenRequestInputV2"></param>
+        /// <param name="automationTransferNativeTokenRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ITransferNativeTokenV2ApiResponse"/>&gt;</returns>
-        public async Task<ITransferNativeTokenV2ApiResponse> TransferNativeTokenV2Async(TransferNativeTokenRequestInputV2 transferNativeTokenRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ITransferNativeTokenV2ApiResponse> TransferNativeTokenV2Async(AutomationTransferNativeTokenRequestInputV2 automationTransferNativeTokenRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateTransferNativeTokenV2(transferNativeTokenRequestInputV2, entityId);
+                ValidateTransferNativeTokenV2(automationTransferNativeTokenRequestInputV2, entityId);
 
-                FormatTransferNativeTokenV2(transferNativeTokenRequestInputV2, ref entityId);
+                FormatTransferNativeTokenV2(automationTransferNativeTokenRequestInputV2, ref entityId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -2166,9 +2166,9 @@ namespace BeamAutomationClient.Api
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v2/assets/profiles/{entityId}/transfer-native";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (transferNativeTokenRequestInputV2 as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (automationTransferNativeTokenRequestInputV2 as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(transferNativeTokenRequestInputV2, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationTransferNativeTokenRequestInputV2, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -2207,7 +2207,7 @@ namespace BeamAutomationClient.Api
 
                         TransferNativeTokenV2ApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v2/assets/profiles/{entityId}/transfer-native", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterTransferNativeTokenV2DefaultImplementation(apiResponseLocalVar, transferNativeTokenRequestInputV2, entityId);
+                        AfterTransferNativeTokenV2DefaultImplementation(apiResponseLocalVar, automationTransferNativeTokenRequestInputV2, entityId);
 
                         Events.ExecuteOnTransferNativeTokenV2(apiResponseLocalVar);
 
@@ -2221,7 +2221,7 @@ namespace BeamAutomationClient.Api
             }
             catch(Exception e)
             {
-                OnErrorTransferNativeTokenV2DefaultImplementation(e, "/v2/assets/profiles/{entityId}/transfer-native", uriBuilderLocalVar.Path, transferNativeTokenRequestInputV2, entityId);
+                OnErrorTransferNativeTokenV2DefaultImplementation(e, "/v2/assets/profiles/{entityId}/transfer-native", uriBuilderLocalVar.Path, automationTransferNativeTokenRequestInputV2, entityId);
                 Events.ExecuteOnErrorTransferNativeTokenV2(e);
                 throw;
             }
@@ -2265,11 +2265,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.TransferTokenResponseV2? Created()
+            public BeamAutomationClient.Model.AutomationTransferTokenResponseV2? Created()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsCreated
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.TransferTokenResponseV2>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationTransferTokenResponseV2>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -2278,7 +2278,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryCreated([NotNullWhen(true)]out BeamAutomationClient.Model.TransferTokenResponseV2? result)
+            public bool TryCreated([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationTransferTokenResponseV2? result)
             {
                 result = null;
 
@@ -2304,18 +2304,18 @@ namespace BeamAutomationClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatTransferTokenV2(TransferTokenRequestInputV2 transferTokenRequestInputV2, ref string entityId);
+        partial void FormatTransferTokenV2(AutomationTransferTokenRequestInputV2 automationTransferTokenRequestInputV2, ref string entityId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="transferTokenRequestInputV2"></param>
+        /// <param name="automationTransferTokenRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <returns></returns>
-        private void ValidateTransferTokenV2(TransferTokenRequestInputV2 transferTokenRequestInputV2, string entityId)
+        private void ValidateTransferTokenV2(AutomationTransferTokenRequestInputV2 automationTransferTokenRequestInputV2, string entityId)
         {
-            if (transferTokenRequestInputV2 == null)
-                throw new ArgumentNullException(nameof(transferTokenRequestInputV2));
+            if (automationTransferTokenRequestInputV2 == null)
+                throw new ArgumentNullException(nameof(automationTransferTokenRequestInputV2));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -2325,12 +2325,12 @@ namespace BeamAutomationClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="transferTokenRequestInputV2"></param>
+        /// <param name="automationTransferTokenRequestInputV2"></param>
         /// <param name="entityId"></param>
-        private void AfterTransferTokenV2DefaultImplementation(ITransferTokenV2ApiResponse apiResponseLocalVar, TransferTokenRequestInputV2 transferTokenRequestInputV2, string entityId)
+        private void AfterTransferTokenV2DefaultImplementation(ITransferTokenV2ApiResponse apiResponseLocalVar, AutomationTransferTokenRequestInputV2 automationTransferTokenRequestInputV2, string entityId)
         {
             bool suppressDefaultLog = false;
-            AfterTransferTokenV2(ref suppressDefaultLog, apiResponseLocalVar, transferTokenRequestInputV2, entityId);
+            AfterTransferTokenV2(ref suppressDefaultLog, apiResponseLocalVar, automationTransferTokenRequestInputV2, entityId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -2340,9 +2340,9 @@ namespace BeamAutomationClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="transferTokenRequestInputV2"></param>
+        /// <param name="automationTransferTokenRequestInputV2"></param>
         /// <param name="entityId"></param>
-        partial void AfterTransferTokenV2(ref bool suppressDefaultLog, ITransferTokenV2ApiResponse apiResponseLocalVar, TransferTokenRequestInputV2 transferTokenRequestInputV2, string entityId);
+        partial void AfterTransferTokenV2(ref bool suppressDefaultLog, ITransferTokenV2ApiResponse apiResponseLocalVar, AutomationTransferTokenRequestInputV2 automationTransferTokenRequestInputV2, string entityId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -2350,12 +2350,12 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="transferTokenRequestInputV2"></param>
+        /// <param name="automationTransferTokenRequestInputV2"></param>
         /// <param name="entityId"></param>
-        private void OnErrorTransferTokenV2DefaultImplementation(Exception exception, string pathFormat, string path, TransferTokenRequestInputV2 transferTokenRequestInputV2, string entityId)
+        private void OnErrorTransferTokenV2DefaultImplementation(Exception exception, string pathFormat, string path, AutomationTransferTokenRequestInputV2 automationTransferTokenRequestInputV2, string entityId)
         {
             bool suppressDefaultLog = false;
-            OnErrorTransferTokenV2(ref suppressDefaultLog, exception, pathFormat, path, transferTokenRequestInputV2, entityId);
+            OnErrorTransferTokenV2(ref suppressDefaultLog, exception, pathFormat, path, automationTransferTokenRequestInputV2, entityId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -2367,22 +2367,22 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="transferTokenRequestInputV2"></param>
+        /// <param name="automationTransferTokenRequestInputV2"></param>
         /// <param name="entityId"></param>
-        partial void OnErrorTransferTokenV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, TransferTokenRequestInputV2 transferTokenRequestInputV2, string entityId);
+        partial void OnErrorTransferTokenV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationTransferTokenRequestInputV2 automationTransferTokenRequestInputV2, string entityId);
 
         /// <summary>
         /// Transfer a token (token assets, ERC20) 
         /// </summary>
-        /// <param name="transferTokenRequestInputV2"></param>
+        /// <param name="automationTransferTokenRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ITransferTokenV2ApiResponse"/>&gt;</returns>
-        public async Task<ITransferTokenV2ApiResponse?> TransferTokenV2OrDefaultAsync(TransferTokenRequestInputV2 transferTokenRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ITransferTokenV2ApiResponse?> TransferTokenV2OrDefaultAsync(AutomationTransferTokenRequestInputV2 automationTransferTokenRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await TransferTokenV2Async(transferTokenRequestInputV2, entityId, cancellationToken).ConfigureAwait(false);
+                return await TransferTokenV2Async(automationTransferTokenRequestInputV2, entityId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -2394,19 +2394,19 @@ namespace BeamAutomationClient.Api
         /// Transfer a token (token assets, ERC20) 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="transferTokenRequestInputV2"></param>
+        /// <param name="automationTransferTokenRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ITransferTokenV2ApiResponse"/>&gt;</returns>
-        public async Task<ITransferTokenV2ApiResponse> TransferTokenV2Async(TransferTokenRequestInputV2 transferTokenRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ITransferTokenV2ApiResponse> TransferTokenV2Async(AutomationTransferTokenRequestInputV2 automationTransferTokenRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateTransferTokenV2(transferTokenRequestInputV2, entityId);
+                ValidateTransferTokenV2(automationTransferTokenRequestInputV2, entityId);
 
-                FormatTransferTokenV2(transferTokenRequestInputV2, ref entityId);
+                FormatTransferTokenV2(automationTransferTokenRequestInputV2, ref entityId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -2416,9 +2416,9 @@ namespace BeamAutomationClient.Api
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v2/assets/profiles/{entityId}/transfer-token";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (transferTokenRequestInputV2 as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (automationTransferTokenRequestInputV2 as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(transferTokenRequestInputV2, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationTransferTokenRequestInputV2, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -2457,7 +2457,7 @@ namespace BeamAutomationClient.Api
 
                         TransferTokenV2ApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v2/assets/profiles/{entityId}/transfer-token", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterTransferTokenV2DefaultImplementation(apiResponseLocalVar, transferTokenRequestInputV2, entityId);
+                        AfterTransferTokenV2DefaultImplementation(apiResponseLocalVar, automationTransferTokenRequestInputV2, entityId);
 
                         Events.ExecuteOnTransferTokenV2(apiResponseLocalVar);
 
@@ -2471,7 +2471,7 @@ namespace BeamAutomationClient.Api
             }
             catch(Exception e)
             {
-                OnErrorTransferTokenV2DefaultImplementation(e, "/v2/assets/profiles/{entityId}/transfer-token", uriBuilderLocalVar.Path, transferTokenRequestInputV2, entityId);
+                OnErrorTransferTokenV2DefaultImplementation(e, "/v2/assets/profiles/{entityId}/transfer-token", uriBuilderLocalVar.Path, automationTransferTokenRequestInputV2, entityId);
                 Events.ExecuteOnErrorTransferTokenV2(e);
                 throw;
             }
@@ -2515,11 +2515,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.TransferTokenResponseV2? Created()
+            public BeamAutomationClient.Model.AutomationTransferTokenResponseV2? Created()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsCreated
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.TransferTokenResponseV2>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationTransferTokenResponseV2>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -2528,7 +2528,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryCreated([NotNullWhen(true)]out BeamAutomationClient.Model.TransferTokenResponseV2? result)
+            public bool TryCreated([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationTransferTokenResponseV2? result)
             {
                 result = null;
 

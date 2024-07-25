@@ -28,12 +28,12 @@ namespace BeamAutomationClient.Api
     /// Represents a collection of functions to interact with the API endpoints
     /// This class is registered as transient.
     /// </summary>
-    public interface IReportingApi : IApi
+    public interface IAutomationReportingApi : IAutomationApi
     {
         /// <summary>
         /// The class containing the events
         /// </summary>
-        ReportingApiEvents Events { get; }
+        AutomationReportingApiEvents Events { get; }
 
         /// <summary>
         /// Get gas usage from a single policy
@@ -106,7 +106,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IGetPolicyUsageApiResponse"/>
     /// </summary>
-    public interface IGetPolicyUsageApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.GetPolicyUsageResponse?>
+    public interface IGetPolicyUsageApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetPolicyUsageResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -118,7 +118,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IGetTotalGameUsageApiResponse"/>
     /// </summary>
-    public interface IGetTotalGameUsageApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.GetAllGasUsageResponse?>
+    public interface IGetTotalGameUsageApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetAllGasUsageResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -130,7 +130,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IGetTotalGameUsageByChainApiResponse"/>
     /// </summary>
-    public interface IGetTotalGameUsageByChainApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.GetGasUsageResponse?>
+    public interface IGetTotalGameUsageByChainApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetGasUsageResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -142,7 +142,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public class ReportingApiEvents
+    public class AutomationReportingApiEvents
     {
         /// <summary>
         /// The event raised after the server response
@@ -154,7 +154,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetPolicyUsage;
 
-        internal void ExecuteOnGetPolicyUsage(ReportingApi.GetPolicyUsageApiResponse apiResponse)
+        internal void ExecuteOnGetPolicyUsage(AutomationReportingApi.GetPolicyUsageApiResponse apiResponse)
         {
             OnGetPolicyUsage?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -174,7 +174,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetTotalGameUsage;
 
-        internal void ExecuteOnGetTotalGameUsage(ReportingApi.GetTotalGameUsageApiResponse apiResponse)
+        internal void ExecuteOnGetTotalGameUsage(AutomationReportingApi.GetTotalGameUsageApiResponse apiResponse)
         {
             OnGetTotalGameUsage?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -194,7 +194,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetTotalGameUsageByChain;
 
-        internal void ExecuteOnGetTotalGameUsageByChain(ReportingApi.GetTotalGameUsageByChainApiResponse apiResponse)
+        internal void ExecuteOnGetTotalGameUsageByChain(AutomationReportingApi.GetTotalGameUsageByChainApiResponse apiResponse)
         {
             OnGetTotalGameUsageByChain?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -208,7 +208,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public sealed partial class ReportingApi : IReportingApi
+    public sealed partial class AutomationReportingApi : IAutomationReportingApi
     {
         private JsonSerializerOptions _jsonSerializerOptions;
 
@@ -220,7 +220,7 @@ namespace BeamAutomationClient.Api
         /// <summary>
         /// The logger
         /// </summary>
-        public ILogger<ReportingApi> Logger { get; }
+        public ILogger<AutomationReportingApi> Logger { get; }
 
         /// <summary>
         /// The HttpClient
@@ -230,7 +230,7 @@ namespace BeamAutomationClient.Api
         /// <summary>
         /// The class containing the events
         /// </summary>
-        public ReportingApiEvents Events { get; }
+        public AutomationReportingApiEvents Events { get; }
 
         /// <summary>
         /// A token provider of type <see cref="ApiKeyProvider"/>
@@ -238,17 +238,17 @@ namespace BeamAutomationClient.Api
         public TokenProvider<ApiKeyToken> ApiKeyProvider { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ReportingApi"/> class.
+        /// Initializes a new instance of the <see cref="AutomationReportingApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public ReportingApi(ILogger<ReportingApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, ReportingApiEvents reportingApiEvents,
+        public AutomationReportingApi(ILogger<AutomationReportingApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, AutomationJsonSerializerOptionsProvider jsonSerializerOptionsProvider, AutomationReportingApiEvents automationReportingApiEvents,
             TokenProvider<ApiKeyToken> apiKeyProvider)
         {
             _jsonSerializerOptions = jsonSerializerOptionsProvider.Options;
             LoggerFactory = loggerFactory;
-            Logger = LoggerFactory.CreateLogger<ReportingApi>();
+            Logger = LoggerFactory.CreateLogger<AutomationReportingApi>();
             HttpClient = httpClient;
-            Events = reportingApiEvents;
+            Events = automationReportingApiEvents;
             ApiKeyProvider = apiKeyProvider;
         }
 
@@ -440,11 +440,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.GetPolicyUsageResponse? Ok()
+            public BeamAutomationClient.Model.AutomationGetPolicyUsageResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.GetPolicyUsageResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationGetPolicyUsageResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -453,7 +453,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.GetPolicyUsageResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationGetPolicyUsageResponse? result)
             {
                 result = null;
 
@@ -643,11 +643,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.GetAllGasUsageResponse? Ok()
+            public BeamAutomationClient.Model.AutomationGetAllGasUsageResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.GetAllGasUsageResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationGetAllGasUsageResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -656,7 +656,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.GetAllGasUsageResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationGetAllGasUsageResponse? result)
             {
                 result = null;
 
@@ -857,11 +857,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.GetGasUsageResponse? Ok()
+            public BeamAutomationClient.Model.AutomationGetGasUsageResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.GetGasUsageResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationGetGasUsageResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -870,7 +870,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.GetGasUsageResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationGetGasUsageResponse? result)
             {
                 result = null;
 

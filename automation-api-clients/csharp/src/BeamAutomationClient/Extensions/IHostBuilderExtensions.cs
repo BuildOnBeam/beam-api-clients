@@ -27,11 +27,11 @@ namespace BeamAutomationClient.Extensions
         /// <param name="builder"></param>
         /// <param name="options"></param>
         [Obsolete("Use ConfigureBeamAutomationApi")]
-        public static IHostBuilder ConfigureApi(this IHostBuilder builder, Action<HostBuilderContext, IServiceCollection, HostConfiguration> options)
+        public static IHostBuilder ConfigureApi(this IHostBuilder builder, Action<HostBuilderContext, IServiceCollection, AutomationHostConfiguration> options)
         {
-            builder.ConfigureServices((context, services) => 
+            builder.ConfigureServices((context, services) =>
             {
-                HostConfiguration config = new HostConfiguration(services);
+                AutomationHostConfiguration config = new AutomationHostConfiguration(services);
 
                 options(context, services, config);
 
@@ -46,11 +46,11 @@ namespace BeamAutomationClient.Extensions
         /// </summary>
         /// <param name="builder"></param>
         /// <param name="options"></param>
-        public static IHostBuilder ConfigureBeamAutomationApi(this IHostBuilder builder, Action<HostBuilderContext, IServiceCollection, HostConfiguration> options)
+        public static IHostBuilder ConfigureBeamAutomationApi(this IHostBuilder builder, Action<HostBuilderContext, IServiceCollection, AutomationHostConfiguration> options)
         {
-            builder.ConfigureServices((context, services) => 
+            builder.ConfigureServices((context, services) =>
             {
-                HostConfiguration config = new HostConfiguration(services);
+                AutomationHostConfiguration config = new AutomationHostConfiguration(services);
 
                 options(context, services, config);
 

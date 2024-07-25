@@ -13,5 +13,13 @@ export type ConvertTokenRequestInput = {
   sponsor?: boolean;
   policyId?: string | null;
   chainId?: number;
+  operationProcessing?: ConvertTokenRequestInput.operationProcessing;
   operationId?: string | null;
 };
+
+export namespace ConvertTokenRequestInput {
+  export enum operationProcessing {
+    SIGN_ONLY = 'SignOnly',
+    EXECUTE = 'Execute',
+  }
+}

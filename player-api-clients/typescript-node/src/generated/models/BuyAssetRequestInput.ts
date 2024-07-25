@@ -9,5 +9,13 @@ export type BuyAssetRequestInput = {
   sponsor?: boolean;
   policyId?: string | null;
   chainId?: number;
+  operationProcessing?: BuyAssetRequestInput.operationProcessing;
   operationId?: string | null;
 };
+
+export namespace BuyAssetRequestInput {
+  export enum operationProcessing {
+    SIGN_ONLY = 'SignOnly',
+    EXECUTE = 'Execute',
+  }
+}

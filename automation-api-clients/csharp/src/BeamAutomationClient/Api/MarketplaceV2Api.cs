@@ -28,12 +28,12 @@ namespace BeamAutomationClient.Api
     /// Represents a collection of functions to interact with the API endpoints
     /// This class is registered as transient.
     /// </summary>
-    public interface IMarketplaceV2Api : IApi
+    public interface IAutomationMarketplaceV2Api : IAutomationApi
     {
         /// <summary>
         /// The class containing the events
         /// </summary>
-        MarketplaceV2ApiEvents Events { get; }
+        AutomationMarketplaceV2ApiEvents Events { get; }
 
         /// <summary>
         /// Accept an offer for an asset
@@ -42,12 +42,12 @@ namespace BeamAutomationClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="acceptAssetOfferRequestInputV2"></param>
+        /// <param name="automationAcceptAssetOfferRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IAcceptAssetOfferV2ApiResponse"/>&gt;</returns>
-        Task<IAcceptAssetOfferV2ApiResponse> AcceptAssetOfferV2Async(AcceptAssetOfferRequestInputV2 acceptAssetOfferRequestInputV2, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IAcceptAssetOfferV2ApiResponse> AcceptAssetOfferV2Async(AutomationAcceptAssetOfferRequestInputV2 automationAcceptAssetOfferRequestInputV2, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Accept an offer for an asset
@@ -55,12 +55,12 @@ namespace BeamAutomationClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="acceptAssetOfferRequestInputV2"></param>
+        /// <param name="automationAcceptAssetOfferRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IAcceptAssetOfferV2ApiResponse"/>?&gt;</returns>
-        Task<IAcceptAssetOfferV2ApiResponse?> AcceptAssetOfferV2OrDefaultAsync(AcceptAssetOfferRequestInputV2 acceptAssetOfferRequestInputV2, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IAcceptAssetOfferV2ApiResponse?> AcceptAssetOfferV2OrDefaultAsync(AutomationAcceptAssetOfferRequestInputV2 automationAcceptAssetOfferRequestInputV2, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Buy listed asset
@@ -69,12 +69,12 @@ namespace BeamAutomationClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="buyAssetRequestInputV2"></param>
+        /// <param name="automationBuyAssetRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IBuyListedAssetV2ApiResponse"/>&gt;</returns>
-        Task<IBuyListedAssetV2ApiResponse> BuyListedAssetV2Async(BuyAssetRequestInputV2 buyAssetRequestInputV2, string entityId, string orderId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IBuyListedAssetV2ApiResponse> BuyListedAssetV2Async(AutomationBuyAssetRequestInputV2 automationBuyAssetRequestInputV2, string entityId, string orderId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Buy listed asset
@@ -82,12 +82,12 @@ namespace BeamAutomationClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="buyAssetRequestInputV2"></param>
+        /// <param name="automationBuyAssetRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IBuyListedAssetV2ApiResponse"/>?&gt;</returns>
-        Task<IBuyListedAssetV2ApiResponse?> BuyListedAssetV2OrDefaultAsync(BuyAssetRequestInputV2 buyAssetRequestInputV2, string entityId, string orderId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IBuyListedAssetV2ApiResponse?> BuyListedAssetV2OrDefaultAsync(AutomationBuyAssetRequestInputV2 automationBuyAssetRequestInputV2, string entityId, string orderId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Cancel an offer for an asset
@@ -96,12 +96,12 @@ namespace BeamAutomationClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="cancelAssetOfferRequestInputV2"></param>
+        /// <param name="automationCancelAssetOfferRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICancelAssetOfferV2ApiResponse"/>&gt;</returns>
-        Task<ICancelAssetOfferV2ApiResponse> CancelAssetOfferV2Async(CancelAssetOfferRequestInputV2 cancelAssetOfferRequestInputV2, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICancelAssetOfferV2ApiResponse> CancelAssetOfferV2Async(AutomationCancelAssetOfferRequestInputV2 automationCancelAssetOfferRequestInputV2, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Cancel an offer for an asset
@@ -109,12 +109,12 @@ namespace BeamAutomationClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="cancelAssetOfferRequestInputV2"></param>
+        /// <param name="automationCancelAssetOfferRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICancelAssetOfferV2ApiResponse"/>?&gt;</returns>
-        Task<ICancelAssetOfferV2ApiResponse?> CancelAssetOfferV2OrDefaultAsync(CancelAssetOfferRequestInputV2 cancelAssetOfferRequestInputV2, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICancelAssetOfferV2ApiResponse?> CancelAssetOfferV2OrDefaultAsync(AutomationCancelAssetOfferRequestInputV2 automationCancelAssetOfferRequestInputV2, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Cancel asset listing
@@ -123,13 +123,13 @@ namespace BeamAutomationClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="cancelAssetListingRequestInputV2"></param>
+        /// <param name="automationCancelAssetListingRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICancelListingV2ApiResponse"/>&gt;</returns>
-        Task<ICancelListingV2ApiResponse> CancelListingV2Async(CancelAssetListingRequestInputV2 cancelAssetListingRequestInputV2, string entityId, string orderId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICancelListingV2ApiResponse> CancelListingV2Async(AutomationCancelAssetListingRequestInputV2 automationCancelAssetListingRequestInputV2, string entityId, string orderId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Cancel asset listing
@@ -137,13 +137,13 @@ namespace BeamAutomationClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="cancelAssetListingRequestInputV2"></param>
+        /// <param name="automationCancelAssetListingRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICancelListingV2ApiResponse"/>?&gt;</returns>
-        Task<ICancelListingV2ApiResponse?> CancelListingV2OrDefaultAsync(CancelAssetListingRequestInputV2 cancelAssetListingRequestInputV2, string entityId, string orderId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICancelListingV2ApiResponse?> CancelListingV2OrDefaultAsync(AutomationCancelAssetListingRequestInputV2 automationCancelAssetListingRequestInputV2, string entityId, string orderId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Make an offer for an asset
@@ -152,11 +152,11 @@ namespace BeamAutomationClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="createAssetOfferRequestInputV2"></param>
+        /// <param name="automationCreateAssetOfferRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateAssetOfferV2ApiResponse"/>&gt;</returns>
-        Task<ICreateAssetOfferV2ApiResponse> CreateAssetOfferV2Async(CreateAssetOfferRequestInputV2 createAssetOfferRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICreateAssetOfferV2ApiResponse> CreateAssetOfferV2Async(AutomationCreateAssetOfferRequestInputV2 automationCreateAssetOfferRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Make an offer for an asset
@@ -164,11 +164,11 @@ namespace BeamAutomationClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="createAssetOfferRequestInputV2"></param>
+        /// <param name="automationCreateAssetOfferRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateAssetOfferV2ApiResponse"/>?&gt;</returns>
-        Task<ICreateAssetOfferV2ApiResponse?> CreateAssetOfferV2OrDefaultAsync(CreateAssetOfferRequestInputV2 createAssetOfferRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICreateAssetOfferV2ApiResponse?> CreateAssetOfferV2OrDefaultAsync(AutomationCreateAssetOfferRequestInputV2 automationCreateAssetOfferRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all offers for an asset
@@ -229,11 +229,11 @@ namespace BeamAutomationClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="getListedAssetsBodyInputV2"></param>
+        /// <param name="automationGetListedAssetsBodyInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetListedAssetsForProfilePostV2ApiResponse"/>&gt;</returns>
-        Task<IGetListedAssetsForProfilePostV2ApiResponse> GetListedAssetsForProfilePostV2Async(GetListedAssetsBodyInputV2 getListedAssetsBodyInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetListedAssetsForProfilePostV2ApiResponse> GetListedAssetsForProfilePostV2Async(AutomationGetListedAssetsBodyInputV2 automationGetListedAssetsBodyInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all the assets listed by a profile (NFT assets, e.g. ERC721 / ERC1155)
@@ -241,11 +241,11 @@ namespace BeamAutomationClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="getListedAssetsBodyInputV2"></param>
+        /// <param name="automationGetListedAssetsBodyInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetListedAssetsForProfilePostV2ApiResponse"/>?&gt;</returns>
-        Task<IGetListedAssetsForProfilePostV2ApiResponse?> GetListedAssetsForProfilePostV2OrDefaultAsync(GetListedAssetsBodyInputV2 getListedAssetsBodyInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetListedAssetsForProfilePostV2ApiResponse?> GetListedAssetsForProfilePostV2OrDefaultAsync(AutomationGetListedAssetsBodyInputV2 automationGetListedAssetsBodyInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155)
@@ -254,10 +254,10 @@ namespace BeamAutomationClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="getListedAssetsBodyInputV2"></param>
+        /// <param name="automationGetListedAssetsBodyInputV2"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetListedAssetsPostV2ApiResponse"/>&gt;</returns>
-        Task<IGetListedAssetsPostV2ApiResponse> GetListedAssetsPostV2Async(GetListedAssetsBodyInputV2 getListedAssetsBodyInputV2, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetListedAssetsPostV2ApiResponse> GetListedAssetsPostV2Async(AutomationGetListedAssetsBodyInputV2 automationGetListedAssetsBodyInputV2, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155)
@@ -265,10 +265,10 @@ namespace BeamAutomationClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="getListedAssetsBodyInputV2"></param>
+        /// <param name="automationGetListedAssetsBodyInputV2"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetListedAssetsPostV2ApiResponse"/>?&gt;</returns>
-        Task<IGetListedAssetsPostV2ApiResponse?> GetListedAssetsPostV2OrDefaultAsync(GetListedAssetsBodyInputV2 getListedAssetsBodyInputV2, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetListedAssetsPostV2ApiResponse?> GetListedAssetsPostV2OrDefaultAsync(AutomationGetListedAssetsBodyInputV2 automationGetListedAssetsBodyInputV2, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all asset offers that player created
@@ -335,11 +335,11 @@ namespace BeamAutomationClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sellAssetRequestInputV2"></param>
+        /// <param name="automationSellAssetRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IListAssetV2ApiResponse"/>&gt;</returns>
-        Task<IListAssetV2ApiResponse> ListAssetV2Async(SellAssetRequestInputV2 sellAssetRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IListAssetV2ApiResponse> ListAssetV2Async(AutomationSellAssetRequestInputV2 automationSellAssetRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List an asset for sale
@@ -347,11 +347,11 @@ namespace BeamAutomationClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="sellAssetRequestInputV2"></param>
+        /// <param name="automationSellAssetRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IListAssetV2ApiResponse"/>?&gt;</returns>
-        Task<IListAssetV2ApiResponse?> ListAssetV2OrDefaultAsync(SellAssetRequestInputV2 sellAssetRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IListAssetV2ApiResponse?> ListAssetV2OrDefaultAsync(AutomationSellAssetRequestInputV2 automationSellAssetRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Schedule a contract refresh in the indexer
@@ -360,10 +360,10 @@ namespace BeamAutomationClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="refreshContractRequestBody"></param>
+        /// <param name="automationRefreshContractRequestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRefreshContractApiResponse"/>&gt;</returns>
-        Task<IRefreshContractApiResponse> RefreshContractAsync(RefreshContractRequestBody refreshContractRequestBody, System.Threading.CancellationToken cancellationToken = default);
+        Task<IRefreshContractApiResponse> RefreshContractAsync(AutomationRefreshContractRequestBody automationRefreshContractRequestBody, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Schedule a contract refresh in the indexer
@@ -371,10 +371,10 @@ namespace BeamAutomationClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="refreshContractRequestBody"></param>
+        /// <param name="automationRefreshContractRequestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRefreshContractApiResponse"/>?&gt;</returns>
-        Task<IRefreshContractApiResponse?> RefreshContractOrDefaultAsync(RefreshContractRequestBody refreshContractRequestBody, System.Threading.CancellationToken cancellationToken = default);
+        Task<IRefreshContractApiResponse?> RefreshContractOrDefaultAsync(AutomationRefreshContractRequestBody automationRefreshContractRequestBody, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Schedule a token refresh in the indexer
@@ -383,10 +383,10 @@ namespace BeamAutomationClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="refreshTokenRequestBody"></param>
+        /// <param name="automationRefreshTokenRequestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRefreshTokenApiResponse"/>&gt;</returns>
-        Task<IRefreshTokenApiResponse> RefreshTokenAsync(RefreshTokenRequestBody refreshTokenRequestBody, System.Threading.CancellationToken cancellationToken = default);
+        Task<IRefreshTokenApiResponse> RefreshTokenAsync(AutomationRefreshTokenRequestBody automationRefreshTokenRequestBody, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Schedule a token refresh in the indexer
@@ -394,16 +394,16 @@ namespace BeamAutomationClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="refreshTokenRequestBody"></param>
+        /// <param name="automationRefreshTokenRequestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRefreshTokenApiResponse"/>?&gt;</returns>
-        Task<IRefreshTokenApiResponse?> RefreshTokenOrDefaultAsync(RefreshTokenRequestBody refreshTokenRequestBody, System.Threading.CancellationToken cancellationToken = default);
+        Task<IRefreshTokenApiResponse?> RefreshTokenOrDefaultAsync(AutomationRefreshTokenRequestBody automationRefreshTokenRequestBody, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
     /// The <see cref="IAcceptAssetOfferV2ApiResponse"/>
     /// </summary>
-    public interface IAcceptAssetOfferV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AcceptOfferResponseV2?>
+    public interface IAcceptAssetOfferV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationAcceptOfferResponseV2?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -415,7 +415,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IBuyListedAssetV2ApiResponse"/>
     /// </summary>
-    public interface IBuyListedAssetV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.BuyAssetResponseV2?>
+    public interface IBuyListedAssetV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationBuyAssetResponseV2?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -427,7 +427,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="ICancelAssetOfferV2ApiResponse"/>
     /// </summary>
-    public interface ICancelAssetOfferV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.CancelOfferResponseV2?>
+    public interface ICancelAssetOfferV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationCancelOfferResponseV2?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -439,7 +439,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="ICancelListingV2ApiResponse"/>
     /// </summary>
-    public interface ICancelListingV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.CancelAssetListingResponseV2?>
+    public interface ICancelListingV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationCancelAssetListingResponseV2?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -451,7 +451,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="ICreateAssetOfferV2ApiResponse"/>
     /// </summary>
-    public interface ICreateAssetOfferV2ApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.CreateOfferResponseV2?>
+    public interface ICreateAssetOfferV2ApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.AutomationCreateOfferResponseV2?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
@@ -463,7 +463,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IGetAssetOffersV2ApiResponse"/>
     /// </summary>
-    public interface IGetAssetOffersV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.GetAssetListingsResponseV2?>
+    public interface IGetAssetOffersV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetAssetListingsResponseV2?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -475,7 +475,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IGetChainCurrenciesV2ApiResponse"/>
     /// </summary>
-    public interface IGetChainCurrenciesV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.GetChainCurrenciesResponseV2?>
+    public interface IGetChainCurrenciesV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetChainCurrenciesResponseV2?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -487,7 +487,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IGetListedAssetsForProfilePostV2ApiResponse"/>
     /// </summary>
-    public interface IGetListedAssetsForProfilePostV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.GetAssetListingsResponseV2?>
+    public interface IGetListedAssetsForProfilePostV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetAssetListingsResponseV2?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -499,7 +499,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IGetListedAssetsPostV2ApiResponse"/>
     /// </summary>
-    public interface IGetListedAssetsPostV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.GetAssetListingsResponseV2?>
+    public interface IGetListedAssetsPostV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetAssetListingsResponseV2?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -511,7 +511,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IGetPlayerAssetOffersV2ApiResponse"/>
     /// </summary>
-    public interface IGetPlayerAssetOffersV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.GetAssetListingsResponseV2?>
+    public interface IGetPlayerAssetOffersV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetAssetListingsResponseV2?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -523,7 +523,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IGetPlayerOffersV2ApiResponse"/>
     /// </summary>
-    public interface IGetPlayerOffersV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.GetAssetListingsResponseV2?>
+    public interface IGetPlayerOffersV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetAssetListingsResponseV2?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -535,7 +535,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IListAssetV2ApiResponse"/>
     /// </summary>
-    public interface IListAssetV2ApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.SellAssetResponseV2?>
+    public interface IListAssetV2ApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.AutomationSellAssetResponseV2?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
@@ -571,7 +571,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public class MarketplaceV2ApiEvents
+    public class AutomationMarketplaceV2ApiEvents
     {
         /// <summary>
         /// The event raised after the server response
@@ -583,7 +583,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorAcceptAssetOfferV2;
 
-        internal void ExecuteOnAcceptAssetOfferV2(MarketplaceV2Api.AcceptAssetOfferV2ApiResponse apiResponse)
+        internal void ExecuteOnAcceptAssetOfferV2(AutomationMarketplaceV2Api.AcceptAssetOfferV2ApiResponse apiResponse)
         {
             OnAcceptAssetOfferV2?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -603,7 +603,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorBuyListedAssetV2;
 
-        internal void ExecuteOnBuyListedAssetV2(MarketplaceV2Api.BuyListedAssetV2ApiResponse apiResponse)
+        internal void ExecuteOnBuyListedAssetV2(AutomationMarketplaceV2Api.BuyListedAssetV2ApiResponse apiResponse)
         {
             OnBuyListedAssetV2?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -623,7 +623,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorCancelAssetOfferV2;
 
-        internal void ExecuteOnCancelAssetOfferV2(MarketplaceV2Api.CancelAssetOfferV2ApiResponse apiResponse)
+        internal void ExecuteOnCancelAssetOfferV2(AutomationMarketplaceV2Api.CancelAssetOfferV2ApiResponse apiResponse)
         {
             OnCancelAssetOfferV2?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -643,7 +643,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorCancelListingV2;
 
-        internal void ExecuteOnCancelListingV2(MarketplaceV2Api.CancelListingV2ApiResponse apiResponse)
+        internal void ExecuteOnCancelListingV2(AutomationMarketplaceV2Api.CancelListingV2ApiResponse apiResponse)
         {
             OnCancelListingV2?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -663,7 +663,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorCreateAssetOfferV2;
 
-        internal void ExecuteOnCreateAssetOfferV2(MarketplaceV2Api.CreateAssetOfferV2ApiResponse apiResponse)
+        internal void ExecuteOnCreateAssetOfferV2(AutomationMarketplaceV2Api.CreateAssetOfferV2ApiResponse apiResponse)
         {
             OnCreateAssetOfferV2?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -683,7 +683,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetAssetOffersV2;
 
-        internal void ExecuteOnGetAssetOffersV2(MarketplaceV2Api.GetAssetOffersV2ApiResponse apiResponse)
+        internal void ExecuteOnGetAssetOffersV2(AutomationMarketplaceV2Api.GetAssetOffersV2ApiResponse apiResponse)
         {
             OnGetAssetOffersV2?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -703,7 +703,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetChainCurrenciesV2;
 
-        internal void ExecuteOnGetChainCurrenciesV2(MarketplaceV2Api.GetChainCurrenciesV2ApiResponse apiResponse)
+        internal void ExecuteOnGetChainCurrenciesV2(AutomationMarketplaceV2Api.GetChainCurrenciesV2ApiResponse apiResponse)
         {
             OnGetChainCurrenciesV2?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -723,7 +723,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetListedAssetsForProfilePostV2;
 
-        internal void ExecuteOnGetListedAssetsForProfilePostV2(MarketplaceV2Api.GetListedAssetsForProfilePostV2ApiResponse apiResponse)
+        internal void ExecuteOnGetListedAssetsForProfilePostV2(AutomationMarketplaceV2Api.GetListedAssetsForProfilePostV2ApiResponse apiResponse)
         {
             OnGetListedAssetsForProfilePostV2?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -743,7 +743,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetListedAssetsPostV2;
 
-        internal void ExecuteOnGetListedAssetsPostV2(MarketplaceV2Api.GetListedAssetsPostV2ApiResponse apiResponse)
+        internal void ExecuteOnGetListedAssetsPostV2(AutomationMarketplaceV2Api.GetListedAssetsPostV2ApiResponse apiResponse)
         {
             OnGetListedAssetsPostV2?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -763,7 +763,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetPlayerAssetOffersV2;
 
-        internal void ExecuteOnGetPlayerAssetOffersV2(MarketplaceV2Api.GetPlayerAssetOffersV2ApiResponse apiResponse)
+        internal void ExecuteOnGetPlayerAssetOffersV2(AutomationMarketplaceV2Api.GetPlayerAssetOffersV2ApiResponse apiResponse)
         {
             OnGetPlayerAssetOffersV2?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -783,7 +783,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetPlayerOffersV2;
 
-        internal void ExecuteOnGetPlayerOffersV2(MarketplaceV2Api.GetPlayerOffersV2ApiResponse apiResponse)
+        internal void ExecuteOnGetPlayerOffersV2(AutomationMarketplaceV2Api.GetPlayerOffersV2ApiResponse apiResponse)
         {
             OnGetPlayerOffersV2?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -803,7 +803,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorListAssetV2;
 
-        internal void ExecuteOnListAssetV2(MarketplaceV2Api.ListAssetV2ApiResponse apiResponse)
+        internal void ExecuteOnListAssetV2(AutomationMarketplaceV2Api.ListAssetV2ApiResponse apiResponse)
         {
             OnListAssetV2?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -823,7 +823,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorRefreshContract;
 
-        internal void ExecuteOnRefreshContract(MarketplaceV2Api.RefreshContractApiResponse apiResponse)
+        internal void ExecuteOnRefreshContract(AutomationMarketplaceV2Api.RefreshContractApiResponse apiResponse)
         {
             OnRefreshContract?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -843,7 +843,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorRefreshToken;
 
-        internal void ExecuteOnRefreshToken(MarketplaceV2Api.RefreshTokenApiResponse apiResponse)
+        internal void ExecuteOnRefreshToken(AutomationMarketplaceV2Api.RefreshTokenApiResponse apiResponse)
         {
             OnRefreshToken?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -857,7 +857,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public sealed partial class MarketplaceV2Api : IMarketplaceV2Api
+    public sealed partial class AutomationMarketplaceV2Api : IAutomationMarketplaceV2Api
     {
         private JsonSerializerOptions _jsonSerializerOptions;
 
@@ -869,7 +869,7 @@ namespace BeamAutomationClient.Api
         /// <summary>
         /// The logger
         /// </summary>
-        public ILogger<MarketplaceV2Api> Logger { get; }
+        public ILogger<AutomationMarketplaceV2Api> Logger { get; }
 
         /// <summary>
         /// The HttpClient
@@ -879,7 +879,7 @@ namespace BeamAutomationClient.Api
         /// <summary>
         /// The class containing the events
         /// </summary>
-        public MarketplaceV2ApiEvents Events { get; }
+        public AutomationMarketplaceV2ApiEvents Events { get; }
 
         /// <summary>
         /// A token provider of type <see cref="ApiKeyProvider"/>
@@ -887,33 +887,33 @@ namespace BeamAutomationClient.Api
         public TokenProvider<ApiKeyToken> ApiKeyProvider { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MarketplaceV2Api"/> class.
+        /// Initializes a new instance of the <see cref="AutomationMarketplaceV2Api"/> class.
         /// </summary>
         /// <returns></returns>
-        public MarketplaceV2Api(ILogger<MarketplaceV2Api> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, MarketplaceV2ApiEvents marketplaceV2ApiEvents,
+        public AutomationMarketplaceV2Api(ILogger<AutomationMarketplaceV2Api> logger, ILoggerFactory loggerFactory, HttpClient httpClient, AutomationJsonSerializerOptionsProvider jsonSerializerOptionsProvider, AutomationMarketplaceV2ApiEvents automationMarketplaceV2ApiEvents,
             TokenProvider<ApiKeyToken> apiKeyProvider)
         {
             _jsonSerializerOptions = jsonSerializerOptionsProvider.Options;
             LoggerFactory = loggerFactory;
-            Logger = LoggerFactory.CreateLogger<MarketplaceV2Api>();
+            Logger = LoggerFactory.CreateLogger<AutomationMarketplaceV2Api>();
             HttpClient = httpClient;
-            Events = marketplaceV2ApiEvents;
+            Events = automationMarketplaceV2ApiEvents;
             ApiKeyProvider = apiKeyProvider;
         }
 
-        partial void FormatAcceptAssetOfferV2(AcceptAssetOfferRequestInputV2 acceptAssetOfferRequestInputV2, ref string entityId, ref string offerId);
+        partial void FormatAcceptAssetOfferV2(AutomationAcceptAssetOfferRequestInputV2 automationAcceptAssetOfferRequestInputV2, ref string entityId, ref string offerId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="acceptAssetOfferRequestInputV2"></param>
+        /// <param name="automationAcceptAssetOfferRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
         /// <returns></returns>
-        private void ValidateAcceptAssetOfferV2(AcceptAssetOfferRequestInputV2 acceptAssetOfferRequestInputV2, string entityId, string offerId)
+        private void ValidateAcceptAssetOfferV2(AutomationAcceptAssetOfferRequestInputV2 automationAcceptAssetOfferRequestInputV2, string entityId, string offerId)
         {
-            if (acceptAssetOfferRequestInputV2 == null)
-                throw new ArgumentNullException(nameof(acceptAssetOfferRequestInputV2));
+            if (automationAcceptAssetOfferRequestInputV2 == null)
+                throw new ArgumentNullException(nameof(automationAcceptAssetOfferRequestInputV2));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -926,13 +926,13 @@ namespace BeamAutomationClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="acceptAssetOfferRequestInputV2"></param>
+        /// <param name="automationAcceptAssetOfferRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
-        private void AfterAcceptAssetOfferV2DefaultImplementation(IAcceptAssetOfferV2ApiResponse apiResponseLocalVar, AcceptAssetOfferRequestInputV2 acceptAssetOfferRequestInputV2, string entityId, string offerId)
+        private void AfterAcceptAssetOfferV2DefaultImplementation(IAcceptAssetOfferV2ApiResponse apiResponseLocalVar, AutomationAcceptAssetOfferRequestInputV2 automationAcceptAssetOfferRequestInputV2, string entityId, string offerId)
         {
             bool suppressDefaultLog = false;
-            AfterAcceptAssetOfferV2(ref suppressDefaultLog, apiResponseLocalVar, acceptAssetOfferRequestInputV2, entityId, offerId);
+            AfterAcceptAssetOfferV2(ref suppressDefaultLog, apiResponseLocalVar, automationAcceptAssetOfferRequestInputV2, entityId, offerId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -942,10 +942,10 @@ namespace BeamAutomationClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="acceptAssetOfferRequestInputV2"></param>
+        /// <param name="automationAcceptAssetOfferRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
-        partial void AfterAcceptAssetOfferV2(ref bool suppressDefaultLog, IAcceptAssetOfferV2ApiResponse apiResponseLocalVar, AcceptAssetOfferRequestInputV2 acceptAssetOfferRequestInputV2, string entityId, string offerId);
+        partial void AfterAcceptAssetOfferV2(ref bool suppressDefaultLog, IAcceptAssetOfferV2ApiResponse apiResponseLocalVar, AutomationAcceptAssetOfferRequestInputV2 automationAcceptAssetOfferRequestInputV2, string entityId, string offerId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -953,13 +953,13 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="acceptAssetOfferRequestInputV2"></param>
+        /// <param name="automationAcceptAssetOfferRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
-        private void OnErrorAcceptAssetOfferV2DefaultImplementation(Exception exception, string pathFormat, string path, AcceptAssetOfferRequestInputV2 acceptAssetOfferRequestInputV2, string entityId, string offerId)
+        private void OnErrorAcceptAssetOfferV2DefaultImplementation(Exception exception, string pathFormat, string path, AutomationAcceptAssetOfferRequestInputV2 automationAcceptAssetOfferRequestInputV2, string entityId, string offerId)
         {
             bool suppressDefaultLog = false;
-            OnErrorAcceptAssetOfferV2(ref suppressDefaultLog, exception, pathFormat, path, acceptAssetOfferRequestInputV2, entityId, offerId);
+            OnErrorAcceptAssetOfferV2(ref suppressDefaultLog, exception, pathFormat, path, automationAcceptAssetOfferRequestInputV2, entityId, offerId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -971,24 +971,24 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="acceptAssetOfferRequestInputV2"></param>
+        /// <param name="automationAcceptAssetOfferRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
-        partial void OnErrorAcceptAssetOfferV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AcceptAssetOfferRequestInputV2 acceptAssetOfferRequestInputV2, string entityId, string offerId);
+        partial void OnErrorAcceptAssetOfferV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationAcceptAssetOfferRequestInputV2 automationAcceptAssetOfferRequestInputV2, string entityId, string offerId);
 
         /// <summary>
         /// Accept an offer for an asset 
         /// </summary>
-        /// <param name="acceptAssetOfferRequestInputV2"></param>
+        /// <param name="automationAcceptAssetOfferRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IAcceptAssetOfferV2ApiResponse"/>&gt;</returns>
-        public async Task<IAcceptAssetOfferV2ApiResponse?> AcceptAssetOfferV2OrDefaultAsync(AcceptAssetOfferRequestInputV2 acceptAssetOfferRequestInputV2, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IAcceptAssetOfferV2ApiResponse?> AcceptAssetOfferV2OrDefaultAsync(AutomationAcceptAssetOfferRequestInputV2 automationAcceptAssetOfferRequestInputV2, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await AcceptAssetOfferV2Async(acceptAssetOfferRequestInputV2, entityId, offerId, cancellationToken).ConfigureAwait(false);
+                return await AcceptAssetOfferV2Async(automationAcceptAssetOfferRequestInputV2, entityId, offerId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -1000,20 +1000,20 @@ namespace BeamAutomationClient.Api
         /// Accept an offer for an asset 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="acceptAssetOfferRequestInputV2"></param>
+        /// <param name="automationAcceptAssetOfferRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IAcceptAssetOfferV2ApiResponse"/>&gt;</returns>
-        public async Task<IAcceptAssetOfferV2ApiResponse> AcceptAssetOfferV2Async(AcceptAssetOfferRequestInputV2 acceptAssetOfferRequestInputV2, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IAcceptAssetOfferV2ApiResponse> AcceptAssetOfferV2Async(AutomationAcceptAssetOfferRequestInputV2 automationAcceptAssetOfferRequestInputV2, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateAcceptAssetOfferV2(acceptAssetOfferRequestInputV2, entityId, offerId);
+                ValidateAcceptAssetOfferV2(automationAcceptAssetOfferRequestInputV2, entityId, offerId);
 
-                FormatAcceptAssetOfferV2(acceptAssetOfferRequestInputV2, ref entityId, ref offerId);
+                FormatAcceptAssetOfferV2(automationAcceptAssetOfferRequestInputV2, ref entityId, ref offerId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -1024,9 +1024,9 @@ namespace BeamAutomationClient.Api
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BofferId%7D", Uri.EscapeDataString(offerId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (acceptAssetOfferRequestInputV2 as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (automationAcceptAssetOfferRequestInputV2 as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(acceptAssetOfferRequestInputV2, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationAcceptAssetOfferRequestInputV2, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -1065,7 +1065,7 @@ namespace BeamAutomationClient.Api
 
                         AcceptAssetOfferV2ApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v2/marketplace/profiles/{entityId}/offers/{offerId}/accept", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterAcceptAssetOfferV2DefaultImplementation(apiResponseLocalVar, acceptAssetOfferRequestInputV2, entityId, offerId);
+                        AfterAcceptAssetOfferV2DefaultImplementation(apiResponseLocalVar, automationAcceptAssetOfferRequestInputV2, entityId, offerId);
 
                         Events.ExecuteOnAcceptAssetOfferV2(apiResponseLocalVar);
 
@@ -1079,7 +1079,7 @@ namespace BeamAutomationClient.Api
             }
             catch(Exception e)
             {
-                OnErrorAcceptAssetOfferV2DefaultImplementation(e, "/v2/marketplace/profiles/{entityId}/offers/{offerId}/accept", uriBuilderLocalVar.Path, acceptAssetOfferRequestInputV2, entityId, offerId);
+                OnErrorAcceptAssetOfferV2DefaultImplementation(e, "/v2/marketplace/profiles/{entityId}/offers/{offerId}/accept", uriBuilderLocalVar.Path, automationAcceptAssetOfferRequestInputV2, entityId, offerId);
                 Events.ExecuteOnErrorAcceptAssetOfferV2(e);
                 throw;
             }
@@ -1123,11 +1123,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.AcceptOfferResponseV2? Ok()
+            public BeamAutomationClient.Model.AutomationAcceptOfferResponseV2? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AcceptOfferResponseV2>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationAcceptOfferResponseV2>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1136,7 +1136,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AcceptOfferResponseV2? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationAcceptOfferResponseV2? result)
             {
                 result = null;
 
@@ -1162,19 +1162,19 @@ namespace BeamAutomationClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatBuyListedAssetV2(BuyAssetRequestInputV2 buyAssetRequestInputV2, ref string entityId, ref string orderId);
+        partial void FormatBuyListedAssetV2(AutomationBuyAssetRequestInputV2 automationBuyAssetRequestInputV2, ref string entityId, ref string orderId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="buyAssetRequestInputV2"></param>
+        /// <param name="automationBuyAssetRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
         /// <returns></returns>
-        private void ValidateBuyListedAssetV2(BuyAssetRequestInputV2 buyAssetRequestInputV2, string entityId, string orderId)
+        private void ValidateBuyListedAssetV2(AutomationBuyAssetRequestInputV2 automationBuyAssetRequestInputV2, string entityId, string orderId)
         {
-            if (buyAssetRequestInputV2 == null)
-                throw new ArgumentNullException(nameof(buyAssetRequestInputV2));
+            if (automationBuyAssetRequestInputV2 == null)
+                throw new ArgumentNullException(nameof(automationBuyAssetRequestInputV2));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -1187,13 +1187,13 @@ namespace BeamAutomationClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="buyAssetRequestInputV2"></param>
+        /// <param name="automationBuyAssetRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
-        private void AfterBuyListedAssetV2DefaultImplementation(IBuyListedAssetV2ApiResponse apiResponseLocalVar, BuyAssetRequestInputV2 buyAssetRequestInputV2, string entityId, string orderId)
+        private void AfterBuyListedAssetV2DefaultImplementation(IBuyListedAssetV2ApiResponse apiResponseLocalVar, AutomationBuyAssetRequestInputV2 automationBuyAssetRequestInputV2, string entityId, string orderId)
         {
             bool suppressDefaultLog = false;
-            AfterBuyListedAssetV2(ref suppressDefaultLog, apiResponseLocalVar, buyAssetRequestInputV2, entityId, orderId);
+            AfterBuyListedAssetV2(ref suppressDefaultLog, apiResponseLocalVar, automationBuyAssetRequestInputV2, entityId, orderId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -1203,10 +1203,10 @@ namespace BeamAutomationClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="buyAssetRequestInputV2"></param>
+        /// <param name="automationBuyAssetRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
-        partial void AfterBuyListedAssetV2(ref bool suppressDefaultLog, IBuyListedAssetV2ApiResponse apiResponseLocalVar, BuyAssetRequestInputV2 buyAssetRequestInputV2, string entityId, string orderId);
+        partial void AfterBuyListedAssetV2(ref bool suppressDefaultLog, IBuyListedAssetV2ApiResponse apiResponseLocalVar, AutomationBuyAssetRequestInputV2 automationBuyAssetRequestInputV2, string entityId, string orderId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -1214,13 +1214,13 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="buyAssetRequestInputV2"></param>
+        /// <param name="automationBuyAssetRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
-        private void OnErrorBuyListedAssetV2DefaultImplementation(Exception exception, string pathFormat, string path, BuyAssetRequestInputV2 buyAssetRequestInputV2, string entityId, string orderId)
+        private void OnErrorBuyListedAssetV2DefaultImplementation(Exception exception, string pathFormat, string path, AutomationBuyAssetRequestInputV2 automationBuyAssetRequestInputV2, string entityId, string orderId)
         {
             bool suppressDefaultLog = false;
-            OnErrorBuyListedAssetV2(ref suppressDefaultLog, exception, pathFormat, path, buyAssetRequestInputV2, entityId, orderId);
+            OnErrorBuyListedAssetV2(ref suppressDefaultLog, exception, pathFormat, path, automationBuyAssetRequestInputV2, entityId, orderId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -1232,24 +1232,24 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="buyAssetRequestInputV2"></param>
+        /// <param name="automationBuyAssetRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
-        partial void OnErrorBuyListedAssetV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, BuyAssetRequestInputV2 buyAssetRequestInputV2, string entityId, string orderId);
+        partial void OnErrorBuyListedAssetV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationBuyAssetRequestInputV2 automationBuyAssetRequestInputV2, string entityId, string orderId);
 
         /// <summary>
         /// Buy listed asset 
         /// </summary>
-        /// <param name="buyAssetRequestInputV2"></param>
+        /// <param name="automationBuyAssetRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IBuyListedAssetV2ApiResponse"/>&gt;</returns>
-        public async Task<IBuyListedAssetV2ApiResponse?> BuyListedAssetV2OrDefaultAsync(BuyAssetRequestInputV2 buyAssetRequestInputV2, string entityId, string orderId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IBuyListedAssetV2ApiResponse?> BuyListedAssetV2OrDefaultAsync(AutomationBuyAssetRequestInputV2 automationBuyAssetRequestInputV2, string entityId, string orderId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await BuyListedAssetV2Async(buyAssetRequestInputV2, entityId, orderId, cancellationToken).ConfigureAwait(false);
+                return await BuyListedAssetV2Async(automationBuyAssetRequestInputV2, entityId, orderId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -1261,20 +1261,20 @@ namespace BeamAutomationClient.Api
         /// Buy listed asset 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="buyAssetRequestInputV2"></param>
+        /// <param name="automationBuyAssetRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IBuyListedAssetV2ApiResponse"/>&gt;</returns>
-        public async Task<IBuyListedAssetV2ApiResponse> BuyListedAssetV2Async(BuyAssetRequestInputV2 buyAssetRequestInputV2, string entityId, string orderId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IBuyListedAssetV2ApiResponse> BuyListedAssetV2Async(AutomationBuyAssetRequestInputV2 automationBuyAssetRequestInputV2, string entityId, string orderId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateBuyListedAssetV2(buyAssetRequestInputV2, entityId, orderId);
+                ValidateBuyListedAssetV2(automationBuyAssetRequestInputV2, entityId, orderId);
 
-                FormatBuyListedAssetV2(buyAssetRequestInputV2, ref entityId, ref orderId);
+                FormatBuyListedAssetV2(automationBuyAssetRequestInputV2, ref entityId, ref orderId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -1285,9 +1285,9 @@ namespace BeamAutomationClient.Api
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BorderId%7D", Uri.EscapeDataString(orderId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (buyAssetRequestInputV2 as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (automationBuyAssetRequestInputV2 as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(buyAssetRequestInputV2, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationBuyAssetRequestInputV2, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -1326,7 +1326,7 @@ namespace BeamAutomationClient.Api
 
                         BuyListedAssetV2ApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v2/marketplace/profiles/{entityId}/listing/{orderId}", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterBuyListedAssetV2DefaultImplementation(apiResponseLocalVar, buyAssetRequestInputV2, entityId, orderId);
+                        AfterBuyListedAssetV2DefaultImplementation(apiResponseLocalVar, automationBuyAssetRequestInputV2, entityId, orderId);
 
                         Events.ExecuteOnBuyListedAssetV2(apiResponseLocalVar);
 
@@ -1340,7 +1340,7 @@ namespace BeamAutomationClient.Api
             }
             catch(Exception e)
             {
-                OnErrorBuyListedAssetV2DefaultImplementation(e, "/v2/marketplace/profiles/{entityId}/listing/{orderId}", uriBuilderLocalVar.Path, buyAssetRequestInputV2, entityId, orderId);
+                OnErrorBuyListedAssetV2DefaultImplementation(e, "/v2/marketplace/profiles/{entityId}/listing/{orderId}", uriBuilderLocalVar.Path, automationBuyAssetRequestInputV2, entityId, orderId);
                 Events.ExecuteOnErrorBuyListedAssetV2(e);
                 throw;
             }
@@ -1384,11 +1384,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.BuyAssetResponseV2? Ok()
+            public BeamAutomationClient.Model.AutomationBuyAssetResponseV2? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.BuyAssetResponseV2>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationBuyAssetResponseV2>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1397,7 +1397,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.BuyAssetResponseV2? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationBuyAssetResponseV2? result)
             {
                 result = null;
 
@@ -1423,19 +1423,19 @@ namespace BeamAutomationClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatCancelAssetOfferV2(CancelAssetOfferRequestInputV2 cancelAssetOfferRequestInputV2, ref string entityId, ref string offerId);
+        partial void FormatCancelAssetOfferV2(AutomationCancelAssetOfferRequestInputV2 automationCancelAssetOfferRequestInputV2, ref string entityId, ref string offerId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="cancelAssetOfferRequestInputV2"></param>
+        /// <param name="automationCancelAssetOfferRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
         /// <returns></returns>
-        private void ValidateCancelAssetOfferV2(CancelAssetOfferRequestInputV2 cancelAssetOfferRequestInputV2, string entityId, string offerId)
+        private void ValidateCancelAssetOfferV2(AutomationCancelAssetOfferRequestInputV2 automationCancelAssetOfferRequestInputV2, string entityId, string offerId)
         {
-            if (cancelAssetOfferRequestInputV2 == null)
-                throw new ArgumentNullException(nameof(cancelAssetOfferRequestInputV2));
+            if (automationCancelAssetOfferRequestInputV2 == null)
+                throw new ArgumentNullException(nameof(automationCancelAssetOfferRequestInputV2));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -1448,13 +1448,13 @@ namespace BeamAutomationClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="cancelAssetOfferRequestInputV2"></param>
+        /// <param name="automationCancelAssetOfferRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
-        private void AfterCancelAssetOfferV2DefaultImplementation(ICancelAssetOfferV2ApiResponse apiResponseLocalVar, CancelAssetOfferRequestInputV2 cancelAssetOfferRequestInputV2, string entityId, string offerId)
+        private void AfterCancelAssetOfferV2DefaultImplementation(ICancelAssetOfferV2ApiResponse apiResponseLocalVar, AutomationCancelAssetOfferRequestInputV2 automationCancelAssetOfferRequestInputV2, string entityId, string offerId)
         {
             bool suppressDefaultLog = false;
-            AfterCancelAssetOfferV2(ref suppressDefaultLog, apiResponseLocalVar, cancelAssetOfferRequestInputV2, entityId, offerId);
+            AfterCancelAssetOfferV2(ref suppressDefaultLog, apiResponseLocalVar, automationCancelAssetOfferRequestInputV2, entityId, offerId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -1464,10 +1464,10 @@ namespace BeamAutomationClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="cancelAssetOfferRequestInputV2"></param>
+        /// <param name="automationCancelAssetOfferRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
-        partial void AfterCancelAssetOfferV2(ref bool suppressDefaultLog, ICancelAssetOfferV2ApiResponse apiResponseLocalVar, CancelAssetOfferRequestInputV2 cancelAssetOfferRequestInputV2, string entityId, string offerId);
+        partial void AfterCancelAssetOfferV2(ref bool suppressDefaultLog, ICancelAssetOfferV2ApiResponse apiResponseLocalVar, AutomationCancelAssetOfferRequestInputV2 automationCancelAssetOfferRequestInputV2, string entityId, string offerId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -1475,13 +1475,13 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="cancelAssetOfferRequestInputV2"></param>
+        /// <param name="automationCancelAssetOfferRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
-        private void OnErrorCancelAssetOfferV2DefaultImplementation(Exception exception, string pathFormat, string path, CancelAssetOfferRequestInputV2 cancelAssetOfferRequestInputV2, string entityId, string offerId)
+        private void OnErrorCancelAssetOfferV2DefaultImplementation(Exception exception, string pathFormat, string path, AutomationCancelAssetOfferRequestInputV2 automationCancelAssetOfferRequestInputV2, string entityId, string offerId)
         {
             bool suppressDefaultLog = false;
-            OnErrorCancelAssetOfferV2(ref suppressDefaultLog, exception, pathFormat, path, cancelAssetOfferRequestInputV2, entityId, offerId);
+            OnErrorCancelAssetOfferV2(ref suppressDefaultLog, exception, pathFormat, path, automationCancelAssetOfferRequestInputV2, entityId, offerId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -1493,24 +1493,24 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="cancelAssetOfferRequestInputV2"></param>
+        /// <param name="automationCancelAssetOfferRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
-        partial void OnErrorCancelAssetOfferV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, CancelAssetOfferRequestInputV2 cancelAssetOfferRequestInputV2, string entityId, string offerId);
+        partial void OnErrorCancelAssetOfferV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationCancelAssetOfferRequestInputV2 automationCancelAssetOfferRequestInputV2, string entityId, string offerId);
 
         /// <summary>
         /// Cancel an offer for an asset 
         /// </summary>
-        /// <param name="cancelAssetOfferRequestInputV2"></param>
+        /// <param name="automationCancelAssetOfferRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICancelAssetOfferV2ApiResponse"/>&gt;</returns>
-        public async Task<ICancelAssetOfferV2ApiResponse?> CancelAssetOfferV2OrDefaultAsync(CancelAssetOfferRequestInputV2 cancelAssetOfferRequestInputV2, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICancelAssetOfferV2ApiResponse?> CancelAssetOfferV2OrDefaultAsync(AutomationCancelAssetOfferRequestInputV2 automationCancelAssetOfferRequestInputV2, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await CancelAssetOfferV2Async(cancelAssetOfferRequestInputV2, entityId, offerId, cancellationToken).ConfigureAwait(false);
+                return await CancelAssetOfferV2Async(automationCancelAssetOfferRequestInputV2, entityId, offerId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -1522,20 +1522,20 @@ namespace BeamAutomationClient.Api
         /// Cancel an offer for an asset 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="cancelAssetOfferRequestInputV2"></param>
+        /// <param name="automationCancelAssetOfferRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICancelAssetOfferV2ApiResponse"/>&gt;</returns>
-        public async Task<ICancelAssetOfferV2ApiResponse> CancelAssetOfferV2Async(CancelAssetOfferRequestInputV2 cancelAssetOfferRequestInputV2, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICancelAssetOfferV2ApiResponse> CancelAssetOfferV2Async(AutomationCancelAssetOfferRequestInputV2 automationCancelAssetOfferRequestInputV2, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateCancelAssetOfferV2(cancelAssetOfferRequestInputV2, entityId, offerId);
+                ValidateCancelAssetOfferV2(automationCancelAssetOfferRequestInputV2, entityId, offerId);
 
-                FormatCancelAssetOfferV2(cancelAssetOfferRequestInputV2, ref entityId, ref offerId);
+                FormatCancelAssetOfferV2(automationCancelAssetOfferRequestInputV2, ref entityId, ref offerId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -1546,9 +1546,9 @@ namespace BeamAutomationClient.Api
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BofferId%7D", Uri.EscapeDataString(offerId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (cancelAssetOfferRequestInputV2 as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (automationCancelAssetOfferRequestInputV2 as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(cancelAssetOfferRequestInputV2, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationCancelAssetOfferRequestInputV2, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -1587,7 +1587,7 @@ namespace BeamAutomationClient.Api
 
                         CancelAssetOfferV2ApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v2/marketplace/profiles/{entityId}/offers/{offerId}", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterCancelAssetOfferV2DefaultImplementation(apiResponseLocalVar, cancelAssetOfferRequestInputV2, entityId, offerId);
+                        AfterCancelAssetOfferV2DefaultImplementation(apiResponseLocalVar, automationCancelAssetOfferRequestInputV2, entityId, offerId);
 
                         Events.ExecuteOnCancelAssetOfferV2(apiResponseLocalVar);
 
@@ -1601,7 +1601,7 @@ namespace BeamAutomationClient.Api
             }
             catch(Exception e)
             {
-                OnErrorCancelAssetOfferV2DefaultImplementation(e, "/v2/marketplace/profiles/{entityId}/offers/{offerId}", uriBuilderLocalVar.Path, cancelAssetOfferRequestInputV2, entityId, offerId);
+                OnErrorCancelAssetOfferV2DefaultImplementation(e, "/v2/marketplace/profiles/{entityId}/offers/{offerId}", uriBuilderLocalVar.Path, automationCancelAssetOfferRequestInputV2, entityId, offerId);
                 Events.ExecuteOnErrorCancelAssetOfferV2(e);
                 throw;
             }
@@ -1645,11 +1645,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.CancelOfferResponseV2? Ok()
+            public BeamAutomationClient.Model.AutomationCancelOfferResponseV2? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.CancelOfferResponseV2>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationCancelOfferResponseV2>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1658,7 +1658,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.CancelOfferResponseV2? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationCancelOfferResponseV2? result)
             {
                 result = null;
 
@@ -1684,19 +1684,19 @@ namespace BeamAutomationClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatCancelListingV2(CancelAssetListingRequestInputV2 cancelAssetListingRequestInputV2, ref string entityId, ref string orderId, ref Option<decimal> chainId);
+        partial void FormatCancelListingV2(AutomationCancelAssetListingRequestInputV2 automationCancelAssetListingRequestInputV2, ref string entityId, ref string orderId, ref Option<decimal> chainId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="cancelAssetListingRequestInputV2"></param>
+        /// <param name="automationCancelAssetListingRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
         /// <returns></returns>
-        private void ValidateCancelListingV2(CancelAssetListingRequestInputV2 cancelAssetListingRequestInputV2, string entityId, string orderId)
+        private void ValidateCancelListingV2(AutomationCancelAssetListingRequestInputV2 automationCancelAssetListingRequestInputV2, string entityId, string orderId)
         {
-            if (cancelAssetListingRequestInputV2 == null)
-                throw new ArgumentNullException(nameof(cancelAssetListingRequestInputV2));
+            if (automationCancelAssetListingRequestInputV2 == null)
+                throw new ArgumentNullException(nameof(automationCancelAssetListingRequestInputV2));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -1709,14 +1709,14 @@ namespace BeamAutomationClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="cancelAssetListingRequestInputV2"></param>
+        /// <param name="automationCancelAssetListingRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
         /// <param name="chainId"></param>
-        private void AfterCancelListingV2DefaultImplementation(ICancelListingV2ApiResponse apiResponseLocalVar, CancelAssetListingRequestInputV2 cancelAssetListingRequestInputV2, string entityId, string orderId, Option<decimal> chainId)
+        private void AfterCancelListingV2DefaultImplementation(ICancelListingV2ApiResponse apiResponseLocalVar, AutomationCancelAssetListingRequestInputV2 automationCancelAssetListingRequestInputV2, string entityId, string orderId, Option<decimal> chainId)
         {
             bool suppressDefaultLog = false;
-            AfterCancelListingV2(ref suppressDefaultLog, apiResponseLocalVar, cancelAssetListingRequestInputV2, entityId, orderId, chainId);
+            AfterCancelListingV2(ref suppressDefaultLog, apiResponseLocalVar, automationCancelAssetListingRequestInputV2, entityId, orderId, chainId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -1726,11 +1726,11 @@ namespace BeamAutomationClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="cancelAssetListingRequestInputV2"></param>
+        /// <param name="automationCancelAssetListingRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
         /// <param name="chainId"></param>
-        partial void AfterCancelListingV2(ref bool suppressDefaultLog, ICancelListingV2ApiResponse apiResponseLocalVar, CancelAssetListingRequestInputV2 cancelAssetListingRequestInputV2, string entityId, string orderId, Option<decimal> chainId);
+        partial void AfterCancelListingV2(ref bool suppressDefaultLog, ICancelListingV2ApiResponse apiResponseLocalVar, AutomationCancelAssetListingRequestInputV2 automationCancelAssetListingRequestInputV2, string entityId, string orderId, Option<decimal> chainId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -1738,14 +1738,14 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="cancelAssetListingRequestInputV2"></param>
+        /// <param name="automationCancelAssetListingRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
         /// <param name="chainId"></param>
-        private void OnErrorCancelListingV2DefaultImplementation(Exception exception, string pathFormat, string path, CancelAssetListingRequestInputV2 cancelAssetListingRequestInputV2, string entityId, string orderId, Option<decimal> chainId)
+        private void OnErrorCancelListingV2DefaultImplementation(Exception exception, string pathFormat, string path, AutomationCancelAssetListingRequestInputV2 automationCancelAssetListingRequestInputV2, string entityId, string orderId, Option<decimal> chainId)
         {
             bool suppressDefaultLog = false;
-            OnErrorCancelListingV2(ref suppressDefaultLog, exception, pathFormat, path, cancelAssetListingRequestInputV2, entityId, orderId, chainId);
+            OnErrorCancelListingV2(ref suppressDefaultLog, exception, pathFormat, path, automationCancelAssetListingRequestInputV2, entityId, orderId, chainId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -1757,26 +1757,26 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="cancelAssetListingRequestInputV2"></param>
+        /// <param name="automationCancelAssetListingRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
         /// <param name="chainId"></param>
-        partial void OnErrorCancelListingV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, CancelAssetListingRequestInputV2 cancelAssetListingRequestInputV2, string entityId, string orderId, Option<decimal> chainId);
+        partial void OnErrorCancelListingV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationCancelAssetListingRequestInputV2 automationCancelAssetListingRequestInputV2, string entityId, string orderId, Option<decimal> chainId);
 
         /// <summary>
         /// Cancel asset listing 
         /// </summary>
-        /// <param name="cancelAssetListingRequestInputV2"></param>
+        /// <param name="automationCancelAssetListingRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICancelListingV2ApiResponse"/>&gt;</returns>
-        public async Task<ICancelListingV2ApiResponse?> CancelListingV2OrDefaultAsync(CancelAssetListingRequestInputV2 cancelAssetListingRequestInputV2, string entityId, string orderId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICancelListingV2ApiResponse?> CancelListingV2OrDefaultAsync(AutomationCancelAssetListingRequestInputV2 automationCancelAssetListingRequestInputV2, string entityId, string orderId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await CancelListingV2Async(cancelAssetListingRequestInputV2, entityId, orderId, chainId, cancellationToken).ConfigureAwait(false);
+                return await CancelListingV2Async(automationCancelAssetListingRequestInputV2, entityId, orderId, chainId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -1788,21 +1788,21 @@ namespace BeamAutomationClient.Api
         /// Cancel asset listing 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="cancelAssetListingRequestInputV2"></param>
+        /// <param name="automationCancelAssetListingRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICancelListingV2ApiResponse"/>&gt;</returns>
-        public async Task<ICancelListingV2ApiResponse> CancelListingV2Async(CancelAssetListingRequestInputV2 cancelAssetListingRequestInputV2, string entityId, string orderId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICancelListingV2ApiResponse> CancelListingV2Async(AutomationCancelAssetListingRequestInputV2 automationCancelAssetListingRequestInputV2, string entityId, string orderId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateCancelListingV2(cancelAssetListingRequestInputV2, entityId, orderId);
+                ValidateCancelListingV2(automationCancelAssetListingRequestInputV2, entityId, orderId);
 
-                FormatCancelListingV2(cancelAssetListingRequestInputV2, ref entityId, ref orderId, ref chainId);
+                FormatCancelListingV2(automationCancelAssetListingRequestInputV2, ref entityId, ref orderId, ref chainId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -1820,9 +1820,9 @@ namespace BeamAutomationClient.Api
 
                     uriBuilderLocalVar.Query = parseQueryStringLocalVar.ToString();
 
-                    httpRequestMessageLocalVar.Content = (cancelAssetListingRequestInputV2 as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (automationCancelAssetListingRequestInputV2 as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(cancelAssetListingRequestInputV2, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationCancelAssetListingRequestInputV2, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -1861,7 +1861,7 @@ namespace BeamAutomationClient.Api
 
                         CancelListingV2ApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v2/marketplace/profiles/{entityId}/listing/{orderId}", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterCancelListingV2DefaultImplementation(apiResponseLocalVar, cancelAssetListingRequestInputV2, entityId, orderId, chainId);
+                        AfterCancelListingV2DefaultImplementation(apiResponseLocalVar, automationCancelAssetListingRequestInputV2, entityId, orderId, chainId);
 
                         Events.ExecuteOnCancelListingV2(apiResponseLocalVar);
 
@@ -1875,7 +1875,7 @@ namespace BeamAutomationClient.Api
             }
             catch(Exception e)
             {
-                OnErrorCancelListingV2DefaultImplementation(e, "/v2/marketplace/profiles/{entityId}/listing/{orderId}", uriBuilderLocalVar.Path, cancelAssetListingRequestInputV2, entityId, orderId, chainId);
+                OnErrorCancelListingV2DefaultImplementation(e, "/v2/marketplace/profiles/{entityId}/listing/{orderId}", uriBuilderLocalVar.Path, automationCancelAssetListingRequestInputV2, entityId, orderId, chainId);
                 Events.ExecuteOnErrorCancelListingV2(e);
                 throw;
             }
@@ -1919,11 +1919,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.CancelAssetListingResponseV2? Ok()
+            public BeamAutomationClient.Model.AutomationCancelAssetListingResponseV2? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.CancelAssetListingResponseV2>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationCancelAssetListingResponseV2>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1932,7 +1932,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.CancelAssetListingResponseV2? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationCancelAssetListingResponseV2? result)
             {
                 result = null;
 
@@ -1958,18 +1958,18 @@ namespace BeamAutomationClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatCreateAssetOfferV2(CreateAssetOfferRequestInputV2 createAssetOfferRequestInputV2, ref string entityId);
+        partial void FormatCreateAssetOfferV2(AutomationCreateAssetOfferRequestInputV2 automationCreateAssetOfferRequestInputV2, ref string entityId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="createAssetOfferRequestInputV2"></param>
+        /// <param name="automationCreateAssetOfferRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <returns></returns>
-        private void ValidateCreateAssetOfferV2(CreateAssetOfferRequestInputV2 createAssetOfferRequestInputV2, string entityId)
+        private void ValidateCreateAssetOfferV2(AutomationCreateAssetOfferRequestInputV2 automationCreateAssetOfferRequestInputV2, string entityId)
         {
-            if (createAssetOfferRequestInputV2 == null)
-                throw new ArgumentNullException(nameof(createAssetOfferRequestInputV2));
+            if (automationCreateAssetOfferRequestInputV2 == null)
+                throw new ArgumentNullException(nameof(automationCreateAssetOfferRequestInputV2));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -1979,12 +1979,12 @@ namespace BeamAutomationClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="createAssetOfferRequestInputV2"></param>
+        /// <param name="automationCreateAssetOfferRequestInputV2"></param>
         /// <param name="entityId"></param>
-        private void AfterCreateAssetOfferV2DefaultImplementation(ICreateAssetOfferV2ApiResponse apiResponseLocalVar, CreateAssetOfferRequestInputV2 createAssetOfferRequestInputV2, string entityId)
+        private void AfterCreateAssetOfferV2DefaultImplementation(ICreateAssetOfferV2ApiResponse apiResponseLocalVar, AutomationCreateAssetOfferRequestInputV2 automationCreateAssetOfferRequestInputV2, string entityId)
         {
             bool suppressDefaultLog = false;
-            AfterCreateAssetOfferV2(ref suppressDefaultLog, apiResponseLocalVar, createAssetOfferRequestInputV2, entityId);
+            AfterCreateAssetOfferV2(ref suppressDefaultLog, apiResponseLocalVar, automationCreateAssetOfferRequestInputV2, entityId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -1994,9 +1994,9 @@ namespace BeamAutomationClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="createAssetOfferRequestInputV2"></param>
+        /// <param name="automationCreateAssetOfferRequestInputV2"></param>
         /// <param name="entityId"></param>
-        partial void AfterCreateAssetOfferV2(ref bool suppressDefaultLog, ICreateAssetOfferV2ApiResponse apiResponseLocalVar, CreateAssetOfferRequestInputV2 createAssetOfferRequestInputV2, string entityId);
+        partial void AfterCreateAssetOfferV2(ref bool suppressDefaultLog, ICreateAssetOfferV2ApiResponse apiResponseLocalVar, AutomationCreateAssetOfferRequestInputV2 automationCreateAssetOfferRequestInputV2, string entityId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -2004,12 +2004,12 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="createAssetOfferRequestInputV2"></param>
+        /// <param name="automationCreateAssetOfferRequestInputV2"></param>
         /// <param name="entityId"></param>
-        private void OnErrorCreateAssetOfferV2DefaultImplementation(Exception exception, string pathFormat, string path, CreateAssetOfferRequestInputV2 createAssetOfferRequestInputV2, string entityId)
+        private void OnErrorCreateAssetOfferV2DefaultImplementation(Exception exception, string pathFormat, string path, AutomationCreateAssetOfferRequestInputV2 automationCreateAssetOfferRequestInputV2, string entityId)
         {
             bool suppressDefaultLog = false;
-            OnErrorCreateAssetOfferV2(ref suppressDefaultLog, exception, pathFormat, path, createAssetOfferRequestInputV2, entityId);
+            OnErrorCreateAssetOfferV2(ref suppressDefaultLog, exception, pathFormat, path, automationCreateAssetOfferRequestInputV2, entityId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -2021,22 +2021,22 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="createAssetOfferRequestInputV2"></param>
+        /// <param name="automationCreateAssetOfferRequestInputV2"></param>
         /// <param name="entityId"></param>
-        partial void OnErrorCreateAssetOfferV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, CreateAssetOfferRequestInputV2 createAssetOfferRequestInputV2, string entityId);
+        partial void OnErrorCreateAssetOfferV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationCreateAssetOfferRequestInputV2 automationCreateAssetOfferRequestInputV2, string entityId);
 
         /// <summary>
         /// Make an offer for an asset 
         /// </summary>
-        /// <param name="createAssetOfferRequestInputV2"></param>
+        /// <param name="automationCreateAssetOfferRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateAssetOfferV2ApiResponse"/>&gt;</returns>
-        public async Task<ICreateAssetOfferV2ApiResponse?> CreateAssetOfferV2OrDefaultAsync(CreateAssetOfferRequestInputV2 createAssetOfferRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICreateAssetOfferV2ApiResponse?> CreateAssetOfferV2OrDefaultAsync(AutomationCreateAssetOfferRequestInputV2 automationCreateAssetOfferRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await CreateAssetOfferV2Async(createAssetOfferRequestInputV2, entityId, cancellationToken).ConfigureAwait(false);
+                return await CreateAssetOfferV2Async(automationCreateAssetOfferRequestInputV2, entityId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -2048,19 +2048,19 @@ namespace BeamAutomationClient.Api
         /// Make an offer for an asset 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="createAssetOfferRequestInputV2"></param>
+        /// <param name="automationCreateAssetOfferRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateAssetOfferV2ApiResponse"/>&gt;</returns>
-        public async Task<ICreateAssetOfferV2ApiResponse> CreateAssetOfferV2Async(CreateAssetOfferRequestInputV2 createAssetOfferRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICreateAssetOfferV2ApiResponse> CreateAssetOfferV2Async(AutomationCreateAssetOfferRequestInputV2 automationCreateAssetOfferRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateCreateAssetOfferV2(createAssetOfferRequestInputV2, entityId);
+                ValidateCreateAssetOfferV2(automationCreateAssetOfferRequestInputV2, entityId);
 
-                FormatCreateAssetOfferV2(createAssetOfferRequestInputV2, ref entityId);
+                FormatCreateAssetOfferV2(automationCreateAssetOfferRequestInputV2, ref entityId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -2070,9 +2070,9 @@ namespace BeamAutomationClient.Api
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v2/marketplace/profiles/{entityId}/offers";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (createAssetOfferRequestInputV2 as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (automationCreateAssetOfferRequestInputV2 as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(createAssetOfferRequestInputV2, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationCreateAssetOfferRequestInputV2, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -2111,7 +2111,7 @@ namespace BeamAutomationClient.Api
 
                         CreateAssetOfferV2ApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v2/marketplace/profiles/{entityId}/offers", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterCreateAssetOfferV2DefaultImplementation(apiResponseLocalVar, createAssetOfferRequestInputV2, entityId);
+                        AfterCreateAssetOfferV2DefaultImplementation(apiResponseLocalVar, automationCreateAssetOfferRequestInputV2, entityId);
 
                         Events.ExecuteOnCreateAssetOfferV2(apiResponseLocalVar);
 
@@ -2125,7 +2125,7 @@ namespace BeamAutomationClient.Api
             }
             catch(Exception e)
             {
-                OnErrorCreateAssetOfferV2DefaultImplementation(e, "/v2/marketplace/profiles/{entityId}/offers", uriBuilderLocalVar.Path, createAssetOfferRequestInputV2, entityId);
+                OnErrorCreateAssetOfferV2DefaultImplementation(e, "/v2/marketplace/profiles/{entityId}/offers", uriBuilderLocalVar.Path, automationCreateAssetOfferRequestInputV2, entityId);
                 Events.ExecuteOnErrorCreateAssetOfferV2(e);
                 throw;
             }
@@ -2169,11 +2169,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.CreateOfferResponseV2? Created()
+            public BeamAutomationClient.Model.AutomationCreateOfferResponseV2? Created()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsCreated
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.CreateOfferResponseV2>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationCreateOfferResponseV2>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -2182,7 +2182,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryCreated([NotNullWhen(true)]out BeamAutomationClient.Model.CreateOfferResponseV2? result)
+            public bool TryCreated([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationCreateOfferResponseV2? result)
             {
                 result = null;
 
@@ -2433,11 +2433,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.GetAssetListingsResponseV2? Ok()
+            public BeamAutomationClient.Model.AutomationGetAssetListingsResponseV2? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.GetAssetListingsResponseV2>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationGetAssetListingsResponseV2>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -2446,7 +2446,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.GetAssetListingsResponseV2? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationGetAssetListingsResponseV2? result)
             {
                 result = null;
 
@@ -2647,11 +2647,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.GetChainCurrenciesResponseV2? Ok()
+            public BeamAutomationClient.Model.AutomationGetChainCurrenciesResponseV2? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.GetChainCurrenciesResponseV2>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationGetChainCurrenciesResponseV2>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -2660,7 +2660,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.GetChainCurrenciesResponseV2? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationGetChainCurrenciesResponseV2? result)
             {
                 result = null;
 
@@ -2686,18 +2686,18 @@ namespace BeamAutomationClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetListedAssetsForProfilePostV2(GetListedAssetsBodyInputV2 getListedAssetsBodyInputV2, ref string entityId);
+        partial void FormatGetListedAssetsForProfilePostV2(AutomationGetListedAssetsBodyInputV2 automationGetListedAssetsBodyInputV2, ref string entityId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="getListedAssetsBodyInputV2"></param>
+        /// <param name="automationGetListedAssetsBodyInputV2"></param>
         /// <param name="entityId"></param>
         /// <returns></returns>
-        private void ValidateGetListedAssetsForProfilePostV2(GetListedAssetsBodyInputV2 getListedAssetsBodyInputV2, string entityId)
+        private void ValidateGetListedAssetsForProfilePostV2(AutomationGetListedAssetsBodyInputV2 automationGetListedAssetsBodyInputV2, string entityId)
         {
-            if (getListedAssetsBodyInputV2 == null)
-                throw new ArgumentNullException(nameof(getListedAssetsBodyInputV2));
+            if (automationGetListedAssetsBodyInputV2 == null)
+                throw new ArgumentNullException(nameof(automationGetListedAssetsBodyInputV2));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -2707,12 +2707,12 @@ namespace BeamAutomationClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="getListedAssetsBodyInputV2"></param>
+        /// <param name="automationGetListedAssetsBodyInputV2"></param>
         /// <param name="entityId"></param>
-        private void AfterGetListedAssetsForProfilePostV2DefaultImplementation(IGetListedAssetsForProfilePostV2ApiResponse apiResponseLocalVar, GetListedAssetsBodyInputV2 getListedAssetsBodyInputV2, string entityId)
+        private void AfterGetListedAssetsForProfilePostV2DefaultImplementation(IGetListedAssetsForProfilePostV2ApiResponse apiResponseLocalVar, AutomationGetListedAssetsBodyInputV2 automationGetListedAssetsBodyInputV2, string entityId)
         {
             bool suppressDefaultLog = false;
-            AfterGetListedAssetsForProfilePostV2(ref suppressDefaultLog, apiResponseLocalVar, getListedAssetsBodyInputV2, entityId);
+            AfterGetListedAssetsForProfilePostV2(ref suppressDefaultLog, apiResponseLocalVar, automationGetListedAssetsBodyInputV2, entityId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -2722,9 +2722,9 @@ namespace BeamAutomationClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="getListedAssetsBodyInputV2"></param>
+        /// <param name="automationGetListedAssetsBodyInputV2"></param>
         /// <param name="entityId"></param>
-        partial void AfterGetListedAssetsForProfilePostV2(ref bool suppressDefaultLog, IGetListedAssetsForProfilePostV2ApiResponse apiResponseLocalVar, GetListedAssetsBodyInputV2 getListedAssetsBodyInputV2, string entityId);
+        partial void AfterGetListedAssetsForProfilePostV2(ref bool suppressDefaultLog, IGetListedAssetsForProfilePostV2ApiResponse apiResponseLocalVar, AutomationGetListedAssetsBodyInputV2 automationGetListedAssetsBodyInputV2, string entityId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -2732,12 +2732,12 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="getListedAssetsBodyInputV2"></param>
+        /// <param name="automationGetListedAssetsBodyInputV2"></param>
         /// <param name="entityId"></param>
-        private void OnErrorGetListedAssetsForProfilePostV2DefaultImplementation(Exception exception, string pathFormat, string path, GetListedAssetsBodyInputV2 getListedAssetsBodyInputV2, string entityId)
+        private void OnErrorGetListedAssetsForProfilePostV2DefaultImplementation(Exception exception, string pathFormat, string path, AutomationGetListedAssetsBodyInputV2 automationGetListedAssetsBodyInputV2, string entityId)
         {
             bool suppressDefaultLog = false;
-            OnErrorGetListedAssetsForProfilePostV2(ref suppressDefaultLog, exception, pathFormat, path, getListedAssetsBodyInputV2, entityId);
+            OnErrorGetListedAssetsForProfilePostV2(ref suppressDefaultLog, exception, pathFormat, path, automationGetListedAssetsBodyInputV2, entityId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -2749,22 +2749,22 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="getListedAssetsBodyInputV2"></param>
+        /// <param name="automationGetListedAssetsBodyInputV2"></param>
         /// <param name="entityId"></param>
-        partial void OnErrorGetListedAssetsForProfilePostV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, GetListedAssetsBodyInputV2 getListedAssetsBodyInputV2, string entityId);
+        partial void OnErrorGetListedAssetsForProfilePostV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationGetListedAssetsBodyInputV2 automationGetListedAssetsBodyInputV2, string entityId);
 
         /// <summary>
         /// Get all the assets listed by a profile (NFT assets, e.g. ERC721 / ERC1155) 
         /// </summary>
-        /// <param name="getListedAssetsBodyInputV2"></param>
+        /// <param name="automationGetListedAssetsBodyInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetListedAssetsForProfilePostV2ApiResponse"/>&gt;</returns>
-        public async Task<IGetListedAssetsForProfilePostV2ApiResponse?> GetListedAssetsForProfilePostV2OrDefaultAsync(GetListedAssetsBodyInputV2 getListedAssetsBodyInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetListedAssetsForProfilePostV2ApiResponse?> GetListedAssetsForProfilePostV2OrDefaultAsync(AutomationGetListedAssetsBodyInputV2 automationGetListedAssetsBodyInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await GetListedAssetsForProfilePostV2Async(getListedAssetsBodyInputV2, entityId, cancellationToken).ConfigureAwait(false);
+                return await GetListedAssetsForProfilePostV2Async(automationGetListedAssetsBodyInputV2, entityId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -2776,19 +2776,19 @@ namespace BeamAutomationClient.Api
         /// Get all the assets listed by a profile (NFT assets, e.g. ERC721 / ERC1155) 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="getListedAssetsBodyInputV2"></param>
+        /// <param name="automationGetListedAssetsBodyInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetListedAssetsForProfilePostV2ApiResponse"/>&gt;</returns>
-        public async Task<IGetListedAssetsForProfilePostV2ApiResponse> GetListedAssetsForProfilePostV2Async(GetListedAssetsBodyInputV2 getListedAssetsBodyInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetListedAssetsForProfilePostV2ApiResponse> GetListedAssetsForProfilePostV2Async(AutomationGetListedAssetsBodyInputV2 automationGetListedAssetsBodyInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateGetListedAssetsForProfilePostV2(getListedAssetsBodyInputV2, entityId);
+                ValidateGetListedAssetsForProfilePostV2(automationGetListedAssetsBodyInputV2, entityId);
 
-                FormatGetListedAssetsForProfilePostV2(getListedAssetsBodyInputV2, ref entityId);
+                FormatGetListedAssetsForProfilePostV2(automationGetListedAssetsBodyInputV2, ref entityId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -2798,9 +2798,9 @@ namespace BeamAutomationClient.Api
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v2/marketplace/profiles/{entityId}";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (getListedAssetsBodyInputV2 as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (automationGetListedAssetsBodyInputV2 as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(getListedAssetsBodyInputV2, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationGetListedAssetsBodyInputV2, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -2839,7 +2839,7 @@ namespace BeamAutomationClient.Api
 
                         GetListedAssetsForProfilePostV2ApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v2/marketplace/profiles/{entityId}", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterGetListedAssetsForProfilePostV2DefaultImplementation(apiResponseLocalVar, getListedAssetsBodyInputV2, entityId);
+                        AfterGetListedAssetsForProfilePostV2DefaultImplementation(apiResponseLocalVar, automationGetListedAssetsBodyInputV2, entityId);
 
                         Events.ExecuteOnGetListedAssetsForProfilePostV2(apiResponseLocalVar);
 
@@ -2853,7 +2853,7 @@ namespace BeamAutomationClient.Api
             }
             catch(Exception e)
             {
-                OnErrorGetListedAssetsForProfilePostV2DefaultImplementation(e, "/v2/marketplace/profiles/{entityId}", uriBuilderLocalVar.Path, getListedAssetsBodyInputV2, entityId);
+                OnErrorGetListedAssetsForProfilePostV2DefaultImplementation(e, "/v2/marketplace/profiles/{entityId}", uriBuilderLocalVar.Path, automationGetListedAssetsBodyInputV2, entityId);
                 Events.ExecuteOnErrorGetListedAssetsForProfilePostV2(e);
                 throw;
             }
@@ -2897,11 +2897,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.GetAssetListingsResponseV2? Ok()
+            public BeamAutomationClient.Model.AutomationGetAssetListingsResponseV2? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.GetAssetListingsResponseV2>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationGetAssetListingsResponseV2>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -2910,7 +2910,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.GetAssetListingsResponseV2? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationGetAssetListingsResponseV2? result)
             {
                 result = null;
 
@@ -2936,28 +2936,28 @@ namespace BeamAutomationClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetListedAssetsPostV2(GetListedAssetsBodyInputV2 getListedAssetsBodyInputV2);
+        partial void FormatGetListedAssetsPostV2(AutomationGetListedAssetsBodyInputV2 automationGetListedAssetsBodyInputV2);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="getListedAssetsBodyInputV2"></param>
+        /// <param name="automationGetListedAssetsBodyInputV2"></param>
         /// <returns></returns>
-        private void ValidateGetListedAssetsPostV2(GetListedAssetsBodyInputV2 getListedAssetsBodyInputV2)
+        private void ValidateGetListedAssetsPostV2(AutomationGetListedAssetsBodyInputV2 automationGetListedAssetsBodyInputV2)
         {
-            if (getListedAssetsBodyInputV2 == null)
-                throw new ArgumentNullException(nameof(getListedAssetsBodyInputV2));
+            if (automationGetListedAssetsBodyInputV2 == null)
+                throw new ArgumentNullException(nameof(automationGetListedAssetsBodyInputV2));
         }
 
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="getListedAssetsBodyInputV2"></param>
-        private void AfterGetListedAssetsPostV2DefaultImplementation(IGetListedAssetsPostV2ApiResponse apiResponseLocalVar, GetListedAssetsBodyInputV2 getListedAssetsBodyInputV2)
+        /// <param name="automationGetListedAssetsBodyInputV2"></param>
+        private void AfterGetListedAssetsPostV2DefaultImplementation(IGetListedAssetsPostV2ApiResponse apiResponseLocalVar, AutomationGetListedAssetsBodyInputV2 automationGetListedAssetsBodyInputV2)
         {
             bool suppressDefaultLog = false;
-            AfterGetListedAssetsPostV2(ref suppressDefaultLog, apiResponseLocalVar, getListedAssetsBodyInputV2);
+            AfterGetListedAssetsPostV2(ref suppressDefaultLog, apiResponseLocalVar, automationGetListedAssetsBodyInputV2);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -2967,8 +2967,8 @@ namespace BeamAutomationClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="getListedAssetsBodyInputV2"></param>
-        partial void AfterGetListedAssetsPostV2(ref bool suppressDefaultLog, IGetListedAssetsPostV2ApiResponse apiResponseLocalVar, GetListedAssetsBodyInputV2 getListedAssetsBodyInputV2);
+        /// <param name="automationGetListedAssetsBodyInputV2"></param>
+        partial void AfterGetListedAssetsPostV2(ref bool suppressDefaultLog, IGetListedAssetsPostV2ApiResponse apiResponseLocalVar, AutomationGetListedAssetsBodyInputV2 automationGetListedAssetsBodyInputV2);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -2976,11 +2976,11 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="getListedAssetsBodyInputV2"></param>
-        private void OnErrorGetListedAssetsPostV2DefaultImplementation(Exception exception, string pathFormat, string path, GetListedAssetsBodyInputV2 getListedAssetsBodyInputV2)
+        /// <param name="automationGetListedAssetsBodyInputV2"></param>
+        private void OnErrorGetListedAssetsPostV2DefaultImplementation(Exception exception, string pathFormat, string path, AutomationGetListedAssetsBodyInputV2 automationGetListedAssetsBodyInputV2)
         {
             bool suppressDefaultLog = false;
-            OnErrorGetListedAssetsPostV2(ref suppressDefaultLog, exception, pathFormat, path, getListedAssetsBodyInputV2);
+            OnErrorGetListedAssetsPostV2(ref suppressDefaultLog, exception, pathFormat, path, automationGetListedAssetsBodyInputV2);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -2992,20 +2992,20 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="getListedAssetsBodyInputV2"></param>
-        partial void OnErrorGetListedAssetsPostV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, GetListedAssetsBodyInputV2 getListedAssetsBodyInputV2);
+        /// <param name="automationGetListedAssetsBodyInputV2"></param>
+        partial void OnErrorGetListedAssetsPostV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationGetListedAssetsBodyInputV2 automationGetListedAssetsBodyInputV2);
 
         /// <summary>
         /// Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155) 
         /// </summary>
-        /// <param name="getListedAssetsBodyInputV2"></param>
+        /// <param name="automationGetListedAssetsBodyInputV2"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetListedAssetsPostV2ApiResponse"/>&gt;</returns>
-        public async Task<IGetListedAssetsPostV2ApiResponse?> GetListedAssetsPostV2OrDefaultAsync(GetListedAssetsBodyInputV2 getListedAssetsBodyInputV2, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetListedAssetsPostV2ApiResponse?> GetListedAssetsPostV2OrDefaultAsync(AutomationGetListedAssetsBodyInputV2 automationGetListedAssetsBodyInputV2, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await GetListedAssetsPostV2Async(getListedAssetsBodyInputV2, cancellationToken).ConfigureAwait(false);
+                return await GetListedAssetsPostV2Async(automationGetListedAssetsBodyInputV2, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -3017,18 +3017,18 @@ namespace BeamAutomationClient.Api
         /// Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155) 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="getListedAssetsBodyInputV2"></param>
+        /// <param name="automationGetListedAssetsBodyInputV2"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetListedAssetsPostV2ApiResponse"/>&gt;</returns>
-        public async Task<IGetListedAssetsPostV2ApiResponse> GetListedAssetsPostV2Async(GetListedAssetsBodyInputV2 getListedAssetsBodyInputV2, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetListedAssetsPostV2ApiResponse> GetListedAssetsPostV2Async(AutomationGetListedAssetsBodyInputV2 automationGetListedAssetsBodyInputV2, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateGetListedAssetsPostV2(getListedAssetsBodyInputV2);
+                ValidateGetListedAssetsPostV2(automationGetListedAssetsBodyInputV2);
 
-                FormatGetListedAssetsPostV2(getListedAssetsBodyInputV2);
+                FormatGetListedAssetsPostV2(automationGetListedAssetsBodyInputV2);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -3037,9 +3037,9 @@ namespace BeamAutomationClient.Api
                     uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v2/marketplace";
 
-                    httpRequestMessageLocalVar.Content = (getListedAssetsBodyInputV2 as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (automationGetListedAssetsBodyInputV2 as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(getListedAssetsBodyInputV2, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationGetListedAssetsBodyInputV2, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -3078,7 +3078,7 @@ namespace BeamAutomationClient.Api
 
                         GetListedAssetsPostV2ApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v2/marketplace", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterGetListedAssetsPostV2DefaultImplementation(apiResponseLocalVar, getListedAssetsBodyInputV2);
+                        AfterGetListedAssetsPostV2DefaultImplementation(apiResponseLocalVar, automationGetListedAssetsBodyInputV2);
 
                         Events.ExecuteOnGetListedAssetsPostV2(apiResponseLocalVar);
 
@@ -3092,7 +3092,7 @@ namespace BeamAutomationClient.Api
             }
             catch(Exception e)
             {
-                OnErrorGetListedAssetsPostV2DefaultImplementation(e, "/v2/marketplace", uriBuilderLocalVar.Path, getListedAssetsBodyInputV2);
+                OnErrorGetListedAssetsPostV2DefaultImplementation(e, "/v2/marketplace", uriBuilderLocalVar.Path, automationGetListedAssetsBodyInputV2);
                 Events.ExecuteOnErrorGetListedAssetsPostV2(e);
                 throw;
             }
@@ -3136,11 +3136,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.GetAssetListingsResponseV2? Ok()
+            public BeamAutomationClient.Model.AutomationGetAssetListingsResponseV2? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.GetAssetListingsResponseV2>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationGetAssetListingsResponseV2>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -3149,7 +3149,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.GetAssetListingsResponseV2? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationGetAssetListingsResponseV2? result)
             {
                 result = null;
 
@@ -3411,11 +3411,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.GetAssetListingsResponseV2? Ok()
+            public BeamAutomationClient.Model.AutomationGetAssetListingsResponseV2? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.GetAssetListingsResponseV2>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationGetAssetListingsResponseV2>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -3424,7 +3424,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.GetAssetListingsResponseV2? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationGetAssetListingsResponseV2? result)
             {
                 result = null;
 
@@ -3664,11 +3664,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.GetAssetListingsResponseV2? Ok()
+            public BeamAutomationClient.Model.AutomationGetAssetListingsResponseV2? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.GetAssetListingsResponseV2>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationGetAssetListingsResponseV2>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -3677,7 +3677,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.GetAssetListingsResponseV2? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationGetAssetListingsResponseV2? result)
             {
                 result = null;
 
@@ -3703,18 +3703,18 @@ namespace BeamAutomationClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatListAssetV2(SellAssetRequestInputV2 sellAssetRequestInputV2, ref string entityId);
+        partial void FormatListAssetV2(AutomationSellAssetRequestInputV2 automationSellAssetRequestInputV2, ref string entityId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="sellAssetRequestInputV2"></param>
+        /// <param name="automationSellAssetRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <returns></returns>
-        private void ValidateListAssetV2(SellAssetRequestInputV2 sellAssetRequestInputV2, string entityId)
+        private void ValidateListAssetV2(AutomationSellAssetRequestInputV2 automationSellAssetRequestInputV2, string entityId)
         {
-            if (sellAssetRequestInputV2 == null)
-                throw new ArgumentNullException(nameof(sellAssetRequestInputV2));
+            if (automationSellAssetRequestInputV2 == null)
+                throw new ArgumentNullException(nameof(automationSellAssetRequestInputV2));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -3724,12 +3724,12 @@ namespace BeamAutomationClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="sellAssetRequestInputV2"></param>
+        /// <param name="automationSellAssetRequestInputV2"></param>
         /// <param name="entityId"></param>
-        private void AfterListAssetV2DefaultImplementation(IListAssetV2ApiResponse apiResponseLocalVar, SellAssetRequestInputV2 sellAssetRequestInputV2, string entityId)
+        private void AfterListAssetV2DefaultImplementation(IListAssetV2ApiResponse apiResponseLocalVar, AutomationSellAssetRequestInputV2 automationSellAssetRequestInputV2, string entityId)
         {
             bool suppressDefaultLog = false;
-            AfterListAssetV2(ref suppressDefaultLog, apiResponseLocalVar, sellAssetRequestInputV2, entityId);
+            AfterListAssetV2(ref suppressDefaultLog, apiResponseLocalVar, automationSellAssetRequestInputV2, entityId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -3739,9 +3739,9 @@ namespace BeamAutomationClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="sellAssetRequestInputV2"></param>
+        /// <param name="automationSellAssetRequestInputV2"></param>
         /// <param name="entityId"></param>
-        partial void AfterListAssetV2(ref bool suppressDefaultLog, IListAssetV2ApiResponse apiResponseLocalVar, SellAssetRequestInputV2 sellAssetRequestInputV2, string entityId);
+        partial void AfterListAssetV2(ref bool suppressDefaultLog, IListAssetV2ApiResponse apiResponseLocalVar, AutomationSellAssetRequestInputV2 automationSellAssetRequestInputV2, string entityId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -3749,12 +3749,12 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="sellAssetRequestInputV2"></param>
+        /// <param name="automationSellAssetRequestInputV2"></param>
         /// <param name="entityId"></param>
-        private void OnErrorListAssetV2DefaultImplementation(Exception exception, string pathFormat, string path, SellAssetRequestInputV2 sellAssetRequestInputV2, string entityId)
+        private void OnErrorListAssetV2DefaultImplementation(Exception exception, string pathFormat, string path, AutomationSellAssetRequestInputV2 automationSellAssetRequestInputV2, string entityId)
         {
             bool suppressDefaultLog = false;
-            OnErrorListAssetV2(ref suppressDefaultLog, exception, pathFormat, path, sellAssetRequestInputV2, entityId);
+            OnErrorListAssetV2(ref suppressDefaultLog, exception, pathFormat, path, automationSellAssetRequestInputV2, entityId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -3766,22 +3766,22 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="sellAssetRequestInputV2"></param>
+        /// <param name="automationSellAssetRequestInputV2"></param>
         /// <param name="entityId"></param>
-        partial void OnErrorListAssetV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, SellAssetRequestInputV2 sellAssetRequestInputV2, string entityId);
+        partial void OnErrorListAssetV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationSellAssetRequestInputV2 automationSellAssetRequestInputV2, string entityId);
 
         /// <summary>
         /// List an asset for sale 
         /// </summary>
-        /// <param name="sellAssetRequestInputV2"></param>
+        /// <param name="automationSellAssetRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IListAssetV2ApiResponse"/>&gt;</returns>
-        public async Task<IListAssetV2ApiResponse?> ListAssetV2OrDefaultAsync(SellAssetRequestInputV2 sellAssetRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IListAssetV2ApiResponse?> ListAssetV2OrDefaultAsync(AutomationSellAssetRequestInputV2 automationSellAssetRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await ListAssetV2Async(sellAssetRequestInputV2, entityId, cancellationToken).ConfigureAwait(false);
+                return await ListAssetV2Async(automationSellAssetRequestInputV2, entityId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -3793,19 +3793,19 @@ namespace BeamAutomationClient.Api
         /// List an asset for sale 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sellAssetRequestInputV2"></param>
+        /// <param name="automationSellAssetRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IListAssetV2ApiResponse"/>&gt;</returns>
-        public async Task<IListAssetV2ApiResponse> ListAssetV2Async(SellAssetRequestInputV2 sellAssetRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IListAssetV2ApiResponse> ListAssetV2Async(AutomationSellAssetRequestInputV2 automationSellAssetRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateListAssetV2(sellAssetRequestInputV2, entityId);
+                ValidateListAssetV2(automationSellAssetRequestInputV2, entityId);
 
-                FormatListAssetV2(sellAssetRequestInputV2, ref entityId);
+                FormatListAssetV2(automationSellAssetRequestInputV2, ref entityId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -3815,9 +3815,9 @@ namespace BeamAutomationClient.Api
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v2/marketplace/profiles/{entityId}/listing";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (sellAssetRequestInputV2 as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (automationSellAssetRequestInputV2 as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(sellAssetRequestInputV2, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationSellAssetRequestInputV2, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -3856,7 +3856,7 @@ namespace BeamAutomationClient.Api
 
                         ListAssetV2ApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v2/marketplace/profiles/{entityId}/listing", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterListAssetV2DefaultImplementation(apiResponseLocalVar, sellAssetRequestInputV2, entityId);
+                        AfterListAssetV2DefaultImplementation(apiResponseLocalVar, automationSellAssetRequestInputV2, entityId);
 
                         Events.ExecuteOnListAssetV2(apiResponseLocalVar);
 
@@ -3870,7 +3870,7 @@ namespace BeamAutomationClient.Api
             }
             catch(Exception e)
             {
-                OnErrorListAssetV2DefaultImplementation(e, "/v2/marketplace/profiles/{entityId}/listing", uriBuilderLocalVar.Path, sellAssetRequestInputV2, entityId);
+                OnErrorListAssetV2DefaultImplementation(e, "/v2/marketplace/profiles/{entityId}/listing", uriBuilderLocalVar.Path, automationSellAssetRequestInputV2, entityId);
                 Events.ExecuteOnErrorListAssetV2(e);
                 throw;
             }
@@ -3914,11 +3914,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.SellAssetResponseV2? Created()
+            public BeamAutomationClient.Model.AutomationSellAssetResponseV2? Created()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsCreated
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.SellAssetResponseV2>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationSellAssetResponseV2>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -3927,7 +3927,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryCreated([NotNullWhen(true)]out BeamAutomationClient.Model.SellAssetResponseV2? result)
+            public bool TryCreated([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationSellAssetResponseV2? result)
             {
                 result = null;
 
@@ -3953,28 +3953,28 @@ namespace BeamAutomationClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatRefreshContract(RefreshContractRequestBody refreshContractRequestBody);
+        partial void FormatRefreshContract(AutomationRefreshContractRequestBody automationRefreshContractRequestBody);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="refreshContractRequestBody"></param>
+        /// <param name="automationRefreshContractRequestBody"></param>
         /// <returns></returns>
-        private void ValidateRefreshContract(RefreshContractRequestBody refreshContractRequestBody)
+        private void ValidateRefreshContract(AutomationRefreshContractRequestBody automationRefreshContractRequestBody)
         {
-            if (refreshContractRequestBody == null)
-                throw new ArgumentNullException(nameof(refreshContractRequestBody));
+            if (automationRefreshContractRequestBody == null)
+                throw new ArgumentNullException(nameof(automationRefreshContractRequestBody));
         }
 
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="refreshContractRequestBody"></param>
-        private void AfterRefreshContractDefaultImplementation(IRefreshContractApiResponse apiResponseLocalVar, RefreshContractRequestBody refreshContractRequestBody)
+        /// <param name="automationRefreshContractRequestBody"></param>
+        private void AfterRefreshContractDefaultImplementation(IRefreshContractApiResponse apiResponseLocalVar, AutomationRefreshContractRequestBody automationRefreshContractRequestBody)
         {
             bool suppressDefaultLog = false;
-            AfterRefreshContract(ref suppressDefaultLog, apiResponseLocalVar, refreshContractRequestBody);
+            AfterRefreshContract(ref suppressDefaultLog, apiResponseLocalVar, automationRefreshContractRequestBody);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -3984,8 +3984,8 @@ namespace BeamAutomationClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="refreshContractRequestBody"></param>
-        partial void AfterRefreshContract(ref bool suppressDefaultLog, IRefreshContractApiResponse apiResponseLocalVar, RefreshContractRequestBody refreshContractRequestBody);
+        /// <param name="automationRefreshContractRequestBody"></param>
+        partial void AfterRefreshContract(ref bool suppressDefaultLog, IRefreshContractApiResponse apiResponseLocalVar, AutomationRefreshContractRequestBody automationRefreshContractRequestBody);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -3993,11 +3993,11 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="refreshContractRequestBody"></param>
-        private void OnErrorRefreshContractDefaultImplementation(Exception exception, string pathFormat, string path, RefreshContractRequestBody refreshContractRequestBody)
+        /// <param name="automationRefreshContractRequestBody"></param>
+        private void OnErrorRefreshContractDefaultImplementation(Exception exception, string pathFormat, string path, AutomationRefreshContractRequestBody automationRefreshContractRequestBody)
         {
             bool suppressDefaultLog = false;
-            OnErrorRefreshContract(ref suppressDefaultLog, exception, pathFormat, path, refreshContractRequestBody);
+            OnErrorRefreshContract(ref suppressDefaultLog, exception, pathFormat, path, automationRefreshContractRequestBody);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -4009,20 +4009,20 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="refreshContractRequestBody"></param>
-        partial void OnErrorRefreshContract(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, RefreshContractRequestBody refreshContractRequestBody);
+        /// <param name="automationRefreshContractRequestBody"></param>
+        partial void OnErrorRefreshContract(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationRefreshContractRequestBody automationRefreshContractRequestBody);
 
         /// <summary>
         /// Schedule a contract refresh in the indexer 
         /// </summary>
-        /// <param name="refreshContractRequestBody"></param>
+        /// <param name="automationRefreshContractRequestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRefreshContractApiResponse"/>&gt;</returns>
-        public async Task<IRefreshContractApiResponse?> RefreshContractOrDefaultAsync(RefreshContractRequestBody refreshContractRequestBody, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IRefreshContractApiResponse?> RefreshContractOrDefaultAsync(AutomationRefreshContractRequestBody automationRefreshContractRequestBody, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await RefreshContractAsync(refreshContractRequestBody, cancellationToken).ConfigureAwait(false);
+                return await RefreshContractAsync(automationRefreshContractRequestBody, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -4034,18 +4034,18 @@ namespace BeamAutomationClient.Api
         /// Schedule a contract refresh in the indexer 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="refreshContractRequestBody"></param>
+        /// <param name="automationRefreshContractRequestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRefreshContractApiResponse"/>&gt;</returns>
-        public async Task<IRefreshContractApiResponse> RefreshContractAsync(RefreshContractRequestBody refreshContractRequestBody, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IRefreshContractApiResponse> RefreshContractAsync(AutomationRefreshContractRequestBody automationRefreshContractRequestBody, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateRefreshContract(refreshContractRequestBody);
+                ValidateRefreshContract(automationRefreshContractRequestBody);
 
-                FormatRefreshContract(refreshContractRequestBody);
+                FormatRefreshContract(automationRefreshContractRequestBody);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -4054,9 +4054,9 @@ namespace BeamAutomationClient.Api
                     uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v2/marketplace/refresh/contract";
 
-                    httpRequestMessageLocalVar.Content = (refreshContractRequestBody as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (automationRefreshContractRequestBody as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(refreshContractRequestBody, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationRefreshContractRequestBody, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -4086,7 +4086,7 @@ namespace BeamAutomationClient.Api
 
                         RefreshContractApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v2/marketplace/refresh/contract", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterRefreshContractDefaultImplementation(apiResponseLocalVar, refreshContractRequestBody);
+                        AfterRefreshContractDefaultImplementation(apiResponseLocalVar, automationRefreshContractRequestBody);
 
                         Events.ExecuteOnRefreshContract(apiResponseLocalVar);
 
@@ -4100,7 +4100,7 @@ namespace BeamAutomationClient.Api
             }
             catch(Exception e)
             {
-                OnErrorRefreshContractDefaultImplementation(e, "/v2/marketplace/refresh/contract", uriBuilderLocalVar.Path, refreshContractRequestBody);
+                OnErrorRefreshContractDefaultImplementation(e, "/v2/marketplace/refresh/contract", uriBuilderLocalVar.Path, automationRefreshContractRequestBody);
                 Events.ExecuteOnErrorRefreshContract(e);
                 throw;
             }
@@ -4151,28 +4151,28 @@ namespace BeamAutomationClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatRefreshToken(RefreshTokenRequestBody refreshTokenRequestBody);
+        partial void FormatRefreshToken(AutomationRefreshTokenRequestBody automationRefreshTokenRequestBody);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="refreshTokenRequestBody"></param>
+        /// <param name="automationRefreshTokenRequestBody"></param>
         /// <returns></returns>
-        private void ValidateRefreshToken(RefreshTokenRequestBody refreshTokenRequestBody)
+        private void ValidateRefreshToken(AutomationRefreshTokenRequestBody automationRefreshTokenRequestBody)
         {
-            if (refreshTokenRequestBody == null)
-                throw new ArgumentNullException(nameof(refreshTokenRequestBody));
+            if (automationRefreshTokenRequestBody == null)
+                throw new ArgumentNullException(nameof(automationRefreshTokenRequestBody));
         }
 
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="refreshTokenRequestBody"></param>
-        private void AfterRefreshTokenDefaultImplementation(IRefreshTokenApiResponse apiResponseLocalVar, RefreshTokenRequestBody refreshTokenRequestBody)
+        /// <param name="automationRefreshTokenRequestBody"></param>
+        private void AfterRefreshTokenDefaultImplementation(IRefreshTokenApiResponse apiResponseLocalVar, AutomationRefreshTokenRequestBody automationRefreshTokenRequestBody)
         {
             bool suppressDefaultLog = false;
-            AfterRefreshToken(ref suppressDefaultLog, apiResponseLocalVar, refreshTokenRequestBody);
+            AfterRefreshToken(ref suppressDefaultLog, apiResponseLocalVar, automationRefreshTokenRequestBody);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -4182,8 +4182,8 @@ namespace BeamAutomationClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="refreshTokenRequestBody"></param>
-        partial void AfterRefreshToken(ref bool suppressDefaultLog, IRefreshTokenApiResponse apiResponseLocalVar, RefreshTokenRequestBody refreshTokenRequestBody);
+        /// <param name="automationRefreshTokenRequestBody"></param>
+        partial void AfterRefreshToken(ref bool suppressDefaultLog, IRefreshTokenApiResponse apiResponseLocalVar, AutomationRefreshTokenRequestBody automationRefreshTokenRequestBody);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -4191,11 +4191,11 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="refreshTokenRequestBody"></param>
-        private void OnErrorRefreshTokenDefaultImplementation(Exception exception, string pathFormat, string path, RefreshTokenRequestBody refreshTokenRequestBody)
+        /// <param name="automationRefreshTokenRequestBody"></param>
+        private void OnErrorRefreshTokenDefaultImplementation(Exception exception, string pathFormat, string path, AutomationRefreshTokenRequestBody automationRefreshTokenRequestBody)
         {
             bool suppressDefaultLog = false;
-            OnErrorRefreshToken(ref suppressDefaultLog, exception, pathFormat, path, refreshTokenRequestBody);
+            OnErrorRefreshToken(ref suppressDefaultLog, exception, pathFormat, path, automationRefreshTokenRequestBody);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -4207,20 +4207,20 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="refreshTokenRequestBody"></param>
-        partial void OnErrorRefreshToken(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, RefreshTokenRequestBody refreshTokenRequestBody);
+        /// <param name="automationRefreshTokenRequestBody"></param>
+        partial void OnErrorRefreshToken(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationRefreshTokenRequestBody automationRefreshTokenRequestBody);
 
         /// <summary>
         /// Schedule a token refresh in the indexer 
         /// </summary>
-        /// <param name="refreshTokenRequestBody"></param>
+        /// <param name="automationRefreshTokenRequestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRefreshTokenApiResponse"/>&gt;</returns>
-        public async Task<IRefreshTokenApiResponse?> RefreshTokenOrDefaultAsync(RefreshTokenRequestBody refreshTokenRequestBody, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IRefreshTokenApiResponse?> RefreshTokenOrDefaultAsync(AutomationRefreshTokenRequestBody automationRefreshTokenRequestBody, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await RefreshTokenAsync(refreshTokenRequestBody, cancellationToken).ConfigureAwait(false);
+                return await RefreshTokenAsync(automationRefreshTokenRequestBody, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -4232,18 +4232,18 @@ namespace BeamAutomationClient.Api
         /// Schedule a token refresh in the indexer 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="refreshTokenRequestBody"></param>
+        /// <param name="automationRefreshTokenRequestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRefreshTokenApiResponse"/>&gt;</returns>
-        public async Task<IRefreshTokenApiResponse> RefreshTokenAsync(RefreshTokenRequestBody refreshTokenRequestBody, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IRefreshTokenApiResponse> RefreshTokenAsync(AutomationRefreshTokenRequestBody automationRefreshTokenRequestBody, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateRefreshToken(refreshTokenRequestBody);
+                ValidateRefreshToken(automationRefreshTokenRequestBody);
 
-                FormatRefreshToken(refreshTokenRequestBody);
+                FormatRefreshToken(automationRefreshTokenRequestBody);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -4252,9 +4252,9 @@ namespace BeamAutomationClient.Api
                     uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v2/marketplace/refresh/token";
 
-                    httpRequestMessageLocalVar.Content = (refreshTokenRequestBody as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (automationRefreshTokenRequestBody as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(refreshTokenRequestBody, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationRefreshTokenRequestBody, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -4284,7 +4284,7 @@ namespace BeamAutomationClient.Api
 
                         RefreshTokenApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v2/marketplace/refresh/token", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterRefreshTokenDefaultImplementation(apiResponseLocalVar, refreshTokenRequestBody);
+                        AfterRefreshTokenDefaultImplementation(apiResponseLocalVar, automationRefreshTokenRequestBody);
 
                         Events.ExecuteOnRefreshToken(apiResponseLocalVar);
 
@@ -4298,7 +4298,7 @@ namespace BeamAutomationClient.Api
             }
             catch(Exception e)
             {
-                OnErrorRefreshTokenDefaultImplementation(e, "/v2/marketplace/refresh/token", uriBuilderLocalVar.Path, refreshTokenRequestBody);
+                OnErrorRefreshTokenDefaultImplementation(e, "/v2/marketplace/refresh/token", uriBuilderLocalVar.Path, automationRefreshTokenRequestBody);
                 Events.ExecuteOnErrorRefreshToken(e);
                 throw;
             }

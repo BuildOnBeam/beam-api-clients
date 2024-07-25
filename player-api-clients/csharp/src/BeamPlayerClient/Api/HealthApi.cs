@@ -28,12 +28,12 @@ namespace BeamPlayerClient.Api
     /// Represents a collection of functions to interact with the API endpoints
     /// This class is registered as transient.
     /// </summary>
-    public interface IHealthApi : IApi
+    public interface IPlayerHealthApi : IPlayerApi
     {
         /// <summary>
         /// The class containing the events
         /// </summary>
-        HealthApiEvents Events { get; }
+        PlayerHealthApiEvents Events { get; }
 
         /// <summary>
         /// 
@@ -78,7 +78,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public class HealthApiEvents
+    public class PlayerHealthApiEvents
     {
         /// <summary>
         /// The event raised after the server response
@@ -90,7 +90,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorCheck;
 
-        internal void ExecuteOnCheck(HealthApi.CheckApiResponse apiResponse)
+        internal void ExecuteOnCheck(PlayerHealthApi.CheckApiResponse apiResponse)
         {
             OnCheck?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -104,7 +104,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public sealed partial class HealthApi : IHealthApi
+    public sealed partial class PlayerHealthApi : IPlayerHealthApi
     {
         private JsonSerializerOptions _jsonSerializerOptions;
 
@@ -116,7 +116,7 @@ namespace BeamPlayerClient.Api
         /// <summary>
         /// The logger
         /// </summary>
-        public ILogger<HealthApi> Logger { get; }
+        public ILogger<PlayerHealthApi> Logger { get; }
 
         /// <summary>
         /// The HttpClient
@@ -126,7 +126,7 @@ namespace BeamPlayerClient.Api
         /// <summary>
         /// The class containing the events
         /// </summary>
-        public HealthApiEvents Events { get; }
+        public PlayerHealthApiEvents Events { get; }
 
         /// <summary>
         /// A token provider of type <see cref="ApiKeyProvider"/>
@@ -134,17 +134,17 @@ namespace BeamPlayerClient.Api
         public TokenProvider<ApiKeyToken> ApiKeyProvider { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HealthApi"/> class.
+        /// Initializes a new instance of the <see cref="PlayerHealthApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public HealthApi(ILogger<HealthApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, HealthApiEvents healthApiEvents,
+        public PlayerHealthApi(ILogger<PlayerHealthApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, PlayerJsonSerializerOptionsProvider jsonSerializerOptionsProvider, PlayerHealthApiEvents playerHealthApiEvents,
             TokenProvider<ApiKeyToken> apiKeyProvider)
         {
             _jsonSerializerOptions = jsonSerializerOptionsProvider.Options;
             LoggerFactory = loggerFactory;
-            Logger = LoggerFactory.CreateLogger<HealthApi>();
+            Logger = LoggerFactory.CreateLogger<PlayerHealthApi>();
             HttpClient = httpClient;
-            Events = healthApiEvents;
+            Events = playerHealthApiEvents;
             ApiKeyProvider = apiKeyProvider;
         }
 

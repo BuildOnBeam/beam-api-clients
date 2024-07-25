@@ -28,12 +28,12 @@ namespace BeamAutomationClient.Api
     /// Represents a collection of functions to interact with the API endpoints
     /// This class is registered as transient.
     /// </summary>
-    public interface IGameApi : IApi
+    public interface IAutomationGameApi : IAutomationApi
     {
         /// <summary>
         /// The class containing the events
         /// </summary>
-        GameApiEvents Events { get; }
+        AutomationGameApiEvents Events { get; }
 
         /// <summary>
         /// Add a new contract to the game
@@ -42,10 +42,10 @@ namespace BeamAutomationClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="addContractRequestInput"></param>
+        /// <param name="automationAddContractRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IAddContractToGameApiResponse"/>&gt;</returns>
-        Task<IAddContractToGameApiResponse> AddContractToGameAsync(AddContractRequestInput addContractRequestInput, System.Threading.CancellationToken cancellationToken = default);
+        Task<IAddContractToGameApiResponse> AddContractToGameAsync(AutomationAddContractRequestInput automationAddContractRequestInput, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Add a new contract to the game
@@ -53,10 +53,10 @@ namespace BeamAutomationClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="addContractRequestInput"></param>
+        /// <param name="automationAddContractRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IAddContractToGameApiResponse"/>?&gt;</returns>
-        Task<IAddContractToGameApiResponse?> AddContractToGameOrDefaultAsync(AddContractRequestInput addContractRequestInput, System.Threading.CancellationToken cancellationToken = default);
+        Task<IAddContractToGameApiResponse?> AddContractToGameOrDefaultAsync(AutomationAddContractRequestInput automationAddContractRequestInput, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get information about your game
@@ -132,10 +132,10 @@ namespace BeamAutomationClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="updateGameRequestInput"></param>
+        /// <param name="automationUpdateGameRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IUpdateGameApiResponse"/>&gt;</returns>
-        Task<IUpdateGameApiResponse> UpdateGameAsync(UpdateGameRequestInput updateGameRequestInput, System.Threading.CancellationToken cancellationToken = default);
+        Task<IUpdateGameApiResponse> UpdateGameAsync(AutomationUpdateGameRequestInput automationUpdateGameRequestInput, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Updating name, description and/or coverImageUrl
@@ -143,16 +143,16 @@ namespace BeamAutomationClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="updateGameRequestInput"></param>
+        /// <param name="automationUpdateGameRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IUpdateGameApiResponse"/>?&gt;</returns>
-        Task<IUpdateGameApiResponse?> UpdateGameOrDefaultAsync(UpdateGameRequestInput updateGameRequestInput, System.Threading.CancellationToken cancellationToken = default);
+        Task<IUpdateGameApiResponse?> UpdateGameOrDefaultAsync(AutomationUpdateGameRequestInput automationUpdateGameRequestInput, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
     /// The <see cref="IAddContractToGameApiResponse"/>
     /// </summary>
-    public interface IAddContractToGameApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.AddContractResponse?>
+    public interface IAddContractToGameApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.AutomationAddContractResponse?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
@@ -164,7 +164,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IGetGameApiResponse"/>
     /// </summary>
-    public interface IGetGameApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.GetGameResponse?>
+    public interface IGetGameApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetGameResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -176,7 +176,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IRegenerateApiKeysApiResponse"/>
     /// </summary>
-    public interface IRegenerateApiKeysApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.RegenerateGameApiKeysResponse?>
+    public interface IRegenerateApiKeysApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.AutomationRegenerateGameApiKeysResponse?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
@@ -188,7 +188,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IRemoveContractFromGameApiResponse"/>
     /// </summary>
-    public interface IRemoveContractFromGameApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.RemoveContractResponse?>
+    public interface IRemoveContractFromGameApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationRemoveContractResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -200,7 +200,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IUpdateGameApiResponse"/>
     /// </summary>
-    public interface IUpdateGameApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.UpdateGameResponse?>
+    public interface IUpdateGameApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationUpdateGameResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -212,7 +212,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public class GameApiEvents
+    public class AutomationGameApiEvents
     {
         /// <summary>
         /// The event raised after the server response
@@ -224,7 +224,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorAddContractToGame;
 
-        internal void ExecuteOnAddContractToGame(GameApi.AddContractToGameApiResponse apiResponse)
+        internal void ExecuteOnAddContractToGame(AutomationGameApi.AddContractToGameApiResponse apiResponse)
         {
             OnAddContractToGame?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -244,7 +244,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetGame;
 
-        internal void ExecuteOnGetGame(GameApi.GetGameApiResponse apiResponse)
+        internal void ExecuteOnGetGame(AutomationGameApi.GetGameApiResponse apiResponse)
         {
             OnGetGame?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -264,7 +264,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorRegenerateApiKeys;
 
-        internal void ExecuteOnRegenerateApiKeys(GameApi.RegenerateApiKeysApiResponse apiResponse)
+        internal void ExecuteOnRegenerateApiKeys(AutomationGameApi.RegenerateApiKeysApiResponse apiResponse)
         {
             OnRegenerateApiKeys?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -284,7 +284,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorRemoveContractFromGame;
 
-        internal void ExecuteOnRemoveContractFromGame(GameApi.RemoveContractFromGameApiResponse apiResponse)
+        internal void ExecuteOnRemoveContractFromGame(AutomationGameApi.RemoveContractFromGameApiResponse apiResponse)
         {
             OnRemoveContractFromGame?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -304,7 +304,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorUpdateGame;
 
-        internal void ExecuteOnUpdateGame(GameApi.UpdateGameApiResponse apiResponse)
+        internal void ExecuteOnUpdateGame(AutomationGameApi.UpdateGameApiResponse apiResponse)
         {
             OnUpdateGame?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -318,7 +318,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public sealed partial class GameApi : IGameApi
+    public sealed partial class AutomationGameApi : IAutomationGameApi
     {
         private JsonSerializerOptions _jsonSerializerOptions;
 
@@ -330,7 +330,7 @@ namespace BeamAutomationClient.Api
         /// <summary>
         /// The logger
         /// </summary>
-        public ILogger<GameApi> Logger { get; }
+        public ILogger<AutomationGameApi> Logger { get; }
 
         /// <summary>
         /// The HttpClient
@@ -340,7 +340,7 @@ namespace BeamAutomationClient.Api
         /// <summary>
         /// The class containing the events
         /// </summary>
-        public GameApiEvents Events { get; }
+        public AutomationGameApiEvents Events { get; }
 
         /// <summary>
         /// A token provider of type <see cref="ApiKeyProvider"/>
@@ -348,42 +348,42 @@ namespace BeamAutomationClient.Api
         public TokenProvider<ApiKeyToken> ApiKeyProvider { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GameApi"/> class.
+        /// Initializes a new instance of the <see cref="AutomationGameApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public GameApi(ILogger<GameApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, GameApiEvents gameApiEvents,
+        public AutomationGameApi(ILogger<AutomationGameApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, AutomationJsonSerializerOptionsProvider jsonSerializerOptionsProvider, AutomationGameApiEvents automationGameApiEvents,
             TokenProvider<ApiKeyToken> apiKeyProvider)
         {
             _jsonSerializerOptions = jsonSerializerOptionsProvider.Options;
             LoggerFactory = loggerFactory;
-            Logger = LoggerFactory.CreateLogger<GameApi>();
+            Logger = LoggerFactory.CreateLogger<AutomationGameApi>();
             HttpClient = httpClient;
-            Events = gameApiEvents;
+            Events = automationGameApiEvents;
             ApiKeyProvider = apiKeyProvider;
         }
 
-        partial void FormatAddContractToGame(AddContractRequestInput addContractRequestInput);
+        partial void FormatAddContractToGame(AutomationAddContractRequestInput automationAddContractRequestInput);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="addContractRequestInput"></param>
+        /// <param name="automationAddContractRequestInput"></param>
         /// <returns></returns>
-        private void ValidateAddContractToGame(AddContractRequestInput addContractRequestInput)
+        private void ValidateAddContractToGame(AutomationAddContractRequestInput automationAddContractRequestInput)
         {
-            if (addContractRequestInput == null)
-                throw new ArgumentNullException(nameof(addContractRequestInput));
+            if (automationAddContractRequestInput == null)
+                throw new ArgumentNullException(nameof(automationAddContractRequestInput));
         }
 
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="addContractRequestInput"></param>
-        private void AfterAddContractToGameDefaultImplementation(IAddContractToGameApiResponse apiResponseLocalVar, AddContractRequestInput addContractRequestInput)
+        /// <param name="automationAddContractRequestInput"></param>
+        private void AfterAddContractToGameDefaultImplementation(IAddContractToGameApiResponse apiResponseLocalVar, AutomationAddContractRequestInput automationAddContractRequestInput)
         {
             bool suppressDefaultLog = false;
-            AfterAddContractToGame(ref suppressDefaultLog, apiResponseLocalVar, addContractRequestInput);
+            AfterAddContractToGame(ref suppressDefaultLog, apiResponseLocalVar, automationAddContractRequestInput);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -393,8 +393,8 @@ namespace BeamAutomationClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="addContractRequestInput"></param>
-        partial void AfterAddContractToGame(ref bool suppressDefaultLog, IAddContractToGameApiResponse apiResponseLocalVar, AddContractRequestInput addContractRequestInput);
+        /// <param name="automationAddContractRequestInput"></param>
+        partial void AfterAddContractToGame(ref bool suppressDefaultLog, IAddContractToGameApiResponse apiResponseLocalVar, AutomationAddContractRequestInput automationAddContractRequestInput);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -402,11 +402,11 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="addContractRequestInput"></param>
-        private void OnErrorAddContractToGameDefaultImplementation(Exception exception, string pathFormat, string path, AddContractRequestInput addContractRequestInput)
+        /// <param name="automationAddContractRequestInput"></param>
+        private void OnErrorAddContractToGameDefaultImplementation(Exception exception, string pathFormat, string path, AutomationAddContractRequestInput automationAddContractRequestInput)
         {
             bool suppressDefaultLog = false;
-            OnErrorAddContractToGame(ref suppressDefaultLog, exception, pathFormat, path, addContractRequestInput);
+            OnErrorAddContractToGame(ref suppressDefaultLog, exception, pathFormat, path, automationAddContractRequestInput);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -418,20 +418,20 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="addContractRequestInput"></param>
-        partial void OnErrorAddContractToGame(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AddContractRequestInput addContractRequestInput);
+        /// <param name="automationAddContractRequestInput"></param>
+        partial void OnErrorAddContractToGame(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationAddContractRequestInput automationAddContractRequestInput);
 
         /// <summary>
         /// Add a new contract to the game 
         /// </summary>
-        /// <param name="addContractRequestInput"></param>
+        /// <param name="automationAddContractRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IAddContractToGameApiResponse"/>&gt;</returns>
-        public async Task<IAddContractToGameApiResponse?> AddContractToGameOrDefaultAsync(AddContractRequestInput addContractRequestInput, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IAddContractToGameApiResponse?> AddContractToGameOrDefaultAsync(AutomationAddContractRequestInput automationAddContractRequestInput, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await AddContractToGameAsync(addContractRequestInput, cancellationToken).ConfigureAwait(false);
+                return await AddContractToGameAsync(automationAddContractRequestInput, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -443,18 +443,18 @@ namespace BeamAutomationClient.Api
         /// Add a new contract to the game 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="addContractRequestInput"></param>
+        /// <param name="automationAddContractRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IAddContractToGameApiResponse"/>&gt;</returns>
-        public async Task<IAddContractToGameApiResponse> AddContractToGameAsync(AddContractRequestInput addContractRequestInput, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IAddContractToGameApiResponse> AddContractToGameAsync(AutomationAddContractRequestInput automationAddContractRequestInput, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateAddContractToGame(addContractRequestInput);
+                ValidateAddContractToGame(automationAddContractRequestInput);
 
-                FormatAddContractToGame(addContractRequestInput);
+                FormatAddContractToGame(automationAddContractRequestInput);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -463,9 +463,9 @@ namespace BeamAutomationClient.Api
                     uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/game/contracts";
 
-                    httpRequestMessageLocalVar.Content = (addContractRequestInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (automationAddContractRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(addContractRequestInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationAddContractRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -504,7 +504,7 @@ namespace BeamAutomationClient.Api
 
                         AddContractToGameApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/game/contracts", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterAddContractToGameDefaultImplementation(apiResponseLocalVar, addContractRequestInput);
+                        AfterAddContractToGameDefaultImplementation(apiResponseLocalVar, automationAddContractRequestInput);
 
                         Events.ExecuteOnAddContractToGame(apiResponseLocalVar);
 
@@ -518,7 +518,7 @@ namespace BeamAutomationClient.Api
             }
             catch(Exception e)
             {
-                OnErrorAddContractToGameDefaultImplementation(e, "/v1/game/contracts", uriBuilderLocalVar.Path, addContractRequestInput);
+                OnErrorAddContractToGameDefaultImplementation(e, "/v1/game/contracts", uriBuilderLocalVar.Path, automationAddContractRequestInput);
                 Events.ExecuteOnErrorAddContractToGame(e);
                 throw;
             }
@@ -562,11 +562,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.AddContractResponse? Created()
+            public BeamAutomationClient.Model.AutomationAddContractResponse? Created()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsCreated
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AddContractResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationAddContractResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -575,7 +575,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryCreated([NotNullWhen(true)]out BeamAutomationClient.Model.AddContractResponse? result)
+            public bool TryCreated([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationAddContractResponse? result)
             {
                 result = null;
 
@@ -765,11 +765,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.GetGameResponse? Ok()
+            public BeamAutomationClient.Model.AutomationGetGameResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.GetGameResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationGetGameResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -778,7 +778,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.GetGameResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationGetGameResponse? result)
             {
                 result = null;
 
@@ -968,11 +968,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.RegenerateGameApiKeysResponse? Created()
+            public BeamAutomationClient.Model.AutomationRegenerateGameApiKeysResponse? Created()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsCreated
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.RegenerateGameApiKeysResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationRegenerateGameApiKeysResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -981,7 +981,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryCreated([NotNullWhen(true)]out BeamAutomationClient.Model.RegenerateGameApiKeysResponse? result)
+            public bool TryCreated([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationRegenerateGameApiKeysResponse? result)
             {
                 result = null;
 
@@ -1202,11 +1202,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.RemoveContractResponse? Ok()
+            public BeamAutomationClient.Model.AutomationRemoveContractResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.RemoveContractResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationRemoveContractResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1215,7 +1215,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.RemoveContractResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationRemoveContractResponse? result)
             {
                 result = null;
 
@@ -1241,28 +1241,28 @@ namespace BeamAutomationClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatUpdateGame(UpdateGameRequestInput updateGameRequestInput);
+        partial void FormatUpdateGame(AutomationUpdateGameRequestInput automationUpdateGameRequestInput);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="updateGameRequestInput"></param>
+        /// <param name="automationUpdateGameRequestInput"></param>
         /// <returns></returns>
-        private void ValidateUpdateGame(UpdateGameRequestInput updateGameRequestInput)
+        private void ValidateUpdateGame(AutomationUpdateGameRequestInput automationUpdateGameRequestInput)
         {
-            if (updateGameRequestInput == null)
-                throw new ArgumentNullException(nameof(updateGameRequestInput));
+            if (automationUpdateGameRequestInput == null)
+                throw new ArgumentNullException(nameof(automationUpdateGameRequestInput));
         }
 
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="updateGameRequestInput"></param>
-        private void AfterUpdateGameDefaultImplementation(IUpdateGameApiResponse apiResponseLocalVar, UpdateGameRequestInput updateGameRequestInput)
+        /// <param name="automationUpdateGameRequestInput"></param>
+        private void AfterUpdateGameDefaultImplementation(IUpdateGameApiResponse apiResponseLocalVar, AutomationUpdateGameRequestInput automationUpdateGameRequestInput)
         {
             bool suppressDefaultLog = false;
-            AfterUpdateGame(ref suppressDefaultLog, apiResponseLocalVar, updateGameRequestInput);
+            AfterUpdateGame(ref suppressDefaultLog, apiResponseLocalVar, automationUpdateGameRequestInput);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -1272,8 +1272,8 @@ namespace BeamAutomationClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="updateGameRequestInput"></param>
-        partial void AfterUpdateGame(ref bool suppressDefaultLog, IUpdateGameApiResponse apiResponseLocalVar, UpdateGameRequestInput updateGameRequestInput);
+        /// <param name="automationUpdateGameRequestInput"></param>
+        partial void AfterUpdateGame(ref bool suppressDefaultLog, IUpdateGameApiResponse apiResponseLocalVar, AutomationUpdateGameRequestInput automationUpdateGameRequestInput);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -1281,11 +1281,11 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="updateGameRequestInput"></param>
-        private void OnErrorUpdateGameDefaultImplementation(Exception exception, string pathFormat, string path, UpdateGameRequestInput updateGameRequestInput)
+        /// <param name="automationUpdateGameRequestInput"></param>
+        private void OnErrorUpdateGameDefaultImplementation(Exception exception, string pathFormat, string path, AutomationUpdateGameRequestInput automationUpdateGameRequestInput)
         {
             bool suppressDefaultLog = false;
-            OnErrorUpdateGame(ref suppressDefaultLog, exception, pathFormat, path, updateGameRequestInput);
+            OnErrorUpdateGame(ref suppressDefaultLog, exception, pathFormat, path, automationUpdateGameRequestInput);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -1297,20 +1297,20 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="updateGameRequestInput"></param>
-        partial void OnErrorUpdateGame(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, UpdateGameRequestInput updateGameRequestInput);
+        /// <param name="automationUpdateGameRequestInput"></param>
+        partial void OnErrorUpdateGame(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationUpdateGameRequestInput automationUpdateGameRequestInput);
 
         /// <summary>
         /// Updating name, description and/or coverImageUrl 
         /// </summary>
-        /// <param name="updateGameRequestInput"></param>
+        /// <param name="automationUpdateGameRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IUpdateGameApiResponse"/>&gt;</returns>
-        public async Task<IUpdateGameApiResponse?> UpdateGameOrDefaultAsync(UpdateGameRequestInput updateGameRequestInput, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IUpdateGameApiResponse?> UpdateGameOrDefaultAsync(AutomationUpdateGameRequestInput automationUpdateGameRequestInput, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await UpdateGameAsync(updateGameRequestInput, cancellationToken).ConfigureAwait(false);
+                return await UpdateGameAsync(automationUpdateGameRequestInput, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -1322,18 +1322,18 @@ namespace BeamAutomationClient.Api
         /// Updating name, description and/or coverImageUrl 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="updateGameRequestInput"></param>
+        /// <param name="automationUpdateGameRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IUpdateGameApiResponse"/>&gt;</returns>
-        public async Task<IUpdateGameApiResponse> UpdateGameAsync(UpdateGameRequestInput updateGameRequestInput, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IUpdateGameApiResponse> UpdateGameAsync(AutomationUpdateGameRequestInput automationUpdateGameRequestInput, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateUpdateGame(updateGameRequestInput);
+                ValidateUpdateGame(automationUpdateGameRequestInput);
 
-                FormatUpdateGame(updateGameRequestInput);
+                FormatUpdateGame(automationUpdateGameRequestInput);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -1342,9 +1342,9 @@ namespace BeamAutomationClient.Api
                     uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/game";
 
-                    httpRequestMessageLocalVar.Content = (updateGameRequestInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (automationUpdateGameRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(updateGameRequestInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationUpdateGameRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -1383,7 +1383,7 @@ namespace BeamAutomationClient.Api
 
                         UpdateGameApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/game", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterUpdateGameDefaultImplementation(apiResponseLocalVar, updateGameRequestInput);
+                        AfterUpdateGameDefaultImplementation(apiResponseLocalVar, automationUpdateGameRequestInput);
 
                         Events.ExecuteOnUpdateGame(apiResponseLocalVar);
 
@@ -1397,7 +1397,7 @@ namespace BeamAutomationClient.Api
             }
             catch(Exception e)
             {
-                OnErrorUpdateGameDefaultImplementation(e, "/v1/game", uriBuilderLocalVar.Path, updateGameRequestInput);
+                OnErrorUpdateGameDefaultImplementation(e, "/v1/game", uriBuilderLocalVar.Path, automationUpdateGameRequestInput);
                 Events.ExecuteOnErrorUpdateGame(e);
                 throw;
             }
@@ -1441,11 +1441,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.UpdateGameResponse? Ok()
+            public BeamAutomationClient.Model.AutomationUpdateGameResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.UpdateGameResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationUpdateGameResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1454,7 +1454,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.UpdateGameResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationUpdateGameResponse? result)
             {
                 result = null;
 

@@ -28,12 +28,12 @@ namespace BeamAutomationClient.Api
     /// Represents a collection of functions to interact with the API endpoints
     /// This class is registered as transient.
     /// </summary>
-    public interface IProfilesApi : IApi
+    public interface IAutomationProfilesApi : IAutomationApi
     {
         /// <summary>
         /// The class containing the events
         /// </summary>
-        ProfilesApiEvents Events { get; }
+        AutomationProfilesApiEvents Events { get; }
 
         /// <summary>
         /// Generates a challenge which can be encoded in a QR code / app link for the user to take control of the profile
@@ -42,12 +42,12 @@ namespace BeamAutomationClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="generateLinkCodeRequestInput"></param>
+        /// <param name="automationGenerateLinkCodeRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateConnectionRequestApiResponse"/>&gt;</returns>
         [Obsolete]
-        Task<ICreateConnectionRequestApiResponse> CreateConnectionRequestAsync(GenerateLinkCodeRequestInput generateLinkCodeRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICreateConnectionRequestApiResponse> CreateConnectionRequestAsync(AutomationGenerateLinkCodeRequestInput automationGenerateLinkCodeRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Generates a challenge which can be encoded in a QR code / app link for the user to take control of the profile
@@ -55,12 +55,12 @@ namespace BeamAutomationClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="generateLinkCodeRequestInput"></param>
+        /// <param name="automationGenerateLinkCodeRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateConnectionRequestApiResponse"/>?&gt;</returns>
         [Obsolete]
-        Task<ICreateConnectionRequestApiResponse?> CreateConnectionRequestOrDefaultAsync(GenerateLinkCodeRequestInput generateLinkCodeRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICreateConnectionRequestApiResponse?> CreateConnectionRequestOrDefaultAsync(AutomationGenerateLinkCodeRequestInput automationGenerateLinkCodeRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Creating a profile
@@ -69,10 +69,10 @@ namespace BeamAutomationClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="createProfileRequestInput"></param>
+        /// <param name="automationCreateProfileRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateProfileApiResponse"/>&gt;</returns>
-        Task<ICreateProfileApiResponse> CreateProfileAsync(CreateProfileRequestInput createProfileRequestInput, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICreateProfileApiResponse> CreateProfileAsync(AutomationCreateProfileRequestInput automationCreateProfileRequestInput, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Creating a profile
@@ -80,10 +80,10 @@ namespace BeamAutomationClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="createProfileRequestInput"></param>
+        /// <param name="automationCreateProfileRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateProfileApiResponse"/>?&gt;</returns>
-        Task<ICreateProfileApiResponse?> CreateProfileOrDefaultAsync(CreateProfileRequestInput createProfileRequestInput, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICreateProfileApiResponse?> CreateProfileOrDefaultAsync(AutomationCreateProfileRequestInput automationCreateProfileRequestInput, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Generates a challenge which can be encoded in a QR code / app link for the user to sign in to the game
@@ -92,12 +92,12 @@ namespace BeamAutomationClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="generateSignInCodeRequestInput"></param>
+        /// <param name="automationGenerateSignInCodeRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateSignInRequestApiResponse"/>&gt;</returns>
         [Obsolete]
-        Task<ICreateSignInRequestApiResponse> CreateSignInRequestAsync(GenerateSignInCodeRequestInput generateSignInCodeRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICreateSignInRequestApiResponse> CreateSignInRequestAsync(AutomationGenerateSignInCodeRequestInput automationGenerateSignInCodeRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Generates a challenge which can be encoded in a QR code / app link for the user to sign in to the game
@@ -105,12 +105,12 @@ namespace BeamAutomationClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="generateSignInCodeRequestInput"></param>
+        /// <param name="automationGenerateSignInCodeRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateSignInRequestApiResponse"/>?&gt;</returns>
         [Obsolete]
-        Task<ICreateSignInRequestApiResponse?> CreateSignInRequestOrDefaultAsync(GenerateSignInCodeRequestInput generateSignInCodeRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICreateSignInRequestApiResponse?> CreateSignInRequestOrDefaultAsync(AutomationGenerateSignInCodeRequestInput automationGenerateSignInCodeRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Getting all profiles
@@ -167,11 +167,11 @@ namespace BeamAutomationClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="updateProfileRequestInput"></param>
+        /// <param name="automationUpdateProfileRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IUpdateProfileApiResponse"/>&gt;</returns>
-        Task<IUpdateProfileApiResponse> UpdateProfileAsync(UpdateProfileRequestInput updateProfileRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IUpdateProfileApiResponse> UpdateProfileAsync(AutomationUpdateProfileRequestInput automationUpdateProfileRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update a profile
@@ -179,17 +179,17 @@ namespace BeamAutomationClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="updateProfileRequestInput"></param>
+        /// <param name="automationUpdateProfileRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IUpdateProfileApiResponse"/>?&gt;</returns>
-        Task<IUpdateProfileApiResponse?> UpdateProfileOrDefaultAsync(UpdateProfileRequestInput updateProfileRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IUpdateProfileApiResponse?> UpdateProfileOrDefaultAsync(AutomationUpdateProfileRequestInput automationUpdateProfileRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
     /// The <see cref="ICreateConnectionRequestApiResponse"/>
     /// </summary>
-    public interface ICreateConnectionRequestApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.GenerateLinkCodeResponse?>
+    public interface ICreateConnectionRequestApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.AutomationGenerateLinkCodeResponse?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
@@ -201,7 +201,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="ICreateProfileApiResponse"/>
     /// </summary>
-    public interface ICreateProfileApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.CreateProfileResponse?>
+    public interface ICreateProfileApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.AutomationCreateProfileResponse?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
@@ -213,7 +213,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="ICreateSignInRequestApiResponse"/>
     /// </summary>
-    public interface ICreateSignInRequestApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.GenerateSignInCodeResponse?>
+    public interface ICreateSignInRequestApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.AutomationGenerateSignInCodeResponse?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
@@ -225,7 +225,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IGetAllProfilesApiResponse"/>
     /// </summary>
-    public interface IGetAllProfilesApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.GetAllProfilesResponse?>
+    public interface IGetAllProfilesApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetAllProfilesResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -237,7 +237,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IGetProfileApiResponse"/>
     /// </summary>
-    public interface IGetProfileApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.GetProfileResponse?>
+    public interface IGetProfileApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetProfileResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -249,7 +249,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IUpdateProfileApiResponse"/>
     /// </summary>
-    public interface IUpdateProfileApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.UpdateProfileResponse?>
+    public interface IUpdateProfileApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationUpdateProfileResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -261,7 +261,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public class ProfilesApiEvents
+    public class AutomationProfilesApiEvents
     {
         /// <summary>
         /// The event raised after the server response
@@ -273,7 +273,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorCreateConnectionRequest;
 
-        internal void ExecuteOnCreateConnectionRequest(ProfilesApi.CreateConnectionRequestApiResponse apiResponse)
+        internal void ExecuteOnCreateConnectionRequest(AutomationProfilesApi.CreateConnectionRequestApiResponse apiResponse)
         {
             OnCreateConnectionRequest?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -293,7 +293,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorCreateProfile;
 
-        internal void ExecuteOnCreateProfile(ProfilesApi.CreateProfileApiResponse apiResponse)
+        internal void ExecuteOnCreateProfile(AutomationProfilesApi.CreateProfileApiResponse apiResponse)
         {
             OnCreateProfile?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -313,7 +313,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorCreateSignInRequest;
 
-        internal void ExecuteOnCreateSignInRequest(ProfilesApi.CreateSignInRequestApiResponse apiResponse)
+        internal void ExecuteOnCreateSignInRequest(AutomationProfilesApi.CreateSignInRequestApiResponse apiResponse)
         {
             OnCreateSignInRequest?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -333,7 +333,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetAllProfiles;
 
-        internal void ExecuteOnGetAllProfiles(ProfilesApi.GetAllProfilesApiResponse apiResponse)
+        internal void ExecuteOnGetAllProfiles(AutomationProfilesApi.GetAllProfilesApiResponse apiResponse)
         {
             OnGetAllProfiles?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -353,7 +353,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetProfile;
 
-        internal void ExecuteOnGetProfile(ProfilesApi.GetProfileApiResponse apiResponse)
+        internal void ExecuteOnGetProfile(AutomationProfilesApi.GetProfileApiResponse apiResponse)
         {
             OnGetProfile?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -373,7 +373,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorUpdateProfile;
 
-        internal void ExecuteOnUpdateProfile(ProfilesApi.UpdateProfileApiResponse apiResponse)
+        internal void ExecuteOnUpdateProfile(AutomationProfilesApi.UpdateProfileApiResponse apiResponse)
         {
             OnUpdateProfile?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -387,7 +387,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public sealed partial class ProfilesApi : IProfilesApi
+    public sealed partial class AutomationProfilesApi : IAutomationProfilesApi
     {
         private JsonSerializerOptions _jsonSerializerOptions;
 
@@ -399,7 +399,7 @@ namespace BeamAutomationClient.Api
         /// <summary>
         /// The logger
         /// </summary>
-        public ILogger<ProfilesApi> Logger { get; }
+        public ILogger<AutomationProfilesApi> Logger { get; }
 
         /// <summary>
         /// The HttpClient
@@ -409,7 +409,7 @@ namespace BeamAutomationClient.Api
         /// <summary>
         /// The class containing the events
         /// </summary>
-        public ProfilesApiEvents Events { get; }
+        public AutomationProfilesApiEvents Events { get; }
 
         /// <summary>
         /// A token provider of type <see cref="ApiKeyProvider"/>
@@ -417,32 +417,32 @@ namespace BeamAutomationClient.Api
         public TokenProvider<ApiKeyToken> ApiKeyProvider { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProfilesApi"/> class.
+        /// Initializes a new instance of the <see cref="AutomationProfilesApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public ProfilesApi(ILogger<ProfilesApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, ProfilesApiEvents profilesApiEvents,
+        public AutomationProfilesApi(ILogger<AutomationProfilesApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, AutomationJsonSerializerOptionsProvider jsonSerializerOptionsProvider, AutomationProfilesApiEvents automationProfilesApiEvents,
             TokenProvider<ApiKeyToken> apiKeyProvider)
         {
             _jsonSerializerOptions = jsonSerializerOptionsProvider.Options;
             LoggerFactory = loggerFactory;
-            Logger = LoggerFactory.CreateLogger<ProfilesApi>();
+            Logger = LoggerFactory.CreateLogger<AutomationProfilesApi>();
             HttpClient = httpClient;
-            Events = profilesApiEvents;
+            Events = automationProfilesApiEvents;
             ApiKeyProvider = apiKeyProvider;
         }
 
-        partial void FormatCreateConnectionRequest(GenerateLinkCodeRequestInput generateLinkCodeRequestInput, ref string entityId);
+        partial void FormatCreateConnectionRequest(AutomationGenerateLinkCodeRequestInput automationGenerateLinkCodeRequestInput, ref string entityId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="generateLinkCodeRequestInput"></param>
+        /// <param name="automationGenerateLinkCodeRequestInput"></param>
         /// <param name="entityId"></param>
         /// <returns></returns>
-        private void ValidateCreateConnectionRequest(GenerateLinkCodeRequestInput generateLinkCodeRequestInput, string entityId)
+        private void ValidateCreateConnectionRequest(AutomationGenerateLinkCodeRequestInput automationGenerateLinkCodeRequestInput, string entityId)
         {
-            if (generateLinkCodeRequestInput == null)
-                throw new ArgumentNullException(nameof(generateLinkCodeRequestInput));
+            if (automationGenerateLinkCodeRequestInput == null)
+                throw new ArgumentNullException(nameof(automationGenerateLinkCodeRequestInput));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -452,12 +452,12 @@ namespace BeamAutomationClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="generateLinkCodeRequestInput"></param>
+        /// <param name="automationGenerateLinkCodeRequestInput"></param>
         /// <param name="entityId"></param>
-        private void AfterCreateConnectionRequestDefaultImplementation(ICreateConnectionRequestApiResponse apiResponseLocalVar, GenerateLinkCodeRequestInput generateLinkCodeRequestInput, string entityId)
+        private void AfterCreateConnectionRequestDefaultImplementation(ICreateConnectionRequestApiResponse apiResponseLocalVar, AutomationGenerateLinkCodeRequestInput automationGenerateLinkCodeRequestInput, string entityId)
         {
             bool suppressDefaultLog = false;
-            AfterCreateConnectionRequest(ref suppressDefaultLog, apiResponseLocalVar, generateLinkCodeRequestInput, entityId);
+            AfterCreateConnectionRequest(ref suppressDefaultLog, apiResponseLocalVar, automationGenerateLinkCodeRequestInput, entityId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -467,9 +467,9 @@ namespace BeamAutomationClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="generateLinkCodeRequestInput"></param>
+        /// <param name="automationGenerateLinkCodeRequestInput"></param>
         /// <param name="entityId"></param>
-        partial void AfterCreateConnectionRequest(ref bool suppressDefaultLog, ICreateConnectionRequestApiResponse apiResponseLocalVar, GenerateLinkCodeRequestInput generateLinkCodeRequestInput, string entityId);
+        partial void AfterCreateConnectionRequest(ref bool suppressDefaultLog, ICreateConnectionRequestApiResponse apiResponseLocalVar, AutomationGenerateLinkCodeRequestInput automationGenerateLinkCodeRequestInput, string entityId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -477,12 +477,12 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="generateLinkCodeRequestInput"></param>
+        /// <param name="automationGenerateLinkCodeRequestInput"></param>
         /// <param name="entityId"></param>
-        private void OnErrorCreateConnectionRequestDefaultImplementation(Exception exception, string pathFormat, string path, GenerateLinkCodeRequestInput generateLinkCodeRequestInput, string entityId)
+        private void OnErrorCreateConnectionRequestDefaultImplementation(Exception exception, string pathFormat, string path, AutomationGenerateLinkCodeRequestInput automationGenerateLinkCodeRequestInput, string entityId)
         {
             bool suppressDefaultLog = false;
-            OnErrorCreateConnectionRequest(ref suppressDefaultLog, exception, pathFormat, path, generateLinkCodeRequestInput, entityId);
+            OnErrorCreateConnectionRequest(ref suppressDefaultLog, exception, pathFormat, path, automationGenerateLinkCodeRequestInput, entityId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -494,22 +494,22 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="generateLinkCodeRequestInput"></param>
+        /// <param name="automationGenerateLinkCodeRequestInput"></param>
         /// <param name="entityId"></param>
-        partial void OnErrorCreateConnectionRequest(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, GenerateLinkCodeRequestInput generateLinkCodeRequestInput, string entityId);
+        partial void OnErrorCreateConnectionRequest(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationGenerateLinkCodeRequestInput automationGenerateLinkCodeRequestInput, string entityId);
 
         /// <summary>
         /// Generates a challenge which can be encoded in a QR code / app link for the user to take control of the profile 
         /// </summary>
-        /// <param name="generateLinkCodeRequestInput"></param>
+        /// <param name="automationGenerateLinkCodeRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateConnectionRequestApiResponse"/>&gt;</returns>
-        public async Task<ICreateConnectionRequestApiResponse?> CreateConnectionRequestOrDefaultAsync(GenerateLinkCodeRequestInput generateLinkCodeRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICreateConnectionRequestApiResponse?> CreateConnectionRequestOrDefaultAsync(AutomationGenerateLinkCodeRequestInput automationGenerateLinkCodeRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await CreateConnectionRequestAsync(generateLinkCodeRequestInput, entityId, cancellationToken).ConfigureAwait(false);
+                return await CreateConnectionRequestAsync(automationGenerateLinkCodeRequestInput, entityId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -521,19 +521,19 @@ namespace BeamAutomationClient.Api
         /// Generates a challenge which can be encoded in a QR code / app link for the user to take control of the profile 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="generateLinkCodeRequestInput"></param>
+        /// <param name="automationGenerateLinkCodeRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateConnectionRequestApiResponse"/>&gt;</returns>
-        public async Task<ICreateConnectionRequestApiResponse> CreateConnectionRequestAsync(GenerateLinkCodeRequestInput generateLinkCodeRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICreateConnectionRequestApiResponse> CreateConnectionRequestAsync(AutomationGenerateLinkCodeRequestInput automationGenerateLinkCodeRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateCreateConnectionRequest(generateLinkCodeRequestInput, entityId);
+                ValidateCreateConnectionRequest(automationGenerateLinkCodeRequestInput, entityId);
 
-                FormatCreateConnectionRequest(generateLinkCodeRequestInput, ref entityId);
+                FormatCreateConnectionRequest(automationGenerateLinkCodeRequestInput, ref entityId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -543,9 +543,9 @@ namespace BeamAutomationClient.Api
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/profiles/{entityId}/create-connection-request";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (generateLinkCodeRequestInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (automationGenerateLinkCodeRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(generateLinkCodeRequestInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationGenerateLinkCodeRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -584,7 +584,7 @@ namespace BeamAutomationClient.Api
 
                         CreateConnectionRequestApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/profiles/{entityId}/create-connection-request", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterCreateConnectionRequestDefaultImplementation(apiResponseLocalVar, generateLinkCodeRequestInput, entityId);
+                        AfterCreateConnectionRequestDefaultImplementation(apiResponseLocalVar, automationGenerateLinkCodeRequestInput, entityId);
 
                         Events.ExecuteOnCreateConnectionRequest(apiResponseLocalVar);
 
@@ -598,7 +598,7 @@ namespace BeamAutomationClient.Api
             }
             catch(Exception e)
             {
-                OnErrorCreateConnectionRequestDefaultImplementation(e, "/v1/profiles/{entityId}/create-connection-request", uriBuilderLocalVar.Path, generateLinkCodeRequestInput, entityId);
+                OnErrorCreateConnectionRequestDefaultImplementation(e, "/v1/profiles/{entityId}/create-connection-request", uriBuilderLocalVar.Path, automationGenerateLinkCodeRequestInput, entityId);
                 Events.ExecuteOnErrorCreateConnectionRequest(e);
                 throw;
             }
@@ -642,11 +642,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.GenerateLinkCodeResponse? Created()
+            public BeamAutomationClient.Model.AutomationGenerateLinkCodeResponse? Created()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsCreated
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.GenerateLinkCodeResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationGenerateLinkCodeResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -655,7 +655,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryCreated([NotNullWhen(true)]out BeamAutomationClient.Model.GenerateLinkCodeResponse? result)
+            public bool TryCreated([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationGenerateLinkCodeResponse? result)
             {
                 result = null;
 
@@ -681,28 +681,28 @@ namespace BeamAutomationClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatCreateProfile(CreateProfileRequestInput createProfileRequestInput);
+        partial void FormatCreateProfile(AutomationCreateProfileRequestInput automationCreateProfileRequestInput);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="createProfileRequestInput"></param>
+        /// <param name="automationCreateProfileRequestInput"></param>
         /// <returns></returns>
-        private void ValidateCreateProfile(CreateProfileRequestInput createProfileRequestInput)
+        private void ValidateCreateProfile(AutomationCreateProfileRequestInput automationCreateProfileRequestInput)
         {
-            if (createProfileRequestInput == null)
-                throw new ArgumentNullException(nameof(createProfileRequestInput));
+            if (automationCreateProfileRequestInput == null)
+                throw new ArgumentNullException(nameof(automationCreateProfileRequestInput));
         }
 
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="createProfileRequestInput"></param>
-        private void AfterCreateProfileDefaultImplementation(ICreateProfileApiResponse apiResponseLocalVar, CreateProfileRequestInput createProfileRequestInput)
+        /// <param name="automationCreateProfileRequestInput"></param>
+        private void AfterCreateProfileDefaultImplementation(ICreateProfileApiResponse apiResponseLocalVar, AutomationCreateProfileRequestInput automationCreateProfileRequestInput)
         {
             bool suppressDefaultLog = false;
-            AfterCreateProfile(ref suppressDefaultLog, apiResponseLocalVar, createProfileRequestInput);
+            AfterCreateProfile(ref suppressDefaultLog, apiResponseLocalVar, automationCreateProfileRequestInput);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -712,8 +712,8 @@ namespace BeamAutomationClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="createProfileRequestInput"></param>
-        partial void AfterCreateProfile(ref bool suppressDefaultLog, ICreateProfileApiResponse apiResponseLocalVar, CreateProfileRequestInput createProfileRequestInput);
+        /// <param name="automationCreateProfileRequestInput"></param>
+        partial void AfterCreateProfile(ref bool suppressDefaultLog, ICreateProfileApiResponse apiResponseLocalVar, AutomationCreateProfileRequestInput automationCreateProfileRequestInput);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -721,11 +721,11 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="createProfileRequestInput"></param>
-        private void OnErrorCreateProfileDefaultImplementation(Exception exception, string pathFormat, string path, CreateProfileRequestInput createProfileRequestInput)
+        /// <param name="automationCreateProfileRequestInput"></param>
+        private void OnErrorCreateProfileDefaultImplementation(Exception exception, string pathFormat, string path, AutomationCreateProfileRequestInput automationCreateProfileRequestInput)
         {
             bool suppressDefaultLog = false;
-            OnErrorCreateProfile(ref suppressDefaultLog, exception, pathFormat, path, createProfileRequestInput);
+            OnErrorCreateProfile(ref suppressDefaultLog, exception, pathFormat, path, automationCreateProfileRequestInput);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -737,20 +737,20 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="createProfileRequestInput"></param>
-        partial void OnErrorCreateProfile(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, CreateProfileRequestInput createProfileRequestInput);
+        /// <param name="automationCreateProfileRequestInput"></param>
+        partial void OnErrorCreateProfile(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationCreateProfileRequestInput automationCreateProfileRequestInput);
 
         /// <summary>
         /// Creating a profile 
         /// </summary>
-        /// <param name="createProfileRequestInput"></param>
+        /// <param name="automationCreateProfileRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateProfileApiResponse"/>&gt;</returns>
-        public async Task<ICreateProfileApiResponse?> CreateProfileOrDefaultAsync(CreateProfileRequestInput createProfileRequestInput, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICreateProfileApiResponse?> CreateProfileOrDefaultAsync(AutomationCreateProfileRequestInput automationCreateProfileRequestInput, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await CreateProfileAsync(createProfileRequestInput, cancellationToken).ConfigureAwait(false);
+                return await CreateProfileAsync(automationCreateProfileRequestInput, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -762,18 +762,18 @@ namespace BeamAutomationClient.Api
         /// Creating a profile 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="createProfileRequestInput"></param>
+        /// <param name="automationCreateProfileRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateProfileApiResponse"/>&gt;</returns>
-        public async Task<ICreateProfileApiResponse> CreateProfileAsync(CreateProfileRequestInput createProfileRequestInput, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICreateProfileApiResponse> CreateProfileAsync(AutomationCreateProfileRequestInput automationCreateProfileRequestInput, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateCreateProfile(createProfileRequestInput);
+                ValidateCreateProfile(automationCreateProfileRequestInput);
 
-                FormatCreateProfile(createProfileRequestInput);
+                FormatCreateProfile(automationCreateProfileRequestInput);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -782,9 +782,9 @@ namespace BeamAutomationClient.Api
                     uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/profiles";
 
-                    httpRequestMessageLocalVar.Content = (createProfileRequestInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (automationCreateProfileRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(createProfileRequestInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationCreateProfileRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -823,7 +823,7 @@ namespace BeamAutomationClient.Api
 
                         CreateProfileApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/profiles", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterCreateProfileDefaultImplementation(apiResponseLocalVar, createProfileRequestInput);
+                        AfterCreateProfileDefaultImplementation(apiResponseLocalVar, automationCreateProfileRequestInput);
 
                         Events.ExecuteOnCreateProfile(apiResponseLocalVar);
 
@@ -837,7 +837,7 @@ namespace BeamAutomationClient.Api
             }
             catch(Exception e)
             {
-                OnErrorCreateProfileDefaultImplementation(e, "/v1/profiles", uriBuilderLocalVar.Path, createProfileRequestInput);
+                OnErrorCreateProfileDefaultImplementation(e, "/v1/profiles", uriBuilderLocalVar.Path, automationCreateProfileRequestInput);
                 Events.ExecuteOnErrorCreateProfile(e);
                 throw;
             }
@@ -881,11 +881,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.CreateProfileResponse? Created()
+            public BeamAutomationClient.Model.AutomationCreateProfileResponse? Created()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsCreated
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.CreateProfileResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationCreateProfileResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -894,7 +894,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryCreated([NotNullWhen(true)]out BeamAutomationClient.Model.CreateProfileResponse? result)
+            public bool TryCreated([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationCreateProfileResponse? result)
             {
                 result = null;
 
@@ -920,18 +920,18 @@ namespace BeamAutomationClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatCreateSignInRequest(GenerateSignInCodeRequestInput generateSignInCodeRequestInput, ref string entityId);
+        partial void FormatCreateSignInRequest(AutomationGenerateSignInCodeRequestInput automationGenerateSignInCodeRequestInput, ref string entityId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="generateSignInCodeRequestInput"></param>
+        /// <param name="automationGenerateSignInCodeRequestInput"></param>
         /// <param name="entityId"></param>
         /// <returns></returns>
-        private void ValidateCreateSignInRequest(GenerateSignInCodeRequestInput generateSignInCodeRequestInput, string entityId)
+        private void ValidateCreateSignInRequest(AutomationGenerateSignInCodeRequestInput automationGenerateSignInCodeRequestInput, string entityId)
         {
-            if (generateSignInCodeRequestInput == null)
-                throw new ArgumentNullException(nameof(generateSignInCodeRequestInput));
+            if (automationGenerateSignInCodeRequestInput == null)
+                throw new ArgumentNullException(nameof(automationGenerateSignInCodeRequestInput));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -941,12 +941,12 @@ namespace BeamAutomationClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="generateSignInCodeRequestInput"></param>
+        /// <param name="automationGenerateSignInCodeRequestInput"></param>
         /// <param name="entityId"></param>
-        private void AfterCreateSignInRequestDefaultImplementation(ICreateSignInRequestApiResponse apiResponseLocalVar, GenerateSignInCodeRequestInput generateSignInCodeRequestInput, string entityId)
+        private void AfterCreateSignInRequestDefaultImplementation(ICreateSignInRequestApiResponse apiResponseLocalVar, AutomationGenerateSignInCodeRequestInput automationGenerateSignInCodeRequestInput, string entityId)
         {
             bool suppressDefaultLog = false;
-            AfterCreateSignInRequest(ref suppressDefaultLog, apiResponseLocalVar, generateSignInCodeRequestInput, entityId);
+            AfterCreateSignInRequest(ref suppressDefaultLog, apiResponseLocalVar, automationGenerateSignInCodeRequestInput, entityId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -956,9 +956,9 @@ namespace BeamAutomationClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="generateSignInCodeRequestInput"></param>
+        /// <param name="automationGenerateSignInCodeRequestInput"></param>
         /// <param name="entityId"></param>
-        partial void AfterCreateSignInRequest(ref bool suppressDefaultLog, ICreateSignInRequestApiResponse apiResponseLocalVar, GenerateSignInCodeRequestInput generateSignInCodeRequestInput, string entityId);
+        partial void AfterCreateSignInRequest(ref bool suppressDefaultLog, ICreateSignInRequestApiResponse apiResponseLocalVar, AutomationGenerateSignInCodeRequestInput automationGenerateSignInCodeRequestInput, string entityId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -966,12 +966,12 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="generateSignInCodeRequestInput"></param>
+        /// <param name="automationGenerateSignInCodeRequestInput"></param>
         /// <param name="entityId"></param>
-        private void OnErrorCreateSignInRequestDefaultImplementation(Exception exception, string pathFormat, string path, GenerateSignInCodeRequestInput generateSignInCodeRequestInput, string entityId)
+        private void OnErrorCreateSignInRequestDefaultImplementation(Exception exception, string pathFormat, string path, AutomationGenerateSignInCodeRequestInput automationGenerateSignInCodeRequestInput, string entityId)
         {
             bool suppressDefaultLog = false;
-            OnErrorCreateSignInRequest(ref suppressDefaultLog, exception, pathFormat, path, generateSignInCodeRequestInput, entityId);
+            OnErrorCreateSignInRequest(ref suppressDefaultLog, exception, pathFormat, path, automationGenerateSignInCodeRequestInput, entityId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -983,22 +983,22 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="generateSignInCodeRequestInput"></param>
+        /// <param name="automationGenerateSignInCodeRequestInput"></param>
         /// <param name="entityId"></param>
-        partial void OnErrorCreateSignInRequest(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, GenerateSignInCodeRequestInput generateSignInCodeRequestInput, string entityId);
+        partial void OnErrorCreateSignInRequest(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationGenerateSignInCodeRequestInput automationGenerateSignInCodeRequestInput, string entityId);
 
         /// <summary>
         /// Generates a challenge which can be encoded in a QR code / app link for the user to sign in to the game 
         /// </summary>
-        /// <param name="generateSignInCodeRequestInput"></param>
+        /// <param name="automationGenerateSignInCodeRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateSignInRequestApiResponse"/>&gt;</returns>
-        public async Task<ICreateSignInRequestApiResponse?> CreateSignInRequestOrDefaultAsync(GenerateSignInCodeRequestInput generateSignInCodeRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICreateSignInRequestApiResponse?> CreateSignInRequestOrDefaultAsync(AutomationGenerateSignInCodeRequestInput automationGenerateSignInCodeRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await CreateSignInRequestAsync(generateSignInCodeRequestInput, entityId, cancellationToken).ConfigureAwait(false);
+                return await CreateSignInRequestAsync(automationGenerateSignInCodeRequestInput, entityId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -1010,19 +1010,19 @@ namespace BeamAutomationClient.Api
         /// Generates a challenge which can be encoded in a QR code / app link for the user to sign in to the game 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="generateSignInCodeRequestInput"></param>
+        /// <param name="automationGenerateSignInCodeRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateSignInRequestApiResponse"/>&gt;</returns>
-        public async Task<ICreateSignInRequestApiResponse> CreateSignInRequestAsync(GenerateSignInCodeRequestInput generateSignInCodeRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICreateSignInRequestApiResponse> CreateSignInRequestAsync(AutomationGenerateSignInCodeRequestInput automationGenerateSignInCodeRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateCreateSignInRequest(generateSignInCodeRequestInput, entityId);
+                ValidateCreateSignInRequest(automationGenerateSignInCodeRequestInput, entityId);
 
-                FormatCreateSignInRequest(generateSignInCodeRequestInput, ref entityId);
+                FormatCreateSignInRequest(automationGenerateSignInCodeRequestInput, ref entityId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -1032,9 +1032,9 @@ namespace BeamAutomationClient.Api
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/profiles/{entityId}/create-sign-in-request";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (generateSignInCodeRequestInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (automationGenerateSignInCodeRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(generateSignInCodeRequestInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationGenerateSignInCodeRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -1073,7 +1073,7 @@ namespace BeamAutomationClient.Api
 
                         CreateSignInRequestApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/profiles/{entityId}/create-sign-in-request", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterCreateSignInRequestDefaultImplementation(apiResponseLocalVar, generateSignInCodeRequestInput, entityId);
+                        AfterCreateSignInRequestDefaultImplementation(apiResponseLocalVar, automationGenerateSignInCodeRequestInput, entityId);
 
                         Events.ExecuteOnCreateSignInRequest(apiResponseLocalVar);
 
@@ -1087,7 +1087,7 @@ namespace BeamAutomationClient.Api
             }
             catch(Exception e)
             {
-                OnErrorCreateSignInRequestDefaultImplementation(e, "/v1/profiles/{entityId}/create-sign-in-request", uriBuilderLocalVar.Path, generateSignInCodeRequestInput, entityId);
+                OnErrorCreateSignInRequestDefaultImplementation(e, "/v1/profiles/{entityId}/create-sign-in-request", uriBuilderLocalVar.Path, automationGenerateSignInCodeRequestInput, entityId);
                 Events.ExecuteOnErrorCreateSignInRequest(e);
                 throw;
             }
@@ -1131,11 +1131,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.GenerateSignInCodeResponse? Created()
+            public BeamAutomationClient.Model.AutomationGenerateSignInCodeResponse? Created()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsCreated
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.GenerateSignInCodeResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationGenerateSignInCodeResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1144,7 +1144,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryCreated([NotNullWhen(true)]out BeamAutomationClient.Model.GenerateSignInCodeResponse? result)
+            public bool TryCreated([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationGenerateSignInCodeResponse? result)
             {
                 result = null;
 
@@ -1360,11 +1360,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.GetAllProfilesResponse? Ok()
+            public BeamAutomationClient.Model.AutomationGetAllProfilesResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.GetAllProfilesResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationGetAllProfilesResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1373,7 +1373,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.GetAllProfilesResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationGetAllProfilesResponse? result)
             {
                 result = null;
 
@@ -1587,11 +1587,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.GetProfileResponse? Ok()
+            public BeamAutomationClient.Model.AutomationGetProfileResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.GetProfileResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationGetProfileResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1600,7 +1600,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.GetProfileResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationGetProfileResponse? result)
             {
                 result = null;
 
@@ -1626,18 +1626,18 @@ namespace BeamAutomationClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatUpdateProfile(UpdateProfileRequestInput updateProfileRequestInput, ref string entityId);
+        partial void FormatUpdateProfile(AutomationUpdateProfileRequestInput automationUpdateProfileRequestInput, ref string entityId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="updateProfileRequestInput"></param>
+        /// <param name="automationUpdateProfileRequestInput"></param>
         /// <param name="entityId"></param>
         /// <returns></returns>
-        private void ValidateUpdateProfile(UpdateProfileRequestInput updateProfileRequestInput, string entityId)
+        private void ValidateUpdateProfile(AutomationUpdateProfileRequestInput automationUpdateProfileRequestInput, string entityId)
         {
-            if (updateProfileRequestInput == null)
-                throw new ArgumentNullException(nameof(updateProfileRequestInput));
+            if (automationUpdateProfileRequestInput == null)
+                throw new ArgumentNullException(nameof(automationUpdateProfileRequestInput));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -1647,12 +1647,12 @@ namespace BeamAutomationClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="updateProfileRequestInput"></param>
+        /// <param name="automationUpdateProfileRequestInput"></param>
         /// <param name="entityId"></param>
-        private void AfterUpdateProfileDefaultImplementation(IUpdateProfileApiResponse apiResponseLocalVar, UpdateProfileRequestInput updateProfileRequestInput, string entityId)
+        private void AfterUpdateProfileDefaultImplementation(IUpdateProfileApiResponse apiResponseLocalVar, AutomationUpdateProfileRequestInput automationUpdateProfileRequestInput, string entityId)
         {
             bool suppressDefaultLog = false;
-            AfterUpdateProfile(ref suppressDefaultLog, apiResponseLocalVar, updateProfileRequestInput, entityId);
+            AfterUpdateProfile(ref suppressDefaultLog, apiResponseLocalVar, automationUpdateProfileRequestInput, entityId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -1662,9 +1662,9 @@ namespace BeamAutomationClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="updateProfileRequestInput"></param>
+        /// <param name="automationUpdateProfileRequestInput"></param>
         /// <param name="entityId"></param>
-        partial void AfterUpdateProfile(ref bool suppressDefaultLog, IUpdateProfileApiResponse apiResponseLocalVar, UpdateProfileRequestInput updateProfileRequestInput, string entityId);
+        partial void AfterUpdateProfile(ref bool suppressDefaultLog, IUpdateProfileApiResponse apiResponseLocalVar, AutomationUpdateProfileRequestInput automationUpdateProfileRequestInput, string entityId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -1672,12 +1672,12 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="updateProfileRequestInput"></param>
+        /// <param name="automationUpdateProfileRequestInput"></param>
         /// <param name="entityId"></param>
-        private void OnErrorUpdateProfileDefaultImplementation(Exception exception, string pathFormat, string path, UpdateProfileRequestInput updateProfileRequestInput, string entityId)
+        private void OnErrorUpdateProfileDefaultImplementation(Exception exception, string pathFormat, string path, AutomationUpdateProfileRequestInput automationUpdateProfileRequestInput, string entityId)
         {
             bool suppressDefaultLog = false;
-            OnErrorUpdateProfile(ref suppressDefaultLog, exception, pathFormat, path, updateProfileRequestInput, entityId);
+            OnErrorUpdateProfile(ref suppressDefaultLog, exception, pathFormat, path, automationUpdateProfileRequestInput, entityId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -1689,22 +1689,22 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="updateProfileRequestInput"></param>
+        /// <param name="automationUpdateProfileRequestInput"></param>
         /// <param name="entityId"></param>
-        partial void OnErrorUpdateProfile(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, UpdateProfileRequestInput updateProfileRequestInput, string entityId);
+        partial void OnErrorUpdateProfile(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationUpdateProfileRequestInput automationUpdateProfileRequestInput, string entityId);
 
         /// <summary>
         /// Update a profile 
         /// </summary>
-        /// <param name="updateProfileRequestInput"></param>
+        /// <param name="automationUpdateProfileRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IUpdateProfileApiResponse"/>&gt;</returns>
-        public async Task<IUpdateProfileApiResponse?> UpdateProfileOrDefaultAsync(UpdateProfileRequestInput updateProfileRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IUpdateProfileApiResponse?> UpdateProfileOrDefaultAsync(AutomationUpdateProfileRequestInput automationUpdateProfileRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await UpdateProfileAsync(updateProfileRequestInput, entityId, cancellationToken).ConfigureAwait(false);
+                return await UpdateProfileAsync(automationUpdateProfileRequestInput, entityId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -1716,19 +1716,19 @@ namespace BeamAutomationClient.Api
         /// Update a profile 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="updateProfileRequestInput"></param>
+        /// <param name="automationUpdateProfileRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IUpdateProfileApiResponse"/>&gt;</returns>
-        public async Task<IUpdateProfileApiResponse> UpdateProfileAsync(UpdateProfileRequestInput updateProfileRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IUpdateProfileApiResponse> UpdateProfileAsync(AutomationUpdateProfileRequestInput automationUpdateProfileRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateUpdateProfile(updateProfileRequestInput, entityId);
+                ValidateUpdateProfile(automationUpdateProfileRequestInput, entityId);
 
-                FormatUpdateProfile(updateProfileRequestInput, ref entityId);
+                FormatUpdateProfile(automationUpdateProfileRequestInput, ref entityId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -1738,9 +1738,9 @@ namespace BeamAutomationClient.Api
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/profiles/{entityId}";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (updateProfileRequestInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (automationUpdateProfileRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(updateProfileRequestInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationUpdateProfileRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -1779,7 +1779,7 @@ namespace BeamAutomationClient.Api
 
                         UpdateProfileApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/profiles/{entityId}", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterUpdateProfileDefaultImplementation(apiResponseLocalVar, updateProfileRequestInput, entityId);
+                        AfterUpdateProfileDefaultImplementation(apiResponseLocalVar, automationUpdateProfileRequestInput, entityId);
 
                         Events.ExecuteOnUpdateProfile(apiResponseLocalVar);
 
@@ -1793,7 +1793,7 @@ namespace BeamAutomationClient.Api
             }
             catch(Exception e)
             {
-                OnErrorUpdateProfileDefaultImplementation(e, "/v1/profiles/{entityId}", uriBuilderLocalVar.Path, updateProfileRequestInput, entityId);
+                OnErrorUpdateProfileDefaultImplementation(e, "/v1/profiles/{entityId}", uriBuilderLocalVar.Path, automationUpdateProfileRequestInput, entityId);
                 Events.ExecuteOnErrorUpdateProfile(e);
                 throw;
             }
@@ -1837,11 +1837,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.UpdateProfileResponse? Ok()
+            public BeamAutomationClient.Model.AutomationUpdateProfileResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.UpdateProfileResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationUpdateProfileResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1850,7 +1850,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.UpdateProfileResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationUpdateProfileResponse? result)
             {
                 result = null;
 

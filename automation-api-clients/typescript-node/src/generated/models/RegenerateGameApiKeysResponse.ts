@@ -27,8 +27,8 @@ export type RegenerateGameApiKeysResponse = {
   apiKeys: Array<{
     type: 'Regenerate' | 'Publishable' | 'Secret';
     id: string;
-    createdAt: any;
-    updatedAt: any;
+    createdAt: string;
+    updatedAt: string;
     apiKey: string;
     gameId: string;
   }>;

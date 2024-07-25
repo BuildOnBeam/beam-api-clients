@@ -26,9 +26,9 @@ namespace BeamAutomationClient.Extensions
         /// </summary>
         /// <param name="services"></param>
         /// <param name="options"></param>
-        public static void AddBeamAutomationApi(this IServiceCollection services, Action<HostConfiguration> options)
+        public static void AddBeamAutomationApi(this IServiceCollection services, Action<AutomationHostConfiguration> options)
         {
-            HostConfiguration config = new(services);
+            AutomationHostConfiguration config = new(services);
             options(config);
             AddBeamAutomationApi(services, config);
         }
@@ -39,14 +39,14 @@ namespace BeamAutomationClient.Extensions
         /// <param name="services"></param>
         /// <param name="options"></param>
         [Obsolete("Use AddBeamAutomationApi")]
-        public static void AddApi(this IServiceCollection services, Action<HostConfiguration> options)
+        public static void AddApi(this IServiceCollection services, Action<AutomationHostConfiguration> options)
         {
-            HostConfiguration config = new(services);
+            AutomationHostConfiguration config = new(services);
             options(config);
             AddBeamAutomationApi(services, config);
         }
 
-        internal static void AddBeamAutomationApi(IServiceCollection services, HostConfiguration host)
+        internal static void AddBeamAutomationApi(IServiceCollection services, AutomationHostConfiguration host)
         {
             if (!host.HttpClientsAdded)
                 host.AddBeamAutomationApiHttpClients();

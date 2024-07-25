@@ -28,12 +28,12 @@ namespace BeamPlayerClient.Api
     /// Represents a collection of functions to interact with the API endpoints
     /// This class is registered as transient.
     /// </summary>
-    public interface ITransactionsApi : IApi
+    public interface IPlayerTransactionsApi : IPlayerApi
     {
         /// <summary>
         /// The class containing the events
         /// </summary>
-        TransactionsApiEvents Events { get; }
+        PlayerTransactionsApiEvents Events { get; }
 
         /// <summary>
         /// Creating a new transaction on behalf of a user
@@ -42,11 +42,11 @@ namespace BeamPlayerClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="createTransactionRequestInput"></param>
+        /// <param name="playerCreateTransactionRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateUserTransactionApiResponse"/>&gt;</returns>
-        Task<ICreateUserTransactionApiResponse> CreateUserTransactionAsync(CreateTransactionRequestInput createTransactionRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICreateUserTransactionApiResponse> CreateUserTransactionAsync(PlayerCreateTransactionRequestInput playerCreateTransactionRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Creating a new transaction on behalf of a user
@@ -54,11 +54,11 @@ namespace BeamPlayerClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="createTransactionRequestInput"></param>
+        /// <param name="playerCreateTransactionRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateUserTransactionApiResponse"/>?&gt;</returns>
-        Task<ICreateUserTransactionApiResponse?> CreateUserTransactionOrDefaultAsync(CreateTransactionRequestInput createTransactionRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICreateUserTransactionApiResponse?> CreateUserTransactionOrDefaultAsync(PlayerCreateTransactionRequestInput playerCreateTransactionRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Getting a transaction
@@ -139,7 +139,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="ICreateUserTransactionApiResponse"/>
     /// </summary>
-    public interface ICreateUserTransactionApiResponse : BeamPlayerClient.Client.IApiResponse, ICreated<BeamPlayerClient.Model.CommonOperationResponse?>
+    public interface ICreateUserTransactionApiResponse : BeamPlayerClient.Client.IApiResponse, ICreated<BeamPlayerClient.Model.PlayerCommonOperationResponse?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
@@ -151,7 +151,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="IGetTransactionApiResponse"/>
     /// </summary>
-    public interface IGetTransactionApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.GetTransactionResponse?>
+    public interface IGetTransactionApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetTransactionResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -163,7 +163,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="IGetTransactionsApiResponse"/>
     /// </summary>
-    public interface IGetTransactionsApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.GetTransactionsResponse?>
+    public interface IGetTransactionsApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetTransactionsResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -175,7 +175,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="IGetUserTransactionsApiResponse"/>
     /// </summary>
-    public interface IGetUserTransactionsApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.GetTransactionsResponse?>
+    public interface IGetUserTransactionsApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetTransactionsResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -187,7 +187,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public class TransactionsApiEvents
+    public class PlayerTransactionsApiEvents
     {
         /// <summary>
         /// The event raised after the server response
@@ -199,7 +199,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorCreateUserTransaction;
 
-        internal void ExecuteOnCreateUserTransaction(TransactionsApi.CreateUserTransactionApiResponse apiResponse)
+        internal void ExecuteOnCreateUserTransaction(PlayerTransactionsApi.CreateUserTransactionApiResponse apiResponse)
         {
             OnCreateUserTransaction?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -219,7 +219,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetTransaction;
 
-        internal void ExecuteOnGetTransaction(TransactionsApi.GetTransactionApiResponse apiResponse)
+        internal void ExecuteOnGetTransaction(PlayerTransactionsApi.GetTransactionApiResponse apiResponse)
         {
             OnGetTransaction?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -239,7 +239,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetTransactions;
 
-        internal void ExecuteOnGetTransactions(TransactionsApi.GetTransactionsApiResponse apiResponse)
+        internal void ExecuteOnGetTransactions(PlayerTransactionsApi.GetTransactionsApiResponse apiResponse)
         {
             OnGetTransactions?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -259,7 +259,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetUserTransactions;
 
-        internal void ExecuteOnGetUserTransactions(TransactionsApi.GetUserTransactionsApiResponse apiResponse)
+        internal void ExecuteOnGetUserTransactions(PlayerTransactionsApi.GetUserTransactionsApiResponse apiResponse)
         {
             OnGetUserTransactions?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -273,7 +273,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public sealed partial class TransactionsApi : ITransactionsApi
+    public sealed partial class PlayerTransactionsApi : IPlayerTransactionsApi
     {
         private JsonSerializerOptions _jsonSerializerOptions;
 
@@ -285,7 +285,7 @@ namespace BeamPlayerClient.Api
         /// <summary>
         /// The logger
         /// </summary>
-        public ILogger<TransactionsApi> Logger { get; }
+        public ILogger<PlayerTransactionsApi> Logger { get; }
 
         /// <summary>
         /// The HttpClient
@@ -295,7 +295,7 @@ namespace BeamPlayerClient.Api
         /// <summary>
         /// The class containing the events
         /// </summary>
-        public TransactionsApiEvents Events { get; }
+        public PlayerTransactionsApiEvents Events { get; }
 
         /// <summary>
         /// A token provider of type <see cref="ApiKeyProvider"/>
@@ -303,32 +303,32 @@ namespace BeamPlayerClient.Api
         public TokenProvider<ApiKeyToken> ApiKeyProvider { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TransactionsApi"/> class.
+        /// Initializes a new instance of the <see cref="PlayerTransactionsApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public TransactionsApi(ILogger<TransactionsApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, TransactionsApiEvents transactionsApiEvents,
+        public PlayerTransactionsApi(ILogger<PlayerTransactionsApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, PlayerJsonSerializerOptionsProvider jsonSerializerOptionsProvider, PlayerTransactionsApiEvents playerTransactionsApiEvents,
             TokenProvider<ApiKeyToken> apiKeyProvider)
         {
             _jsonSerializerOptions = jsonSerializerOptionsProvider.Options;
             LoggerFactory = loggerFactory;
-            Logger = LoggerFactory.CreateLogger<TransactionsApi>();
+            Logger = LoggerFactory.CreateLogger<PlayerTransactionsApi>();
             HttpClient = httpClient;
-            Events = transactionsApiEvents;
+            Events = playerTransactionsApiEvents;
             ApiKeyProvider = apiKeyProvider;
         }
 
-        partial void FormatCreateUserTransaction(CreateTransactionRequestInput createTransactionRequestInput, ref string entityId);
+        partial void FormatCreateUserTransaction(PlayerCreateTransactionRequestInput playerCreateTransactionRequestInput, ref string entityId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="createTransactionRequestInput"></param>
+        /// <param name="playerCreateTransactionRequestInput"></param>
         /// <param name="entityId"></param>
         /// <returns></returns>
-        private void ValidateCreateUserTransaction(CreateTransactionRequestInput createTransactionRequestInput, string entityId)
+        private void ValidateCreateUserTransaction(PlayerCreateTransactionRequestInput playerCreateTransactionRequestInput, string entityId)
         {
-            if (createTransactionRequestInput == null)
-                throw new ArgumentNullException(nameof(createTransactionRequestInput));
+            if (playerCreateTransactionRequestInput == null)
+                throw new ArgumentNullException(nameof(playerCreateTransactionRequestInput));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -338,12 +338,12 @@ namespace BeamPlayerClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="createTransactionRequestInput"></param>
+        /// <param name="playerCreateTransactionRequestInput"></param>
         /// <param name="entityId"></param>
-        private void AfterCreateUserTransactionDefaultImplementation(ICreateUserTransactionApiResponse apiResponseLocalVar, CreateTransactionRequestInput createTransactionRequestInput, string entityId)
+        private void AfterCreateUserTransactionDefaultImplementation(ICreateUserTransactionApiResponse apiResponseLocalVar, PlayerCreateTransactionRequestInput playerCreateTransactionRequestInput, string entityId)
         {
             bool suppressDefaultLog = false;
-            AfterCreateUserTransaction(ref suppressDefaultLog, apiResponseLocalVar, createTransactionRequestInput, entityId);
+            AfterCreateUserTransaction(ref suppressDefaultLog, apiResponseLocalVar, playerCreateTransactionRequestInput, entityId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -353,9 +353,9 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="createTransactionRequestInput"></param>
+        /// <param name="playerCreateTransactionRequestInput"></param>
         /// <param name="entityId"></param>
-        partial void AfterCreateUserTransaction(ref bool suppressDefaultLog, ICreateUserTransactionApiResponse apiResponseLocalVar, CreateTransactionRequestInput createTransactionRequestInput, string entityId);
+        partial void AfterCreateUserTransaction(ref bool suppressDefaultLog, ICreateUserTransactionApiResponse apiResponseLocalVar, PlayerCreateTransactionRequestInput playerCreateTransactionRequestInput, string entityId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -363,12 +363,12 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="createTransactionRequestInput"></param>
+        /// <param name="playerCreateTransactionRequestInput"></param>
         /// <param name="entityId"></param>
-        private void OnErrorCreateUserTransactionDefaultImplementation(Exception exception, string pathFormat, string path, CreateTransactionRequestInput createTransactionRequestInput, string entityId)
+        private void OnErrorCreateUserTransactionDefaultImplementation(Exception exception, string pathFormat, string path, PlayerCreateTransactionRequestInput playerCreateTransactionRequestInput, string entityId)
         {
             bool suppressDefaultLog = false;
-            OnErrorCreateUserTransaction(ref suppressDefaultLog, exception, pathFormat, path, createTransactionRequestInput, entityId);
+            OnErrorCreateUserTransaction(ref suppressDefaultLog, exception, pathFormat, path, playerCreateTransactionRequestInput, entityId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -380,22 +380,22 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="createTransactionRequestInput"></param>
+        /// <param name="playerCreateTransactionRequestInput"></param>
         /// <param name="entityId"></param>
-        partial void OnErrorCreateUserTransaction(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, CreateTransactionRequestInput createTransactionRequestInput, string entityId);
+        partial void OnErrorCreateUserTransaction(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, PlayerCreateTransactionRequestInput playerCreateTransactionRequestInput, string entityId);
 
         /// <summary>
         /// Creating a new transaction on behalf of a user 
         /// </summary>
-        /// <param name="createTransactionRequestInput"></param>
+        /// <param name="playerCreateTransactionRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateUserTransactionApiResponse"/>&gt;</returns>
-        public async Task<ICreateUserTransactionApiResponse?> CreateUserTransactionOrDefaultAsync(CreateTransactionRequestInput createTransactionRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICreateUserTransactionApiResponse?> CreateUserTransactionOrDefaultAsync(PlayerCreateTransactionRequestInput playerCreateTransactionRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await CreateUserTransactionAsync(createTransactionRequestInput, entityId, cancellationToken).ConfigureAwait(false);
+                return await CreateUserTransactionAsync(playerCreateTransactionRequestInput, entityId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -407,19 +407,19 @@ namespace BeamPlayerClient.Api
         /// Creating a new transaction on behalf of a user 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="createTransactionRequestInput"></param>
+        /// <param name="playerCreateTransactionRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateUserTransactionApiResponse"/>&gt;</returns>
-        public async Task<ICreateUserTransactionApiResponse> CreateUserTransactionAsync(CreateTransactionRequestInput createTransactionRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICreateUserTransactionApiResponse> CreateUserTransactionAsync(PlayerCreateTransactionRequestInput playerCreateTransactionRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateCreateUserTransaction(createTransactionRequestInput, entityId);
+                ValidateCreateUserTransaction(playerCreateTransactionRequestInput, entityId);
 
-                FormatCreateUserTransaction(createTransactionRequestInput, ref entityId);
+                FormatCreateUserTransaction(playerCreateTransactionRequestInput, ref entityId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -429,9 +429,9 @@ namespace BeamPlayerClient.Api
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/player/transactions/users/{entityId}";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (createTransactionRequestInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (playerCreateTransactionRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(createTransactionRequestInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(playerCreateTransactionRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -470,7 +470,7 @@ namespace BeamPlayerClient.Api
 
                         CreateUserTransactionApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/player/transactions/users/{entityId}", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterCreateUserTransactionDefaultImplementation(apiResponseLocalVar, createTransactionRequestInput, entityId);
+                        AfterCreateUserTransactionDefaultImplementation(apiResponseLocalVar, playerCreateTransactionRequestInput, entityId);
 
                         Events.ExecuteOnCreateUserTransaction(apiResponseLocalVar);
 
@@ -484,7 +484,7 @@ namespace BeamPlayerClient.Api
             }
             catch(Exception e)
             {
-                OnErrorCreateUserTransactionDefaultImplementation(e, "/v1/player/transactions/users/{entityId}", uriBuilderLocalVar.Path, createTransactionRequestInput, entityId);
+                OnErrorCreateUserTransactionDefaultImplementation(e, "/v1/player/transactions/users/{entityId}", uriBuilderLocalVar.Path, playerCreateTransactionRequestInput, entityId);
                 Events.ExecuteOnErrorCreateUserTransaction(e);
                 throw;
             }
@@ -528,11 +528,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.CommonOperationResponse? Created()
+            public BeamPlayerClient.Model.PlayerCommonOperationResponse? Created()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsCreated
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.CommonOperationResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerCommonOperationResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -541,7 +541,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryCreated([NotNullWhen(true)]out BeamPlayerClient.Model.CommonOperationResponse? result)
+            public bool TryCreated([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerCommonOperationResponse? result)
             {
                 result = null;
 
@@ -755,11 +755,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.GetTransactionResponse? Ok()
+            public BeamPlayerClient.Model.PlayerGetTransactionResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.GetTransactionResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerGetTransactionResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -768,7 +768,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.GetTransactionResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerGetTransactionResponse? result)
             {
                 result = null;
 
@@ -984,11 +984,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.GetTransactionsResponse? Ok()
+            public BeamPlayerClient.Model.PlayerGetTransactionsResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.GetTransactionsResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerGetTransactionsResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -997,7 +997,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.GetTransactionsResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerGetTransactionsResponse? result)
             {
                 result = null;
 
@@ -1233,11 +1233,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.GetTransactionsResponse? Ok()
+            public BeamPlayerClient.Model.PlayerGetTransactionsResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.GetTransactionsResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerGetTransactionsResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1246,7 +1246,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.GetTransactionsResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerGetTransactionsResponse? result)
             {
                 result = null;
 

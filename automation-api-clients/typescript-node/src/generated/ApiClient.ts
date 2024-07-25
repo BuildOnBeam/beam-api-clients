@@ -6,6 +6,7 @@ import type { BaseHttpRequest } from './core/BaseHttpRequest';
 import { NodeHttpRequest } from './core/NodeHttpRequest';
 import type { OpenAPIConfig } from './core/OpenAPI';
 
+import { ActivityService } from './services/ActivityService';
 import { AssetsV2Service } from './services/AssetsV2Service';
 import { ChainService } from './services/ChainService';
 import { ExchangeService } from './services/ExchangeService';
@@ -15,6 +16,7 @@ import { MarketplaceV2Service } from './services/MarketplaceV2Service';
 import { PolicyService } from './services/PolicyService';
 import { ProfilesService } from './services/ProfilesService';
 import { ReportingService } from './services/ReportingService';
+import { StatsService } from './services/StatsService';
 import { TradingService } from './services/TradingService';
 import { TransactionsV2Service } from './services/TransactionsV2Service';
 import { WebhooksService } from './services/WebhooksService';
@@ -22,6 +24,7 @@ import { WebhooksService } from './services/WebhooksService';
 type HttpRequestConstructor = new (config: OpenAPIConfig) => BaseHttpRequest;
 
 export class ApiClient {
+  public readonly activity: ActivityService;
   public readonly assetsV2: AssetsV2Service;
   public readonly chain: ChainService;
   public readonly exchange: ExchangeService;
@@ -31,6 +34,7 @@ export class ApiClient {
   public readonly policy: PolicyService;
   public readonly profiles: ProfilesService;
   public readonly reporting: ReportingService;
+  public readonly stats: StatsService;
   public readonly trading: TradingService;
   public readonly transactionsV2: TransactionsV2Service;
   public readonly webhooks: WebhooksService;
@@ -53,6 +57,7 @@ export class ApiClient {
       ENCODE_PATH: config?.ENCODE_PATH,
     });
 
+    this.activity = new ActivityService(this.request);
     this.assetsV2 = new AssetsV2Service(this.request);
     this.chain = new ChainService(this.request);
     this.exchange = new ExchangeService(this.request);
@@ -62,6 +67,7 @@ export class ApiClient {
     this.policy = new PolicyService(this.request);
     this.profiles = new ProfilesService(this.request);
     this.reporting = new ReportingService(this.request);
+    this.stats = new StatsService(this.request);
     this.trading = new TradingService(this.request);
     this.transactionsV2 = new TransactionsV2Service(this.request);
     this.webhooks = new WebhooksService(this.request);

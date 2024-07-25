@@ -11,5 +11,13 @@ export type TransferNativeTokenRequestInput = {
   sponsor?: boolean;
   policyId?: string | null;
   chainId?: number;
+  operationProcessing?: TransferNativeTokenRequestInput.operationProcessing;
   operationId?: string | null;
 };
+
+export namespace TransferNativeTokenRequestInput {
+  export enum operationProcessing {
+    SIGN_ONLY = 'SignOnly',
+    EXECUTE = 'Execute',
+  }
+}

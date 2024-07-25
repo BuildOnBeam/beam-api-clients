@@ -27,22 +27,22 @@ export type UpdateGameResponse = {
   contracts: Array<{
     type: 'ERC20' | 'ERC721' | 'ERC1155' | 'SEAPORT' | 'UNISWAPV2' | 'WETH';
     id: string;
-    createdAt: any;
-    updatedAt: any;
+    createdAt: string;
+    updatedAt: string;
     externalId: string;
     address: string;
     name: string | null;
     chainId: number;
     gameId: string | null;
-    abi: string | number | boolean | Record<string, any>;
+    abi: any;
   }>;
   policies: Array<{
     model: 'ContractFunctions' | 'AccountFunctions';
     type: 'PayForUser' | 'ChargeCustomToken';
     rateType: 'Fixed' | 'Dynamic' | null;
     id: string;
-    createdAt: any;
-    updatedAt: any;
+    createdAt: string;
+    updatedAt: string;
     externalId: string;
     name: string;
     chainId: number;

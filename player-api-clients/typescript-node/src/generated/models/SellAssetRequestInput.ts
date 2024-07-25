@@ -21,6 +21,7 @@ export type SellAssetRequestInput = {
   sponsor?: boolean;
   policyId?: string | null;
   chainId?: number;
+  operationProcessing?: SellAssetRequestInput.operationProcessing;
   operationId?: string | null;
 };
 
@@ -39,5 +40,10 @@ export namespace SellAssetRequestInput {
     USDT = 'USDT',
     IMX = 'IMX',
     WIMX = 'WIMX',
+  }
+
+  export enum operationProcessing {
+    SIGN_ONLY = 'SignOnly',
+    EXECUTE = 'Execute',
   }
 }

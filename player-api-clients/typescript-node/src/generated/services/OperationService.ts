@@ -86,4 +86,22 @@ export class OperationService {
       mediaType: 'application/json',
     });
   }
+
+  /**
+   * Executes operation for given id
+   * @param opId
+   * @returns CommonOperationResponse
+   * @throws ApiError
+   */
+  public executeSignedOperation(
+    opId: string,
+  ): CancelablePromise<CommonOperationResponse> {
+    return this.httpRequest.request({
+      method: 'POST',
+      url: '/v1/player/operation/{opId}/execute',
+      path: {
+        opId: opId,
+      },
+    });
+  }
 }

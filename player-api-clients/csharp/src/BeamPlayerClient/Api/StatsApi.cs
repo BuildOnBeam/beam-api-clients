@@ -28,12 +28,12 @@ namespace BeamPlayerClient.Api
     /// Represents a collection of functions to interact with the API endpoints
     /// This class is registered as transient.
     /// </summary>
-    public interface IStatsApi : IApi
+    public interface IPlayerStatsApi : IPlayerApi
     {
         /// <summary>
         /// The class containing the events
         /// </summary>
-        StatsApiEvents Events { get; }
+        PlayerStatsApiEvents Events { get; }
 
         /// <summary>
         /// Get asset stats
@@ -42,12 +42,12 @@ namespace BeamPlayerClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="commonStatsRequestInput"></param>
+        /// <param name="playerCommonStatsRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAssetStatsApiResponse"/>&gt;</returns>
-        Task<IGetAssetStatsApiResponse> GetAssetStatsAsync(CommonStatsRequestInput commonStatsRequestInput, string assetAddress, string assetId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetAssetStatsApiResponse> GetAssetStatsAsync(PlayerCommonStatsRequestInput playerCommonStatsRequestInput, string assetAddress, string assetId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get asset stats
@@ -55,12 +55,12 @@ namespace BeamPlayerClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="commonStatsRequestInput"></param>
+        /// <param name="playerCommonStatsRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAssetStatsApiResponse"/>?&gt;</returns>
-        Task<IGetAssetStatsApiResponse?> GetAssetStatsOrDefaultAsync(CommonStatsRequestInput commonStatsRequestInput, string assetAddress, string assetId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetAssetStatsApiResponse?> GetAssetStatsOrDefaultAsync(PlayerCommonStatsRequestInput playerCommonStatsRequestInput, string assetAddress, string assetId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get contract stats
@@ -69,11 +69,11 @@ namespace BeamPlayerClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="commonStatsRequestInput"></param>
+        /// <param name="playerCommonStatsRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetContractStatsApiResponse"/>&gt;</returns>
-        Task<IGetContractStatsApiResponse> GetContractStatsAsync(CommonStatsRequestInput commonStatsRequestInput, string assetAddress, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetContractStatsApiResponse> GetContractStatsAsync(PlayerCommonStatsRequestInput playerCommonStatsRequestInput, string assetAddress, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get contract stats
@@ -81,17 +81,17 @@ namespace BeamPlayerClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="commonStatsRequestInput"></param>
+        /// <param name="playerCommonStatsRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetContractStatsApiResponse"/>?&gt;</returns>
-        Task<IGetContractStatsApiResponse?> GetContractStatsOrDefaultAsync(CommonStatsRequestInput commonStatsRequestInput, string assetAddress, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetContractStatsApiResponse?> GetContractStatsOrDefaultAsync(PlayerCommonStatsRequestInput playerCommonStatsRequestInput, string assetAddress, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
     /// The <see cref="IGetAssetStatsApiResponse"/>
     /// </summary>
-    public interface IGetAssetStatsApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.CommonStatsResponse?>
+    public interface IGetAssetStatsApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerCommonStatsResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -103,7 +103,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="IGetContractStatsApiResponse"/>
     /// </summary>
-    public interface IGetContractStatsApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.CommonStatsResponse?>
+    public interface IGetContractStatsApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerCommonStatsResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -115,7 +115,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public class StatsApiEvents
+    public class PlayerStatsApiEvents
     {
         /// <summary>
         /// The event raised after the server response
@@ -127,7 +127,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetAssetStats;
 
-        internal void ExecuteOnGetAssetStats(StatsApi.GetAssetStatsApiResponse apiResponse)
+        internal void ExecuteOnGetAssetStats(PlayerStatsApi.GetAssetStatsApiResponse apiResponse)
         {
             OnGetAssetStats?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -147,7 +147,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetContractStats;
 
-        internal void ExecuteOnGetContractStats(StatsApi.GetContractStatsApiResponse apiResponse)
+        internal void ExecuteOnGetContractStats(PlayerStatsApi.GetContractStatsApiResponse apiResponse)
         {
             OnGetContractStats?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -161,7 +161,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public sealed partial class StatsApi : IStatsApi
+    public sealed partial class PlayerStatsApi : IPlayerStatsApi
     {
         private JsonSerializerOptions _jsonSerializerOptions;
 
@@ -173,7 +173,7 @@ namespace BeamPlayerClient.Api
         /// <summary>
         /// The logger
         /// </summary>
-        public ILogger<StatsApi> Logger { get; }
+        public ILogger<PlayerStatsApi> Logger { get; }
 
         /// <summary>
         /// The HttpClient
@@ -183,7 +183,7 @@ namespace BeamPlayerClient.Api
         /// <summary>
         /// The class containing the events
         /// </summary>
-        public StatsApiEvents Events { get; }
+        public PlayerStatsApiEvents Events { get; }
 
         /// <summary>
         /// A token provider of type <see cref="ApiKeyProvider"/>
@@ -191,33 +191,33 @@ namespace BeamPlayerClient.Api
         public TokenProvider<ApiKeyToken> ApiKeyProvider { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="StatsApi"/> class.
+        /// Initializes a new instance of the <see cref="PlayerStatsApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public StatsApi(ILogger<StatsApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, StatsApiEvents statsApiEvents,
+        public PlayerStatsApi(ILogger<PlayerStatsApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, PlayerJsonSerializerOptionsProvider jsonSerializerOptionsProvider, PlayerStatsApiEvents playerStatsApiEvents,
             TokenProvider<ApiKeyToken> apiKeyProvider)
         {
             _jsonSerializerOptions = jsonSerializerOptionsProvider.Options;
             LoggerFactory = loggerFactory;
-            Logger = LoggerFactory.CreateLogger<StatsApi>();
+            Logger = LoggerFactory.CreateLogger<PlayerStatsApi>();
             HttpClient = httpClient;
-            Events = statsApiEvents;
+            Events = playerStatsApiEvents;
             ApiKeyProvider = apiKeyProvider;
         }
 
-        partial void FormatGetAssetStats(CommonStatsRequestInput commonStatsRequestInput, ref string assetAddress, ref string assetId);
+        partial void FormatGetAssetStats(PlayerCommonStatsRequestInput playerCommonStatsRequestInput, ref string assetAddress, ref string assetId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="commonStatsRequestInput"></param>
+        /// <param name="playerCommonStatsRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
         /// <returns></returns>
-        private void ValidateGetAssetStats(CommonStatsRequestInput commonStatsRequestInput, string assetAddress, string assetId)
+        private void ValidateGetAssetStats(PlayerCommonStatsRequestInput playerCommonStatsRequestInput, string assetAddress, string assetId)
         {
-            if (commonStatsRequestInput == null)
-                throw new ArgumentNullException(nameof(commonStatsRequestInput));
+            if (playerCommonStatsRequestInput == null)
+                throw new ArgumentNullException(nameof(playerCommonStatsRequestInput));
 
             if (assetAddress == null)
                 throw new ArgumentNullException(nameof(assetAddress));
@@ -230,13 +230,13 @@ namespace BeamPlayerClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="commonStatsRequestInput"></param>
+        /// <param name="playerCommonStatsRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        private void AfterGetAssetStatsDefaultImplementation(IGetAssetStatsApiResponse apiResponseLocalVar, CommonStatsRequestInput commonStatsRequestInput, string assetAddress, string assetId)
+        private void AfterGetAssetStatsDefaultImplementation(IGetAssetStatsApiResponse apiResponseLocalVar, PlayerCommonStatsRequestInput playerCommonStatsRequestInput, string assetAddress, string assetId)
         {
             bool suppressDefaultLog = false;
-            AfterGetAssetStats(ref suppressDefaultLog, apiResponseLocalVar, commonStatsRequestInput, assetAddress, assetId);
+            AfterGetAssetStats(ref suppressDefaultLog, apiResponseLocalVar, playerCommonStatsRequestInput, assetAddress, assetId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -246,10 +246,10 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="commonStatsRequestInput"></param>
+        /// <param name="playerCommonStatsRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        partial void AfterGetAssetStats(ref bool suppressDefaultLog, IGetAssetStatsApiResponse apiResponseLocalVar, CommonStatsRequestInput commonStatsRequestInput, string assetAddress, string assetId);
+        partial void AfterGetAssetStats(ref bool suppressDefaultLog, IGetAssetStatsApiResponse apiResponseLocalVar, PlayerCommonStatsRequestInput playerCommonStatsRequestInput, string assetAddress, string assetId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -257,13 +257,13 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="commonStatsRequestInput"></param>
+        /// <param name="playerCommonStatsRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        private void OnErrorGetAssetStatsDefaultImplementation(Exception exception, string pathFormat, string path, CommonStatsRequestInput commonStatsRequestInput, string assetAddress, string assetId)
+        private void OnErrorGetAssetStatsDefaultImplementation(Exception exception, string pathFormat, string path, PlayerCommonStatsRequestInput playerCommonStatsRequestInput, string assetAddress, string assetId)
         {
             bool suppressDefaultLog = false;
-            OnErrorGetAssetStats(ref suppressDefaultLog, exception, pathFormat, path, commonStatsRequestInput, assetAddress, assetId);
+            OnErrorGetAssetStats(ref suppressDefaultLog, exception, pathFormat, path, playerCommonStatsRequestInput, assetAddress, assetId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -275,24 +275,24 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="commonStatsRequestInput"></param>
+        /// <param name="playerCommonStatsRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        partial void OnErrorGetAssetStats(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, CommonStatsRequestInput commonStatsRequestInput, string assetAddress, string assetId);
+        partial void OnErrorGetAssetStats(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, PlayerCommonStatsRequestInput playerCommonStatsRequestInput, string assetAddress, string assetId);
 
         /// <summary>
         /// Get asset stats 
         /// </summary>
-        /// <param name="commonStatsRequestInput"></param>
+        /// <param name="playerCommonStatsRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAssetStatsApiResponse"/>&gt;</returns>
-        public async Task<IGetAssetStatsApiResponse?> GetAssetStatsOrDefaultAsync(CommonStatsRequestInput commonStatsRequestInput, string assetAddress, string assetId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetAssetStatsApiResponse?> GetAssetStatsOrDefaultAsync(PlayerCommonStatsRequestInput playerCommonStatsRequestInput, string assetAddress, string assetId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await GetAssetStatsAsync(commonStatsRequestInput, assetAddress, assetId, cancellationToken).ConfigureAwait(false);
+                return await GetAssetStatsAsync(playerCommonStatsRequestInput, assetAddress, assetId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -304,20 +304,20 @@ namespace BeamPlayerClient.Api
         /// Get asset stats 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="commonStatsRequestInput"></param>
+        /// <param name="playerCommonStatsRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAssetStatsApiResponse"/>&gt;</returns>
-        public async Task<IGetAssetStatsApiResponse> GetAssetStatsAsync(CommonStatsRequestInput commonStatsRequestInput, string assetAddress, string assetId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetAssetStatsApiResponse> GetAssetStatsAsync(PlayerCommonStatsRequestInput playerCommonStatsRequestInput, string assetAddress, string assetId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateGetAssetStats(commonStatsRequestInput, assetAddress, assetId);
+                ValidateGetAssetStats(playerCommonStatsRequestInput, assetAddress, assetId);
 
-                FormatGetAssetStats(commonStatsRequestInput, ref assetAddress, ref assetId);
+                FormatGetAssetStats(playerCommonStatsRequestInput, ref assetAddress, ref assetId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -328,9 +328,9 @@ namespace BeamPlayerClient.Api
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BassetAddress%7D", Uri.EscapeDataString(assetAddress.ToString()));
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BassetId%7D", Uri.EscapeDataString(assetId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (commonStatsRequestInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (playerCommonStatsRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(commonStatsRequestInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(playerCommonStatsRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -369,7 +369,7 @@ namespace BeamPlayerClient.Api
 
                         GetAssetStatsApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/player/stats/{assetAddress}/assets/{assetId}", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterGetAssetStatsDefaultImplementation(apiResponseLocalVar, commonStatsRequestInput, assetAddress, assetId);
+                        AfterGetAssetStatsDefaultImplementation(apiResponseLocalVar, playerCommonStatsRequestInput, assetAddress, assetId);
 
                         Events.ExecuteOnGetAssetStats(apiResponseLocalVar);
 
@@ -383,7 +383,7 @@ namespace BeamPlayerClient.Api
             }
             catch(Exception e)
             {
-                OnErrorGetAssetStatsDefaultImplementation(e, "/v1/player/stats/{assetAddress}/assets/{assetId}", uriBuilderLocalVar.Path, commonStatsRequestInput, assetAddress, assetId);
+                OnErrorGetAssetStatsDefaultImplementation(e, "/v1/player/stats/{assetAddress}/assets/{assetId}", uriBuilderLocalVar.Path, playerCommonStatsRequestInput, assetAddress, assetId);
                 Events.ExecuteOnErrorGetAssetStats(e);
                 throw;
             }
@@ -427,11 +427,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.CommonStatsResponse? Ok()
+            public BeamPlayerClient.Model.PlayerCommonStatsResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.CommonStatsResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerCommonStatsResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -440,7 +440,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.CommonStatsResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerCommonStatsResponse? result)
             {
                 result = null;
 
@@ -466,18 +466,18 @@ namespace BeamPlayerClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetContractStats(CommonStatsRequestInput commonStatsRequestInput, ref string assetAddress);
+        partial void FormatGetContractStats(PlayerCommonStatsRequestInput playerCommonStatsRequestInput, ref string assetAddress);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="commonStatsRequestInput"></param>
+        /// <param name="playerCommonStatsRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <returns></returns>
-        private void ValidateGetContractStats(CommonStatsRequestInput commonStatsRequestInput, string assetAddress)
+        private void ValidateGetContractStats(PlayerCommonStatsRequestInput playerCommonStatsRequestInput, string assetAddress)
         {
-            if (commonStatsRequestInput == null)
-                throw new ArgumentNullException(nameof(commonStatsRequestInput));
+            if (playerCommonStatsRequestInput == null)
+                throw new ArgumentNullException(nameof(playerCommonStatsRequestInput));
 
             if (assetAddress == null)
                 throw new ArgumentNullException(nameof(assetAddress));
@@ -487,12 +487,12 @@ namespace BeamPlayerClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="commonStatsRequestInput"></param>
+        /// <param name="playerCommonStatsRequestInput"></param>
         /// <param name="assetAddress"></param>
-        private void AfterGetContractStatsDefaultImplementation(IGetContractStatsApiResponse apiResponseLocalVar, CommonStatsRequestInput commonStatsRequestInput, string assetAddress)
+        private void AfterGetContractStatsDefaultImplementation(IGetContractStatsApiResponse apiResponseLocalVar, PlayerCommonStatsRequestInput playerCommonStatsRequestInput, string assetAddress)
         {
             bool suppressDefaultLog = false;
-            AfterGetContractStats(ref suppressDefaultLog, apiResponseLocalVar, commonStatsRequestInput, assetAddress);
+            AfterGetContractStats(ref suppressDefaultLog, apiResponseLocalVar, playerCommonStatsRequestInput, assetAddress);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -502,9 +502,9 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="commonStatsRequestInput"></param>
+        /// <param name="playerCommonStatsRequestInput"></param>
         /// <param name="assetAddress"></param>
-        partial void AfterGetContractStats(ref bool suppressDefaultLog, IGetContractStatsApiResponse apiResponseLocalVar, CommonStatsRequestInput commonStatsRequestInput, string assetAddress);
+        partial void AfterGetContractStats(ref bool suppressDefaultLog, IGetContractStatsApiResponse apiResponseLocalVar, PlayerCommonStatsRequestInput playerCommonStatsRequestInput, string assetAddress);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -512,12 +512,12 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="commonStatsRequestInput"></param>
+        /// <param name="playerCommonStatsRequestInput"></param>
         /// <param name="assetAddress"></param>
-        private void OnErrorGetContractStatsDefaultImplementation(Exception exception, string pathFormat, string path, CommonStatsRequestInput commonStatsRequestInput, string assetAddress)
+        private void OnErrorGetContractStatsDefaultImplementation(Exception exception, string pathFormat, string path, PlayerCommonStatsRequestInput playerCommonStatsRequestInput, string assetAddress)
         {
             bool suppressDefaultLog = false;
-            OnErrorGetContractStats(ref suppressDefaultLog, exception, pathFormat, path, commonStatsRequestInput, assetAddress);
+            OnErrorGetContractStats(ref suppressDefaultLog, exception, pathFormat, path, playerCommonStatsRequestInput, assetAddress);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -529,22 +529,22 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="commonStatsRequestInput"></param>
+        /// <param name="playerCommonStatsRequestInput"></param>
         /// <param name="assetAddress"></param>
-        partial void OnErrorGetContractStats(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, CommonStatsRequestInput commonStatsRequestInput, string assetAddress);
+        partial void OnErrorGetContractStats(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, PlayerCommonStatsRequestInput playerCommonStatsRequestInput, string assetAddress);
 
         /// <summary>
         /// Get contract stats 
         /// </summary>
-        /// <param name="commonStatsRequestInput"></param>
+        /// <param name="playerCommonStatsRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetContractStatsApiResponse"/>&gt;</returns>
-        public async Task<IGetContractStatsApiResponse?> GetContractStatsOrDefaultAsync(CommonStatsRequestInput commonStatsRequestInput, string assetAddress, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetContractStatsApiResponse?> GetContractStatsOrDefaultAsync(PlayerCommonStatsRequestInput playerCommonStatsRequestInput, string assetAddress, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await GetContractStatsAsync(commonStatsRequestInput, assetAddress, cancellationToken).ConfigureAwait(false);
+                return await GetContractStatsAsync(playerCommonStatsRequestInput, assetAddress, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -556,19 +556,19 @@ namespace BeamPlayerClient.Api
         /// Get contract stats 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="commonStatsRequestInput"></param>
+        /// <param name="playerCommonStatsRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetContractStatsApiResponse"/>&gt;</returns>
-        public async Task<IGetContractStatsApiResponse> GetContractStatsAsync(CommonStatsRequestInput commonStatsRequestInput, string assetAddress, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetContractStatsApiResponse> GetContractStatsAsync(PlayerCommonStatsRequestInput playerCommonStatsRequestInput, string assetAddress, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateGetContractStats(commonStatsRequestInput, assetAddress);
+                ValidateGetContractStats(playerCommonStatsRequestInput, assetAddress);
 
-                FormatGetContractStats(commonStatsRequestInput, ref assetAddress);
+                FormatGetContractStats(playerCommonStatsRequestInput, ref assetAddress);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -578,9 +578,9 @@ namespace BeamPlayerClient.Api
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/player/stats/{assetAddress}";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BassetAddress%7D", Uri.EscapeDataString(assetAddress.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (commonStatsRequestInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (playerCommonStatsRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(commonStatsRequestInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(playerCommonStatsRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -619,7 +619,7 @@ namespace BeamPlayerClient.Api
 
                         GetContractStatsApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/player/stats/{assetAddress}", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterGetContractStatsDefaultImplementation(apiResponseLocalVar, commonStatsRequestInput, assetAddress);
+                        AfterGetContractStatsDefaultImplementation(apiResponseLocalVar, playerCommonStatsRequestInput, assetAddress);
 
                         Events.ExecuteOnGetContractStats(apiResponseLocalVar);
 
@@ -633,7 +633,7 @@ namespace BeamPlayerClient.Api
             }
             catch(Exception e)
             {
-                OnErrorGetContractStatsDefaultImplementation(e, "/v1/player/stats/{assetAddress}", uriBuilderLocalVar.Path, commonStatsRequestInput, assetAddress);
+                OnErrorGetContractStatsDefaultImplementation(e, "/v1/player/stats/{assetAddress}", uriBuilderLocalVar.Path, playerCommonStatsRequestInput, assetAddress);
                 Events.ExecuteOnErrorGetContractStats(e);
                 throw;
             }
@@ -677,11 +677,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.CommonStatsResponse? Ok()
+            public BeamPlayerClient.Model.PlayerCommonStatsResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.CommonStatsResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerCommonStatsResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -690,7 +690,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.CommonStatsResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerCommonStatsResponse? result)
             {
                 result = null;
 

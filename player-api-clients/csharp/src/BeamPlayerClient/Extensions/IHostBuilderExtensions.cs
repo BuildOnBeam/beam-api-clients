@@ -27,11 +27,11 @@ namespace BeamPlayerClient.Extensions
         /// <param name="builder"></param>
         /// <param name="options"></param>
         [Obsolete("Use ConfigureBeamPlayerApi")]
-        public static IHostBuilder ConfigureApi(this IHostBuilder builder, Action<HostBuilderContext, IServiceCollection, HostConfiguration> options)
+        public static IHostBuilder ConfigureApi(this IHostBuilder builder, Action<HostBuilderContext, IServiceCollection, PlayerHostConfiguration> options)
         {
-            builder.ConfigureServices((context, services) => 
+            builder.ConfigureServices((context, services) =>
             {
-                HostConfiguration config = new HostConfiguration(services);
+                PlayerHostConfiguration config = new PlayerHostConfiguration(services);
 
                 options(context, services, config);
 
@@ -46,11 +46,11 @@ namespace BeamPlayerClient.Extensions
         /// </summary>
         /// <param name="builder"></param>
         /// <param name="options"></param>
-        public static IHostBuilder ConfigureBeamPlayerApi(this IHostBuilder builder, Action<HostBuilderContext, IServiceCollection, HostConfiguration> options)
+        public static IHostBuilder ConfigureBeamPlayerApi(this IHostBuilder builder, Action<HostBuilderContext, IServiceCollection, PlayerHostConfiguration> options)
         {
-            builder.ConfigureServices((context, services) => 
+            builder.ConfigureServices((context, services) =>
             {
-                HostConfiguration config = new HostConfiguration(services);
+                PlayerHostConfiguration config = new PlayerHostConfiguration(services);
 
                 options(context, services, config);
 

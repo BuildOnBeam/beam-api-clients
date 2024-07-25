@@ -11,6 +11,8 @@ import type { CreateAssetOfferRequestInput } from '../models/CreateAssetOfferReq
 import type { GetAssetListingsResponse } from '../models/GetAssetListingsResponse';
 import type { GetChainCurrenciesResponse } from '../models/GetChainCurrenciesResponse';
 import type { GetListedAssetsBodyInput } from '../models/GetListedAssetsBodyInput';
+import type { RefreshContractRequestBody } from '../models/RefreshContractRequestBody';
+import type { RefreshTokenRequestBody } from '../models/RefreshTokenRequestBody';
 import type { SellAssetRequestInput } from '../models/SellAssetRequestInput';
 
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
@@ -309,6 +311,40 @@ export class MarketplaceService {
       path: {
         chainId: chainId,
       },
+    });
+  }
+
+  /**
+   * Schedule a token refresh in the indexer
+   * @param requestBody
+   * @returns any
+   * @throws ApiError
+   */
+  public refreshToken(
+    requestBody: RefreshTokenRequestBody,
+  ): CancelablePromise<any> {
+    return this.httpRequest.request({
+      method: 'POST',
+      url: '/v1/player/marketplace/refresh/token',
+      body: requestBody,
+      mediaType: 'application/json',
+    });
+  }
+
+  /**
+   * Schedule a contract refresh in the indexer
+   * @param requestBody
+   * @returns any
+   * @throws ApiError
+   */
+  public refreshContract(
+    requestBody: RefreshContractRequestBody,
+  ): CancelablePromise<any> {
+    return this.httpRequest.request({
+      method: 'POST',
+      url: '/v1/player/marketplace/refresh/contract',
+      body: requestBody,
+      mediaType: 'application/json',
     });
   }
 }

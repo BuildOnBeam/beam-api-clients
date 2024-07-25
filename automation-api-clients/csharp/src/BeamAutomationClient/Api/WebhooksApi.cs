@@ -28,12 +28,12 @@ namespace BeamAutomationClient.Api
     /// Represents a collection of functions to interact with the API endpoints
     /// This class is registered as transient.
     /// </summary>
-    public interface IWebhooksApi : IApi
+    public interface IAutomationWebhooksApi : IAutomationApi
     {
         /// <summary>
         /// The class containing the events
         /// </summary>
-        WebhooksApiEvents Events { get; }
+        AutomationWebhooksApiEvents Events { get; }
 
         /// <summary>
         /// Create webhook for your game
@@ -42,10 +42,10 @@ namespace BeamAutomationClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="createWebhookForGame"></param>
+        /// <param name="automationCreateWebhookForGame"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateWebhookApiResponse"/>&gt;</returns>
-        Task<ICreateWebhookApiResponse> CreateWebhookAsync(CreateWebhookForGame createWebhookForGame, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICreateWebhookApiResponse> CreateWebhookAsync(AutomationCreateWebhookForGame automationCreateWebhookForGame, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Create webhook for your game
@@ -53,10 +53,10 @@ namespace BeamAutomationClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="createWebhookForGame"></param>
+        /// <param name="automationCreateWebhookForGame"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateWebhookApiResponse"/>?&gt;</returns>
-        Task<ICreateWebhookApiResponse?> CreateWebhookOrDefaultAsync(CreateWebhookForGame createWebhookForGame, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICreateWebhookApiResponse?> CreateWebhookOrDefaultAsync(AutomationCreateWebhookForGame automationCreateWebhookForGame, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete webhook from your game
@@ -106,7 +106,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="ICreateWebhookApiResponse"/>
     /// </summary>
-    public interface ICreateWebhookApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.WebhookForGameResponse?>
+    public interface ICreateWebhookApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationWebhookForGameResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -130,7 +130,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IGetWebhooksForGameApiResponse"/>
     /// </summary>
-    public interface IGetWebhooksForGameApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.GetWebhooksForGameResponse?>
+    public interface IGetWebhooksForGameApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetWebhooksForGameResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -142,7 +142,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public class WebhooksApiEvents
+    public class AutomationWebhooksApiEvents
     {
         /// <summary>
         /// The event raised after the server response
@@ -154,7 +154,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorCreateWebhook;
 
-        internal void ExecuteOnCreateWebhook(WebhooksApi.CreateWebhookApiResponse apiResponse)
+        internal void ExecuteOnCreateWebhook(AutomationWebhooksApi.CreateWebhookApiResponse apiResponse)
         {
             OnCreateWebhook?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -174,7 +174,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorDeleteWebhook;
 
-        internal void ExecuteOnDeleteWebhook(WebhooksApi.DeleteWebhookApiResponse apiResponse)
+        internal void ExecuteOnDeleteWebhook(AutomationWebhooksApi.DeleteWebhookApiResponse apiResponse)
         {
             OnDeleteWebhook?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -194,7 +194,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetWebhooksForGame;
 
-        internal void ExecuteOnGetWebhooksForGame(WebhooksApi.GetWebhooksForGameApiResponse apiResponse)
+        internal void ExecuteOnGetWebhooksForGame(AutomationWebhooksApi.GetWebhooksForGameApiResponse apiResponse)
         {
             OnGetWebhooksForGame?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -208,7 +208,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public sealed partial class WebhooksApi : IWebhooksApi
+    public sealed partial class AutomationWebhooksApi : IAutomationWebhooksApi
     {
         private JsonSerializerOptions _jsonSerializerOptions;
 
@@ -220,7 +220,7 @@ namespace BeamAutomationClient.Api
         /// <summary>
         /// The logger
         /// </summary>
-        public ILogger<WebhooksApi> Logger { get; }
+        public ILogger<AutomationWebhooksApi> Logger { get; }
 
         /// <summary>
         /// The HttpClient
@@ -230,7 +230,7 @@ namespace BeamAutomationClient.Api
         /// <summary>
         /// The class containing the events
         /// </summary>
-        public WebhooksApiEvents Events { get; }
+        public AutomationWebhooksApiEvents Events { get; }
 
         /// <summary>
         /// A token provider of type <see cref="ApiKeyProvider"/>
@@ -238,42 +238,42 @@ namespace BeamAutomationClient.Api
         public TokenProvider<ApiKeyToken> ApiKeyProvider { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WebhooksApi"/> class.
+        /// Initializes a new instance of the <see cref="AutomationWebhooksApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public WebhooksApi(ILogger<WebhooksApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, WebhooksApiEvents webhooksApiEvents,
+        public AutomationWebhooksApi(ILogger<AutomationWebhooksApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, AutomationJsonSerializerOptionsProvider jsonSerializerOptionsProvider, AutomationWebhooksApiEvents automationWebhooksApiEvents,
             TokenProvider<ApiKeyToken> apiKeyProvider)
         {
             _jsonSerializerOptions = jsonSerializerOptionsProvider.Options;
             LoggerFactory = loggerFactory;
-            Logger = LoggerFactory.CreateLogger<WebhooksApi>();
+            Logger = LoggerFactory.CreateLogger<AutomationWebhooksApi>();
             HttpClient = httpClient;
-            Events = webhooksApiEvents;
+            Events = automationWebhooksApiEvents;
             ApiKeyProvider = apiKeyProvider;
         }
 
-        partial void FormatCreateWebhook(CreateWebhookForGame createWebhookForGame);
+        partial void FormatCreateWebhook(AutomationCreateWebhookForGame automationCreateWebhookForGame);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="createWebhookForGame"></param>
+        /// <param name="automationCreateWebhookForGame"></param>
         /// <returns></returns>
-        private void ValidateCreateWebhook(CreateWebhookForGame createWebhookForGame)
+        private void ValidateCreateWebhook(AutomationCreateWebhookForGame automationCreateWebhookForGame)
         {
-            if (createWebhookForGame == null)
-                throw new ArgumentNullException(nameof(createWebhookForGame));
+            if (automationCreateWebhookForGame == null)
+                throw new ArgumentNullException(nameof(automationCreateWebhookForGame));
         }
 
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="createWebhookForGame"></param>
-        private void AfterCreateWebhookDefaultImplementation(ICreateWebhookApiResponse apiResponseLocalVar, CreateWebhookForGame createWebhookForGame)
+        /// <param name="automationCreateWebhookForGame"></param>
+        private void AfterCreateWebhookDefaultImplementation(ICreateWebhookApiResponse apiResponseLocalVar, AutomationCreateWebhookForGame automationCreateWebhookForGame)
         {
             bool suppressDefaultLog = false;
-            AfterCreateWebhook(ref suppressDefaultLog, apiResponseLocalVar, createWebhookForGame);
+            AfterCreateWebhook(ref suppressDefaultLog, apiResponseLocalVar, automationCreateWebhookForGame);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -283,8 +283,8 @@ namespace BeamAutomationClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="createWebhookForGame"></param>
-        partial void AfterCreateWebhook(ref bool suppressDefaultLog, ICreateWebhookApiResponse apiResponseLocalVar, CreateWebhookForGame createWebhookForGame);
+        /// <param name="automationCreateWebhookForGame"></param>
+        partial void AfterCreateWebhook(ref bool suppressDefaultLog, ICreateWebhookApiResponse apiResponseLocalVar, AutomationCreateWebhookForGame automationCreateWebhookForGame);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -292,11 +292,11 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="createWebhookForGame"></param>
-        private void OnErrorCreateWebhookDefaultImplementation(Exception exception, string pathFormat, string path, CreateWebhookForGame createWebhookForGame)
+        /// <param name="automationCreateWebhookForGame"></param>
+        private void OnErrorCreateWebhookDefaultImplementation(Exception exception, string pathFormat, string path, AutomationCreateWebhookForGame automationCreateWebhookForGame)
         {
             bool suppressDefaultLog = false;
-            OnErrorCreateWebhook(ref suppressDefaultLog, exception, pathFormat, path, createWebhookForGame);
+            OnErrorCreateWebhook(ref suppressDefaultLog, exception, pathFormat, path, automationCreateWebhookForGame);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -308,20 +308,20 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="createWebhookForGame"></param>
-        partial void OnErrorCreateWebhook(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, CreateWebhookForGame createWebhookForGame);
+        /// <param name="automationCreateWebhookForGame"></param>
+        partial void OnErrorCreateWebhook(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationCreateWebhookForGame automationCreateWebhookForGame);
 
         /// <summary>
         /// Create webhook for your game 
         /// </summary>
-        /// <param name="createWebhookForGame"></param>
+        /// <param name="automationCreateWebhookForGame"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateWebhookApiResponse"/>&gt;</returns>
-        public async Task<ICreateWebhookApiResponse?> CreateWebhookOrDefaultAsync(CreateWebhookForGame createWebhookForGame, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICreateWebhookApiResponse?> CreateWebhookOrDefaultAsync(AutomationCreateWebhookForGame automationCreateWebhookForGame, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await CreateWebhookAsync(createWebhookForGame, cancellationToken).ConfigureAwait(false);
+                return await CreateWebhookAsync(automationCreateWebhookForGame, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -333,18 +333,18 @@ namespace BeamAutomationClient.Api
         /// Create webhook for your game 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="createWebhookForGame"></param>
+        /// <param name="automationCreateWebhookForGame"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateWebhookApiResponse"/>&gt;</returns>
-        public async Task<ICreateWebhookApiResponse> CreateWebhookAsync(CreateWebhookForGame createWebhookForGame, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICreateWebhookApiResponse> CreateWebhookAsync(AutomationCreateWebhookForGame automationCreateWebhookForGame, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateCreateWebhook(createWebhookForGame);
+                ValidateCreateWebhook(automationCreateWebhookForGame);
 
-                FormatCreateWebhook(createWebhookForGame);
+                FormatCreateWebhook(automationCreateWebhookForGame);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -353,9 +353,9 @@ namespace BeamAutomationClient.Api
                     uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/webhook";
 
-                    httpRequestMessageLocalVar.Content = (createWebhookForGame as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (automationCreateWebhookForGame as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(createWebhookForGame, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationCreateWebhookForGame, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -394,7 +394,7 @@ namespace BeamAutomationClient.Api
 
                         CreateWebhookApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/webhook", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterCreateWebhookDefaultImplementation(apiResponseLocalVar, createWebhookForGame);
+                        AfterCreateWebhookDefaultImplementation(apiResponseLocalVar, automationCreateWebhookForGame);
 
                         Events.ExecuteOnCreateWebhook(apiResponseLocalVar);
 
@@ -408,7 +408,7 @@ namespace BeamAutomationClient.Api
             }
             catch(Exception e)
             {
-                OnErrorCreateWebhookDefaultImplementation(e, "/v1/webhook", uriBuilderLocalVar.Path, createWebhookForGame);
+                OnErrorCreateWebhookDefaultImplementation(e, "/v1/webhook", uriBuilderLocalVar.Path, automationCreateWebhookForGame);
                 Events.ExecuteOnErrorCreateWebhook(e);
                 throw;
             }
@@ -452,11 +452,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.WebhookForGameResponse? Ok()
+            public BeamAutomationClient.Model.AutomationWebhookForGameResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.WebhookForGameResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationWebhookForGameResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -465,7 +465,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.WebhookForGameResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationWebhookForGameResponse? result)
             {
                 result = null;
 
@@ -841,11 +841,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.GetWebhooksForGameResponse? Ok()
+            public BeamAutomationClient.Model.AutomationGetWebhooksForGameResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.GetWebhooksForGameResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationGetWebhooksForGameResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -854,7 +854,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.GetWebhooksForGameResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationGetWebhooksForGameResponse? result)
             {
                 result = null;
 

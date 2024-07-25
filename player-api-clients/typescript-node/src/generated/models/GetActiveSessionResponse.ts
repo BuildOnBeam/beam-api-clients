@@ -6,7 +6,7 @@
 export type GetActiveSessionResponse = {
   id: string;
   isActive: boolean;
-  startTime?: string | null;
-  endTime?: string | null;
+  startTime: string;
+  endTime: string;
   sessionAddress: string;
 };

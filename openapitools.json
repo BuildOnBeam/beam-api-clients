@@ -8,7 +8,7 @@
         "generatorName": "csharp",
         "output": "./automation-api-clients/csharp",
         "library": "generichost",
-        "inputSpec": "https://api.testnet.onbeam.com/api/automation-json",
+        "inputSpec": "./automation-api-clients/csharp/spec.json",
         "templateDir": "./templates",
         "skipValidateSpec": true,
         "globalProperty": {
@@ -20,6 +20,7 @@
         "additionalProperties": {
           "packageName": "BeamAutomationClient",
           "apiName": "BeamAutomationApi",
+          "classPrefix": "Automation",
           "returnICollection": true,
           "optionalMethodArgument": false,
           "nullableReferenceTypes": true,
@@ -30,7 +31,7 @@
         "generatorName": "csharp",
         "output": "./player-api-clients/csharp",
         "library": "generichost",
-        "inputSpec": "https://api.testnet.onbeam.com/api/player-json",
+        "inputSpec": "./player-api-clients/csharp/spec.json",
         "templateDir": "./templates",
         "skipValidateSpec": true,
         "globalProperty": {
@@ -42,6 +43,7 @@
         "additionalProperties": {
           "packageName": "BeamPlayerClient",
           "apiName": "BeamPlayerApi",
+          "classPrefix": "Player",
           "returnICollection": true,
           "optionalMethodArgument": false,
           "nullableReferenceTypes": true,

@@ -6,8 +6,8 @@
 export type GetTransactionsResponseV2 = {
   data: Array<{
     id: string;
-    createdAt: any;
-    updatedAt: any;
+    createdAt: string;
+    updatedAt: string;
     chainId: number;
     intent: {
       interactions?: Array<{
@@ -23,7 +23,7 @@ export type GetTransactionsResponseV2 = {
      * The transaction object exists if you created the transaction deterministically and contains information about the on-chain transaction
      */
     transaction?: {
-      createdAt: any;
+      createdAt: string;
       blockNumber?: number;
       hash?: string;
       gasUsed?: string;

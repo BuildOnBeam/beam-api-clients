@@ -22,7 +22,7 @@ export type GetTransactionResponse = {
    * The transaction object exists if you created the transaction deterministically and contains information about the on-chain transaction
    */
   transaction?: {
-    createdAt: any;
+    createdAt: string;
     blockNumber?: number;
     hash?: string;
     gasUsed?: string;
@@ -50,8 +50,10 @@ export type GetTransactionResponse = {
   /**
    * User and wallet information related to the transaction
    */
-  profile: {
-    id?: string | null;
+  user: {
+    entities: Array<{
+      entityId: string;
+    }>;
     wallet: {
       address: string;
     };

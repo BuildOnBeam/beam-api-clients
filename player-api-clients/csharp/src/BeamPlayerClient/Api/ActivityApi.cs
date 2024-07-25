@@ -28,12 +28,12 @@ namespace BeamPlayerClient.Api
     /// Represents a collection of functions to interact with the API endpoints
     /// This class is registered as transient.
     /// </summary>
-    public interface IActivityApi : IApi
+    public interface IPlayerActivityApi : IPlayerApi
     {
         /// <summary>
         /// The class containing the events
         /// </summary>
-        ActivityApiEvents Events { get; }
+        PlayerActivityApiEvents Events { get; }
 
         /// <summary>
         /// Get asset activity
@@ -42,12 +42,12 @@ namespace BeamPlayerClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="playerCommonActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAssetActivityApiResponse"/>&gt;</returns>
-        Task<IGetAssetActivityApiResponse> GetAssetActivityAsync(CommonActivityRequestInput commonActivityRequestInput, string assetAddress, string assetId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetAssetActivityApiResponse> GetAssetActivityAsync(PlayerCommonActivityRequestInput playerCommonActivityRequestInput, string assetAddress, string assetId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get asset activity
@@ -55,12 +55,12 @@ namespace BeamPlayerClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="playerCommonActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAssetActivityApiResponse"/>?&gt;</returns>
-        Task<IGetAssetActivityApiResponse?> GetAssetActivityOrDefaultAsync(CommonActivityRequestInput commonActivityRequestInput, string assetAddress, string assetId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetAssetActivityApiResponse?> GetAssetActivityOrDefaultAsync(PlayerCommonActivityRequestInput playerCommonActivityRequestInput, string assetAddress, string assetId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get contract activity
@@ -69,11 +69,11 @@ namespace BeamPlayerClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="playerCommonActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetContractActivityApiResponse"/>&gt;</returns>
-        Task<IGetContractActivityApiResponse> GetContractActivityAsync(CommonActivityRequestInput commonActivityRequestInput, string assetAddress, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetContractActivityApiResponse> GetContractActivityAsync(PlayerCommonActivityRequestInput playerCommonActivityRequestInput, string assetAddress, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get contract activity
@@ -81,11 +81,11 @@ namespace BeamPlayerClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="playerCommonActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetContractActivityApiResponse"/>?&gt;</returns>
-        Task<IGetContractActivityApiResponse?> GetContractActivityOrDefaultAsync(CommonActivityRequestInput commonActivityRequestInput, string assetAddress, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetContractActivityApiResponse?> GetContractActivityOrDefaultAsync(PlayerCommonActivityRequestInput playerCommonActivityRequestInput, string assetAddress, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get user activity
@@ -94,11 +94,11 @@ namespace BeamPlayerClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="playerCommonActivityRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetUserActivityApiResponse"/>&gt;</returns>
-        Task<IGetUserActivityApiResponse> GetUserActivityAsync(CommonActivityRequestInput commonActivityRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetUserActivityApiResponse> GetUserActivityAsync(PlayerCommonActivityRequestInput playerCommonActivityRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get user activity
@@ -106,17 +106,17 @@ namespace BeamPlayerClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="playerCommonActivityRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetUserActivityApiResponse"/>?&gt;</returns>
-        Task<IGetUserActivityApiResponse?> GetUserActivityOrDefaultAsync(CommonActivityRequestInput commonActivityRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetUserActivityApiResponse?> GetUserActivityOrDefaultAsync(PlayerCommonActivityRequestInput playerCommonActivityRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
     /// The <see cref="IGetAssetActivityApiResponse"/>
     /// </summary>
-    public interface IGetAssetActivityApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.CommonActivityResponse?>
+    public interface IGetAssetActivityApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerCommonActivityResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -128,7 +128,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="IGetContractActivityApiResponse"/>
     /// </summary>
-    public interface IGetContractActivityApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.CommonActivityResponse?>
+    public interface IGetContractActivityApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerCommonActivityResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -140,7 +140,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="IGetUserActivityApiResponse"/>
     /// </summary>
-    public interface IGetUserActivityApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.CommonActivityResponse?>
+    public interface IGetUserActivityApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerCommonActivityResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -152,7 +152,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public class ActivityApiEvents
+    public class PlayerActivityApiEvents
     {
         /// <summary>
         /// The event raised after the server response
@@ -164,7 +164,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetAssetActivity;
 
-        internal void ExecuteOnGetAssetActivity(ActivityApi.GetAssetActivityApiResponse apiResponse)
+        internal void ExecuteOnGetAssetActivity(PlayerActivityApi.GetAssetActivityApiResponse apiResponse)
         {
             OnGetAssetActivity?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -184,7 +184,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetContractActivity;
 
-        internal void ExecuteOnGetContractActivity(ActivityApi.GetContractActivityApiResponse apiResponse)
+        internal void ExecuteOnGetContractActivity(PlayerActivityApi.GetContractActivityApiResponse apiResponse)
         {
             OnGetContractActivity?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -204,7 +204,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetUserActivity;
 
-        internal void ExecuteOnGetUserActivity(ActivityApi.GetUserActivityApiResponse apiResponse)
+        internal void ExecuteOnGetUserActivity(PlayerActivityApi.GetUserActivityApiResponse apiResponse)
         {
             OnGetUserActivity?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -218,7 +218,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public sealed partial class ActivityApi : IActivityApi
+    public sealed partial class PlayerActivityApi : IPlayerActivityApi
     {
         private JsonSerializerOptions _jsonSerializerOptions;
 
@@ -230,7 +230,7 @@ namespace BeamPlayerClient.Api
         /// <summary>
         /// The logger
         /// </summary>
-        public ILogger<ActivityApi> Logger { get; }
+        public ILogger<PlayerActivityApi> Logger { get; }
 
         /// <summary>
         /// The HttpClient
@@ -240,7 +240,7 @@ namespace BeamPlayerClient.Api
         /// <summary>
         /// The class containing the events
         /// </summary>
-        public ActivityApiEvents Events { get; }
+        public PlayerActivityApiEvents Events { get; }
 
         /// <summary>
         /// A token provider of type <see cref="ApiKeyProvider"/>
@@ -248,33 +248,33 @@ namespace BeamPlayerClient.Api
         public TokenProvider<ApiKeyToken> ApiKeyProvider { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ActivityApi"/> class.
+        /// Initializes a new instance of the <see cref="PlayerActivityApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public ActivityApi(ILogger<ActivityApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, ActivityApiEvents activityApiEvents,
+        public PlayerActivityApi(ILogger<PlayerActivityApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, PlayerJsonSerializerOptionsProvider jsonSerializerOptionsProvider, PlayerActivityApiEvents playerActivityApiEvents,
             TokenProvider<ApiKeyToken> apiKeyProvider)
         {
             _jsonSerializerOptions = jsonSerializerOptionsProvider.Options;
             LoggerFactory = loggerFactory;
-            Logger = LoggerFactory.CreateLogger<ActivityApi>();
+            Logger = LoggerFactory.CreateLogger<PlayerActivityApi>();
             HttpClient = httpClient;
-            Events = activityApiEvents;
+            Events = playerActivityApiEvents;
             ApiKeyProvider = apiKeyProvider;
         }
 
-        partial void FormatGetAssetActivity(CommonActivityRequestInput commonActivityRequestInput, ref string assetAddress, ref string assetId);
+        partial void FormatGetAssetActivity(PlayerCommonActivityRequestInput playerCommonActivityRequestInput, ref string assetAddress, ref string assetId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="playerCommonActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
         /// <returns></returns>
-        private void ValidateGetAssetActivity(CommonActivityRequestInput commonActivityRequestInput, string assetAddress, string assetId)
+        private void ValidateGetAssetActivity(PlayerCommonActivityRequestInput playerCommonActivityRequestInput, string assetAddress, string assetId)
         {
-            if (commonActivityRequestInput == null)
-                throw new ArgumentNullException(nameof(commonActivityRequestInput));
+            if (playerCommonActivityRequestInput == null)
+                throw new ArgumentNullException(nameof(playerCommonActivityRequestInput));
 
             if (assetAddress == null)
                 throw new ArgumentNullException(nameof(assetAddress));
@@ -287,13 +287,13 @@ namespace BeamPlayerClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="playerCommonActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        private void AfterGetAssetActivityDefaultImplementation(IGetAssetActivityApiResponse apiResponseLocalVar, CommonActivityRequestInput commonActivityRequestInput, string assetAddress, string assetId)
+        private void AfterGetAssetActivityDefaultImplementation(IGetAssetActivityApiResponse apiResponseLocalVar, PlayerCommonActivityRequestInput playerCommonActivityRequestInput, string assetAddress, string assetId)
         {
             bool suppressDefaultLog = false;
-            AfterGetAssetActivity(ref suppressDefaultLog, apiResponseLocalVar, commonActivityRequestInput, assetAddress, assetId);
+            AfterGetAssetActivity(ref suppressDefaultLog, apiResponseLocalVar, playerCommonActivityRequestInput, assetAddress, assetId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -303,10 +303,10 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="playerCommonActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        partial void AfterGetAssetActivity(ref bool suppressDefaultLog, IGetAssetActivityApiResponse apiResponseLocalVar, CommonActivityRequestInput commonActivityRequestInput, string assetAddress, string assetId);
+        partial void AfterGetAssetActivity(ref bool suppressDefaultLog, IGetAssetActivityApiResponse apiResponseLocalVar, PlayerCommonActivityRequestInput playerCommonActivityRequestInput, string assetAddress, string assetId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -314,13 +314,13 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="playerCommonActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        private void OnErrorGetAssetActivityDefaultImplementation(Exception exception, string pathFormat, string path, CommonActivityRequestInput commonActivityRequestInput, string assetAddress, string assetId)
+        private void OnErrorGetAssetActivityDefaultImplementation(Exception exception, string pathFormat, string path, PlayerCommonActivityRequestInput playerCommonActivityRequestInput, string assetAddress, string assetId)
         {
             bool suppressDefaultLog = false;
-            OnErrorGetAssetActivity(ref suppressDefaultLog, exception, pathFormat, path, commonActivityRequestInput, assetAddress, assetId);
+            OnErrorGetAssetActivity(ref suppressDefaultLog, exception, pathFormat, path, playerCommonActivityRequestInput, assetAddress, assetId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -332,24 +332,24 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="playerCommonActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        partial void OnErrorGetAssetActivity(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, CommonActivityRequestInput commonActivityRequestInput, string assetAddress, string assetId);
+        partial void OnErrorGetAssetActivity(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, PlayerCommonActivityRequestInput playerCommonActivityRequestInput, string assetAddress, string assetId);
 
         /// <summary>
         /// Get asset activity 
         /// </summary>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="playerCommonActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAssetActivityApiResponse"/>&gt;</returns>
-        public async Task<IGetAssetActivityApiResponse?> GetAssetActivityOrDefaultAsync(CommonActivityRequestInput commonActivityRequestInput, string assetAddress, string assetId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetAssetActivityApiResponse?> GetAssetActivityOrDefaultAsync(PlayerCommonActivityRequestInput playerCommonActivityRequestInput, string assetAddress, string assetId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await GetAssetActivityAsync(commonActivityRequestInput, assetAddress, assetId, cancellationToken).ConfigureAwait(false);
+                return await GetAssetActivityAsync(playerCommonActivityRequestInput, assetAddress, assetId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -361,20 +361,20 @@ namespace BeamPlayerClient.Api
         /// Get asset activity 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="playerCommonActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAssetActivityApiResponse"/>&gt;</returns>
-        public async Task<IGetAssetActivityApiResponse> GetAssetActivityAsync(CommonActivityRequestInput commonActivityRequestInput, string assetAddress, string assetId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetAssetActivityApiResponse> GetAssetActivityAsync(PlayerCommonActivityRequestInput playerCommonActivityRequestInput, string assetAddress, string assetId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateGetAssetActivity(commonActivityRequestInput, assetAddress, assetId);
+                ValidateGetAssetActivity(playerCommonActivityRequestInput, assetAddress, assetId);
 
-                FormatGetAssetActivity(commonActivityRequestInput, ref assetAddress, ref assetId);
+                FormatGetAssetActivity(playerCommonActivityRequestInput, ref assetAddress, ref assetId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -385,9 +385,9 @@ namespace BeamPlayerClient.Api
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BassetAddress%7D", Uri.EscapeDataString(assetAddress.ToString()));
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BassetId%7D", Uri.EscapeDataString(assetId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (commonActivityRequestInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (playerCommonActivityRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(commonActivityRequestInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(playerCommonActivityRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -426,7 +426,7 @@ namespace BeamPlayerClient.Api
 
                         GetAssetActivityApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/player/activity/assets/{assetAddress}/asset/{assetId}", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterGetAssetActivityDefaultImplementation(apiResponseLocalVar, commonActivityRequestInput, assetAddress, assetId);
+                        AfterGetAssetActivityDefaultImplementation(apiResponseLocalVar, playerCommonActivityRequestInput, assetAddress, assetId);
 
                         Events.ExecuteOnGetAssetActivity(apiResponseLocalVar);
 
@@ -440,7 +440,7 @@ namespace BeamPlayerClient.Api
             }
             catch(Exception e)
             {
-                OnErrorGetAssetActivityDefaultImplementation(e, "/v1/player/activity/assets/{assetAddress}/asset/{assetId}", uriBuilderLocalVar.Path, commonActivityRequestInput, assetAddress, assetId);
+                OnErrorGetAssetActivityDefaultImplementation(e, "/v1/player/activity/assets/{assetAddress}/asset/{assetId}", uriBuilderLocalVar.Path, playerCommonActivityRequestInput, assetAddress, assetId);
                 Events.ExecuteOnErrorGetAssetActivity(e);
                 throw;
             }
@@ -484,11 +484,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.CommonActivityResponse? Ok()
+            public BeamPlayerClient.Model.PlayerCommonActivityResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.CommonActivityResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerCommonActivityResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -497,7 +497,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.CommonActivityResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerCommonActivityResponse? result)
             {
                 result = null;
 
@@ -523,18 +523,18 @@ namespace BeamPlayerClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetContractActivity(CommonActivityRequestInput commonActivityRequestInput, ref string assetAddress);
+        partial void FormatGetContractActivity(PlayerCommonActivityRequestInput playerCommonActivityRequestInput, ref string assetAddress);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="playerCommonActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <returns></returns>
-        private void ValidateGetContractActivity(CommonActivityRequestInput commonActivityRequestInput, string assetAddress)
+        private void ValidateGetContractActivity(PlayerCommonActivityRequestInput playerCommonActivityRequestInput, string assetAddress)
         {
-            if (commonActivityRequestInput == null)
-                throw new ArgumentNullException(nameof(commonActivityRequestInput));
+            if (playerCommonActivityRequestInput == null)
+                throw new ArgumentNullException(nameof(playerCommonActivityRequestInput));
 
             if (assetAddress == null)
                 throw new ArgumentNullException(nameof(assetAddress));
@@ -544,12 +544,12 @@ namespace BeamPlayerClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="playerCommonActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
-        private void AfterGetContractActivityDefaultImplementation(IGetContractActivityApiResponse apiResponseLocalVar, CommonActivityRequestInput commonActivityRequestInput, string assetAddress)
+        private void AfterGetContractActivityDefaultImplementation(IGetContractActivityApiResponse apiResponseLocalVar, PlayerCommonActivityRequestInput playerCommonActivityRequestInput, string assetAddress)
         {
             bool suppressDefaultLog = false;
-            AfterGetContractActivity(ref suppressDefaultLog, apiResponseLocalVar, commonActivityRequestInput, assetAddress);
+            AfterGetContractActivity(ref suppressDefaultLog, apiResponseLocalVar, playerCommonActivityRequestInput, assetAddress);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -559,9 +559,9 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="playerCommonActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
-        partial void AfterGetContractActivity(ref bool suppressDefaultLog, IGetContractActivityApiResponse apiResponseLocalVar, CommonActivityRequestInput commonActivityRequestInput, string assetAddress);
+        partial void AfterGetContractActivity(ref bool suppressDefaultLog, IGetContractActivityApiResponse apiResponseLocalVar, PlayerCommonActivityRequestInput playerCommonActivityRequestInput, string assetAddress);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -569,12 +569,12 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="playerCommonActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
-        private void OnErrorGetContractActivityDefaultImplementation(Exception exception, string pathFormat, string path, CommonActivityRequestInput commonActivityRequestInput, string assetAddress)
+        private void OnErrorGetContractActivityDefaultImplementation(Exception exception, string pathFormat, string path, PlayerCommonActivityRequestInput playerCommonActivityRequestInput, string assetAddress)
         {
             bool suppressDefaultLog = false;
-            OnErrorGetContractActivity(ref suppressDefaultLog, exception, pathFormat, path, commonActivityRequestInput, assetAddress);
+            OnErrorGetContractActivity(ref suppressDefaultLog, exception, pathFormat, path, playerCommonActivityRequestInput, assetAddress);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -586,22 +586,22 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="playerCommonActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
-        partial void OnErrorGetContractActivity(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, CommonActivityRequestInput commonActivityRequestInput, string assetAddress);
+        partial void OnErrorGetContractActivity(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, PlayerCommonActivityRequestInput playerCommonActivityRequestInput, string assetAddress);
 
         /// <summary>
         /// Get contract activity 
         /// </summary>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="playerCommonActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetContractActivityApiResponse"/>&gt;</returns>
-        public async Task<IGetContractActivityApiResponse?> GetContractActivityOrDefaultAsync(CommonActivityRequestInput commonActivityRequestInput, string assetAddress, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetContractActivityApiResponse?> GetContractActivityOrDefaultAsync(PlayerCommonActivityRequestInput playerCommonActivityRequestInput, string assetAddress, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await GetContractActivityAsync(commonActivityRequestInput, assetAddress, cancellationToken).ConfigureAwait(false);
+                return await GetContractActivityAsync(playerCommonActivityRequestInput, assetAddress, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -613,19 +613,19 @@ namespace BeamPlayerClient.Api
         /// Get contract activity 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="playerCommonActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetContractActivityApiResponse"/>&gt;</returns>
-        public async Task<IGetContractActivityApiResponse> GetContractActivityAsync(CommonActivityRequestInput commonActivityRequestInput, string assetAddress, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetContractActivityApiResponse> GetContractActivityAsync(PlayerCommonActivityRequestInput playerCommonActivityRequestInput, string assetAddress, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateGetContractActivity(commonActivityRequestInput, assetAddress);
+                ValidateGetContractActivity(playerCommonActivityRequestInput, assetAddress);
 
-                FormatGetContractActivity(commonActivityRequestInput, ref assetAddress);
+                FormatGetContractActivity(playerCommonActivityRequestInput, ref assetAddress);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -635,9 +635,9 @@ namespace BeamPlayerClient.Api
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/player/activity/assets/{assetAddress}";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BassetAddress%7D", Uri.EscapeDataString(assetAddress.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (commonActivityRequestInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (playerCommonActivityRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(commonActivityRequestInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(playerCommonActivityRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -676,7 +676,7 @@ namespace BeamPlayerClient.Api
 
                         GetContractActivityApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/player/activity/assets/{assetAddress}", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterGetContractActivityDefaultImplementation(apiResponseLocalVar, commonActivityRequestInput, assetAddress);
+                        AfterGetContractActivityDefaultImplementation(apiResponseLocalVar, playerCommonActivityRequestInput, assetAddress);
 
                         Events.ExecuteOnGetContractActivity(apiResponseLocalVar);
 
@@ -690,7 +690,7 @@ namespace BeamPlayerClient.Api
             }
             catch(Exception e)
             {
-                OnErrorGetContractActivityDefaultImplementation(e, "/v1/player/activity/assets/{assetAddress}", uriBuilderLocalVar.Path, commonActivityRequestInput, assetAddress);
+                OnErrorGetContractActivityDefaultImplementation(e, "/v1/player/activity/assets/{assetAddress}", uriBuilderLocalVar.Path, playerCommonActivityRequestInput, assetAddress);
                 Events.ExecuteOnErrorGetContractActivity(e);
                 throw;
             }
@@ -734,11 +734,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.CommonActivityResponse? Ok()
+            public BeamPlayerClient.Model.PlayerCommonActivityResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.CommonActivityResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerCommonActivityResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -747,7 +747,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.CommonActivityResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerCommonActivityResponse? result)
             {
                 result = null;
 
@@ -773,18 +773,18 @@ namespace BeamPlayerClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetUserActivity(CommonActivityRequestInput commonActivityRequestInput, ref string entityId);
+        partial void FormatGetUserActivity(PlayerCommonActivityRequestInput playerCommonActivityRequestInput, ref string entityId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="playerCommonActivityRequestInput"></param>
         /// <param name="entityId"></param>
         /// <returns></returns>
-        private void ValidateGetUserActivity(CommonActivityRequestInput commonActivityRequestInput, string entityId)
+        private void ValidateGetUserActivity(PlayerCommonActivityRequestInput playerCommonActivityRequestInput, string entityId)
         {
-            if (commonActivityRequestInput == null)
-                throw new ArgumentNullException(nameof(commonActivityRequestInput));
+            if (playerCommonActivityRequestInput == null)
+                throw new ArgumentNullException(nameof(playerCommonActivityRequestInput));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -794,12 +794,12 @@ namespace BeamPlayerClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="playerCommonActivityRequestInput"></param>
         /// <param name="entityId"></param>
-        private void AfterGetUserActivityDefaultImplementation(IGetUserActivityApiResponse apiResponseLocalVar, CommonActivityRequestInput commonActivityRequestInput, string entityId)
+        private void AfterGetUserActivityDefaultImplementation(IGetUserActivityApiResponse apiResponseLocalVar, PlayerCommonActivityRequestInput playerCommonActivityRequestInput, string entityId)
         {
             bool suppressDefaultLog = false;
-            AfterGetUserActivity(ref suppressDefaultLog, apiResponseLocalVar, commonActivityRequestInput, entityId);
+            AfterGetUserActivity(ref suppressDefaultLog, apiResponseLocalVar, playerCommonActivityRequestInput, entityId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -809,9 +809,9 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="playerCommonActivityRequestInput"></param>
         /// <param name="entityId"></param>
-        partial void AfterGetUserActivity(ref bool suppressDefaultLog, IGetUserActivityApiResponse apiResponseLocalVar, CommonActivityRequestInput commonActivityRequestInput, string entityId);
+        partial void AfterGetUserActivity(ref bool suppressDefaultLog, IGetUserActivityApiResponse apiResponseLocalVar, PlayerCommonActivityRequestInput playerCommonActivityRequestInput, string entityId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -819,12 +819,12 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="playerCommonActivityRequestInput"></param>
         /// <param name="entityId"></param>
-        private void OnErrorGetUserActivityDefaultImplementation(Exception exception, string pathFormat, string path, CommonActivityRequestInput commonActivityRequestInput, string entityId)
+        private void OnErrorGetUserActivityDefaultImplementation(Exception exception, string pathFormat, string path, PlayerCommonActivityRequestInput playerCommonActivityRequestInput, string entityId)
         {
             bool suppressDefaultLog = false;
-            OnErrorGetUserActivity(ref suppressDefaultLog, exception, pathFormat, path, commonActivityRequestInput, entityId);
+            OnErrorGetUserActivity(ref suppressDefaultLog, exception, pathFormat, path, playerCommonActivityRequestInput, entityId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -836,22 +836,22 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="playerCommonActivityRequestInput"></param>
         /// <param name="entityId"></param>
-        partial void OnErrorGetUserActivity(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, CommonActivityRequestInput commonActivityRequestInput, string entityId);
+        partial void OnErrorGetUserActivity(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, PlayerCommonActivityRequestInput playerCommonActivityRequestInput, string entityId);
 
         /// <summary>
         /// Get user activity 
         /// </summary>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="playerCommonActivityRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetUserActivityApiResponse"/>&gt;</returns>
-        public async Task<IGetUserActivityApiResponse?> GetUserActivityOrDefaultAsync(CommonActivityRequestInput commonActivityRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetUserActivityApiResponse?> GetUserActivityOrDefaultAsync(PlayerCommonActivityRequestInput playerCommonActivityRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await GetUserActivityAsync(commonActivityRequestInput, entityId, cancellationToken).ConfigureAwait(false);
+                return await GetUserActivityAsync(playerCommonActivityRequestInput, entityId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -863,19 +863,19 @@ namespace BeamPlayerClient.Api
         /// Get user activity 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="commonActivityRequestInput"></param>
+        /// <param name="playerCommonActivityRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetUserActivityApiResponse"/>&gt;</returns>
-        public async Task<IGetUserActivityApiResponse> GetUserActivityAsync(CommonActivityRequestInput commonActivityRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetUserActivityApiResponse> GetUserActivityAsync(PlayerCommonActivityRequestInput playerCommonActivityRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateGetUserActivity(commonActivityRequestInput, entityId);
+                ValidateGetUserActivity(playerCommonActivityRequestInput, entityId);
 
-                FormatGetUserActivity(commonActivityRequestInput, ref entityId);
+                FormatGetUserActivity(playerCommonActivityRequestInput, ref entityId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -885,9 +885,9 @@ namespace BeamPlayerClient.Api
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/player/activity/users/{entityId}";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (commonActivityRequestInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (playerCommonActivityRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(commonActivityRequestInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(playerCommonActivityRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -926,7 +926,7 @@ namespace BeamPlayerClient.Api
 
                         GetUserActivityApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/player/activity/users/{entityId}", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterGetUserActivityDefaultImplementation(apiResponseLocalVar, commonActivityRequestInput, entityId);
+                        AfterGetUserActivityDefaultImplementation(apiResponseLocalVar, playerCommonActivityRequestInput, entityId);
 
                         Events.ExecuteOnGetUserActivity(apiResponseLocalVar);
 
@@ -940,7 +940,7 @@ namespace BeamPlayerClient.Api
             }
             catch(Exception e)
             {
-                OnErrorGetUserActivityDefaultImplementation(e, "/v1/player/activity/users/{entityId}", uriBuilderLocalVar.Path, commonActivityRequestInput, entityId);
+                OnErrorGetUserActivityDefaultImplementation(e, "/v1/player/activity/users/{entityId}", uriBuilderLocalVar.Path, playerCommonActivityRequestInput, entityId);
                 Events.ExecuteOnErrorGetUserActivity(e);
                 throw;
             }
@@ -984,11 +984,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.CommonActivityResponse? Ok()
+            public BeamPlayerClient.Model.PlayerCommonActivityResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.CommonActivityResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerCommonActivityResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -997,7 +997,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.CommonActivityResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerCommonActivityResponse? result)
             {
                 result = null;
 

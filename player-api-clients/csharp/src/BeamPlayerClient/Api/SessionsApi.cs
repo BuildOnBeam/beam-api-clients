@@ -28,12 +28,12 @@ namespace BeamPlayerClient.Api
     /// Represents a collection of functions to interact with the API endpoints
     /// This class is registered as transient.
     /// </summary>
-    public interface ISessionsApi : IApi
+    public interface IPlayerSessionsApi : IPlayerApi
     {
         /// <summary>
         /// The class containing the events
         /// </summary>
-        SessionsApiEvents Events { get; }
+        PlayerSessionsApiEvents Events { get; }
 
         /// <summary>
         /// 
@@ -42,11 +42,11 @@ namespace BeamPlayerClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="generateSessionUrlRequestInput"></param>
+        /// <param name="playerGenerateSessionUrlRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateSessionRequestApiResponse"/>&gt;</returns>
-        Task<ICreateSessionRequestApiResponse> CreateSessionRequestAsync(GenerateSessionUrlRequestInput generateSessionUrlRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICreateSessionRequestApiResponse> CreateSessionRequestAsync(PlayerGenerateSessionUrlRequestInput playerGenerateSessionUrlRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -54,11 +54,11 @@ namespace BeamPlayerClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="generateSessionUrlRequestInput"></param>
+        /// <param name="playerGenerateSessionUrlRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateSessionRequestApiResponse"/>?&gt;</returns>
-        Task<ICreateSessionRequestApiResponse?> CreateSessionRequestOrDefaultAsync(GenerateSessionUrlRequestInput generateSessionUrlRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICreateSessionRequestApiResponse?> CreateSessionRequestOrDefaultAsync(PlayerGenerateSessionUrlRequestInput playerGenerateSessionUrlRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -142,11 +142,11 @@ namespace BeamPlayerClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="revokeSessionRequestInput"></param>
+        /// <param name="playerRevokeSessionRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRevokeSessionApiResponse"/>&gt;</returns>
-        Task<IRevokeSessionApiResponse> RevokeSessionAsync(RevokeSessionRequestInput revokeSessionRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IRevokeSessionApiResponse> RevokeSessionAsync(PlayerRevokeSessionRequestInput playerRevokeSessionRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -154,17 +154,17 @@ namespace BeamPlayerClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="revokeSessionRequestInput"></param>
+        /// <param name="playerRevokeSessionRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRevokeSessionApiResponse"/>?&gt;</returns>
-        Task<IRevokeSessionApiResponse?> RevokeSessionOrDefaultAsync(RevokeSessionRequestInput revokeSessionRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IRevokeSessionApiResponse?> RevokeSessionOrDefaultAsync(PlayerRevokeSessionRequestInput playerRevokeSessionRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
     /// The <see cref="ICreateSessionRequestApiResponse"/>
     /// </summary>
-    public interface ICreateSessionRequestApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.GenerateSessionRequestResponse?>
+    public interface ICreateSessionRequestApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGenerateSessionRequestResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -176,7 +176,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="IGetActiveSessionApiResponse"/>
     /// </summary>
-    public interface IGetActiveSessionApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.GetActiveSessionResponse?>
+    public interface IGetActiveSessionApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetActiveSessionResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -188,7 +188,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="IGetAllActiveSessionsApiResponse"/>
     /// </summary>
-    public interface IGetAllActiveSessionsApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.GetActiveSessionsResponse?>
+    public interface IGetAllActiveSessionsApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetActiveSessionsResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -200,7 +200,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="IGetSessionRequestApiResponse"/>
     /// </summary>
-    public interface IGetSessionRequestApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.GetSessionRequestResponse?>
+    public interface IGetSessionRequestApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetSessionRequestResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -212,7 +212,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="IRevokeSessionApiResponse"/>
     /// </summary>
-    public interface IRevokeSessionApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.CommonOperationResponse?>
+    public interface IRevokeSessionApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerCommonOperationResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -224,7 +224,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public class SessionsApiEvents
+    public class PlayerSessionsApiEvents
     {
         /// <summary>
         /// The event raised after the server response
@@ -236,7 +236,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorCreateSessionRequest;
 
-        internal void ExecuteOnCreateSessionRequest(SessionsApi.CreateSessionRequestApiResponse apiResponse)
+        internal void ExecuteOnCreateSessionRequest(PlayerSessionsApi.CreateSessionRequestApiResponse apiResponse)
         {
             OnCreateSessionRequest?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -256,7 +256,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetActiveSession;
 
-        internal void ExecuteOnGetActiveSession(SessionsApi.GetActiveSessionApiResponse apiResponse)
+        internal void ExecuteOnGetActiveSession(PlayerSessionsApi.GetActiveSessionApiResponse apiResponse)
         {
             OnGetActiveSession?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -276,7 +276,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetAllActiveSessions;
 
-        internal void ExecuteOnGetAllActiveSessions(SessionsApi.GetAllActiveSessionsApiResponse apiResponse)
+        internal void ExecuteOnGetAllActiveSessions(PlayerSessionsApi.GetAllActiveSessionsApiResponse apiResponse)
         {
             OnGetAllActiveSessions?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -296,7 +296,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetSessionRequest;
 
-        internal void ExecuteOnGetSessionRequest(SessionsApi.GetSessionRequestApiResponse apiResponse)
+        internal void ExecuteOnGetSessionRequest(PlayerSessionsApi.GetSessionRequestApiResponse apiResponse)
         {
             OnGetSessionRequest?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -316,7 +316,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorRevokeSession;
 
-        internal void ExecuteOnRevokeSession(SessionsApi.RevokeSessionApiResponse apiResponse)
+        internal void ExecuteOnRevokeSession(PlayerSessionsApi.RevokeSessionApiResponse apiResponse)
         {
             OnRevokeSession?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -330,7 +330,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public sealed partial class SessionsApi : ISessionsApi
+    public sealed partial class PlayerSessionsApi : IPlayerSessionsApi
     {
         private JsonSerializerOptions _jsonSerializerOptions;
 
@@ -342,7 +342,7 @@ namespace BeamPlayerClient.Api
         /// <summary>
         /// The logger
         /// </summary>
-        public ILogger<SessionsApi> Logger { get; }
+        public ILogger<PlayerSessionsApi> Logger { get; }
 
         /// <summary>
         /// The HttpClient
@@ -352,7 +352,7 @@ namespace BeamPlayerClient.Api
         /// <summary>
         /// The class containing the events
         /// </summary>
-        public SessionsApiEvents Events { get; }
+        public PlayerSessionsApiEvents Events { get; }
 
         /// <summary>
         /// A token provider of type <see cref="ApiKeyProvider"/>
@@ -360,32 +360,32 @@ namespace BeamPlayerClient.Api
         public TokenProvider<ApiKeyToken> ApiKeyProvider { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SessionsApi"/> class.
+        /// Initializes a new instance of the <see cref="PlayerSessionsApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public SessionsApi(ILogger<SessionsApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, SessionsApiEvents sessionsApiEvents,
+        public PlayerSessionsApi(ILogger<PlayerSessionsApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, PlayerJsonSerializerOptionsProvider jsonSerializerOptionsProvider, PlayerSessionsApiEvents playerSessionsApiEvents,
             TokenProvider<ApiKeyToken> apiKeyProvider)
         {
             _jsonSerializerOptions = jsonSerializerOptionsProvider.Options;
             LoggerFactory = loggerFactory;
-            Logger = LoggerFactory.CreateLogger<SessionsApi>();
+            Logger = LoggerFactory.CreateLogger<PlayerSessionsApi>();
             HttpClient = httpClient;
-            Events = sessionsApiEvents;
+            Events = playerSessionsApiEvents;
             ApiKeyProvider = apiKeyProvider;
         }
 
-        partial void FormatCreateSessionRequest(GenerateSessionUrlRequestInput generateSessionUrlRequestInput, ref string entityId);
+        partial void FormatCreateSessionRequest(PlayerGenerateSessionUrlRequestInput playerGenerateSessionUrlRequestInput, ref string entityId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="generateSessionUrlRequestInput"></param>
+        /// <param name="playerGenerateSessionUrlRequestInput"></param>
         /// <param name="entityId"></param>
         /// <returns></returns>
-        private void ValidateCreateSessionRequest(GenerateSessionUrlRequestInput generateSessionUrlRequestInput, string entityId)
+        private void ValidateCreateSessionRequest(PlayerGenerateSessionUrlRequestInput playerGenerateSessionUrlRequestInput, string entityId)
         {
-            if (generateSessionUrlRequestInput == null)
-                throw new ArgumentNullException(nameof(generateSessionUrlRequestInput));
+            if (playerGenerateSessionUrlRequestInput == null)
+                throw new ArgumentNullException(nameof(playerGenerateSessionUrlRequestInput));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -395,12 +395,12 @@ namespace BeamPlayerClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="generateSessionUrlRequestInput"></param>
+        /// <param name="playerGenerateSessionUrlRequestInput"></param>
         /// <param name="entityId"></param>
-        private void AfterCreateSessionRequestDefaultImplementation(ICreateSessionRequestApiResponse apiResponseLocalVar, GenerateSessionUrlRequestInput generateSessionUrlRequestInput, string entityId)
+        private void AfterCreateSessionRequestDefaultImplementation(ICreateSessionRequestApiResponse apiResponseLocalVar, PlayerGenerateSessionUrlRequestInput playerGenerateSessionUrlRequestInput, string entityId)
         {
             bool suppressDefaultLog = false;
-            AfterCreateSessionRequest(ref suppressDefaultLog, apiResponseLocalVar, generateSessionUrlRequestInput, entityId);
+            AfterCreateSessionRequest(ref suppressDefaultLog, apiResponseLocalVar, playerGenerateSessionUrlRequestInput, entityId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -410,9 +410,9 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="generateSessionUrlRequestInput"></param>
+        /// <param name="playerGenerateSessionUrlRequestInput"></param>
         /// <param name="entityId"></param>
-        partial void AfterCreateSessionRequest(ref bool suppressDefaultLog, ICreateSessionRequestApiResponse apiResponseLocalVar, GenerateSessionUrlRequestInput generateSessionUrlRequestInput, string entityId);
+        partial void AfterCreateSessionRequest(ref bool suppressDefaultLog, ICreateSessionRequestApiResponse apiResponseLocalVar, PlayerGenerateSessionUrlRequestInput playerGenerateSessionUrlRequestInput, string entityId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -420,12 +420,12 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="generateSessionUrlRequestInput"></param>
+        /// <param name="playerGenerateSessionUrlRequestInput"></param>
         /// <param name="entityId"></param>
-        private void OnErrorCreateSessionRequestDefaultImplementation(Exception exception, string pathFormat, string path, GenerateSessionUrlRequestInput generateSessionUrlRequestInput, string entityId)
+        private void OnErrorCreateSessionRequestDefaultImplementation(Exception exception, string pathFormat, string path, PlayerGenerateSessionUrlRequestInput playerGenerateSessionUrlRequestInput, string entityId)
         {
             bool suppressDefaultLog = false;
-            OnErrorCreateSessionRequest(ref suppressDefaultLog, exception, pathFormat, path, generateSessionUrlRequestInput, entityId);
+            OnErrorCreateSessionRequest(ref suppressDefaultLog, exception, pathFormat, path, playerGenerateSessionUrlRequestInput, entityId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -437,22 +437,22 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="generateSessionUrlRequestInput"></param>
+        /// <param name="playerGenerateSessionUrlRequestInput"></param>
         /// <param name="entityId"></param>
-        partial void OnErrorCreateSessionRequest(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, GenerateSessionUrlRequestInput generateSessionUrlRequestInput, string entityId);
+        partial void OnErrorCreateSessionRequest(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, PlayerGenerateSessionUrlRequestInput playerGenerateSessionUrlRequestInput, string entityId);
 
         /// <summary>
         ///  
         /// </summary>
-        /// <param name="generateSessionUrlRequestInput"></param>
+        /// <param name="playerGenerateSessionUrlRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateSessionRequestApiResponse"/>&gt;</returns>
-        public async Task<ICreateSessionRequestApiResponse?> CreateSessionRequestOrDefaultAsync(GenerateSessionUrlRequestInput generateSessionUrlRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICreateSessionRequestApiResponse?> CreateSessionRequestOrDefaultAsync(PlayerGenerateSessionUrlRequestInput playerGenerateSessionUrlRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await CreateSessionRequestAsync(generateSessionUrlRequestInput, entityId, cancellationToken).ConfigureAwait(false);
+                return await CreateSessionRequestAsync(playerGenerateSessionUrlRequestInput, entityId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -464,19 +464,19 @@ namespace BeamPlayerClient.Api
         ///  
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="generateSessionUrlRequestInput"></param>
+        /// <param name="playerGenerateSessionUrlRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateSessionRequestApiResponse"/>&gt;</returns>
-        public async Task<ICreateSessionRequestApiResponse> CreateSessionRequestAsync(GenerateSessionUrlRequestInput generateSessionUrlRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICreateSessionRequestApiResponse> CreateSessionRequestAsync(PlayerGenerateSessionUrlRequestInput playerGenerateSessionUrlRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateCreateSessionRequest(generateSessionUrlRequestInput, entityId);
+                ValidateCreateSessionRequest(playerGenerateSessionUrlRequestInput, entityId);
 
-                FormatCreateSessionRequest(generateSessionUrlRequestInput, ref entityId);
+                FormatCreateSessionRequest(playerGenerateSessionUrlRequestInput, ref entityId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -486,9 +486,9 @@ namespace BeamPlayerClient.Api
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/player/sessions/users/{entityId}/request";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (generateSessionUrlRequestInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (playerGenerateSessionUrlRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(generateSessionUrlRequestInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(playerGenerateSessionUrlRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -527,7 +527,7 @@ namespace BeamPlayerClient.Api
 
                         CreateSessionRequestApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/player/sessions/users/{entityId}/request", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterCreateSessionRequestDefaultImplementation(apiResponseLocalVar, generateSessionUrlRequestInput, entityId);
+                        AfterCreateSessionRequestDefaultImplementation(apiResponseLocalVar, playerGenerateSessionUrlRequestInput, entityId);
 
                         Events.ExecuteOnCreateSessionRequest(apiResponseLocalVar);
 
@@ -541,7 +541,7 @@ namespace BeamPlayerClient.Api
             }
             catch(Exception e)
             {
-                OnErrorCreateSessionRequestDefaultImplementation(e, "/v1/player/sessions/users/{entityId}/request", uriBuilderLocalVar.Path, generateSessionUrlRequestInput, entityId);
+                OnErrorCreateSessionRequestDefaultImplementation(e, "/v1/player/sessions/users/{entityId}/request", uriBuilderLocalVar.Path, playerGenerateSessionUrlRequestInput, entityId);
                 Events.ExecuteOnErrorCreateSessionRequest(e);
                 throw;
             }
@@ -585,11 +585,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.GenerateSessionRequestResponse? Ok()
+            public BeamPlayerClient.Model.PlayerGenerateSessionRequestResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.GenerateSessionRequestResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerGenerateSessionRequestResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -598,7 +598,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.GenerateSessionRequestResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerGenerateSessionRequestResponse? result)
             {
                 result = null;
 
@@ -836,11 +836,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.GetActiveSessionResponse? Ok()
+            public BeamPlayerClient.Model.PlayerGetActiveSessionResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.GetActiveSessionResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerGetActiveSessionResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -849,7 +849,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.GetActiveSessionResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerGetActiveSessionResponse? result)
             {
                 result = null;
 
@@ -1076,11 +1076,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.GetActiveSessionsResponse? Ok()
+            public BeamPlayerClient.Model.PlayerGetActiveSessionsResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.GetActiveSessionsResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerGetActiveSessionsResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1089,7 +1089,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.GetActiveSessionsResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerGetActiveSessionsResponse? result)
             {
                 result = null;
 
@@ -1303,11 +1303,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.GetSessionRequestResponse? Ok()
+            public BeamPlayerClient.Model.PlayerGetSessionRequestResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.GetSessionRequestResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerGetSessionRequestResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1316,7 +1316,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.GetSessionRequestResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerGetSessionRequestResponse? result)
             {
                 result = null;
 
@@ -1342,18 +1342,18 @@ namespace BeamPlayerClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatRevokeSession(RevokeSessionRequestInput revokeSessionRequestInput, ref string entityId);
+        partial void FormatRevokeSession(PlayerRevokeSessionRequestInput playerRevokeSessionRequestInput, ref string entityId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="revokeSessionRequestInput"></param>
+        /// <param name="playerRevokeSessionRequestInput"></param>
         /// <param name="entityId"></param>
         /// <returns></returns>
-        private void ValidateRevokeSession(RevokeSessionRequestInput revokeSessionRequestInput, string entityId)
+        private void ValidateRevokeSession(PlayerRevokeSessionRequestInput playerRevokeSessionRequestInput, string entityId)
         {
-            if (revokeSessionRequestInput == null)
-                throw new ArgumentNullException(nameof(revokeSessionRequestInput));
+            if (playerRevokeSessionRequestInput == null)
+                throw new ArgumentNullException(nameof(playerRevokeSessionRequestInput));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -1363,12 +1363,12 @@ namespace BeamPlayerClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="revokeSessionRequestInput"></param>
+        /// <param name="playerRevokeSessionRequestInput"></param>
         /// <param name="entityId"></param>
-        private void AfterRevokeSessionDefaultImplementation(IRevokeSessionApiResponse apiResponseLocalVar, RevokeSessionRequestInput revokeSessionRequestInput, string entityId)
+        private void AfterRevokeSessionDefaultImplementation(IRevokeSessionApiResponse apiResponseLocalVar, PlayerRevokeSessionRequestInput playerRevokeSessionRequestInput, string entityId)
         {
             bool suppressDefaultLog = false;
-            AfterRevokeSession(ref suppressDefaultLog, apiResponseLocalVar, revokeSessionRequestInput, entityId);
+            AfterRevokeSession(ref suppressDefaultLog, apiResponseLocalVar, playerRevokeSessionRequestInput, entityId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -1378,9 +1378,9 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="revokeSessionRequestInput"></param>
+        /// <param name="playerRevokeSessionRequestInput"></param>
         /// <param name="entityId"></param>
-        partial void AfterRevokeSession(ref bool suppressDefaultLog, IRevokeSessionApiResponse apiResponseLocalVar, RevokeSessionRequestInput revokeSessionRequestInput, string entityId);
+        partial void AfterRevokeSession(ref bool suppressDefaultLog, IRevokeSessionApiResponse apiResponseLocalVar, PlayerRevokeSessionRequestInput playerRevokeSessionRequestInput, string entityId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -1388,12 +1388,12 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="revokeSessionRequestInput"></param>
+        /// <param name="playerRevokeSessionRequestInput"></param>
         /// <param name="entityId"></param>
-        private void OnErrorRevokeSessionDefaultImplementation(Exception exception, string pathFormat, string path, RevokeSessionRequestInput revokeSessionRequestInput, string entityId)
+        private void OnErrorRevokeSessionDefaultImplementation(Exception exception, string pathFormat, string path, PlayerRevokeSessionRequestInput playerRevokeSessionRequestInput, string entityId)
         {
             bool suppressDefaultLog = false;
-            OnErrorRevokeSession(ref suppressDefaultLog, exception, pathFormat, path, revokeSessionRequestInput, entityId);
+            OnErrorRevokeSession(ref suppressDefaultLog, exception, pathFormat, path, playerRevokeSessionRequestInput, entityId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -1405,22 +1405,22 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="revokeSessionRequestInput"></param>
+        /// <param name="playerRevokeSessionRequestInput"></param>
         /// <param name="entityId"></param>
-        partial void OnErrorRevokeSession(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, RevokeSessionRequestInput revokeSessionRequestInput, string entityId);
+        partial void OnErrorRevokeSession(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, PlayerRevokeSessionRequestInput playerRevokeSessionRequestInput, string entityId);
 
         /// <summary>
         ///  
         /// </summary>
-        /// <param name="revokeSessionRequestInput"></param>
+        /// <param name="playerRevokeSessionRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRevokeSessionApiResponse"/>&gt;</returns>
-        public async Task<IRevokeSessionApiResponse?> RevokeSessionOrDefaultAsync(RevokeSessionRequestInput revokeSessionRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IRevokeSessionApiResponse?> RevokeSessionOrDefaultAsync(PlayerRevokeSessionRequestInput playerRevokeSessionRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await RevokeSessionAsync(revokeSessionRequestInput, entityId, cancellationToken).ConfigureAwait(false);
+                return await RevokeSessionAsync(playerRevokeSessionRequestInput, entityId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -1432,19 +1432,19 @@ namespace BeamPlayerClient.Api
         ///  
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="revokeSessionRequestInput"></param>
+        /// <param name="playerRevokeSessionRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRevokeSessionApiResponse"/>&gt;</returns>
-        public async Task<IRevokeSessionApiResponse> RevokeSessionAsync(RevokeSessionRequestInput revokeSessionRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IRevokeSessionApiResponse> RevokeSessionAsync(PlayerRevokeSessionRequestInput playerRevokeSessionRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateRevokeSession(revokeSessionRequestInput, entityId);
+                ValidateRevokeSession(playerRevokeSessionRequestInput, entityId);
 
-                FormatRevokeSession(revokeSessionRequestInput, ref entityId);
+                FormatRevokeSession(playerRevokeSessionRequestInput, ref entityId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -1454,9 +1454,9 @@ namespace BeamPlayerClient.Api
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/player/sessions/users/{entityId}/revoke";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (revokeSessionRequestInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (playerRevokeSessionRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(revokeSessionRequestInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(playerRevokeSessionRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -1495,7 +1495,7 @@ namespace BeamPlayerClient.Api
 
                         RevokeSessionApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/player/sessions/users/{entityId}/revoke", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterRevokeSessionDefaultImplementation(apiResponseLocalVar, revokeSessionRequestInput, entityId);
+                        AfterRevokeSessionDefaultImplementation(apiResponseLocalVar, playerRevokeSessionRequestInput, entityId);
 
                         Events.ExecuteOnRevokeSession(apiResponseLocalVar);
 
@@ -1509,7 +1509,7 @@ namespace BeamPlayerClient.Api
             }
             catch(Exception e)
             {
-                OnErrorRevokeSessionDefaultImplementation(e, "/v1/player/sessions/users/{entityId}/revoke", uriBuilderLocalVar.Path, revokeSessionRequestInput, entityId);
+                OnErrorRevokeSessionDefaultImplementation(e, "/v1/player/sessions/users/{entityId}/revoke", uriBuilderLocalVar.Path, playerRevokeSessionRequestInput, entityId);
                 Events.ExecuteOnErrorRevokeSession(e);
                 throw;
             }
@@ -1553,11 +1553,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.CommonOperationResponse? Ok()
+            public BeamPlayerClient.Model.PlayerCommonOperationResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.CommonOperationResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerCommonOperationResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1566,7 +1566,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.CommonOperationResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerCommonOperationResponse? result)
             {
                 result = null;
 

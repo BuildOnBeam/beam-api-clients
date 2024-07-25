@@ -4,11 +4,11 @@
     "ignore": [
       "pnpm-lock.yaml",
       "./automation-api-clients/typescript-node/src/generated/core/request.ts",
+      "./player-api-clients/typescript-node/src/generated/core/request.ts",
       "./automation-api-clients/typescript-node/src/generated/core/NodeHttpRequest.ts",
-      "./automation-api-clients/csharp/src/Beam/bin/*",
-      "./automation-api-clients/csharp/src/Beam/obj/*",
-      "./automation-api-clients/csharp/src/Beam.Test/bin/*",
-      "./automation-api-clients/csharp/src/Beam.Test/obj/*"
+      "./player-api-clients/typescript-node/src/generated/core/NodeHttpRequest.ts",
+      "./automation-api-clients/csharp/*",
+      "./player-api-clients/csharp/*"
     ]
   },
   "formatter": {

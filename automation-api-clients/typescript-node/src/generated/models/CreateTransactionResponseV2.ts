@@ -22,7 +22,7 @@ export type CreateTransactionResponseV2 = {
    * The transaction object exists if you created the transaction deterministically and contains information about the on-chain transaction
    */
   transaction?: {
-    createdAt: any;
+    createdAt: string;
     blockNumber?: number;
     hash?: string;
     gasUsed?: string;

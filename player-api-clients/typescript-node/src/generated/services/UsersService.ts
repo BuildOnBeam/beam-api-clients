@@ -19,8 +19,8 @@ export class UsersService {
    * @throws ApiError
    */
   public getAllUsers(
-    limit?: number,
-    offset?: number,
+    limit = 10,
+    offset = 0,
   ): CancelablePromise<GetAllUsersResponse> {
     return this.httpRequest.request({
       method: 'GET',

@@ -12,6 +12,7 @@ export type CreateAssetOfferRequestInput = {
   endTime?: string;
   currency?: CreateAssetOfferRequestInput.currency;
   chainId?: number;
+  operationProcessing?: CreateAssetOfferRequestInput.operationProcessing;
   operationId?: string | null;
 };
 
@@ -20,5 +21,10 @@ export namespace CreateAssetOfferRequestInput {
     WBEAM = 'WBEAM',
     USDC = 'USDC',
     USDT = 'USDT',
+  }
+
+  export enum operationProcessing {
+    SIGN_ONLY = 'SignOnly',
+    EXECUTE = 'Execute',
   }
 }

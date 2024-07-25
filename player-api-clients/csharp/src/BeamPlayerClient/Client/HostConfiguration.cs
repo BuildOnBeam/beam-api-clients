@@ -24,7 +24,7 @@ namespace BeamPlayerClient.Client
     /// <summary>
     /// Provides hosting configuration for BeamPlayerClient
     /// </summary>
-    public class HostConfiguration
+    public class PlayerHostConfiguration
     {
         private readonly IServiceCollection _services;
         private readonly JsonSerializerOptions _jsonOptions = new JsonSerializerOptions();
@@ -32,130 +32,130 @@ namespace BeamPlayerClient.Client
         internal bool HttpClientsAdded { get; private set; }
 
         /// <summary>
-        /// Instantiates the class 
+        /// Instantiates the class
         /// </summary>
         /// <param name="services"></param>
-        public HostConfiguration(IServiceCollection services)
+        public PlayerHostConfiguration(IServiceCollection services)
         {
             _services = services;
             _jsonOptions.Converters.Add(new JsonStringEnumConverter());
             _jsonOptions.Converters.Add(new DateTimeJsonConverter());
             _jsonOptions.Converters.Add(new DateTimeNullableJsonConverter());
-            _jsonOptions.Converters.Add(new AcceptAssetOfferRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new BuyAssetRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new CancelAssetListingRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new CancelAssetOfferRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new Check200ResponseJsonConverter());
             _jsonOptions.Converters.Add(new Check200ResponseInfoValueJsonConverter());
             _jsonOptions.Converters.Add(new Check503ResponseJsonConverter());
-            _jsonOptions.Converters.Add(new CommonActivityRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new CommonActivityResponseJsonConverter());
-            _jsonOptions.Converters.Add(new CommonActivityResponseDataInnerJsonConverter());
-            _jsonOptions.Converters.Add(new CommonActivityResponseDataInnerAssetJsonConverter());
-            _jsonOptions.Converters.Add(new CommonActivityResponseDataInnerContractJsonConverter());
-            _jsonOptions.Converters.Add(new CommonActivityResponseDataInnerOrderJsonConverter());
-            _jsonOptions.Converters.Add(new CommonActivityResponseDataInnerTransactionJsonConverter());
-            _jsonOptions.Converters.Add(new CommonOperationResponseJsonConverter());
-            _jsonOptions.Converters.Add(new CommonOperationResponseTransactionsInnerJsonConverter());
-            _jsonOptions.Converters.Add(new CommonStatsRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new CommonStatsResponseJsonConverter());
-            _jsonOptions.Converters.Add(new CommonStatsResponseCountJsonConverter());
-            _jsonOptions.Converters.Add(new ConfirmOperationRequestJsonConverter());
-            _jsonOptions.Converters.Add(new ConfirmOperationRequestTransactionsInnerJsonConverter());
-            _jsonOptions.Converters.Add(new ConvertTokenRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new CreateAssetOfferRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new CreateConnectionRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new CreateConnectionRequestResponseJsonConverter());
-            _jsonOptions.Converters.Add(new CreateOperationRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new CreateOperationRequestInputTransactionsInnerJsonConverter());
-            _jsonOptions.Converters.Add(new CreateTransactionRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new CreateTransactionRequestInputInteractionsInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GenerateSessionRequestResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GenerateSessionUrlRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new GetActiveSessionResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetActiveSessionsResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetActiveSessionsResponseSessionsInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetAllUsersResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetAllUsersResponseDataInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetAllUsersResponseDataInnerWalletsInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetAssetListingsResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetAssetListingsResponseDataInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetAssetListingsResponseDataInnerPriceJsonConverter());
-            _jsonOptions.Converters.Add(new GetAssetListingsResponseDataInnerPriceAmountJsonConverter());
-            _jsonOptions.Converters.Add(new GetAssetListingsResponseDataInnerPriceCurrencyJsonConverter());
-            _jsonOptions.Converters.Add(new GetAssetResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetAssetResponseOwnersInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetAssetsForContractBodyInputJsonConverter());
-            _jsonOptions.Converters.Add(new GetAssetsForContractBodyInputAttributesInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetAssetsForContractResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetAssetsForContractResponseDataInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetAssetsForUserBodyInputJsonConverter());
-            _jsonOptions.Converters.Add(new GetAssetsForUserResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetAssetsForUserResponseDataInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetAssetsForUserResponseDataInnerAttributesInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetAttributesResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetAttributesResponseDataInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetAttributesResponseDataInnerValuesInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetChainCurrenciesResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetChainCurrenciesResponseDataInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetConnectionRequestResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetListedAssetsBodyInputJsonConverter());
-            _jsonOptions.Converters.Add(new GetOwnerAssetsBodyInputJsonConverter());
-            _jsonOptions.Converters.Add(new GetOwnerAssetsResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetOwnersResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetOwnersResponseDataInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetOwnersResponsePaginationJsonConverter());
-            _jsonOptions.Converters.Add(new GetQuoteResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetSessionRequestResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetTransactionResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetTransactionResponsePolicyJsonConverter());
-            _jsonOptions.Converters.Add(new GetTransactionResponseUserJsonConverter());
-            _jsonOptions.Converters.Add(new GetTransactionResponseUserEntitiesInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetTransactionResponseUserWalletJsonConverter());
-            _jsonOptions.Converters.Add(new GetTransactionsResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetTransactionsResponseDataInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetTransactionsResponseDataInnerIntentJsonConverter());
-            _jsonOptions.Converters.Add(new GetTransactionsResponseDataInnerIntentInteractionsInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetTransactionsResponseDataInnerTransactionJsonConverter());
-            _jsonOptions.Converters.Add(new GetTransactionsResponseDataInnerTransactionLogsInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetUserCurrenciesResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetUserCurrenciesResponseDataInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetUserNativeCurrencyResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetUserNativeCurrencyResponseNativeTokenBalanceJsonConverter());
-            _jsonOptions.Converters.Add(new GetUserResponseJsonConverter());
-            _jsonOptions.Converters.Add(new RefreshContractRequestBodyJsonConverter());
-            _jsonOptions.Converters.Add(new RefreshTokenRequestBodyJsonConverter());
-            _jsonOptions.Converters.Add(new RevokeSessionRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new SellAssetRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new TransferAssetRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new TransferAssetRequestInputAssetsInnerJsonConverter());
-            _jsonOptions.Converters.Add(new TransferNativeTokenRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new TransferTokenRequestInputJsonConverter());
-            JsonSerializerOptionsProvider jsonSerializerOptionsProvider = new(_jsonOptions);
+            _jsonOptions.Converters.Add(new PlayerAcceptAssetOfferRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerBuyAssetRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerCancelAssetListingRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerCancelAssetOfferRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerCommonActivityRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerCommonActivityResponseJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerCommonActivityResponseDataInnerJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerCommonActivityResponseDataInnerAssetJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerCommonActivityResponseDataInnerContractJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerCommonActivityResponseDataInnerOrderJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerCommonActivityResponseDataInnerTransactionJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerCommonOperationResponseJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerCommonOperationResponseTransactionsInnerJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerCommonStatsRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerCommonStatsResponseJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerCommonStatsResponseCountJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerConfirmOperationRequestJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerConfirmOperationRequestTransactionsInnerJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerConvertTokenRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerCreateAssetOfferRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerCreateConnectionRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerCreateConnectionRequestResponseJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerCreateOperationRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerCreateOperationRequestInputTransactionsInnerJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerCreateTransactionRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerCreateTransactionRequestInputInteractionsInnerJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGenerateSessionRequestResponseJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGenerateSessionUrlRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetActiveSessionResponseJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetActiveSessionsResponseJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetActiveSessionsResponseSessionsInnerJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetAllUsersResponseJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetAllUsersResponseDataInnerJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetAllUsersResponseDataInnerWalletsInnerJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetAssetListingsResponseJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetAssetListingsResponseDataInnerJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetAssetListingsResponseDataInnerPriceJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetAssetListingsResponseDataInnerPriceAmountJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetAssetListingsResponseDataInnerPriceCurrencyJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetAssetResponseJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetAssetResponseOwnersInnerJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetAssetsForContractBodyInputJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetAssetsForContractBodyInputAttributesInnerJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetAssetsForContractResponseJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetAssetsForContractResponseDataInnerJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetAssetsForUserBodyInputJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetAssetsForUserResponseJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetAssetsForUserResponseDataInnerJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetAssetsForUserResponseDataInnerAttributesInnerJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetAttributesResponseJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetAttributesResponseDataInnerJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetAttributesResponseDataInnerValuesInnerJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetChainCurrenciesResponseJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetChainCurrenciesResponseDataInnerJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetConnectionRequestResponseJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetListedAssetsBodyInputJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetOwnerAssetsBodyInputJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetOwnerAssetsResponseJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetOwnersResponseJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetOwnersResponseDataInnerJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetOwnersResponsePaginationJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetQuoteResponseJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetSessionRequestResponseJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetTransactionResponseJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetTransactionResponsePolicyJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetTransactionResponseUserJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetTransactionResponseUserEntitiesInnerJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetTransactionResponseUserWalletJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetTransactionsResponseJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetTransactionsResponseDataInnerJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetTransactionsResponseDataInnerIntentJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetTransactionsResponseDataInnerIntentInteractionsInnerJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetTransactionsResponseDataInnerTransactionJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetTransactionsResponseDataInnerTransactionLogsInnerJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetUserCurrenciesResponseJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetUserCurrenciesResponseDataInnerJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetUserNativeCurrencyResponseJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetUserNativeCurrencyResponseNativeTokenBalanceJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetUserResponseJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerRefreshContractRequestBodyJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerRefreshTokenRequestBodyJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerRevokeSessionRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerSellAssetRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerTransferAssetRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerTransferAssetRequestInputAssetsInnerJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerTransferNativeTokenRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerTransferTokenRequestInputJsonConverter());
+            PlayerJsonSerializerOptionsProvider jsonSerializerOptionsProvider = new(_jsonOptions);
             _services.AddSingleton(jsonSerializerOptionsProvider);
             _services.AddSingleton<IApiFactory, ApiFactory>();
-            _services.AddSingleton<ActivityApiEvents>();
-            _services.AddTransient<IActivityApi, ActivityApi>();
-            _services.AddSingleton<AssetsApiEvents>();
-            _services.AddTransient<IAssetsApi, AssetsApi>();
-            _services.AddSingleton<ConnectorApiEvents>();
-            _services.AddTransient<IConnectorApi, ConnectorApi>();
-            _services.AddSingleton<ExchangeApiEvents>();
-            _services.AddTransient<IExchangeApi, ExchangeApi>();
-            _services.AddSingleton<HealthApiEvents>();
-            _services.AddTransient<IHealthApi, HealthApi>();
-            _services.AddSingleton<MarketplaceApiEvents>();
-            _services.AddTransient<IMarketplaceApi, MarketplaceApi>();
-            _services.AddSingleton<OperationApiEvents>();
-            _services.AddTransient<IOperationApi, OperationApi>();
-            _services.AddSingleton<SessionsApiEvents>();
-            _services.AddTransient<ISessionsApi, SessionsApi>();
-            _services.AddSingleton<StatsApiEvents>();
-            _services.AddTransient<IStatsApi, StatsApi>();
-            _services.AddSingleton<TransactionsApiEvents>();
-            _services.AddTransient<ITransactionsApi, TransactionsApi>();
-            _services.AddSingleton<UsersApiEvents>();
-            _services.AddTransient<IUsersApi, UsersApi>();
+            _services.AddSingleton<PlayerActivityApiEvents>();
+            _services.AddTransient<IPlayerActivityApi, PlayerActivityApi>();
+            _services.AddSingleton<PlayerAssetsApiEvents>();
+            _services.AddTransient<IPlayerAssetsApi, PlayerAssetsApi>();
+            _services.AddSingleton<PlayerConnectorApiEvents>();
+            _services.AddTransient<IPlayerConnectorApi, PlayerConnectorApi>();
+            _services.AddSingleton<PlayerExchangeApiEvents>();
+            _services.AddTransient<IPlayerExchangeApi, PlayerExchangeApi>();
+            _services.AddSingleton<PlayerHealthApiEvents>();
+            _services.AddTransient<IPlayerHealthApi, PlayerHealthApi>();
+            _services.AddSingleton<PlayerMarketplaceApiEvents>();
+            _services.AddTransient<IPlayerMarketplaceApi, PlayerMarketplaceApi>();
+            _services.AddSingleton<PlayerOperationApiEvents>();
+            _services.AddTransient<IPlayerOperationApi, PlayerOperationApi>();
+            _services.AddSingleton<PlayerSessionsApiEvents>();
+            _services.AddTransient<IPlayerSessionsApi, PlayerSessionsApi>();
+            _services.AddSingleton<PlayerStatsApiEvents>();
+            _services.AddTransient<IPlayerStatsApi, PlayerStatsApi>();
+            _services.AddSingleton<PlayerTransactionsApiEvents>();
+            _services.AddTransient<IPlayerTransactionsApi, PlayerTransactionsApi>();
+            _services.AddSingleton<PlayerUsersApiEvents>();
+            _services.AddTransient<IPlayerUsersApi, PlayerUsersApi>();
         }
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace BeamPlayerClient.Client
         /// <param name="client"></param>
         /// <param name="builder"></param>
         /// <returns></returns>
-        public HostConfiguration AddBeamPlayerApiHttpClients
+        public PlayerHostConfiguration AddBeamPlayerApiHttpClients
         (
             Action<HttpClient>? client = null, Action<IHttpClientBuilder>? builder = null)
         {
@@ -173,17 +173,17 @@ namespace BeamPlayerClient.Client
 
             List<IHttpClientBuilder> builders = new List<IHttpClientBuilder>();
 
-            builders.Add(_services.AddHttpClient<IActivityApi, ActivityApi>(client));
-            builders.Add(_services.AddHttpClient<IAssetsApi, AssetsApi>(client));
-            builders.Add(_services.AddHttpClient<IConnectorApi, ConnectorApi>(client));
-            builders.Add(_services.AddHttpClient<IExchangeApi, ExchangeApi>(client));
-            builders.Add(_services.AddHttpClient<IHealthApi, HealthApi>(client));
-            builders.Add(_services.AddHttpClient<IMarketplaceApi, MarketplaceApi>(client));
-            builders.Add(_services.AddHttpClient<IOperationApi, OperationApi>(client));
-            builders.Add(_services.AddHttpClient<ISessionsApi, SessionsApi>(client));
-            builders.Add(_services.AddHttpClient<IStatsApi, StatsApi>(client));
-            builders.Add(_services.AddHttpClient<ITransactionsApi, TransactionsApi>(client));
-            builders.Add(_services.AddHttpClient<IUsersApi, UsersApi>(client));
+            builders.Add(_services.AddHttpClient<IPlayerActivityApi, PlayerActivityApi>(client));
+            builders.Add(_services.AddHttpClient<IPlayerAssetsApi, PlayerAssetsApi>(client));
+            builders.Add(_services.AddHttpClient<IPlayerConnectorApi, PlayerConnectorApi>(client));
+            builders.Add(_services.AddHttpClient<IPlayerExchangeApi, PlayerExchangeApi>(client));
+            builders.Add(_services.AddHttpClient<IPlayerHealthApi, PlayerHealthApi>(client));
+            builders.Add(_services.AddHttpClient<IPlayerMarketplaceApi, PlayerMarketplaceApi>(client));
+            builders.Add(_services.AddHttpClient<IPlayerOperationApi, PlayerOperationApi>(client));
+            builders.Add(_services.AddHttpClient<IPlayerSessionsApi, PlayerSessionsApi>(client));
+            builders.Add(_services.AddHttpClient<IPlayerStatsApi, PlayerStatsApi>(client));
+            builders.Add(_services.AddHttpClient<IPlayerTransactionsApi, PlayerTransactionsApi>(client));
+            builders.Add(_services.AddHttpClient<IPlayerUsersApi, PlayerUsersApi>(client));
             
             if (builder != null)
                 foreach (IHttpClientBuilder instance in builders)
@@ -199,7 +199,7 @@ namespace BeamPlayerClient.Client
         /// </summary>
         /// <param name="options"></param>
         /// <returns></returns>
-        public HostConfiguration ConfigureJsonOptions(Action<JsonSerializerOptions> options)
+        public PlayerHostConfiguration ConfigureJsonOptions(Action<JsonSerializerOptions> options)
         {
             options(_jsonOptions);
 
@@ -212,7 +212,7 @@ namespace BeamPlayerClient.Client
         /// <typeparam name="TTokenBase"></typeparam>
         /// <param name="token"></param>
         /// <returns></returns>
-        public HostConfiguration AddTokens<TTokenBase>(TTokenBase token) where TTokenBase : TokenBase
+        public PlayerHostConfiguration AddTokens<TTokenBase>(TTokenBase token) where TTokenBase : TokenBase
         {
             return AddTokens(new TTokenBase[]{ token });
         }
@@ -223,7 +223,7 @@ namespace BeamPlayerClient.Client
         /// <typeparam name="TTokenBase"></typeparam>
         /// <param name="tokens"></param>
         /// <returns></returns>
-        public HostConfiguration AddTokens<TTokenBase>(IEnumerable<TTokenBase> tokens) where TTokenBase : TokenBase
+        public PlayerHostConfiguration AddTokens<TTokenBase>(IEnumerable<TTokenBase> tokens) where TTokenBase : TokenBase
         {
             TokenContainer<TTokenBase> container = new TokenContainer<TTokenBase>(tokens);
             _services.AddSingleton(services => container);
@@ -237,7 +237,7 @@ namespace BeamPlayerClient.Client
         /// <typeparam name="TTokenProvider"></typeparam>
         /// <typeparam name="TTokenBase"></typeparam>
         /// <returns></returns>
-        public HostConfiguration UseProvider<TTokenProvider, TTokenBase>() 
+        public PlayerHostConfiguration UseProvider<TTokenProvider, TTokenBase>()
             where TTokenProvider : TokenProvider<TTokenBase>
             where TTokenBase : TokenBase
         {

@@ -9,8 +9,8 @@ export type GetUserResponse = {
   gameId: string;
   wallets: Array<{
     id: string;
-    createdAt: any;
-    updatedAt: any;
+    createdAt: string;
+    updatedAt: string;
     externalId: string;
     address: string;
     chainId: number;

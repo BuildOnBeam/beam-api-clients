@@ -28,12 +28,12 @@ namespace BeamAutomationClient.Api
     /// Represents a collection of functions to interact with the API endpoints
     /// This class is registered as transient.
     /// </summary>
-    public interface ITradingApi : IApi
+    public interface IAutomationTradingApi : IAutomationApi
     {
         /// <summary>
         /// The class containing the events
         /// </summary>
-        TradingApiEvents Events { get; }
+        AutomationTradingApiEvents Events { get; }
 
         /// <summary>
         /// 
@@ -42,10 +42,10 @@ namespace BeamAutomationClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="tradeTokensRequestInput"></param>
+        /// <param name="automationTradeTokensRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ITradeAssetsApiResponse"/>&gt;</returns>
-        Task<ITradeAssetsApiResponse> TradeAssetsAsync(TradeTokensRequestInput tradeTokensRequestInput, System.Threading.CancellationToken cancellationToken = default);
+        Task<ITradeAssetsApiResponse> TradeAssetsAsync(AutomationTradeTokensRequestInput automationTradeTokensRequestInput, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -53,16 +53,16 @@ namespace BeamAutomationClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="tradeTokensRequestInput"></param>
+        /// <param name="automationTradeTokensRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ITradeAssetsApiResponse"/>?&gt;</returns>
-        Task<ITradeAssetsApiResponse?> TradeAssetsOrDefaultAsync(TradeTokensRequestInput tradeTokensRequestInput, System.Threading.CancellationToken cancellationToken = default);
+        Task<ITradeAssetsApiResponse?> TradeAssetsOrDefaultAsync(AutomationTradeTokensRequestInput automationTradeTokensRequestInput, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
     /// The <see cref="ITradeAssetsApiResponse"/>
     /// </summary>
-    public interface ITradeAssetsApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.TradeTokensResponse?>
+    public interface ITradeAssetsApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationTradeTokensResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -74,7 +74,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public class TradingApiEvents
+    public class AutomationTradingApiEvents
     {
         /// <summary>
         /// The event raised after the server response
@@ -86,7 +86,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorTradeAssets;
 
-        internal void ExecuteOnTradeAssets(TradingApi.TradeAssetsApiResponse apiResponse)
+        internal void ExecuteOnTradeAssets(AutomationTradingApi.TradeAssetsApiResponse apiResponse)
         {
             OnTradeAssets?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -100,7 +100,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public sealed partial class TradingApi : ITradingApi
+    public sealed partial class AutomationTradingApi : IAutomationTradingApi
     {
         private JsonSerializerOptions _jsonSerializerOptions;
 
@@ -112,7 +112,7 @@ namespace BeamAutomationClient.Api
         /// <summary>
         /// The logger
         /// </summary>
-        public ILogger<TradingApi> Logger { get; }
+        public ILogger<AutomationTradingApi> Logger { get; }
 
         /// <summary>
         /// The HttpClient
@@ -122,7 +122,7 @@ namespace BeamAutomationClient.Api
         /// <summary>
         /// The class containing the events
         /// </summary>
-        public TradingApiEvents Events { get; }
+        public AutomationTradingApiEvents Events { get; }
 
         /// <summary>
         /// A token provider of type <see cref="ApiKeyProvider"/>
@@ -130,42 +130,42 @@ namespace BeamAutomationClient.Api
         public TokenProvider<ApiKeyToken> ApiKeyProvider { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TradingApi"/> class.
+        /// Initializes a new instance of the <see cref="AutomationTradingApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public TradingApi(ILogger<TradingApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, TradingApiEvents tradingApiEvents,
+        public AutomationTradingApi(ILogger<AutomationTradingApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, AutomationJsonSerializerOptionsProvider jsonSerializerOptionsProvider, AutomationTradingApiEvents automationTradingApiEvents,
             TokenProvider<ApiKeyToken> apiKeyProvider)
         {
             _jsonSerializerOptions = jsonSerializerOptionsProvider.Options;
             LoggerFactory = loggerFactory;
-            Logger = LoggerFactory.CreateLogger<TradingApi>();
+            Logger = LoggerFactory.CreateLogger<AutomationTradingApi>();
             HttpClient = httpClient;
-            Events = tradingApiEvents;
+            Events = automationTradingApiEvents;
             ApiKeyProvider = apiKeyProvider;
         }
 
-        partial void FormatTradeAssets(TradeTokensRequestInput tradeTokensRequestInput);
+        partial void FormatTradeAssets(AutomationTradeTokensRequestInput automationTradeTokensRequestInput);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="tradeTokensRequestInput"></param>
+        /// <param name="automationTradeTokensRequestInput"></param>
         /// <returns></returns>
-        private void ValidateTradeAssets(TradeTokensRequestInput tradeTokensRequestInput)
+        private void ValidateTradeAssets(AutomationTradeTokensRequestInput automationTradeTokensRequestInput)
         {
-            if (tradeTokensRequestInput == null)
-                throw new ArgumentNullException(nameof(tradeTokensRequestInput));
+            if (automationTradeTokensRequestInput == null)
+                throw new ArgumentNullException(nameof(automationTradeTokensRequestInput));
         }
 
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="tradeTokensRequestInput"></param>
-        private void AfterTradeAssetsDefaultImplementation(ITradeAssetsApiResponse apiResponseLocalVar, TradeTokensRequestInput tradeTokensRequestInput)
+        /// <param name="automationTradeTokensRequestInput"></param>
+        private void AfterTradeAssetsDefaultImplementation(ITradeAssetsApiResponse apiResponseLocalVar, AutomationTradeTokensRequestInput automationTradeTokensRequestInput)
         {
             bool suppressDefaultLog = false;
-            AfterTradeAssets(ref suppressDefaultLog, apiResponseLocalVar, tradeTokensRequestInput);
+            AfterTradeAssets(ref suppressDefaultLog, apiResponseLocalVar, automationTradeTokensRequestInput);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -175,8 +175,8 @@ namespace BeamAutomationClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="tradeTokensRequestInput"></param>
-        partial void AfterTradeAssets(ref bool suppressDefaultLog, ITradeAssetsApiResponse apiResponseLocalVar, TradeTokensRequestInput tradeTokensRequestInput);
+        /// <param name="automationTradeTokensRequestInput"></param>
+        partial void AfterTradeAssets(ref bool suppressDefaultLog, ITradeAssetsApiResponse apiResponseLocalVar, AutomationTradeTokensRequestInput automationTradeTokensRequestInput);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -184,11 +184,11 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="tradeTokensRequestInput"></param>
-        private void OnErrorTradeAssetsDefaultImplementation(Exception exception, string pathFormat, string path, TradeTokensRequestInput tradeTokensRequestInput)
+        /// <param name="automationTradeTokensRequestInput"></param>
+        private void OnErrorTradeAssetsDefaultImplementation(Exception exception, string pathFormat, string path, AutomationTradeTokensRequestInput automationTradeTokensRequestInput)
         {
             bool suppressDefaultLog = false;
-            OnErrorTradeAssets(ref suppressDefaultLog, exception, pathFormat, path, tradeTokensRequestInput);
+            OnErrorTradeAssets(ref suppressDefaultLog, exception, pathFormat, path, automationTradeTokensRequestInput);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -200,20 +200,20 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="tradeTokensRequestInput"></param>
-        partial void OnErrorTradeAssets(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, TradeTokensRequestInput tradeTokensRequestInput);
+        /// <param name="automationTradeTokensRequestInput"></param>
+        partial void OnErrorTradeAssets(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationTradeTokensRequestInput automationTradeTokensRequestInput);
 
         /// <summary>
         ///  
         /// </summary>
-        /// <param name="tradeTokensRequestInput"></param>
+        /// <param name="automationTradeTokensRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ITradeAssetsApiResponse"/>&gt;</returns>
-        public async Task<ITradeAssetsApiResponse?> TradeAssetsOrDefaultAsync(TradeTokensRequestInput tradeTokensRequestInput, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ITradeAssetsApiResponse?> TradeAssetsOrDefaultAsync(AutomationTradeTokensRequestInput automationTradeTokensRequestInput, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await TradeAssetsAsync(tradeTokensRequestInput, cancellationToken).ConfigureAwait(false);
+                return await TradeAssetsAsync(automationTradeTokensRequestInput, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -225,18 +225,18 @@ namespace BeamAutomationClient.Api
         ///  
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="tradeTokensRequestInput"></param>
+        /// <param name="automationTradeTokensRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ITradeAssetsApiResponse"/>&gt;</returns>
-        public async Task<ITradeAssetsApiResponse> TradeAssetsAsync(TradeTokensRequestInput tradeTokensRequestInput, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ITradeAssetsApiResponse> TradeAssetsAsync(AutomationTradeTokensRequestInput automationTradeTokensRequestInput, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateTradeAssets(tradeTokensRequestInput);
+                ValidateTradeAssets(automationTradeTokensRequestInput);
 
-                FormatTradeAssets(tradeTokensRequestInput);
+                FormatTradeAssets(automationTradeTokensRequestInput);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -245,9 +245,9 @@ namespace BeamAutomationClient.Api
                     uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/trading/trade";
 
-                    httpRequestMessageLocalVar.Content = (tradeTokensRequestInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (automationTradeTokensRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(tradeTokensRequestInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationTradeTokensRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -286,7 +286,7 @@ namespace BeamAutomationClient.Api
 
                         TradeAssetsApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/trading/trade", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterTradeAssetsDefaultImplementation(apiResponseLocalVar, tradeTokensRequestInput);
+                        AfterTradeAssetsDefaultImplementation(apiResponseLocalVar, automationTradeTokensRequestInput);
 
                         Events.ExecuteOnTradeAssets(apiResponseLocalVar);
 
@@ -300,7 +300,7 @@ namespace BeamAutomationClient.Api
             }
             catch(Exception e)
             {
-                OnErrorTradeAssetsDefaultImplementation(e, "/v1/trading/trade", uriBuilderLocalVar.Path, tradeTokensRequestInput);
+                OnErrorTradeAssetsDefaultImplementation(e, "/v1/trading/trade", uriBuilderLocalVar.Path, automationTradeTokensRequestInput);
                 Events.ExecuteOnErrorTradeAssets(e);
                 throw;
             }
@@ -344,11 +344,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.TradeTokensResponse? Ok()
+            public BeamAutomationClient.Model.AutomationTradeTokensResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.TradeTokensResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationTradeTokensResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -357,7 +357,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.TradeTokensResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationTradeTokensResponse? result)
             {
                 result = null;
 

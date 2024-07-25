@@ -6,24 +6,30 @@ import type { BaseHttpRequest } from './core/BaseHttpRequest';
 import { NodeHttpRequest } from './core/NodeHttpRequest';
 import type { OpenAPIConfig } from './core/OpenAPI';
 
+import { ActivityService } from './services/ActivityService';
 import { AssetsService } from './services/AssetsService';
+import { ConnectorService } from './services/ConnectorService';
 import { ExchangeService } from './services/ExchangeService';
 import { HealthService } from './services/HealthService';
 import { MarketplaceService } from './services/MarketplaceService';
 import { OperationService } from './services/OperationService';
 import { SessionsService } from './services/SessionsService';
+import { StatsService } from './services/StatsService';
 import { TransactionsService } from './services/TransactionsService';
 import { UsersService } from './services/UsersService';
 
 type HttpRequestConstructor = new (config: OpenAPIConfig) => BaseHttpRequest;
 
 export class ApiClient {
+  public readonly activity: ActivityService;
   public readonly assets: AssetsService;
+  public readonly connector: ConnectorService;
   public readonly exchange: ExchangeService;
   public readonly health: HealthService;
   public readonly marketplace: MarketplaceService;
   public readonly operation: OperationService;
   public readonly sessions: SessionsService;
+  public readonly stats: StatsService;
   public readonly transactions: TransactionsService;
   public readonly users: UsersService;
 
@@ -45,12 +51,15 @@ export class ApiClient {
       ENCODE_PATH: config?.ENCODE_PATH,
     });
 
+    this.activity = new ActivityService(this.request);
     this.assets = new AssetsService(this.request);
+    this.connector = new ConnectorService(this.request);
     this.exchange = new ExchangeService(this.request);
     this.health = new HealthService(this.request);
     this.marketplace = new MarketplaceService(this.request);
     this.operation = new OperationService(this.request);
     this.sessions = new SessionsService(this.request);
+    this.stats = new StatsService(this.request);
     this.transactions = new TransactionsService(this.request);
     this.users = new UsersService(this.request);
   }

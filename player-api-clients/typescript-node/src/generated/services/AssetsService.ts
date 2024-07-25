@@ -8,6 +8,10 @@ import type { GetAssetsForContractBodyInput } from '../models/GetAssetsForContra
 import type { GetAssetsForContractResponse } from '../models/GetAssetsForContractResponse';
 import type { GetAssetsForUserBodyInput } from '../models/GetAssetsForUserBodyInput';
 import type { GetAssetsForUserResponse } from '../models/GetAssetsForUserResponse';
+import type { GetAttributesResponse } from '../models/GetAttributesResponse';
+import type { GetOwnerAssetsBodyInput } from '../models/GetOwnerAssetsBodyInput';
+import type { GetOwnerAssetsResponse } from '../models/GetOwnerAssetsResponse';
+import type { GetOwnersResponse } from '../models/GetOwnersResponse';
 import type { GetUserCurrenciesResponse } from '../models/GetUserCurrenciesResponse';
 import type { GetUserNativeCurrencyResponse } from '../models/GetUserNativeCurrencyResponse';
 import type { TransferAssetRequestInput } from '../models/TransferAssetRequestInput';
@@ -133,7 +137,7 @@ export class AssetsService {
   }
 
   /**
-   * Transfer the native token (BEAM)
+   * Transfer the native token
    * @param entityId
    * @param requestBody
    * @returns CommonOperationResponse
@@ -161,13 +165,13 @@ export class AssetsService {
    * @returns GetAssetsForContractResponse
    * @throws ApiError
    */
-  public getContractAssetsPost(
+  public getAssetsForContract(
     assetAddress: string,
     requestBody: GetAssetsForContractBodyInput,
   ): CancelablePromise<GetAssetsForContractResponse> {
     return this.httpRequest.request({
       method: 'POST',
-      url: '/v1/player/assets/{assetAddress}',
+      url: '/v1/player/assets/{assetAddress}/assets',
       path: {
         assetAddress: assetAddress,
       },
@@ -181,8 +185,8 @@ export class AssetsService {
    * @param assetAddress
    * @param assetId
    * @param chainId
-   * @param entityId
-   * @param owners If true, will return owners of the token
+   * @param entityId If true, will always return 'owners' record for this User if he owns the asset
+   * @param owners If true, will return all owners of the asset
    * @returns GetAssetResponse
    * @throws ApiError
    */
@@ -195,7 +199,7 @@ export class AssetsService {
   ): CancelablePromise<GetAssetResponse> {
     return this.httpRequest.request({
       method: 'GET',
-      url: '/v1/player/assets/{assetAddress}/{assetId}',
+      url: '/v1/player/assets/{assetAddress}/assets/{assetId}',
       path: {
         assetAddress: assetAddress,
         assetId: assetId,
@@ -205,6 +209,80 @@ export class AssetsService {
         entityId: entityId,
         owners: owners,
       },
+    });
+  }
+
+  /**
+   * @param assetAddress
+   * @param chainId
+   * @returns GetAttributesResponse
+   * @throws ApiError
+   */
+  public getAttributes(
+    assetAddress: string,
+    chainId: number,
+  ): CancelablePromise<GetAttributesResponse> {
+    return this.httpRequest.request({
+      method: 'GET',
+      url: '/v1/player/assets/{assetAddress}/attributes',
+      path: {
+        assetAddress: assetAddress,
+      },
+      query: {
+        chainId: chainId,
+      },
+    });
+  }
+
+  /**
+   * @param assetAddress
+   * @param chainId
+   * @param limit
+   * @param offset
+   * @returns GetOwnersResponse
+   * @throws ApiError
+   */
+  public getOwners(
+    assetAddress: string,
+    chainId: number,
+    limit = 10,
+    offset = 0,
+  ): CancelablePromise<GetOwnersResponse> {
+    return this.httpRequest.request({
+      method: 'GET',
+      url: '/v1/player/assets/{assetAddress}/owners',
+      path: {
+        assetAddress: assetAddress,
+      },
+      query: {
+        chainId: chainId,
+        limit: limit,
+        offset: offset,
+      },
+    });
+  }
+
+  /**
+   * @param assetAddress
+   * @param ownerAddress
+   * @param requestBody
+   * @returns GetOwnerAssetsResponse
+   * @throws ApiError
+   */
+  public getOwnerAssets(
+    assetAddress: string,
+    ownerAddress: string,
+    requestBody: GetOwnerAssetsBodyInput,
+  ): CancelablePromise<GetOwnerAssetsResponse> {
+    return this.httpRequest.request({
+      method: 'POST',
+      url: '/v1/player/assets/{assetAddress}/owners/{ownerAddress}/assets',
+      path: {
+        assetAddress: assetAddress,
+        ownerAddress: ownerAddress,
+      },
+      body: requestBody,
+      mediaType: 'application/json',
     });
   }
 }

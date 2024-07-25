@@ -14,5 +14,13 @@ export type CreateTransactionRequestInput = {
   sponsor?: boolean;
   policyId?: string | null;
   chainId?: number;
+  operationProcessing?: CreateTransactionRequestInput.operationProcessing;
   operationId?: string | null;
 };
+
+export namespace CreateTransactionRequestInput {
+  export enum operationProcessing {
+    SIGN_ONLY = 'SignOnly',
+    EXECUTE = 'Execute',
+  }
+}

@@ -15,5 +15,13 @@ export type TransferAssetRequestInput = {
   sponsor?: boolean;
   policyId?: string | null;
   chainId?: number;
+  operationProcessing?: TransferAssetRequestInput.operationProcessing;
   operationId?: string | null;
 };
+
+export namespace TransferAssetRequestInput {
+  export enum operationProcessing {
+    SIGN_ONLY = 'SignOnly',
+    EXECUTE = 'Execute',
+  }
+}

@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 VisualStudioVersion = 12.0.0.0
 MinimumVisualStudioVersion = 10.0.0.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeamAutomationClient", "src\BeamAutomationClient\BeamAutomationClient.csproj", "{F1E7B5F9-0A9D-4A9B-9614-28F349E41796}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeamAutomationClient", "src\BeamAutomationClient\BeamAutomationClient.csproj", "{A183F0EA-AE2E-4F26-8AC8-6543DEE3AEDA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -10,10 +10,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F1E7B5F9-0A9D-4A9B-9614-28F349E41796}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F1E7B5F9-0A9D-4A9B-9614-28F349E41796}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F1E7B5F9-0A9D-4A9B-9614-28F349E41796}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F1E7B5F9-0A9D-4A9B-9614-28F349E41796}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A183F0EA-AE2E-4F26-8AC8-6543DEE3AEDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A183F0EA-AE2E-4F26-8AC8-6543DEE3AEDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A183F0EA-AE2E-4F26-8AC8-6543DEE3AEDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A183F0EA-AE2E-4F26-8AC8-6543DEE3AEDA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.ActiveCfg = Release|Any CPU

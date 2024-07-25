@@ -14,7 +14,7 @@ namespace BeamPlayerClient.Client
         /// </summary>
         /// <typeparam name="IResult"></typeparam>
         /// <returns></returns>
-        IResult Create<IResult>() where IResult : IApi;
+        IResult Create<IResult>() where IResult : IPlayerApi;
     }
 
     /// <summary>
@@ -41,7 +41,7 @@ namespace BeamPlayerClient.Client
         /// </summary>
         /// <typeparam name="IResult"></typeparam>
         /// <returns></returns>
-        public IResult Create<IResult>() where IResult : IApi
+        public IResult Create<IResult>() where IResult : IPlayerApi
         {
             return Services.GetRequiredService<IResult>();
         }

@@ -6,7 +6,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// Any Api client
     /// </summary>
-    public interface IApi
+    public interface IPlayerApi
     {
         /// <summary>
         /// The HttpClient

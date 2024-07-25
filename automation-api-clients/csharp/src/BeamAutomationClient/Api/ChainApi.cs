@@ -28,12 +28,12 @@ namespace BeamAutomationClient.Api
     /// Represents a collection of functions to interact with the API endpoints
     /// This class is registered as transient.
     /// </summary>
-    public interface IChainApi : IApi
+    public interface IAutomationChainApi : IAutomationApi
     {
         /// <summary>
         /// The class containing the events
         /// </summary>
-        ChainApiEvents Events { get; }
+        AutomationChainApiEvents Events { get; }
 
         /// <summary>
         /// 
@@ -65,11 +65,11 @@ namespace BeamAutomationClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="createTransactionRequestInputV2"></param>
+        /// <param name="automationCreateTransactionRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IEstimateProfileTransactionGasApiResponse"/>&gt;</returns>
-        Task<IEstimateProfileTransactionGasApiResponse> EstimateProfileTransactionGasAsync(CreateTransactionRequestInputV2 createTransactionRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IEstimateProfileTransactionGasApiResponse> EstimateProfileTransactionGasAsync(AutomationCreateTransactionRequestInputV2 automationCreateTransactionRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Estimate gas fee for a transaction on behalf of a profile
@@ -77,17 +77,17 @@ namespace BeamAutomationClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="createTransactionRequestInputV2"></param>
+        /// <param name="automationCreateTransactionRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IEstimateProfileTransactionGasApiResponse"/>?&gt;</returns>
-        Task<IEstimateProfileTransactionGasApiResponse?> EstimateProfileTransactionGasOrDefaultAsync(CreateTransactionRequestInputV2 createTransactionRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IEstimateProfileTransactionGasApiResponse?> EstimateProfileTransactionGasOrDefaultAsync(AutomationCreateTransactionRequestInputV2 automationCreateTransactionRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
     /// The <see cref="IChainApiResponse"/>
     /// </summary>
-    public interface IChainApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.GetChainResponse?>
+    public interface IChainApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetChainResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -99,7 +99,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IEstimateProfileTransactionGasApiResponse"/>
     /// </summary>
-    public interface IEstimateProfileTransactionGasApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.GetEstimateResponse?>
+    public interface IEstimateProfileTransactionGasApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetEstimateResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -111,7 +111,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public class ChainApiEvents
+    public class AutomationChainApiEvents
     {
         /// <summary>
         /// The event raised after the server response
@@ -123,7 +123,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorChain;
 
-        internal void ExecuteOnChain(ChainApi.ChainApiResponse apiResponse)
+        internal void ExecuteOnChain(AutomationChainApi.ChainApiResponse apiResponse)
         {
             OnChain?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -143,7 +143,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorEstimateProfileTransactionGas;
 
-        internal void ExecuteOnEstimateProfileTransactionGas(ChainApi.EstimateProfileTransactionGasApiResponse apiResponse)
+        internal void ExecuteOnEstimateProfileTransactionGas(AutomationChainApi.EstimateProfileTransactionGasApiResponse apiResponse)
         {
             OnEstimateProfileTransactionGas?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -157,7 +157,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public sealed partial class ChainApi : IChainApi
+    public sealed partial class AutomationChainApi : IAutomationChainApi
     {
         private JsonSerializerOptions _jsonSerializerOptions;
 
@@ -169,7 +169,7 @@ namespace BeamAutomationClient.Api
         /// <summary>
         /// The logger
         /// </summary>
-        public ILogger<ChainApi> Logger { get; }
+        public ILogger<AutomationChainApi> Logger { get; }
 
         /// <summary>
         /// The HttpClient
@@ -179,7 +179,7 @@ namespace BeamAutomationClient.Api
         /// <summary>
         /// The class containing the events
         /// </summary>
-        public ChainApiEvents Events { get; }
+        public AutomationChainApiEvents Events { get; }
 
         /// <summary>
         /// A token provider of type <see cref="ApiKeyProvider"/>
@@ -187,17 +187,17 @@ namespace BeamAutomationClient.Api
         public TokenProvider<ApiKeyToken> ApiKeyProvider { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChainApi"/> class.
+        /// Initializes a new instance of the <see cref="AutomationChainApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public ChainApi(ILogger<ChainApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, ChainApiEvents chainApiEvents,
+        public AutomationChainApi(ILogger<AutomationChainApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, AutomationJsonSerializerOptionsProvider jsonSerializerOptionsProvider, AutomationChainApiEvents automationChainApiEvents,
             TokenProvider<ApiKeyToken> apiKeyProvider)
         {
             _jsonSerializerOptions = jsonSerializerOptionsProvider.Options;
             LoggerFactory = loggerFactory;
-            Logger = LoggerFactory.CreateLogger<ChainApi>();
+            Logger = LoggerFactory.CreateLogger<AutomationChainApi>();
             HttpClient = httpClient;
-            Events = chainApiEvents;
+            Events = automationChainApiEvents;
             ApiKeyProvider = apiKeyProvider;
         }
 
@@ -382,11 +382,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.GetChainResponse? Ok()
+            public BeamAutomationClient.Model.AutomationGetChainResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.GetChainResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationGetChainResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -395,7 +395,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.GetChainResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationGetChainResponse? result)
             {
                 result = null;
 
@@ -421,18 +421,18 @@ namespace BeamAutomationClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatEstimateProfileTransactionGas(CreateTransactionRequestInputV2 createTransactionRequestInputV2, ref string entityId);
+        partial void FormatEstimateProfileTransactionGas(AutomationCreateTransactionRequestInputV2 automationCreateTransactionRequestInputV2, ref string entityId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="createTransactionRequestInputV2"></param>
+        /// <param name="automationCreateTransactionRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <returns></returns>
-        private void ValidateEstimateProfileTransactionGas(CreateTransactionRequestInputV2 createTransactionRequestInputV2, string entityId)
+        private void ValidateEstimateProfileTransactionGas(AutomationCreateTransactionRequestInputV2 automationCreateTransactionRequestInputV2, string entityId)
         {
-            if (createTransactionRequestInputV2 == null)
-                throw new ArgumentNullException(nameof(createTransactionRequestInputV2));
+            if (automationCreateTransactionRequestInputV2 == null)
+                throw new ArgumentNullException(nameof(automationCreateTransactionRequestInputV2));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -442,12 +442,12 @@ namespace BeamAutomationClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="createTransactionRequestInputV2"></param>
+        /// <param name="automationCreateTransactionRequestInputV2"></param>
         /// <param name="entityId"></param>
-        private void AfterEstimateProfileTransactionGasDefaultImplementation(IEstimateProfileTransactionGasApiResponse apiResponseLocalVar, CreateTransactionRequestInputV2 createTransactionRequestInputV2, string entityId)
+        private void AfterEstimateProfileTransactionGasDefaultImplementation(IEstimateProfileTransactionGasApiResponse apiResponseLocalVar, AutomationCreateTransactionRequestInputV2 automationCreateTransactionRequestInputV2, string entityId)
         {
             bool suppressDefaultLog = false;
-            AfterEstimateProfileTransactionGas(ref suppressDefaultLog, apiResponseLocalVar, createTransactionRequestInputV2, entityId);
+            AfterEstimateProfileTransactionGas(ref suppressDefaultLog, apiResponseLocalVar, automationCreateTransactionRequestInputV2, entityId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -457,9 +457,9 @@ namespace BeamAutomationClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="createTransactionRequestInputV2"></param>
+        /// <param name="automationCreateTransactionRequestInputV2"></param>
         /// <param name="entityId"></param>
-        partial void AfterEstimateProfileTransactionGas(ref bool suppressDefaultLog, IEstimateProfileTransactionGasApiResponse apiResponseLocalVar, CreateTransactionRequestInputV2 createTransactionRequestInputV2, string entityId);
+        partial void AfterEstimateProfileTransactionGas(ref bool suppressDefaultLog, IEstimateProfileTransactionGasApiResponse apiResponseLocalVar, AutomationCreateTransactionRequestInputV2 automationCreateTransactionRequestInputV2, string entityId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -467,12 +467,12 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="createTransactionRequestInputV2"></param>
+        /// <param name="automationCreateTransactionRequestInputV2"></param>
         /// <param name="entityId"></param>
-        private void OnErrorEstimateProfileTransactionGasDefaultImplementation(Exception exception, string pathFormat, string path, CreateTransactionRequestInputV2 createTransactionRequestInputV2, string entityId)
+        private void OnErrorEstimateProfileTransactionGasDefaultImplementation(Exception exception, string pathFormat, string path, AutomationCreateTransactionRequestInputV2 automationCreateTransactionRequestInputV2, string entityId)
         {
             bool suppressDefaultLog = false;
-            OnErrorEstimateProfileTransactionGas(ref suppressDefaultLog, exception, pathFormat, path, createTransactionRequestInputV2, entityId);
+            OnErrorEstimateProfileTransactionGas(ref suppressDefaultLog, exception, pathFormat, path, automationCreateTransactionRequestInputV2, entityId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -484,22 +484,22 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="createTransactionRequestInputV2"></param>
+        /// <param name="automationCreateTransactionRequestInputV2"></param>
         /// <param name="entityId"></param>
-        partial void OnErrorEstimateProfileTransactionGas(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, CreateTransactionRequestInputV2 createTransactionRequestInputV2, string entityId);
+        partial void OnErrorEstimateProfileTransactionGas(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationCreateTransactionRequestInputV2 automationCreateTransactionRequestInputV2, string entityId);
 
         /// <summary>
         /// Estimate gas fee for a transaction on behalf of a profile 
         /// </summary>
-        /// <param name="createTransactionRequestInputV2"></param>
+        /// <param name="automationCreateTransactionRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IEstimateProfileTransactionGasApiResponse"/>&gt;</returns>
-        public async Task<IEstimateProfileTransactionGasApiResponse?> EstimateProfileTransactionGasOrDefaultAsync(CreateTransactionRequestInputV2 createTransactionRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IEstimateProfileTransactionGasApiResponse?> EstimateProfileTransactionGasOrDefaultAsync(AutomationCreateTransactionRequestInputV2 automationCreateTransactionRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await EstimateProfileTransactionGasAsync(createTransactionRequestInputV2, entityId, cancellationToken).ConfigureAwait(false);
+                return await EstimateProfileTransactionGasAsync(automationCreateTransactionRequestInputV2, entityId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -511,19 +511,19 @@ namespace BeamAutomationClient.Api
         /// Estimate gas fee for a transaction on behalf of a profile 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="createTransactionRequestInputV2"></param>
+        /// <param name="automationCreateTransactionRequestInputV2"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IEstimateProfileTransactionGasApiResponse"/>&gt;</returns>
-        public async Task<IEstimateProfileTransactionGasApiResponse> EstimateProfileTransactionGasAsync(CreateTransactionRequestInputV2 createTransactionRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IEstimateProfileTransactionGasApiResponse> EstimateProfileTransactionGasAsync(AutomationCreateTransactionRequestInputV2 automationCreateTransactionRequestInputV2, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateEstimateProfileTransactionGas(createTransactionRequestInputV2, entityId);
+                ValidateEstimateProfileTransactionGas(automationCreateTransactionRequestInputV2, entityId);
 
-                FormatEstimateProfileTransactionGas(createTransactionRequestInputV2, ref entityId);
+                FormatEstimateProfileTransactionGas(automationCreateTransactionRequestInputV2, ref entityId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -533,9 +533,9 @@ namespace BeamAutomationClient.Api
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/chain/estimate/profiles/{entityId}/transaction";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (createTransactionRequestInputV2 as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (automationCreateTransactionRequestInputV2 as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(createTransactionRequestInputV2, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationCreateTransactionRequestInputV2, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -574,7 +574,7 @@ namespace BeamAutomationClient.Api
 
                         EstimateProfileTransactionGasApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/chain/estimate/profiles/{entityId}/transaction", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterEstimateProfileTransactionGasDefaultImplementation(apiResponseLocalVar, createTransactionRequestInputV2, entityId);
+                        AfterEstimateProfileTransactionGasDefaultImplementation(apiResponseLocalVar, automationCreateTransactionRequestInputV2, entityId);
 
                         Events.ExecuteOnEstimateProfileTransactionGas(apiResponseLocalVar);
 
@@ -588,7 +588,7 @@ namespace BeamAutomationClient.Api
             }
             catch(Exception e)
             {
-                OnErrorEstimateProfileTransactionGasDefaultImplementation(e, "/v1/chain/estimate/profiles/{entityId}/transaction", uriBuilderLocalVar.Path, createTransactionRequestInputV2, entityId);
+                OnErrorEstimateProfileTransactionGasDefaultImplementation(e, "/v1/chain/estimate/profiles/{entityId}/transaction", uriBuilderLocalVar.Path, automationCreateTransactionRequestInputV2, entityId);
                 Events.ExecuteOnErrorEstimateProfileTransactionGas(e);
                 throw;
             }
@@ -632,11 +632,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.GetEstimateResponse? Ok()
+            public BeamAutomationClient.Model.AutomationGetEstimateResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.GetEstimateResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationGetEstimateResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -645,7 +645,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.GetEstimateResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationGetEstimateResponse? result)
             {
                 result = null;
 

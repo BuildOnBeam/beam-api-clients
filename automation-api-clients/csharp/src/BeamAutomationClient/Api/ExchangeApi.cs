@@ -28,12 +28,12 @@ namespace BeamAutomationClient.Api
     /// Represents a collection of functions to interact with the API endpoints
     /// This class is registered as transient.
     /// </summary>
-    public interface IExchangeApi : IApi
+    public interface IAutomationExchangeApi : IAutomationApi
     {
         /// <summary>
         /// The class containing the events
         /// </summary>
-        ExchangeApiEvents Events { get; }
+        AutomationExchangeApiEvents Events { get; }
 
         /// <summary>
         /// Swap an exact amount of &#x60;tokenIn&#x60; for a minimum amount of &#x60;tokenOut&#x60;
@@ -42,11 +42,11 @@ namespace BeamAutomationClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="convertTokenRequestInput"></param>
+        /// <param name="automationConvertTokenRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IConvertInputApiResponse"/>&gt;</returns>
-        Task<IConvertInputApiResponse> ConvertInputAsync(ConvertTokenRequestInput convertTokenRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IConvertInputApiResponse> ConvertInputAsync(AutomationConvertTokenRequestInput automationConvertTokenRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Swap an exact amount of &#x60;tokenIn&#x60; for a minimum amount of &#x60;tokenOut&#x60;
@@ -54,11 +54,11 @@ namespace BeamAutomationClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="convertTokenRequestInput"></param>
+        /// <param name="automationConvertTokenRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IConvertInputApiResponse"/>?&gt;</returns>
-        Task<IConvertInputApiResponse?> ConvertInputOrDefaultAsync(ConvertTokenRequestInput convertTokenRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IConvertInputApiResponse?> ConvertInputOrDefaultAsync(AutomationConvertTokenRequestInput automationConvertTokenRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Swap a maximum amount of &#x60;tokenIn&#x60; for an exact amount of &#x60;tokenOut&#x60;
@@ -67,11 +67,11 @@ namespace BeamAutomationClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="convertTokenRequestInput"></param>
+        /// <param name="automationConvertTokenRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IConvertToOutputApiResponse"/>&gt;</returns>
-        Task<IConvertToOutputApiResponse> ConvertToOutputAsync(ConvertTokenRequestInput convertTokenRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IConvertToOutputApiResponse> ConvertToOutputAsync(AutomationConvertTokenRequestInput automationConvertTokenRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Swap a maximum amount of &#x60;tokenIn&#x60; for an exact amount of &#x60;tokenOut&#x60;
@@ -79,11 +79,11 @@ namespace BeamAutomationClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="convertTokenRequestInput"></param>
+        /// <param name="automationConvertTokenRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IConvertToOutputApiResponse"/>?&gt;</returns>
-        Task<IConvertToOutputApiResponse?> ConvertToOutputOrDefaultAsync(ConvertTokenRequestInput convertTokenRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IConvertToOutputApiResponse?> ConvertToOutputOrDefaultAsync(AutomationConvertTokenRequestInput automationConvertTokenRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns the maximum necessary input amount for a token trade, given a desired output amount
@@ -147,7 +147,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IConvertInputApiResponse"/>
     /// </summary>
-    public interface IConvertInputApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.ConvertTokenResponse?>
+    public interface IConvertInputApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationConvertTokenResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -159,7 +159,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IConvertToOutputApiResponse"/>
     /// </summary>
-    public interface IConvertToOutputApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.ConvertTokenResponse?>
+    public interface IConvertToOutputApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationConvertTokenResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -171,7 +171,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IGetQuoteForInputApiResponse"/>
     /// </summary>
-    public interface IGetQuoteForInputApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.GetQuoteResponse?>
+    public interface IGetQuoteForInputApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetQuoteResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -183,7 +183,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IGetQuoteForOutputApiResponse"/>
     /// </summary>
-    public interface IGetQuoteForOutputApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.GetQuoteResponse?>
+    public interface IGetQuoteForOutputApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetQuoteResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -195,7 +195,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public class ExchangeApiEvents
+    public class AutomationExchangeApiEvents
     {
         /// <summary>
         /// The event raised after the server response
@@ -207,7 +207,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorConvertInput;
 
-        internal void ExecuteOnConvertInput(ExchangeApi.ConvertInputApiResponse apiResponse)
+        internal void ExecuteOnConvertInput(AutomationExchangeApi.ConvertInputApiResponse apiResponse)
         {
             OnConvertInput?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -227,7 +227,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorConvertToOutput;
 
-        internal void ExecuteOnConvertToOutput(ExchangeApi.ConvertToOutputApiResponse apiResponse)
+        internal void ExecuteOnConvertToOutput(AutomationExchangeApi.ConvertToOutputApiResponse apiResponse)
         {
             OnConvertToOutput?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -247,7 +247,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetQuoteForInput;
 
-        internal void ExecuteOnGetQuoteForInput(ExchangeApi.GetQuoteForInputApiResponse apiResponse)
+        internal void ExecuteOnGetQuoteForInput(AutomationExchangeApi.GetQuoteForInputApiResponse apiResponse)
         {
             OnGetQuoteForInput?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -267,7 +267,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetQuoteForOutput;
 
-        internal void ExecuteOnGetQuoteForOutput(ExchangeApi.GetQuoteForOutputApiResponse apiResponse)
+        internal void ExecuteOnGetQuoteForOutput(AutomationExchangeApi.GetQuoteForOutputApiResponse apiResponse)
         {
             OnGetQuoteForOutput?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -281,7 +281,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public sealed partial class ExchangeApi : IExchangeApi
+    public sealed partial class AutomationExchangeApi : IAutomationExchangeApi
     {
         private JsonSerializerOptions _jsonSerializerOptions;
 
@@ -293,7 +293,7 @@ namespace BeamAutomationClient.Api
         /// <summary>
         /// The logger
         /// </summary>
-        public ILogger<ExchangeApi> Logger { get; }
+        public ILogger<AutomationExchangeApi> Logger { get; }
 
         /// <summary>
         /// The HttpClient
@@ -303,7 +303,7 @@ namespace BeamAutomationClient.Api
         /// <summary>
         /// The class containing the events
         /// </summary>
-        public ExchangeApiEvents Events { get; }
+        public AutomationExchangeApiEvents Events { get; }
 
         /// <summary>
         /// A token provider of type <see cref="ApiKeyProvider"/>
@@ -311,32 +311,32 @@ namespace BeamAutomationClient.Api
         public TokenProvider<ApiKeyToken> ApiKeyProvider { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ExchangeApi"/> class.
+        /// Initializes a new instance of the <see cref="AutomationExchangeApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public ExchangeApi(ILogger<ExchangeApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, ExchangeApiEvents exchangeApiEvents,
+        public AutomationExchangeApi(ILogger<AutomationExchangeApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, AutomationJsonSerializerOptionsProvider jsonSerializerOptionsProvider, AutomationExchangeApiEvents automationExchangeApiEvents,
             TokenProvider<ApiKeyToken> apiKeyProvider)
         {
             _jsonSerializerOptions = jsonSerializerOptionsProvider.Options;
             LoggerFactory = loggerFactory;
-            Logger = LoggerFactory.CreateLogger<ExchangeApi>();
+            Logger = LoggerFactory.CreateLogger<AutomationExchangeApi>();
             HttpClient = httpClient;
-            Events = exchangeApiEvents;
+            Events = automationExchangeApiEvents;
             ApiKeyProvider = apiKeyProvider;
         }
 
-        partial void FormatConvertInput(ConvertTokenRequestInput convertTokenRequestInput, ref string entityId);
+        partial void FormatConvertInput(AutomationConvertTokenRequestInput automationConvertTokenRequestInput, ref string entityId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="convertTokenRequestInput"></param>
+        /// <param name="automationConvertTokenRequestInput"></param>
         /// <param name="entityId"></param>
         /// <returns></returns>
-        private void ValidateConvertInput(ConvertTokenRequestInput convertTokenRequestInput, string entityId)
+        private void ValidateConvertInput(AutomationConvertTokenRequestInput automationConvertTokenRequestInput, string entityId)
         {
-            if (convertTokenRequestInput == null)
-                throw new ArgumentNullException(nameof(convertTokenRequestInput));
+            if (automationConvertTokenRequestInput == null)
+                throw new ArgumentNullException(nameof(automationConvertTokenRequestInput));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -346,12 +346,12 @@ namespace BeamAutomationClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="convertTokenRequestInput"></param>
+        /// <param name="automationConvertTokenRequestInput"></param>
         /// <param name="entityId"></param>
-        private void AfterConvertInputDefaultImplementation(IConvertInputApiResponse apiResponseLocalVar, ConvertTokenRequestInput convertTokenRequestInput, string entityId)
+        private void AfterConvertInputDefaultImplementation(IConvertInputApiResponse apiResponseLocalVar, AutomationConvertTokenRequestInput automationConvertTokenRequestInput, string entityId)
         {
             bool suppressDefaultLog = false;
-            AfterConvertInput(ref suppressDefaultLog, apiResponseLocalVar, convertTokenRequestInput, entityId);
+            AfterConvertInput(ref suppressDefaultLog, apiResponseLocalVar, automationConvertTokenRequestInput, entityId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -361,9 +361,9 @@ namespace BeamAutomationClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="convertTokenRequestInput"></param>
+        /// <param name="automationConvertTokenRequestInput"></param>
         /// <param name="entityId"></param>
-        partial void AfterConvertInput(ref bool suppressDefaultLog, IConvertInputApiResponse apiResponseLocalVar, ConvertTokenRequestInput convertTokenRequestInput, string entityId);
+        partial void AfterConvertInput(ref bool suppressDefaultLog, IConvertInputApiResponse apiResponseLocalVar, AutomationConvertTokenRequestInput automationConvertTokenRequestInput, string entityId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -371,12 +371,12 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="convertTokenRequestInput"></param>
+        /// <param name="automationConvertTokenRequestInput"></param>
         /// <param name="entityId"></param>
-        private void OnErrorConvertInputDefaultImplementation(Exception exception, string pathFormat, string path, ConvertTokenRequestInput convertTokenRequestInput, string entityId)
+        private void OnErrorConvertInputDefaultImplementation(Exception exception, string pathFormat, string path, AutomationConvertTokenRequestInput automationConvertTokenRequestInput, string entityId)
         {
             bool suppressDefaultLog = false;
-            OnErrorConvertInput(ref suppressDefaultLog, exception, pathFormat, path, convertTokenRequestInput, entityId);
+            OnErrorConvertInput(ref suppressDefaultLog, exception, pathFormat, path, automationConvertTokenRequestInput, entityId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -388,22 +388,22 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="convertTokenRequestInput"></param>
+        /// <param name="automationConvertTokenRequestInput"></param>
         /// <param name="entityId"></param>
-        partial void OnErrorConvertInput(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, ConvertTokenRequestInput convertTokenRequestInput, string entityId);
+        partial void OnErrorConvertInput(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationConvertTokenRequestInput automationConvertTokenRequestInput, string entityId);
 
         /// <summary>
         /// Swap an exact amount of &#x60;tokenIn&#x60; for a minimum amount of &#x60;tokenOut&#x60; 
         /// </summary>
-        /// <param name="convertTokenRequestInput"></param>
+        /// <param name="automationConvertTokenRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IConvertInputApiResponse"/>&gt;</returns>
-        public async Task<IConvertInputApiResponse?> ConvertInputOrDefaultAsync(ConvertTokenRequestInput convertTokenRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IConvertInputApiResponse?> ConvertInputOrDefaultAsync(AutomationConvertTokenRequestInput automationConvertTokenRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await ConvertInputAsync(convertTokenRequestInput, entityId, cancellationToken).ConfigureAwait(false);
+                return await ConvertInputAsync(automationConvertTokenRequestInput, entityId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -415,19 +415,19 @@ namespace BeamAutomationClient.Api
         /// Swap an exact amount of &#x60;tokenIn&#x60; for a minimum amount of &#x60;tokenOut&#x60; 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="convertTokenRequestInput"></param>
+        /// <param name="automationConvertTokenRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IConvertInputApiResponse"/>&gt;</returns>
-        public async Task<IConvertInputApiResponse> ConvertInputAsync(ConvertTokenRequestInput convertTokenRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IConvertInputApiResponse> ConvertInputAsync(AutomationConvertTokenRequestInput automationConvertTokenRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateConvertInput(convertTokenRequestInput, entityId);
+                ValidateConvertInput(automationConvertTokenRequestInput, entityId);
 
-                FormatConvertInput(convertTokenRequestInput, ref entityId);
+                FormatConvertInput(automationConvertTokenRequestInput, ref entityId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -437,9 +437,9 @@ namespace BeamAutomationClient.Api
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/exchange/profiles/{entityId}/convert/input";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (convertTokenRequestInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (automationConvertTokenRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(convertTokenRequestInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationConvertTokenRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -478,7 +478,7 @@ namespace BeamAutomationClient.Api
 
                         ConvertInputApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/exchange/profiles/{entityId}/convert/input", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterConvertInputDefaultImplementation(apiResponseLocalVar, convertTokenRequestInput, entityId);
+                        AfterConvertInputDefaultImplementation(apiResponseLocalVar, automationConvertTokenRequestInput, entityId);
 
                         Events.ExecuteOnConvertInput(apiResponseLocalVar);
 
@@ -492,7 +492,7 @@ namespace BeamAutomationClient.Api
             }
             catch(Exception e)
             {
-                OnErrorConvertInputDefaultImplementation(e, "/v1/exchange/profiles/{entityId}/convert/input", uriBuilderLocalVar.Path, convertTokenRequestInput, entityId);
+                OnErrorConvertInputDefaultImplementation(e, "/v1/exchange/profiles/{entityId}/convert/input", uriBuilderLocalVar.Path, automationConvertTokenRequestInput, entityId);
                 Events.ExecuteOnErrorConvertInput(e);
                 throw;
             }
@@ -536,11 +536,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.ConvertTokenResponse? Ok()
+            public BeamAutomationClient.Model.AutomationConvertTokenResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.ConvertTokenResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationConvertTokenResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -549,7 +549,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.ConvertTokenResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationConvertTokenResponse? result)
             {
                 result = null;
 
@@ -575,18 +575,18 @@ namespace BeamAutomationClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatConvertToOutput(ConvertTokenRequestInput convertTokenRequestInput, ref string entityId);
+        partial void FormatConvertToOutput(AutomationConvertTokenRequestInput automationConvertTokenRequestInput, ref string entityId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="convertTokenRequestInput"></param>
+        /// <param name="automationConvertTokenRequestInput"></param>
         /// <param name="entityId"></param>
         /// <returns></returns>
-        private void ValidateConvertToOutput(ConvertTokenRequestInput convertTokenRequestInput, string entityId)
+        private void ValidateConvertToOutput(AutomationConvertTokenRequestInput automationConvertTokenRequestInput, string entityId)
         {
-            if (convertTokenRequestInput == null)
-                throw new ArgumentNullException(nameof(convertTokenRequestInput));
+            if (automationConvertTokenRequestInput == null)
+                throw new ArgumentNullException(nameof(automationConvertTokenRequestInput));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -596,12 +596,12 @@ namespace BeamAutomationClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="convertTokenRequestInput"></param>
+        /// <param name="automationConvertTokenRequestInput"></param>
         /// <param name="entityId"></param>
-        private void AfterConvertToOutputDefaultImplementation(IConvertToOutputApiResponse apiResponseLocalVar, ConvertTokenRequestInput convertTokenRequestInput, string entityId)
+        private void AfterConvertToOutputDefaultImplementation(IConvertToOutputApiResponse apiResponseLocalVar, AutomationConvertTokenRequestInput automationConvertTokenRequestInput, string entityId)
         {
             bool suppressDefaultLog = false;
-            AfterConvertToOutput(ref suppressDefaultLog, apiResponseLocalVar, convertTokenRequestInput, entityId);
+            AfterConvertToOutput(ref suppressDefaultLog, apiResponseLocalVar, automationConvertTokenRequestInput, entityId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -611,9 +611,9 @@ namespace BeamAutomationClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="convertTokenRequestInput"></param>
+        /// <param name="automationConvertTokenRequestInput"></param>
         /// <param name="entityId"></param>
-        partial void AfterConvertToOutput(ref bool suppressDefaultLog, IConvertToOutputApiResponse apiResponseLocalVar, ConvertTokenRequestInput convertTokenRequestInput, string entityId);
+        partial void AfterConvertToOutput(ref bool suppressDefaultLog, IConvertToOutputApiResponse apiResponseLocalVar, AutomationConvertTokenRequestInput automationConvertTokenRequestInput, string entityId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -621,12 +621,12 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="convertTokenRequestInput"></param>
+        /// <param name="automationConvertTokenRequestInput"></param>
         /// <param name="entityId"></param>
-        private void OnErrorConvertToOutputDefaultImplementation(Exception exception, string pathFormat, string path, ConvertTokenRequestInput convertTokenRequestInput, string entityId)
+        private void OnErrorConvertToOutputDefaultImplementation(Exception exception, string pathFormat, string path, AutomationConvertTokenRequestInput automationConvertTokenRequestInput, string entityId)
         {
             bool suppressDefaultLog = false;
-            OnErrorConvertToOutput(ref suppressDefaultLog, exception, pathFormat, path, convertTokenRequestInput, entityId);
+            OnErrorConvertToOutput(ref suppressDefaultLog, exception, pathFormat, path, automationConvertTokenRequestInput, entityId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -638,22 +638,22 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="convertTokenRequestInput"></param>
+        /// <param name="automationConvertTokenRequestInput"></param>
         /// <param name="entityId"></param>
-        partial void OnErrorConvertToOutput(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, ConvertTokenRequestInput convertTokenRequestInput, string entityId);
+        partial void OnErrorConvertToOutput(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationConvertTokenRequestInput automationConvertTokenRequestInput, string entityId);
 
         /// <summary>
         /// Swap a maximum amount of &#x60;tokenIn&#x60; for an exact amount of &#x60;tokenOut&#x60; 
         /// </summary>
-        /// <param name="convertTokenRequestInput"></param>
+        /// <param name="automationConvertTokenRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IConvertToOutputApiResponse"/>&gt;</returns>
-        public async Task<IConvertToOutputApiResponse?> ConvertToOutputOrDefaultAsync(ConvertTokenRequestInput convertTokenRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IConvertToOutputApiResponse?> ConvertToOutputOrDefaultAsync(AutomationConvertTokenRequestInput automationConvertTokenRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await ConvertToOutputAsync(convertTokenRequestInput, entityId, cancellationToken).ConfigureAwait(false);
+                return await ConvertToOutputAsync(automationConvertTokenRequestInput, entityId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -665,19 +665,19 @@ namespace BeamAutomationClient.Api
         /// Swap a maximum amount of &#x60;tokenIn&#x60; for an exact amount of &#x60;tokenOut&#x60; 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="convertTokenRequestInput"></param>
+        /// <param name="automationConvertTokenRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IConvertToOutputApiResponse"/>&gt;</returns>
-        public async Task<IConvertToOutputApiResponse> ConvertToOutputAsync(ConvertTokenRequestInput convertTokenRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IConvertToOutputApiResponse> ConvertToOutputAsync(AutomationConvertTokenRequestInput automationConvertTokenRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateConvertToOutput(convertTokenRequestInput, entityId);
+                ValidateConvertToOutput(automationConvertTokenRequestInput, entityId);
 
-                FormatConvertToOutput(convertTokenRequestInput, ref entityId);
+                FormatConvertToOutput(automationConvertTokenRequestInput, ref entityId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -687,9 +687,9 @@ namespace BeamAutomationClient.Api
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/exchange/profiles/{entityId}/convert/output";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (convertTokenRequestInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (automationConvertTokenRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(convertTokenRequestInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationConvertTokenRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -728,7 +728,7 @@ namespace BeamAutomationClient.Api
 
                         ConvertToOutputApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/exchange/profiles/{entityId}/convert/output", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterConvertToOutputDefaultImplementation(apiResponseLocalVar, convertTokenRequestInput, entityId);
+                        AfterConvertToOutputDefaultImplementation(apiResponseLocalVar, automationConvertTokenRequestInput, entityId);
 
                         Events.ExecuteOnConvertToOutput(apiResponseLocalVar);
 
@@ -742,7 +742,7 @@ namespace BeamAutomationClient.Api
             }
             catch(Exception e)
             {
-                OnErrorConvertToOutputDefaultImplementation(e, "/v1/exchange/profiles/{entityId}/convert/output", uriBuilderLocalVar.Path, convertTokenRequestInput, entityId);
+                OnErrorConvertToOutputDefaultImplementation(e, "/v1/exchange/profiles/{entityId}/convert/output", uriBuilderLocalVar.Path, automationConvertTokenRequestInput, entityId);
                 Events.ExecuteOnErrorConvertToOutput(e);
                 throw;
             }
@@ -786,11 +786,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.ConvertTokenResponse? Ok()
+            public BeamAutomationClient.Model.AutomationConvertTokenResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.ConvertTokenResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationConvertTokenResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -799,7 +799,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.ConvertTokenResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationConvertTokenResponse? result)
             {
                 result = null;
 
@@ -1049,11 +1049,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.GetQuoteResponse? Ok()
+            public BeamAutomationClient.Model.AutomationGetQuoteResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.GetQuoteResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationGetQuoteResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1062,7 +1062,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.GetQuoteResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationGetQuoteResponse? result)
             {
                 result = null;
 
@@ -1312,11 +1312,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.GetQuoteResponse? Ok()
+            public BeamAutomationClient.Model.AutomationGetQuoteResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.GetQuoteResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationGetQuoteResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1325,7 +1325,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.GetQuoteResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationGetQuoteResponse? result)
             {
                 result = null;
 

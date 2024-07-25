@@ -7,23 +7,6 @@ export type AddContractRequestInput = {
   address: string;
   type: AddContractRequestInput.type;
   chainId: number;
-  abi: Array<{
-    name?: string;
-    type?: string;
-    anonymous?: boolean;
-    payable?: boolean;
-    constant?: boolean;
-    stateMutability?: string;
-    gas?: string;
-    inputs?: Array<{
-      name?: string;
-      type?: string;
-      indexed?: boolean;
-      internalType?: any;
-      components?: any[];
-    }>;
-    outputs?: any[];
-  }>;
   name: string;
 };
 

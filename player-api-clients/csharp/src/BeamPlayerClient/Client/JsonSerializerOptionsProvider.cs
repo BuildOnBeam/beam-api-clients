@@ -9,7 +9,7 @@ namespace BeamPlayerClient.Client
     /// <summary>
     /// Provides the JsonSerializerOptions
     /// </summary>
-    public class JsonSerializerOptionsProvider
+    public class PlayerJsonSerializerOptionsProvider
     {
         /// <summary>
         /// the JsonSerializerOptions
@@ -19,7 +19,7 @@ namespace BeamPlayerClient.Client
         /// <summary>
         /// Instantiates a JsonSerializerOptionsProvider
         /// </summary>
-        public JsonSerializerOptionsProvider(JsonSerializerOptions options)
+        public PlayerJsonSerializerOptionsProvider(JsonSerializerOptions options)
         {
             Options = options;
         }

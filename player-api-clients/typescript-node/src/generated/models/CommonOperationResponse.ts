@@ -5,6 +5,7 @@
 
 export type CommonOperationResponse = {
   status: CommonOperationResponse.status;
+  processing: CommonOperationResponse.processing;
   id: string;
   createdAt: string;
   updatedAt: string | null;
@@ -13,22 +14,32 @@ export type CommonOperationResponse = {
   chainId: number;
   url: string;
   transactions: Array<{
-    type: 'OpenfortTransaction' | 'OpenfortReservoirOrder';
-    status: 'Pending' | 'Rejected' | 'Executed' | 'Error';
+    type:
+      | 'OpenfortTransaction'
+      | 'OpenfortReservoirOrder'
+      | 'OpenfortRevokeSession';
+    status: 'Pending' | 'Signed' | 'Rejected' | 'Executed' | 'Error';
     id: string;
     externalId: string | null;
     signature: string | null;
+    transactionHash: string | null;
     operationId: string | null;
-    data?: (string | number | boolean | Record<string, any>) | null;
+    data?: any;
     hash: string;
   }>;
 };
 
 export namespace CommonOperationResponse {
   export enum status {
+    SIGNED = 'Signed',
     PENDING = 'Pending',
     REJECTED = 'Rejected',
     EXECUTED = 'Executed',
     ERROR = 'Error',
+  }
+
+  export enum processing {
+    SIGN_ONLY = 'SignOnly',
+    EXECUTE = 'Execute',
   }
 }

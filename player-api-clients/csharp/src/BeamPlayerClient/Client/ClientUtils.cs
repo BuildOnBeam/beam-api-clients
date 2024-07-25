@@ -120,92 +120,92 @@ namespace BeamPlayerClient.Client
                 return boolean
                     ? "true"
                     : "false";
-            if (obj is AcceptAssetOfferRequestInput.OperationProcessingEnum acceptAssetOfferRequestInputOperationProcessingEnum)
-                return AcceptAssetOfferRequestInput.OperationProcessingEnumToJsonValue(acceptAssetOfferRequestInputOperationProcessingEnum);
-            if (obj is BuyAssetRequestInput.OperationProcessingEnum buyAssetRequestInputOperationProcessingEnum)
-                return BuyAssetRequestInput.OperationProcessingEnumToJsonValue(buyAssetRequestInputOperationProcessingEnum);
-            if (obj is CancelAssetListingRequestInput.OperationProcessingEnum cancelAssetListingRequestInputOperationProcessingEnum)
-                return CancelAssetListingRequestInput.OperationProcessingEnumToJsonValue(cancelAssetListingRequestInputOperationProcessingEnum);
-            if (obj is CancelAssetOfferRequestInput.OperationProcessingEnum cancelAssetOfferRequestInputOperationProcessingEnum)
-                return CancelAssetOfferRequestInput.OperationProcessingEnumToJsonValue(cancelAssetOfferRequestInputOperationProcessingEnum);
-            if (obj is CommonActivityRequestInput.TypesEnum commonActivityRequestInputTypesEnum)
-                return CommonActivityRequestInput.TypesEnumToJsonValue(commonActivityRequestInputTypesEnum);
-            if (obj is CommonActivityResponseDataInner.TypeEnum commonActivityResponseDataInnerTypeEnum)
-                return CommonActivityResponseDataInner.TypeEnumToJsonValue(commonActivityResponseDataInnerTypeEnum);
-            if (obj is CommonOperationResponse.ProcessingEnum commonOperationResponseProcessingEnum)
-                return CommonOperationResponse.ProcessingEnumToJsonValue(commonOperationResponseProcessingEnum);
-            if (obj is CommonOperationResponse.StatusEnum commonOperationResponseStatusEnum)
-                return CommonOperationResponse.StatusEnumToJsonValue(commonOperationResponseStatusEnum);
-            if (obj is CommonOperationResponseTransactionsInner.StatusEnum commonOperationResponseTransactionsInnerStatusEnum)
-                return CommonOperationResponseTransactionsInner.StatusEnumToJsonValue(commonOperationResponseTransactionsInnerStatusEnum);
-            if (obj is CommonOperationResponseTransactionsInner.TypeEnum commonOperationResponseTransactionsInnerTypeEnum)
-                return CommonOperationResponseTransactionsInner.TypeEnumToJsonValue(commonOperationResponseTransactionsInnerTypeEnum);
-            if (obj is ConfirmOperationRequest.StatusEnum confirmOperationRequestStatusEnum)
-                return ConfirmOperationRequest.StatusEnumToJsonValue(confirmOperationRequestStatusEnum);
-            if (obj is ConvertTokenRequestInput.OperationProcessingEnum convertTokenRequestInputOperationProcessingEnum)
-                return ConvertTokenRequestInput.OperationProcessingEnumToJsonValue(convertTokenRequestInputOperationProcessingEnum);
-            if (obj is CreateAssetOfferRequestInput.CurrencyEnum createAssetOfferRequestInputCurrencyEnum)
-                return CreateAssetOfferRequestInput.CurrencyEnumToJsonValue(createAssetOfferRequestInputCurrencyEnum);
-            if (obj is CreateAssetOfferRequestInput.OperationProcessingEnum createAssetOfferRequestInputOperationProcessingEnum)
-                return CreateAssetOfferRequestInput.OperationProcessingEnumToJsonValue(createAssetOfferRequestInputOperationProcessingEnum);
-            if (obj is CreateConnectionRequestResponse.StatusEnum createConnectionRequestResponseStatusEnum)
-                return CreateConnectionRequestResponse.StatusEnumToJsonValue(createConnectionRequestResponseStatusEnum);
-            if (obj is CreateOperationRequestInput.OperationProcessingEnum createOperationRequestInputOperationProcessingEnum)
-                return CreateOperationRequestInput.OperationProcessingEnumToJsonValue(createOperationRequestInputOperationProcessingEnum);
-            if (obj is CreateOperationRequestInputTransactionsInner.TypeEnum createOperationRequestInputTransactionsInnerTypeEnum)
-                return CreateOperationRequestInputTransactionsInner.TypeEnumToJsonValue(createOperationRequestInputTransactionsInnerTypeEnum);
-            if (obj is CreateTransactionRequestInput.OperationProcessingEnum createTransactionRequestInputOperationProcessingEnum)
-                return CreateTransactionRequestInput.OperationProcessingEnumToJsonValue(createTransactionRequestInputOperationProcessingEnum);
-            if (obj is GenerateSessionRequestResponse.StatusEnum generateSessionRequestResponseStatusEnum)
-                return GenerateSessionRequestResponse.StatusEnumToJsonValue(generateSessionRequestResponseStatusEnum);
-            if (obj is GetAssetListingsResponseDataInner.StatusEnum getAssetListingsResponseDataInnerStatusEnum)
-                return GetAssetListingsResponseDataInner.StatusEnumToJsonValue(getAssetListingsResponseDataInnerStatusEnum);
-            if (obj is GetAssetListingsResponseDataInnerPriceCurrency.SymbolEnum getAssetListingsResponseDataInnerPriceCurrencySymbolEnum)
-                return GetAssetListingsResponseDataInnerPriceCurrency.SymbolEnumToJsonValue(getAssetListingsResponseDataInnerPriceCurrencySymbolEnum);
-            if (obj is GetAssetResponse.RarityEnum getAssetResponseRarityEnum)
-                return GetAssetResponse.RarityEnumToJsonValue(getAssetResponseRarityEnum);
-            if (obj is GetAssetsForContractBodyInput.SortByEnum getAssetsForContractBodyInputSortByEnum)
-                return GetAssetsForContractBodyInput.SortByEnumToJsonValue(getAssetsForContractBodyInputSortByEnum);
-            if (obj is GetAssetsForContractBodyInput.SortDirectionEnum getAssetsForContractBodyInputSortDirectionEnum)
-                return GetAssetsForContractBodyInput.SortDirectionEnumToJsonValue(getAssetsForContractBodyInputSortDirectionEnum);
-            if (obj is GetAssetsForContractResponseDataInner.RarityEnum getAssetsForContractResponseDataInnerRarityEnum)
-                return GetAssetsForContractResponseDataInner.RarityEnumToJsonValue(getAssetsForContractResponseDataInnerRarityEnum);
-            if (obj is GetAssetsForUserBodyInput.SortByEnum getAssetsForUserBodyInputSortByEnum)
-                return GetAssetsForUserBodyInput.SortByEnumToJsonValue(getAssetsForUserBodyInputSortByEnum);
-            if (obj is GetAssetsForUserBodyInput.SortDirectionEnum getAssetsForUserBodyInputSortDirectionEnum)
-                return GetAssetsForUserBodyInput.SortDirectionEnumToJsonValue(getAssetsForUserBodyInputSortDirectionEnum);
-            if (obj is GetAssetsForUserResponseDataInner.RarityEnum getAssetsForUserResponseDataInnerRarityEnum)
-                return GetAssetsForUserResponseDataInner.RarityEnumToJsonValue(getAssetsForUserResponseDataInnerRarityEnum);
-            if (obj is GetAttributesResponseDataInner.KindEnum getAttributesResponseDataInnerKindEnum)
-                return GetAttributesResponseDataInner.KindEnumToJsonValue(getAttributesResponseDataInnerKindEnum);
-            if (obj is GetChainCurrenciesResponseDataInner.SymbolEnum getChainCurrenciesResponseDataInnerSymbolEnum)
-                return GetChainCurrenciesResponseDataInner.SymbolEnumToJsonValue(getChainCurrenciesResponseDataInnerSymbolEnum);
-            if (obj is GetConnectionRequestResponse.StatusEnum getConnectionRequestResponseStatusEnum)
-                return GetConnectionRequestResponse.StatusEnumToJsonValue(getConnectionRequestResponseStatusEnum);
-            if (obj is GetListedAssetsBodyInput.SortByEnum getListedAssetsBodyInputSortByEnum)
-                return GetListedAssetsBodyInput.SortByEnumToJsonValue(getListedAssetsBodyInputSortByEnum);
-            if (obj is GetListedAssetsBodyInput.SortDirectionEnum getListedAssetsBodyInputSortDirectionEnum)
-                return GetListedAssetsBodyInput.SortDirectionEnumToJsonValue(getListedAssetsBodyInputSortDirectionEnum);
-            if (obj is GetOwnerAssetsBodyInput.SortByEnum getOwnerAssetsBodyInputSortByEnum)
-                return GetOwnerAssetsBodyInput.SortByEnumToJsonValue(getOwnerAssetsBodyInputSortByEnum);
-            if (obj is GetOwnerAssetsBodyInput.SortDirectionEnum getOwnerAssetsBodyInputSortDirectionEnum)
-                return GetOwnerAssetsBodyInput.SortDirectionEnumToJsonValue(getOwnerAssetsBodyInputSortDirectionEnum);
-            if (obj is GetSessionRequestResponse.StatusEnum getSessionRequestResponseStatusEnum)
-                return GetSessionRequestResponse.StatusEnumToJsonValue(getSessionRequestResponseStatusEnum);
-            if (obj is RevokeSessionRequestInput.OperationProcessingEnum revokeSessionRequestInputOperationProcessingEnum)
-                return RevokeSessionRequestInput.OperationProcessingEnumToJsonValue(revokeSessionRequestInputOperationProcessingEnum);
-            if (obj is SellAssetRequestInput.SellTypeEnum sellAssetRequestInputSellTypeEnum)
-                return SellAssetRequestInput.SellTypeEnumToJsonValue(sellAssetRequestInputSellTypeEnum);
-            if (obj is SellAssetRequestInput.CurrencyEnum sellAssetRequestInputCurrencyEnum)
-                return SellAssetRequestInput.CurrencyEnumToJsonValue(sellAssetRequestInputCurrencyEnum);
-            if (obj is SellAssetRequestInput.OperationProcessingEnum sellAssetRequestInputOperationProcessingEnum)
-                return SellAssetRequestInput.OperationProcessingEnumToJsonValue(sellAssetRequestInputOperationProcessingEnum);
-            if (obj is TransferAssetRequestInput.OperationProcessingEnum transferAssetRequestInputOperationProcessingEnum)
-                return TransferAssetRequestInput.OperationProcessingEnumToJsonValue(transferAssetRequestInputOperationProcessingEnum);
-            if (obj is TransferNativeTokenRequestInput.OperationProcessingEnum transferNativeTokenRequestInputOperationProcessingEnum)
-                return TransferNativeTokenRequestInput.OperationProcessingEnumToJsonValue(transferNativeTokenRequestInputOperationProcessingEnum);
-            if (obj is TransferTokenRequestInput.OperationProcessingEnum transferTokenRequestInputOperationProcessingEnum)
-                return TransferTokenRequestInput.OperationProcessingEnumToJsonValue(transferTokenRequestInputOperationProcessingEnum);
+            if (obj is PlayerAcceptAssetOfferRequestInput.OperationProcessingEnum playerAcceptAssetOfferRequestInputOperationProcessingEnum)
+                return PlayerAcceptAssetOfferRequestInput.OperationProcessingEnumToJsonValue(playerAcceptAssetOfferRequestInputOperationProcessingEnum);
+            if (obj is PlayerBuyAssetRequestInput.OperationProcessingEnum playerBuyAssetRequestInputOperationProcessingEnum)
+                return PlayerBuyAssetRequestInput.OperationProcessingEnumToJsonValue(playerBuyAssetRequestInputOperationProcessingEnum);
+            if (obj is PlayerCancelAssetListingRequestInput.OperationProcessingEnum playerCancelAssetListingRequestInputOperationProcessingEnum)
+                return PlayerCancelAssetListingRequestInput.OperationProcessingEnumToJsonValue(playerCancelAssetListingRequestInputOperationProcessingEnum);
+            if (obj is PlayerCancelAssetOfferRequestInput.OperationProcessingEnum playerCancelAssetOfferRequestInputOperationProcessingEnum)
+                return PlayerCancelAssetOfferRequestInput.OperationProcessingEnumToJsonValue(playerCancelAssetOfferRequestInputOperationProcessingEnum);
+            if (obj is PlayerCommonActivityRequestInput.TypesEnum playerCommonActivityRequestInputTypesEnum)
+                return PlayerCommonActivityRequestInput.TypesEnumToJsonValue(playerCommonActivityRequestInputTypesEnum);
+            if (obj is PlayerCommonActivityResponseDataInner.TypeEnum playerCommonActivityResponseDataInnerTypeEnum)
+                return PlayerCommonActivityResponseDataInner.TypeEnumToJsonValue(playerCommonActivityResponseDataInnerTypeEnum);
+            if (obj is PlayerCommonOperationResponse.ProcessingEnum playerCommonOperationResponseProcessingEnum)
+                return PlayerCommonOperationResponse.ProcessingEnumToJsonValue(playerCommonOperationResponseProcessingEnum);
+            if (obj is PlayerCommonOperationResponse.StatusEnum playerCommonOperationResponseStatusEnum)
+                return PlayerCommonOperationResponse.StatusEnumToJsonValue(playerCommonOperationResponseStatusEnum);
+            if (obj is PlayerCommonOperationResponseTransactionsInner.StatusEnum playerCommonOperationResponseTransactionsInnerStatusEnum)
+                return PlayerCommonOperationResponseTransactionsInner.StatusEnumToJsonValue(playerCommonOperationResponseTransactionsInnerStatusEnum);
+            if (obj is PlayerCommonOperationResponseTransactionsInner.TypeEnum playerCommonOperationResponseTransactionsInnerTypeEnum)
+                return PlayerCommonOperationResponseTransactionsInner.TypeEnumToJsonValue(playerCommonOperationResponseTransactionsInnerTypeEnum);
+            if (obj is PlayerConfirmOperationRequest.StatusEnum playerConfirmOperationRequestStatusEnum)
+                return PlayerConfirmOperationRequest.StatusEnumToJsonValue(playerConfirmOperationRequestStatusEnum);
+            if (obj is PlayerConvertTokenRequestInput.OperationProcessingEnum playerConvertTokenRequestInputOperationProcessingEnum)
+                return PlayerConvertTokenRequestInput.OperationProcessingEnumToJsonValue(playerConvertTokenRequestInputOperationProcessingEnum);
+            if (obj is PlayerCreateAssetOfferRequestInput.CurrencyEnum playerCreateAssetOfferRequestInputCurrencyEnum)
+                return PlayerCreateAssetOfferRequestInput.CurrencyEnumToJsonValue(playerCreateAssetOfferRequestInputCurrencyEnum);
+            if (obj is PlayerCreateAssetOfferRequestInput.OperationProcessingEnum playerCreateAssetOfferRequestInputOperationProcessingEnum)
+                return PlayerCreateAssetOfferRequestInput.OperationProcessingEnumToJsonValue(playerCreateAssetOfferRequestInputOperationProcessingEnum);
+            if (obj is PlayerCreateConnectionRequestResponse.StatusEnum playerCreateConnectionRequestResponseStatusEnum)
+                return PlayerCreateConnectionRequestResponse.StatusEnumToJsonValue(playerCreateConnectionRequestResponseStatusEnum);
+            if (obj is PlayerCreateOperationRequestInput.OperationProcessingEnum playerCreateOperationRequestInputOperationProcessingEnum)
+                return PlayerCreateOperationRequestInput.OperationProcessingEnumToJsonValue(playerCreateOperationRequestInputOperationProcessingEnum);
+            if (obj is PlayerCreateOperationRequestInputTransactionsInner.TypeEnum playerCreateOperationRequestInputTransactionsInnerTypeEnum)
+                return PlayerCreateOperationRequestInputTransactionsInner.TypeEnumToJsonValue(playerCreateOperationRequestInputTransactionsInnerTypeEnum);
+            if (obj is PlayerCreateTransactionRequestInput.OperationProcessingEnum playerCreateTransactionRequestInputOperationProcessingEnum)
+                return PlayerCreateTransactionRequestInput.OperationProcessingEnumToJsonValue(playerCreateTransactionRequestInputOperationProcessingEnum);
+            if (obj is PlayerGenerateSessionRequestResponse.StatusEnum playerGenerateSessionRequestResponseStatusEnum)
+                return PlayerGenerateSessionRequestResponse.StatusEnumToJsonValue(playerGenerateSessionRequestResponseStatusEnum);
+            if (obj is PlayerGetAssetListingsResponseDataInner.StatusEnum playerGetAssetListingsResponseDataInnerStatusEnum)
+                return PlayerGetAssetListingsResponseDataInner.StatusEnumToJsonValue(playerGetAssetListingsResponseDataInnerStatusEnum);
+            if (obj is PlayerGetAssetListingsResponseDataInnerPriceCurrency.SymbolEnum playerGetAssetListingsResponseDataInnerPriceCurrencySymbolEnum)
+                return PlayerGetAssetListingsResponseDataInnerPriceCurrency.SymbolEnumToJsonValue(playerGetAssetListingsResponseDataInnerPriceCurrencySymbolEnum);
+            if (obj is PlayerGetAssetResponse.RarityEnum playerGetAssetResponseRarityEnum)
+                return PlayerGetAssetResponse.RarityEnumToJsonValue(playerGetAssetResponseRarityEnum);
+            if (obj is PlayerGetAssetsForContractBodyInput.SortByEnum playerGetAssetsForContractBodyInputSortByEnum)
+                return PlayerGetAssetsForContractBodyInput.SortByEnumToJsonValue(playerGetAssetsForContractBodyInputSortByEnum);
+            if (obj is PlayerGetAssetsForContractBodyInput.SortDirectionEnum playerGetAssetsForContractBodyInputSortDirectionEnum)
+                return PlayerGetAssetsForContractBodyInput.SortDirectionEnumToJsonValue(playerGetAssetsForContractBodyInputSortDirectionEnum);
+            if (obj is PlayerGetAssetsForContractResponseDataInner.RarityEnum playerGetAssetsForContractResponseDataInnerRarityEnum)
+                return PlayerGetAssetsForContractResponseDataInner.RarityEnumToJsonValue(playerGetAssetsForContractResponseDataInnerRarityEnum);
+            if (obj is PlayerGetAssetsForUserBodyInput.SortByEnum playerGetAssetsForUserBodyInputSortByEnum)
+                return PlayerGetAssetsForUserBodyInput.SortByEnumToJsonValue(playerGetAssetsForUserBodyInputSortByEnum);
+            if (obj is PlayerGetAssetsForUserBodyInput.SortDirectionEnum playerGetAssetsForUserBodyInputSortDirectionEnum)
+                return PlayerGetAssetsForUserBodyInput.SortDirectionEnumToJsonValue(playerGetAssetsForUserBodyInputSortDirectionEnum);
+            if (obj is PlayerGetAssetsForUserResponseDataInner.RarityEnum playerGetAssetsForUserResponseDataInnerRarityEnum)
+                return PlayerGetAssetsForUserResponseDataInner.RarityEnumToJsonValue(playerGetAssetsForUserResponseDataInnerRarityEnum);
+            if (obj is PlayerGetAttributesResponseDataInner.KindEnum playerGetAttributesResponseDataInnerKindEnum)
+                return PlayerGetAttributesResponseDataInner.KindEnumToJsonValue(playerGetAttributesResponseDataInnerKindEnum);
+            if (obj is PlayerGetChainCurrenciesResponseDataInner.SymbolEnum playerGetChainCurrenciesResponseDataInnerSymbolEnum)
+                return PlayerGetChainCurrenciesResponseDataInner.SymbolEnumToJsonValue(playerGetChainCurrenciesResponseDataInnerSymbolEnum);
+            if (obj is PlayerGetConnectionRequestResponse.StatusEnum playerGetConnectionRequestResponseStatusEnum)
+                return PlayerGetConnectionRequestResponse.StatusEnumToJsonValue(playerGetConnectionRequestResponseStatusEnum);
+            if (obj is PlayerGetListedAssetsBodyInput.SortByEnum playerGetListedAssetsBodyInputSortByEnum)
+                return PlayerGetListedAssetsBodyInput.SortByEnumToJsonValue(playerGetListedAssetsBodyInputSortByEnum);
+            if (obj is PlayerGetListedAssetsBodyInput.SortDirectionEnum playerGetListedAssetsBodyInputSortDirectionEnum)
+                return PlayerGetListedAssetsBodyInput.SortDirectionEnumToJsonValue(playerGetListedAssetsBodyInputSortDirectionEnum);
+            if (obj is PlayerGetOwnerAssetsBodyInput.SortByEnum playerGetOwnerAssetsBodyInputSortByEnum)
+                return PlayerGetOwnerAssetsBodyInput.SortByEnumToJsonValue(playerGetOwnerAssetsBodyInputSortByEnum);
+            if (obj is PlayerGetOwnerAssetsBodyInput.SortDirectionEnum playerGetOwnerAssetsBodyInputSortDirectionEnum)
+                return PlayerGetOwnerAssetsBodyInput.SortDirectionEnumToJsonValue(playerGetOwnerAssetsBodyInputSortDirectionEnum);
+            if (obj is PlayerGetSessionRequestResponse.StatusEnum playerGetSessionRequestResponseStatusEnum)
+                return PlayerGetSessionRequestResponse.StatusEnumToJsonValue(playerGetSessionRequestResponseStatusEnum);
+            if (obj is PlayerRevokeSessionRequestInput.OperationProcessingEnum playerRevokeSessionRequestInputOperationProcessingEnum)
+                return PlayerRevokeSessionRequestInput.OperationProcessingEnumToJsonValue(playerRevokeSessionRequestInputOperationProcessingEnum);
+            if (obj is PlayerSellAssetRequestInput.SellTypeEnum playerSellAssetRequestInputSellTypeEnum)
+                return PlayerSellAssetRequestInput.SellTypeEnumToJsonValue(playerSellAssetRequestInputSellTypeEnum);
+            if (obj is PlayerSellAssetRequestInput.CurrencyEnum playerSellAssetRequestInputCurrencyEnum)
+                return PlayerSellAssetRequestInput.CurrencyEnumToJsonValue(playerSellAssetRequestInputCurrencyEnum);
+            if (obj is PlayerSellAssetRequestInput.OperationProcessingEnum playerSellAssetRequestInputOperationProcessingEnum)
+                return PlayerSellAssetRequestInput.OperationProcessingEnumToJsonValue(playerSellAssetRequestInputOperationProcessingEnum);
+            if (obj is PlayerTransferAssetRequestInput.OperationProcessingEnum playerTransferAssetRequestInputOperationProcessingEnum)
+                return PlayerTransferAssetRequestInput.OperationProcessingEnumToJsonValue(playerTransferAssetRequestInputOperationProcessingEnum);
+            if (obj is PlayerTransferNativeTokenRequestInput.OperationProcessingEnum playerTransferNativeTokenRequestInputOperationProcessingEnum)
+                return PlayerTransferNativeTokenRequestInput.OperationProcessingEnumToJsonValue(playerTransferNativeTokenRequestInputOperationProcessingEnum);
+            if (obj is PlayerTransferTokenRequestInput.OperationProcessingEnum playerTransferTokenRequestInputOperationProcessingEnum)
+                return PlayerTransferTokenRequestInput.OperationProcessingEnumToJsonValue(playerTransferTokenRequestInputOperationProcessingEnum);
             if (obj is ICollection collection)
             {
                 List<string?> entries = new();

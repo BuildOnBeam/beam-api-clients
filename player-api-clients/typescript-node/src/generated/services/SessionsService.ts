@@ -2,10 +2,13 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { CommonOperationResponse } from '../models/CommonOperationResponse';
 import type { GenerateSessionRequestResponse } from '../models/GenerateSessionRequestResponse';
 import type { GenerateSessionUrlRequestInput } from '../models/GenerateSessionUrlRequestInput';
 import type { GetActiveSessionResponse } from '../models/GetActiveSessionResponse';
+import type { GetActiveSessionsResponse } from '../models/GetActiveSessionsResponse';
 import type { GetSessionRequestResponse } from '../models/GetSessionRequestResponse';
+import type { RevokeSessionRequestInput } from '../models/RevokeSessionRequestInput';
 
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -35,6 +38,27 @@ export class SessionsService {
   }
 
   /**
+   * @param entityId
+   * @param requestBody
+   * @returns CommonOperationResponse
+   * @throws ApiError
+   */
+  public revokeSession(
+    entityId: string,
+    requestBody: RevokeSessionRequestInput,
+  ): CancelablePromise<CommonOperationResponse> {
+    return this.httpRequest.request({
+      method: 'POST',
+      url: '/v1/player/sessions/users/{entityId}/revoke',
+      path: {
+        entityId: entityId,
+      },
+      body: requestBody,
+      mediaType: 'application/json',
+    });
+  }
+
+  /**
    * @param requestId
    * @returns GetSessionRequestResponse
    * @throws ApiError
@@ -47,6 +71,28 @@ export class SessionsService {
       url: '/v1/player/sessions/request/{requestId}',
       path: {
         requestId: requestId,
+      },
+    });
+  }
+
+  /**
+   * @param entityId
+   * @param chainId
+   * @returns GetActiveSessionsResponse
+   * @throws ApiError
+   */
+  public getAllActiveSessions(
+    entityId: string,
+    chainId?: number,
+  ): CancelablePromise<GetActiveSessionsResponse> {
+    return this.httpRequest.request({
+      method: 'GET',
+      url: '/v1/player/sessions/users/{entityId}/active',
+      path: {
+        entityId: entityId,
+      },
+      query: {
+        chainId: chainId,
       },
     });
   }

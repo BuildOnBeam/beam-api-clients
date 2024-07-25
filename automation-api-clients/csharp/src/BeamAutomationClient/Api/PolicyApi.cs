@@ -28,12 +28,12 @@ namespace BeamAutomationClient.Api
     /// Represents a collection of functions to interact with the API endpoints
     /// This class is registered as transient.
     /// </summary>
-    public interface IPolicyApi : IApi
+    public interface IAutomationPolicyApi : IAutomationApi
     {
         /// <summary>
         /// The class containing the events
         /// </summary>
-        PolicyApiEvents Events { get; }
+        AutomationPolicyApiEvents Events { get; }
 
         /// <summary>
         /// Add a new policy to sponsor web3 actions
@@ -42,10 +42,10 @@ namespace BeamAutomationClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="commonAddPolicyRequestInput"></param>
+        /// <param name="automationCommonAddPolicyRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreatePolicyApiResponse"/>&gt;</returns>
-        Task<ICreatePolicyApiResponse> CreatePolicyAsync(CommonAddPolicyRequestInput commonAddPolicyRequestInput, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICreatePolicyApiResponse> CreatePolicyAsync(AutomationCommonAddPolicyRequestInput automationCommonAddPolicyRequestInput, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Add a new policy to sponsor web3 actions
@@ -53,10 +53,10 @@ namespace BeamAutomationClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="commonAddPolicyRequestInput"></param>
+        /// <param name="automationCommonAddPolicyRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreatePolicyApiResponse"/>?&gt;</returns>
-        Task<ICreatePolicyApiResponse?> CreatePolicyOrDefaultAsync(CommonAddPolicyRequestInput commonAddPolicyRequestInput, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICreatePolicyApiResponse?> CreatePolicyOrDefaultAsync(AutomationCommonAddPolicyRequestInput automationCommonAddPolicyRequestInput, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Removing a policy that sponsors web3 actions
@@ -106,7 +106,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="ICreatePolicyApiResponse"/>
     /// </summary>
-    public interface ICreatePolicyApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.CommonAddPolicyResponse?>
+    public interface ICreatePolicyApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.AutomationCommonAddPolicyResponse?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
@@ -118,7 +118,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IDeletePolicyApiResponse"/>
     /// </summary>
-    public interface IDeletePolicyApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.CommonRemovePolicyResponse?>
+    public interface IDeletePolicyApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationCommonRemovePolicyResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -130,7 +130,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IGetPoliciesApiResponse"/>
     /// </summary>
-    public interface IGetPoliciesApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.CommonGetPoliciesResponse?>
+    public interface IGetPoliciesApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationCommonGetPoliciesResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -142,7 +142,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public class PolicyApiEvents
+    public class AutomationPolicyApiEvents
     {
         /// <summary>
         /// The event raised after the server response
@@ -154,7 +154,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorCreatePolicy;
 
-        internal void ExecuteOnCreatePolicy(PolicyApi.CreatePolicyApiResponse apiResponse)
+        internal void ExecuteOnCreatePolicy(AutomationPolicyApi.CreatePolicyApiResponse apiResponse)
         {
             OnCreatePolicy?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -174,7 +174,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorDeletePolicy;
 
-        internal void ExecuteOnDeletePolicy(PolicyApi.DeletePolicyApiResponse apiResponse)
+        internal void ExecuteOnDeletePolicy(AutomationPolicyApi.DeletePolicyApiResponse apiResponse)
         {
             OnDeletePolicy?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -194,7 +194,7 @@ namespace BeamAutomationClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetPolicies;
 
-        internal void ExecuteOnGetPolicies(PolicyApi.GetPoliciesApiResponse apiResponse)
+        internal void ExecuteOnGetPolicies(AutomationPolicyApi.GetPoliciesApiResponse apiResponse)
         {
             OnGetPolicies?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -208,7 +208,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public sealed partial class PolicyApi : IPolicyApi
+    public sealed partial class AutomationPolicyApi : IAutomationPolicyApi
     {
         private JsonSerializerOptions _jsonSerializerOptions;
 
@@ -220,7 +220,7 @@ namespace BeamAutomationClient.Api
         /// <summary>
         /// The logger
         /// </summary>
-        public ILogger<PolicyApi> Logger { get; }
+        public ILogger<AutomationPolicyApi> Logger { get; }
 
         /// <summary>
         /// The HttpClient
@@ -230,7 +230,7 @@ namespace BeamAutomationClient.Api
         /// <summary>
         /// The class containing the events
         /// </summary>
-        public PolicyApiEvents Events { get; }
+        public AutomationPolicyApiEvents Events { get; }
 
         /// <summary>
         /// A token provider of type <see cref="ApiKeyProvider"/>
@@ -238,42 +238,42 @@ namespace BeamAutomationClient.Api
         public TokenProvider<ApiKeyToken> ApiKeyProvider { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PolicyApi"/> class.
+        /// Initializes a new instance of the <see cref="AutomationPolicyApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public PolicyApi(ILogger<PolicyApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, PolicyApiEvents policyApiEvents,
+        public AutomationPolicyApi(ILogger<AutomationPolicyApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, AutomationJsonSerializerOptionsProvider jsonSerializerOptionsProvider, AutomationPolicyApiEvents automationPolicyApiEvents,
             TokenProvider<ApiKeyToken> apiKeyProvider)
         {
             _jsonSerializerOptions = jsonSerializerOptionsProvider.Options;
             LoggerFactory = loggerFactory;
-            Logger = LoggerFactory.CreateLogger<PolicyApi>();
+            Logger = LoggerFactory.CreateLogger<AutomationPolicyApi>();
             HttpClient = httpClient;
-            Events = policyApiEvents;
+            Events = automationPolicyApiEvents;
             ApiKeyProvider = apiKeyProvider;
         }
 
-        partial void FormatCreatePolicy(CommonAddPolicyRequestInput commonAddPolicyRequestInput);
+        partial void FormatCreatePolicy(AutomationCommonAddPolicyRequestInput automationCommonAddPolicyRequestInput);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="commonAddPolicyRequestInput"></param>
+        /// <param name="automationCommonAddPolicyRequestInput"></param>
         /// <returns></returns>
-        private void ValidateCreatePolicy(CommonAddPolicyRequestInput commonAddPolicyRequestInput)
+        private void ValidateCreatePolicy(AutomationCommonAddPolicyRequestInput automationCommonAddPolicyRequestInput)
         {
-            if (commonAddPolicyRequestInput == null)
-                throw new ArgumentNullException(nameof(commonAddPolicyRequestInput));
+            if (automationCommonAddPolicyRequestInput == null)
+                throw new ArgumentNullException(nameof(automationCommonAddPolicyRequestInput));
         }
 
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="commonAddPolicyRequestInput"></param>
-        private void AfterCreatePolicyDefaultImplementation(ICreatePolicyApiResponse apiResponseLocalVar, CommonAddPolicyRequestInput commonAddPolicyRequestInput)
+        /// <param name="automationCommonAddPolicyRequestInput"></param>
+        private void AfterCreatePolicyDefaultImplementation(ICreatePolicyApiResponse apiResponseLocalVar, AutomationCommonAddPolicyRequestInput automationCommonAddPolicyRequestInput)
         {
             bool suppressDefaultLog = false;
-            AfterCreatePolicy(ref suppressDefaultLog, apiResponseLocalVar, commonAddPolicyRequestInput);
+            AfterCreatePolicy(ref suppressDefaultLog, apiResponseLocalVar, automationCommonAddPolicyRequestInput);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -283,8 +283,8 @@ namespace BeamAutomationClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="commonAddPolicyRequestInput"></param>
-        partial void AfterCreatePolicy(ref bool suppressDefaultLog, ICreatePolicyApiResponse apiResponseLocalVar, CommonAddPolicyRequestInput commonAddPolicyRequestInput);
+        /// <param name="automationCommonAddPolicyRequestInput"></param>
+        partial void AfterCreatePolicy(ref bool suppressDefaultLog, ICreatePolicyApiResponse apiResponseLocalVar, AutomationCommonAddPolicyRequestInput automationCommonAddPolicyRequestInput);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -292,11 +292,11 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="commonAddPolicyRequestInput"></param>
-        private void OnErrorCreatePolicyDefaultImplementation(Exception exception, string pathFormat, string path, CommonAddPolicyRequestInput commonAddPolicyRequestInput)
+        /// <param name="automationCommonAddPolicyRequestInput"></param>
+        private void OnErrorCreatePolicyDefaultImplementation(Exception exception, string pathFormat, string path, AutomationCommonAddPolicyRequestInput automationCommonAddPolicyRequestInput)
         {
             bool suppressDefaultLog = false;
-            OnErrorCreatePolicy(ref suppressDefaultLog, exception, pathFormat, path, commonAddPolicyRequestInput);
+            OnErrorCreatePolicy(ref suppressDefaultLog, exception, pathFormat, path, automationCommonAddPolicyRequestInput);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -308,20 +308,20 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="commonAddPolicyRequestInput"></param>
-        partial void OnErrorCreatePolicy(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, CommonAddPolicyRequestInput commonAddPolicyRequestInput);
+        /// <param name="automationCommonAddPolicyRequestInput"></param>
+        partial void OnErrorCreatePolicy(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationCommonAddPolicyRequestInput automationCommonAddPolicyRequestInput);
 
         /// <summary>
         /// Add a new policy to sponsor web3 actions 
         /// </summary>
-        /// <param name="commonAddPolicyRequestInput"></param>
+        /// <param name="automationCommonAddPolicyRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreatePolicyApiResponse"/>&gt;</returns>
-        public async Task<ICreatePolicyApiResponse?> CreatePolicyOrDefaultAsync(CommonAddPolicyRequestInput commonAddPolicyRequestInput, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICreatePolicyApiResponse?> CreatePolicyOrDefaultAsync(AutomationCommonAddPolicyRequestInput automationCommonAddPolicyRequestInput, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await CreatePolicyAsync(commonAddPolicyRequestInput, cancellationToken).ConfigureAwait(false);
+                return await CreatePolicyAsync(automationCommonAddPolicyRequestInput, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -333,18 +333,18 @@ namespace BeamAutomationClient.Api
         /// Add a new policy to sponsor web3 actions 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="commonAddPolicyRequestInput"></param>
+        /// <param name="automationCommonAddPolicyRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreatePolicyApiResponse"/>&gt;</returns>
-        public async Task<ICreatePolicyApiResponse> CreatePolicyAsync(CommonAddPolicyRequestInput commonAddPolicyRequestInput, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICreatePolicyApiResponse> CreatePolicyAsync(AutomationCommonAddPolicyRequestInput automationCommonAddPolicyRequestInput, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateCreatePolicy(commonAddPolicyRequestInput);
+                ValidateCreatePolicy(automationCommonAddPolicyRequestInput);
 
-                FormatCreatePolicy(commonAddPolicyRequestInput);
+                FormatCreatePolicy(automationCommonAddPolicyRequestInput);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -353,9 +353,9 @@ namespace BeamAutomationClient.Api
                     uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/policies";
 
-                    httpRequestMessageLocalVar.Content = (commonAddPolicyRequestInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (automationCommonAddPolicyRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(commonAddPolicyRequestInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationCommonAddPolicyRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -394,7 +394,7 @@ namespace BeamAutomationClient.Api
 
                         CreatePolicyApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/policies", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterCreatePolicyDefaultImplementation(apiResponseLocalVar, commonAddPolicyRequestInput);
+                        AfterCreatePolicyDefaultImplementation(apiResponseLocalVar, automationCommonAddPolicyRequestInput);
 
                         Events.ExecuteOnCreatePolicy(apiResponseLocalVar);
 
@@ -408,7 +408,7 @@ namespace BeamAutomationClient.Api
             }
             catch(Exception e)
             {
-                OnErrorCreatePolicyDefaultImplementation(e, "/v1/policies", uriBuilderLocalVar.Path, commonAddPolicyRequestInput);
+                OnErrorCreatePolicyDefaultImplementation(e, "/v1/policies", uriBuilderLocalVar.Path, automationCommonAddPolicyRequestInput);
                 Events.ExecuteOnErrorCreatePolicy(e);
                 throw;
             }
@@ -452,11 +452,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.CommonAddPolicyResponse? Created()
+            public BeamAutomationClient.Model.AutomationCommonAddPolicyResponse? Created()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsCreated
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.CommonAddPolicyResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationCommonAddPolicyResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -465,7 +465,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryCreated([NotNullWhen(true)]out BeamAutomationClient.Model.CommonAddPolicyResponse? result)
+            public bool TryCreated([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationCommonAddPolicyResponse? result)
             {
                 result = null;
 
@@ -679,11 +679,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.CommonRemovePolicyResponse? Ok()
+            public BeamAutomationClient.Model.AutomationCommonRemovePolicyResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.CommonRemovePolicyResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationCommonRemovePolicyResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -692,7 +692,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.CommonRemovePolicyResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationCommonRemovePolicyResponse? result)
             {
                 result = null;
 
@@ -882,11 +882,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.CommonGetPoliciesResponse? Ok()
+            public BeamAutomationClient.Model.AutomationCommonGetPoliciesResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.CommonGetPoliciesResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationCommonGetPoliciesResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -895,7 +895,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.CommonGetPoliciesResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationCommonGetPoliciesResponse? result)
             {
                 result = null;
 

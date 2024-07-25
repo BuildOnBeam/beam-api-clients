@@ -1,11 +1,13 @@
 {
   "name": "@onbeam/api-clients",
   "scripts": {
-    "generate": "pnpm generate:self-custody:csharp && pnpm generate:custodial:node && pnpm generate:self-custody:node",
-    "generate:custodial:csharp": "rm -rf ./automation-api-clients/csharp/src/BeamAutomationClient/Api && rm -rf ./automation-api-clients/csharp/src/BeamAutomationClient/Model && openapi-generator-cli generate",
-    "generate:custodial:node": "pnpm --filter @onbeam/node generate && pnpm validate:lint:fix",
-    "generate:self-custody:csharp": "rm -rf ./player-api-clients/csharp/src/BeamPlayerClient/Api && rm -rf ./player-api-clients/csharp/src/BeamPlayerClient/Model && openapi-generator-cli generate",
-    "generate:self-custody:node": "pnpm --filter @onbeam/self-custody generate && pnpm validate:lint:fix",
+    "get:oas:csharp:player": "node get-and-modify-oas-for-csharp.js 'https://api.testnet.onbeam.com/api/player-json' 'Player' './player-api-clients/csharp/spec.json'",
+    "get:oas:csharp:automation": "node get-and-modify-oas-for-csharp.js 'https://api.testnet.onbeam.com/api/automation-json' 'Automation' './automation-api-clients/csharp/spec.json'",
+    "generate": "pnpm generate:player:csharp && pnpm generate:automation:node && pnpm generate:player:node",
+    "generate:automation:csharp": "rm -rf ./automation-api-clients/csharp/src/BeamAutomationClient/Api && rm -rf ./automation-api-clients/csharp/src/BeamAutomationClient/Model && pnpm get:oas:csharp:automation && openapi-generator-cli generate",
+    "generate:automation:node": "pnpm --filter @onbeam/automation-api-client generate && pnpm validate:lint:fix",
+    "generate:player:csharp": "rm -rf ./player-api-clients/csharp/src/BeamPlayerClient/Api && rm -rf ./player-api-clients/csharp/src/BeamPlayerClient/Model && pnpm get:oas:csharp:player && openapi-generator-cli generate",
+    "generate:player:node": "pnpm --filter @onbeam/player-api-client generate && pnpm validate:lint:fix",
     "validate:format": "biome format .",
     "validate:format:fix": "pnpm validate:format --write",
     "validate:lint": "biome check .",

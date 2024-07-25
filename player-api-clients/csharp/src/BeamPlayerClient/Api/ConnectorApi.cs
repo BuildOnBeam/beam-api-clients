@@ -28,12 +28,12 @@ namespace BeamPlayerClient.Api
     /// Represents a collection of functions to interact with the API endpoints
     /// This class is registered as transient.
     /// </summary>
-    public interface IConnectorApi : IApi
+    public interface IPlayerConnectorApi : IPlayerApi
     {
         /// <summary>
         /// The class containing the events
         /// </summary>
-        ConnectorApiEvents Events { get; }
+        PlayerConnectorApiEvents Events { get; }
 
         /// <summary>
         /// 
@@ -42,10 +42,10 @@ namespace BeamPlayerClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="createConnectionRequestInput"></param>
+        /// <param name="playerCreateConnectionRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateConnectionRequestApiResponse"/>&gt;</returns>
-        Task<ICreateConnectionRequestApiResponse> CreateConnectionRequestAsync(CreateConnectionRequestInput createConnectionRequestInput, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICreateConnectionRequestApiResponse> CreateConnectionRequestAsync(PlayerCreateConnectionRequestInput playerCreateConnectionRequestInput, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -53,10 +53,10 @@ namespace BeamPlayerClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="createConnectionRequestInput"></param>
+        /// <param name="playerCreateConnectionRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateConnectionRequestApiResponse"/>?&gt;</returns>
-        Task<ICreateConnectionRequestApiResponse?> CreateConnectionRequestOrDefaultAsync(CreateConnectionRequestInput createConnectionRequestInput, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICreateConnectionRequestApiResponse?> CreateConnectionRequestOrDefaultAsync(PlayerCreateConnectionRequestInput playerCreateConnectionRequestInput, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -85,7 +85,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="ICreateConnectionRequestApiResponse"/>
     /// </summary>
-    public interface ICreateConnectionRequestApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.CreateConnectionRequestResponse?>
+    public interface ICreateConnectionRequestApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerCreateConnectionRequestResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -97,7 +97,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="IGetConnectionRequestApiResponse"/>
     /// </summary>
-    public interface IGetConnectionRequestApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.GetConnectionRequestResponse?>
+    public interface IGetConnectionRequestApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetConnectionRequestResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -109,7 +109,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public class ConnectorApiEvents
+    public class PlayerConnectorApiEvents
     {
         /// <summary>
         /// The event raised after the server response
@@ -121,7 +121,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorCreateConnectionRequest;
 
-        internal void ExecuteOnCreateConnectionRequest(ConnectorApi.CreateConnectionRequestApiResponse apiResponse)
+        internal void ExecuteOnCreateConnectionRequest(PlayerConnectorApi.CreateConnectionRequestApiResponse apiResponse)
         {
             OnCreateConnectionRequest?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -141,7 +141,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetConnectionRequest;
 
-        internal void ExecuteOnGetConnectionRequest(ConnectorApi.GetConnectionRequestApiResponse apiResponse)
+        internal void ExecuteOnGetConnectionRequest(PlayerConnectorApi.GetConnectionRequestApiResponse apiResponse)
         {
             OnGetConnectionRequest?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -155,7 +155,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public sealed partial class ConnectorApi : IConnectorApi
+    public sealed partial class PlayerConnectorApi : IPlayerConnectorApi
     {
         private JsonSerializerOptions _jsonSerializerOptions;
 
@@ -167,7 +167,7 @@ namespace BeamPlayerClient.Api
         /// <summary>
         /// The logger
         /// </summary>
-        public ILogger<ConnectorApi> Logger { get; }
+        public ILogger<PlayerConnectorApi> Logger { get; }
 
         /// <summary>
         /// The HttpClient
@@ -177,7 +177,7 @@ namespace BeamPlayerClient.Api
         /// <summary>
         /// The class containing the events
         /// </summary>
-        public ConnectorApiEvents Events { get; }
+        public PlayerConnectorApiEvents Events { get; }
 
         /// <summary>
         /// A token provider of type <see cref="ApiKeyProvider"/>
@@ -185,42 +185,42 @@ namespace BeamPlayerClient.Api
         public TokenProvider<ApiKeyToken> ApiKeyProvider { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConnectorApi"/> class.
+        /// Initializes a new instance of the <see cref="PlayerConnectorApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public ConnectorApi(ILogger<ConnectorApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, ConnectorApiEvents connectorApiEvents,
+        public PlayerConnectorApi(ILogger<PlayerConnectorApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, PlayerJsonSerializerOptionsProvider jsonSerializerOptionsProvider, PlayerConnectorApiEvents playerConnectorApiEvents,
             TokenProvider<ApiKeyToken> apiKeyProvider)
         {
             _jsonSerializerOptions = jsonSerializerOptionsProvider.Options;
             LoggerFactory = loggerFactory;
-            Logger = LoggerFactory.CreateLogger<ConnectorApi>();
+            Logger = LoggerFactory.CreateLogger<PlayerConnectorApi>();
             HttpClient = httpClient;
-            Events = connectorApiEvents;
+            Events = playerConnectorApiEvents;
             ApiKeyProvider = apiKeyProvider;
         }
 
-        partial void FormatCreateConnectionRequest(CreateConnectionRequestInput createConnectionRequestInput);
+        partial void FormatCreateConnectionRequest(PlayerCreateConnectionRequestInput playerCreateConnectionRequestInput);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="createConnectionRequestInput"></param>
+        /// <param name="playerCreateConnectionRequestInput"></param>
         /// <returns></returns>
-        private void ValidateCreateConnectionRequest(CreateConnectionRequestInput createConnectionRequestInput)
+        private void ValidateCreateConnectionRequest(PlayerCreateConnectionRequestInput playerCreateConnectionRequestInput)
         {
-            if (createConnectionRequestInput == null)
-                throw new ArgumentNullException(nameof(createConnectionRequestInput));
+            if (playerCreateConnectionRequestInput == null)
+                throw new ArgumentNullException(nameof(playerCreateConnectionRequestInput));
         }
 
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="createConnectionRequestInput"></param>
-        private void AfterCreateConnectionRequestDefaultImplementation(ICreateConnectionRequestApiResponse apiResponseLocalVar, CreateConnectionRequestInput createConnectionRequestInput)
+        /// <param name="playerCreateConnectionRequestInput"></param>
+        private void AfterCreateConnectionRequestDefaultImplementation(ICreateConnectionRequestApiResponse apiResponseLocalVar, PlayerCreateConnectionRequestInput playerCreateConnectionRequestInput)
         {
             bool suppressDefaultLog = false;
-            AfterCreateConnectionRequest(ref suppressDefaultLog, apiResponseLocalVar, createConnectionRequestInput);
+            AfterCreateConnectionRequest(ref suppressDefaultLog, apiResponseLocalVar, playerCreateConnectionRequestInput);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -230,8 +230,8 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="createConnectionRequestInput"></param>
-        partial void AfterCreateConnectionRequest(ref bool suppressDefaultLog, ICreateConnectionRequestApiResponse apiResponseLocalVar, CreateConnectionRequestInput createConnectionRequestInput);
+        /// <param name="playerCreateConnectionRequestInput"></param>
+        partial void AfterCreateConnectionRequest(ref bool suppressDefaultLog, ICreateConnectionRequestApiResponse apiResponseLocalVar, PlayerCreateConnectionRequestInput playerCreateConnectionRequestInput);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -239,11 +239,11 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="createConnectionRequestInput"></param>
-        private void OnErrorCreateConnectionRequestDefaultImplementation(Exception exception, string pathFormat, string path, CreateConnectionRequestInput createConnectionRequestInput)
+        /// <param name="playerCreateConnectionRequestInput"></param>
+        private void OnErrorCreateConnectionRequestDefaultImplementation(Exception exception, string pathFormat, string path, PlayerCreateConnectionRequestInput playerCreateConnectionRequestInput)
         {
             bool suppressDefaultLog = false;
-            OnErrorCreateConnectionRequest(ref suppressDefaultLog, exception, pathFormat, path, createConnectionRequestInput);
+            OnErrorCreateConnectionRequest(ref suppressDefaultLog, exception, pathFormat, path, playerCreateConnectionRequestInput);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -255,20 +255,20 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="createConnectionRequestInput"></param>
-        partial void OnErrorCreateConnectionRequest(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, CreateConnectionRequestInput createConnectionRequestInput);
+        /// <param name="playerCreateConnectionRequestInput"></param>
+        partial void OnErrorCreateConnectionRequest(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, PlayerCreateConnectionRequestInput playerCreateConnectionRequestInput);
 
         /// <summary>
         ///  
         /// </summary>
-        /// <param name="createConnectionRequestInput"></param>
+        /// <param name="playerCreateConnectionRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateConnectionRequestApiResponse"/>&gt;</returns>
-        public async Task<ICreateConnectionRequestApiResponse?> CreateConnectionRequestOrDefaultAsync(CreateConnectionRequestInput createConnectionRequestInput, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICreateConnectionRequestApiResponse?> CreateConnectionRequestOrDefaultAsync(PlayerCreateConnectionRequestInput playerCreateConnectionRequestInput, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await CreateConnectionRequestAsync(createConnectionRequestInput, cancellationToken).ConfigureAwait(false);
+                return await CreateConnectionRequestAsync(playerCreateConnectionRequestInput, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -280,18 +280,18 @@ namespace BeamPlayerClient.Api
         ///  
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="createConnectionRequestInput"></param>
+        /// <param name="playerCreateConnectionRequestInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateConnectionRequestApiResponse"/>&gt;</returns>
-        public async Task<ICreateConnectionRequestApiResponse> CreateConnectionRequestAsync(CreateConnectionRequestInput createConnectionRequestInput, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICreateConnectionRequestApiResponse> CreateConnectionRequestAsync(PlayerCreateConnectionRequestInput playerCreateConnectionRequestInput, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateCreateConnectionRequest(createConnectionRequestInput);
+                ValidateCreateConnectionRequest(playerCreateConnectionRequestInput);
 
-                FormatCreateConnectionRequest(createConnectionRequestInput);
+                FormatCreateConnectionRequest(playerCreateConnectionRequestInput);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -300,9 +300,9 @@ namespace BeamPlayerClient.Api
                     uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/connection/request";
 
-                    httpRequestMessageLocalVar.Content = (createConnectionRequestInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (playerCreateConnectionRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(createConnectionRequestInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(playerCreateConnectionRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -341,7 +341,7 @@ namespace BeamPlayerClient.Api
 
                         CreateConnectionRequestApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/connection/request", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterCreateConnectionRequestDefaultImplementation(apiResponseLocalVar, createConnectionRequestInput);
+                        AfterCreateConnectionRequestDefaultImplementation(apiResponseLocalVar, playerCreateConnectionRequestInput);
 
                         Events.ExecuteOnCreateConnectionRequest(apiResponseLocalVar);
 
@@ -355,7 +355,7 @@ namespace BeamPlayerClient.Api
             }
             catch(Exception e)
             {
-                OnErrorCreateConnectionRequestDefaultImplementation(e, "/v1/connection/request", uriBuilderLocalVar.Path, createConnectionRequestInput);
+                OnErrorCreateConnectionRequestDefaultImplementation(e, "/v1/connection/request", uriBuilderLocalVar.Path, playerCreateConnectionRequestInput);
                 Events.ExecuteOnErrorCreateConnectionRequest(e);
                 throw;
             }
@@ -399,11 +399,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.CreateConnectionRequestResponse? Ok()
+            public BeamPlayerClient.Model.PlayerCreateConnectionRequestResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.CreateConnectionRequestResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerCreateConnectionRequestResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -412,7 +412,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.CreateConnectionRequestResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerCreateConnectionRequestResponse? result)
             {
                 result = null;
 
@@ -626,11 +626,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.GetConnectionRequestResponse? Ok()
+            public BeamPlayerClient.Model.PlayerGetConnectionRequestResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.GetConnectionRequestResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerGetConnectionRequestResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -639,7 +639,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.GetConnectionRequestResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerGetConnectionRequestResponse? result)
             {
                 result = null;
 

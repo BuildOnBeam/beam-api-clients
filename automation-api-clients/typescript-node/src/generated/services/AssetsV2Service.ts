@@ -134,7 +134,7 @@ export class AssetsV2Service {
   }
 
   /**
-   * Transfer the native token (BEAM)
+   * Transfer the native token
    * @param entityId
    * @param requestBody
    * @returns TransferTokenResponseV2

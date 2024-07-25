@@ -28,12 +28,12 @@ namespace BeamPlayerClient.Api
     /// Represents a collection of functions to interact with the API endpoints
     /// This class is registered as transient.
     /// </summary>
-    public interface IMarketplaceApi : IApi
+    public interface IPlayerMarketplaceApi : IPlayerApi
     {
         /// <summary>
         /// The class containing the events
         /// </summary>
-        MarketplaceApiEvents Events { get; }
+        PlayerMarketplaceApiEvents Events { get; }
 
         /// <summary>
         /// Accept an offer for an asset
@@ -42,12 +42,12 @@ namespace BeamPlayerClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="acceptAssetOfferRequestInput"></param>
+        /// <param name="playerAcceptAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IAcceptAssetOfferApiResponse"/>&gt;</returns>
-        Task<IAcceptAssetOfferApiResponse> AcceptAssetOfferAsync(AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IAcceptAssetOfferApiResponse> AcceptAssetOfferAsync(PlayerAcceptAssetOfferRequestInput playerAcceptAssetOfferRequestInput, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Accept an offer for an asset
@@ -55,12 +55,12 @@ namespace BeamPlayerClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="acceptAssetOfferRequestInput"></param>
+        /// <param name="playerAcceptAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IAcceptAssetOfferApiResponse"/>?&gt;</returns>
-        Task<IAcceptAssetOfferApiResponse?> AcceptAssetOfferOrDefaultAsync(AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IAcceptAssetOfferApiResponse?> AcceptAssetOfferOrDefaultAsync(PlayerAcceptAssetOfferRequestInput playerAcceptAssetOfferRequestInput, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Buy listed asset
@@ -69,12 +69,12 @@ namespace BeamPlayerClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="buyAssetRequestInput"></param>
+        /// <param name="playerBuyAssetRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IBuyListedAssetApiResponse"/>&gt;</returns>
-        Task<IBuyListedAssetApiResponse> BuyListedAssetAsync(BuyAssetRequestInput buyAssetRequestInput, string entityId, string orderId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IBuyListedAssetApiResponse> BuyListedAssetAsync(PlayerBuyAssetRequestInput playerBuyAssetRequestInput, string entityId, string orderId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Buy listed asset
@@ -82,12 +82,12 @@ namespace BeamPlayerClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="buyAssetRequestInput"></param>
+        /// <param name="playerBuyAssetRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IBuyListedAssetApiResponse"/>?&gt;</returns>
-        Task<IBuyListedAssetApiResponse?> BuyListedAssetOrDefaultAsync(BuyAssetRequestInput buyAssetRequestInput, string entityId, string orderId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IBuyListedAssetApiResponse?> BuyListedAssetOrDefaultAsync(PlayerBuyAssetRequestInput playerBuyAssetRequestInput, string entityId, string orderId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Cancel an offer for an asset
@@ -96,12 +96,12 @@ namespace BeamPlayerClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="cancelAssetOfferRequestInput"></param>
+        /// <param name="playerCancelAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICancelAssetOfferApiResponse"/>&gt;</returns>
-        Task<ICancelAssetOfferApiResponse> CancelAssetOfferAsync(CancelAssetOfferRequestInput cancelAssetOfferRequestInput, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICancelAssetOfferApiResponse> CancelAssetOfferAsync(PlayerCancelAssetOfferRequestInput playerCancelAssetOfferRequestInput, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Cancel an offer for an asset
@@ -109,12 +109,12 @@ namespace BeamPlayerClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="cancelAssetOfferRequestInput"></param>
+        /// <param name="playerCancelAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICancelAssetOfferApiResponse"/>?&gt;</returns>
-        Task<ICancelAssetOfferApiResponse?> CancelAssetOfferOrDefaultAsync(CancelAssetOfferRequestInput cancelAssetOfferRequestInput, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICancelAssetOfferApiResponse?> CancelAssetOfferOrDefaultAsync(PlayerCancelAssetOfferRequestInput playerCancelAssetOfferRequestInput, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Cancel asset listing
@@ -123,13 +123,13 @@ namespace BeamPlayerClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="cancelAssetListingRequestInput"></param>
+        /// <param name="playerCancelAssetListingRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICancelListingApiResponse"/>&gt;</returns>
-        Task<ICancelListingApiResponse> CancelListingAsync(CancelAssetListingRequestInput cancelAssetListingRequestInput, string entityId, string orderId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICancelListingApiResponse> CancelListingAsync(PlayerCancelAssetListingRequestInput playerCancelAssetListingRequestInput, string entityId, string orderId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Cancel asset listing
@@ -137,13 +137,13 @@ namespace BeamPlayerClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="cancelAssetListingRequestInput"></param>
+        /// <param name="playerCancelAssetListingRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICancelListingApiResponse"/>?&gt;</returns>
-        Task<ICancelListingApiResponse?> CancelListingOrDefaultAsync(CancelAssetListingRequestInput cancelAssetListingRequestInput, string entityId, string orderId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICancelListingApiResponse?> CancelListingOrDefaultAsync(PlayerCancelAssetListingRequestInput playerCancelAssetListingRequestInput, string entityId, string orderId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Make an offer for an asset
@@ -152,11 +152,11 @@ namespace BeamPlayerClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="createAssetOfferRequestInput"></param>
+        /// <param name="playerCreateAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateAssetOfferApiResponse"/>&gt;</returns>
-        Task<ICreateAssetOfferApiResponse> CreateAssetOfferAsync(CreateAssetOfferRequestInput createAssetOfferRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICreateAssetOfferApiResponse> CreateAssetOfferAsync(PlayerCreateAssetOfferRequestInput playerCreateAssetOfferRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Make an offer for an asset
@@ -164,11 +164,11 @@ namespace BeamPlayerClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="createAssetOfferRequestInput"></param>
+        /// <param name="playerCreateAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateAssetOfferApiResponse"/>?&gt;</returns>
-        Task<ICreateAssetOfferApiResponse?> CreateAssetOfferOrDefaultAsync(CreateAssetOfferRequestInput createAssetOfferRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICreateAssetOfferApiResponse?> CreateAssetOfferOrDefaultAsync(PlayerCreateAssetOfferRequestInput playerCreateAssetOfferRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all offers for an asset
@@ -229,10 +229,10 @@ namespace BeamPlayerClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="getListedAssetsBodyInput"></param>
+        /// <param name="playerGetListedAssetsBodyInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetListedAssetsApiResponse"/>&gt;</returns>
-        Task<IGetListedAssetsApiResponse> GetListedAssetsAsync(GetListedAssetsBodyInput getListedAssetsBodyInput, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetListedAssetsApiResponse> GetListedAssetsAsync(PlayerGetListedAssetsBodyInput playerGetListedAssetsBodyInput, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155)
@@ -240,10 +240,10 @@ namespace BeamPlayerClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="getListedAssetsBodyInput"></param>
+        /// <param name="playerGetListedAssetsBodyInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetListedAssetsApiResponse"/>?&gt;</returns>
-        Task<IGetListedAssetsApiResponse?> GetListedAssetsOrDefaultAsync(GetListedAssetsBodyInput getListedAssetsBodyInput, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetListedAssetsApiResponse?> GetListedAssetsOrDefaultAsync(PlayerGetListedAssetsBodyInput playerGetListedAssetsBodyInput, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all the assets listed by a profile (NFT assets, e.g. ERC721 / ERC1155)
@@ -252,11 +252,11 @@ namespace BeamPlayerClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="getListedAssetsBodyInput"></param>
+        /// <param name="playerGetListedAssetsBodyInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetListedAssetsForUserApiResponse"/>&gt;</returns>
-        Task<IGetListedAssetsForUserApiResponse> GetListedAssetsForUserAsync(GetListedAssetsBodyInput getListedAssetsBodyInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetListedAssetsForUserApiResponse> GetListedAssetsForUserAsync(PlayerGetListedAssetsBodyInput playerGetListedAssetsBodyInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all the assets listed by a profile (NFT assets, e.g. ERC721 / ERC1155)
@@ -264,11 +264,11 @@ namespace BeamPlayerClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="getListedAssetsBodyInput"></param>
+        /// <param name="playerGetListedAssetsBodyInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetListedAssetsForUserApiResponse"/>?&gt;</returns>
-        Task<IGetListedAssetsForUserApiResponse?> GetListedAssetsForUserOrDefaultAsync(GetListedAssetsBodyInput getListedAssetsBodyInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetListedAssetsForUserApiResponse?> GetListedAssetsForUserOrDefaultAsync(PlayerGetListedAssetsBodyInput playerGetListedAssetsBodyInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all asset offers that a user created for a specific asset
@@ -335,11 +335,11 @@ namespace BeamPlayerClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sellAssetRequestInput"></param>
+        /// <param name="playerSellAssetRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IListAssetApiResponse"/>&gt;</returns>
-        Task<IListAssetApiResponse> ListAssetAsync(SellAssetRequestInput sellAssetRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IListAssetApiResponse> ListAssetAsync(PlayerSellAssetRequestInput playerSellAssetRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List an asset for sale
@@ -347,11 +347,11 @@ namespace BeamPlayerClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="sellAssetRequestInput"></param>
+        /// <param name="playerSellAssetRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IListAssetApiResponse"/>?&gt;</returns>
-        Task<IListAssetApiResponse?> ListAssetOrDefaultAsync(SellAssetRequestInput sellAssetRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IListAssetApiResponse?> ListAssetOrDefaultAsync(PlayerSellAssetRequestInput playerSellAssetRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Schedule a contract refresh in the indexer
@@ -360,10 +360,10 @@ namespace BeamPlayerClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="refreshContractRequestBody"></param>
+        /// <param name="playerRefreshContractRequestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRefreshContractApiResponse"/>&gt;</returns>
-        Task<IRefreshContractApiResponse> RefreshContractAsync(RefreshContractRequestBody refreshContractRequestBody, System.Threading.CancellationToken cancellationToken = default);
+        Task<IRefreshContractApiResponse> RefreshContractAsync(PlayerRefreshContractRequestBody playerRefreshContractRequestBody, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Schedule a contract refresh in the indexer
@@ -371,10 +371,10 @@ namespace BeamPlayerClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="refreshContractRequestBody"></param>
+        /// <param name="playerRefreshContractRequestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRefreshContractApiResponse"/>?&gt;</returns>
-        Task<IRefreshContractApiResponse?> RefreshContractOrDefaultAsync(RefreshContractRequestBody refreshContractRequestBody, System.Threading.CancellationToken cancellationToken = default);
+        Task<IRefreshContractApiResponse?> RefreshContractOrDefaultAsync(PlayerRefreshContractRequestBody playerRefreshContractRequestBody, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Schedule a token refresh in the indexer
@@ -383,10 +383,10 @@ namespace BeamPlayerClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="refreshTokenRequestBody"></param>
+        /// <param name="playerRefreshTokenRequestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRefreshTokenApiResponse"/>&gt;</returns>
-        Task<IRefreshTokenApiResponse> RefreshTokenAsync(RefreshTokenRequestBody refreshTokenRequestBody, System.Threading.CancellationToken cancellationToken = default);
+        Task<IRefreshTokenApiResponse> RefreshTokenAsync(PlayerRefreshTokenRequestBody playerRefreshTokenRequestBody, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Schedule a token refresh in the indexer
@@ -394,16 +394,16 @@ namespace BeamPlayerClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="refreshTokenRequestBody"></param>
+        /// <param name="playerRefreshTokenRequestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRefreshTokenApiResponse"/>?&gt;</returns>
-        Task<IRefreshTokenApiResponse?> RefreshTokenOrDefaultAsync(RefreshTokenRequestBody refreshTokenRequestBody, System.Threading.CancellationToken cancellationToken = default);
+        Task<IRefreshTokenApiResponse?> RefreshTokenOrDefaultAsync(PlayerRefreshTokenRequestBody playerRefreshTokenRequestBody, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
     /// The <see cref="IAcceptAssetOfferApiResponse"/>
     /// </summary>
-    public interface IAcceptAssetOfferApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.CommonOperationResponse?>
+    public interface IAcceptAssetOfferApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerCommonOperationResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -415,7 +415,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="IBuyListedAssetApiResponse"/>
     /// </summary>
-    public interface IBuyListedAssetApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.CommonOperationResponse?>
+    public interface IBuyListedAssetApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerCommonOperationResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -427,7 +427,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="ICancelAssetOfferApiResponse"/>
     /// </summary>
-    public interface ICancelAssetOfferApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.CommonOperationResponse?>
+    public interface ICancelAssetOfferApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerCommonOperationResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -439,7 +439,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="ICancelListingApiResponse"/>
     /// </summary>
-    public interface ICancelListingApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.CommonOperationResponse?>
+    public interface ICancelListingApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerCommonOperationResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -451,7 +451,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="ICreateAssetOfferApiResponse"/>
     /// </summary>
-    public interface ICreateAssetOfferApiResponse : BeamPlayerClient.Client.IApiResponse, ICreated<BeamPlayerClient.Model.CommonOperationResponse?>
+    public interface ICreateAssetOfferApiResponse : BeamPlayerClient.Client.IApiResponse, ICreated<BeamPlayerClient.Model.PlayerCommonOperationResponse?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
@@ -463,7 +463,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="IGetAssetOffersApiResponse"/>
     /// </summary>
-    public interface IGetAssetOffersApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.GetAssetListingsResponse?>
+    public interface IGetAssetOffersApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetAssetListingsResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -475,7 +475,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="IGetChainCurrenciesApiResponse"/>
     /// </summary>
-    public interface IGetChainCurrenciesApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.GetChainCurrenciesResponse?>
+    public interface IGetChainCurrenciesApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetChainCurrenciesResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -487,7 +487,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="IGetListedAssetsApiResponse"/>
     /// </summary>
-    public interface IGetListedAssetsApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.GetAssetListingsResponse?>
+    public interface IGetListedAssetsApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetAssetListingsResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -499,7 +499,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="IGetListedAssetsForUserApiResponse"/>
     /// </summary>
-    public interface IGetListedAssetsForUserApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.GetAssetListingsResponse?>
+    public interface IGetListedAssetsForUserApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetAssetListingsResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -511,7 +511,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="IGetUserAssetOffersApiResponse"/>
     /// </summary>
-    public interface IGetUserAssetOffersApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.GetAssetListingsResponse?>
+    public interface IGetUserAssetOffersApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetAssetListingsResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -523,7 +523,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="IGetUserOffersApiResponse"/>
     /// </summary>
-    public interface IGetUserOffersApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.GetAssetListingsResponse?>
+    public interface IGetUserOffersApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetAssetListingsResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -535,7 +535,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="IListAssetApiResponse"/>
     /// </summary>
-    public interface IListAssetApiResponse : BeamPlayerClient.Client.IApiResponse, ICreated<BeamPlayerClient.Model.CommonOperationResponse?>
+    public interface IListAssetApiResponse : BeamPlayerClient.Client.IApiResponse, ICreated<BeamPlayerClient.Model.PlayerCommonOperationResponse?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
@@ -571,7 +571,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public class MarketplaceApiEvents
+    public class PlayerMarketplaceApiEvents
     {
         /// <summary>
         /// The event raised after the server response
@@ -583,7 +583,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorAcceptAssetOffer;
 
-        internal void ExecuteOnAcceptAssetOffer(MarketplaceApi.AcceptAssetOfferApiResponse apiResponse)
+        internal void ExecuteOnAcceptAssetOffer(PlayerMarketplaceApi.AcceptAssetOfferApiResponse apiResponse)
         {
             OnAcceptAssetOffer?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -603,7 +603,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorBuyListedAsset;
 
-        internal void ExecuteOnBuyListedAsset(MarketplaceApi.BuyListedAssetApiResponse apiResponse)
+        internal void ExecuteOnBuyListedAsset(PlayerMarketplaceApi.BuyListedAssetApiResponse apiResponse)
         {
             OnBuyListedAsset?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -623,7 +623,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorCancelAssetOffer;
 
-        internal void ExecuteOnCancelAssetOffer(MarketplaceApi.CancelAssetOfferApiResponse apiResponse)
+        internal void ExecuteOnCancelAssetOffer(PlayerMarketplaceApi.CancelAssetOfferApiResponse apiResponse)
         {
             OnCancelAssetOffer?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -643,7 +643,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorCancelListing;
 
-        internal void ExecuteOnCancelListing(MarketplaceApi.CancelListingApiResponse apiResponse)
+        internal void ExecuteOnCancelListing(PlayerMarketplaceApi.CancelListingApiResponse apiResponse)
         {
             OnCancelListing?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -663,7 +663,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorCreateAssetOffer;
 
-        internal void ExecuteOnCreateAssetOffer(MarketplaceApi.CreateAssetOfferApiResponse apiResponse)
+        internal void ExecuteOnCreateAssetOffer(PlayerMarketplaceApi.CreateAssetOfferApiResponse apiResponse)
         {
             OnCreateAssetOffer?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -683,7 +683,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetAssetOffers;
 
-        internal void ExecuteOnGetAssetOffers(MarketplaceApi.GetAssetOffersApiResponse apiResponse)
+        internal void ExecuteOnGetAssetOffers(PlayerMarketplaceApi.GetAssetOffersApiResponse apiResponse)
         {
             OnGetAssetOffers?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -703,7 +703,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetChainCurrencies;
 
-        internal void ExecuteOnGetChainCurrencies(MarketplaceApi.GetChainCurrenciesApiResponse apiResponse)
+        internal void ExecuteOnGetChainCurrencies(PlayerMarketplaceApi.GetChainCurrenciesApiResponse apiResponse)
         {
             OnGetChainCurrencies?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -723,7 +723,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetListedAssets;
 
-        internal void ExecuteOnGetListedAssets(MarketplaceApi.GetListedAssetsApiResponse apiResponse)
+        internal void ExecuteOnGetListedAssets(PlayerMarketplaceApi.GetListedAssetsApiResponse apiResponse)
         {
             OnGetListedAssets?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -743,7 +743,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetListedAssetsForUser;
 
-        internal void ExecuteOnGetListedAssetsForUser(MarketplaceApi.GetListedAssetsForUserApiResponse apiResponse)
+        internal void ExecuteOnGetListedAssetsForUser(PlayerMarketplaceApi.GetListedAssetsForUserApiResponse apiResponse)
         {
             OnGetListedAssetsForUser?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -763,7 +763,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetUserAssetOffers;
 
-        internal void ExecuteOnGetUserAssetOffers(MarketplaceApi.GetUserAssetOffersApiResponse apiResponse)
+        internal void ExecuteOnGetUserAssetOffers(PlayerMarketplaceApi.GetUserAssetOffersApiResponse apiResponse)
         {
             OnGetUserAssetOffers?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -783,7 +783,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetUserOffers;
 
-        internal void ExecuteOnGetUserOffers(MarketplaceApi.GetUserOffersApiResponse apiResponse)
+        internal void ExecuteOnGetUserOffers(PlayerMarketplaceApi.GetUserOffersApiResponse apiResponse)
         {
             OnGetUserOffers?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -803,7 +803,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorListAsset;
 
-        internal void ExecuteOnListAsset(MarketplaceApi.ListAssetApiResponse apiResponse)
+        internal void ExecuteOnListAsset(PlayerMarketplaceApi.ListAssetApiResponse apiResponse)
         {
             OnListAsset?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -823,7 +823,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorRefreshContract;
 
-        internal void ExecuteOnRefreshContract(MarketplaceApi.RefreshContractApiResponse apiResponse)
+        internal void ExecuteOnRefreshContract(PlayerMarketplaceApi.RefreshContractApiResponse apiResponse)
         {
             OnRefreshContract?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -843,7 +843,7 @@ namespace BeamPlayerClient.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorRefreshToken;
 
-        internal void ExecuteOnRefreshToken(MarketplaceApi.RefreshTokenApiResponse apiResponse)
+        internal void ExecuteOnRefreshToken(PlayerMarketplaceApi.RefreshTokenApiResponse apiResponse)
         {
             OnRefreshToken?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -857,7 +857,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public sealed partial class MarketplaceApi : IMarketplaceApi
+    public sealed partial class PlayerMarketplaceApi : IPlayerMarketplaceApi
     {
         private JsonSerializerOptions _jsonSerializerOptions;
 
@@ -869,7 +869,7 @@ namespace BeamPlayerClient.Api
         /// <summary>
         /// The logger
         /// </summary>
-        public ILogger<MarketplaceApi> Logger { get; }
+        public ILogger<PlayerMarketplaceApi> Logger { get; }
 
         /// <summary>
         /// The HttpClient
@@ -879,7 +879,7 @@ namespace BeamPlayerClient.Api
         /// <summary>
         /// The class containing the events
         /// </summary>
-        public MarketplaceApiEvents Events { get; }
+        public PlayerMarketplaceApiEvents Events { get; }
 
         /// <summary>
         /// A token provider of type <see cref="ApiKeyProvider"/>
@@ -887,33 +887,33 @@ namespace BeamPlayerClient.Api
         public TokenProvider<ApiKeyToken> ApiKeyProvider { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MarketplaceApi"/> class.
+        /// Initializes a new instance of the <see cref="PlayerMarketplaceApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public MarketplaceApi(ILogger<MarketplaceApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, MarketplaceApiEvents marketplaceApiEvents,
+        public PlayerMarketplaceApi(ILogger<PlayerMarketplaceApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, PlayerJsonSerializerOptionsProvider jsonSerializerOptionsProvider, PlayerMarketplaceApiEvents playerMarketplaceApiEvents,
             TokenProvider<ApiKeyToken> apiKeyProvider)
         {
             _jsonSerializerOptions = jsonSerializerOptionsProvider.Options;
             LoggerFactory = loggerFactory;
-            Logger = LoggerFactory.CreateLogger<MarketplaceApi>();
+            Logger = LoggerFactory.CreateLogger<PlayerMarketplaceApi>();
             HttpClient = httpClient;
-            Events = marketplaceApiEvents;
+            Events = playerMarketplaceApiEvents;
             ApiKeyProvider = apiKeyProvider;
         }
 
-        partial void FormatAcceptAssetOffer(AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, ref string entityId, ref string offerId);
+        partial void FormatAcceptAssetOffer(PlayerAcceptAssetOfferRequestInput playerAcceptAssetOfferRequestInput, ref string entityId, ref string offerId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="acceptAssetOfferRequestInput"></param>
+        /// <param name="playerAcceptAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
         /// <returns></returns>
-        private void ValidateAcceptAssetOffer(AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, string entityId, string offerId)
+        private void ValidateAcceptAssetOffer(PlayerAcceptAssetOfferRequestInput playerAcceptAssetOfferRequestInput, string entityId, string offerId)
         {
-            if (acceptAssetOfferRequestInput == null)
-                throw new ArgumentNullException(nameof(acceptAssetOfferRequestInput));
+            if (playerAcceptAssetOfferRequestInput == null)
+                throw new ArgumentNullException(nameof(playerAcceptAssetOfferRequestInput));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -926,13 +926,13 @@ namespace BeamPlayerClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="acceptAssetOfferRequestInput"></param>
+        /// <param name="playerAcceptAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
-        private void AfterAcceptAssetOfferDefaultImplementation(IAcceptAssetOfferApiResponse apiResponseLocalVar, AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, string entityId, string offerId)
+        private void AfterAcceptAssetOfferDefaultImplementation(IAcceptAssetOfferApiResponse apiResponseLocalVar, PlayerAcceptAssetOfferRequestInput playerAcceptAssetOfferRequestInput, string entityId, string offerId)
         {
             bool suppressDefaultLog = false;
-            AfterAcceptAssetOffer(ref suppressDefaultLog, apiResponseLocalVar, acceptAssetOfferRequestInput, entityId, offerId);
+            AfterAcceptAssetOffer(ref suppressDefaultLog, apiResponseLocalVar, playerAcceptAssetOfferRequestInput, entityId, offerId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -942,10 +942,10 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="acceptAssetOfferRequestInput"></param>
+        /// <param name="playerAcceptAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
-        partial void AfterAcceptAssetOffer(ref bool suppressDefaultLog, IAcceptAssetOfferApiResponse apiResponseLocalVar, AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, string entityId, string offerId);
+        partial void AfterAcceptAssetOffer(ref bool suppressDefaultLog, IAcceptAssetOfferApiResponse apiResponseLocalVar, PlayerAcceptAssetOfferRequestInput playerAcceptAssetOfferRequestInput, string entityId, string offerId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -953,13 +953,13 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="acceptAssetOfferRequestInput"></param>
+        /// <param name="playerAcceptAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
-        private void OnErrorAcceptAssetOfferDefaultImplementation(Exception exception, string pathFormat, string path, AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, string entityId, string offerId)
+        private void OnErrorAcceptAssetOfferDefaultImplementation(Exception exception, string pathFormat, string path, PlayerAcceptAssetOfferRequestInput playerAcceptAssetOfferRequestInput, string entityId, string offerId)
         {
             bool suppressDefaultLog = false;
-            OnErrorAcceptAssetOffer(ref suppressDefaultLog, exception, pathFormat, path, acceptAssetOfferRequestInput, entityId, offerId);
+            OnErrorAcceptAssetOffer(ref suppressDefaultLog, exception, pathFormat, path, playerAcceptAssetOfferRequestInput, entityId, offerId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -971,24 +971,24 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="acceptAssetOfferRequestInput"></param>
+        /// <param name="playerAcceptAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
-        partial void OnErrorAcceptAssetOffer(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, string entityId, string offerId);
+        partial void OnErrorAcceptAssetOffer(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, PlayerAcceptAssetOfferRequestInput playerAcceptAssetOfferRequestInput, string entityId, string offerId);
 
         /// <summary>
         /// Accept an offer for an asset 
         /// </summary>
-        /// <param name="acceptAssetOfferRequestInput"></param>
+        /// <param name="playerAcceptAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IAcceptAssetOfferApiResponse"/>&gt;</returns>
-        public async Task<IAcceptAssetOfferApiResponse?> AcceptAssetOfferOrDefaultAsync(AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IAcceptAssetOfferApiResponse?> AcceptAssetOfferOrDefaultAsync(PlayerAcceptAssetOfferRequestInput playerAcceptAssetOfferRequestInput, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await AcceptAssetOfferAsync(acceptAssetOfferRequestInput, entityId, offerId, cancellationToken).ConfigureAwait(false);
+                return await AcceptAssetOfferAsync(playerAcceptAssetOfferRequestInput, entityId, offerId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -1000,20 +1000,20 @@ namespace BeamPlayerClient.Api
         /// Accept an offer for an asset 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="acceptAssetOfferRequestInput"></param>
+        /// <param name="playerAcceptAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IAcceptAssetOfferApiResponse"/>&gt;</returns>
-        public async Task<IAcceptAssetOfferApiResponse> AcceptAssetOfferAsync(AcceptAssetOfferRequestInput acceptAssetOfferRequestInput, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IAcceptAssetOfferApiResponse> AcceptAssetOfferAsync(PlayerAcceptAssetOfferRequestInput playerAcceptAssetOfferRequestInput, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateAcceptAssetOffer(acceptAssetOfferRequestInput, entityId, offerId);
+                ValidateAcceptAssetOffer(playerAcceptAssetOfferRequestInput, entityId, offerId);
 
-                FormatAcceptAssetOffer(acceptAssetOfferRequestInput, ref entityId, ref offerId);
+                FormatAcceptAssetOffer(playerAcceptAssetOfferRequestInput, ref entityId, ref offerId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -1024,9 +1024,9 @@ namespace BeamPlayerClient.Api
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BofferId%7D", Uri.EscapeDataString(offerId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (acceptAssetOfferRequestInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (playerAcceptAssetOfferRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(acceptAssetOfferRequestInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(playerAcceptAssetOfferRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -1065,7 +1065,7 @@ namespace BeamPlayerClient.Api
 
                         AcceptAssetOfferApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/player/marketplace/users/{entityId}/offers/{offerId}/accept", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterAcceptAssetOfferDefaultImplementation(apiResponseLocalVar, acceptAssetOfferRequestInput, entityId, offerId);
+                        AfterAcceptAssetOfferDefaultImplementation(apiResponseLocalVar, playerAcceptAssetOfferRequestInput, entityId, offerId);
 
                         Events.ExecuteOnAcceptAssetOffer(apiResponseLocalVar);
 
@@ -1079,7 +1079,7 @@ namespace BeamPlayerClient.Api
             }
             catch(Exception e)
             {
-                OnErrorAcceptAssetOfferDefaultImplementation(e, "/v1/player/marketplace/users/{entityId}/offers/{offerId}/accept", uriBuilderLocalVar.Path, acceptAssetOfferRequestInput, entityId, offerId);
+                OnErrorAcceptAssetOfferDefaultImplementation(e, "/v1/player/marketplace/users/{entityId}/offers/{offerId}/accept", uriBuilderLocalVar.Path, playerAcceptAssetOfferRequestInput, entityId, offerId);
                 Events.ExecuteOnErrorAcceptAssetOffer(e);
                 throw;
             }
@@ -1123,11 +1123,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.CommonOperationResponse? Ok()
+            public BeamPlayerClient.Model.PlayerCommonOperationResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.CommonOperationResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerCommonOperationResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1136,7 +1136,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.CommonOperationResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerCommonOperationResponse? result)
             {
                 result = null;
 
@@ -1162,19 +1162,19 @@ namespace BeamPlayerClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatBuyListedAsset(BuyAssetRequestInput buyAssetRequestInput, ref string entityId, ref string orderId);
+        partial void FormatBuyListedAsset(PlayerBuyAssetRequestInput playerBuyAssetRequestInput, ref string entityId, ref string orderId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="buyAssetRequestInput"></param>
+        /// <param name="playerBuyAssetRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
         /// <returns></returns>
-        private void ValidateBuyListedAsset(BuyAssetRequestInput buyAssetRequestInput, string entityId, string orderId)
+        private void ValidateBuyListedAsset(PlayerBuyAssetRequestInput playerBuyAssetRequestInput, string entityId, string orderId)
         {
-            if (buyAssetRequestInput == null)
-                throw new ArgumentNullException(nameof(buyAssetRequestInput));
+            if (playerBuyAssetRequestInput == null)
+                throw new ArgumentNullException(nameof(playerBuyAssetRequestInput));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -1187,13 +1187,13 @@ namespace BeamPlayerClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="buyAssetRequestInput"></param>
+        /// <param name="playerBuyAssetRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
-        private void AfterBuyListedAssetDefaultImplementation(IBuyListedAssetApiResponse apiResponseLocalVar, BuyAssetRequestInput buyAssetRequestInput, string entityId, string orderId)
+        private void AfterBuyListedAssetDefaultImplementation(IBuyListedAssetApiResponse apiResponseLocalVar, PlayerBuyAssetRequestInput playerBuyAssetRequestInput, string entityId, string orderId)
         {
             bool suppressDefaultLog = false;
-            AfterBuyListedAsset(ref suppressDefaultLog, apiResponseLocalVar, buyAssetRequestInput, entityId, orderId);
+            AfterBuyListedAsset(ref suppressDefaultLog, apiResponseLocalVar, playerBuyAssetRequestInput, entityId, orderId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -1203,10 +1203,10 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="buyAssetRequestInput"></param>
+        /// <param name="playerBuyAssetRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
-        partial void AfterBuyListedAsset(ref bool suppressDefaultLog, IBuyListedAssetApiResponse apiResponseLocalVar, BuyAssetRequestInput buyAssetRequestInput, string entityId, string orderId);
+        partial void AfterBuyListedAsset(ref bool suppressDefaultLog, IBuyListedAssetApiResponse apiResponseLocalVar, PlayerBuyAssetRequestInput playerBuyAssetRequestInput, string entityId, string orderId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -1214,13 +1214,13 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="buyAssetRequestInput"></param>
+        /// <param name="playerBuyAssetRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
-        private void OnErrorBuyListedAssetDefaultImplementation(Exception exception, string pathFormat, string path, BuyAssetRequestInput buyAssetRequestInput, string entityId, string orderId)
+        private void OnErrorBuyListedAssetDefaultImplementation(Exception exception, string pathFormat, string path, PlayerBuyAssetRequestInput playerBuyAssetRequestInput, string entityId, string orderId)
         {
             bool suppressDefaultLog = false;
-            OnErrorBuyListedAsset(ref suppressDefaultLog, exception, pathFormat, path, buyAssetRequestInput, entityId, orderId);
+            OnErrorBuyListedAsset(ref suppressDefaultLog, exception, pathFormat, path, playerBuyAssetRequestInput, entityId, orderId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -1232,24 +1232,24 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="buyAssetRequestInput"></param>
+        /// <param name="playerBuyAssetRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
-        partial void OnErrorBuyListedAsset(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, BuyAssetRequestInput buyAssetRequestInput, string entityId, string orderId);
+        partial void OnErrorBuyListedAsset(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, PlayerBuyAssetRequestInput playerBuyAssetRequestInput, string entityId, string orderId);
 
         /// <summary>
         /// Buy listed asset 
         /// </summary>
-        /// <param name="buyAssetRequestInput"></param>
+        /// <param name="playerBuyAssetRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IBuyListedAssetApiResponse"/>&gt;</returns>
-        public async Task<IBuyListedAssetApiResponse?> BuyListedAssetOrDefaultAsync(BuyAssetRequestInput buyAssetRequestInput, string entityId, string orderId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IBuyListedAssetApiResponse?> BuyListedAssetOrDefaultAsync(PlayerBuyAssetRequestInput playerBuyAssetRequestInput, string entityId, string orderId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await BuyListedAssetAsync(buyAssetRequestInput, entityId, orderId, cancellationToken).ConfigureAwait(false);
+                return await BuyListedAssetAsync(playerBuyAssetRequestInput, entityId, orderId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -1261,20 +1261,20 @@ namespace BeamPlayerClient.Api
         /// Buy listed asset 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="buyAssetRequestInput"></param>
+        /// <param name="playerBuyAssetRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IBuyListedAssetApiResponse"/>&gt;</returns>
-        public async Task<IBuyListedAssetApiResponse> BuyListedAssetAsync(BuyAssetRequestInput buyAssetRequestInput, string entityId, string orderId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IBuyListedAssetApiResponse> BuyListedAssetAsync(PlayerBuyAssetRequestInput playerBuyAssetRequestInput, string entityId, string orderId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateBuyListedAsset(buyAssetRequestInput, entityId, orderId);
+                ValidateBuyListedAsset(playerBuyAssetRequestInput, entityId, orderId);
 
-                FormatBuyListedAsset(buyAssetRequestInput, ref entityId, ref orderId);
+                FormatBuyListedAsset(playerBuyAssetRequestInput, ref entityId, ref orderId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -1285,9 +1285,9 @@ namespace BeamPlayerClient.Api
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BorderId%7D", Uri.EscapeDataString(orderId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (buyAssetRequestInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (playerBuyAssetRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(buyAssetRequestInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(playerBuyAssetRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -1326,7 +1326,7 @@ namespace BeamPlayerClient.Api
 
                         BuyListedAssetApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/player/marketplace/users/{entityId}/listing/{orderId}", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterBuyListedAssetDefaultImplementation(apiResponseLocalVar, buyAssetRequestInput, entityId, orderId);
+                        AfterBuyListedAssetDefaultImplementation(apiResponseLocalVar, playerBuyAssetRequestInput, entityId, orderId);
 
                         Events.ExecuteOnBuyListedAsset(apiResponseLocalVar);
 
@@ -1340,7 +1340,7 @@ namespace BeamPlayerClient.Api
             }
             catch(Exception e)
             {
-                OnErrorBuyListedAssetDefaultImplementation(e, "/v1/player/marketplace/users/{entityId}/listing/{orderId}", uriBuilderLocalVar.Path, buyAssetRequestInput, entityId, orderId);
+                OnErrorBuyListedAssetDefaultImplementation(e, "/v1/player/marketplace/users/{entityId}/listing/{orderId}", uriBuilderLocalVar.Path, playerBuyAssetRequestInput, entityId, orderId);
                 Events.ExecuteOnErrorBuyListedAsset(e);
                 throw;
             }
@@ -1384,11 +1384,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.CommonOperationResponse? Ok()
+            public BeamPlayerClient.Model.PlayerCommonOperationResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.CommonOperationResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerCommonOperationResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1397,7 +1397,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.CommonOperationResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerCommonOperationResponse? result)
             {
                 result = null;
 
@@ -1423,19 +1423,19 @@ namespace BeamPlayerClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatCancelAssetOffer(CancelAssetOfferRequestInput cancelAssetOfferRequestInput, ref string entityId, ref string offerId);
+        partial void FormatCancelAssetOffer(PlayerCancelAssetOfferRequestInput playerCancelAssetOfferRequestInput, ref string entityId, ref string offerId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="cancelAssetOfferRequestInput"></param>
+        /// <param name="playerCancelAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
         /// <returns></returns>
-        private void ValidateCancelAssetOffer(CancelAssetOfferRequestInput cancelAssetOfferRequestInput, string entityId, string offerId)
+        private void ValidateCancelAssetOffer(PlayerCancelAssetOfferRequestInput playerCancelAssetOfferRequestInput, string entityId, string offerId)
         {
-            if (cancelAssetOfferRequestInput == null)
-                throw new ArgumentNullException(nameof(cancelAssetOfferRequestInput));
+            if (playerCancelAssetOfferRequestInput == null)
+                throw new ArgumentNullException(nameof(playerCancelAssetOfferRequestInput));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -1448,13 +1448,13 @@ namespace BeamPlayerClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="cancelAssetOfferRequestInput"></param>
+        /// <param name="playerCancelAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
-        private void AfterCancelAssetOfferDefaultImplementation(ICancelAssetOfferApiResponse apiResponseLocalVar, CancelAssetOfferRequestInput cancelAssetOfferRequestInput, string entityId, string offerId)
+        private void AfterCancelAssetOfferDefaultImplementation(ICancelAssetOfferApiResponse apiResponseLocalVar, PlayerCancelAssetOfferRequestInput playerCancelAssetOfferRequestInput, string entityId, string offerId)
         {
             bool suppressDefaultLog = false;
-            AfterCancelAssetOffer(ref suppressDefaultLog, apiResponseLocalVar, cancelAssetOfferRequestInput, entityId, offerId);
+            AfterCancelAssetOffer(ref suppressDefaultLog, apiResponseLocalVar, playerCancelAssetOfferRequestInput, entityId, offerId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -1464,10 +1464,10 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="cancelAssetOfferRequestInput"></param>
+        /// <param name="playerCancelAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
-        partial void AfterCancelAssetOffer(ref bool suppressDefaultLog, ICancelAssetOfferApiResponse apiResponseLocalVar, CancelAssetOfferRequestInput cancelAssetOfferRequestInput, string entityId, string offerId);
+        partial void AfterCancelAssetOffer(ref bool suppressDefaultLog, ICancelAssetOfferApiResponse apiResponseLocalVar, PlayerCancelAssetOfferRequestInput playerCancelAssetOfferRequestInput, string entityId, string offerId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -1475,13 +1475,13 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="cancelAssetOfferRequestInput"></param>
+        /// <param name="playerCancelAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
-        private void OnErrorCancelAssetOfferDefaultImplementation(Exception exception, string pathFormat, string path, CancelAssetOfferRequestInput cancelAssetOfferRequestInput, string entityId, string offerId)
+        private void OnErrorCancelAssetOfferDefaultImplementation(Exception exception, string pathFormat, string path, PlayerCancelAssetOfferRequestInput playerCancelAssetOfferRequestInput, string entityId, string offerId)
         {
             bool suppressDefaultLog = false;
-            OnErrorCancelAssetOffer(ref suppressDefaultLog, exception, pathFormat, path, cancelAssetOfferRequestInput, entityId, offerId);
+            OnErrorCancelAssetOffer(ref suppressDefaultLog, exception, pathFormat, path, playerCancelAssetOfferRequestInput, entityId, offerId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -1493,24 +1493,24 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="cancelAssetOfferRequestInput"></param>
+        /// <param name="playerCancelAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
-        partial void OnErrorCancelAssetOffer(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, CancelAssetOfferRequestInput cancelAssetOfferRequestInput, string entityId, string offerId);
+        partial void OnErrorCancelAssetOffer(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, PlayerCancelAssetOfferRequestInput playerCancelAssetOfferRequestInput, string entityId, string offerId);
 
         /// <summary>
         /// Cancel an offer for an asset 
         /// </summary>
-        /// <param name="cancelAssetOfferRequestInput"></param>
+        /// <param name="playerCancelAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICancelAssetOfferApiResponse"/>&gt;</returns>
-        public async Task<ICancelAssetOfferApiResponse?> CancelAssetOfferOrDefaultAsync(CancelAssetOfferRequestInput cancelAssetOfferRequestInput, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICancelAssetOfferApiResponse?> CancelAssetOfferOrDefaultAsync(PlayerCancelAssetOfferRequestInput playerCancelAssetOfferRequestInput, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await CancelAssetOfferAsync(cancelAssetOfferRequestInput, entityId, offerId, cancellationToken).ConfigureAwait(false);
+                return await CancelAssetOfferAsync(playerCancelAssetOfferRequestInput, entityId, offerId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -1522,20 +1522,20 @@ namespace BeamPlayerClient.Api
         /// Cancel an offer for an asset 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="cancelAssetOfferRequestInput"></param>
+        /// <param name="playerCancelAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="offerId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICancelAssetOfferApiResponse"/>&gt;</returns>
-        public async Task<ICancelAssetOfferApiResponse> CancelAssetOfferAsync(CancelAssetOfferRequestInput cancelAssetOfferRequestInput, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICancelAssetOfferApiResponse> CancelAssetOfferAsync(PlayerCancelAssetOfferRequestInput playerCancelAssetOfferRequestInput, string entityId, string offerId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateCancelAssetOffer(cancelAssetOfferRequestInput, entityId, offerId);
+                ValidateCancelAssetOffer(playerCancelAssetOfferRequestInput, entityId, offerId);
 
-                FormatCancelAssetOffer(cancelAssetOfferRequestInput, ref entityId, ref offerId);
+                FormatCancelAssetOffer(playerCancelAssetOfferRequestInput, ref entityId, ref offerId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -1546,9 +1546,9 @@ namespace BeamPlayerClient.Api
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BofferId%7D", Uri.EscapeDataString(offerId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (cancelAssetOfferRequestInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (playerCancelAssetOfferRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(cancelAssetOfferRequestInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(playerCancelAssetOfferRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -1587,7 +1587,7 @@ namespace BeamPlayerClient.Api
 
                         CancelAssetOfferApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/player/marketplace/users/{entityId}/offers/{offerId}", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterCancelAssetOfferDefaultImplementation(apiResponseLocalVar, cancelAssetOfferRequestInput, entityId, offerId);
+                        AfterCancelAssetOfferDefaultImplementation(apiResponseLocalVar, playerCancelAssetOfferRequestInput, entityId, offerId);
 
                         Events.ExecuteOnCancelAssetOffer(apiResponseLocalVar);
 
@@ -1601,7 +1601,7 @@ namespace BeamPlayerClient.Api
             }
             catch(Exception e)
             {
-                OnErrorCancelAssetOfferDefaultImplementation(e, "/v1/player/marketplace/users/{entityId}/offers/{offerId}", uriBuilderLocalVar.Path, cancelAssetOfferRequestInput, entityId, offerId);
+                OnErrorCancelAssetOfferDefaultImplementation(e, "/v1/player/marketplace/users/{entityId}/offers/{offerId}", uriBuilderLocalVar.Path, playerCancelAssetOfferRequestInput, entityId, offerId);
                 Events.ExecuteOnErrorCancelAssetOffer(e);
                 throw;
             }
@@ -1645,11 +1645,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.CommonOperationResponse? Ok()
+            public BeamPlayerClient.Model.PlayerCommonOperationResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.CommonOperationResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerCommonOperationResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1658,7 +1658,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.CommonOperationResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerCommonOperationResponse? result)
             {
                 result = null;
 
@@ -1684,19 +1684,19 @@ namespace BeamPlayerClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatCancelListing(CancelAssetListingRequestInput cancelAssetListingRequestInput, ref string entityId, ref string orderId, ref Option<decimal> chainId);
+        partial void FormatCancelListing(PlayerCancelAssetListingRequestInput playerCancelAssetListingRequestInput, ref string entityId, ref string orderId, ref Option<decimal> chainId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="cancelAssetListingRequestInput"></param>
+        /// <param name="playerCancelAssetListingRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
         /// <returns></returns>
-        private void ValidateCancelListing(CancelAssetListingRequestInput cancelAssetListingRequestInput, string entityId, string orderId)
+        private void ValidateCancelListing(PlayerCancelAssetListingRequestInput playerCancelAssetListingRequestInput, string entityId, string orderId)
         {
-            if (cancelAssetListingRequestInput == null)
-                throw new ArgumentNullException(nameof(cancelAssetListingRequestInput));
+            if (playerCancelAssetListingRequestInput == null)
+                throw new ArgumentNullException(nameof(playerCancelAssetListingRequestInput));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -1709,14 +1709,14 @@ namespace BeamPlayerClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="cancelAssetListingRequestInput"></param>
+        /// <param name="playerCancelAssetListingRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
         /// <param name="chainId"></param>
-        private void AfterCancelListingDefaultImplementation(ICancelListingApiResponse apiResponseLocalVar, CancelAssetListingRequestInput cancelAssetListingRequestInput, string entityId, string orderId, Option<decimal> chainId)
+        private void AfterCancelListingDefaultImplementation(ICancelListingApiResponse apiResponseLocalVar, PlayerCancelAssetListingRequestInput playerCancelAssetListingRequestInput, string entityId, string orderId, Option<decimal> chainId)
         {
             bool suppressDefaultLog = false;
-            AfterCancelListing(ref suppressDefaultLog, apiResponseLocalVar, cancelAssetListingRequestInput, entityId, orderId, chainId);
+            AfterCancelListing(ref suppressDefaultLog, apiResponseLocalVar, playerCancelAssetListingRequestInput, entityId, orderId, chainId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -1726,11 +1726,11 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="cancelAssetListingRequestInput"></param>
+        /// <param name="playerCancelAssetListingRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
         /// <param name="chainId"></param>
-        partial void AfterCancelListing(ref bool suppressDefaultLog, ICancelListingApiResponse apiResponseLocalVar, CancelAssetListingRequestInput cancelAssetListingRequestInput, string entityId, string orderId, Option<decimal> chainId);
+        partial void AfterCancelListing(ref bool suppressDefaultLog, ICancelListingApiResponse apiResponseLocalVar, PlayerCancelAssetListingRequestInput playerCancelAssetListingRequestInput, string entityId, string orderId, Option<decimal> chainId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -1738,14 +1738,14 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="cancelAssetListingRequestInput"></param>
+        /// <param name="playerCancelAssetListingRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
         /// <param name="chainId"></param>
-        private void OnErrorCancelListingDefaultImplementation(Exception exception, string pathFormat, string path, CancelAssetListingRequestInput cancelAssetListingRequestInput, string entityId, string orderId, Option<decimal> chainId)
+        private void OnErrorCancelListingDefaultImplementation(Exception exception, string pathFormat, string path, PlayerCancelAssetListingRequestInput playerCancelAssetListingRequestInput, string entityId, string orderId, Option<decimal> chainId)
         {
             bool suppressDefaultLog = false;
-            OnErrorCancelListing(ref suppressDefaultLog, exception, pathFormat, path, cancelAssetListingRequestInput, entityId, orderId, chainId);
+            OnErrorCancelListing(ref suppressDefaultLog, exception, pathFormat, path, playerCancelAssetListingRequestInput, entityId, orderId, chainId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -1757,26 +1757,26 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="cancelAssetListingRequestInput"></param>
+        /// <param name="playerCancelAssetListingRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
         /// <param name="chainId"></param>
-        partial void OnErrorCancelListing(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, CancelAssetListingRequestInput cancelAssetListingRequestInput, string entityId, string orderId, Option<decimal> chainId);
+        partial void OnErrorCancelListing(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, PlayerCancelAssetListingRequestInput playerCancelAssetListingRequestInput, string entityId, string orderId, Option<decimal> chainId);
 
         /// <summary>
         /// Cancel asset listing 
         /// </summary>
-        /// <param name="cancelAssetListingRequestInput"></param>
+        /// <param name="playerCancelAssetListingRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICancelListingApiResponse"/>&gt;</returns>
-        public async Task<ICancelListingApiResponse?> CancelListingOrDefaultAsync(CancelAssetListingRequestInput cancelAssetListingRequestInput, string entityId, string orderId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICancelListingApiResponse?> CancelListingOrDefaultAsync(PlayerCancelAssetListingRequestInput playerCancelAssetListingRequestInput, string entityId, string orderId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await CancelListingAsync(cancelAssetListingRequestInput, entityId, orderId, chainId, cancellationToken).ConfigureAwait(false);
+                return await CancelListingAsync(playerCancelAssetListingRequestInput, entityId, orderId, chainId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -1788,21 +1788,21 @@ namespace BeamPlayerClient.Api
         /// Cancel asset listing 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="cancelAssetListingRequestInput"></param>
+        /// <param name="playerCancelAssetListingRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="orderId"></param>
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICancelListingApiResponse"/>&gt;</returns>
-        public async Task<ICancelListingApiResponse> CancelListingAsync(CancelAssetListingRequestInput cancelAssetListingRequestInput, string entityId, string orderId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICancelListingApiResponse> CancelListingAsync(PlayerCancelAssetListingRequestInput playerCancelAssetListingRequestInput, string entityId, string orderId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateCancelListing(cancelAssetListingRequestInput, entityId, orderId);
+                ValidateCancelListing(playerCancelAssetListingRequestInput, entityId, orderId);
 
-                FormatCancelListing(cancelAssetListingRequestInput, ref entityId, ref orderId, ref chainId);
+                FormatCancelListing(playerCancelAssetListingRequestInput, ref entityId, ref orderId, ref chainId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -1820,9 +1820,9 @@ namespace BeamPlayerClient.Api
 
                     uriBuilderLocalVar.Query = parseQueryStringLocalVar.ToString();
 
-                    httpRequestMessageLocalVar.Content = (cancelAssetListingRequestInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (playerCancelAssetListingRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(cancelAssetListingRequestInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(playerCancelAssetListingRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -1861,7 +1861,7 @@ namespace BeamPlayerClient.Api
 
                         CancelListingApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/player/marketplace/users/{entityId}/listing/{orderId}", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterCancelListingDefaultImplementation(apiResponseLocalVar, cancelAssetListingRequestInput, entityId, orderId, chainId);
+                        AfterCancelListingDefaultImplementation(apiResponseLocalVar, playerCancelAssetListingRequestInput, entityId, orderId, chainId);
 
                         Events.ExecuteOnCancelListing(apiResponseLocalVar);
 
@@ -1875,7 +1875,7 @@ namespace BeamPlayerClient.Api
             }
             catch(Exception e)
             {
-                OnErrorCancelListingDefaultImplementation(e, "/v1/player/marketplace/users/{entityId}/listing/{orderId}", uriBuilderLocalVar.Path, cancelAssetListingRequestInput, entityId, orderId, chainId);
+                OnErrorCancelListingDefaultImplementation(e, "/v1/player/marketplace/users/{entityId}/listing/{orderId}", uriBuilderLocalVar.Path, playerCancelAssetListingRequestInput, entityId, orderId, chainId);
                 Events.ExecuteOnErrorCancelListing(e);
                 throw;
             }
@@ -1919,11 +1919,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.CommonOperationResponse? Ok()
+            public BeamPlayerClient.Model.PlayerCommonOperationResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.CommonOperationResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerCommonOperationResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1932,7 +1932,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.CommonOperationResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerCommonOperationResponse? result)
             {
                 result = null;
 
@@ -1958,18 +1958,18 @@ namespace BeamPlayerClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatCreateAssetOffer(CreateAssetOfferRequestInput createAssetOfferRequestInput, ref string entityId);
+        partial void FormatCreateAssetOffer(PlayerCreateAssetOfferRequestInput playerCreateAssetOfferRequestInput, ref string entityId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="createAssetOfferRequestInput"></param>
+        /// <param name="playerCreateAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
         /// <returns></returns>
-        private void ValidateCreateAssetOffer(CreateAssetOfferRequestInput createAssetOfferRequestInput, string entityId)
+        private void ValidateCreateAssetOffer(PlayerCreateAssetOfferRequestInput playerCreateAssetOfferRequestInput, string entityId)
         {
-            if (createAssetOfferRequestInput == null)
-                throw new ArgumentNullException(nameof(createAssetOfferRequestInput));
+            if (playerCreateAssetOfferRequestInput == null)
+                throw new ArgumentNullException(nameof(playerCreateAssetOfferRequestInput));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -1979,12 +1979,12 @@ namespace BeamPlayerClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="createAssetOfferRequestInput"></param>
+        /// <param name="playerCreateAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
-        private void AfterCreateAssetOfferDefaultImplementation(ICreateAssetOfferApiResponse apiResponseLocalVar, CreateAssetOfferRequestInput createAssetOfferRequestInput, string entityId)
+        private void AfterCreateAssetOfferDefaultImplementation(ICreateAssetOfferApiResponse apiResponseLocalVar, PlayerCreateAssetOfferRequestInput playerCreateAssetOfferRequestInput, string entityId)
         {
             bool suppressDefaultLog = false;
-            AfterCreateAssetOffer(ref suppressDefaultLog, apiResponseLocalVar, createAssetOfferRequestInput, entityId);
+            AfterCreateAssetOffer(ref suppressDefaultLog, apiResponseLocalVar, playerCreateAssetOfferRequestInput, entityId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -1994,9 +1994,9 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="createAssetOfferRequestInput"></param>
+        /// <param name="playerCreateAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
-        partial void AfterCreateAssetOffer(ref bool suppressDefaultLog, ICreateAssetOfferApiResponse apiResponseLocalVar, CreateAssetOfferRequestInput createAssetOfferRequestInput, string entityId);
+        partial void AfterCreateAssetOffer(ref bool suppressDefaultLog, ICreateAssetOfferApiResponse apiResponseLocalVar, PlayerCreateAssetOfferRequestInput playerCreateAssetOfferRequestInput, string entityId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -2004,12 +2004,12 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="createAssetOfferRequestInput"></param>
+        /// <param name="playerCreateAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
-        private void OnErrorCreateAssetOfferDefaultImplementation(Exception exception, string pathFormat, string path, CreateAssetOfferRequestInput createAssetOfferRequestInput, string entityId)
+        private void OnErrorCreateAssetOfferDefaultImplementation(Exception exception, string pathFormat, string path, PlayerCreateAssetOfferRequestInput playerCreateAssetOfferRequestInput, string entityId)
         {
             bool suppressDefaultLog = false;
-            OnErrorCreateAssetOffer(ref suppressDefaultLog, exception, pathFormat, path, createAssetOfferRequestInput, entityId);
+            OnErrorCreateAssetOffer(ref suppressDefaultLog, exception, pathFormat, path, playerCreateAssetOfferRequestInput, entityId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -2021,22 +2021,22 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="createAssetOfferRequestInput"></param>
+        /// <param name="playerCreateAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
-        partial void OnErrorCreateAssetOffer(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, CreateAssetOfferRequestInput createAssetOfferRequestInput, string entityId);
+        partial void OnErrorCreateAssetOffer(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, PlayerCreateAssetOfferRequestInput playerCreateAssetOfferRequestInput, string entityId);
 
         /// <summary>
         /// Make an offer for an asset 
         /// </summary>
-        /// <param name="createAssetOfferRequestInput"></param>
+        /// <param name="playerCreateAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateAssetOfferApiResponse"/>&gt;</returns>
-        public async Task<ICreateAssetOfferApiResponse?> CreateAssetOfferOrDefaultAsync(CreateAssetOfferRequestInput createAssetOfferRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICreateAssetOfferApiResponse?> CreateAssetOfferOrDefaultAsync(PlayerCreateAssetOfferRequestInput playerCreateAssetOfferRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await CreateAssetOfferAsync(createAssetOfferRequestInput, entityId, cancellationToken).ConfigureAwait(false);
+                return await CreateAssetOfferAsync(playerCreateAssetOfferRequestInput, entityId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -2048,19 +2048,19 @@ namespace BeamPlayerClient.Api
         /// Make an offer for an asset 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="createAssetOfferRequestInput"></param>
+        /// <param name="playerCreateAssetOfferRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateAssetOfferApiResponse"/>&gt;</returns>
-        public async Task<ICreateAssetOfferApiResponse> CreateAssetOfferAsync(CreateAssetOfferRequestInput createAssetOfferRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICreateAssetOfferApiResponse> CreateAssetOfferAsync(PlayerCreateAssetOfferRequestInput playerCreateAssetOfferRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateCreateAssetOffer(createAssetOfferRequestInput, entityId);
+                ValidateCreateAssetOffer(playerCreateAssetOfferRequestInput, entityId);
 
-                FormatCreateAssetOffer(createAssetOfferRequestInput, ref entityId);
+                FormatCreateAssetOffer(playerCreateAssetOfferRequestInput, ref entityId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -2070,9 +2070,9 @@ namespace BeamPlayerClient.Api
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/player/marketplace/users/{entityId}/offers";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (createAssetOfferRequestInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (playerCreateAssetOfferRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(createAssetOfferRequestInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(playerCreateAssetOfferRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -2111,7 +2111,7 @@ namespace BeamPlayerClient.Api
 
                         CreateAssetOfferApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/player/marketplace/users/{entityId}/offers", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterCreateAssetOfferDefaultImplementation(apiResponseLocalVar, createAssetOfferRequestInput, entityId);
+                        AfterCreateAssetOfferDefaultImplementation(apiResponseLocalVar, playerCreateAssetOfferRequestInput, entityId);
 
                         Events.ExecuteOnCreateAssetOffer(apiResponseLocalVar);
 
@@ -2125,7 +2125,7 @@ namespace BeamPlayerClient.Api
             }
             catch(Exception e)
             {
-                OnErrorCreateAssetOfferDefaultImplementation(e, "/v1/player/marketplace/users/{entityId}/offers", uriBuilderLocalVar.Path, createAssetOfferRequestInput, entityId);
+                OnErrorCreateAssetOfferDefaultImplementation(e, "/v1/player/marketplace/users/{entityId}/offers", uriBuilderLocalVar.Path, playerCreateAssetOfferRequestInput, entityId);
                 Events.ExecuteOnErrorCreateAssetOffer(e);
                 throw;
             }
@@ -2169,11 +2169,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.CommonOperationResponse? Created()
+            public BeamPlayerClient.Model.PlayerCommonOperationResponse? Created()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsCreated
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.CommonOperationResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerCommonOperationResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -2182,7 +2182,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryCreated([NotNullWhen(true)]out BeamPlayerClient.Model.CommonOperationResponse? result)
+            public bool TryCreated([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerCommonOperationResponse? result)
             {
                 result = null;
 
@@ -2433,11 +2433,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.GetAssetListingsResponse? Ok()
+            public BeamPlayerClient.Model.PlayerGetAssetListingsResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.GetAssetListingsResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerGetAssetListingsResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -2446,7 +2446,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.GetAssetListingsResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerGetAssetListingsResponse? result)
             {
                 result = null;
 
@@ -2647,11 +2647,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.GetChainCurrenciesResponse? Ok()
+            public BeamPlayerClient.Model.PlayerGetChainCurrenciesResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.GetChainCurrenciesResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerGetChainCurrenciesResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -2660,7 +2660,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.GetChainCurrenciesResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerGetChainCurrenciesResponse? result)
             {
                 result = null;
 
@@ -2686,28 +2686,28 @@ namespace BeamPlayerClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetListedAssets(GetListedAssetsBodyInput getListedAssetsBodyInput);
+        partial void FormatGetListedAssets(PlayerGetListedAssetsBodyInput playerGetListedAssetsBodyInput);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="getListedAssetsBodyInput"></param>
+        /// <param name="playerGetListedAssetsBodyInput"></param>
         /// <returns></returns>
-        private void ValidateGetListedAssets(GetListedAssetsBodyInput getListedAssetsBodyInput)
+        private void ValidateGetListedAssets(PlayerGetListedAssetsBodyInput playerGetListedAssetsBodyInput)
         {
-            if (getListedAssetsBodyInput == null)
-                throw new ArgumentNullException(nameof(getListedAssetsBodyInput));
+            if (playerGetListedAssetsBodyInput == null)
+                throw new ArgumentNullException(nameof(playerGetListedAssetsBodyInput));
         }
 
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="getListedAssetsBodyInput"></param>
-        private void AfterGetListedAssetsDefaultImplementation(IGetListedAssetsApiResponse apiResponseLocalVar, GetListedAssetsBodyInput getListedAssetsBodyInput)
+        /// <param name="playerGetListedAssetsBodyInput"></param>
+        private void AfterGetListedAssetsDefaultImplementation(IGetListedAssetsApiResponse apiResponseLocalVar, PlayerGetListedAssetsBodyInput playerGetListedAssetsBodyInput)
         {
             bool suppressDefaultLog = false;
-            AfterGetListedAssets(ref suppressDefaultLog, apiResponseLocalVar, getListedAssetsBodyInput);
+            AfterGetListedAssets(ref suppressDefaultLog, apiResponseLocalVar, playerGetListedAssetsBodyInput);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -2717,8 +2717,8 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="getListedAssetsBodyInput"></param>
-        partial void AfterGetListedAssets(ref bool suppressDefaultLog, IGetListedAssetsApiResponse apiResponseLocalVar, GetListedAssetsBodyInput getListedAssetsBodyInput);
+        /// <param name="playerGetListedAssetsBodyInput"></param>
+        partial void AfterGetListedAssets(ref bool suppressDefaultLog, IGetListedAssetsApiResponse apiResponseLocalVar, PlayerGetListedAssetsBodyInput playerGetListedAssetsBodyInput);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -2726,11 +2726,11 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="getListedAssetsBodyInput"></param>
-        private void OnErrorGetListedAssetsDefaultImplementation(Exception exception, string pathFormat, string path, GetListedAssetsBodyInput getListedAssetsBodyInput)
+        /// <param name="playerGetListedAssetsBodyInput"></param>
+        private void OnErrorGetListedAssetsDefaultImplementation(Exception exception, string pathFormat, string path, PlayerGetListedAssetsBodyInput playerGetListedAssetsBodyInput)
         {
             bool suppressDefaultLog = false;
-            OnErrorGetListedAssets(ref suppressDefaultLog, exception, pathFormat, path, getListedAssetsBodyInput);
+            OnErrorGetListedAssets(ref suppressDefaultLog, exception, pathFormat, path, playerGetListedAssetsBodyInput);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -2742,20 +2742,20 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="getListedAssetsBodyInput"></param>
-        partial void OnErrorGetListedAssets(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, GetListedAssetsBodyInput getListedAssetsBodyInput);
+        /// <param name="playerGetListedAssetsBodyInput"></param>
+        partial void OnErrorGetListedAssets(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, PlayerGetListedAssetsBodyInput playerGetListedAssetsBodyInput);
 
         /// <summary>
         /// Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155) 
         /// </summary>
-        /// <param name="getListedAssetsBodyInput"></param>
+        /// <param name="playerGetListedAssetsBodyInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetListedAssetsApiResponse"/>&gt;</returns>
-        public async Task<IGetListedAssetsApiResponse?> GetListedAssetsOrDefaultAsync(GetListedAssetsBodyInput getListedAssetsBodyInput, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetListedAssetsApiResponse?> GetListedAssetsOrDefaultAsync(PlayerGetListedAssetsBodyInput playerGetListedAssetsBodyInput, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await GetListedAssetsAsync(getListedAssetsBodyInput, cancellationToken).ConfigureAwait(false);
+                return await GetListedAssetsAsync(playerGetListedAssetsBodyInput, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -2767,18 +2767,18 @@ namespace BeamPlayerClient.Api
         /// Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155) 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="getListedAssetsBodyInput"></param>
+        /// <param name="playerGetListedAssetsBodyInput"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetListedAssetsApiResponse"/>&gt;</returns>
-        public async Task<IGetListedAssetsApiResponse> GetListedAssetsAsync(GetListedAssetsBodyInput getListedAssetsBodyInput, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetListedAssetsApiResponse> GetListedAssetsAsync(PlayerGetListedAssetsBodyInput playerGetListedAssetsBodyInput, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateGetListedAssets(getListedAssetsBodyInput);
+                ValidateGetListedAssets(playerGetListedAssetsBodyInput);
 
-                FormatGetListedAssets(getListedAssetsBodyInput);
+                FormatGetListedAssets(playerGetListedAssetsBodyInput);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -2787,9 +2787,9 @@ namespace BeamPlayerClient.Api
                     uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/player/marketplace";
 
-                    httpRequestMessageLocalVar.Content = (getListedAssetsBodyInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (playerGetListedAssetsBodyInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(getListedAssetsBodyInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(playerGetListedAssetsBodyInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -2828,7 +2828,7 @@ namespace BeamPlayerClient.Api
 
                         GetListedAssetsApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/player/marketplace", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterGetListedAssetsDefaultImplementation(apiResponseLocalVar, getListedAssetsBodyInput);
+                        AfterGetListedAssetsDefaultImplementation(apiResponseLocalVar, playerGetListedAssetsBodyInput);
 
                         Events.ExecuteOnGetListedAssets(apiResponseLocalVar);
 
@@ -2842,7 +2842,7 @@ namespace BeamPlayerClient.Api
             }
             catch(Exception e)
             {
-                OnErrorGetListedAssetsDefaultImplementation(e, "/v1/player/marketplace", uriBuilderLocalVar.Path, getListedAssetsBodyInput);
+                OnErrorGetListedAssetsDefaultImplementation(e, "/v1/player/marketplace", uriBuilderLocalVar.Path, playerGetListedAssetsBodyInput);
                 Events.ExecuteOnErrorGetListedAssets(e);
                 throw;
             }
@@ -2886,11 +2886,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.GetAssetListingsResponse? Ok()
+            public BeamPlayerClient.Model.PlayerGetAssetListingsResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.GetAssetListingsResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerGetAssetListingsResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -2899,7 +2899,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.GetAssetListingsResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerGetAssetListingsResponse? result)
             {
                 result = null;
 
@@ -2925,18 +2925,18 @@ namespace BeamPlayerClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetListedAssetsForUser(GetListedAssetsBodyInput getListedAssetsBodyInput, ref string entityId);
+        partial void FormatGetListedAssetsForUser(PlayerGetListedAssetsBodyInput playerGetListedAssetsBodyInput, ref string entityId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="getListedAssetsBodyInput"></param>
+        /// <param name="playerGetListedAssetsBodyInput"></param>
         /// <param name="entityId"></param>
         /// <returns></returns>
-        private void ValidateGetListedAssetsForUser(GetListedAssetsBodyInput getListedAssetsBodyInput, string entityId)
+        private void ValidateGetListedAssetsForUser(PlayerGetListedAssetsBodyInput playerGetListedAssetsBodyInput, string entityId)
         {
-            if (getListedAssetsBodyInput == null)
-                throw new ArgumentNullException(nameof(getListedAssetsBodyInput));
+            if (playerGetListedAssetsBodyInput == null)
+                throw new ArgumentNullException(nameof(playerGetListedAssetsBodyInput));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -2946,12 +2946,12 @@ namespace BeamPlayerClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="getListedAssetsBodyInput"></param>
+        /// <param name="playerGetListedAssetsBodyInput"></param>
         /// <param name="entityId"></param>
-        private void AfterGetListedAssetsForUserDefaultImplementation(IGetListedAssetsForUserApiResponse apiResponseLocalVar, GetListedAssetsBodyInput getListedAssetsBodyInput, string entityId)
+        private void AfterGetListedAssetsForUserDefaultImplementation(IGetListedAssetsForUserApiResponse apiResponseLocalVar, PlayerGetListedAssetsBodyInput playerGetListedAssetsBodyInput, string entityId)
         {
             bool suppressDefaultLog = false;
-            AfterGetListedAssetsForUser(ref suppressDefaultLog, apiResponseLocalVar, getListedAssetsBodyInput, entityId);
+            AfterGetListedAssetsForUser(ref suppressDefaultLog, apiResponseLocalVar, playerGetListedAssetsBodyInput, entityId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -2961,9 +2961,9 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="getListedAssetsBodyInput"></param>
+        /// <param name="playerGetListedAssetsBodyInput"></param>
         /// <param name="entityId"></param>
-        partial void AfterGetListedAssetsForUser(ref bool suppressDefaultLog, IGetListedAssetsForUserApiResponse apiResponseLocalVar, GetListedAssetsBodyInput getListedAssetsBodyInput, string entityId);
+        partial void AfterGetListedAssetsForUser(ref bool suppressDefaultLog, IGetListedAssetsForUserApiResponse apiResponseLocalVar, PlayerGetListedAssetsBodyInput playerGetListedAssetsBodyInput, string entityId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -2971,12 +2971,12 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="getListedAssetsBodyInput"></param>
+        /// <param name="playerGetListedAssetsBodyInput"></param>
         /// <param name="entityId"></param>
-        private void OnErrorGetListedAssetsForUserDefaultImplementation(Exception exception, string pathFormat, string path, GetListedAssetsBodyInput getListedAssetsBodyInput, string entityId)
+        private void OnErrorGetListedAssetsForUserDefaultImplementation(Exception exception, string pathFormat, string path, PlayerGetListedAssetsBodyInput playerGetListedAssetsBodyInput, string entityId)
         {
             bool suppressDefaultLog = false;
-            OnErrorGetListedAssetsForUser(ref suppressDefaultLog, exception, pathFormat, path, getListedAssetsBodyInput, entityId);
+            OnErrorGetListedAssetsForUser(ref suppressDefaultLog, exception, pathFormat, path, playerGetListedAssetsBodyInput, entityId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -2988,22 +2988,22 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="getListedAssetsBodyInput"></param>
+        /// <param name="playerGetListedAssetsBodyInput"></param>
         /// <param name="entityId"></param>
-        partial void OnErrorGetListedAssetsForUser(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, GetListedAssetsBodyInput getListedAssetsBodyInput, string entityId);
+        partial void OnErrorGetListedAssetsForUser(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, PlayerGetListedAssetsBodyInput playerGetListedAssetsBodyInput, string entityId);
 
         /// <summary>
         /// Get all the assets listed by a profile (NFT assets, e.g. ERC721 / ERC1155) 
         /// </summary>
-        /// <param name="getListedAssetsBodyInput"></param>
+        /// <param name="playerGetListedAssetsBodyInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetListedAssetsForUserApiResponse"/>&gt;</returns>
-        public async Task<IGetListedAssetsForUserApiResponse?> GetListedAssetsForUserOrDefaultAsync(GetListedAssetsBodyInput getListedAssetsBodyInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetListedAssetsForUserApiResponse?> GetListedAssetsForUserOrDefaultAsync(PlayerGetListedAssetsBodyInput playerGetListedAssetsBodyInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await GetListedAssetsForUserAsync(getListedAssetsBodyInput, entityId, cancellationToken).ConfigureAwait(false);
+                return await GetListedAssetsForUserAsync(playerGetListedAssetsBodyInput, entityId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -3015,19 +3015,19 @@ namespace BeamPlayerClient.Api
         /// Get all the assets listed by a profile (NFT assets, e.g. ERC721 / ERC1155) 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="getListedAssetsBodyInput"></param>
+        /// <param name="playerGetListedAssetsBodyInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetListedAssetsForUserApiResponse"/>&gt;</returns>
-        public async Task<IGetListedAssetsForUserApiResponse> GetListedAssetsForUserAsync(GetListedAssetsBodyInput getListedAssetsBodyInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetListedAssetsForUserApiResponse> GetListedAssetsForUserAsync(PlayerGetListedAssetsBodyInput playerGetListedAssetsBodyInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateGetListedAssetsForUser(getListedAssetsBodyInput, entityId);
+                ValidateGetListedAssetsForUser(playerGetListedAssetsBodyInput, entityId);
 
-                FormatGetListedAssetsForUser(getListedAssetsBodyInput, ref entityId);
+                FormatGetListedAssetsForUser(playerGetListedAssetsBodyInput, ref entityId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -3037,9 +3037,9 @@ namespace BeamPlayerClient.Api
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/player/marketplace/users/{entityId}";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (getListedAssetsBodyInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (playerGetListedAssetsBodyInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(getListedAssetsBodyInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(playerGetListedAssetsBodyInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -3078,7 +3078,7 @@ namespace BeamPlayerClient.Api
 
                         GetListedAssetsForUserApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/player/marketplace/users/{entityId}", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterGetListedAssetsForUserDefaultImplementation(apiResponseLocalVar, getListedAssetsBodyInput, entityId);
+                        AfterGetListedAssetsForUserDefaultImplementation(apiResponseLocalVar, playerGetListedAssetsBodyInput, entityId);
 
                         Events.ExecuteOnGetListedAssetsForUser(apiResponseLocalVar);
 
@@ -3092,7 +3092,7 @@ namespace BeamPlayerClient.Api
             }
             catch(Exception e)
             {
-                OnErrorGetListedAssetsForUserDefaultImplementation(e, "/v1/player/marketplace/users/{entityId}", uriBuilderLocalVar.Path, getListedAssetsBodyInput, entityId);
+                OnErrorGetListedAssetsForUserDefaultImplementation(e, "/v1/player/marketplace/users/{entityId}", uriBuilderLocalVar.Path, playerGetListedAssetsBodyInput, entityId);
                 Events.ExecuteOnErrorGetListedAssetsForUser(e);
                 throw;
             }
@@ -3136,11 +3136,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.GetAssetListingsResponse? Ok()
+            public BeamPlayerClient.Model.PlayerGetAssetListingsResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.GetAssetListingsResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerGetAssetListingsResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -3149,7 +3149,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.GetAssetListingsResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerGetAssetListingsResponse? result)
             {
                 result = null;
 
@@ -3411,11 +3411,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.GetAssetListingsResponse? Ok()
+            public BeamPlayerClient.Model.PlayerGetAssetListingsResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.GetAssetListingsResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerGetAssetListingsResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -3424,7 +3424,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.GetAssetListingsResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerGetAssetListingsResponse? result)
             {
                 result = null;
 
@@ -3664,11 +3664,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.GetAssetListingsResponse? Ok()
+            public BeamPlayerClient.Model.PlayerGetAssetListingsResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.GetAssetListingsResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerGetAssetListingsResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -3677,7 +3677,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.GetAssetListingsResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerGetAssetListingsResponse? result)
             {
                 result = null;
 
@@ -3703,18 +3703,18 @@ namespace BeamPlayerClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatListAsset(SellAssetRequestInput sellAssetRequestInput, ref string entityId);
+        partial void FormatListAsset(PlayerSellAssetRequestInput playerSellAssetRequestInput, ref string entityId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="sellAssetRequestInput"></param>
+        /// <param name="playerSellAssetRequestInput"></param>
         /// <param name="entityId"></param>
         /// <returns></returns>
-        private void ValidateListAsset(SellAssetRequestInput sellAssetRequestInput, string entityId)
+        private void ValidateListAsset(PlayerSellAssetRequestInput playerSellAssetRequestInput, string entityId)
         {
-            if (sellAssetRequestInput == null)
-                throw new ArgumentNullException(nameof(sellAssetRequestInput));
+            if (playerSellAssetRequestInput == null)
+                throw new ArgumentNullException(nameof(playerSellAssetRequestInput));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -3724,12 +3724,12 @@ namespace BeamPlayerClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="sellAssetRequestInput"></param>
+        /// <param name="playerSellAssetRequestInput"></param>
         /// <param name="entityId"></param>
-        private void AfterListAssetDefaultImplementation(IListAssetApiResponse apiResponseLocalVar, SellAssetRequestInput sellAssetRequestInput, string entityId)
+        private void AfterListAssetDefaultImplementation(IListAssetApiResponse apiResponseLocalVar, PlayerSellAssetRequestInput playerSellAssetRequestInput, string entityId)
         {
             bool suppressDefaultLog = false;
-            AfterListAsset(ref suppressDefaultLog, apiResponseLocalVar, sellAssetRequestInput, entityId);
+            AfterListAsset(ref suppressDefaultLog, apiResponseLocalVar, playerSellAssetRequestInput, entityId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -3739,9 +3739,9 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="sellAssetRequestInput"></param>
+        /// <param name="playerSellAssetRequestInput"></param>
         /// <param name="entityId"></param>
-        partial void AfterListAsset(ref bool suppressDefaultLog, IListAssetApiResponse apiResponseLocalVar, SellAssetRequestInput sellAssetRequestInput, string entityId);
+        partial void AfterListAsset(ref bool suppressDefaultLog, IListAssetApiResponse apiResponseLocalVar, PlayerSellAssetRequestInput playerSellAssetRequestInput, string entityId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -3749,12 +3749,12 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="sellAssetRequestInput"></param>
+        /// <param name="playerSellAssetRequestInput"></param>
         /// <param name="entityId"></param>
-        private void OnErrorListAssetDefaultImplementation(Exception exception, string pathFormat, string path, SellAssetRequestInput sellAssetRequestInput, string entityId)
+        private void OnErrorListAssetDefaultImplementation(Exception exception, string pathFormat, string path, PlayerSellAssetRequestInput playerSellAssetRequestInput, string entityId)
         {
             bool suppressDefaultLog = false;
-            OnErrorListAsset(ref suppressDefaultLog, exception, pathFormat, path, sellAssetRequestInput, entityId);
+            OnErrorListAsset(ref suppressDefaultLog, exception, pathFormat, path, playerSellAssetRequestInput, entityId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -3766,22 +3766,22 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="sellAssetRequestInput"></param>
+        /// <param name="playerSellAssetRequestInput"></param>
         /// <param name="entityId"></param>
-        partial void OnErrorListAsset(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, SellAssetRequestInput sellAssetRequestInput, string entityId);
+        partial void OnErrorListAsset(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, PlayerSellAssetRequestInput playerSellAssetRequestInput, string entityId);
 
         /// <summary>
         /// List an asset for sale 
         /// </summary>
-        /// <param name="sellAssetRequestInput"></param>
+        /// <param name="playerSellAssetRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IListAssetApiResponse"/>&gt;</returns>
-        public async Task<IListAssetApiResponse?> ListAssetOrDefaultAsync(SellAssetRequestInput sellAssetRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IListAssetApiResponse?> ListAssetOrDefaultAsync(PlayerSellAssetRequestInput playerSellAssetRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await ListAssetAsync(sellAssetRequestInput, entityId, cancellationToken).ConfigureAwait(false);
+                return await ListAssetAsync(playerSellAssetRequestInput, entityId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -3793,19 +3793,19 @@ namespace BeamPlayerClient.Api
         /// List an asset for sale 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="sellAssetRequestInput"></param>
+        /// <param name="playerSellAssetRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IListAssetApiResponse"/>&gt;</returns>
-        public async Task<IListAssetApiResponse> ListAssetAsync(SellAssetRequestInput sellAssetRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IListAssetApiResponse> ListAssetAsync(PlayerSellAssetRequestInput playerSellAssetRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateListAsset(sellAssetRequestInput, entityId);
+                ValidateListAsset(playerSellAssetRequestInput, entityId);
 
-                FormatListAsset(sellAssetRequestInput, ref entityId);
+                FormatListAsset(playerSellAssetRequestInput, ref entityId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -3815,9 +3815,9 @@ namespace BeamPlayerClient.Api
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/player/marketplace/users/{entityId}/listing";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (sellAssetRequestInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (playerSellAssetRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(sellAssetRequestInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(playerSellAssetRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -3856,7 +3856,7 @@ namespace BeamPlayerClient.Api
 
                         ListAssetApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/player/marketplace/users/{entityId}/listing", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterListAssetDefaultImplementation(apiResponseLocalVar, sellAssetRequestInput, entityId);
+                        AfterListAssetDefaultImplementation(apiResponseLocalVar, playerSellAssetRequestInput, entityId);
 
                         Events.ExecuteOnListAsset(apiResponseLocalVar);
 
@@ -3870,7 +3870,7 @@ namespace BeamPlayerClient.Api
             }
             catch(Exception e)
             {
-                OnErrorListAssetDefaultImplementation(e, "/v1/player/marketplace/users/{entityId}/listing", uriBuilderLocalVar.Path, sellAssetRequestInput, entityId);
+                OnErrorListAssetDefaultImplementation(e, "/v1/player/marketplace/users/{entityId}/listing", uriBuilderLocalVar.Path, playerSellAssetRequestInput, entityId);
                 Events.ExecuteOnErrorListAsset(e);
                 throw;
             }
@@ -3914,11 +3914,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.CommonOperationResponse? Created()
+            public BeamPlayerClient.Model.PlayerCommonOperationResponse? Created()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsCreated
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.CommonOperationResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerCommonOperationResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -3927,7 +3927,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryCreated([NotNullWhen(true)]out BeamPlayerClient.Model.CommonOperationResponse? result)
+            public bool TryCreated([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerCommonOperationResponse? result)
             {
                 result = null;
 
@@ -3953,28 +3953,28 @@ namespace BeamPlayerClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatRefreshContract(RefreshContractRequestBody refreshContractRequestBody);
+        partial void FormatRefreshContract(PlayerRefreshContractRequestBody playerRefreshContractRequestBody);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="refreshContractRequestBody"></param>
+        /// <param name="playerRefreshContractRequestBody"></param>
         /// <returns></returns>
-        private void ValidateRefreshContract(RefreshContractRequestBody refreshContractRequestBody)
+        private void ValidateRefreshContract(PlayerRefreshContractRequestBody playerRefreshContractRequestBody)
         {
-            if (refreshContractRequestBody == null)
-                throw new ArgumentNullException(nameof(refreshContractRequestBody));
+            if (playerRefreshContractRequestBody == null)
+                throw new ArgumentNullException(nameof(playerRefreshContractRequestBody));
         }
 
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="refreshContractRequestBody"></param>
-        private void AfterRefreshContractDefaultImplementation(IRefreshContractApiResponse apiResponseLocalVar, RefreshContractRequestBody refreshContractRequestBody)
+        /// <param name="playerRefreshContractRequestBody"></param>
+        private void AfterRefreshContractDefaultImplementation(IRefreshContractApiResponse apiResponseLocalVar, PlayerRefreshContractRequestBody playerRefreshContractRequestBody)
         {
             bool suppressDefaultLog = false;
-            AfterRefreshContract(ref suppressDefaultLog, apiResponseLocalVar, refreshContractRequestBody);
+            AfterRefreshContract(ref suppressDefaultLog, apiResponseLocalVar, playerRefreshContractRequestBody);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -3984,8 +3984,8 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="refreshContractRequestBody"></param>
-        partial void AfterRefreshContract(ref bool suppressDefaultLog, IRefreshContractApiResponse apiResponseLocalVar, RefreshContractRequestBody refreshContractRequestBody);
+        /// <param name="playerRefreshContractRequestBody"></param>
+        partial void AfterRefreshContract(ref bool suppressDefaultLog, IRefreshContractApiResponse apiResponseLocalVar, PlayerRefreshContractRequestBody playerRefreshContractRequestBody);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -3993,11 +3993,11 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="refreshContractRequestBody"></param>
-        private void OnErrorRefreshContractDefaultImplementation(Exception exception, string pathFormat, string path, RefreshContractRequestBody refreshContractRequestBody)
+        /// <param name="playerRefreshContractRequestBody"></param>
+        private void OnErrorRefreshContractDefaultImplementation(Exception exception, string pathFormat, string path, PlayerRefreshContractRequestBody playerRefreshContractRequestBody)
         {
             bool suppressDefaultLog = false;
-            OnErrorRefreshContract(ref suppressDefaultLog, exception, pathFormat, path, refreshContractRequestBody);
+            OnErrorRefreshContract(ref suppressDefaultLog, exception, pathFormat, path, playerRefreshContractRequestBody);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -4009,20 +4009,20 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="refreshContractRequestBody"></param>
-        partial void OnErrorRefreshContract(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, RefreshContractRequestBody refreshContractRequestBody);
+        /// <param name="playerRefreshContractRequestBody"></param>
+        partial void OnErrorRefreshContract(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, PlayerRefreshContractRequestBody playerRefreshContractRequestBody);
 
         /// <summary>
         /// Schedule a contract refresh in the indexer 
         /// </summary>
-        /// <param name="refreshContractRequestBody"></param>
+        /// <param name="playerRefreshContractRequestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRefreshContractApiResponse"/>&gt;</returns>
-        public async Task<IRefreshContractApiResponse?> RefreshContractOrDefaultAsync(RefreshContractRequestBody refreshContractRequestBody, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IRefreshContractApiResponse?> RefreshContractOrDefaultAsync(PlayerRefreshContractRequestBody playerRefreshContractRequestBody, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await RefreshContractAsync(refreshContractRequestBody, cancellationToken).ConfigureAwait(false);
+                return await RefreshContractAsync(playerRefreshContractRequestBody, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -4034,18 +4034,18 @@ namespace BeamPlayerClient.Api
         /// Schedule a contract refresh in the indexer 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="refreshContractRequestBody"></param>
+        /// <param name="playerRefreshContractRequestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRefreshContractApiResponse"/>&gt;</returns>
-        public async Task<IRefreshContractApiResponse> RefreshContractAsync(RefreshContractRequestBody refreshContractRequestBody, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IRefreshContractApiResponse> RefreshContractAsync(PlayerRefreshContractRequestBody playerRefreshContractRequestBody, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateRefreshContract(refreshContractRequestBody);
+                ValidateRefreshContract(playerRefreshContractRequestBody);
 
-                FormatRefreshContract(refreshContractRequestBody);
+                FormatRefreshContract(playerRefreshContractRequestBody);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -4054,9 +4054,9 @@ namespace BeamPlayerClient.Api
                     uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/player/marketplace/refresh/contract";
 
-                    httpRequestMessageLocalVar.Content = (refreshContractRequestBody as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (playerRefreshContractRequestBody as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(refreshContractRequestBody, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(playerRefreshContractRequestBody, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -4086,7 +4086,7 @@ namespace BeamPlayerClient.Api
 
                         RefreshContractApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/player/marketplace/refresh/contract", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterRefreshContractDefaultImplementation(apiResponseLocalVar, refreshContractRequestBody);
+                        AfterRefreshContractDefaultImplementation(apiResponseLocalVar, playerRefreshContractRequestBody);
 
                         Events.ExecuteOnRefreshContract(apiResponseLocalVar);
 
@@ -4100,7 +4100,7 @@ namespace BeamPlayerClient.Api
             }
             catch(Exception e)
             {
-                OnErrorRefreshContractDefaultImplementation(e, "/v1/player/marketplace/refresh/contract", uriBuilderLocalVar.Path, refreshContractRequestBody);
+                OnErrorRefreshContractDefaultImplementation(e, "/v1/player/marketplace/refresh/contract", uriBuilderLocalVar.Path, playerRefreshContractRequestBody);
                 Events.ExecuteOnErrorRefreshContract(e);
                 throw;
             }
@@ -4151,28 +4151,28 @@ namespace BeamPlayerClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatRefreshToken(RefreshTokenRequestBody refreshTokenRequestBody);
+        partial void FormatRefreshToken(PlayerRefreshTokenRequestBody playerRefreshTokenRequestBody);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="refreshTokenRequestBody"></param>
+        /// <param name="playerRefreshTokenRequestBody"></param>
         /// <returns></returns>
-        private void ValidateRefreshToken(RefreshTokenRequestBody refreshTokenRequestBody)
+        private void ValidateRefreshToken(PlayerRefreshTokenRequestBody playerRefreshTokenRequestBody)
         {
-            if (refreshTokenRequestBody == null)
-                throw new ArgumentNullException(nameof(refreshTokenRequestBody));
+            if (playerRefreshTokenRequestBody == null)
+                throw new ArgumentNullException(nameof(playerRefreshTokenRequestBody));
         }
 
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="refreshTokenRequestBody"></param>
-        private void AfterRefreshTokenDefaultImplementation(IRefreshTokenApiResponse apiResponseLocalVar, RefreshTokenRequestBody refreshTokenRequestBody)
+        /// <param name="playerRefreshTokenRequestBody"></param>
+        private void AfterRefreshTokenDefaultImplementation(IRefreshTokenApiResponse apiResponseLocalVar, PlayerRefreshTokenRequestBody playerRefreshTokenRequestBody)
         {
             bool suppressDefaultLog = false;
-            AfterRefreshToken(ref suppressDefaultLog, apiResponseLocalVar, refreshTokenRequestBody);
+            AfterRefreshToken(ref suppressDefaultLog, apiResponseLocalVar, playerRefreshTokenRequestBody);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -4182,8 +4182,8 @@ namespace BeamPlayerClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="refreshTokenRequestBody"></param>
-        partial void AfterRefreshToken(ref bool suppressDefaultLog, IRefreshTokenApiResponse apiResponseLocalVar, RefreshTokenRequestBody refreshTokenRequestBody);
+        /// <param name="playerRefreshTokenRequestBody"></param>
+        partial void AfterRefreshToken(ref bool suppressDefaultLog, IRefreshTokenApiResponse apiResponseLocalVar, PlayerRefreshTokenRequestBody playerRefreshTokenRequestBody);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -4191,11 +4191,11 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="refreshTokenRequestBody"></param>
-        private void OnErrorRefreshTokenDefaultImplementation(Exception exception, string pathFormat, string path, RefreshTokenRequestBody refreshTokenRequestBody)
+        /// <param name="playerRefreshTokenRequestBody"></param>
+        private void OnErrorRefreshTokenDefaultImplementation(Exception exception, string pathFormat, string path, PlayerRefreshTokenRequestBody playerRefreshTokenRequestBody)
         {
             bool suppressDefaultLog = false;
-            OnErrorRefreshToken(ref suppressDefaultLog, exception, pathFormat, path, refreshTokenRequestBody);
+            OnErrorRefreshToken(ref suppressDefaultLog, exception, pathFormat, path, playerRefreshTokenRequestBody);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -4207,20 +4207,20 @@ namespace BeamPlayerClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="refreshTokenRequestBody"></param>
-        partial void OnErrorRefreshToken(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, RefreshTokenRequestBody refreshTokenRequestBody);
+        /// <param name="playerRefreshTokenRequestBody"></param>
+        partial void OnErrorRefreshToken(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, PlayerRefreshTokenRequestBody playerRefreshTokenRequestBody);
 
         /// <summary>
         /// Schedule a token refresh in the indexer 
         /// </summary>
-        /// <param name="refreshTokenRequestBody"></param>
+        /// <param name="playerRefreshTokenRequestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRefreshTokenApiResponse"/>&gt;</returns>
-        public async Task<IRefreshTokenApiResponse?> RefreshTokenOrDefaultAsync(RefreshTokenRequestBody refreshTokenRequestBody, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IRefreshTokenApiResponse?> RefreshTokenOrDefaultAsync(PlayerRefreshTokenRequestBody playerRefreshTokenRequestBody, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await RefreshTokenAsync(refreshTokenRequestBody, cancellationToken).ConfigureAwait(false);
+                return await RefreshTokenAsync(playerRefreshTokenRequestBody, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -4232,18 +4232,18 @@ namespace BeamPlayerClient.Api
         /// Schedule a token refresh in the indexer 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="refreshTokenRequestBody"></param>
+        /// <param name="playerRefreshTokenRequestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRefreshTokenApiResponse"/>&gt;</returns>
-        public async Task<IRefreshTokenApiResponse> RefreshTokenAsync(RefreshTokenRequestBody refreshTokenRequestBody, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IRefreshTokenApiResponse> RefreshTokenAsync(PlayerRefreshTokenRequestBody playerRefreshTokenRequestBody, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateRefreshToken(refreshTokenRequestBody);
+                ValidateRefreshToken(playerRefreshTokenRequestBody);
 
-                FormatRefreshToken(refreshTokenRequestBody);
+                FormatRefreshToken(playerRefreshTokenRequestBody);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -4252,9 +4252,9 @@ namespace BeamPlayerClient.Api
                     uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/player/marketplace/refresh/token";
 
-                    httpRequestMessageLocalVar.Content = (refreshTokenRequestBody as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (playerRefreshTokenRequestBody as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(refreshTokenRequestBody, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(playerRefreshTokenRequestBody, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -4284,7 +4284,7 @@ namespace BeamPlayerClient.Api
 
                         RefreshTokenApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/player/marketplace/refresh/token", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterRefreshTokenDefaultImplementation(apiResponseLocalVar, refreshTokenRequestBody);
+                        AfterRefreshTokenDefaultImplementation(apiResponseLocalVar, playerRefreshTokenRequestBody);
 
                         Events.ExecuteOnRefreshToken(apiResponseLocalVar);
 
@@ -4298,7 +4298,7 @@ namespace BeamPlayerClient.Api
             }
             catch(Exception e)
             {
-                OnErrorRefreshTokenDefaultImplementation(e, "/v1/player/marketplace/refresh/token", uriBuilderLocalVar.Path, refreshTokenRequestBody);
+                OnErrorRefreshTokenDefaultImplementation(e, "/v1/player/marketplace/refresh/token", uriBuilderLocalVar.Path, playerRefreshTokenRequestBody);
                 Events.ExecuteOnErrorRefreshToken(e);
                 throw;
             }

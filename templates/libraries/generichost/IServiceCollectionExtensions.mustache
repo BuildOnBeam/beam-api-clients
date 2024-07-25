@@ -22,7 +22,7 @@ namespace {{packageName}}.Extensions
         /// <param name="services"></param>
         public static void Add{{apiName}}(this IServiceCollection services)
         {
-            HostConfiguration config = new{{^net70OrLater}} HostConfiguration{{/net70OrLater}}(services);
+            {{classPrefix}}HostConfiguration config = new{{^net70OrLater}} {{classPrefix}}HostConfiguration{{/net70OrLater}}(services);
             Add{{apiName}}(services, config);
         }
 
@@ -33,7 +33,7 @@ namespace {{packageName}}.Extensions
         [Obsolete("Use Add{{apiName}}")]
         public static void AddApi(this IServiceCollection services)
         {
-            HostConfiguration config = new{{^net70OrLater}} HostConfiguration{{/net70OrLater}}(services);
+            {{classPrefix}}HostConfiguration config = new{{^net70OrLater}} {{classPrefix}}HostConfiguration{{/net70OrLater}}(services);
             Add{{apiName}}(services, config);
         }
 
@@ -43,9 +43,9 @@ namespace {{packageName}}.Extensions
         /// </summary>
         /// <param name="services"></param>
         /// <param name="options"></param>
-        public static void Add{{apiName}}(this IServiceCollection services, Action<HostConfiguration> options)
+        public static void Add{{apiName}}(this IServiceCollection services, Action<{{classPrefix}}HostConfiguration> options)
         {
-            HostConfiguration config = new{{^net70OrLater}} HostConfiguration{{/net70OrLater}}(services);
+            {{classPrefix}}HostConfiguration config = new{{^net70OrLater}} {{classPrefix}}HostConfiguration{{/net70OrLater}}(services);
             options(config);
             Add{{apiName}}(services, config);
         }
@@ -56,14 +56,14 @@ namespace {{packageName}}.Extensions
         /// <param name="services"></param>
         /// <param name="options"></param>
         [Obsolete("Use Add{{apiName}}")]
-        public static void AddApi(this IServiceCollection services, Action<HostConfiguration> options)
+        public static void AddApi(this IServiceCollection services, Action<{{classPrefix}}HostConfiguration> options)
         {
-            HostConfiguration config = new{{^net70OrLater}} HostConfiguration{{/net70OrLater}}(services);
+            {{classPrefix}}HostConfiguration config = new{{^net70OrLater}} {{classPrefix}}HostConfiguration{{/net70OrLater}}(services);
             options(config);
             Add{{apiName}}(services, config);
         }
 
-        internal static void Add{{apiName}}(IServiceCollection services, HostConfiguration host)
+        internal static void Add{{apiName}}(IServiceCollection services, {{classPrefix}}HostConfiguration host)
         {
             if (!host.HttpClientsAdded)
                 host.Add{{apiName}}HttpClients();

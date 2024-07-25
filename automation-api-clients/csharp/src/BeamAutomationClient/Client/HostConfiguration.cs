@@ -24,7 +24,7 @@ namespace BeamAutomationClient.Client
     /// <summary>
     /// Provides hosting configuration for BeamAutomationClient
     /// </summary>
-    public class HostConfiguration
+    public class AutomationHostConfiguration
     {
         private readonly IServiceCollection _services;
         private readonly JsonSerializerOptions _jsonOptions = new JsonSerializerOptions();
@@ -32,168 +32,168 @@ namespace BeamAutomationClient.Client
         internal bool HttpClientsAdded { get; private set; }
 
         /// <summary>
-        /// Instantiates the class 
+        /// Instantiates the class
         /// </summary>
         /// <param name="services"></param>
-        public HostConfiguration(IServiceCollection services)
+        public AutomationHostConfiguration(IServiceCollection services)
         {
             _services = services;
             _jsonOptions.Converters.Add(new JsonStringEnumConverter());
             _jsonOptions.Converters.Add(new DateTimeJsonConverter());
             _jsonOptions.Converters.Add(new DateTimeNullableJsonConverter());
-            _jsonOptions.Converters.Add(new AcceptAssetOfferRequestInputV2JsonConverter());
-            _jsonOptions.Converters.Add(new AcceptOfferResponseV2JsonConverter());
-            _jsonOptions.Converters.Add(new AddContractRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new AddContractResponseJsonConverter());
-            _jsonOptions.Converters.Add(new BuyAssetRequestInputV2JsonConverter());
-            _jsonOptions.Converters.Add(new BuyAssetResponseV2JsonConverter());
-            _jsonOptions.Converters.Add(new CancelAssetListingRequestInputV2JsonConverter());
-            _jsonOptions.Converters.Add(new CancelAssetListingResponseV2JsonConverter());
-            _jsonOptions.Converters.Add(new CancelAssetOfferRequestInputV2JsonConverter());
-            _jsonOptions.Converters.Add(new CancelOfferResponseV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationAcceptAssetOfferRequestInputV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationAcceptOfferResponseV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationAddContractRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationAddContractResponseJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationBuyAssetRequestInputV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationBuyAssetResponseV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationCancelAssetListingRequestInputV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationCancelAssetListingResponseV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationCancelAssetOfferRequestInputV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationCancelOfferResponseV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationCommonActivityRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationCommonActivityResponseJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationCommonActivityResponseDataInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationCommonActivityResponseDataInnerAssetJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationCommonActivityResponseDataInnerContractJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationCommonActivityResponseDataInnerOrderJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationCommonActivityResponseDataInnerTransactionJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationCommonAddPolicyRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationCommonAddPolicyResponseJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationCommonGetPoliciesResponseJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationCommonGetPoliciesResponseDataInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationCommonRemovePolicyResponseJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationCommonStatsRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationCommonStatsResponseJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationCommonStatsResponseCountJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationConvertTokenRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationConvertTokenResponseJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationCreateAssetOfferRequestInputV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationCreateOfferResponseV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationCreateProfileRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationCreateProfileResponseJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationCreateProfileResponseWalletsInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationCreateTransactionRequestInputV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationCreateTransactionRequestInputV2InteractionsInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationCreateTransactionResponseV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationCreateWebhookForGameJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGenerateLinkCodeRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGenerateLinkCodeResponseJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGenerateSignInCodeRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGenerateSignInCodeResponseJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetAllGasUsageResponseJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetAllGasUsageResponseChainsInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetAllGasUsageResponseChainsInnerPoliciesInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetAllGasUsageResponseChainsInnerPoliciesInnerPeriodsInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetAllGasUsageResponseChainsInnerPoliciesInnerPolicyJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetAllGasUsageResponseChainsInnerSummaryJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetAllProfilesResponseJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetAllProfilesResponseDataInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetAllProfilesResponsePaginationJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetAssetListingsResponseV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetAssetListingsResponseV2DataInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetAssetListingsResponseV2DataInnerPriceJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetAssetListingsResponseV2DataInnerPriceAmountJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetAssetListingsResponseV2DataInnerPriceCurrencyJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetAssetResponseV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetAssetResponseV2OwnersInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetAssetsForContractBodyInputV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetAssetsForContractBodyInputV2AttributesInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetAssetsForContractResponseV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetAssetsForContractResponseV2DataInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetAssetsForProfileBodyInputV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetAssetsForProfileResponseV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetAssetsForProfileResponseV2DataInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetAssetsForProfileResponseV2DataInnerAttributesInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetChainCurrenciesResponseV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetChainCurrenciesResponseV2DataInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetChainResponseJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetChainResponseNativeCurrencyJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetEstimateResponseJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetGameResponseJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetGameResponseContractsInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetGameResponseDepositorJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetGameResponseDevelopersInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetGameResponseDevelopersInnerDeveloperJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetGameResponsePoliciesInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetGasUsageResponseJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetListedAssetsBodyInputV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetPolicyUsageResponseJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetProfileCurrenciesResponseV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetProfileCurrenciesResponseV2DataInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetProfileNativeCurrencyResponseV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetProfileNativeCurrencyResponseV2NativeTokenBalanceJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetProfileResponseJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetQuoteResponseJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetTransactionResponseV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetTransactionResponseV2PolicyJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetTransactionResponseV2ProfileJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetTransactionResponseV2ProfileWalletJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetTransactionsResponseV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetTransactionsResponseV2DataInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetTransactionsResponseV2DataInnerIntentJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetTransactionsResponseV2DataInnerTransactionJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetTransactionsResponseV2DataInnerTransactionLogsInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetWebhooksForGameResponseJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetWebhooksForGameResponseWebhooksInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationRefreshContractRequestBodyJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationRefreshTokenRequestBodyJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationRegenerateGameApiKeysResponseJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationRegenerateGameApiKeysResponseApiKeysInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationRemoveContractResponseJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationSellAssetRequestInputV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationSellAssetResponseV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationTradeTokensRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationTradeTokensRequestInputInitiatorJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationTradeTokensRequestInputInitiatorTokensInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationTradeTokensResponseJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationTransferAssetRequestInputV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationTransferAssetRequestInputV2AssetsInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationTransferAssetResponseV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationTransferNativeTokenRequestInputV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationTransferTokenRequestInputV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationTransferTokenResponseV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationUpdateGameRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationUpdateGameResponseJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationUpdateGameResponsePoliciesInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationUpdateProfileRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationUpdateProfileResponseJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationWebhookForGameResponseJsonConverter());
             _jsonOptions.Converters.Add(new Check200ResponseJsonConverter());
             _jsonOptions.Converters.Add(new Check200ResponseInfoValueJsonConverter());
             _jsonOptions.Converters.Add(new Check503ResponseJsonConverter());
-            _jsonOptions.Converters.Add(new CommonActivityRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new CommonActivityResponseJsonConverter());
-            _jsonOptions.Converters.Add(new CommonActivityResponseDataInnerJsonConverter());
-            _jsonOptions.Converters.Add(new CommonActivityResponseDataInnerAssetJsonConverter());
-            _jsonOptions.Converters.Add(new CommonActivityResponseDataInnerContractJsonConverter());
-            _jsonOptions.Converters.Add(new CommonActivityResponseDataInnerOrderJsonConverter());
-            _jsonOptions.Converters.Add(new CommonActivityResponseDataInnerTransactionJsonConverter());
-            _jsonOptions.Converters.Add(new CommonAddPolicyRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new CommonAddPolicyResponseJsonConverter());
-            _jsonOptions.Converters.Add(new CommonGetPoliciesResponseJsonConverter());
-            _jsonOptions.Converters.Add(new CommonGetPoliciesResponseDataInnerJsonConverter());
-            _jsonOptions.Converters.Add(new CommonRemovePolicyResponseJsonConverter());
-            _jsonOptions.Converters.Add(new CommonStatsRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new CommonStatsResponseJsonConverter());
-            _jsonOptions.Converters.Add(new CommonStatsResponseCountJsonConverter());
-            _jsonOptions.Converters.Add(new ConvertTokenRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new ConvertTokenResponseJsonConverter());
-            _jsonOptions.Converters.Add(new CreateAssetOfferRequestInputV2JsonConverter());
-            _jsonOptions.Converters.Add(new CreateOfferResponseV2JsonConverter());
-            _jsonOptions.Converters.Add(new CreateProfileRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new CreateProfileResponseJsonConverter());
-            _jsonOptions.Converters.Add(new CreateProfileResponseWalletsInnerJsonConverter());
-            _jsonOptions.Converters.Add(new CreateTransactionRequestInputV2JsonConverter());
-            _jsonOptions.Converters.Add(new CreateTransactionRequestInputV2InteractionsInnerJsonConverter());
-            _jsonOptions.Converters.Add(new CreateTransactionResponseV2JsonConverter());
-            _jsonOptions.Converters.Add(new CreateWebhookForGameJsonConverter());
-            _jsonOptions.Converters.Add(new GenerateLinkCodeRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new GenerateLinkCodeResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GenerateSignInCodeRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new GenerateSignInCodeResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetAllGasUsageResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetAllGasUsageResponseChainsInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetAllGasUsageResponseChainsInnerPoliciesInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetAllGasUsageResponseChainsInnerPoliciesInnerPeriodsInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetAllGasUsageResponseChainsInnerPoliciesInnerPolicyJsonConverter());
-            _jsonOptions.Converters.Add(new GetAllGasUsageResponseChainsInnerSummaryJsonConverter());
-            _jsonOptions.Converters.Add(new GetAllProfilesResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetAllProfilesResponseDataInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetAllProfilesResponsePaginationJsonConverter());
-            _jsonOptions.Converters.Add(new GetAssetListingsResponseV2JsonConverter());
-            _jsonOptions.Converters.Add(new GetAssetListingsResponseV2DataInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetAssetListingsResponseV2DataInnerPriceJsonConverter());
-            _jsonOptions.Converters.Add(new GetAssetListingsResponseV2DataInnerPriceAmountJsonConverter());
-            _jsonOptions.Converters.Add(new GetAssetListingsResponseV2DataInnerPriceCurrencyJsonConverter());
-            _jsonOptions.Converters.Add(new GetAssetResponseV2JsonConverter());
-            _jsonOptions.Converters.Add(new GetAssetResponseV2OwnersInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetAssetsForContractBodyInputV2JsonConverter());
-            _jsonOptions.Converters.Add(new GetAssetsForContractBodyInputV2AttributesInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetAssetsForContractResponseV2JsonConverter());
-            _jsonOptions.Converters.Add(new GetAssetsForContractResponseV2DataInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetAssetsForProfileBodyInputV2JsonConverter());
-            _jsonOptions.Converters.Add(new GetAssetsForProfileResponseV2JsonConverter());
-            _jsonOptions.Converters.Add(new GetAssetsForProfileResponseV2DataInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetAssetsForProfileResponseV2DataInnerAttributesInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetChainCurrenciesResponseV2JsonConverter());
-            _jsonOptions.Converters.Add(new GetChainCurrenciesResponseV2DataInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetChainResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetChainResponseNativeCurrencyJsonConverter());
-            _jsonOptions.Converters.Add(new GetEstimateResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetGameResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetGameResponseContractsInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetGameResponseDepositorJsonConverter());
-            _jsonOptions.Converters.Add(new GetGameResponseDevelopersInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetGameResponseDevelopersInnerDeveloperJsonConverter());
-            _jsonOptions.Converters.Add(new GetGameResponsePoliciesInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetGasUsageResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetListedAssetsBodyInputV2JsonConverter());
-            _jsonOptions.Converters.Add(new GetPolicyUsageResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetProfileCurrenciesResponseV2JsonConverter());
-            _jsonOptions.Converters.Add(new GetProfileCurrenciesResponseV2DataInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetProfileNativeCurrencyResponseV2JsonConverter());
-            _jsonOptions.Converters.Add(new GetProfileNativeCurrencyResponseV2NativeTokenBalanceJsonConverter());
-            _jsonOptions.Converters.Add(new GetProfileResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetQuoteResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetTransactionResponseV2JsonConverter());
-            _jsonOptions.Converters.Add(new GetTransactionResponseV2PolicyJsonConverter());
-            _jsonOptions.Converters.Add(new GetTransactionResponseV2ProfileJsonConverter());
-            _jsonOptions.Converters.Add(new GetTransactionResponseV2ProfileWalletJsonConverter());
-            _jsonOptions.Converters.Add(new GetTransactionsResponseV2JsonConverter());
-            _jsonOptions.Converters.Add(new GetTransactionsResponseV2DataInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetTransactionsResponseV2DataInnerIntentJsonConverter());
-            _jsonOptions.Converters.Add(new GetTransactionsResponseV2DataInnerIntentInteractionsInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetTransactionsResponseV2DataInnerTransactionJsonConverter());
-            _jsonOptions.Converters.Add(new GetTransactionsResponseV2DataInnerTransactionLogsInnerJsonConverter());
-            _jsonOptions.Converters.Add(new GetWebhooksForGameResponseJsonConverter());
-            _jsonOptions.Converters.Add(new GetWebhooksForGameResponseWebhooksInnerJsonConverter());
-            _jsonOptions.Converters.Add(new RefreshContractRequestBodyJsonConverter());
-            _jsonOptions.Converters.Add(new RefreshTokenRequestBodyJsonConverter());
-            _jsonOptions.Converters.Add(new RegenerateGameApiKeysResponseJsonConverter());
-            _jsonOptions.Converters.Add(new RegenerateGameApiKeysResponseApiKeysInnerJsonConverter());
-            _jsonOptions.Converters.Add(new RemoveContractResponseJsonConverter());
-            _jsonOptions.Converters.Add(new SellAssetRequestInputV2JsonConverter());
-            _jsonOptions.Converters.Add(new SellAssetResponseV2JsonConverter());
-            _jsonOptions.Converters.Add(new TradeTokensRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new TradeTokensRequestInputInitiatorJsonConverter());
-            _jsonOptions.Converters.Add(new TradeTokensRequestInputInitiatorTokensInnerJsonConverter());
-            _jsonOptions.Converters.Add(new TradeTokensResponseJsonConverter());
-            _jsonOptions.Converters.Add(new TransferAssetRequestInputV2JsonConverter());
-            _jsonOptions.Converters.Add(new TransferAssetRequestInputV2AssetsInnerJsonConverter());
-            _jsonOptions.Converters.Add(new TransferAssetResponseV2JsonConverter());
-            _jsonOptions.Converters.Add(new TransferNativeTokenRequestInputV2JsonConverter());
-            _jsonOptions.Converters.Add(new TransferTokenRequestInputV2JsonConverter());
-            _jsonOptions.Converters.Add(new TransferTokenResponseV2JsonConverter());
-            _jsonOptions.Converters.Add(new UpdateGameRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new UpdateGameResponseJsonConverter());
-            _jsonOptions.Converters.Add(new UpdateGameResponsePoliciesInnerJsonConverter());
-            _jsonOptions.Converters.Add(new UpdateProfileRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new UpdateProfileResponseJsonConverter());
-            _jsonOptions.Converters.Add(new WebhookForGameResponseJsonConverter());
-            JsonSerializerOptionsProvider jsonSerializerOptionsProvider = new(_jsonOptions);
+            AutomationJsonSerializerOptionsProvider jsonSerializerOptionsProvider = new(_jsonOptions);
             _services.AddSingleton(jsonSerializerOptionsProvider);
             _services.AddSingleton<IApiFactory, ApiFactory>();
-            _services.AddSingleton<ActivityApiEvents>();
-            _services.AddTransient<IActivityApi, ActivityApi>();
-            _services.AddSingleton<AssetsV2ApiEvents>();
-            _services.AddTransient<IAssetsV2Api, AssetsV2Api>();
-            _services.AddSingleton<ChainApiEvents>();
-            _services.AddTransient<IChainApi, ChainApi>();
-            _services.AddSingleton<ExchangeApiEvents>();
-            _services.AddTransient<IExchangeApi, ExchangeApi>();
-            _services.AddSingleton<GameApiEvents>();
-            _services.AddTransient<IGameApi, GameApi>();
-            _services.AddSingleton<HealthApiEvents>();
-            _services.AddTransient<IHealthApi, HealthApi>();
-            _services.AddSingleton<MarketplaceV2ApiEvents>();
-            _services.AddTransient<IMarketplaceV2Api, MarketplaceV2Api>();
-            _services.AddSingleton<PolicyApiEvents>();
-            _services.AddTransient<IPolicyApi, PolicyApi>();
-            _services.AddSingleton<ProfilesApiEvents>();
-            _services.AddTransient<IProfilesApi, ProfilesApi>();
-            _services.AddSingleton<ReportingApiEvents>();
-            _services.AddTransient<IReportingApi, ReportingApi>();
-            _services.AddSingleton<StatsApiEvents>();
-            _services.AddTransient<IStatsApi, StatsApi>();
-            _services.AddSingleton<TradingApiEvents>();
-            _services.AddTransient<ITradingApi, TradingApi>();
-            _services.AddSingleton<TransactionsV2ApiEvents>();
-            _services.AddTransient<ITransactionsV2Api, TransactionsV2Api>();
-            _services.AddSingleton<WebhooksApiEvents>();
-            _services.AddTransient<IWebhooksApi, WebhooksApi>();
+            _services.AddSingleton<AutomationActivityApiEvents>();
+            _services.AddTransient<IAutomationActivityApi, AutomationActivityApi>();
+            _services.AddSingleton<AutomationAssetsV2ApiEvents>();
+            _services.AddTransient<IAutomationAssetsV2Api, AutomationAssetsV2Api>();
+            _services.AddSingleton<AutomationChainApiEvents>();
+            _services.AddTransient<IAutomationChainApi, AutomationChainApi>();
+            _services.AddSingleton<AutomationExchangeApiEvents>();
+            _services.AddTransient<IAutomationExchangeApi, AutomationExchangeApi>();
+            _services.AddSingleton<AutomationGameApiEvents>();
+            _services.AddTransient<IAutomationGameApi, AutomationGameApi>();
+            _services.AddSingleton<AutomationHealthApiEvents>();
+            _services.AddTransient<IAutomationHealthApi, AutomationHealthApi>();
+            _services.AddSingleton<AutomationMarketplaceV2ApiEvents>();
+            _services.AddTransient<IAutomationMarketplaceV2Api, AutomationMarketplaceV2Api>();
+            _services.AddSingleton<AutomationPolicyApiEvents>();
+            _services.AddTransient<IAutomationPolicyApi, AutomationPolicyApi>();
+            _services.AddSingleton<AutomationProfilesApiEvents>();
+            _services.AddTransient<IAutomationProfilesApi, AutomationProfilesApi>();
+            _services.AddSingleton<AutomationReportingApiEvents>();
+            _services.AddTransient<IAutomationReportingApi, AutomationReportingApi>();
+            _services.AddSingleton<AutomationStatsApiEvents>();
+            _services.AddTransient<IAutomationStatsApi, AutomationStatsApi>();
+            _services.AddSingleton<AutomationTradingApiEvents>();
+            _services.AddTransient<IAutomationTradingApi, AutomationTradingApi>();
+            _services.AddSingleton<AutomationTransactionsV2ApiEvents>();
+            _services.AddTransient<IAutomationTransactionsV2Api, AutomationTransactionsV2Api>();
+            _services.AddSingleton<AutomationWebhooksApiEvents>();
+            _services.AddTransient<IAutomationWebhooksApi, AutomationWebhooksApi>();
         }
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace BeamAutomationClient.Client
         /// <param name="client"></param>
         /// <param name="builder"></param>
         /// <returns></returns>
-        public HostConfiguration AddBeamAutomationApiHttpClients
+        public AutomationHostConfiguration AddBeamAutomationApiHttpClients
         (
             Action<HttpClient>? client = null, Action<IHttpClientBuilder>? builder = null)
         {
@@ -211,20 +211,20 @@ namespace BeamAutomationClient.Client
 
             List<IHttpClientBuilder> builders = new List<IHttpClientBuilder>();
 
-            builders.Add(_services.AddHttpClient<IActivityApi, ActivityApi>(client));
-            builders.Add(_services.AddHttpClient<IAssetsV2Api, AssetsV2Api>(client));
-            builders.Add(_services.AddHttpClient<IChainApi, ChainApi>(client));
-            builders.Add(_services.AddHttpClient<IExchangeApi, ExchangeApi>(client));
-            builders.Add(_services.AddHttpClient<IGameApi, GameApi>(client));
-            builders.Add(_services.AddHttpClient<IHealthApi, HealthApi>(client));
-            builders.Add(_services.AddHttpClient<IMarketplaceV2Api, MarketplaceV2Api>(client));
-            builders.Add(_services.AddHttpClient<IPolicyApi, PolicyApi>(client));
-            builders.Add(_services.AddHttpClient<IProfilesApi, ProfilesApi>(client));
-            builders.Add(_services.AddHttpClient<IReportingApi, ReportingApi>(client));
-            builders.Add(_services.AddHttpClient<IStatsApi, StatsApi>(client));
-            builders.Add(_services.AddHttpClient<ITradingApi, TradingApi>(client));
-            builders.Add(_services.AddHttpClient<ITransactionsV2Api, TransactionsV2Api>(client));
-            builders.Add(_services.AddHttpClient<IWebhooksApi, WebhooksApi>(client));
+            builders.Add(_services.AddHttpClient<IAutomationActivityApi, AutomationActivityApi>(client));
+            builders.Add(_services.AddHttpClient<IAutomationAssetsV2Api, AutomationAssetsV2Api>(client));
+            builders.Add(_services.AddHttpClient<IAutomationChainApi, AutomationChainApi>(client));
+            builders.Add(_services.AddHttpClient<IAutomationExchangeApi, AutomationExchangeApi>(client));
+            builders.Add(_services.AddHttpClient<IAutomationGameApi, AutomationGameApi>(client));
+            builders.Add(_services.AddHttpClient<IAutomationHealthApi, AutomationHealthApi>(client));
+            builders.Add(_services.AddHttpClient<IAutomationMarketplaceV2Api, AutomationMarketplaceV2Api>(client));
+            builders.Add(_services.AddHttpClient<IAutomationPolicyApi, AutomationPolicyApi>(client));
+            builders.Add(_services.AddHttpClient<IAutomationProfilesApi, AutomationProfilesApi>(client));
+            builders.Add(_services.AddHttpClient<IAutomationReportingApi, AutomationReportingApi>(client));
+            builders.Add(_services.AddHttpClient<IAutomationStatsApi, AutomationStatsApi>(client));
+            builders.Add(_services.AddHttpClient<IAutomationTradingApi, AutomationTradingApi>(client));
+            builders.Add(_services.AddHttpClient<IAutomationTransactionsV2Api, AutomationTransactionsV2Api>(client));
+            builders.Add(_services.AddHttpClient<IAutomationWebhooksApi, AutomationWebhooksApi>(client));
             
             if (builder != null)
                 foreach (IHttpClientBuilder instance in builders)
@@ -240,7 +240,7 @@ namespace BeamAutomationClient.Client
         /// </summary>
         /// <param name="options"></param>
         /// <returns></returns>
-        public HostConfiguration ConfigureJsonOptions(Action<JsonSerializerOptions> options)
+        public AutomationHostConfiguration ConfigureJsonOptions(Action<JsonSerializerOptions> options)
         {
             options(_jsonOptions);
 
@@ -253,7 +253,7 @@ namespace BeamAutomationClient.Client
         /// <typeparam name="TTokenBase"></typeparam>
         /// <param name="token"></param>
         /// <returns></returns>
-        public HostConfiguration AddTokens<TTokenBase>(TTokenBase token) where TTokenBase : TokenBase
+        public AutomationHostConfiguration AddTokens<TTokenBase>(TTokenBase token) where TTokenBase : TokenBase
         {
             return AddTokens(new TTokenBase[]{ token });
         }
@@ -264,7 +264,7 @@ namespace BeamAutomationClient.Client
         /// <typeparam name="TTokenBase"></typeparam>
         /// <param name="tokens"></param>
         /// <returns></returns>
-        public HostConfiguration AddTokens<TTokenBase>(IEnumerable<TTokenBase> tokens) where TTokenBase : TokenBase
+        public AutomationHostConfiguration AddTokens<TTokenBase>(IEnumerable<TTokenBase> tokens) where TTokenBase : TokenBase
         {
             TokenContainer<TTokenBase> container = new TokenContainer<TTokenBase>(tokens);
             _services.AddSingleton(services => container);
@@ -278,7 +278,7 @@ namespace BeamAutomationClient.Client
         /// <typeparam name="TTokenProvider"></typeparam>
         /// <typeparam name="TTokenBase"></typeparam>
         /// <returns></returns>
-        public HostConfiguration UseProvider<TTokenProvider, TTokenBase>() 
+        public AutomationHostConfiguration UseProvider<TTokenProvider, TTokenBase>()
             where TTokenProvider : TokenProvider<TTokenBase>
             where TTokenBase : TokenBase
         {

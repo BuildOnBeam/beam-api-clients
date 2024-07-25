@@ -2,10 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { AddPolicyRequestInput } from '../models/AddPolicyRequestInput';
-import type { AddPolicyResponse } from '../models/AddPolicyResponse';
-import type { GetPoliciesResponse } from '../models/GetPoliciesResponse';
-import type { RemovePolicyResponse } from '../models/RemovePolicyResponse';
+import type { CommonAddPolicyRequestInput } from '../models/CommonAddPolicyRequestInput';
+import type { CommonAddPolicyResponse } from '../models/CommonAddPolicyResponse';
+import type { CommonGetPoliciesResponse } from '../models/CommonGetPoliciesResponse';
+import type { CommonRemovePolicyResponse } from '../models/CommonRemovePolicyResponse';
 
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -16,12 +16,12 @@ export class PolicyService {
   /**
    * Add a new policy to sponsor web3 actions
    * @param requestBody
-   * @returns AddPolicyResponse Policy was successfully created
+   * @returns CommonAddPolicyResponse Policy was successfully created
    * @throws ApiError
    */
   public createPolicy(
-    requestBody: AddPolicyRequestInput,
-  ): CancelablePromise<AddPolicyResponse> {
+    requestBody: CommonAddPolicyRequestInput,
+  ): CancelablePromise<CommonAddPolicyResponse> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v1/policies',
@@ -32,10 +32,10 @@ export class PolicyService {
 
   /**
    * Get a list of policies
-   * @returns GetPoliciesResponse
+   * @returns CommonGetPoliciesResponse
    * @throws ApiError
    */
-  public getPolicies(): CancelablePromise<GetPoliciesResponse> {
+  public getPolicies(): CancelablePromise<CommonGetPoliciesResponse> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v1/policies',
@@ -45,12 +45,12 @@ export class PolicyService {
   /**
    * Removing a policy that sponsors web3 actions
    * @param policyId
-   * @returns RemovePolicyResponse Policy was successfully deleted
+   * @returns CommonRemovePolicyResponse Policy was successfully deleted
    * @throws ApiError
    */
   public deletePolicy(
     policyId: string,
-  ): CancelablePromise<RemovePolicyResponse> {
+  ): CancelablePromise<CommonRemovePolicyResponse> {
     return this.httpRequest.request({
       method: 'DELETE',
       url: '/v1/policies/{policyId}',
