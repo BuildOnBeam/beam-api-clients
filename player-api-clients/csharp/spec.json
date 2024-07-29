@@ -2889,7 +2889,8 @@
                   "type": "string"
                 },
                 "assetId": {
-                  "type": "string"
+                  "type": "string",
+                  "pattern": "^\\d+$"
                 },
                 "amountToTransfer": {
                   "default": 1,
@@ -3899,7 +3900,8 @@
             "type": "string"
           },
           "assetId": {
-            "type": "string"
+            "type": "string",
+            "pattern": "^\\d+$"
           },
           "quantity": {
             "type": "number"
@@ -4054,7 +4056,8 @@
             "type": "string"
           },
           "assetId": {
-            "type": "string"
+            "type": "string",
+            "pattern": "^\\d+$"
           },
           "quantity": {
             "type": "number",
@@ -4226,7 +4229,8 @@
             "type": "string"
           },
           "tokenId": {
-            "type": "string"
+            "type": "string",
+            "pattern": "^\\d+$"
           },
           "chainId": {
             "default": 13337,
@@ -4845,13 +4849,28 @@
                 "userId"
               ]
             }
+          },
+          "entities": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "entityId": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "entityId"
+              ]
+            }
           }
         },
         "required": [
           "externalEntityId",
           "userId",
           "gameId",
-          "wallets"
+          "wallets",
+          "entities"
         ]
       },
       "PlayerCreateOperationRequestInput": {

@@ -518,6 +518,16 @@ namespace BeamPlayerClient.Model
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            if (this.AssetId != null) {
+                // AssetId (string) pattern
+                Regex regexAssetId = new Regex(@"^\d+$", RegexOptions.CultureInvariant);
+
+                if (!regexAssetId.Match(this.AssetId).Success)
+                {
+                    yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for AssetId, must match a pattern of " + regexAssetId, new [] { "AssetId" });
+                }
+            }
+
             yield break;
         }
     }

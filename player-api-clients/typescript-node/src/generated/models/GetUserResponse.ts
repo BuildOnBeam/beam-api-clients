@@ -17,4 +17,7 @@ export type GetUserResponse = {
     profileId: string | null;
     userId: string | null;
   }>;
+  entities: Array<{
+    entityId: string;
+  }>;
 };
