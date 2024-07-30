@@ -3,13 +3,9 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { AcceptAssetOfferRequestInputV2 } from '../models/AcceptAssetOfferRequestInputV2';
-import type { AcceptOfferResponseV2 } from '../models/AcceptOfferResponseV2';
 import type { BuyAssetRequestInputV2 } from '../models/BuyAssetRequestInputV2';
-import type { BuyAssetResponseV2 } from '../models/BuyAssetResponseV2';
 import type { CancelAssetListingRequestInputV2 } from '../models/CancelAssetListingRequestInputV2';
-import type { CancelAssetListingResponseV2 } from '../models/CancelAssetListingResponseV2';
 import type { CancelAssetOfferRequestInputV2 } from '../models/CancelAssetOfferRequestInputV2';
-import type { CancelOfferResponseV2 } from '../models/CancelOfferResponseV2';
 import type { CreateAssetOfferRequestInputV2 } from '../models/CreateAssetOfferRequestInputV2';
 import type { CreateOfferResponseV2 } from '../models/CreateOfferResponseV2';
 import type { GetAssetListingsResponseV2 } from '../models/GetAssetListingsResponseV2';
@@ -19,6 +15,7 @@ import type { RefreshContractRequestBody } from '../models/RefreshContractReques
 import type { RefreshTokenRequestBody } from '../models/RefreshTokenRequestBody';
 import type { SellAssetRequestInputV2 } from '../models/SellAssetRequestInputV2';
 import type { SellAssetResponseV2 } from '../models/SellAssetResponseV2';
+import type { TransactionResponse } from '../models/TransactionResponse';
 
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -92,14 +89,14 @@ export class MarketplaceV2Service {
    * @param entityId
    * @param orderId
    * @param requestBody
-   * @returns BuyAssetResponseV2
+   * @returns TransactionResponse
    * @throws ApiError
    */
   public buyListedAssetV2(
     entityId: string,
     orderId: string,
     requestBody: BuyAssetRequestInputV2,
-  ): CancelablePromise<BuyAssetResponseV2> {
+  ): CancelablePromise<TransactionResponse> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v2/marketplace/profiles/{entityId}/listing/{orderId}',
@@ -118,7 +115,7 @@ export class MarketplaceV2Service {
    * @param orderId
    * @param requestBody
    * @param chainId
-   * @returns CancelAssetListingResponseV2
+   * @returns TransactionResponse
    * @throws ApiError
    */
   public cancelListingV2(
@@ -126,7 +123,7 @@ export class MarketplaceV2Service {
     orderId: string,
     requestBody: CancelAssetListingRequestInputV2,
     chainId?: number,
-  ): CancelablePromise<CancelAssetListingResponseV2> {
+  ): CancelablePromise<TransactionResponse> {
     return this.httpRequest.request({
       method: 'DELETE',
       url: '/v2/marketplace/profiles/{entityId}/listing/{orderId}',
@@ -227,14 +224,14 @@ export class MarketplaceV2Service {
    * @param entityId
    * @param offerId
    * @param requestBody
-   * @returns AcceptOfferResponseV2
+   * @returns TransactionResponse
    * @throws ApiError
    */
   public acceptAssetOfferV2(
     entityId: string,
     offerId: string,
     requestBody: AcceptAssetOfferRequestInputV2,
-  ): CancelablePromise<AcceptOfferResponseV2> {
+  ): CancelablePromise<TransactionResponse> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v2/marketplace/profiles/{entityId}/offers/{offerId}/accept',
@@ -252,14 +249,14 @@ export class MarketplaceV2Service {
    * @param entityId
    * @param offerId
    * @param requestBody
-   * @returns CancelOfferResponseV2
+   * @returns TransactionResponse
    * @throws ApiError
    */
   public cancelAssetOfferV2(
     entityId: string,
     offerId: string,
     requestBody: CancelAssetOfferRequestInputV2,
-  ): CancelablePromise<CancelOfferResponseV2> {
+  ): CancelablePromise<TransactionResponse> {
     return this.httpRequest.request({
       method: 'DELETE',
       url: '/v2/marketplace/profiles/{entityId}/offers/{offerId}',

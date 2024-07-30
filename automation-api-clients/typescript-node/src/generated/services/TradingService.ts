@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { TradeTokensRequestInput } from '../models/TradeTokensRequestInput';
-import type { TradeTokensResponse } from '../models/TradeTokensResponse';
+import type { TransactionResponse } from '../models/TransactionResponse';
 
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -13,12 +13,12 @@ export class TradingService {
 
   /**
    * @param requestBody
-   * @returns TradeTokensResponse
+   * @returns TransactionResponse
    * @throws ApiError
    */
   public tradeAssets(
     requestBody: TradeTokensRequestInput,
-  ): CancelablePromise<TradeTokensResponse> {
+  ): CancelablePromise<TransactionResponse> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v1/trading/trade',

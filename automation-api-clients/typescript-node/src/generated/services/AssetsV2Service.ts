@@ -9,11 +9,10 @@ import type { GetAssetsForProfileBodyInputV2 } from '../models/GetAssetsForProfi
 import type { GetAssetsForProfileResponseV2 } from '../models/GetAssetsForProfileResponseV2';
 import type { GetProfileCurrenciesResponseV2 } from '../models/GetProfileCurrenciesResponseV2';
 import type { GetProfileNativeCurrencyResponseV2 } from '../models/GetProfileNativeCurrencyResponseV2';
+import type { TransactionResponse } from '../models/TransactionResponse';
 import type { TransferAssetRequestInputV2 } from '../models/TransferAssetRequestInputV2';
-import type { TransferAssetResponseV2 } from '../models/TransferAssetResponseV2';
 import type { TransferNativeTokenRequestInputV2 } from '../models/TransferNativeTokenRequestInputV2';
 import type { TransferTokenRequestInputV2 } from '../models/TransferTokenRequestInputV2';
-import type { TransferTokenResponseV2 } from '../models/TransferTokenResponseV2';
 
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -93,13 +92,13 @@ export class AssetsV2Service {
    * Transfer an asset (NFT assets, ERC721 / ERC1155)
    * @param entityId
    * @param requestBody
-   * @returns TransferAssetResponseV2
+   * @returns TransactionResponse
    * @throws ApiError
    */
   public transferAssetV2(
     entityId: string,
     requestBody: TransferAssetRequestInputV2,
-  ): CancelablePromise<TransferAssetResponseV2> {
+  ): CancelablePromise<TransactionResponse> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v2/assets/profiles/{entityId}/transfer-asset',
@@ -115,13 +114,13 @@ export class AssetsV2Service {
    * Transfer a token (token assets, ERC20)
    * @param entityId
    * @param requestBody
-   * @returns TransferTokenResponseV2
+   * @returns TransactionResponse
    * @throws ApiError
    */
   public transferTokenV2(
     entityId: string,
     requestBody: TransferTokenRequestInputV2,
-  ): CancelablePromise<TransferTokenResponseV2> {
+  ): CancelablePromise<TransactionResponse> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v2/assets/profiles/{entityId}/transfer-token',
@@ -137,13 +136,13 @@ export class AssetsV2Service {
    * Transfer the native token
    * @param entityId
    * @param requestBody
-   * @returns TransferTokenResponseV2
+   * @returns TransactionResponse
    * @throws ApiError
    */
   public transferNativeTokenV2(
     entityId: string,
     requestBody: TransferNativeTokenRequestInputV2,
-  ): CancelablePromise<TransferTokenResponseV2> {
+  ): CancelablePromise<TransactionResponse> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v2/assets/profiles/{entityId}/transfer-native',

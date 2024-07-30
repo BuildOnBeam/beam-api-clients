@@ -3,8 +3,8 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { ConvertTokenRequestInput } from '../models/ConvertTokenRequestInput';
-import type { ConvertTokenResponse } from '../models/ConvertTokenResponse';
 import type { GetQuoteResponse } from '../models/GetQuoteResponse';
+import type { TransactionResponse } from '../models/TransactionResponse';
 
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -70,13 +70,13 @@ export class ExchangeService {
    * Swap an exact amount of `tokenIn` for a minimum amount of `tokenOut`
    * @param entityId
    * @param requestBody
-   * @returns ConvertTokenResponse
+   * @returns TransactionResponse
    * @throws ApiError
    */
   public convertInput(
     entityId: string,
     requestBody: ConvertTokenRequestInput,
-  ): CancelablePromise<ConvertTokenResponse> {
+  ): CancelablePromise<TransactionResponse> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v1/exchange/profiles/{entityId}/convert/input',
@@ -92,13 +92,13 @@ export class ExchangeService {
    * Swap a maximum amount of `tokenIn` for an exact amount of `tokenOut`
    * @param entityId
    * @param requestBody
-   * @returns ConvertTokenResponse
+   * @returns TransactionResponse
    * @throws ApiError
    */
   public convertToOutput(
     entityId: string,
     requestBody: ConvertTokenRequestInput,
-  ): CancelablePromise<ConvertTokenResponse> {
+  ): CancelablePromise<TransactionResponse> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v1/exchange/profiles/{entityId}/convert/output',

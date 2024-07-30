@@ -13,6 +13,7 @@ export class WebhooksService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
 
   /**
+   * @deprecated
    * Get webhooks registered by your game
    * @returns GetWebhooksForGameResponse List of webhooks registered for your game
    * @throws ApiError
@@ -25,6 +26,7 @@ export class WebhooksService {
   }
 
   /**
+   * @deprecated
    * Create webhook for your game
    * @param requestBody
    * @returns WebhookForGameResponse Create webhook for your game.
@@ -42,6 +44,7 @@ export class WebhooksService {
   }
 
   /**
+   * @deprecated
    * Delete webhook from your game
    * @param webhookId
    * @returns void

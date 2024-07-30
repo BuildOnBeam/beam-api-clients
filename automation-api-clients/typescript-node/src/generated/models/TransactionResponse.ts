@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type CreateTransactionResponseV2 = {
+export type TransactionResponse = {
   id: string;
   createdAt: string;
   updatedAt: string;
@@ -56,4 +56,21 @@ export type CreateTransactionResponseV2 = {
       address: string;
     };
   };
+  status: TransactionResponse.status;
+  type: TransactionResponse.type;
+  transactionHash?: string;
+  explorerUrl: string;
+  success: boolean;
 };
+
+export namespace TransactionResponse {
+  export enum status {
+    PENDING = 'pending',
+    SUCCESS = 'success',
+  }
+
+  export enum type {
+    CUSTODIAL = 'custodial',
+    SELF_CUSTODIAL = 'self-custodial',
+  }
+}
