@@ -10,6 +10,7 @@ export type GenerateSessionRequestResponse = {
   updatedAt: string | null;
   chainId: number;
   openfortId: string | null;
+  address: string;
   url: string;
 };
 

@@ -5,6 +5,8 @@
 import type { CommonOperationResponse } from '../models/CommonOperationResponse';
 import type { ConvertTokenRequestInput } from '../models/ConvertTokenRequestInput';
 import type { GetQuoteResponse } from '../models/GetQuoteResponse';
+import type { UnwrappingTokenInput } from '../models/UnwrappingTokenInput';
+import type { WrappingTokenInput } from '../models/WrappingTokenInput';
 
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -102,6 +104,50 @@ export class ExchangeService {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v1/player/exchange/users/{entityId}/convert/output',
+      path: {
+        entityId: entityId,
+      },
+      body: requestBody,
+      mediaType: 'application/json',
+    });
+  }
+
+  /**
+   * Wrap an amount of native token to wrapped native token
+   * @param entityId
+   * @param requestBody
+   * @returns CommonOperationResponse
+   * @throws ApiError
+   */
+  public wrapNative(
+    entityId: string,
+    requestBody: WrappingTokenInput,
+  ): CancelablePromise<CommonOperationResponse> {
+    return this.httpRequest.request({
+      method: 'POST',
+      url: '/v1/player/exchange/users/{entityId}/native/wrap',
+      path: {
+        entityId: entityId,
+      },
+      body: requestBody,
+      mediaType: 'application/json',
+    });
+  }
+
+  /**
+   * Unwrap an amount of wrapped to native token
+   * @param entityId
+   * @param requestBody
+   * @returns CommonOperationResponse
+   * @throws ApiError
+   */
+  public unwrapNative(
+    entityId: string,
+    requestBody: UnwrappingTokenInput,
+  ): CancelablePromise<CommonOperationResponse> {
+    return this.httpRequest.request({
+      method: 'POST',
+      url: '/v1/player/exchange/users/{entityId}/native/unwrap',
       path: {
         entityId: entityId,
       },

@@ -58,6 +58,8 @@ export { SellAssetRequestInput } from './models/SellAssetRequestInput';
 export { TransferAssetRequestInput } from './models/TransferAssetRequestInput';
 export { TransferNativeTokenRequestInput } from './models/TransferNativeTokenRequestInput';
 export { TransferTokenRequestInput } from './models/TransferTokenRequestInput';
+export { UnwrappingTokenInput } from './models/UnwrappingTokenInput';
+export { WrappingTokenInput } from './models/WrappingTokenInput';
 
 export { ActivityService } from './services/ActivityService';
 export { AssetsService } from './services/AssetsService';

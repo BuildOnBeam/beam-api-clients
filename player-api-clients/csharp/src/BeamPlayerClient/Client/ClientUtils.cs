@@ -206,6 +206,10 @@ namespace BeamPlayerClient.Client
                 return PlayerTransferNativeTokenRequestInput.OperationProcessingEnumToJsonValue(playerTransferNativeTokenRequestInputOperationProcessingEnum);
             if (obj is PlayerTransferTokenRequestInput.OperationProcessingEnum playerTransferTokenRequestInputOperationProcessingEnum)
                 return PlayerTransferTokenRequestInput.OperationProcessingEnumToJsonValue(playerTransferTokenRequestInputOperationProcessingEnum);
+            if (obj is PlayerUnwrappingTokenInput.OperationProcessingEnum playerUnwrappingTokenInputOperationProcessingEnum)
+                return PlayerUnwrappingTokenInput.OperationProcessingEnumToJsonValue(playerUnwrappingTokenInputOperationProcessingEnum);
+            if (obj is PlayerWrappingTokenInput.OperationProcessingEnum playerWrappingTokenInputOperationProcessingEnum)
+                return PlayerWrappingTokenInput.OperationProcessingEnumToJsonValue(playerWrappingTokenInputOperationProcessingEnum);
             if (obj is ICollection collection)
             {
                 List<string?> entries = new();

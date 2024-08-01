@@ -27,26 +27,30 @@ using BeamPlayerClient.Client;
 namespace BeamPlayerClient.Model
 {
     /// <summary>
-    /// PlayerCreateOperationRequestInput
+    /// PlayerUnwrappingTokenInput
     /// </summary>
-    public partial class PlayerCreateOperationRequestInput : IValidatableObject
+    public partial class PlayerUnwrappingTokenInput : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PlayerCreateOperationRequestInput" /> class.
+        /// Initializes a new instance of the <see cref="PlayerUnwrappingTokenInput" /> class.
         /// </summary>
-        /// <param name="entityId">entityId</param>
+        /// <param name="amount">amount</param>
         /// <param name="chainId">chainId (default to 13337M)</param>
         /// <param name="operationId">operationId</param>
         /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute)</param>
-        /// <param name="transactions">transactions</param>
+        /// <param name="optimistic">optimistic (default to false)</param>
+        /// <param name="policyId">policyId</param>
+        /// <param name="sponsor">sponsor (default to true)</param>
         [JsonConstructor]
-        public PlayerCreateOperationRequestInput(string entityId, Option<decimal?> chainId = default, Option<string?> operationId = default, Option<OperationProcessingEnum?> operationProcessing = default, List<PlayerCreateOperationRequestInputTransactionsInner>? transactions = default)
+        public PlayerUnwrappingTokenInput(string amount, Option<decimal?> chainId = default, Option<string?> operationId = default, Option<OperationProcessingEnum?> operationProcessing = default, Option<bool?> optimistic = default, Option<string?> policyId = default, Option<bool?> sponsor = default)
         {
-            EntityId = entityId;
+            Amount = amount;
             ChainIdOption = chainId;
             OperationIdOption = operationId;
             OperationProcessingOption = operationProcessing;
-            Transactions = transactions;
+            OptimisticOption = optimistic;
+            PolicyIdOption = policyId;
+            SponsorOption = sponsor;
             OnCreated();
         }
 
@@ -132,10 +136,10 @@ namespace BeamPlayerClient.Model
         public OperationProcessingEnum? OperationProcessing { get { return this.OperationProcessingOption; } set { this.OperationProcessingOption = new(value); } }
 
         /// <summary>
-        /// Gets or Sets EntityId
+        /// Gets or Sets Amount
         /// </summary>
-        [JsonPropertyName("entityId")]
-        public string EntityId { get; set; }
+        [JsonPropertyName("amount")]
+        public string Amount { get; set; }
 
         /// <summary>
         /// Used to track the state of ChainId
@@ -164,10 +168,43 @@ namespace BeamPlayerClient.Model
         public string? OperationId { get { return this. OperationIdOption; } set { this.OperationIdOption = new(value); } }
 
         /// <summary>
-        /// Gets or Sets Transactions
+        /// Used to track the state of Optimistic
         /// </summary>
-        [JsonPropertyName("transactions")]
-        public List<PlayerCreateOperationRequestInputTransactionsInner>? Transactions { get; set; }
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> OptimisticOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Optimistic
+        /// </summary>
+        [JsonPropertyName("optimistic")]
+        public bool? Optimistic { get { return this. OptimisticOption; } set { this.OptimisticOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of PolicyId
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> PolicyIdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets PolicyId
+        /// </summary>
+        [JsonPropertyName("policyId")]
+        public string? PolicyId { get { return this. PolicyIdOption; } set { this.PolicyIdOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Sponsor
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> SponsorOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Sponsor
+        /// </summary>
+        [JsonPropertyName("sponsor")]
+        public bool? Sponsor { get { return this. SponsorOption; } set { this.SponsorOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -176,12 +213,14 @@ namespace BeamPlayerClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class PlayerCreateOperationRequestInput {\n");
-            sb.Append("  EntityId: ").Append(EntityId).Append("\n");
+            sb.Append("class PlayerUnwrappingTokenInput {\n");
+            sb.Append("  Amount: ").Append(Amount).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  OperationId: ").Append(OperationId).Append("\n");
             sb.Append("  OperationProcessing: ").Append(OperationProcessing).Append("\n");
-            sb.Append("  Transactions: ").Append(Transactions).Append("\n");
+            sb.Append("  Optimistic: ").Append(Optimistic).Append("\n");
+            sb.Append("  PolicyId: ").Append(PolicyId).Append("\n");
+            sb.Append("  Sponsor: ").Append(Sponsor).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -198,19 +237,19 @@ namespace BeamPlayerClient.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="PlayerCreateOperationRequestInput" />
+    /// A Json converter for type <see cref="PlayerUnwrappingTokenInput" />
     /// </summary>
-    public class PlayerCreateOperationRequestInputJsonConverter : JsonConverter<PlayerCreateOperationRequestInput>
+    public class PlayerUnwrappingTokenInputJsonConverter : JsonConverter<PlayerUnwrappingTokenInput>
     {
         /// <summary>
-        /// Deserializes json to <see cref="PlayerCreateOperationRequestInput" />
+        /// Deserializes json to <see cref="PlayerUnwrappingTokenInput" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override PlayerCreateOperationRequestInput Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override PlayerUnwrappingTokenInput Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -219,11 +258,13 @@ namespace BeamPlayerClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<string?> entityId = default;
+            Option<string?> amount = default;
             Option<decimal?> chainId = default;
             Option<string?> operationId = default;
-            Option<PlayerCreateOperationRequestInput.OperationProcessingEnum?> operationProcessing = default;
-            Option<List<PlayerCreateOperationRequestInputTransactionsInner>?> transactions = default;
+            Option<PlayerUnwrappingTokenInput.OperationProcessingEnum?> operationProcessing = default;
+            Option<bool?> optimistic = default;
+            Option<string?> policyId = default;
+            Option<bool?> sponsor = default;
 
             while (utf8JsonReader.Read())
             {
@@ -240,8 +281,8 @@ namespace BeamPlayerClient.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "entityId":
-                            entityId = new Option<string?>(utf8JsonReader.GetString()!);
+                        case "amount":
+                            amount = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
@@ -253,11 +294,18 @@ namespace BeamPlayerClient.Model
                         case "operationProcessing":
                             string? operationProcessingRawValue = utf8JsonReader.GetString();
                             if (operationProcessingRawValue != null)
-                                operationProcessing = new Option<PlayerCreateOperationRequestInput.OperationProcessingEnum?>(PlayerCreateOperationRequestInput.OperationProcessingEnumFromStringOrDefault(operationProcessingRawValue));
+                                operationProcessing = new Option<PlayerUnwrappingTokenInput.OperationProcessingEnum?>(PlayerUnwrappingTokenInput.OperationProcessingEnumFromStringOrDefault(operationProcessingRawValue));
                             break;
-                        case "transactions":
+                        case "optimistic":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                transactions = new Option<List<PlayerCreateOperationRequestInputTransactionsInner>?>(JsonSerializer.Deserialize<List<PlayerCreateOperationRequestInputTransactionsInner>>(ref utf8JsonReader, jsonSerializerOptions));
+                                optimistic = new Option<bool?>(utf8JsonReader.GetBoolean());
+                            break;
+                        case "policyId":
+                            policyId = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "sponsor":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                sponsor = new Option<bool?>(utf8JsonReader.GetBoolean());
                             break;
                         default:
                             break;
@@ -265,71 +313,78 @@ namespace BeamPlayerClient.Model
                 }
             }
 
-            if (!entityId.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCreateOperationRequestInput.", nameof(entityId));
+            if (!amount.IsSet)
+                throw new ArgumentException("Property is required for class PlayerUnwrappingTokenInput.", nameof(amount));
 
-            if (!transactions.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCreateOperationRequestInput.", nameof(transactions));
-
-            if (entityId.IsSet && entityId.Value == null)
-                throw new ArgumentNullException(nameof(entityId), "Property is not nullable for class PlayerCreateOperationRequestInput.");
+            if (amount.IsSet && amount.Value == null)
+                throw new ArgumentNullException(nameof(amount), "Property is not nullable for class PlayerUnwrappingTokenInput.");
 
             if (chainId.IsSet && chainId.Value == null)
-                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class PlayerCreateOperationRequestInput.");
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class PlayerUnwrappingTokenInput.");
 
             if (operationProcessing.IsSet && operationProcessing.Value == null)
-                throw new ArgumentNullException(nameof(operationProcessing), "Property is not nullable for class PlayerCreateOperationRequestInput.");
+                throw new ArgumentNullException(nameof(operationProcessing), "Property is not nullable for class PlayerUnwrappingTokenInput.");
 
-            return new PlayerCreateOperationRequestInput(entityId.Value!, chainId, operationId, operationProcessing, transactions.Value!);
+            if (optimistic.IsSet && optimistic.Value == null)
+                throw new ArgumentNullException(nameof(optimistic), "Property is not nullable for class PlayerUnwrappingTokenInput.");
+
+            if (sponsor.IsSet && sponsor.Value == null)
+                throw new ArgumentNullException(nameof(sponsor), "Property is not nullable for class PlayerUnwrappingTokenInput.");
+
+            return new PlayerUnwrappingTokenInput(amount.Value!, chainId, operationId, operationProcessing, optimistic, policyId, sponsor);
         }
 
         /// <summary>
-        /// Serializes a <see cref="PlayerCreateOperationRequestInput" />
+        /// Serializes a <see cref="PlayerUnwrappingTokenInput" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="playerCreateOperationRequestInput"></param>
+        /// <param name="playerUnwrappingTokenInput"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, PlayerCreateOperationRequestInput playerCreateOperationRequestInput, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, PlayerUnwrappingTokenInput playerUnwrappingTokenInput, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(ref writer, playerCreateOperationRequestInput, jsonSerializerOptions);
+            WriteProperties(ref writer, playerUnwrappingTokenInput, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="PlayerCreateOperationRequestInput" />
+        /// Serializes the properties of <see cref="PlayerUnwrappingTokenInput" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="playerCreateOperationRequestInput"></param>
+        /// <param name="playerUnwrappingTokenInput"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(ref Utf8JsonWriter writer, PlayerCreateOperationRequestInput playerCreateOperationRequestInput, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(ref Utf8JsonWriter writer, PlayerUnwrappingTokenInput playerUnwrappingTokenInput, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (playerCreateOperationRequestInput.EntityId == null)
-                throw new ArgumentNullException(nameof(playerCreateOperationRequestInput.EntityId), "Property is required for class PlayerCreateOperationRequestInput.");
+            if (playerUnwrappingTokenInput.Amount == null)
+                throw new ArgumentNullException(nameof(playerUnwrappingTokenInput.Amount), "Property is required for class PlayerUnwrappingTokenInput.");
 
-            writer.WriteString("entityId", playerCreateOperationRequestInput.EntityId);
+            writer.WriteString("amount", playerUnwrappingTokenInput.Amount);
 
-            if (playerCreateOperationRequestInput.ChainIdOption.IsSet)
-                writer.WriteNumber("chainId", playerCreateOperationRequestInput.ChainIdOption.Value!.Value);
+            if (playerUnwrappingTokenInput.ChainIdOption.IsSet)
+                writer.WriteNumber("chainId", playerUnwrappingTokenInput.ChainIdOption.Value!.Value);
 
-            if (playerCreateOperationRequestInput.OperationIdOption.IsSet)
-                if (playerCreateOperationRequestInput.OperationIdOption.Value != null)
-                    writer.WriteString("operationId", playerCreateOperationRequestInput.OperationId);
+            if (playerUnwrappingTokenInput.OperationIdOption.IsSet)
+                if (playerUnwrappingTokenInput.OperationIdOption.Value != null)
+                    writer.WriteString("operationId", playerUnwrappingTokenInput.OperationId);
                 else
                     writer.WriteNull("operationId");
 
-            var operationProcessingRawValue = PlayerCreateOperationRequestInput.OperationProcessingEnumToJsonValue(playerCreateOperationRequestInput.OperationProcessingOption.Value!.Value);
+            var operationProcessingRawValue = PlayerUnwrappingTokenInput.OperationProcessingEnumToJsonValue(playerUnwrappingTokenInput.OperationProcessingOption.Value!.Value);
             writer.WriteString("operationProcessing", operationProcessingRawValue);
-            if (playerCreateOperationRequestInput.Transactions != null)
-            {
-                writer.WritePropertyName("transactions");
-                JsonSerializer.Serialize(writer, playerCreateOperationRequestInput.Transactions, jsonSerializerOptions);
-            }
-            else
-                writer.WriteNull("transactions");
+            if (playerUnwrappingTokenInput.OptimisticOption.IsSet)
+                writer.WriteBoolean("optimistic", playerUnwrappingTokenInput.OptimisticOption.Value!.Value);
+
+            if (playerUnwrappingTokenInput.PolicyIdOption.IsSet)
+                if (playerUnwrappingTokenInput.PolicyIdOption.Value != null)
+                    writer.WriteString("policyId", playerUnwrappingTokenInput.PolicyId);
+                else
+                    writer.WriteNull("policyId");
+
+            if (playerUnwrappingTokenInput.SponsorOption.IsSet)
+                writer.WriteBoolean("sponsor", playerUnwrappingTokenInput.SponsorOption.Value!.Value);
         }
     }
 }

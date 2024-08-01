@@ -34,6 +34,7 @@ namespace BeamPlayerClient.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="PlayerGetSessionRequestResponse" /> class.
         /// </summary>
+        /// <param name="address">address</param>
         /// <param name="chainId">chainId</param>
         /// <param name="createdAt">createdAt</param>
         /// <param name="id">id</param>
@@ -41,8 +42,9 @@ namespace BeamPlayerClient.Model
         /// <param name="openfortId">openfortId</param>
         /// <param name="updatedAt">updatedAt</param>
         [JsonConstructor]
-        public PlayerGetSessionRequestResponse(int chainId, DateTime createdAt, string id, StatusEnum status, string? openfortId = default, DateTime? updatedAt = default)
+        public PlayerGetSessionRequestResponse(string address, int chainId, DateTime createdAt, string id, StatusEnum status, string? openfortId = default, DateTime? updatedAt = default)
         {
+            Address = address;
             ChainId = chainId;
             CreatedAt = createdAt;
             Id = id;
@@ -141,6 +143,12 @@ namespace BeamPlayerClient.Model
         public StatusEnum Status { get; set; }
 
         /// <summary>
+        /// Gets or Sets Address
+        /// </summary>
+        [JsonPropertyName("address")]
+        public string Address { get; set; }
+
+        /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [JsonPropertyName("chainId")]
@@ -178,6 +186,7 @@ namespace BeamPlayerClient.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class PlayerGetSessionRequestResponse {\n");
+            sb.Append("  Address: ").Append(Address).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
@@ -231,6 +240,7 @@ namespace BeamPlayerClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
+            Option<string?> address = default;
             Option<int?> chainId = default;
             Option<DateTime?> createdAt = default;
             Option<string?> id = default;
@@ -253,6 +263,9 @@ namespace BeamPlayerClient.Model
 
                     switch (localVarJsonPropertyName)
                     {
+                        case "address":
+                            address = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 chainId = new Option<int?>(utf8JsonReader.GetInt32());
@@ -282,6 +295,9 @@ namespace BeamPlayerClient.Model
                 }
             }
 
+            if (!address.IsSet)
+                throw new ArgumentException("Property is required for class PlayerGetSessionRequestResponse.", nameof(address));
+
             if (!chainId.IsSet)
                 throw new ArgumentException("Property is required for class PlayerGetSessionRequestResponse.", nameof(chainId));
 
@@ -300,6 +316,9 @@ namespace BeamPlayerClient.Model
             if (!updatedAt.IsSet)
                 throw new ArgumentException("Property is required for class PlayerGetSessionRequestResponse.", nameof(updatedAt));
 
+            if (address.IsSet && address.Value == null)
+                throw new ArgumentNullException(nameof(address), "Property is not nullable for class PlayerGetSessionRequestResponse.");
+
             if (chainId.IsSet && chainId.Value == null)
                 throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class PlayerGetSessionRequestResponse.");
 
@@ -312,7 +331,7 @@ namespace BeamPlayerClient.Model
             if (status.IsSet && status.Value == null)
                 throw new ArgumentNullException(nameof(status), "Property is not nullable for class PlayerGetSessionRequestResponse.");
 
-            return new PlayerGetSessionRequestResponse(chainId.Value!.Value!, createdAt.Value!.Value!, id.Value!, status.Value!.Value!, openfortId.Value!, updatedAt.Value!);
+            return new PlayerGetSessionRequestResponse(address.Value!, chainId.Value!.Value!, createdAt.Value!.Value!, id.Value!, status.Value!.Value!, openfortId.Value!, updatedAt.Value!);
         }
 
         /// <summary>
@@ -339,8 +358,13 @@ namespace BeamPlayerClient.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, PlayerGetSessionRequestResponse playerGetSessionRequestResponse, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (playerGetSessionRequestResponse.Address == null)
+                throw new ArgumentNullException(nameof(playerGetSessionRequestResponse.Address), "Property is required for class PlayerGetSessionRequestResponse.");
+
             if (playerGetSessionRequestResponse.Id == null)
                 throw new ArgumentNullException(nameof(playerGetSessionRequestResponse.Id), "Property is required for class PlayerGetSessionRequestResponse.");
+
+            writer.WriteString("address", playerGetSessionRequestResponse.Address);
 
             writer.WriteNumber("chainId", playerGetSessionRequestResponse.ChainId);
 

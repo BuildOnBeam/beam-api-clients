@@ -2049,6 +2049,98 @@
         ]
       }
     },
+    "/v1/player/exchange/users/{entityId}/native/wrap": {
+      "post": {
+        "operationId": "wrapNative",
+        "summary": "Wrap an amount of native token to wrapped native token",
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlayerWrappingTokenInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerCommonOperationResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Exchange"
+        ],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v1/player/exchange/users/{entityId}/native/unwrap": {
+      "post": {
+        "operationId": "unwrapNative",
+        "summary": "Unwrap an amount of wrapped to native token",
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlayerUnwrappingTokenInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerCommonOperationResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Exchange"
+        ],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
     "/v1/player/sessions/users/{entityId}/request": {
       "post": {
         "operationId": "createSessionRequest",
@@ -4879,9 +4971,6 @@
           "entityId": {
             "type": "string"
           },
-          "chainId": {
-            "type": "number"
-          },
           "transactions": {
             "type": "array",
             "items": {
@@ -4903,6 +4992,10 @@
             },
             "nullable": true
           },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          },
           "operationProcessing": {
             "default": "Execute",
             "type": "string",
@@ -4918,7 +5011,6 @@
         },
         "required": [
           "entityId",
-          "chainId",
           "transactions"
         ]
       },
@@ -5038,6 +5130,88 @@
           "amountOut"
         ]
       },
+      "PlayerWrappingTokenInput": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "string"
+          },
+          "optimistic": {
+            "default": false,
+            "type": "boolean"
+          },
+          "sponsor": {
+            "default": true,
+            "type": "boolean"
+          },
+          "policyId": {
+            "default": null,
+            "type": "string",
+            "format": "cuid",
+            "nullable": true
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          },
+          "operationProcessing": {
+            "default": "Execute",
+            "type": "string",
+            "enum": [
+              "SignOnly",
+              "Execute"
+            ]
+          },
+          "operationId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "amount"
+        ]
+      },
+      "PlayerUnwrappingTokenInput": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "string"
+          },
+          "optimistic": {
+            "default": false,
+            "type": "boolean"
+          },
+          "sponsor": {
+            "default": true,
+            "type": "boolean"
+          },
+          "policyId": {
+            "default": null,
+            "type": "string",
+            "format": "cuid",
+            "nullable": true
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          },
+          "operationProcessing": {
+            "default": "Execute",
+            "type": "string",
+            "enum": [
+              "SignOnly",
+              "Execute"
+            ]
+          },
+          "operationId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "amount"
+        ]
+      },
       "PlayerGenerateSessionUrlRequestInput": {
         "type": "object",
         "properties": {
@@ -5084,6 +5258,9 @@
             "type": "string",
             "nullable": true
           },
+          "address": {
+            "type": "string"
+          },
           "url": {
             "type": "string",
             "format": "uri"
@@ -5096,6 +5273,7 @@
           "updatedAt",
           "chainId",
           "openfortId",
+          "address",
           "url"
         ]
       },
@@ -5157,6 +5335,9 @@
           "openfortId": {
             "type": "string",
             "nullable": true
+          },
+          "address": {
+            "type": "string"
           }
         },
         "required": [
@@ -5165,7 +5346,8 @@
           "createdAt",
           "updatedAt",
           "chainId",
-          "openfortId"
+          "openfortId",
+          "address"
         ]
       },
       "PlayerGetActiveSessionsResponse": {

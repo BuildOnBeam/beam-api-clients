@@ -5,7 +5,6 @@
 
 export type CreateOperationRequestInput = {
   entityId: string;
-  chainId: number;
   transactions: Array<{
     data?: any;
     type:
@@ -13,6 +12,7 @@ export type CreateOperationRequestInput = {
       | 'OpenfortReservoirOrder'
       | 'OpenfortRevokeSession';
   }> | null;
+  chainId?: number;
   operationProcessing?: CreateOperationRequestInput.operationProcessing;
   operationId?: string | null;
 };

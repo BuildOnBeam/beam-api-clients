@@ -142,6 +142,56 @@ namespace BeamPlayerClient.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetQuoteForOutputApiResponse"/>?&gt;</returns>
         Task<IGetQuoteForOutputApiResponse?> GetQuoteForOutputOrDefaultAsync(string tokenIn, string tokenOut, string amountIn, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Unwrap an amount of wrapped to native token
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="playerUnwrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IUnwrapNativeApiResponse"/>&gt;</returns>
+        Task<IUnwrapNativeApiResponse> UnwrapNativeAsync(PlayerUnwrappingTokenInput playerUnwrappingTokenInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Unwrap an amount of wrapped to native token
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="playerUnwrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IUnwrapNativeApiResponse"/>?&gt;</returns>
+        Task<IUnwrapNativeApiResponse?> UnwrapNativeOrDefaultAsync(PlayerUnwrappingTokenInput playerUnwrappingTokenInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Wrap an amount of native token to wrapped native token
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="playerWrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IWrapNativeApiResponse"/>&gt;</returns>
+        Task<IWrapNativeApiResponse> WrapNativeAsync(PlayerWrappingTokenInput playerWrappingTokenInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Wrap an amount of native token to wrapped native token
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="playerWrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IWrapNativeApiResponse"/>?&gt;</returns>
+        Task<IWrapNativeApiResponse?> WrapNativeOrDefaultAsync(PlayerWrappingTokenInput playerWrappingTokenInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
@@ -184,6 +234,30 @@ namespace BeamPlayerClient.Api
     /// The <see cref="IGetQuoteForOutputApiResponse"/>
     /// </summary>
     public interface IGetQuoteForOutputApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetQuoteResponse?>
+    {
+        /// <summary>
+        /// Returns true if the response is 200 Ok
+        /// </summary>
+        /// <returns></returns>
+        bool IsOk { get; }
+    }
+
+    /// <summary>
+    /// The <see cref="IUnwrapNativeApiResponse"/>
+    /// </summary>
+    public interface IUnwrapNativeApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerCommonOperationResponse?>
+    {
+        /// <summary>
+        /// Returns true if the response is 200 Ok
+        /// </summary>
+        /// <returns></returns>
+        bool IsOk { get; }
+    }
+
+    /// <summary>
+    /// The <see cref="IWrapNativeApiResponse"/>
+    /// </summary>
+    public interface IWrapNativeApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerCommonOperationResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -275,6 +349,46 @@ namespace BeamPlayerClient.Api
         internal void ExecuteOnErrorGetQuoteForOutput(Exception exception)
         {
             OnErrorGetQuoteForOutput?.Invoke(this, new ExceptionEventArgs(exception));
+        }
+
+        /// <summary>
+        /// The event raised after the server response
+        /// </summary>
+        public event EventHandler<ApiResponseEventArgs>? OnUnwrapNative;
+
+        /// <summary>
+        /// The event raised after an error querying the server
+        /// </summary>
+        public event EventHandler<ExceptionEventArgs>? OnErrorUnwrapNative;
+
+        internal void ExecuteOnUnwrapNative(PlayerExchangeApi.UnwrapNativeApiResponse apiResponse)
+        {
+            OnUnwrapNative?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+        }
+
+        internal void ExecuteOnErrorUnwrapNative(Exception exception)
+        {
+            OnErrorUnwrapNative?.Invoke(this, new ExceptionEventArgs(exception));
+        }
+
+        /// <summary>
+        /// The event raised after the server response
+        /// </summary>
+        public event EventHandler<ApiResponseEventArgs>? OnWrapNative;
+
+        /// <summary>
+        /// The event raised after an error querying the server
+        /// </summary>
+        public event EventHandler<ExceptionEventArgs>? OnErrorWrapNative;
+
+        internal void ExecuteOnWrapNative(PlayerExchangeApi.WrapNativeApiResponse apiResponse)
+        {
+            OnWrapNative?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+        }
+
+        internal void ExecuteOnErrorWrapNative(Exception exception)
+        {
+            OnErrorWrapNative?.Invoke(this, new ExceptionEventArgs(exception));
         }
     }
 
@@ -1326,6 +1440,506 @@ namespace BeamPlayerClient.Api
             /// <param name="result"></param>
             /// <returns></returns>
             public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerGetQuoteResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
+        }
+
+        partial void FormatUnwrapNative(PlayerUnwrappingTokenInput playerUnwrappingTokenInput, ref string entityId);
+
+        /// <summary>
+        /// Validates the request parameters
+        /// </summary>
+        /// <param name="playerUnwrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        /// <returns></returns>
+        private void ValidateUnwrapNative(PlayerUnwrappingTokenInput playerUnwrappingTokenInput, string entityId)
+        {
+            if (playerUnwrappingTokenInput == null)
+                throw new ArgumentNullException(nameof(playerUnwrappingTokenInput));
+
+            if (entityId == null)
+                throw new ArgumentNullException(nameof(entityId));
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="playerUnwrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        private void AfterUnwrapNativeDefaultImplementation(IUnwrapNativeApiResponse apiResponseLocalVar, PlayerUnwrappingTokenInput playerUnwrappingTokenInput, string entityId)
+        {
+            bool suppressDefaultLog = false;
+            AfterUnwrapNative(ref suppressDefaultLog, apiResponseLocalVar, playerUnwrappingTokenInput, entityId);
+            if (!suppressDefaultLog)
+                Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="playerUnwrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        partial void AfterUnwrapNative(ref bool suppressDefaultLog, IUnwrapNativeApiResponse apiResponseLocalVar, PlayerUnwrappingTokenInput playerUnwrappingTokenInput, string entityId);
+
+        /// <summary>
+        /// Logs exceptions that occur while retrieving the server response
+        /// </summary>
+        /// <param name="exception"></param>
+        /// <param name="pathFormat"></param>
+        /// <param name="path"></param>
+        /// <param name="playerUnwrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        private void OnErrorUnwrapNativeDefaultImplementation(Exception exception, string pathFormat, string path, PlayerUnwrappingTokenInput playerUnwrappingTokenInput, string entityId)
+        {
+            bool suppressDefaultLog = false;
+            OnErrorUnwrapNative(ref suppressDefaultLog, exception, pathFormat, path, playerUnwrappingTokenInput, entityId);
+            if (!suppressDefaultLog)
+                Logger.LogError(exception, "An error occurred while sending the request to the server.");
+        }
+
+        /// <summary>
+        /// A partial method that gives developers a way to provide customized exception handling
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="exception"></param>
+        /// <param name="pathFormat"></param>
+        /// <param name="path"></param>
+        /// <param name="playerUnwrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        partial void OnErrorUnwrapNative(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, PlayerUnwrappingTokenInput playerUnwrappingTokenInput, string entityId);
+
+        /// <summary>
+        /// Unwrap an amount of wrapped to native token 
+        /// </summary>
+        /// <param name="playerUnwrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IUnwrapNativeApiResponse"/>&gt;</returns>
+        public async Task<IUnwrapNativeApiResponse?> UnwrapNativeOrDefaultAsync(PlayerUnwrappingTokenInput playerUnwrappingTokenInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await UnwrapNativeAsync(playerUnwrappingTokenInput, entityId, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Unwrap an amount of wrapped to native token 
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="playerUnwrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IUnwrapNativeApiResponse"/>&gt;</returns>
+        public async Task<IUnwrapNativeApiResponse> UnwrapNativeAsync(PlayerUnwrappingTokenInput playerUnwrappingTokenInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        {
+            UriBuilder uriBuilderLocalVar = new UriBuilder();
+
+            try
+            {
+                ValidateUnwrapNative(playerUnwrappingTokenInput, entityId);
+
+                FormatUnwrapNative(playerUnwrappingTokenInput, ref entityId);
+
+                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
+                {
+                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
+                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
+                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
+                    uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/player/exchange/users/{entityId}/native/unwrap";
+                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
+
+                    httpRequestMessageLocalVar.Content = (playerUnwrappingTokenInput as object) is System.IO.Stream stream
+                        ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(playerUnwrappingTokenInput, _jsonSerializerOptions));
+
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    PlayerApiKeyToken apiKeyTokenLocalVar1 = (PlayerApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
+                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    string[] contentTypes = new string[] {
+                        "application/json"
+                    };
+
+                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
+
+                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
+                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
+
+                    string[] acceptLocalVars = new string[] {
+                        "application/json"
+                    };
+
+                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+
+                    if (acceptLocalVar != null)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+
+                    httpRequestMessageLocalVar.Method = HttpMethod.Post;
+
+                    DateTime requestedAtLocalVar = DateTime.UtcNow;
+
+                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
+                    {
+                        string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+
+                        ILogger<UnwrapNativeApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<UnwrapNativeApiResponse>();
+
+                        UnwrapNativeApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/player/exchange/users/{entityId}/native/unwrap", requestedAtLocalVar, _jsonSerializerOptions);
+
+                        AfterUnwrapNativeDefaultImplementation(apiResponseLocalVar, playerUnwrappingTokenInput, entityId);
+
+                        Events.ExecuteOnUnwrapNative(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
+
+                        return apiResponseLocalVar;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                OnErrorUnwrapNativeDefaultImplementation(e, "/v1/player/exchange/users/{entityId}/native/unwrap", uriBuilderLocalVar.Path, playerUnwrappingTokenInput, entityId);
+                Events.ExecuteOnErrorUnwrapNative(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="UnwrapNativeApiResponse"/>
+        /// </summary>
+        public partial class UnwrapNativeApiResponse : BeamPlayerClient.Client.ApiResponse, IUnwrapNativeApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<UnwrapNativeApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="UnwrapNativeApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public UnwrapNativeApiResponse(ILogger<UnwrapNativeApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerCommonOperationResponse? Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerCommonOperationResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerCommonOperationResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
+        }
+
+        partial void FormatWrapNative(PlayerWrappingTokenInput playerWrappingTokenInput, ref string entityId);
+
+        /// <summary>
+        /// Validates the request parameters
+        /// </summary>
+        /// <param name="playerWrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        /// <returns></returns>
+        private void ValidateWrapNative(PlayerWrappingTokenInput playerWrappingTokenInput, string entityId)
+        {
+            if (playerWrappingTokenInput == null)
+                throw new ArgumentNullException(nameof(playerWrappingTokenInput));
+
+            if (entityId == null)
+                throw new ArgumentNullException(nameof(entityId));
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="playerWrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        private void AfterWrapNativeDefaultImplementation(IWrapNativeApiResponse apiResponseLocalVar, PlayerWrappingTokenInput playerWrappingTokenInput, string entityId)
+        {
+            bool suppressDefaultLog = false;
+            AfterWrapNative(ref suppressDefaultLog, apiResponseLocalVar, playerWrappingTokenInput, entityId);
+            if (!suppressDefaultLog)
+                Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="playerWrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        partial void AfterWrapNative(ref bool suppressDefaultLog, IWrapNativeApiResponse apiResponseLocalVar, PlayerWrappingTokenInput playerWrappingTokenInput, string entityId);
+
+        /// <summary>
+        /// Logs exceptions that occur while retrieving the server response
+        /// </summary>
+        /// <param name="exception"></param>
+        /// <param name="pathFormat"></param>
+        /// <param name="path"></param>
+        /// <param name="playerWrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        private void OnErrorWrapNativeDefaultImplementation(Exception exception, string pathFormat, string path, PlayerWrappingTokenInput playerWrappingTokenInput, string entityId)
+        {
+            bool suppressDefaultLog = false;
+            OnErrorWrapNative(ref suppressDefaultLog, exception, pathFormat, path, playerWrappingTokenInput, entityId);
+            if (!suppressDefaultLog)
+                Logger.LogError(exception, "An error occurred while sending the request to the server.");
+        }
+
+        /// <summary>
+        /// A partial method that gives developers a way to provide customized exception handling
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="exception"></param>
+        /// <param name="pathFormat"></param>
+        /// <param name="path"></param>
+        /// <param name="playerWrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        partial void OnErrorWrapNative(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, PlayerWrappingTokenInput playerWrappingTokenInput, string entityId);
+
+        /// <summary>
+        /// Wrap an amount of native token to wrapped native token 
+        /// </summary>
+        /// <param name="playerWrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IWrapNativeApiResponse"/>&gt;</returns>
+        public async Task<IWrapNativeApiResponse?> WrapNativeOrDefaultAsync(PlayerWrappingTokenInput playerWrappingTokenInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await WrapNativeAsync(playerWrappingTokenInput, entityId, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Wrap an amount of native token to wrapped native token 
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="playerWrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IWrapNativeApiResponse"/>&gt;</returns>
+        public async Task<IWrapNativeApiResponse> WrapNativeAsync(PlayerWrappingTokenInput playerWrappingTokenInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        {
+            UriBuilder uriBuilderLocalVar = new UriBuilder();
+
+            try
+            {
+                ValidateWrapNative(playerWrappingTokenInput, entityId);
+
+                FormatWrapNative(playerWrappingTokenInput, ref entityId);
+
+                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
+                {
+                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
+                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
+                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
+                    uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/player/exchange/users/{entityId}/native/wrap";
+                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
+
+                    httpRequestMessageLocalVar.Content = (playerWrappingTokenInput as object) is System.IO.Stream stream
+                        ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(playerWrappingTokenInput, _jsonSerializerOptions));
+
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    PlayerApiKeyToken apiKeyTokenLocalVar1 = (PlayerApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
+                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    string[] contentTypes = new string[] {
+                        "application/json"
+                    };
+
+                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
+
+                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
+                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
+
+                    string[] acceptLocalVars = new string[] {
+                        "application/json"
+                    };
+
+                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+
+                    if (acceptLocalVar != null)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+
+                    httpRequestMessageLocalVar.Method = HttpMethod.Post;
+
+                    DateTime requestedAtLocalVar = DateTime.UtcNow;
+
+                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
+                    {
+                        string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+
+                        ILogger<WrapNativeApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<WrapNativeApiResponse>();
+
+                        WrapNativeApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/player/exchange/users/{entityId}/native/wrap", requestedAtLocalVar, _jsonSerializerOptions);
+
+                        AfterWrapNativeDefaultImplementation(apiResponseLocalVar, playerWrappingTokenInput, entityId);
+
+                        Events.ExecuteOnWrapNative(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
+
+                        return apiResponseLocalVar;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                OnErrorWrapNativeDefaultImplementation(e, "/v1/player/exchange/users/{entityId}/native/wrap", uriBuilderLocalVar.Path, playerWrappingTokenInput, entityId);
+                Events.ExecuteOnErrorWrapNative(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="WrapNativeApiResponse"/>
+        /// </summary>
+        public partial class WrapNativeApiResponse : BeamPlayerClient.Client.ApiResponse, IWrapNativeApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<WrapNativeApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="WrapNativeApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public WrapNativeApiResponse(ILogger<WrapNativeApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerCommonOperationResponse? Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerCommonOperationResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerCommonOperationResponse? result)
             {
                 result = null;
 

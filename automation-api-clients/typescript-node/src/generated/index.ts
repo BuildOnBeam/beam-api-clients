@@ -67,11 +67,13 @@ export { TransactionResponse } from './models/TransactionResponse';
 export type { TransferAssetRequestInputV2 } from './models/TransferAssetRequestInputV2';
 export type { TransferNativeTokenRequestInputV2 } from './models/TransferNativeTokenRequestInputV2';
 export type { TransferTokenRequestInputV2 } from './models/TransferTokenRequestInputV2';
+export type { UnwrappingTokenInput } from './models/UnwrappingTokenInput';
 export { UpdateGameRequestInput } from './models/UpdateGameRequestInput';
 export { UpdateGameResponse } from './models/UpdateGameResponse';
 export type { UpdateProfileRequestInput } from './models/UpdateProfileRequestInput';
 export type { UpdateProfileResponse } from './models/UpdateProfileResponse';
 export type { WebhookForGameResponse } from './models/WebhookForGameResponse';
+export type { WrappingTokenInput } from './models/WrappingTokenInput';
 
 export { ActivityService } from './services/ActivityService';
 export { AssetsV2Service } from './services/AssetsV2Service';
