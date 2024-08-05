@@ -2,8 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { CommonActivityRequestInput } from '../models/CommonActivityRequestInput';
 import type { CommonActivityResponse } from '../models/CommonActivityResponse';
+import type { CommonAssetActivityRequestInput } from '../models/CommonAssetActivityRequestInput';
+import type { CommonContractActivityRequestInput } from '../models/CommonContractActivityRequestInput';
+import type { CommonUserActivityRequestInput } from '../models/CommonUserActivityRequestInput';
 
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -20,7 +22,7 @@ export class ActivityService {
    */
   public getProfileActivity(
     entityId: string,
-    requestBody: CommonActivityRequestInput,
+    requestBody: CommonUserActivityRequestInput,
   ): CancelablePromise<CommonActivityResponse> {
     return this.httpRequest.request({
       method: 'POST',
@@ -42,7 +44,7 @@ export class ActivityService {
    */
   public getContractActivity(
     assetAddress: string,
-    requestBody: CommonActivityRequestInput,
+    requestBody: CommonContractActivityRequestInput,
   ): CancelablePromise<CommonActivityResponse> {
     return this.httpRequest.request({
       method: 'POST',
@@ -66,7 +68,7 @@ export class ActivityService {
   public getAssetActivity(
     assetAddress: string,
     assetId: string,
-    requestBody: CommonActivityRequestInput,
+    requestBody: CommonAssetActivityRequestInput,
   ): CancelablePromise<CommonActivityResponse> {
     return this.httpRequest.request({
       method: 'POST',

@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type CommonActivityRequestInput = {
+export type CommonContractActivityRequestInput = {
   limit?: number;
   types?: Array<
     'ask' | 'ask_cancel' | 'bid' | 'bid_cancel' | 'sale' | 'mint' | 'transfer'

@@ -14,11 +14,13 @@ export { AcceptAssetOfferRequestInput } from './models/AcceptAssetOfferRequestIn
 export { BuyAssetRequestInput } from './models/BuyAssetRequestInput';
 export { CancelAssetListingRequestInput } from './models/CancelAssetListingRequestInput';
 export { CancelAssetOfferRequestInput } from './models/CancelAssetOfferRequestInput';
-export type { CommonActivityRequestInput } from './models/CommonActivityRequestInput';
 export type { CommonActivityResponse } from './models/CommonActivityResponse';
+export type { CommonAssetActivityRequestInput } from './models/CommonAssetActivityRequestInput';
+export type { CommonContractActivityRequestInput } from './models/CommonContractActivityRequestInput';
 export { CommonOperationResponse } from './models/CommonOperationResponse';
 export type { CommonStatsRequestInput } from './models/CommonStatsRequestInput';
 export type { CommonStatsResponse } from './models/CommonStatsResponse';
+export type { CommonUserActivityRequestInput } from './models/CommonUserActivityRequestInput';
 export { ConfirmOperationRequest } from './models/ConfirmOperationRequest';
 export { ConvertTokenRequestInput } from './models/ConvertTokenRequestInput';
 export { CreateAssetOfferRequestInput } from './models/CreateAssetOfferRequestInput';

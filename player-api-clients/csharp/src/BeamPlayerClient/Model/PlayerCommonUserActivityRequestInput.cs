@@ -27,18 +27,18 @@ using BeamPlayerClient.Client;
 namespace BeamPlayerClient.Model
 {
     /// <summary>
-    /// PlayerCommonActivityRequestInput
+    /// PlayerCommonUserActivityRequestInput
     /// </summary>
-    public partial class PlayerCommonActivityRequestInput : IValidatableObject
+    public partial class PlayerCommonUserActivityRequestInput : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PlayerCommonActivityRequestInput" /> class.
+        /// Initializes a new instance of the <see cref="PlayerCommonUserActivityRequestInput" /> class.
         /// </summary>
         /// <param name="chainId">chainId (default to 13337M)</param>
         /// <param name="limit">limit (default to 20M)</param>
         /// <param name="types">types</param>
         [JsonConstructor]
-        public PlayerCommonActivityRequestInput(Option<decimal?> chainId = default, Option<decimal?> limit = default, Option<List<PlayerCommonActivityRequestInput.TypesEnum>?> types = default)
+        public PlayerCommonUserActivityRequestInput(Option<decimal?> chainId = default, Option<decimal?> limit = default, Option<List<PlayerCommonUserActivityRequestInput.TypesEnum>?> types = default)
         {
             ChainIdOption = chainId;
             LimitOption = limit;
@@ -215,13 +215,13 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [JsonIgnore]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<List<PlayerCommonActivityRequestInput.TypesEnum>?> TypesOption { get; private set; }
+        public Option<List<PlayerCommonUserActivityRequestInput.TypesEnum>?> TypesOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Types
         /// </summary>
         [JsonPropertyName("types")]
-        public List<PlayerCommonActivityRequestInput.TypesEnum>? Types { get { return this. TypesOption; } set { this.TypesOption = new(value); } }
+        public List<PlayerCommonUserActivityRequestInput.TypesEnum>? Types { get { return this. TypesOption; } set { this.TypesOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -230,7 +230,7 @@ namespace BeamPlayerClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class PlayerCommonActivityRequestInput {\n");
+            sb.Append("class PlayerCommonUserActivityRequestInput {\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  Limit: ").Append(Limit).Append("\n");
             sb.Append("  Types: ").Append(Types).Append("\n");
@@ -246,9 +246,9 @@ namespace BeamPlayerClient.Model
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             // Limit (decimal) maximum
-            if (this.LimitOption.IsSet && this.LimitOption.Value > (decimal)100)
+            if (this.LimitOption.IsSet && this.LimitOption.Value > (decimal)20)
             {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Limit, must be a value less than or equal to 100.", new [] { "Limit" });
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Limit, must be a value less than or equal to 20.", new [] { "Limit" });
             }
 
             // Limit (decimal) minimum
@@ -262,19 +262,19 @@ namespace BeamPlayerClient.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="PlayerCommonActivityRequestInput" />
+    /// A Json converter for type <see cref="PlayerCommonUserActivityRequestInput" />
     /// </summary>
-    public class PlayerCommonActivityRequestInputJsonConverter : JsonConverter<PlayerCommonActivityRequestInput>
+    public class PlayerCommonUserActivityRequestInputJsonConverter : JsonConverter<PlayerCommonUserActivityRequestInput>
     {
         /// <summary>
-        /// Deserializes json to <see cref="PlayerCommonActivityRequestInput" />
+        /// Deserializes json to <see cref="PlayerCommonUserActivityRequestInput" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override PlayerCommonActivityRequestInput Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override PlayerCommonUserActivityRequestInput Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -285,7 +285,7 @@ namespace BeamPlayerClient.Model
 
             Option<decimal?> chainId = default;
             Option<decimal?> limit = default;
-            Option<List<PlayerCommonActivityRequestInput.TypesEnum>?> types = default;
+            Option<List<PlayerCommonUserActivityRequestInput.TypesEnum>?> types = default;
 
             while (utf8JsonReader.Read())
             {
@@ -312,7 +312,7 @@ namespace BeamPlayerClient.Model
                             break;
                         case "types":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                types = new Option<List<PlayerCommonActivityRequestInput.TypesEnum>?>(JsonSerializer.Deserialize<List<PlayerCommonActivityRequestInput.TypesEnum>>(ref utf8JsonReader, jsonSerializerOptions));
+                                types = new Option<List<PlayerCommonUserActivityRequestInput.TypesEnum>?>(JsonSerializer.Deserialize<List<PlayerCommonUserActivityRequestInput.TypesEnum>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -321,49 +321,49 @@ namespace BeamPlayerClient.Model
             }
 
             if (chainId.IsSet && chainId.Value == null)
-                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class PlayerCommonActivityRequestInput.");
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class PlayerCommonUserActivityRequestInput.");
 
             if (limit.IsSet && limit.Value == null)
-                throw new ArgumentNullException(nameof(limit), "Property is not nullable for class PlayerCommonActivityRequestInput.");
+                throw new ArgumentNullException(nameof(limit), "Property is not nullable for class PlayerCommonUserActivityRequestInput.");
 
-            return new PlayerCommonActivityRequestInput(chainId, limit, types);
+            return new PlayerCommonUserActivityRequestInput(chainId, limit, types);
         }
 
         /// <summary>
-        /// Serializes a <see cref="PlayerCommonActivityRequestInput" />
+        /// Serializes a <see cref="PlayerCommonUserActivityRequestInput" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="playerCommonActivityRequestInput"></param>
+        /// <param name="playerCommonUserActivityRequestInput"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, PlayerCommonActivityRequestInput playerCommonActivityRequestInput, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, PlayerCommonUserActivityRequestInput playerCommonUserActivityRequestInput, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(ref writer, playerCommonActivityRequestInput, jsonSerializerOptions);
+            WriteProperties(ref writer, playerCommonUserActivityRequestInput, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="PlayerCommonActivityRequestInput" />
+        /// Serializes the properties of <see cref="PlayerCommonUserActivityRequestInput" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="playerCommonActivityRequestInput"></param>
+        /// <param name="playerCommonUserActivityRequestInput"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(ref Utf8JsonWriter writer, PlayerCommonActivityRequestInput playerCommonActivityRequestInput, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(ref Utf8JsonWriter writer, PlayerCommonUserActivityRequestInput playerCommonUserActivityRequestInput, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (playerCommonActivityRequestInput.ChainIdOption.IsSet)
-                writer.WriteNumber("chainId", playerCommonActivityRequestInput.ChainIdOption.Value!.Value);
+            if (playerCommonUserActivityRequestInput.ChainIdOption.IsSet)
+                writer.WriteNumber("chainId", playerCommonUserActivityRequestInput.ChainIdOption.Value!.Value);
 
-            if (playerCommonActivityRequestInput.LimitOption.IsSet)
-                writer.WriteNumber("limit", playerCommonActivityRequestInput.LimitOption.Value!.Value);
+            if (playerCommonUserActivityRequestInput.LimitOption.IsSet)
+                writer.WriteNumber("limit", playerCommonUserActivityRequestInput.LimitOption.Value!.Value);
 
-            if (playerCommonActivityRequestInput.TypesOption.IsSet)
-                if (playerCommonActivityRequestInput.TypesOption.Value != null)
+            if (playerCommonUserActivityRequestInput.TypesOption.IsSet)
+                if (playerCommonUserActivityRequestInput.TypesOption.Value != null)
                 {
                     writer.WritePropertyName("types");
-                    JsonSerializer.Serialize(writer, playerCommonActivityRequestInput.Types, jsonSerializerOptions);
+                    JsonSerializer.Serialize(writer, playerCommonUserActivityRequestInput.Types, jsonSerializerOptions);
                 }
                 else
                     writer.WriteNull("types");

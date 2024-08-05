@@ -2557,7 +2557,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PlayerCommonActivityRequestInput"
+                "$ref": "#/components/schemas/PlayerCommonUserActivityRequestInput"
               }
             }
           }
@@ -2603,7 +2603,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PlayerCommonActivityRequestInput"
+                "$ref": "#/components/schemas/PlayerCommonContractActivityRequestInput"
               }
             }
           }
@@ -2657,7 +2657,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PlayerCommonActivityRequestInput"
+                "$ref": "#/components/schemas/PlayerCommonAssetActivityRequestInput"
               }
             }
           }
@@ -5557,14 +5557,14 @@
           "count"
         ]
       },
-      "PlayerCommonActivityRequestInput": {
+      "PlayerCommonUserActivityRequestInput": {
         "type": "object",
         "properties": {
           "limit": {
             "default": 20,
             "type": "number",
             "minimum": 1,
-            "maximum": 100
+            "maximum": 20
           },
           "types": {
             "type": "array",
@@ -5679,6 +5679,68 @@
         "required": [
           "data"
         ]
+      },
+      "PlayerCommonContractActivityRequestInput": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "default": 20,
+            "type": "number",
+            "minimum": 1,
+            "maximum": 50
+          },
+          "types": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ask",
+                "ask_cancel",
+                "bid",
+                "bid_cancel",
+                "sale",
+                "mint",
+                "transfer"
+              ]
+            },
+            "nullable": true
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          }
+        }
+      },
+      "PlayerCommonAssetActivityRequestInput": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "default": 20,
+            "type": "number",
+            "minimum": 1,
+            "maximum": 20
+          },
+          "types": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ask",
+                "ask_cancel",
+                "bid",
+                "bid_cancel",
+                "sale",
+                "mint",
+                "transfer"
+              ]
+            },
+            "nullable": true
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          }
+        }
       }
     }
   }
