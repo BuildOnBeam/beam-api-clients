@@ -29,7 +29,7 @@ namespace BeamPlayerClient.Extensions
         /// <param name="client"></param>
         /// <param name="retries"></param>
         /// <returns></returns>
-        public static IHttpClientBuilder AddRetryPolicy(this IHttpClientBuilder client, int retries)
+        public static IHttpClientBuilder AddPlayerRetryPolicy(this IHttpClientBuilder client, int retries)
         {
             client.AddPolicyHandler(RetryPolicy(retries));
 
@@ -42,7 +42,7 @@ namespace BeamPlayerClient.Extensions
         /// <param name="client"></param>
         /// <param name="timeout"></param>
         /// <returns></returns>
-        public static IHttpClientBuilder AddTimeoutPolicy(this IHttpClientBuilder client, TimeSpan timeout)
+        public static IHttpClientBuilder AddPlayerTimeoutPolicy(this IHttpClientBuilder client, TimeSpan timeout)
         {
             client.AddPolicyHandler(TimeoutPolicy(timeout));
 
@@ -56,7 +56,7 @@ namespace BeamPlayerClient.Extensions
         /// <param name="handledEventsAllowedBeforeBreaking"></param>
         /// <param name="durationOfBreak"></param>
         /// <returns></returns>
-        public static IHttpClientBuilder AddCircuitBreakerPolicy(this IHttpClientBuilder client, int handledEventsAllowedBeforeBreaking, TimeSpan durationOfBreak)
+        public static IHttpClientBuilder AddPlayerCircuitBreakerPolicy(this IHttpClientBuilder client, int handledEventsAllowedBeforeBreaking, TimeSpan durationOfBreak)
         {
             client.AddTransientHttpErrorPolicy(builder => CircuitBreakerPolicy(builder, handledEventsAllowedBeforeBreaking, durationOfBreak));
 
