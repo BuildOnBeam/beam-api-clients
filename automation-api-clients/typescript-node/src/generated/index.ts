@@ -11,7 +11,7 @@ export { OpenAPI } from './core/OpenAPI';
 export type { OpenAPIConfig } from './core/OpenAPI';
 
 export type { AcceptAssetOfferRequestInputV2 } from './models/AcceptAssetOfferRequestInputV2';
-export { AddContractRequestInput } from './models/AddContractRequestInput';
+export type { AddContractRequestInput } from './models/AddContractRequestInput';
 export { AddContractResponse } from './models/AddContractResponse';
 export type { BuyAssetRequestInputV2 } from './models/BuyAssetRequestInputV2';
 export type { CancelAssetListingRequestInputV2 } from './models/CancelAssetListingRequestInputV2';
