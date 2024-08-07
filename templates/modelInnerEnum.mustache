@@ -106,14 +106,14 @@
             /// <returns></returns>
             public static {{datatypeWithEnum}}{{^datatypeWithEnum}}{{classname}}{{/datatypeWithEnum}} FromString(string value)
             {
-            {{#allowableValues}}
+                {{#allowableValues}}
                 {{#enumVars}}
                     if (value.Equals({{^isString}}({{{value}}}).ToString(){{/isString}}{{#isString}}"{{{value}}}"{{/isString}}))
-                    return {{datatypeWithEnum}}{{^datatypeWithEnum}}{{classname}}{{/datatypeWithEnum}}.{{name}};
+                        return {{datatypeWithEnum}}{{^datatypeWithEnum}}{{classname}}{{/datatypeWithEnum}}.{{name}};
 
                 {{/enumVars}}
-            {{/allowableValues}}
-            throw new NotImplementedException($"Could not convert value to type {{datatypeWithEnum}}{{^datatypeWithEnum}}{{classname}}{{/datatypeWithEnum}}: '{value}'");
+                {{/allowableValues}}
+                throw new NotImplementedException($"Could not convert value to type {{datatypeWithEnum}}{{^datatypeWithEnum}}{{classname}}{{/datatypeWithEnum}}: '{value}'");
             }
 
             /// <summary>
@@ -123,14 +123,14 @@
             /// <returns></returns>
             public static {{datatypeWithEnum}}{{^datatypeWithEnum}}{{classname}}{{/datatypeWithEnum}}? FromStringOrDefault(string value)
             {
-            {{#allowableValues}}
+                {{#allowableValues}}
                 {{#enumVars}}
                     if (value.Equals({{^isString}}({{{value}}}).ToString(){{/isString}}{{#isString}}"{{{value}}}"{{/isString}}))
-                    return {{datatypeWithEnum}}{{^datatypeWithEnum}}{{classname}}{{/datatypeWithEnum}}.{{name}};
+                        return {{datatypeWithEnum}}{{^datatypeWithEnum}}{{classname}}{{/datatypeWithEnum}}.{{name}};
 
                 {{/enumVars}}
-            {{/allowableValues}}
-            return null;
+                {{/allowableValues}}
+                return null;
             }
 
             /// <summary>
@@ -148,7 +148,7 @@
                 {{#allowableValues}}
                     {{#enumVars}}
                         if (value == {{datatypeWithEnum}}{{^datatypeWithEnum}}{{classname}}{{/datatypeWithEnum}}.{{name}})
-                        return {{^isNumeric}}"{{/isNumeric}}{{{value}}}{{^isNumeric}}"{{/isNumeric}};
+                            return {{^isNumeric}}"{{/isNumeric}}{{{value}}}{{^isNumeric}}"{{/isNumeric}};
 
                     {{/enumVars}}
                 {{/allowableValues}}
@@ -175,11 +175,11 @@
                 string{{nrt?}} rawValue = reader.GetString();
 
                 {{datatypeWithEnum}}{{^datatypeWithEnum}}{{classname}}{{/datatypeWithEnum}}? result = rawValue == null
-                ? null
-                : {{datatypeWithEnum}}{{^datatypeWithEnum}}{{classname}}{{/datatypeWithEnum}}ValueConverter.FromStringOrDefault(rawValue);
+                    ? null
+                    : {{datatypeWithEnum}}{{^datatypeWithEnum}}{{classname}}{{/datatypeWithEnum}}ValueConverter.FromStringOrDefault(rawValue);
 
                 if (result != null)
-                return result.Value;
+                    return result.Value;
 
                 throw new JsonException();
             }
