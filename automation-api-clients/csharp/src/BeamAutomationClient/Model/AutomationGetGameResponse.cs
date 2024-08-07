@@ -75,6 +75,7 @@ namespace BeamAutomationClient.Model
         /// <summary>
         /// Defines PegiContent
         /// </summary>
+        [JsonConverter(typeof(PegiContentEnumJsonConverter))]
         public enum PegiContentEnum
         {
             /// <summary>
@@ -223,8 +224,157 @@ namespace BeamAutomationClient.Model
         }
 
         /// <summary>
+        /// Converts <see cref="PegiContentEnum"/> to and from the JSON value
+        /// </summary>
+        public static class PegiContentEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="PegiContentEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static PegiContentEnum FromString(string value)
+            {
+                    if (value.Equals("BadLanguage"))
+                        return PegiContentEnum.BadLanguage;
+
+                    if (value.Equals("Discrimination"))
+                        return PegiContentEnum.Discrimination;
+
+                    if (value.Equals("Drugs"))
+                        return PegiContentEnum.Drugs;
+
+                    if (value.Equals("Fear"))
+                        return PegiContentEnum.Fear;
+
+                    if (value.Equals("Gambling"))
+                        return PegiContentEnum.Gambling;
+
+                    if (value.Equals("Sex"))
+                        return PegiContentEnum.Sex;
+
+                    if (value.Equals("Violence"))
+                        return PegiContentEnum.Violence;
+
+                    if (value.Equals("InGamePurchases"))
+                        return PegiContentEnum.InGamePurchases;
+
+                throw new NotImplementedException($"Could not convert value to type PegiContentEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="PegiContentEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static PegiContentEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("BadLanguage"))
+                        return PegiContentEnum.BadLanguage;
+
+                    if (value.Equals("Discrimination"))
+                        return PegiContentEnum.Discrimination;
+
+                    if (value.Equals("Drugs"))
+                        return PegiContentEnum.Drugs;
+
+                    if (value.Equals("Fear"))
+                        return PegiContentEnum.Fear;
+
+                    if (value.Equals("Gambling"))
+                        return PegiContentEnum.Gambling;
+
+                    if (value.Equals("Sex"))
+                        return PegiContentEnum.Sex;
+
+                    if (value.Equals("Violence"))
+                        return PegiContentEnum.Violence;
+
+                    if (value.Equals("InGamePurchases"))
+                        return PegiContentEnum.InGamePurchases;
+
+                return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="PegiContentEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(PegiContentEnum value)
+            {
+                        if (value == PegiContentEnum.BadLanguage)
+                            return "BadLanguage";
+
+                        if (value == PegiContentEnum.Discrimination)
+                            return "Discrimination";
+
+                        if (value == PegiContentEnum.Drugs)
+                            return "Drugs";
+
+                        if (value == PegiContentEnum.Fear)
+                            return "Fear";
+
+                        if (value == PegiContentEnum.Gambling)
+                            return "Gambling";
+
+                        if (value == PegiContentEnum.Sex)
+                            return "Sex";
+
+                        if (value == PegiContentEnum.Violence)
+                            return "Violence";
+
+                        if (value == PegiContentEnum.InGamePurchases)
+                            return "InGamePurchases";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="PegiContentEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class PegiContentEnumJsonConverter : JsonConverter<PegiContentEnum>
+        {
+            /// <summary>
+            /// Returns a PegiContentEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override PegiContentEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string? rawValue = reader.GetString();
+
+                PegiContentEnum? result = rawValue == null
+                    ? null
+                    : PegiContentEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                    return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the PegiContentEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="pegiContentEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, PegiContentEnum pegiContentEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(PegiContentEnumValueConverter.ToJsonValue(pegiContentEnum));
+            }
+        }
+
+        /// <summary>
         /// Defines PegiRating
         /// </summary>
+        [JsonConverter(typeof(PegiRatingEnumJsonConverter))]
         public enum PegiRatingEnum
         {
             /// <summary>
@@ -331,6 +481,127 @@ namespace BeamAutomationClient.Model
                 return "Eighteen";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Converts <see cref="PegiRatingEnum"/> to and from the JSON value
+        /// </summary>
+        public static class PegiRatingEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="PegiRatingEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static PegiRatingEnum FromString(string value)
+            {
+                    if (value.Equals("Three"))
+                        return PegiRatingEnum.Three;
+
+                    if (value.Equals("Seven"))
+                        return PegiRatingEnum.Seven;
+
+                    if (value.Equals("Twelve"))
+                        return PegiRatingEnum.Twelve;
+
+                    if (value.Equals("Sixteen"))
+                        return PegiRatingEnum.Sixteen;
+
+                    if (value.Equals("Eighteen"))
+                        return PegiRatingEnum.Eighteen;
+
+                throw new NotImplementedException($"Could not convert value to type PegiRatingEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="PegiRatingEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static PegiRatingEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("Three"))
+                        return PegiRatingEnum.Three;
+
+                    if (value.Equals("Seven"))
+                        return PegiRatingEnum.Seven;
+
+                    if (value.Equals("Twelve"))
+                        return PegiRatingEnum.Twelve;
+
+                    if (value.Equals("Sixteen"))
+                        return PegiRatingEnum.Sixteen;
+
+                    if (value.Equals("Eighteen"))
+                        return PegiRatingEnum.Eighteen;
+
+                return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="PegiRatingEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(PegiRatingEnum value)
+            {
+                        if (value == PegiRatingEnum.Three)
+                            return "Three";
+
+                        if (value == PegiRatingEnum.Seven)
+                            return "Seven";
+
+                        if (value == PegiRatingEnum.Twelve)
+                            return "Twelve";
+
+                        if (value == PegiRatingEnum.Sixteen)
+                            return "Sixteen";
+
+                        if (value == PegiRatingEnum.Eighteen)
+                            return "Eighteen";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="PegiRatingEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class PegiRatingEnumJsonConverter : JsonConverter<PegiRatingEnum>
+        {
+            /// <summary>
+            /// Returns a PegiRatingEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override PegiRatingEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string? rawValue = reader.GetString();
+
+                PegiRatingEnum? result = rawValue == null
+                    ? null
+                    : PegiRatingEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                    return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the PegiRatingEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="pegiRatingEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, PegiRatingEnum pegiRatingEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(PegiRatingEnumValueConverter.ToJsonValue(pegiRatingEnum));
+            }
         }
 
         /// <summary>

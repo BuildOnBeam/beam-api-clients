@@ -75,6 +75,7 @@ namespace BeamAutomationClient.Model
         /// <summary>
         /// Defines Status
         /// </summary>
+        [JsonConverter(typeof(StatusEnumJsonConverter))]
         public enum StatusEnum
         {
             /// <summary>
@@ -181,6 +182,127 @@ namespace BeamAutomationClient.Model
                 return "filled";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Converts <see cref="StatusEnum"/> to and from the JSON value
+        /// </summary>
+        public static class StatusEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="StatusEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static StatusEnum FromString(string value)
+            {
+                    if (value.Equals("active"))
+                        return StatusEnum.Active;
+
+                    if (value.Equals("inactive"))
+                        return StatusEnum.Inactive;
+
+                    if (value.Equals("expired"))
+                        return StatusEnum.Expired;
+
+                    if (value.Equals("canceled"))
+                        return StatusEnum.Canceled;
+
+                    if (value.Equals("filled"))
+                        return StatusEnum.Filled;
+
+                throw new NotImplementedException($"Could not convert value to type StatusEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="StatusEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static StatusEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("active"))
+                        return StatusEnum.Active;
+
+                    if (value.Equals("inactive"))
+                        return StatusEnum.Inactive;
+
+                    if (value.Equals("expired"))
+                        return StatusEnum.Expired;
+
+                    if (value.Equals("canceled"))
+                        return StatusEnum.Canceled;
+
+                    if (value.Equals("filled"))
+                        return StatusEnum.Filled;
+
+                return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="StatusEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(StatusEnum value)
+            {
+                        if (value == StatusEnum.Active)
+                            return "active";
+
+                        if (value == StatusEnum.Inactive)
+                            return "inactive";
+
+                        if (value == StatusEnum.Expired)
+                            return "expired";
+
+                        if (value == StatusEnum.Canceled)
+                            return "canceled";
+
+                        if (value == StatusEnum.Filled)
+                            return "filled";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="StatusEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class StatusEnumJsonConverter : JsonConverter<StatusEnum>
+        {
+            /// <summary>
+            /// Returns a StatusEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override StatusEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string? rawValue = reader.GetString();
+
+                StatusEnum? result = rawValue == null
+                    ? null
+                    : StatusEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                    return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the StatusEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="statusEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, StatusEnum statusEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(StatusEnumValueConverter.ToJsonValue(statusEnum));
+            }
         }
 
         /// <summary>

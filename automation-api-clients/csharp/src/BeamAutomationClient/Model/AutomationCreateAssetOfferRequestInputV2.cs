@@ -61,6 +61,7 @@ namespace BeamAutomationClient.Model
         /// <summary>
         /// Defines Currency
         /// </summary>
+        [JsonConverter(typeof(CurrencyEnumJsonConverter))]
         public enum CurrencyEnum
         {
             /// <summary>
@@ -136,6 +137,109 @@ namespace BeamAutomationClient.Model
                 return "USDT";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Converts <see cref="CurrencyEnum"/> to and from the JSON value
+        /// </summary>
+        public static class CurrencyEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="CurrencyEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static CurrencyEnum FromString(string value)
+            {
+                    if (value.Equals("WBEAM"))
+                        return CurrencyEnum.WBEAM;
+
+                    if (value.Equals("USDC"))
+                        return CurrencyEnum.USDC;
+
+                    if (value.Equals("USDT"))
+                        return CurrencyEnum.USDT;
+
+                throw new NotImplementedException($"Could not convert value to type CurrencyEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="CurrencyEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static CurrencyEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("WBEAM"))
+                        return CurrencyEnum.WBEAM;
+
+                    if (value.Equals("USDC"))
+                        return CurrencyEnum.USDC;
+
+                    if (value.Equals("USDT"))
+                        return CurrencyEnum.USDT;
+
+                return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="CurrencyEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(CurrencyEnum value)
+            {
+                        if (value == CurrencyEnum.WBEAM)
+                            return "WBEAM";
+
+                        if (value == CurrencyEnum.USDC)
+                            return "USDC";
+
+                        if (value == CurrencyEnum.USDT)
+                            return "USDT";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="CurrencyEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class CurrencyEnumJsonConverter : JsonConverter<CurrencyEnum>
+        {
+            /// <summary>
+            /// Returns a CurrencyEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override CurrencyEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string? rawValue = reader.GetString();
+
+                CurrencyEnum? result = rawValue == null
+                    ? null
+                    : CurrencyEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                    return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the CurrencyEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="currencyEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, CurrencyEnum currencyEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(CurrencyEnumValueConverter.ToJsonValue(currencyEnum));
+            }
         }
 
         /// <summary>

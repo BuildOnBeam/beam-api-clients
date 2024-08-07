@@ -65,6 +65,7 @@ namespace BeamAutomationClient.Model
         /// <summary>
         /// Defines Rarity
         /// </summary>
+        [JsonConverter(typeof(RarityEnumJsonConverter))]
         public enum RarityEnum
         {
             /// <summary>
@@ -171,6 +172,127 @@ namespace BeamAutomationClient.Model
                 return "ExtremelyRare";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Converts <see cref="RarityEnum"/> to and from the JSON value
+        /// </summary>
+        public static class RarityEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="RarityEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static RarityEnum FromString(string value)
+            {
+                    if (value.Equals("Common"))
+                        return RarityEnum.Common;
+
+                    if (value.Equals("Uncommon"))
+                        return RarityEnum.Uncommon;
+
+                    if (value.Equals("Rare"))
+                        return RarityEnum.Rare;
+
+                    if (value.Equals("VeryRare"))
+                        return RarityEnum.VeryRare;
+
+                    if (value.Equals("ExtremelyRare"))
+                        return RarityEnum.ExtremelyRare;
+
+                throw new NotImplementedException($"Could not convert value to type RarityEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="RarityEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static RarityEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("Common"))
+                        return RarityEnum.Common;
+
+                    if (value.Equals("Uncommon"))
+                        return RarityEnum.Uncommon;
+
+                    if (value.Equals("Rare"))
+                        return RarityEnum.Rare;
+
+                    if (value.Equals("VeryRare"))
+                        return RarityEnum.VeryRare;
+
+                    if (value.Equals("ExtremelyRare"))
+                        return RarityEnum.ExtremelyRare;
+
+                return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="RarityEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(RarityEnum value)
+            {
+                        if (value == RarityEnum.Common)
+                            return "Common";
+
+                        if (value == RarityEnum.Uncommon)
+                            return "Uncommon";
+
+                        if (value == RarityEnum.Rare)
+                            return "Rare";
+
+                        if (value == RarityEnum.VeryRare)
+                            return "VeryRare";
+
+                        if (value == RarityEnum.ExtremelyRare)
+                            return "ExtremelyRare";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="RarityEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class RarityEnumJsonConverter : JsonConverter<RarityEnum>
+        {
+            /// <summary>
+            /// Returns a RarityEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override RarityEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string? rawValue = reader.GetString();
+
+                RarityEnum? result = rawValue == null
+                    ? null
+                    : RarityEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                    return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the RarityEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="rarityEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, RarityEnum rarityEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(RarityEnumValueConverter.ToJsonValue(rarityEnum));
+            }
         }
 
         /// <summary>

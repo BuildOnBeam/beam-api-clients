@@ -51,6 +51,7 @@ namespace BeamAutomationClient.Model
         /// <summary>
         /// Defines Types
         /// </summary>
+        [JsonConverter(typeof(TypesEnumJsonConverter))]
         public enum TypesEnum
         {
             /// <summary>
@@ -182,6 +183,145 @@ namespace BeamAutomationClient.Model
                 return "transfer";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Converts <see cref="TypesEnum"/> to and from the JSON value
+        /// </summary>
+        public static class TypesEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="TypesEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static TypesEnum FromString(string value)
+            {
+                    if (value.Equals("ask"))
+                        return TypesEnum.Ask;
+
+                    if (value.Equals("ask_cancel"))
+                        return TypesEnum.AskCancel;
+
+                    if (value.Equals("bid"))
+                        return TypesEnum.Bid;
+
+                    if (value.Equals("bid_cancel"))
+                        return TypesEnum.BidCancel;
+
+                    if (value.Equals("sale"))
+                        return TypesEnum.Sale;
+
+                    if (value.Equals("mint"))
+                        return TypesEnum.Mint;
+
+                    if (value.Equals("transfer"))
+                        return TypesEnum.Transfer;
+
+                throw new NotImplementedException($"Could not convert value to type TypesEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="TypesEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static TypesEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("ask"))
+                        return TypesEnum.Ask;
+
+                    if (value.Equals("ask_cancel"))
+                        return TypesEnum.AskCancel;
+
+                    if (value.Equals("bid"))
+                        return TypesEnum.Bid;
+
+                    if (value.Equals("bid_cancel"))
+                        return TypesEnum.BidCancel;
+
+                    if (value.Equals("sale"))
+                        return TypesEnum.Sale;
+
+                    if (value.Equals("mint"))
+                        return TypesEnum.Mint;
+
+                    if (value.Equals("transfer"))
+                        return TypesEnum.Transfer;
+
+                return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="TypesEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(TypesEnum value)
+            {
+                        if (value == TypesEnum.Ask)
+                            return "ask";
+
+                        if (value == TypesEnum.AskCancel)
+                            return "ask_cancel";
+
+                        if (value == TypesEnum.Bid)
+                            return "bid";
+
+                        if (value == TypesEnum.BidCancel)
+                            return "bid_cancel";
+
+                        if (value == TypesEnum.Sale)
+                            return "sale";
+
+                        if (value == TypesEnum.Mint)
+                            return "mint";
+
+                        if (value == TypesEnum.Transfer)
+                            return "transfer";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="TypesEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class TypesEnumJsonConverter : JsonConverter<TypesEnum>
+        {
+            /// <summary>
+            /// Returns a TypesEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override TypesEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string? rawValue = reader.GetString();
+
+                TypesEnum? result = rawValue == null
+                    ? null
+                    : TypesEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                    return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the TypesEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="typesEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, TypesEnum typesEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(TypesEnumValueConverter.ToJsonValue(typesEnum));
+            }
         }
 
         /// <summary>

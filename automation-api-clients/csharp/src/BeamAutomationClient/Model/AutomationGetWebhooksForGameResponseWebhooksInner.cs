@@ -59,6 +59,7 @@ namespace BeamAutomationClient.Model
         /// <summary>
         /// Defines Events
         /// </summary>
+        [JsonConverter(typeof(EventsEnumJsonConverter))]
         public enum EventsEnum
         {
             /// <summary>
@@ -106,6 +107,91 @@ namespace BeamAutomationClient.Model
                 return "TokenTransfers";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Converts <see cref="EventsEnum"/> to and from the JSON value
+        /// </summary>
+        public static class EventsEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="EventsEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static EventsEnum FromString(string value)
+            {
+                    if (value.Equals("TokenTransfers"))
+                        return EventsEnum.TokenTransfers;
+
+                throw new NotImplementedException($"Could not convert value to type EventsEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="EventsEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static EventsEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("TokenTransfers"))
+                        return EventsEnum.TokenTransfers;
+
+                return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="EventsEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(EventsEnum value)
+            {
+                        if (value == EventsEnum.TokenTransfers)
+                            return "TokenTransfers";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="EventsEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class EventsEnumJsonConverter : JsonConverter<EventsEnum>
+        {
+            /// <summary>
+            /// Returns a EventsEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override EventsEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string? rawValue = reader.GetString();
+
+                EventsEnum? result = rawValue == null
+                    ? null
+                    : EventsEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                    return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the EventsEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="eventsEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, EventsEnum eventsEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(EventsEnumValueConverter.ToJsonValue(eventsEnum));
+            }
         }
 
         /// <summary>

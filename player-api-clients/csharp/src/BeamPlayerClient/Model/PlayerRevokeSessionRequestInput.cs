@@ -53,6 +53,7 @@ namespace BeamPlayerClient.Model
         /// <summary>
         /// Defines OperationProcessing
         /// </summary>
+        [JsonConverter(typeof(OperationProcessingEnumJsonConverter))]
         public enum OperationProcessingEnum
         {
             /// <summary>
@@ -114,6 +115,100 @@ namespace BeamPlayerClient.Model
                 return "Execute";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Converts <see cref="OperationProcessingEnum"/> to and from the JSON value
+        /// </summary>
+        public static class OperationProcessingEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="OperationProcessingEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static OperationProcessingEnum FromString(string value)
+            {
+                    if (value.Equals("SignOnly"))
+                        return OperationProcessingEnum.SignOnly;
+
+                    if (value.Equals("Execute"))
+                        return OperationProcessingEnum.Execute;
+
+                throw new NotImplementedException($"Could not convert value to type OperationProcessingEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="OperationProcessingEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static OperationProcessingEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("SignOnly"))
+                        return OperationProcessingEnum.SignOnly;
+
+                    if (value.Equals("Execute"))
+                        return OperationProcessingEnum.Execute;
+
+                return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="OperationProcessingEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(OperationProcessingEnum value)
+            {
+                        if (value == OperationProcessingEnum.SignOnly)
+                            return "SignOnly";
+
+                        if (value == OperationProcessingEnum.Execute)
+                            return "Execute";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="OperationProcessingEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class OperationProcessingEnumJsonConverter : JsonConverter<OperationProcessingEnum>
+        {
+            /// <summary>
+            /// Returns a OperationProcessingEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override OperationProcessingEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string? rawValue = reader.GetString();
+
+                OperationProcessingEnum? result = rawValue == null
+                    ? null
+                    : OperationProcessingEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                    return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the OperationProcessingEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="operationProcessingEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, OperationProcessingEnum operationProcessingEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(OperationProcessingEnumValueConverter.ToJsonValue(operationProcessingEnum));
+            }
         }
 
         /// <summary>

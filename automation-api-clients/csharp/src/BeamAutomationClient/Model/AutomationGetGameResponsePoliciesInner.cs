@@ -71,6 +71,7 @@ namespace BeamAutomationClient.Model
         /// <summary>
         /// Defines Model
         /// </summary>
+        [JsonConverter(typeof(ModelEnumJsonConverter))]
         public enum ModelEnum
         {
             /// <summary>
@@ -135,6 +136,100 @@ namespace BeamAutomationClient.Model
         }
 
         /// <summary>
+        /// Converts <see cref="ModelEnum"/> to and from the JSON value
+        /// </summary>
+        public static class ModelEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="ModelEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static ModelEnum FromString(string value)
+            {
+                    if (value.Equals("ContractFunctions"))
+                        return ModelEnum.ContractFunctions;
+
+                    if (value.Equals("AccountFunctions"))
+                        return ModelEnum.AccountFunctions;
+
+                throw new NotImplementedException($"Could not convert value to type ModelEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="ModelEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static ModelEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("ContractFunctions"))
+                        return ModelEnum.ContractFunctions;
+
+                    if (value.Equals("AccountFunctions"))
+                        return ModelEnum.AccountFunctions;
+
+                return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="ModelEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(ModelEnum value)
+            {
+                        if (value == ModelEnum.ContractFunctions)
+                            return "ContractFunctions";
+
+                        if (value == ModelEnum.AccountFunctions)
+                            return "AccountFunctions";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="ModelEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class ModelEnumJsonConverter : JsonConverter<ModelEnum>
+        {
+            /// <summary>
+            /// Returns a ModelEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override ModelEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string? rawValue = reader.GetString();
+
+                ModelEnum? result = rawValue == null
+                    ? null
+                    : ModelEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                    return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the ModelEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="modelEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, ModelEnum modelEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(ModelEnumValueConverter.ToJsonValue(modelEnum));
+            }
+        }
+
+        /// <summary>
         /// Gets or Sets Model
         /// </summary>
         [JsonPropertyName("model")]
@@ -143,6 +238,7 @@ namespace BeamAutomationClient.Model
         /// <summary>
         /// Defines Type
         /// </summary>
+        [JsonConverter(typeof(TypeEnumJsonConverter))]
         public enum TypeEnum
         {
             /// <summary>
@@ -207,6 +303,100 @@ namespace BeamAutomationClient.Model
         }
 
         /// <summary>
+        /// Converts <see cref="TypeEnum"/> to and from the JSON value
+        /// </summary>
+        public static class TypeEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="TypeEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static TypeEnum FromString(string value)
+            {
+                    if (value.Equals("PayForUser"))
+                        return TypeEnum.PayForUser;
+
+                    if (value.Equals("ChargeCustomToken"))
+                        return TypeEnum.ChargeCustomToken;
+
+                throw new NotImplementedException($"Could not convert value to type TypeEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="TypeEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static TypeEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("PayForUser"))
+                        return TypeEnum.PayForUser;
+
+                    if (value.Equals("ChargeCustomToken"))
+                        return TypeEnum.ChargeCustomToken;
+
+                return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="TypeEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(TypeEnum value)
+            {
+                        if (value == TypeEnum.PayForUser)
+                            return "PayForUser";
+
+                        if (value == TypeEnum.ChargeCustomToken)
+                            return "ChargeCustomToken";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="TypeEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class TypeEnumJsonConverter : JsonConverter<TypeEnum>
+        {
+            /// <summary>
+            /// Returns a TypeEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override TypeEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string? rawValue = reader.GetString();
+
+                TypeEnum? result = rawValue == null
+                    ? null
+                    : TypeEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                    return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the TypeEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="typeEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, TypeEnum typeEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(TypeEnumValueConverter.ToJsonValue(typeEnum));
+            }
+        }
+
+        /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [JsonPropertyName("type")]
@@ -215,6 +405,7 @@ namespace BeamAutomationClient.Model
         /// <summary>
         /// Defines RateType
         /// </summary>
+        [JsonConverter(typeof(RateTypeEnumJsonConverter))]
         public enum RateTypeEnum
         {
             /// <summary>
@@ -279,6 +470,100 @@ namespace BeamAutomationClient.Model
                 return "Dynamic";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Converts <see cref="RateTypeEnum"/> to and from the JSON value
+        /// </summary>
+        public static class RateTypeEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="RateTypeEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static RateTypeEnum FromString(string value)
+            {
+                    if (value.Equals("Fixed"))
+                        return RateTypeEnum.Fixed;
+
+                    if (value.Equals("Dynamic"))
+                        return RateTypeEnum.Dynamic;
+
+                throw new NotImplementedException($"Could not convert value to type RateTypeEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="RateTypeEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static RateTypeEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("Fixed"))
+                        return RateTypeEnum.Fixed;
+
+                    if (value.Equals("Dynamic"))
+                        return RateTypeEnum.Dynamic;
+
+                return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="RateTypeEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(RateTypeEnum value)
+            {
+                        if (value == RateTypeEnum.Fixed)
+                            return "Fixed";
+
+                        if (value == RateTypeEnum.Dynamic)
+                            return "Dynamic";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="RateTypeEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class RateTypeEnumJsonConverter : JsonConverter<RateTypeEnum>
+        {
+            /// <summary>
+            /// Returns a RateTypeEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override RateTypeEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string? rawValue = reader.GetString();
+
+                RateTypeEnum? result = rawValue == null
+                    ? null
+                    : RateTypeEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                    return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the RateTypeEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="rateTypeEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, RateTypeEnum rateTypeEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(RateTypeEnumValueConverter.ToJsonValue(rateTypeEnum));
+            }
         }
 
         /// <summary>

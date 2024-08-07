@@ -51,6 +51,7 @@ namespace BeamPlayerClient.Model
         /// <summary>
         /// Defines Symbol
         /// </summary>
+        [JsonConverter(typeof(SymbolEnumJsonConverter))]
         public enum SymbolEnum
         {
             /// <summary>
@@ -171,6 +172,136 @@ namespace BeamPlayerClient.Model
                 return "WIMX";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Converts <see cref="SymbolEnum"/> to and from the JSON value
+        /// </summary>
+        public static class SymbolEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="SymbolEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static SymbolEnum FromString(string value)
+            {
+                    if (value.Equals("BEAM"))
+                        return SymbolEnum.BEAM;
+
+                    if (value.Equals("WBEAM"))
+                        return SymbolEnum.WBEAM;
+
+                    if (value.Equals("USDC"))
+                        return SymbolEnum.USDC;
+
+                    if (value.Equals("USDT"))
+                        return SymbolEnum.USDT;
+
+                    if (value.Equals("IMX"))
+                        return SymbolEnum.IMX;
+
+                    if (value.Equals("WIMX"))
+                        return SymbolEnum.WIMX;
+
+                throw new NotImplementedException($"Could not convert value to type SymbolEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="SymbolEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static SymbolEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("BEAM"))
+                        return SymbolEnum.BEAM;
+
+                    if (value.Equals("WBEAM"))
+                        return SymbolEnum.WBEAM;
+
+                    if (value.Equals("USDC"))
+                        return SymbolEnum.USDC;
+
+                    if (value.Equals("USDT"))
+                        return SymbolEnum.USDT;
+
+                    if (value.Equals("IMX"))
+                        return SymbolEnum.IMX;
+
+                    if (value.Equals("WIMX"))
+                        return SymbolEnum.WIMX;
+
+                return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="SymbolEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(SymbolEnum value)
+            {
+                        if (value == SymbolEnum.BEAM)
+                            return "BEAM";
+
+                        if (value == SymbolEnum.WBEAM)
+                            return "WBEAM";
+
+                        if (value == SymbolEnum.USDC)
+                            return "USDC";
+
+                        if (value == SymbolEnum.USDT)
+                            return "USDT";
+
+                        if (value == SymbolEnum.IMX)
+                            return "IMX";
+
+                        if (value == SymbolEnum.WIMX)
+                            return "WIMX";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="SymbolEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class SymbolEnumJsonConverter : JsonConverter<SymbolEnum>
+        {
+            /// <summary>
+            /// Returns a SymbolEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override SymbolEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string? rawValue = reader.GetString();
+
+                SymbolEnum? result = rawValue == null
+                    ? null
+                    : SymbolEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                    return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the SymbolEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="symbolEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, SymbolEnum symbolEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(SymbolEnumValueConverter.ToJsonValue(symbolEnum));
+            }
         }
 
         /// <summary>

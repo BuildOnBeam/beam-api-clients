@@ -65,6 +65,7 @@ namespace BeamPlayerClient.Model
         /// <summary>
         /// Defines Processing
         /// </summary>
+        [JsonConverter(typeof(ProcessingEnumJsonConverter))]
         public enum ProcessingEnum
         {
             /// <summary>
@@ -129,6 +130,100 @@ namespace BeamPlayerClient.Model
         }
 
         /// <summary>
+        /// Converts <see cref="ProcessingEnum"/> to and from the JSON value
+        /// </summary>
+        public static class ProcessingEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="ProcessingEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static ProcessingEnum FromString(string value)
+            {
+                    if (value.Equals("SignOnly"))
+                        return ProcessingEnum.SignOnly;
+
+                    if (value.Equals("Execute"))
+                        return ProcessingEnum.Execute;
+
+                throw new NotImplementedException($"Could not convert value to type ProcessingEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="ProcessingEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static ProcessingEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("SignOnly"))
+                        return ProcessingEnum.SignOnly;
+
+                    if (value.Equals("Execute"))
+                        return ProcessingEnum.Execute;
+
+                return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="ProcessingEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(ProcessingEnum value)
+            {
+                        if (value == ProcessingEnum.SignOnly)
+                            return "SignOnly";
+
+                        if (value == ProcessingEnum.Execute)
+                            return "Execute";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="ProcessingEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class ProcessingEnumJsonConverter : JsonConverter<ProcessingEnum>
+        {
+            /// <summary>
+            /// Returns a ProcessingEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override ProcessingEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string? rawValue = reader.GetString();
+
+                ProcessingEnum? result = rawValue == null
+                    ? null
+                    : ProcessingEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                    return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the ProcessingEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="processingEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, ProcessingEnum processingEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(ProcessingEnumValueConverter.ToJsonValue(processingEnum));
+            }
+        }
+
+        /// <summary>
         /// Gets or Sets Processing
         /// </summary>
         [JsonPropertyName("processing")]
@@ -137,6 +232,7 @@ namespace BeamPlayerClient.Model
         /// <summary>
         /// Defines Status
         /// </summary>
+        [JsonConverter(typeof(StatusEnumJsonConverter))]
         public enum StatusEnum
         {
             /// <summary>
@@ -240,6 +336,127 @@ namespace BeamPlayerClient.Model
                 return "Error";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Converts <see cref="StatusEnum"/> to and from the JSON value
+        /// </summary>
+        public static class StatusEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="StatusEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static StatusEnum FromString(string value)
+            {
+                    if (value.Equals("Signed"))
+                        return StatusEnum.Signed;
+
+                    if (value.Equals("Pending"))
+                        return StatusEnum.Pending;
+
+                    if (value.Equals("Rejected"))
+                        return StatusEnum.Rejected;
+
+                    if (value.Equals("Executed"))
+                        return StatusEnum.Executed;
+
+                    if (value.Equals("Error"))
+                        return StatusEnum.Error;
+
+                throw new NotImplementedException($"Could not convert value to type StatusEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="StatusEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static StatusEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("Signed"))
+                        return StatusEnum.Signed;
+
+                    if (value.Equals("Pending"))
+                        return StatusEnum.Pending;
+
+                    if (value.Equals("Rejected"))
+                        return StatusEnum.Rejected;
+
+                    if (value.Equals("Executed"))
+                        return StatusEnum.Executed;
+
+                    if (value.Equals("Error"))
+                        return StatusEnum.Error;
+
+                return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="StatusEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(StatusEnum value)
+            {
+                        if (value == StatusEnum.Signed)
+                            return "Signed";
+
+                        if (value == StatusEnum.Pending)
+                            return "Pending";
+
+                        if (value == StatusEnum.Rejected)
+                            return "Rejected";
+
+                        if (value == StatusEnum.Executed)
+                            return "Executed";
+
+                        if (value == StatusEnum.Error)
+                            return "Error";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="StatusEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class StatusEnumJsonConverter : JsonConverter<StatusEnum>
+        {
+            /// <summary>
+            /// Returns a StatusEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override StatusEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string? rawValue = reader.GetString();
+
+                StatusEnum? result = rawValue == null
+                    ? null
+                    : StatusEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                    return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the StatusEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="statusEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, StatusEnum statusEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(StatusEnumValueConverter.ToJsonValue(statusEnum));
+            }
         }
 
         /// <summary>

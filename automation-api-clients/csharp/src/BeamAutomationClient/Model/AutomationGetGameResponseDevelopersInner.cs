@@ -55,6 +55,7 @@ namespace BeamAutomationClient.Model
         /// <summary>
         /// Defines Role
         /// </summary>
+        [JsonConverter(typeof(RoleEnumJsonConverter))]
         public enum RoleEnum
         {
             /// <summary>
@@ -133,6 +134,109 @@ namespace BeamAutomationClient.Model
                 return "Viewer";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Converts <see cref="RoleEnum"/> to and from the JSON value
+        /// </summary>
+        public static class RoleEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="RoleEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static RoleEnum FromString(string value)
+            {
+                    if (value.Equals("Owner"))
+                        return RoleEnum.Owner;
+
+                    if (value.Equals("Admin"))
+                        return RoleEnum.Admin;
+
+                    if (value.Equals("Viewer"))
+                        return RoleEnum.Viewer;
+
+                throw new NotImplementedException($"Could not convert value to type RoleEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="RoleEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static RoleEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("Owner"))
+                        return RoleEnum.Owner;
+
+                    if (value.Equals("Admin"))
+                        return RoleEnum.Admin;
+
+                    if (value.Equals("Viewer"))
+                        return RoleEnum.Viewer;
+
+                return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="RoleEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(RoleEnum value)
+            {
+                        if (value == RoleEnum.Owner)
+                            return "Owner";
+
+                        if (value == RoleEnum.Admin)
+                            return "Admin";
+
+                        if (value == RoleEnum.Viewer)
+                            return "Viewer";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="RoleEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class RoleEnumJsonConverter : JsonConverter<RoleEnum>
+        {
+            /// <summary>
+            /// Returns a RoleEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override RoleEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string? rawValue = reader.GetString();
+
+                RoleEnum? result = rawValue == null
+                    ? null
+                    : RoleEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                    return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the RoleEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="roleEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, RoleEnum roleEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(RoleEnumValueConverter.ToJsonValue(roleEnum));
+            }
         }
 
         /// <summary>

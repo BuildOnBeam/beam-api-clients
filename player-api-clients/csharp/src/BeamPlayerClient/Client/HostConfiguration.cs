@@ -38,7 +38,6 @@ namespace BeamPlayerClient.Client
         public PlayerHostConfiguration(IServiceCollection services)
         {
             _services = services;
-            _jsonOptions.Converters.Add(new JsonStringEnumConverter());
             _jsonOptions.Converters.Add(new DateTimeJsonConverter());
             _jsonOptions.Converters.Add(new DateTimeNullableJsonConverter());
             _jsonOptions.Converters.Add(new Check200ResponseJsonConverter());

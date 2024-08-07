@@ -67,6 +67,7 @@ namespace BeamAutomationClient.Model
         /// <summary>
         /// Defines SellType
         /// </summary>
+        [JsonConverter(typeof(SellTypeEnumJsonConverter))]
         public enum SellTypeEnum
         {
             /// <summary>
@@ -159,6 +160,118 @@ namespace BeamAutomationClient.Model
         }
 
         /// <summary>
+        /// Converts <see cref="SellTypeEnum"/> to and from the JSON value
+        /// </summary>
+        public static class SellTypeEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="SellTypeEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static SellTypeEnum FromString(string value)
+            {
+                    if (value.Equals("FixedPrice"))
+                        return SellTypeEnum.FixedPrice;
+
+                    if (value.Equals("DescendingAuction"))
+                        return SellTypeEnum.DescendingAuction;
+
+                    if (value.Equals("AscendingAuction"))
+                        return SellTypeEnum.AscendingAuction;
+
+                    if (value.Equals("NotForSale"))
+                        return SellTypeEnum.NotForSale;
+
+                throw new NotImplementedException($"Could not convert value to type SellTypeEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="SellTypeEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static SellTypeEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("FixedPrice"))
+                        return SellTypeEnum.FixedPrice;
+
+                    if (value.Equals("DescendingAuction"))
+                        return SellTypeEnum.DescendingAuction;
+
+                    if (value.Equals("AscendingAuction"))
+                        return SellTypeEnum.AscendingAuction;
+
+                    if (value.Equals("NotForSale"))
+                        return SellTypeEnum.NotForSale;
+
+                return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="SellTypeEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(SellTypeEnum value)
+            {
+                        if (value == SellTypeEnum.FixedPrice)
+                            return "FixedPrice";
+
+                        if (value == SellTypeEnum.DescendingAuction)
+                            return "DescendingAuction";
+
+                        if (value == SellTypeEnum.AscendingAuction)
+                            return "AscendingAuction";
+
+                        if (value == SellTypeEnum.NotForSale)
+                            return "NotForSale";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="SellTypeEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class SellTypeEnumJsonConverter : JsonConverter<SellTypeEnum>
+        {
+            /// <summary>
+            /// Returns a SellTypeEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override SellTypeEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string? rawValue = reader.GetString();
+
+                SellTypeEnum? result = rawValue == null
+                    ? null
+                    : SellTypeEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                    return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the SellTypeEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="sellTypeEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, SellTypeEnum sellTypeEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(SellTypeEnumValueConverter.ToJsonValue(sellTypeEnum));
+            }
+        }
+
+        /// <summary>
         /// Gets or Sets SellType
         /// </summary>
         [JsonPropertyName("sellType")]
@@ -167,6 +280,7 @@ namespace BeamAutomationClient.Model
         /// <summary>
         /// Defines Currency
         /// </summary>
+        [JsonConverter(typeof(CurrencyEnumJsonConverter))]
         public enum CurrencyEnum
         {
             /// <summary>
@@ -284,6 +398,136 @@ namespace BeamAutomationClient.Model
                 return "WIMX";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Converts <see cref="CurrencyEnum"/> to and from the JSON value
+        /// </summary>
+        public static class CurrencyEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="CurrencyEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static CurrencyEnum FromString(string value)
+            {
+                    if (value.Equals("BEAM"))
+                        return CurrencyEnum.BEAM;
+
+                    if (value.Equals("WBEAM"))
+                        return CurrencyEnum.WBEAM;
+
+                    if (value.Equals("USDC"))
+                        return CurrencyEnum.USDC;
+
+                    if (value.Equals("USDT"))
+                        return CurrencyEnum.USDT;
+
+                    if (value.Equals("IMX"))
+                        return CurrencyEnum.IMX;
+
+                    if (value.Equals("WIMX"))
+                        return CurrencyEnum.WIMX;
+
+                throw new NotImplementedException($"Could not convert value to type CurrencyEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="CurrencyEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static CurrencyEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("BEAM"))
+                        return CurrencyEnum.BEAM;
+
+                    if (value.Equals("WBEAM"))
+                        return CurrencyEnum.WBEAM;
+
+                    if (value.Equals("USDC"))
+                        return CurrencyEnum.USDC;
+
+                    if (value.Equals("USDT"))
+                        return CurrencyEnum.USDT;
+
+                    if (value.Equals("IMX"))
+                        return CurrencyEnum.IMX;
+
+                    if (value.Equals("WIMX"))
+                        return CurrencyEnum.WIMX;
+
+                return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="CurrencyEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(CurrencyEnum value)
+            {
+                        if (value == CurrencyEnum.BEAM)
+                            return "BEAM";
+
+                        if (value == CurrencyEnum.WBEAM)
+                            return "WBEAM";
+
+                        if (value == CurrencyEnum.USDC)
+                            return "USDC";
+
+                        if (value == CurrencyEnum.USDT)
+                            return "USDT";
+
+                        if (value == CurrencyEnum.IMX)
+                            return "IMX";
+
+                        if (value == CurrencyEnum.WIMX)
+                            return "WIMX";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="CurrencyEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class CurrencyEnumJsonConverter : JsonConverter<CurrencyEnum>
+        {
+            /// <summary>
+            /// Returns a CurrencyEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override CurrencyEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string? rawValue = reader.GetString();
+
+                CurrencyEnum? result = rawValue == null
+                    ? null
+                    : CurrencyEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                    return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the CurrencyEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="currencyEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, CurrencyEnum currencyEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(CurrencyEnumValueConverter.ToJsonValue(currencyEnum));
+            }
         }
 
         /// <summary>
