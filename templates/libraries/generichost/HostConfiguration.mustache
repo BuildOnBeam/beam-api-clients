@@ -32,7 +32,6 @@ namespace {{packageName}}.{{clientPackage}}
         public {{classPrefix}}HostConfiguration(IServiceCollection services)
         {
             _services = services;
-            _jsonOptions.Converters.Add(new JsonStringEnumConverter());
             _jsonOptions.Converters.Add(new DateTimeJsonConverter());
             _jsonOptions.Converters.Add(new DateTimeNullableJsonConverter());
             {{#models}}
