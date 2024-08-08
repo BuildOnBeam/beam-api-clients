@@ -35,12 +35,14 @@ namespace BeamPlayerClient.Model
         /// Initializes a new instance of the <see cref="PlayerCommonUserActivityRequestInput" /> class.
         /// </summary>
         /// <param name="chainId">chainId (default to 13337M)</param>
+        /// <param name="continuation">continuation</param>
         /// <param name="limit">limit (default to 20M)</param>
         /// <param name="types">types</param>
         [JsonConstructor]
-        public PlayerCommonUserActivityRequestInput(Option<decimal?> chainId = default, Option<decimal?> limit = default, Option<List<PlayerCommonUserActivityRequestInput.TypesEnum>?> types = default)
+        public PlayerCommonUserActivityRequestInput(Option<decimal?> chainId = default, Option<string?> continuation = default, Option<decimal?> limit = default, Option<List<PlayerCommonUserActivityRequestInput.TypesEnum>?> types = default)
         {
             ChainIdOption = chainId;
+            ContinuationOption = continuation;
             LimitOption = limit;
             TypesOption = types;
             OnCreated();
@@ -338,6 +340,19 @@ namespace BeamPlayerClient.Model
         public decimal? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of Continuation
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> ContinuationOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Continuation
+        /// </summary>
+        [JsonPropertyName("continuation")]
+        public string? Continuation { get { return this. ContinuationOption; } set { this.ContinuationOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of Limit
         /// </summary>
         [JsonIgnore]
@@ -372,6 +387,7 @@ namespace BeamPlayerClient.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class PlayerCommonUserActivityRequestInput {\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
+            sb.Append("  Continuation: ").Append(Continuation).Append("\n");
             sb.Append("  Limit: ").Append(Limit).Append("\n");
             sb.Append("  Types: ").Append(Types).Append("\n");
             sb.Append("}\n");
@@ -424,6 +440,7 @@ namespace BeamPlayerClient.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<decimal?> chainId = default;
+            Option<string?> continuation = default;
             Option<decimal?> limit = default;
             Option<List<PlayerCommonUserActivityRequestInput.TypesEnum>?> types = default;
 
@@ -446,6 +463,9 @@ namespace BeamPlayerClient.Model
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
+                        case "continuation":
+                            continuation = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         case "limit":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 limit = new Option<decimal?>(utf8JsonReader.GetDecimal());
@@ -466,7 +486,7 @@ namespace BeamPlayerClient.Model
             if (limit.IsSet && limit.Value == null)
                 throw new ArgumentNullException(nameof(limit), "Property is not nullable for class PlayerCommonUserActivityRequestInput.");
 
-            return new PlayerCommonUserActivityRequestInput(chainId, limit, types);
+            return new PlayerCommonUserActivityRequestInput(chainId, continuation, limit, types);
         }
 
         /// <summary>
@@ -495,6 +515,12 @@ namespace BeamPlayerClient.Model
         {
             if (playerCommonUserActivityRequestInput.ChainIdOption.IsSet)
                 writer.WriteNumber("chainId", playerCommonUserActivityRequestInput.ChainIdOption.Value!.Value);
+
+            if (playerCommonUserActivityRequestInput.ContinuationOption.IsSet)
+                if (playerCommonUserActivityRequestInput.ContinuationOption.Value != null)
+                    writer.WriteString("continuation", playerCommonUserActivityRequestInput.Continuation);
+                else
+                    writer.WriteNull("continuation");
 
             if (playerCommonUserActivityRequestInput.LimitOption.IsSet)
                 writer.WriteNumber("limit", playerCommonUserActivityRequestInput.LimitOption.Value!.Value);

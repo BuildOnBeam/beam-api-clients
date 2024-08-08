@@ -9,4 +9,5 @@ export type CommonContractActivityRequestInput = {
     'ask' | 'ask_cancel' | 'bid' | 'bid_cancel' | 'sale' | 'mint' | 'transfer'
   > | null;
   chainId?: number;
+  continuation?: string | null;
 };

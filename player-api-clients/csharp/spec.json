@@ -5585,6 +5585,11 @@
           "chainId": {
             "default": 13337,
             "type": "number"
+          },
+          "continuation": {
+            "default": null,
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -5708,6 +5713,11 @@
           "chainId": {
             "default": 13337,
             "type": "number"
+          },
+          "continuation": {
+            "default": null,
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -5739,6 +5749,11 @@
           "chainId": {
             "default": 13337,
             "type": "number"
+          },
+          "continuation": {
+            "default": null,
+            "type": "string",
+            "nullable": true
           }
         }
       }
