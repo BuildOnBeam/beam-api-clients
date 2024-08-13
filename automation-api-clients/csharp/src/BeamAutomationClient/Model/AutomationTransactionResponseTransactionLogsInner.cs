@@ -27,12 +27,12 @@ using BeamAutomationClient.Client;
 namespace BeamAutomationClient.Model
 {
     /// <summary>
-    /// AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner
+    /// AutomationTransactionResponseTransactionLogsInner
     /// </summary>
-    public partial class AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner : IValidatableObject
+    public partial class AutomationTransactionResponseTransactionLogsInner : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner" /> class.
+        /// Initializes a new instance of the <see cref="AutomationTransactionResponseTransactionLogsInner" /> class.
         /// </summary>
         /// <param name="address">address</param>
         /// <param name="blockHash">blockHash</param>
@@ -45,7 +45,7 @@ namespace BeamAutomationClient.Model
         /// <param name="transactionIndex">transactionIndex</param>
         /// <param name="orphaned">orphaned</param>
         [JsonConstructor]
-        public AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner(string address, string blockHash, decimal blockNumber, string data, decimal logIndex, bool removed, List<string> topics, string transactionHash, decimal transactionIndex, Option<bool?> orphaned = default)
+        public AutomationTransactionResponseTransactionLogsInner(string address, string blockHash, decimal blockNumber, string data, decimal logIndex, bool removed, List<string> topics, string transactionHash, decimal transactionIndex, Option<bool?> orphaned = default)
         {
             Address = address;
             BlockHash = blockHash;
@@ -136,7 +136,7 @@ namespace BeamAutomationClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner {\n");
+            sb.Append("class AutomationTransactionResponseTransactionLogsInner {\n");
             sb.Append("  Address: ").Append(Address).Append("\n");
             sb.Append("  BlockHash: ").Append(BlockHash).Append("\n");
             sb.Append("  BlockNumber: ").Append(BlockNumber).Append("\n");
@@ -163,19 +163,19 @@ namespace BeamAutomationClient.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner" />
+    /// A Json converter for type <see cref="AutomationTransactionResponseTransactionLogsInner" />
     /// </summary>
-    public class AutomationGetTransactionsResponseV2DataInnerTransactionLogsInnerJsonConverter : JsonConverter<AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner>
+    public class AutomationTransactionResponseTransactionLogsInnerJsonConverter : JsonConverter<AutomationTransactionResponseTransactionLogsInner>
     {
         /// <summary>
-        /// Deserializes json to <see cref="AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner" />
+        /// Deserializes json to <see cref="AutomationTransactionResponseTransactionLogsInner" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override AutomationTransactionResponseTransactionLogsInner Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -253,122 +253,122 @@ namespace BeamAutomationClient.Model
             }
 
             if (!address.IsSet)
-                throw new ArgumentException("Property is required for class AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner.", nameof(address));
+                throw new ArgumentException("Property is required for class AutomationTransactionResponseTransactionLogsInner.", nameof(address));
 
             if (!blockHash.IsSet)
-                throw new ArgumentException("Property is required for class AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner.", nameof(blockHash));
+                throw new ArgumentException("Property is required for class AutomationTransactionResponseTransactionLogsInner.", nameof(blockHash));
 
             if (!blockNumber.IsSet)
-                throw new ArgumentException("Property is required for class AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner.", nameof(blockNumber));
+                throw new ArgumentException("Property is required for class AutomationTransactionResponseTransactionLogsInner.", nameof(blockNumber));
 
             if (!data.IsSet)
-                throw new ArgumentException("Property is required for class AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner.", nameof(data));
+                throw new ArgumentException("Property is required for class AutomationTransactionResponseTransactionLogsInner.", nameof(data));
 
             if (!logIndex.IsSet)
-                throw new ArgumentException("Property is required for class AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner.", nameof(logIndex));
+                throw new ArgumentException("Property is required for class AutomationTransactionResponseTransactionLogsInner.", nameof(logIndex));
 
             if (!removed.IsSet)
-                throw new ArgumentException("Property is required for class AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner.", nameof(removed));
+                throw new ArgumentException("Property is required for class AutomationTransactionResponseTransactionLogsInner.", nameof(removed));
 
             if (!topics.IsSet)
-                throw new ArgumentException("Property is required for class AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner.", nameof(topics));
+                throw new ArgumentException("Property is required for class AutomationTransactionResponseTransactionLogsInner.", nameof(topics));
 
             if (!transactionHash.IsSet)
-                throw new ArgumentException("Property is required for class AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner.", nameof(transactionHash));
+                throw new ArgumentException("Property is required for class AutomationTransactionResponseTransactionLogsInner.", nameof(transactionHash));
 
             if (!transactionIndex.IsSet)
-                throw new ArgumentException("Property is required for class AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner.", nameof(transactionIndex));
+                throw new ArgumentException("Property is required for class AutomationTransactionResponseTransactionLogsInner.", nameof(transactionIndex));
 
             if (address.IsSet && address.Value == null)
-                throw new ArgumentNullException(nameof(address), "Property is not nullable for class AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner.");
+                throw new ArgumentNullException(nameof(address), "Property is not nullable for class AutomationTransactionResponseTransactionLogsInner.");
 
             if (blockHash.IsSet && blockHash.Value == null)
-                throw new ArgumentNullException(nameof(blockHash), "Property is not nullable for class AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner.");
+                throw new ArgumentNullException(nameof(blockHash), "Property is not nullable for class AutomationTransactionResponseTransactionLogsInner.");
 
             if (blockNumber.IsSet && blockNumber.Value == null)
-                throw new ArgumentNullException(nameof(blockNumber), "Property is not nullable for class AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner.");
+                throw new ArgumentNullException(nameof(blockNumber), "Property is not nullable for class AutomationTransactionResponseTransactionLogsInner.");
 
             if (data.IsSet && data.Value == null)
-                throw new ArgumentNullException(nameof(data), "Property is not nullable for class AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner.");
+                throw new ArgumentNullException(nameof(data), "Property is not nullable for class AutomationTransactionResponseTransactionLogsInner.");
 
             if (logIndex.IsSet && logIndex.Value == null)
-                throw new ArgumentNullException(nameof(logIndex), "Property is not nullable for class AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner.");
+                throw new ArgumentNullException(nameof(logIndex), "Property is not nullable for class AutomationTransactionResponseTransactionLogsInner.");
 
             if (removed.IsSet && removed.Value == null)
-                throw new ArgumentNullException(nameof(removed), "Property is not nullable for class AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner.");
+                throw new ArgumentNullException(nameof(removed), "Property is not nullable for class AutomationTransactionResponseTransactionLogsInner.");
 
             if (topics.IsSet && topics.Value == null)
-                throw new ArgumentNullException(nameof(topics), "Property is not nullable for class AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner.");
+                throw new ArgumentNullException(nameof(topics), "Property is not nullable for class AutomationTransactionResponseTransactionLogsInner.");
 
             if (transactionHash.IsSet && transactionHash.Value == null)
-                throw new ArgumentNullException(nameof(transactionHash), "Property is not nullable for class AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner.");
+                throw new ArgumentNullException(nameof(transactionHash), "Property is not nullable for class AutomationTransactionResponseTransactionLogsInner.");
 
             if (transactionIndex.IsSet && transactionIndex.Value == null)
-                throw new ArgumentNullException(nameof(transactionIndex), "Property is not nullable for class AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner.");
+                throw new ArgumentNullException(nameof(transactionIndex), "Property is not nullable for class AutomationTransactionResponseTransactionLogsInner.");
 
-            return new AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner(address.Value!, blockHash.Value!, blockNumber.Value!.Value!, data.Value!, logIndex.Value!.Value!, removed.Value!.Value!, topics.Value!, transactionHash.Value!, transactionIndex.Value!.Value!, orphaned);
+            return new AutomationTransactionResponseTransactionLogsInner(address.Value!, blockHash.Value!, blockNumber.Value!.Value!, data.Value!, logIndex.Value!.Value!, removed.Value!.Value!, topics.Value!, transactionHash.Value!, transactionIndex.Value!.Value!, orphaned);
         }
 
         /// <summary>
-        /// Serializes a <see cref="AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner" />
+        /// Serializes a <see cref="AutomationTransactionResponseTransactionLogsInner" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="automationGetTransactionsResponseV2DataInnerTransactionLogsInner"></param>
+        /// <param name="automationTransactionResponseTransactionLogsInner"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner automationGetTransactionsResponseV2DataInnerTransactionLogsInner, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, AutomationTransactionResponseTransactionLogsInner automationTransactionResponseTransactionLogsInner, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(ref writer, automationGetTransactionsResponseV2DataInnerTransactionLogsInner, jsonSerializerOptions);
+            WriteProperties(ref writer, automationTransactionResponseTransactionLogsInner, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner" />
+        /// Serializes the properties of <see cref="AutomationTransactionResponseTransactionLogsInner" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="automationGetTransactionsResponseV2DataInnerTransactionLogsInner"></param>
+        /// <param name="automationTransactionResponseTransactionLogsInner"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(ref Utf8JsonWriter writer, AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner automationGetTransactionsResponseV2DataInnerTransactionLogsInner, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(ref Utf8JsonWriter writer, AutomationTransactionResponseTransactionLogsInner automationTransactionResponseTransactionLogsInner, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (automationGetTransactionsResponseV2DataInnerTransactionLogsInner.Address == null)
-                throw new ArgumentNullException(nameof(automationGetTransactionsResponseV2DataInnerTransactionLogsInner.Address), "Property is required for class AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner.");
+            if (automationTransactionResponseTransactionLogsInner.Address == null)
+                throw new ArgumentNullException(nameof(automationTransactionResponseTransactionLogsInner.Address), "Property is required for class AutomationTransactionResponseTransactionLogsInner.");
 
-            if (automationGetTransactionsResponseV2DataInnerTransactionLogsInner.BlockHash == null)
-                throw new ArgumentNullException(nameof(automationGetTransactionsResponseV2DataInnerTransactionLogsInner.BlockHash), "Property is required for class AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner.");
+            if (automationTransactionResponseTransactionLogsInner.BlockHash == null)
+                throw new ArgumentNullException(nameof(automationTransactionResponseTransactionLogsInner.BlockHash), "Property is required for class AutomationTransactionResponseTransactionLogsInner.");
 
-            if (automationGetTransactionsResponseV2DataInnerTransactionLogsInner.Data == null)
-                throw new ArgumentNullException(nameof(automationGetTransactionsResponseV2DataInnerTransactionLogsInner.Data), "Property is required for class AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner.");
+            if (automationTransactionResponseTransactionLogsInner.Data == null)
+                throw new ArgumentNullException(nameof(automationTransactionResponseTransactionLogsInner.Data), "Property is required for class AutomationTransactionResponseTransactionLogsInner.");
 
-            if (automationGetTransactionsResponseV2DataInnerTransactionLogsInner.Topics == null)
-                throw new ArgumentNullException(nameof(automationGetTransactionsResponseV2DataInnerTransactionLogsInner.Topics), "Property is required for class AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner.");
+            if (automationTransactionResponseTransactionLogsInner.Topics == null)
+                throw new ArgumentNullException(nameof(automationTransactionResponseTransactionLogsInner.Topics), "Property is required for class AutomationTransactionResponseTransactionLogsInner.");
 
-            if (automationGetTransactionsResponseV2DataInnerTransactionLogsInner.TransactionHash == null)
-                throw new ArgumentNullException(nameof(automationGetTransactionsResponseV2DataInnerTransactionLogsInner.TransactionHash), "Property is required for class AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner.");
+            if (automationTransactionResponseTransactionLogsInner.TransactionHash == null)
+                throw new ArgumentNullException(nameof(automationTransactionResponseTransactionLogsInner.TransactionHash), "Property is required for class AutomationTransactionResponseTransactionLogsInner.");
 
-            writer.WriteString("address", automationGetTransactionsResponseV2DataInnerTransactionLogsInner.Address);
+            writer.WriteString("address", automationTransactionResponseTransactionLogsInner.Address);
 
-            writer.WriteString("blockHash", automationGetTransactionsResponseV2DataInnerTransactionLogsInner.BlockHash);
+            writer.WriteString("blockHash", automationTransactionResponseTransactionLogsInner.BlockHash);
 
-            writer.WriteNumber("blockNumber", automationGetTransactionsResponseV2DataInnerTransactionLogsInner.BlockNumber);
+            writer.WriteNumber("blockNumber", automationTransactionResponseTransactionLogsInner.BlockNumber);
 
-            writer.WriteString("data", automationGetTransactionsResponseV2DataInnerTransactionLogsInner.Data);
+            writer.WriteString("data", automationTransactionResponseTransactionLogsInner.Data);
 
-            writer.WriteNumber("logIndex", automationGetTransactionsResponseV2DataInnerTransactionLogsInner.LogIndex);
+            writer.WriteNumber("logIndex", automationTransactionResponseTransactionLogsInner.LogIndex);
 
-            writer.WriteBoolean("removed", automationGetTransactionsResponseV2DataInnerTransactionLogsInner.Removed);
+            writer.WriteBoolean("removed", automationTransactionResponseTransactionLogsInner.Removed);
 
             writer.WritePropertyName("topics");
-            JsonSerializer.Serialize(writer, automationGetTransactionsResponseV2DataInnerTransactionLogsInner.Topics, jsonSerializerOptions);
-            writer.WriteString("transactionHash", automationGetTransactionsResponseV2DataInnerTransactionLogsInner.TransactionHash);
+            JsonSerializer.Serialize(writer, automationTransactionResponseTransactionLogsInner.Topics, jsonSerializerOptions);
+            writer.WriteString("transactionHash", automationTransactionResponseTransactionLogsInner.TransactionHash);
 
-            writer.WriteNumber("transactionIndex", automationGetTransactionsResponseV2DataInnerTransactionLogsInner.TransactionIndex);
+            writer.WriteNumber("transactionIndex", automationTransactionResponseTransactionLogsInner.TransactionIndex);
 
-            if (automationGetTransactionsResponseV2DataInnerTransactionLogsInner.OrphanedOption.IsSet)
-                if (automationGetTransactionsResponseV2DataInnerTransactionLogsInner.OrphanedOption.Value != null)
-                    writer.WriteBoolean("orphaned", automationGetTransactionsResponseV2DataInnerTransactionLogsInner.OrphanedOption.Value!.Value);
+            if (automationTransactionResponseTransactionLogsInner.OrphanedOption.IsSet)
+                if (automationTransactionResponseTransactionLogsInner.OrphanedOption.Value != null)
+                    writer.WriteBoolean("orphaned", automationTransactionResponseTransactionLogsInner.OrphanedOption.Value!.Value);
                 else
                     writer.WriteNull("orphaned");
         }

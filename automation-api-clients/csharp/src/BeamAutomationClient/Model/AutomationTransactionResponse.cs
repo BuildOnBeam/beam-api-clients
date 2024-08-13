@@ -27,25 +27,41 @@ using BeamAutomationClient.Client;
 namespace BeamAutomationClient.Model
 {
     /// <summary>
-    /// AutomationTransferTokenResponseV2
+    /// AutomationTransactionResponse
     /// </summary>
-    public partial class AutomationTransferTokenResponseV2 : IValidatableObject
+    public partial class AutomationTransactionResponse : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AutomationTransferTokenResponseV2" /> class.
+        /// Initializes a new instance of the <see cref="AutomationTransactionResponse" /> class.
         /// </summary>
-        /// <param name="status">status</param>
-        /// <param name="type">type</param>
+        /// <param name="chainId">chainId</param>
+        /// <param name="createdAt">createdAt</param>
         /// <param name="explorerUrl">explorerUrl</param>
-        /// <param name="payloadToSign">payloadToSign</param>
+        /// <param name="id">id</param>
+        /// <param name="intent">intent</param>
+        /// <param name="policy">policy</param>
+        /// <param name="profile">profile</param>
+        /// <param name="status">status</param>
+        /// <param name="success">success</param>
+        /// <param name="type">type</param>
+        /// <param name="updatedAt">updatedAt</param>
+        /// <param name="transaction">transaction</param>
         /// <param name="transactionHash">transactionHash</param>
         [JsonConstructor]
-        public AutomationTransferTokenResponseV2(StatusEnum status, TypeEnum type, Option<string?> explorerUrl = default, Option<string?> payloadToSign = default, Option<string?> transactionHash = default)
+        public AutomationTransactionResponse(decimal chainId, DateTime createdAt, string explorerUrl, string id, AutomationTransactionResponseIntent intent, AutomationTransactionResponsePolicy policy, AutomationTransactionResponseProfile profile, StatusEnum status, bool success, TypeEnum type, DateTime updatedAt, Option<AutomationTransactionResponseTransaction?> transaction = default, Option<string?> transactionHash = default)
         {
+            ChainId = chainId;
+            CreatedAt = createdAt;
+            ExplorerUrl = explorerUrl;
+            Id = id;
+            Intent = intent;
+            Policy = policy;
+            Profile = profile;
             Status = status;
+            Success = success;
             Type = type;
-            ExplorerUrlOption = explorerUrl;
-            PayloadToSignOption = payloadToSign;
+            UpdatedAt = updatedAt;
+            TransactionOption = transaction;
             TransactionHashOption = transactionHash;
             OnCreated();
         }
@@ -387,30 +403,71 @@ namespace BeamAutomationClient.Model
         public TypeEnum Type { get; set; }
 
         /// <summary>
-        /// Used to track the state of ExplorerUrl
+        /// Gets or Sets ChainId
         /// </summary>
-        [JsonIgnore]
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> ExplorerUrlOption { get; private set; }
+        [JsonPropertyName("chainId")]
+        public decimal ChainId { get; set; }
+
+        /// <summary>
+        /// Gets or Sets CreatedAt
+        /// </summary>
+        [JsonPropertyName("createdAt")]
+        public DateTime CreatedAt { get; set; }
 
         /// <summary>
         /// Gets or Sets ExplorerUrl
         /// </summary>
         [JsonPropertyName("explorerUrl")]
-        public string? ExplorerUrl { get { return this. ExplorerUrlOption; } set { this.ExplorerUrlOption = new(value); } }
+        public string ExplorerUrl { get; set; }
 
         /// <summary>
-        /// Used to track the state of PayloadToSign
+        /// Gets or Sets Id
+        /// </summary>
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Intent
+        /// </summary>
+        [JsonPropertyName("intent")]
+        public AutomationTransactionResponseIntent Intent { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Policy
+        /// </summary>
+        [JsonPropertyName("policy")]
+        public AutomationTransactionResponsePolicy Policy { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Profile
+        /// </summary>
+        [JsonPropertyName("profile")]
+        public AutomationTransactionResponseProfile Profile { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Success
+        /// </summary>
+        [JsonPropertyName("success")]
+        public bool Success { get; set; }
+
+        /// <summary>
+        /// Gets or Sets UpdatedAt
+        /// </summary>
+        [JsonPropertyName("updatedAt")]
+        public DateTime UpdatedAt { get; set; }
+
+        /// <summary>
+        /// Used to track the state of Transaction
         /// </summary>
         [JsonIgnore]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> PayloadToSignOption { get; private set; }
+        public Option<AutomationTransactionResponseTransaction?> TransactionOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets PayloadToSign
+        /// Gets or Sets Transaction
         /// </summary>
-        [JsonPropertyName("payloadToSign")]
-        public string? PayloadToSign { get { return this. PayloadToSignOption; } set { this.PayloadToSignOption = new(value); } }
+        [JsonPropertyName("transaction")]
+        public AutomationTransactionResponseTransaction? Transaction { get { return this. TransactionOption; } set { this.TransactionOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of TransactionHash
@@ -432,11 +489,19 @@ namespace BeamAutomationClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class AutomationTransferTokenResponseV2 {\n");
-            sb.Append("  Status: ").Append(Status).Append("\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("class AutomationTransactionResponse {\n");
+            sb.Append("  ChainId: ").Append(ChainId).Append("\n");
+            sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  ExplorerUrl: ").Append(ExplorerUrl).Append("\n");
-            sb.Append("  PayloadToSign: ").Append(PayloadToSign).Append("\n");
+            sb.Append("  Id: ").Append(Id).Append("\n");
+            sb.Append("  Intent: ").Append(Intent).Append("\n");
+            sb.Append("  Policy: ").Append(Policy).Append("\n");
+            sb.Append("  Profile: ").Append(Profile).Append("\n");
+            sb.Append("  Status: ").Append(Status).Append("\n");
+            sb.Append("  Success: ").Append(Success).Append("\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
+            sb.Append("  Transaction: ").Append(Transaction).Append("\n");
             sb.Append("  TransactionHash: ").Append(TransactionHash).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -454,19 +519,29 @@ namespace BeamAutomationClient.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="AutomationTransferTokenResponseV2" />
+    /// A Json converter for type <see cref="AutomationTransactionResponse" />
     /// </summary>
-    public class AutomationTransferTokenResponseV2JsonConverter : JsonConverter<AutomationTransferTokenResponseV2>
+    public class AutomationTransactionResponseJsonConverter : JsonConverter<AutomationTransactionResponse>
     {
         /// <summary>
-        /// Deserializes json to <see cref="AutomationTransferTokenResponseV2" />
+        /// The format to use to serialize CreatedAt
+        /// </summary>
+        public static string CreatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
+        /// The format to use to serialize UpdatedAt
+        /// </summary>
+        public static string UpdatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
+        /// Deserializes json to <see cref="AutomationTransactionResponse" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override AutomationTransferTokenResponseV2 Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override AutomationTransactionResponse Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -475,10 +550,18 @@ namespace BeamAutomationClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<AutomationTransferTokenResponseV2.StatusEnum?> status = default;
-            Option<AutomationTransferTokenResponseV2.TypeEnum?> type = default;
+            Option<decimal?> chainId = default;
+            Option<DateTime?> createdAt = default;
             Option<string?> explorerUrl = default;
-            Option<string?> payloadToSign = default;
+            Option<string?> id = default;
+            Option<AutomationTransactionResponseIntent?> intent = default;
+            Option<AutomationTransactionResponsePolicy?> policy = default;
+            Option<AutomationTransactionResponseProfile?> profile = default;
+            Option<AutomationTransactionResponse.StatusEnum?> status = default;
+            Option<bool?> success = default;
+            Option<AutomationTransactionResponse.TypeEnum?> type = default;
+            Option<DateTime?> updatedAt = default;
+            Option<AutomationTransactionResponseTransaction?> transaction = default;
             Option<string?> transactionHash = default;
 
             while (utf8JsonReader.Read())
@@ -496,21 +579,53 @@ namespace BeamAutomationClient.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "status":
-                            string? statusRawValue = utf8JsonReader.GetString();
-                            if (statusRawValue != null)
-                                status = new Option<AutomationTransferTokenResponseV2.StatusEnum?>(AutomationTransferTokenResponseV2.StatusEnumFromStringOrDefault(statusRawValue));
+                        case "chainId":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
-                        case "type":
-                            string? typeRawValue = utf8JsonReader.GetString();
-                            if (typeRawValue != null)
-                                type = new Option<AutomationTransferTokenResponseV2.TypeEnum?>(AutomationTransferTokenResponseV2.TypeEnumFromStringOrDefault(typeRawValue));
+                        case "createdAt":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                createdAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "explorerUrl":
                             explorerUrl = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "payloadToSign":
-                            payloadToSign = new Option<string?>(utf8JsonReader.GetString()!);
+                        case "id":
+                            id = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
+                        case "intent":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                intent = new Option<AutomationTransactionResponseIntent?>(JsonSerializer.Deserialize<AutomationTransactionResponseIntent>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
+                        case "policy":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                policy = new Option<AutomationTransactionResponsePolicy?>(JsonSerializer.Deserialize<AutomationTransactionResponsePolicy>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
+                        case "profile":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                profile = new Option<AutomationTransactionResponseProfile?>(JsonSerializer.Deserialize<AutomationTransactionResponseProfile>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
+                        case "status":
+                            string? statusRawValue = utf8JsonReader.GetString();
+                            if (statusRawValue != null)
+                                status = new Option<AutomationTransactionResponse.StatusEnum?>(AutomationTransactionResponse.StatusEnumFromStringOrDefault(statusRawValue));
+                            break;
+                        case "success":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                success = new Option<bool?>(utf8JsonReader.GetBoolean());
+                            break;
+                        case "type":
+                            string? typeRawValue = utf8JsonReader.GetString();
+                            if (typeRawValue != null)
+                                type = new Option<AutomationTransactionResponse.TypeEnum?>(AutomationTransactionResponse.TypeEnumFromStringOrDefault(typeRawValue));
+                            break;
+                        case "updatedAt":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                updatedAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "transaction":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                transaction = new Option<AutomationTransactionResponseTransaction?>(JsonSerializer.Deserialize<AutomationTransactionResponseTransaction>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "transactionHash":
                             transactionHash = new Option<string?>(utf8JsonReader.GetString()!);
@@ -521,75 +636,152 @@ namespace BeamAutomationClient.Model
                 }
             }
 
+            if (!chainId.IsSet)
+                throw new ArgumentException("Property is required for class AutomationTransactionResponse.", nameof(chainId));
+
+            if (!createdAt.IsSet)
+                throw new ArgumentException("Property is required for class AutomationTransactionResponse.", nameof(createdAt));
+
+            if (!explorerUrl.IsSet)
+                throw new ArgumentException("Property is required for class AutomationTransactionResponse.", nameof(explorerUrl));
+
+            if (!id.IsSet)
+                throw new ArgumentException("Property is required for class AutomationTransactionResponse.", nameof(id));
+
+            if (!intent.IsSet)
+                throw new ArgumentException("Property is required for class AutomationTransactionResponse.", nameof(intent));
+
+            if (!policy.IsSet)
+                throw new ArgumentException("Property is required for class AutomationTransactionResponse.", nameof(policy));
+
+            if (!profile.IsSet)
+                throw new ArgumentException("Property is required for class AutomationTransactionResponse.", nameof(profile));
+
             if (!status.IsSet)
-                throw new ArgumentException("Property is required for class AutomationTransferTokenResponseV2.", nameof(status));
+                throw new ArgumentException("Property is required for class AutomationTransactionResponse.", nameof(status));
+
+            if (!success.IsSet)
+                throw new ArgumentException("Property is required for class AutomationTransactionResponse.", nameof(success));
 
             if (!type.IsSet)
-                throw new ArgumentException("Property is required for class AutomationTransferTokenResponseV2.", nameof(type));
+                throw new ArgumentException("Property is required for class AutomationTransactionResponse.", nameof(type));
 
-            if (status.IsSet && status.Value == null)
-                throw new ArgumentNullException(nameof(status), "Property is not nullable for class AutomationTransferTokenResponseV2.");
+            if (!updatedAt.IsSet)
+                throw new ArgumentException("Property is required for class AutomationTransactionResponse.", nameof(updatedAt));
 
-            if (type.IsSet && type.Value == null)
-                throw new ArgumentNullException(nameof(type), "Property is not nullable for class AutomationTransferTokenResponseV2.");
+            if (chainId.IsSet && chainId.Value == null)
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class AutomationTransactionResponse.");
+
+            if (createdAt.IsSet && createdAt.Value == null)
+                throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class AutomationTransactionResponse.");
 
             if (explorerUrl.IsSet && explorerUrl.Value == null)
-                throw new ArgumentNullException(nameof(explorerUrl), "Property is not nullable for class AutomationTransferTokenResponseV2.");
+                throw new ArgumentNullException(nameof(explorerUrl), "Property is not nullable for class AutomationTransactionResponse.");
 
-            if (payloadToSign.IsSet && payloadToSign.Value == null)
-                throw new ArgumentNullException(nameof(payloadToSign), "Property is not nullable for class AutomationTransferTokenResponseV2.");
+            if (id.IsSet && id.Value == null)
+                throw new ArgumentNullException(nameof(id), "Property is not nullable for class AutomationTransactionResponse.");
+
+            if (intent.IsSet && intent.Value == null)
+                throw new ArgumentNullException(nameof(intent), "Property is not nullable for class AutomationTransactionResponse.");
+
+            if (policy.IsSet && policy.Value == null)
+                throw new ArgumentNullException(nameof(policy), "Property is not nullable for class AutomationTransactionResponse.");
+
+            if (profile.IsSet && profile.Value == null)
+                throw new ArgumentNullException(nameof(profile), "Property is not nullable for class AutomationTransactionResponse.");
+
+            if (status.IsSet && status.Value == null)
+                throw new ArgumentNullException(nameof(status), "Property is not nullable for class AutomationTransactionResponse.");
+
+            if (success.IsSet && success.Value == null)
+                throw new ArgumentNullException(nameof(success), "Property is not nullable for class AutomationTransactionResponse.");
+
+            if (type.IsSet && type.Value == null)
+                throw new ArgumentNullException(nameof(type), "Property is not nullable for class AutomationTransactionResponse.");
+
+            if (updatedAt.IsSet && updatedAt.Value == null)
+                throw new ArgumentNullException(nameof(updatedAt), "Property is not nullable for class AutomationTransactionResponse.");
 
             if (transactionHash.IsSet && transactionHash.Value == null)
-                throw new ArgumentNullException(nameof(transactionHash), "Property is not nullable for class AutomationTransferTokenResponseV2.");
+                throw new ArgumentNullException(nameof(transactionHash), "Property is not nullable for class AutomationTransactionResponse.");
 
-            return new AutomationTransferTokenResponseV2(status.Value!.Value!, type.Value!.Value!, explorerUrl, payloadToSign, transactionHash);
+            return new AutomationTransactionResponse(chainId.Value!.Value!, createdAt.Value!.Value!, explorerUrl.Value!, id.Value!, intent.Value!, policy.Value!, profile.Value!, status.Value!.Value!, success.Value!.Value!, type.Value!.Value!, updatedAt.Value!.Value!, transaction, transactionHash);
         }
 
         /// <summary>
-        /// Serializes a <see cref="AutomationTransferTokenResponseV2" />
+        /// Serializes a <see cref="AutomationTransactionResponse" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="automationTransferTokenResponseV2"></param>
+        /// <param name="automationTransactionResponse"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, AutomationTransferTokenResponseV2 automationTransferTokenResponseV2, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, AutomationTransactionResponse automationTransactionResponse, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(ref writer, automationTransferTokenResponseV2, jsonSerializerOptions);
+            WriteProperties(ref writer, automationTransactionResponse, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="AutomationTransferTokenResponseV2" />
+        /// Serializes the properties of <see cref="AutomationTransactionResponse" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="automationTransferTokenResponseV2"></param>
+        /// <param name="automationTransactionResponse"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(ref Utf8JsonWriter writer, AutomationTransferTokenResponseV2 automationTransferTokenResponseV2, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(ref Utf8JsonWriter writer, AutomationTransactionResponse automationTransactionResponse, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (automationTransferTokenResponseV2.ExplorerUrlOption.IsSet && automationTransferTokenResponseV2.ExplorerUrl == null)
-                throw new ArgumentNullException(nameof(automationTransferTokenResponseV2.ExplorerUrl), "Property is required for class AutomationTransferTokenResponseV2.");
+            if (automationTransactionResponse.ExplorerUrl == null)
+                throw new ArgumentNullException(nameof(automationTransactionResponse.ExplorerUrl), "Property is required for class AutomationTransactionResponse.");
 
-            if (automationTransferTokenResponseV2.PayloadToSignOption.IsSet && automationTransferTokenResponseV2.PayloadToSign == null)
-                throw new ArgumentNullException(nameof(automationTransferTokenResponseV2.PayloadToSign), "Property is required for class AutomationTransferTokenResponseV2.");
+            if (automationTransactionResponse.Id == null)
+                throw new ArgumentNullException(nameof(automationTransactionResponse.Id), "Property is required for class AutomationTransactionResponse.");
 
-            if (automationTransferTokenResponseV2.TransactionHashOption.IsSet && automationTransferTokenResponseV2.TransactionHash == null)
-                throw new ArgumentNullException(nameof(automationTransferTokenResponseV2.TransactionHash), "Property is required for class AutomationTransferTokenResponseV2.");
+            if (automationTransactionResponse.Intent == null)
+                throw new ArgumentNullException(nameof(automationTransactionResponse.Intent), "Property is required for class AutomationTransactionResponse.");
 
-            var statusRawValue = AutomationTransferTokenResponseV2.StatusEnumToJsonValue(automationTransferTokenResponseV2.Status);
+            if (automationTransactionResponse.Policy == null)
+                throw new ArgumentNullException(nameof(automationTransactionResponse.Policy), "Property is required for class AutomationTransactionResponse.");
+
+            if (automationTransactionResponse.Profile == null)
+                throw new ArgumentNullException(nameof(automationTransactionResponse.Profile), "Property is required for class AutomationTransactionResponse.");
+
+            if (automationTransactionResponse.TransactionHashOption.IsSet && automationTransactionResponse.TransactionHash == null)
+                throw new ArgumentNullException(nameof(automationTransactionResponse.TransactionHash), "Property is required for class AutomationTransactionResponse.");
+
+            writer.WriteNumber("chainId", automationTransactionResponse.ChainId);
+
+            writer.WriteString("createdAt", automationTransactionResponse.CreatedAt.ToString(CreatedAtFormat));
+
+            writer.WriteString("explorerUrl", automationTransactionResponse.ExplorerUrl);
+
+            writer.WriteString("id", automationTransactionResponse.Id);
+
+            writer.WritePropertyName("intent");
+            JsonSerializer.Serialize(writer, automationTransactionResponse.Intent, jsonSerializerOptions);
+            writer.WritePropertyName("policy");
+            JsonSerializer.Serialize(writer, automationTransactionResponse.Policy, jsonSerializerOptions);
+            writer.WritePropertyName("profile");
+            JsonSerializer.Serialize(writer, automationTransactionResponse.Profile, jsonSerializerOptions);
+            var statusRawValue = AutomationTransactionResponse.StatusEnumToJsonValue(automationTransactionResponse.Status);
             writer.WriteString("status", statusRawValue);
-            var typeRawValue = AutomationTransferTokenResponseV2.TypeEnumToJsonValue(automationTransferTokenResponseV2.Type);
+            writer.WriteBoolean("success", automationTransactionResponse.Success);
+
+            var typeRawValue = AutomationTransactionResponse.TypeEnumToJsonValue(automationTransactionResponse.Type);
             writer.WriteString("type", typeRawValue);
-            if (automationTransferTokenResponseV2.ExplorerUrlOption.IsSet)
-                writer.WriteString("explorerUrl", automationTransferTokenResponseV2.ExplorerUrl);
+            writer.WriteString("updatedAt", automationTransactionResponse.UpdatedAt.ToString(UpdatedAtFormat));
 
-            if (automationTransferTokenResponseV2.PayloadToSignOption.IsSet)
-                writer.WriteString("payloadToSign", automationTransferTokenResponseV2.PayloadToSign);
-
-            if (automationTransferTokenResponseV2.TransactionHashOption.IsSet)
-                writer.WriteString("transactionHash", automationTransferTokenResponseV2.TransactionHash);
+            if (automationTransactionResponse.TransactionOption.IsSet)
+                if (automationTransactionResponse.TransactionOption.Value != null)
+                {
+                    writer.WritePropertyName("transaction");
+                    JsonSerializer.Serialize(writer, automationTransactionResponse.Transaction, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("transaction");
+            if (automationTransactionResponse.TransactionHashOption.IsSet)
+                writer.WriteString("transactionHash", automationTransactionResponse.TransactionHash);
         }
     }
 }

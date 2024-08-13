@@ -26,7 +26,9 @@
                       },
                       "additionalProperties": {
                         "type": "object",
-                        "required": ["status"],
+                        "required": [
+                          "status"
+                        ],
                         "properties": {
                           "status": {
                             "type": "string"
@@ -41,7 +43,9 @@
                       "example": {},
                       "additionalProperties": {
                         "type": "object",
-                        "required": ["status"],
+                        "required": [
+                          "status"
+                        ],
                         "properties": {
                           "status": {
                             "type": "string"
@@ -60,7 +64,9 @@
                       },
                       "additionalProperties": {
                         "type": "object",
-                        "required": ["status"],
+                        "required": [
+                          "status"
+                        ],
                         "properties": {
                           "status": {
                             "type": "string"
@@ -94,7 +100,9 @@
                       },
                       "additionalProperties": {
                         "type": "object",
-                        "required": ["status"],
+                        "required": [
+                          "status"
+                        ],
                         "properties": {
                           "status": {
                             "type": "string"
@@ -114,7 +122,9 @@
                       },
                       "additionalProperties": {
                         "type": "object",
-                        "required": ["status"],
+                        "required": [
+                          "status"
+                        ],
                         "properties": {
                           "status": {
                             "type": "string"
@@ -137,7 +147,9 @@
                       },
                       "additionalProperties": {
                         "type": "object",
-                        "required": ["status"],
+                        "required": [
+                          "status"
+                        ],
                         "properties": {
                           "status": {
                             "type": "string"
@@ -152,7 +164,9 @@
             }
           }
         },
-        "tags": ["Health"]
+        "tags": [
+          "Health"
+        ]
       }
     },
     "/v2/assets/profiles/{entityId}": {
@@ -191,7 +205,9 @@
             }
           }
         },
-        "tags": ["Assets V2"],
+        "tags": [
+          "Assets V2"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -233,7 +249,9 @@
             }
           }
         },
-        "tags": ["Assets V2"],
+        "tags": [
+          "Assets V2"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -275,7 +293,9 @@
             }
           }
         },
-        "tags": ["Assets V2"],
+        "tags": [
+          "Assets V2"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -313,13 +333,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AutomationTransferAssetResponseV2"
+                  "$ref": "#/components/schemas/AutomationTransactionResponse"
                 }
               }
             }
           }
         },
-        "tags": ["Assets V2"],
+        "tags": [
+          "Assets V2"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -357,13 +379,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AutomationTransferTokenResponseV2"
+                  "$ref": "#/components/schemas/AutomationTransactionResponse"
                 }
               }
             }
           }
         },
-        "tags": ["Assets V2"],
+        "tags": [
+          "Assets V2"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -401,13 +425,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AutomationTransferTokenResponseV2"
+                  "$ref": "#/components/schemas/AutomationTransactionResponse"
                 }
               }
             }
           }
         },
-        "tags": ["Assets V2"],
+        "tags": [
+          "Assets V2"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -451,7 +477,9 @@
             }
           }
         },
-        "tags": ["Assets V2"],
+        "tags": [
+          "Assets V2"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -518,7 +546,9 @@
             }
           }
         },
-        "tags": ["Assets V2"],
+        "tags": [
+          "Assets V2"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -551,7 +581,9 @@
             }
           }
         },
-        "tags": ["Chain"],
+        "tags": [
+          "Chain"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -595,7 +627,9 @@
             }
           }
         },
-        "tags": ["Chain"],
+        "tags": [
+          "Chain"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -653,7 +687,9 @@
             }
           }
         },
-        "tags": ["Exchange"],
+        "tags": [
+          "Exchange"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -711,7 +747,9 @@
             }
           }
         },
-        "tags": ["Exchange"],
+        "tags": [
+          "Exchange"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -749,13 +787,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AutomationConvertTokenResponse"
+                  "$ref": "#/components/schemas/AutomationTransactionResponse"
                 }
               }
             }
           }
         },
-        "tags": ["Exchange"],
+        "tags": [
+          "Exchange"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -793,13 +833,107 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AutomationConvertTokenResponse"
+                  "$ref": "#/components/schemas/AutomationTransactionResponse"
                 }
               }
             }
           }
         },
-        "tags": ["Exchange"],
+        "tags": [
+          "Exchange"
+        ],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v1/exchange/profiles/{entityId}/native/wrap": {
+      "post": {
+        "operationId": "wrapNative",
+        "summary": "Wrap an amount of native token to wrapped native token",
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationWrappingTokenInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationTransactionResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Exchange"
+        ],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v1/exchange/profiles/{entityId}/native/unwrap": {
+      "post": {
+        "operationId": "unwrapNative",
+        "summary": "Unwrap an amount of wrapped to native token",
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationUnwrappingTokenInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationTransactionResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Exchange"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -824,7 +958,9 @@
             }
           }
         },
-        "tags": ["Game"],
+        "tags": [
+          "Game"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -857,7 +993,9 @@
             }
           }
         },
-        "tags": ["Game"],
+        "tags": [
+          "Game"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -882,7 +1020,9 @@
             }
           }
         },
-        "tags": ["Game"],
+        "tags": [
+          "Game"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -917,7 +1057,9 @@
             }
           }
         },
-        "tags": ["Game"],
+        "tags": [
+          "Game"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -959,7 +1101,9 @@
             }
           }
         },
-        "tags": ["Game"],
+        "tags": [
+          "Game"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -994,7 +1138,9 @@
             }
           }
         },
-        "tags": ["Marketplace V2"],
+        "tags": [
+          "Marketplace V2"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -1038,7 +1184,9 @@
             }
           }
         },
-        "tags": ["Marketplace V2"],
+        "tags": [
+          "Marketplace V2"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -1082,7 +1230,9 @@
             }
           }
         },
-        "tags": ["Marketplace V2"],
+        "tags": [
+          "Marketplace V2"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -1128,13 +1278,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AutomationBuyAssetResponseV2"
+                  "$ref": "#/components/schemas/AutomationTransactionResponse"
                 }
               }
             }
           }
         },
-        "tags": ["Marketplace V2"],
+        "tags": [
+          "Marketplace V2"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -1186,13 +1338,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AutomationCancelAssetListingResponseV2"
+                  "$ref": "#/components/schemas/AutomationTransactionResponse"
                 }
               }
             }
           }
         },
-        "tags": ["Marketplace V2"],
+        "tags": [
+          "Marketplace V2"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -1236,7 +1390,9 @@
             }
           }
         },
-        "tags": ["Marketplace V2"],
+        "tags": [
+          "Marketplace V2"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -1284,7 +1440,9 @@
             }
           }
         },
-        "tags": ["Marketplace V2"],
+        "tags": [
+          "Marketplace V2"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -1350,7 +1508,9 @@
             }
           }
         },
-        "tags": ["Marketplace V2"],
+        "tags": [
+          "Marketplace V2"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -1396,13 +1556,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AutomationAcceptOfferResponseV2"
+                  "$ref": "#/components/schemas/AutomationTransactionResponse"
                 }
               }
             }
           }
         },
-        "tags": ["Marketplace V2"],
+        "tags": [
+          "Marketplace V2"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -1448,13 +1610,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AutomationCancelOfferResponseV2"
+                  "$ref": "#/components/schemas/AutomationTransactionResponse"
                 }
               }
             }
           }
         },
-        "tags": ["Marketplace V2"],
+        "tags": [
+          "Marketplace V2"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -1512,7 +1676,9 @@
             }
           }
         },
-        "tags": ["Marketplace V2"],
+        "tags": [
+          "Marketplace V2"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -1546,7 +1712,9 @@
             }
           }
         },
-        "tags": ["Marketplace V2"],
+        "tags": [
+          "Marketplace V2"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -1574,7 +1742,9 @@
             "description": ""
           }
         },
-        "tags": ["Marketplace V2"],
+        "tags": [
+          "Marketplace V2"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -1602,7 +1772,9 @@
             "description": ""
           }
         },
-        "tags": ["Marketplace V2"],
+        "tags": [
+          "Marketplace V2"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -1637,7 +1809,9 @@
             }
           }
         },
-        "tags": ["Policy"],
+        "tags": [
+          "Policy"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -1660,7 +1834,9 @@
             }
           }
         },
-        "tags": ["Policy"],
+        "tags": [
+          "Policy"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -1694,7 +1870,9 @@
             }
           }
         },
-        "tags": ["Policy"],
+        "tags": [
+          "Policy"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -1729,7 +1907,9 @@
             }
           }
         },
-        "tags": ["Profiles"],
+        "tags": [
+          "Profiles"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -1771,7 +1951,9 @@
             }
           }
         },
-        "tags": ["Profiles"],
+        "tags": [
+          "Profiles"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -1805,7 +1987,9 @@
             }
           }
         },
-        "tags": ["Profiles"],
+        "tags": [
+          "Profiles"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -1847,7 +2031,9 @@
             }
           }
         },
-        "tags": ["Profiles"],
+        "tags": [
+          "Profiles"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -1892,7 +2078,9 @@
             }
           }
         },
-        "tags": ["Profiles"],
+        "tags": [
+          "Profiles"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -1937,7 +2125,9 @@
             }
           }
         },
-        "tags": ["Profiles"],
+        "tags": [
+          "Profiles"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -1962,7 +2152,9 @@
             }
           }
         },
-        "tags": ["Reporting"],
+        "tags": [
+          "Reporting"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -1996,7 +2188,9 @@
             }
           }
         },
-        "tags": ["Reporting"],
+        "tags": [
+          "Reporting"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -2030,7 +2224,9 @@
             }
           }
         },
-        "tags": ["Reporting"],
+        "tags": [
+          "Reporting"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -2074,7 +2270,9 @@
             }
           }
         },
-        "tags": ["Transactions V2"],
+        "tags": [
+          "Transactions V2"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -2102,13 +2300,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AutomationGetTransactionResponseV2"
+                  "$ref": "#/components/schemas/AutomationTransactionResponse"
                 }
               }
             }
           }
         },
-        "tags": ["Transactions V2"],
+        "tags": [
+          "Transactions V2"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -2160,7 +2360,9 @@
             }
           }
         },
-        "tags": ["Transactions V2"],
+        "tags": [
+          "Transactions V2"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -2196,13 +2398,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AutomationCreateTransactionResponseV2"
+                  "$ref": "#/components/schemas/AutomationTransactionResponse"
                 }
               }
             }
           }
         },
-        "tags": ["Transactions V2"],
+        "tags": [
+          "Transactions V2"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -2230,13 +2434,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AutomationTradeTokensResponse"
+                  "$ref": "#/components/schemas/AutomationTransactionResponse"
                 }
               }
             }
           }
         },
-        "tags": ["Trading"],
+        "tags": [
+          "Trading"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -2247,7 +2453,9 @@
     "/v1/webhook": {
       "get": {
         "operationId": "getWebhooksForGame",
+        "x-sunset": "2024-10-01",
         "summary": "Get webhooks registered by your game",
+        "deprecated": true,
         "parameters": [],
         "responses": {
           "200": {
@@ -2261,7 +2469,9 @@
             }
           }
         },
-        "tags": ["Webhooks"],
+        "tags": [
+          "Webhooks"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -2270,7 +2480,9 @@
       },
       "post": {
         "operationId": "createWebhook",
+        "x-sunset": "2024-10-01",
         "summary": "Create webhook for your game",
+        "deprecated": true,
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -2294,7 +2506,9 @@
             }
           }
         },
-        "tags": ["Webhooks"],
+        "tags": [
+          "Webhooks"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -2305,7 +2519,9 @@
     "/v1/webhook/{webhookId}": {
       "delete": {
         "operationId": "deleteWebhook",
+        "x-sunset": "2024-10-01",
         "summary": "Delete webhook from your game",
+        "deprecated": true,
         "parameters": [
           {
             "name": "webhookId",
@@ -2321,7 +2537,9 @@
             "description": ""
           }
         },
-        "tags": ["Webhooks"],
+        "tags": [
+          "Webhooks"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -2365,7 +2583,9 @@
             }
           }
         },
-        "tags": ["Stats"],
+        "tags": [
+          "Stats"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -2417,7 +2637,9 @@
             }
           }
         },
-        "tags": ["Stats"],
+        "tags": [
+          "Stats"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -2444,7 +2666,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AutomationCommonActivityRequestInput"
+                "$ref": "#/components/schemas/AutomationCommonUserActivityRequestInput"
               }
             }
           }
@@ -2461,7 +2683,9 @@
             }
           }
         },
-        "tags": ["Activity"],
+        "tags": [
+          "Activity"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -2488,7 +2712,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AutomationCommonActivityRequestInput"
+                "$ref": "#/components/schemas/AutomationCommonContractActivityRequestInput"
               }
             }
           }
@@ -2505,7 +2729,9 @@
             }
           }
         },
-        "tags": ["Activity"],
+        "tags": [
+          "Activity"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -2540,7 +2766,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AutomationCommonActivityRequestInput"
+                "$ref": "#/components/schemas/AutomationCommonAssetActivityRequestInput"
               }
             }
           }
@@ -2557,7 +2783,9 @@
             }
           }
         },
-        "tags": ["Activity"],
+        "tags": [
+          "Activity"
+        ],
         "security": [
           {
             "beam-api-key": []
@@ -2642,12 +2870,18 @@
           "sortDirection": {
             "default": "asc",
             "type": "string",
-            "enum": ["asc", "desc"]
+            "enum": [
+              "asc",
+              "desc"
+            ]
           },
           "sortBy": {
             "default": "acquiredAt",
             "type": "string",
-            "enum": ["acquiredAt", "lastAppraisalValue"]
+            "enum": [
+              "acquiredAt",
+              "lastAppraisalValue"
+            ]
           },
           "contract": {
             "default": null,
@@ -2771,7 +3005,9 @@
             "nullable": true
           }
         },
-        "required": ["data"]
+        "required": [
+          "data"
+        ]
       },
       "AutomationGetProfileCurrenciesResponseV2": {
         "type": "object",
@@ -2814,7 +3050,9 @@
             }
           }
         },
-        "required": ["data"]
+        "required": [
+          "data"
+        ]
       },
       "AutomationGetProfileNativeCurrencyResponseV2": {
         "type": "object",
@@ -2841,10 +3079,18 @@
                 "type": "string"
               }
             },
-            "required": ["name", "symbol", "decimals", "chainId", "balance"]
+            "required": [
+              "name",
+              "symbol",
+              "decimals",
+              "chainId",
+              "balance"
+            ]
           }
         },
-        "required": ["nativeTokenBalance"]
+        "required": [
+          "nativeTokenBalance"
+        ]
       },
       "AutomationTransferAssetRequestInputV2": {
         "type": "object",
@@ -2864,7 +3110,8 @@
                   "type": "string"
                 },
                 "assetId": {
-                  "type": "string"
+                  "type": "string",
+                  "pattern": "^\\d+$"
                 },
                 "amountToTransfer": {
                   "default": 1,
@@ -2873,7 +3120,10 @@
                   "minimum": 1
                 }
               },
-              "required": ["assetAddress", "assetId"]
+              "required": [
+                "assetAddress",
+                "assetId"
+              ]
             },
             "minItems": 1
           },
@@ -2896,30 +3146,214 @@
             "type": "number"
           }
         },
-        "required": ["assets"]
+        "required": [
+          "assets"
+        ]
       },
-      "AutomationTransferAssetResponseV2": {
+      "AutomationTransactionResponse": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "chainId": {
+            "type": "number"
+          },
+          "intent": {
+            "type": "object",
+            "properties": {
+              "interactions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "to": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    },
+                    "contract": {
+                      "type": "string"
+                    },
+                    "functionName": {
+                      "type": "string"
+                    },
+                    "functionArgs": {
+                      "type": "array",
+                      "items": {}
+                    }
+                  }
+                },
+                "nullable": true
+              },
+              "hash": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          },
+          "transaction": {
+            "type": "object",
+            "properties": {
+              "createdAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "blockNumber": {
+                "type": "number"
+              },
+              "hash": {
+                "type": "string"
+              },
+              "gasUsed": {
+                "type": "string"
+              },
+              "gasFee": {
+                "type": "string"
+              },
+              "status": {
+                "type": "number"
+              },
+              "logs": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "blockNumber": {
+                      "type": "number"
+                    },
+                    "blockHash": {
+                      "type": "string"
+                    },
+                    "transactionIndex": {
+                      "type": "number"
+                    },
+                    "removed": {
+                      "type": "boolean"
+                    },
+                    "address": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "string"
+                    },
+                    "topics": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "transactionHash": {
+                      "type": "string"
+                    },
+                    "logIndex": {
+                      "type": "number"
+                    },
+                    "orphaned": {
+                      "type": "boolean",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "blockNumber",
+                    "blockHash",
+                    "transactionIndex",
+                    "removed",
+                    "address",
+                    "data",
+                    "topics",
+                    "transactionHash",
+                    "logIndex"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "createdAt"
+            ],
+            "nullable": true,
+            "description": "The transaction object exists if you created the transaction deterministically and contains information about the on-chain transaction"
+          },
+          "policy": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "nullable": true
+              }
+            },
+            "description": "Policy information related to the transaction"
+          },
+          "profile": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "nullable": true
+              },
+              "wallet": {
+                "type": "object",
+                "properties": {
+                  "address": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "address"
+                ]
+              }
+            },
+            "required": [
+              "wallet"
+            ],
+            "description": "Profile and wallet information related to the transaction"
+          },
           "status": {
             "type": "string",
-            "enum": ["pending", "success"]
+            "enum": [
+              "pending",
+              "success"
+            ]
           },
           "type": {
             "type": "string",
-            "enum": ["custodial", "self-custodial"]
-          },
-          "payloadToSign": {
-            "type": "string"
+            "enum": [
+              "custodial",
+              "self-custodial"
+            ]
           },
           "transactionHash": {
             "type": "string"
           },
           "explorerUrl": {
             "type": "string"
+          },
+          "success": {
+            "type": "boolean"
           }
         },
-        "required": ["status", "type"]
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "chainId",
+          "intent",
+          "policy",
+          "profile",
+          "status",
+          "type",
+          "explorerUrl",
+          "success"
+        ]
       },
       "AutomationTransferTokenRequestInputV2": {
         "type": "object",
@@ -2955,30 +3389,10 @@
             "type": "number"
           }
         },
-        "required": ["assetAddress", "amountToTransfer"]
-      },
-      "AutomationTransferTokenResponseV2": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "enum": ["pending", "success"]
-          },
-          "type": {
-            "type": "string",
-            "enum": ["custodial", "self-custodial"]
-          },
-          "payloadToSign": {
-            "type": "string"
-          },
-          "transactionHash": {
-            "type": "string"
-          },
-          "explorerUrl": {
-            "type": "string"
-          }
-        },
-        "required": ["status", "type"]
+        "required": [
+          "assetAddress",
+          "amountToTransfer"
+        ]
       },
       "AutomationTransferNativeTokenRequestInputV2": {
         "type": "object",
@@ -3011,7 +3425,9 @@
             "type": "number"
           }
         },
-        "required": ["amountToTransfer"]
+        "required": [
+          "amountToTransfer"
+        ]
       },
       "AutomationGetAssetsForContractBodyInputV2": {
         "type": "object",
@@ -3063,19 +3479,30 @@
                   "type": "string"
                 }
               },
-              "required": ["key", "value"]
+              "required": [
+                "key",
+                "value"
+              ]
             },
             "nullable": true
           },
           "sortDirection": {
             "default": "asc",
             "type": "string",
-            "enum": ["asc", "desc"]
+            "enum": [
+              "asc",
+              "desc"
+            ]
           },
           "sortBy": {
             "default": "floorAskPrice",
             "type": "string",
-            "enum": ["floorAskPrice", "tokenId", "rarity", "updatedAt"]
+            "enum": [
+              "floorAskPrice",
+              "tokenId",
+              "rarity",
+              "updatedAt"
+            ]
           },
           "limit": {
             "default": 20,
@@ -3176,7 +3603,9 @@
             "nullable": true
           }
         },
-        "required": ["data"]
+        "required": [
+          "data"
+        ]
       },
       "AutomationGetAssetResponseV2": {
         "type": "object",
@@ -3214,13 +3643,22 @@
                   "type": "string"
                 }
               },
-              "required": ["address", "quantity"]
+              "required": [
+                "address",
+                "quantity"
+              ]
             },
             "nullable": true
           },
           "rarity": {
             "type": "string",
-            "enum": ["Common", "Uncommon", "Rare", "VeryRare", "ExtremelyRare"],
+            "enum": [
+              "Common",
+              "Uncommon",
+              "Rare",
+              "VeryRare",
+              "ExtremelyRare"
+            ],
             "nullable": true
           },
           "rarityScore": {
@@ -3293,10 +3731,18 @@
                 "type": "number"
               }
             },
-            "required": ["name", "symbol", "decimals"]
+            "required": [
+              "name",
+              "symbol",
+              "decimals"
+            ]
           }
         },
-        "required": ["chainId", "blockNumber", "nativeCurrency"]
+        "required": [
+          "chainId",
+          "blockNumber",
+          "nativeCurrency"
+        ]
       },
       "AutomationCreateTransactionRequestInputV2": {
         "type": "object",
@@ -3321,7 +3767,10 @@
                   "type": "string"
                 }
               },
-              "required": ["contractAddress", "functionName"]
+              "required": [
+                "contractAddress",
+                "functionName"
+              ]
             },
             "minItems": 1,
             "maxItems": 9
@@ -3345,7 +3794,9 @@
             "type": "number"
           }
         },
-        "required": ["interactions"]
+        "required": [
+          "interactions"
+        ]
       },
       "AutomationGetEstimateResponse": {
         "type": "object",
@@ -3354,7 +3805,9 @@
             "type": "string"
           }
         },
-        "required": ["estimatedGas"]
+        "required": [
+          "estimatedGas"
+        ]
       },
       "AutomationGetQuoteResponse": {
         "type": "object",
@@ -3372,7 +3825,12 @@
             "type": "string"
           }
         },
-        "required": ["tokenIn", "tokenOut", "amountIn", "amountOut"]
+        "required": [
+          "tokenIn",
+          "tokenOut",
+          "amountIn",
+          "amountOut"
+        ]
       },
       "AutomationConvertTokenRequestInput": {
         "type": "object",
@@ -3411,34 +3869,83 @@
             "type": "number"
           }
         },
-        "required": ["tokenIn", "tokenOut", "amountIn", "amountOut"]
+        "required": [
+          "tokenIn",
+          "tokenOut",
+          "amountIn",
+          "amountOut"
+        ]
       },
-      "AutomationConvertTokenResponse": {
+      "AutomationWrappingTokenInput": {
         "type": "object",
         "properties": {
-          "status": {
-            "type": "string",
-            "enum": ["pending", "success"]
-          },
-          "type": {
-            "type": "string",
-            "enum": ["custodial", "self-custodial"]
-          },
-          "transactionHash": {
+          "amount": {
             "type": "string"
           },
-          "explorerUrl": {
-            "type": "string"
+          "optimistic": {
+            "default": false,
+            "type": "boolean"
+          },
+          "sponsor": {
+            "default": true,
+            "type": "boolean"
+          },
+          "policyId": {
+            "default": null,
+            "type": "string",
+            "format": "cuid",
+            "nullable": true
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
           }
         },
-        "required": ["status", "type"]
+        "required": [
+          "amount"
+        ]
+      },
+      "AutomationUnwrappingTokenInput": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "string"
+          },
+          "optimistic": {
+            "default": false,
+            "type": "boolean"
+          },
+          "sponsor": {
+            "default": true,
+            "type": "boolean"
+          },
+          "policyId": {
+            "default": null,
+            "type": "string",
+            "format": "cuid",
+            "nullable": true
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          }
+        },
+        "required": [
+          "amount"
+        ]
       },
       "AutomationGetGameResponse": {
         "type": "object",
         "properties": {
           "pegiRating": {
             "type": "string",
-            "enum": ["Three", "Seven", "Twelve", "Sixteen", "Eighteen"],
+            "enum": [
+              "Three",
+              "Seven",
+              "Twelve",
+              "Sixteen",
+              "Eighteen"
+            ],
             "nullable": true
           },
           "pegiContent": {
@@ -3536,7 +4043,11 @@
               "properties": {
                 "role": {
                   "type": "string",
-                  "enum": ["Owner", "Admin", "Viewer"],
+                  "enum": [
+                    "Owner",
+                    "Admin",
+                    "Viewer"
+                  ],
                   "nullable": true
                 },
                 "id": {
@@ -3587,7 +4098,13 @@
                   ]
                 }
               },
-              "required": ["role", "id", "developerId", "gameId", "developer"]
+              "required": [
+                "role",
+                "id",
+                "developerId",
+                "gameId",
+                "developer"
+              ]
             }
           },
           "contracts": {
@@ -3658,15 +4175,24 @@
               "properties": {
                 "model": {
                   "type": "string",
-                  "enum": ["ContractFunctions", "AccountFunctions"]
+                  "enum": [
+                    "ContractFunctions",
+                    "AccountFunctions"
+                  ]
                 },
                 "type": {
                   "type": "string",
-                  "enum": ["PayForUser", "ChargeCustomToken"]
+                  "enum": [
+                    "PayForUser",
+                    "ChargeCustomToken"
+                  ]
                 },
                 "rateType": {
                   "type": "string",
-                  "enum": ["Fixed", "Dynamic"],
+                  "enum": [
+                    "Fixed",
+                    "Dynamic"
+                  ],
                   "nullable": true
                 },
                 "id": {
@@ -3764,7 +4290,13 @@
           },
           "pegiRating": {
             "type": "string",
-            "enum": ["Three", "Seven", "Twelve", "Sixteen", "Eighteen"],
+            "enum": [
+              "Three",
+              "Seven",
+              "Twelve",
+              "Sixteen",
+              "Eighteen"
+            ],
             "nullable": true
           },
           "pegiContent": {
@@ -3790,7 +4322,13 @@
         "properties": {
           "pegiRating": {
             "type": "string",
-            "enum": ["Three", "Seven", "Twelve", "Sixteen", "Eighteen"],
+            "enum": [
+              "Three",
+              "Seven",
+              "Twelve",
+              "Sixteen",
+              "Eighteen"
+            ],
             "nullable": true
           },
           "pegiContent": {
@@ -3914,15 +4452,24 @@
               "properties": {
                 "model": {
                   "type": "string",
-                  "enum": ["ContractFunctions", "AccountFunctions"]
+                  "enum": [
+                    "ContractFunctions",
+                    "AccountFunctions"
+                  ]
                 },
                 "type": {
                   "type": "string",
-                  "enum": ["PayForUser", "ChargeCustomToken"]
+                  "enum": [
+                    "PayForUser",
+                    "ChargeCustomToken"
+                  ]
                 },
                 "rateType": {
                   "type": "string",
-                  "enum": ["Fixed", "Dynamic"],
+                  "enum": [
+                    "Fixed",
+                    "Dynamic"
+                  ],
                   "nullable": true
                 },
                 "id": {
@@ -4001,7 +4548,13 @@
         "properties": {
           "pegiRating": {
             "type": "string",
-            "enum": ["Three", "Seven", "Twelve", "Sixteen", "Eighteen"],
+            "enum": [
+              "Three",
+              "Seven",
+              "Twelve",
+              "Sixteen",
+              "Eighteen"
+            ],
             "nullable": true
           },
           "pegiContent": {
@@ -4064,7 +4617,11 @@
               "properties": {
                 "type": {
                   "type": "string",
-                  "enum": ["Regenerate", "Publishable", "Secret"]
+                  "enum": [
+                    "Regenerate",
+                    "Publishable",
+                    "Secret"
+                  ]
                 },
                 "id": {
                   "type": "string",
@@ -4117,17 +4674,6 @@
           "address": {
             "type": "string"
           },
-          "type": {
-            "type": "string",
-            "enum": [
-              "ERC20",
-              "ERC721",
-              "ERC1155",
-              "SEAPORT",
-              "UNISWAPV2",
-              "WETH"
-            ]
-          },
           "chainId": {
             "type": "integer"
           },
@@ -4135,7 +4681,11 @@
             "type": "string"
           }
         },
-        "required": ["address", "type", "chainId", "name"]
+        "required": [
+          "address",
+          "chainId",
+          "name"
+        ]
       },
       "AutomationAddContractResponse": {
         "type": "object",
@@ -4202,7 +4752,9 @@
             "type": "boolean"
           }
         },
-        "required": ["success"]
+        "required": [
+          "success"
+        ]
       },
       "AutomationGetListedAssetsBodyInputV2": {
         "type": "object",
@@ -4218,12 +4770,19 @@
           "sortBy": {
             "default": "createdAt",
             "type": "string",
-            "enum": ["createdAt", "updatedAt", "price"]
+            "enum": [
+              "createdAt",
+              "updatedAt",
+              "price"
+            ]
           },
           "sortDirection": {
             "default": "desc",
             "type": "string",
-            "enum": ["asc", "desc"],
+            "enum": [
+              "asc",
+              "desc"
+            ],
             "description": "If using `createdAt` for sorting, only `desc` is allowed."
           },
           "limit": {
@@ -4305,7 +4864,10 @@
                           "type": "integer"
                         }
                       },
-                      "required": ["address", "decimals"],
+                      "required": [
+                        "address",
+                        "decimals"
+                      ],
                       "nullable": true
                     },
                     "amount": {
@@ -4324,7 +4886,12 @@
                           "type": "number"
                         }
                       },
-                      "required": ["raw", "decimal", "usd", "native"],
+                      "required": [
+                        "raw",
+                        "decimal",
+                        "usd",
+                        "native"
+                      ],
                       "nullable": true
                     },
                     "netAmount": {
@@ -4343,7 +4910,12 @@
                           "type": "number"
                         }
                       },
-                      "required": ["raw", "decimal", "usd", "native"],
+                      "required": [
+                        "raw",
+                        "decimal",
+                        "usd",
+                        "native"
+                      ],
                       "nullable": true
                     }
                   },
@@ -4397,7 +4969,9 @@
             "nullable": true
           }
         },
-        "required": ["data"]
+        "required": [
+          "data"
+        ]
       },
       "AutomationSellAssetRequestInputV2": {
         "type": "object",
@@ -4406,7 +4980,8 @@
             "type": "string"
           },
           "assetId": {
-            "type": "string"
+            "type": "string",
+            "pattern": "^\\d+$"
           },
           "quantity": {
             "type": "number"
@@ -4436,7 +5011,14 @@
           "currency": {
             "default": "BEAM",
             "type": "string",
-            "enum": ["BEAM", "WBEAM", "USDC", "USDT", "IMX", "WIMX"]
+            "enum": [
+              "BEAM",
+              "WBEAM",
+              "USDC",
+              "USDT",
+              "IMX",
+              "WIMX"
+            ]
           },
           "sponsor": {
             "default": true,
@@ -4453,7 +5035,13 @@
             "type": "number"
           }
         },
-        "required": ["assetAddress", "assetId", "quantity", "price", "sellType"]
+        "required": [
+          "assetAddress",
+          "assetId",
+          "quantity",
+          "price",
+          "sellType"
+        ]
       },
       "AutomationSellAssetResponseV2": {
         "type": "object",
@@ -4462,7 +5050,9 @@
             "type": "string"
           }
         },
-        "required": ["orderId"]
+        "required": [
+          "orderId"
+        ]
       },
       "AutomationBuyAssetRequestInputV2": {
         "type": "object",
@@ -4489,22 +5079,9 @@
             "type": "number"
           }
         },
-        "required": ["quantity"]
-      },
-      "AutomationBuyAssetResponseV2": {
-        "type": "object",
-        "properties": {
-          "success": {
-            "type": "boolean"
-          },
-          "transactionHash": {
-            "type": "string"
-          },
-          "explorerUrl": {
-            "type": "string"
-          }
-        },
-        "required": ["success"]
+        "required": [
+          "quantity"
+        ]
       },
       "AutomationCancelAssetListingRequestInputV2": {
         "type": "object",
@@ -4525,15 +5102,6 @@
           }
         }
       },
-      "AutomationCancelAssetListingResponseV2": {
-        "type": "object",
-        "properties": {
-          "success": {
-            "type": "boolean"
-          }
-        },
-        "required": ["success"]
-      },
       "AutomationCreateAssetOfferRequestInputV2": {
         "type": "object",
         "properties": {
@@ -4541,7 +5109,8 @@
             "type": "string"
           },
           "assetId": {
-            "type": "string"
+            "type": "string",
+            "pattern": "^\\d+$"
           },
           "quantity": {
             "type": "number",
@@ -4559,14 +5128,23 @@
           "currency": {
             "default": "WBEAM",
             "type": "string",
-            "enum": ["WBEAM", "USDC", "USDT"]
+            "enum": [
+              "WBEAM",
+              "USDC",
+              "USDT"
+            ]
           },
           "chainId": {
             "default": 13337,
             "type": "number"
           }
         },
-        "required": ["assetAddress", "assetId", "quantity", "price"]
+        "required": [
+          "assetAddress",
+          "assetId",
+          "quantity",
+          "price"
+        ]
       },
       "AutomationCreateOfferResponseV2": {
         "type": "object",
@@ -4575,7 +5153,9 @@
             "type": "string"
           }
         },
-        "required": ["offerId"]
+        "required": [
+          "offerId"
+        ]
       },
       "AutomationAcceptAssetOfferRequestInputV2": {
         "type": "object",
@@ -4606,22 +5186,10 @@
             "type": "number"
           }
         },
-        "required": ["quantity", "offerId"]
-      },
-      "AutomationAcceptOfferResponseV2": {
-        "type": "object",
-        "properties": {
-          "success": {
-            "type": "boolean"
-          },
-          "transactionHash": {
-            "type": "string"
-          },
-          "explorerUrl": {
-            "type": "string"
-          }
-        },
-        "required": ["success"]
+        "required": [
+          "quantity",
+          "offerId"
+        ]
       },
       "AutomationCancelAssetOfferRequestInputV2": {
         "type": "object",
@@ -4648,22 +5216,9 @@
             "type": "number"
           }
         },
-        "required": ["offerId"]
-      },
-      "AutomationCancelOfferResponseV2": {
-        "type": "object",
-        "properties": {
-          "success": {
-            "type": "boolean"
-          },
-          "transactionHash": {
-            "type": "string"
-          },
-          "explorerUrl": {
-            "type": "string"
-          }
-        },
-        "required": ["success"]
+        "required": [
+          "offerId"
+        ]
       },
       "AutomationGetChainCurrenciesResponseV2": {
         "type": "object",
@@ -4678,17 +5233,30 @@
                 },
                 "symbol": {
                   "type": "string",
-                  "enum": ["BEAM", "WBEAM", "USDC", "USDT", "IMX", "WIMX"]
+                  "enum": [
+                    "BEAM",
+                    "WBEAM",
+                    "USDC",
+                    "USDT",
+                    "IMX",
+                    "WIMX"
+                  ]
                 },
                 "address": {
                   "type": "string"
                 }
               },
-              "required": ["decimals", "symbol", "address"]
+              "required": [
+                "decimals",
+                "symbol",
+                "address"
+              ]
             }
           }
         },
-        "required": ["data"]
+        "required": [
+          "data"
+        ]
       },
       "AutomationRefreshTokenRequestBody": {
         "type": "object",
@@ -4697,14 +5265,18 @@
             "type": "string"
           },
           "tokenId": {
-            "type": "string"
+            "type": "string",
+            "pattern": "^\\d+$"
           },
           "chainId": {
             "default": 13337,
             "type": "number"
           }
         },
-        "required": ["assetAddress", "tokenId"]
+        "required": [
+          "assetAddress",
+          "tokenId"
+        ]
       },
       "AutomationRefreshContractRequestBody": {
         "type": "object",
@@ -4717,7 +5289,9 @@
             "type": "number"
           }
         },
-        "required": ["assetAddress"]
+        "required": [
+          "assetAddress"
+        ]
       },
       "AutomationCommonAddPolicyRequestInput": {
         "type": "object",
@@ -4731,14 +5305,21 @@
           },
           "rateType": {
             "type": "string",
-            "enum": ["Fixed", "Dynamic"]
+            "enum": [
+              "Fixed",
+              "Dynamic"
+            ]
           },
           "chainId": {
             "default": 13337,
             "type": "number"
           }
         },
-        "required": ["tokenAddress", "amount", "rateType"]
+        "required": [
+          "tokenAddress",
+          "amount",
+          "rateType"
+        ]
       },
       "AutomationCommonAddPolicyResponse": {
         "type": "object",
@@ -4760,7 +5341,10 @@
           },
           "rateType": {
             "type": "string",
-            "enum": ["Fixed", "Dynamic"],
+            "enum": [
+              "Fixed",
+              "Dynamic"
+            ],
             "nullable": true
           },
           "depositorId": {
@@ -4784,7 +5368,9 @@
             "type": "boolean"
           }
         },
-        "required": ["success"]
+        "required": [
+          "success"
+        ]
       },
       "AutomationCommonGetPoliciesResponse": {
         "type": "object",
@@ -4800,7 +5386,10 @@
                 },
                 "rateType": {
                   "type": "string",
-                  "enum": ["Fixed", "Dynamic"],
+                  "enum": [
+                    "Fixed",
+                    "Dynamic"
+                  ],
                   "nullable": true
                 },
                 "amount": {
@@ -4816,11 +5405,19 @@
                   "nullable": true
                 }
               },
-              "required": ["id", "rateType", "amount", "token", "depositorId"]
+              "required": [
+                "id",
+                "rateType",
+                "amount",
+                "token",
+                "depositorId"
+              ]
             }
           }
         },
-        "required": ["data"]
+        "required": [
+          "data"
+        ]
       },
       "AutomationCreateProfileRequestInput": {
         "type": "object",
@@ -4835,7 +5432,9 @@
             "type": "number"
           }
         },
-        "required": ["entityId"]
+        "required": [
+          "entityId"
+        ]
       },
       "AutomationCreateProfileResponse": {
         "type": "object",
@@ -5042,10 +5641,15 @@
                 "type": "number"
               }
             },
-            "required": ["count"]
+            "required": [
+              "count"
+            ]
           }
         },
-        "required": ["data", "pagination"]
+        "required": [
+          "data",
+          "pagination"
+        ]
       },
       "AutomationGetProfileResponse": {
         "type": "object",
@@ -5148,7 +5752,9 @@
             "maxLength": 250
           }
         },
-        "required": ["newEntityId"]
+        "required": [
+          "newEntityId"
+        ]
       },
       "AutomationUpdateProfileResponse": {
         "type": "object",
@@ -5259,7 +5865,9 @@
             "type": "string"
           }
         },
-        "required": ["challenge"]
+        "required": [
+          "challenge"
+        ]
       },
       "AutomationGenerateSignInCodeRequestInput": {
         "type": "object",
@@ -5278,7 +5886,9 @@
             "type": "string"
           }
         },
-        "required": ["challenge"]
+        "required": [
+          "challenge"
+        ]
       },
       "AutomationGetAllGasUsageResponse": {
         "type": "object",
@@ -5321,13 +5931,21 @@
                           },
                           "model": {
                             "type": "string",
-                            "enum": ["ContractFunctions", "AccountFunctions"]
+                            "enum": [
+                              "ContractFunctions",
+                              "AccountFunctions"
+                            ]
                           },
                           "chainId": {
                             "type": "integer"
                           }
                         },
-                        "required": ["id", "name", "model", "chainId"]
+                        "required": [
+                          "id",
+                          "name",
+                          "model",
+                          "chainId"
+                        ]
                       },
                       "periods": {
                         "type": "array",
@@ -5406,11 +6024,16 @@
                   ]
                 }
               },
-              "required": ["policies", "summary"]
+              "required": [
+                "policies",
+                "summary"
+              ]
             }
           }
         },
-        "required": ["chains"]
+        "required": [
+          "chains"
+        ]
       },
       "AutomationGetGasUsageResponse": {
         "type": "object",
@@ -5448,13 +6071,21 @@
                     },
                     "model": {
                       "type": "string",
-                      "enum": ["ContractFunctions", "AccountFunctions"]
+                      "enum": [
+                        "ContractFunctions",
+                        "AccountFunctions"
+                      ]
                     },
                     "chainId": {
                       "type": "integer"
                     }
                   },
-                  "required": ["id", "name", "model", "chainId"]
+                  "required": [
+                    "id",
+                    "name",
+                    "model",
+                    "chainId"
+                  ]
                 },
                 "periods": {
                   "type": "array",
@@ -5533,7 +6164,10 @@
             ]
           }
         },
-        "required": ["policies", "summary"]
+        "required": [
+          "policies",
+          "summary"
+        ]
       },
       "AutomationGetPolicyUsageResponse": {
         "type": "object",
@@ -5566,13 +6200,21 @@
               },
               "model": {
                 "type": "string",
-                "enum": ["ContractFunctions", "AccountFunctions"]
+                "enum": [
+                  "ContractFunctions",
+                  "AccountFunctions"
+                ]
               },
               "chainId": {
                 "type": "integer"
               }
             },
-            "required": ["id", "name", "model", "chainId"]
+            "required": [
+              "id",
+              "name",
+              "model",
+              "chainId"
+            ]
           },
           "periods": {
             "type": "array",
@@ -5750,12 +6392,20 @@
                       }
                     }
                   },
-                  "required": ["createdAt"],
+                  "required": [
+                    "createdAt"
+                  ],
                   "nullable": true,
                   "description": "The transaction object exists if you created the transaction deterministically and contains information about the on-chain transaction"
                 }
               },
-              "required": ["id", "createdAt", "updatedAt", "chainId", "intent"]
+              "required": [
+                "id",
+                "createdAt",
+                "updatedAt",
+                "chainId",
+                "intent"
+              ]
             }
           },
           "pagination": {
@@ -5773,353 +6423,14 @@
                 "type": "number"
               }
             },
-            "required": ["count"]
-          }
-        },
-        "required": ["data", "pagination"]
-      },
-      "AutomationGetTransactionResponseV2": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "chainId": {
-            "type": "number"
-          },
-          "intent": {
-            "type": "object",
-            "properties": {
-              "interactions": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "to": {
-                      "type": "string"
-                    },
-                    "value": {
-                      "type": "string"
-                    },
-                    "contract": {
-                      "type": "string"
-                    },
-                    "functionName": {
-                      "type": "string"
-                    },
-                    "functionArgs": {
-                      "type": "array",
-                      "items": {}
-                    }
-                  }
-                },
-                "nullable": true
-              },
-              "hash": {
-                "type": "string",
-                "nullable": true
-              }
-            }
-          },
-          "transaction": {
-            "type": "object",
-            "properties": {
-              "createdAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "blockNumber": {
-                "type": "number"
-              },
-              "hash": {
-                "type": "string"
-              },
-              "gasUsed": {
-                "type": "string"
-              },
-              "gasFee": {
-                "type": "string"
-              },
-              "status": {
-                "type": "number"
-              },
-              "logs": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "blockNumber": {
-                      "type": "number"
-                    },
-                    "blockHash": {
-                      "type": "string"
-                    },
-                    "transactionIndex": {
-                      "type": "number"
-                    },
-                    "removed": {
-                      "type": "boolean"
-                    },
-                    "address": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "string"
-                    },
-                    "topics": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    },
-                    "transactionHash": {
-                      "type": "string"
-                    },
-                    "logIndex": {
-                      "type": "number"
-                    },
-                    "orphaned": {
-                      "type": "boolean",
-                      "nullable": true
-                    }
-                  },
-                  "required": [
-                    "blockNumber",
-                    "blockHash",
-                    "transactionIndex",
-                    "removed",
-                    "address",
-                    "data",
-                    "topics",
-                    "transactionHash",
-                    "logIndex"
-                  ]
-                }
-              }
-            },
-            "required": ["createdAt"],
-            "nullable": true,
-            "description": "The transaction object exists if you created the transaction deterministically and contains information about the on-chain transaction"
-          },
-          "policy": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "string",
-                "nullable": true
-              }
-            },
-            "description": "Policy information related to the transaction"
-          },
-          "profile": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "string",
-                "nullable": true
-              },
-              "wallet": {
-                "type": "object",
-                "properties": {
-                  "address": {
-                    "type": "string"
-                  }
-                },
-                "required": ["address"]
-              }
-            },
-            "required": ["wallet"],
-            "description": "Profile and wallet information related to the transaction"
+            "required": [
+              "count"
+            ]
           }
         },
         "required": [
-          "id",
-          "createdAt",
-          "updatedAt",
-          "chainId",
-          "intent",
-          "policy",
-          "profile"
-        ]
-      },
-      "AutomationCreateTransactionResponseV2": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "chainId": {
-            "type": "number"
-          },
-          "intent": {
-            "type": "object",
-            "properties": {
-              "interactions": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "to": {
-                      "type": "string"
-                    },
-                    "value": {
-                      "type": "string"
-                    },
-                    "contract": {
-                      "type": "string"
-                    },
-                    "functionName": {
-                      "type": "string"
-                    },
-                    "functionArgs": {
-                      "type": "array",
-                      "items": {}
-                    }
-                  }
-                },
-                "nullable": true
-              },
-              "hash": {
-                "type": "string",
-                "nullable": true
-              }
-            }
-          },
-          "transaction": {
-            "type": "object",
-            "properties": {
-              "createdAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "blockNumber": {
-                "type": "number"
-              },
-              "hash": {
-                "type": "string"
-              },
-              "gasUsed": {
-                "type": "string"
-              },
-              "gasFee": {
-                "type": "string"
-              },
-              "status": {
-                "type": "number"
-              },
-              "logs": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "blockNumber": {
-                      "type": "number"
-                    },
-                    "blockHash": {
-                      "type": "string"
-                    },
-                    "transactionIndex": {
-                      "type": "number"
-                    },
-                    "removed": {
-                      "type": "boolean"
-                    },
-                    "address": {
-                      "type": "string"
-                    },
-                    "data": {
-                      "type": "string"
-                    },
-                    "topics": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    },
-                    "transactionHash": {
-                      "type": "string"
-                    },
-                    "logIndex": {
-                      "type": "number"
-                    },
-                    "orphaned": {
-                      "type": "boolean",
-                      "nullable": true
-                    }
-                  },
-                  "required": [
-                    "blockNumber",
-                    "blockHash",
-                    "transactionIndex",
-                    "removed",
-                    "address",
-                    "data",
-                    "topics",
-                    "transactionHash",
-                    "logIndex"
-                  ]
-                }
-              }
-            },
-            "required": ["createdAt"],
-            "nullable": true,
-            "description": "The transaction object exists if you created the transaction deterministically and contains information about the on-chain transaction"
-          },
-          "policy": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "string",
-                "nullable": true
-              }
-            },
-            "description": "Policy information related to the transaction"
-          },
-          "profile": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "string",
-                "nullable": true
-              },
-              "wallet": {
-                "type": "object",
-                "properties": {
-                  "address": {
-                    "type": "string"
-                  }
-                },
-                "required": ["address"]
-              }
-            },
-            "required": ["wallet"],
-            "description": "Profile and wallet information related to the transaction"
-          }
-        },
-        "required": [
-          "id",
-          "createdAt",
-          "updatedAt",
-          "chainId",
-          "intent",
-          "policy",
-          "profile"
+          "data",
+          "pagination"
         ]
       },
       "AutomationTradeTokensRequestInput": {
@@ -6146,11 +6457,17 @@
                       "type": "string"
                     }
                   },
-                  "required": ["assetAddress", "amount"]
+                  "required": [
+                    "assetAddress",
+                    "amount"
+                  ]
                 }
               }
             },
-            "required": ["entityId", "tokens"]
+            "required": [
+              "entityId",
+              "tokens"
+            ]
           },
           "counterparty": {
             "type": "object",
@@ -6173,11 +6490,17 @@
                       "type": "string"
                     }
                   },
-                  "required": ["assetAddress", "amount"]
+                  "required": [
+                    "assetAddress",
+                    "amount"
+                  ]
                 }
               }
             },
-            "required": ["entityId", "tokens"]
+            "required": [
+              "entityId",
+              "tokens"
+            ]
           },
           "sponsor": {
             "default": true,
@@ -6194,27 +6517,10 @@
             "type": "number"
           }
         },
-        "required": ["initiator", "counterparty"]
-      },
-      "AutomationTradeTokensResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "enum": ["pending", "success"]
-          },
-          "type": {
-            "type": "string",
-            "enum": ["custodial", "self-custodial"]
-          },
-          "transactionHash": {
-            "type": "string"
-          },
-          "explorerUrl": {
-            "type": "string"
-          }
-        },
-        "required": ["status", "type"]
+        "required": [
+          "initiator",
+          "counterparty"
+        ]
       },
       "AutomationGetWebhooksForGameResponse": {
         "type": "object",
@@ -6239,7 +6545,9 @@
                   "type": "array",
                   "items": {
                     "type": "string",
-                    "enum": ["TokenTransfers"]
+                    "enum": [
+                      "TokenTransfers"
+                    ]
                   }
                 },
                 "contract": {
@@ -6265,7 +6573,9 @@
             }
           }
         },
-        "required": ["webhooks"]
+        "required": [
+          "webhooks"
+        ]
       },
       "AutomationCreateWebhookForGame": {
         "type": "object",
@@ -6281,7 +6591,9 @@
             "type": "array",
             "items": {
               "type": "string",
-              "enum": ["TokenTransfers"]
+              "enum": [
+                "TokenTransfers"
+              ]
             }
           },
           "chainId": {
@@ -6289,7 +6601,11 @@
             "type": "number"
           }
         },
-        "required": ["url", "contract", "events"]
+        "required": [
+          "url",
+          "contract",
+          "events"
+        ]
       },
       "AutomationWebhookForGameResponse": {
         "type": "object",
@@ -6309,7 +6625,9 @@
             "type": "array",
             "items": {
               "type": "string",
-              "enum": ["TokenTransfers"]
+              "enum": [
+                "TokenTransfers"
+              ]
             }
           },
           "contract": {
@@ -6349,7 +6667,10 @@
                   "type": "string"
                 }
               },
-              "required": ["key", "value"]
+              "required": [
+                "key",
+                "value"
+              ]
             },
             "nullable": true
           },
@@ -6372,19 +6693,24 @@
                 "type": "number"
               }
             },
-            "required": ["tokens", "listed"]
+            "required": [
+              "tokens",
+              "listed"
+            ]
           }
         },
-        "required": ["count"]
+        "required": [
+          "count"
+        ]
       },
-      "AutomationCommonActivityRequestInput": {
+      "AutomationCommonUserActivityRequestInput": {
         "type": "object",
         "properties": {
           "limit": {
             "default": 20,
             "type": "number",
             "minimum": 1,
-            "maximum": 100
+            "maximum": 20
           },
           "types": {
             "type": "array",
@@ -6405,6 +6731,11 @@
           "chainId": {
             "default": 13337,
             "type": "number"
+          },
+          "continuation": {
+            "default": null,
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -6483,7 +6814,11 @@
                   "nullable": true
                 }
               },
-              "required": ["contract", "transaction", "asset"]
+              "required": [
+                "contract",
+                "transaction",
+                "asset"
+              ]
             }
           },
           "continuation": {
@@ -6492,7 +6827,81 @@
             "nullable": true
           }
         },
-        "required": ["data"]
+        "required": [
+          "data"
+        ]
+      },
+      "AutomationCommonContractActivityRequestInput": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "default": 20,
+            "type": "number",
+            "minimum": 1,
+            "maximum": 50
+          },
+          "types": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ask",
+                "ask_cancel",
+                "bid",
+                "bid_cancel",
+                "sale",
+                "mint",
+                "transfer"
+              ]
+            },
+            "nullable": true
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          },
+          "continuation": {
+            "default": null,
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "AutomationCommonAssetActivityRequestInput": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "default": 20,
+            "type": "number",
+            "minimum": 1,
+            "maximum": 20
+          },
+          "types": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ask",
+                "ask_cancel",
+                "bid",
+                "bid_cancel",
+                "sale",
+                "mint",
+                "transfer"
+              ]
+            },
+            "nullable": true
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "number"
+          },
+          "continuation": {
+            "default": null,
+            "type": "string",
+            "nullable": true
+          }
+        }
       }
     }
   }

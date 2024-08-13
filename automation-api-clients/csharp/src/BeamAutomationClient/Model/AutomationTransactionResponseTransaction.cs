@@ -29,10 +29,10 @@ namespace BeamAutomationClient.Model
     /// <summary>
     /// The transaction object exists if you created the transaction deterministically and contains information about the on-chain transaction
     /// </summary>
-    public partial class AutomationGetTransactionsResponseV2DataInnerTransaction : IValidatableObject
+    public partial class AutomationTransactionResponseTransaction : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AutomationGetTransactionsResponseV2DataInnerTransaction" /> class.
+        /// Initializes a new instance of the <see cref="AutomationTransactionResponseTransaction" /> class.
         /// </summary>
         /// <param name="createdAt">createdAt</param>
         /// <param name="blockNumber">blockNumber</param>
@@ -42,7 +42,7 @@ namespace BeamAutomationClient.Model
         /// <param name="logs">logs</param>
         /// <param name="status">status</param>
         [JsonConstructor]
-        public AutomationGetTransactionsResponseV2DataInnerTransaction(DateTime createdAt, Option<decimal?> blockNumber = default, Option<string?> gasFee = default, Option<string?> gasUsed = default, Option<string?> hash = default, Option<List<AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner>?> logs = default, Option<decimal?> status = default)
+        public AutomationTransactionResponseTransaction(DateTime createdAt, Option<decimal?> blockNumber = default, Option<string?> gasFee = default, Option<string?> gasUsed = default, Option<string?> hash = default, Option<List<AutomationTransactionResponseTransactionLogsInner>?> logs = default, Option<decimal?> status = default)
         {
             CreatedAt = createdAt;
             BlockNumberOption = blockNumber;
@@ -119,13 +119,13 @@ namespace BeamAutomationClient.Model
         /// </summary>
         [JsonIgnore]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<List<AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner>?> LogsOption { get; private set; }
+        public Option<List<AutomationTransactionResponseTransactionLogsInner>?> LogsOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Logs
         /// </summary>
         [JsonPropertyName("logs")]
-        public List<AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner>? Logs { get { return this. LogsOption; } set { this.LogsOption = new(value); } }
+        public List<AutomationTransactionResponseTransactionLogsInner>? Logs { get { return this. LogsOption; } set { this.LogsOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Status
@@ -147,7 +147,7 @@ namespace BeamAutomationClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class AutomationGetTransactionsResponseV2DataInnerTransaction {\n");
+            sb.Append("class AutomationTransactionResponseTransaction {\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  BlockNumber: ").Append(BlockNumber).Append("\n");
             sb.Append("  GasFee: ").Append(GasFee).Append("\n");
@@ -171,9 +171,9 @@ namespace BeamAutomationClient.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="AutomationGetTransactionsResponseV2DataInnerTransaction" />
+    /// A Json converter for type <see cref="AutomationTransactionResponseTransaction" />
     /// </summary>
-    public class AutomationGetTransactionsResponseV2DataInnerTransactionJsonConverter : JsonConverter<AutomationGetTransactionsResponseV2DataInnerTransaction>
+    public class AutomationTransactionResponseTransactionJsonConverter : JsonConverter<AutomationTransactionResponseTransaction>
     {
         /// <summary>
         /// The format to use to serialize CreatedAt
@@ -181,14 +181,14 @@ namespace BeamAutomationClient.Model
         public static string CreatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
 
         /// <summary>
-        /// Deserializes json to <see cref="AutomationGetTransactionsResponseV2DataInnerTransaction" />
+        /// Deserializes json to <see cref="AutomationTransactionResponseTransaction" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override AutomationGetTransactionsResponseV2DataInnerTransaction Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override AutomationTransactionResponseTransaction Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -202,7 +202,7 @@ namespace BeamAutomationClient.Model
             Option<string?> gasFee = default;
             Option<string?> gasUsed = default;
             Option<string?> hash = default;
-            Option<List<AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner>?> logs = default;
+            Option<List<AutomationTransactionResponseTransactionLogsInner>?> logs = default;
             Option<decimal?> status = default;
 
             while (utf8JsonReader.Read())
@@ -239,7 +239,7 @@ namespace BeamAutomationClient.Model
                             break;
                         case "logs":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                logs = new Option<List<AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner>?>(JsonSerializer.Deserialize<List<AutomationGetTransactionsResponseV2DataInnerTransactionLogsInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                                logs = new Option<List<AutomationTransactionResponseTransactionLogsInner>?>(JsonSerializer.Deserialize<List<AutomationTransactionResponseTransactionLogsInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "status":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
@@ -252,89 +252,89 @@ namespace BeamAutomationClient.Model
             }
 
             if (!createdAt.IsSet)
-                throw new ArgumentException("Property is required for class AutomationGetTransactionsResponseV2DataInnerTransaction.", nameof(createdAt));
+                throw new ArgumentException("Property is required for class AutomationTransactionResponseTransaction.", nameof(createdAt));
 
             if (createdAt.IsSet && createdAt.Value == null)
-                throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class AutomationGetTransactionsResponseV2DataInnerTransaction.");
+                throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class AutomationTransactionResponseTransaction.");
 
             if (blockNumber.IsSet && blockNumber.Value == null)
-                throw new ArgumentNullException(nameof(blockNumber), "Property is not nullable for class AutomationGetTransactionsResponseV2DataInnerTransaction.");
+                throw new ArgumentNullException(nameof(blockNumber), "Property is not nullable for class AutomationTransactionResponseTransaction.");
 
             if (gasFee.IsSet && gasFee.Value == null)
-                throw new ArgumentNullException(nameof(gasFee), "Property is not nullable for class AutomationGetTransactionsResponseV2DataInnerTransaction.");
+                throw new ArgumentNullException(nameof(gasFee), "Property is not nullable for class AutomationTransactionResponseTransaction.");
 
             if (gasUsed.IsSet && gasUsed.Value == null)
-                throw new ArgumentNullException(nameof(gasUsed), "Property is not nullable for class AutomationGetTransactionsResponseV2DataInnerTransaction.");
+                throw new ArgumentNullException(nameof(gasUsed), "Property is not nullable for class AutomationTransactionResponseTransaction.");
 
             if (hash.IsSet && hash.Value == null)
-                throw new ArgumentNullException(nameof(hash), "Property is not nullable for class AutomationGetTransactionsResponseV2DataInnerTransaction.");
+                throw new ArgumentNullException(nameof(hash), "Property is not nullable for class AutomationTransactionResponseTransaction.");
 
             if (logs.IsSet && logs.Value == null)
-                throw new ArgumentNullException(nameof(logs), "Property is not nullable for class AutomationGetTransactionsResponseV2DataInnerTransaction.");
+                throw new ArgumentNullException(nameof(logs), "Property is not nullable for class AutomationTransactionResponseTransaction.");
 
             if (status.IsSet && status.Value == null)
-                throw new ArgumentNullException(nameof(status), "Property is not nullable for class AutomationGetTransactionsResponseV2DataInnerTransaction.");
+                throw new ArgumentNullException(nameof(status), "Property is not nullable for class AutomationTransactionResponseTransaction.");
 
-            return new AutomationGetTransactionsResponseV2DataInnerTransaction(createdAt.Value!.Value!, blockNumber, gasFee, gasUsed, hash, logs, status);
+            return new AutomationTransactionResponseTransaction(createdAt.Value!.Value!, blockNumber, gasFee, gasUsed, hash, logs, status);
         }
 
         /// <summary>
-        /// Serializes a <see cref="AutomationGetTransactionsResponseV2DataInnerTransaction" />
+        /// Serializes a <see cref="AutomationTransactionResponseTransaction" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="automationGetTransactionsResponseV2DataInnerTransaction"></param>
+        /// <param name="automationTransactionResponseTransaction"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, AutomationGetTransactionsResponseV2DataInnerTransaction automationGetTransactionsResponseV2DataInnerTransaction, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, AutomationTransactionResponseTransaction automationTransactionResponseTransaction, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(ref writer, automationGetTransactionsResponseV2DataInnerTransaction, jsonSerializerOptions);
+            WriteProperties(ref writer, automationTransactionResponseTransaction, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="AutomationGetTransactionsResponseV2DataInnerTransaction" />
+        /// Serializes the properties of <see cref="AutomationTransactionResponseTransaction" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="automationGetTransactionsResponseV2DataInnerTransaction"></param>
+        /// <param name="automationTransactionResponseTransaction"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(ref Utf8JsonWriter writer, AutomationGetTransactionsResponseV2DataInnerTransaction automationGetTransactionsResponseV2DataInnerTransaction, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(ref Utf8JsonWriter writer, AutomationTransactionResponseTransaction automationTransactionResponseTransaction, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (automationGetTransactionsResponseV2DataInnerTransaction.GasFeeOption.IsSet && automationGetTransactionsResponseV2DataInnerTransaction.GasFee == null)
-                throw new ArgumentNullException(nameof(automationGetTransactionsResponseV2DataInnerTransaction.GasFee), "Property is required for class AutomationGetTransactionsResponseV2DataInnerTransaction.");
+            if (automationTransactionResponseTransaction.GasFeeOption.IsSet && automationTransactionResponseTransaction.GasFee == null)
+                throw new ArgumentNullException(nameof(automationTransactionResponseTransaction.GasFee), "Property is required for class AutomationTransactionResponseTransaction.");
 
-            if (automationGetTransactionsResponseV2DataInnerTransaction.GasUsedOption.IsSet && automationGetTransactionsResponseV2DataInnerTransaction.GasUsed == null)
-                throw new ArgumentNullException(nameof(automationGetTransactionsResponseV2DataInnerTransaction.GasUsed), "Property is required for class AutomationGetTransactionsResponseV2DataInnerTransaction.");
+            if (automationTransactionResponseTransaction.GasUsedOption.IsSet && automationTransactionResponseTransaction.GasUsed == null)
+                throw new ArgumentNullException(nameof(automationTransactionResponseTransaction.GasUsed), "Property is required for class AutomationTransactionResponseTransaction.");
 
-            if (automationGetTransactionsResponseV2DataInnerTransaction.HashOption.IsSet && automationGetTransactionsResponseV2DataInnerTransaction.Hash == null)
-                throw new ArgumentNullException(nameof(automationGetTransactionsResponseV2DataInnerTransaction.Hash), "Property is required for class AutomationGetTransactionsResponseV2DataInnerTransaction.");
+            if (automationTransactionResponseTransaction.HashOption.IsSet && automationTransactionResponseTransaction.Hash == null)
+                throw new ArgumentNullException(nameof(automationTransactionResponseTransaction.Hash), "Property is required for class AutomationTransactionResponseTransaction.");
 
-            if (automationGetTransactionsResponseV2DataInnerTransaction.LogsOption.IsSet && automationGetTransactionsResponseV2DataInnerTransaction.Logs == null)
-                throw new ArgumentNullException(nameof(automationGetTransactionsResponseV2DataInnerTransaction.Logs), "Property is required for class AutomationGetTransactionsResponseV2DataInnerTransaction.");
+            if (automationTransactionResponseTransaction.LogsOption.IsSet && automationTransactionResponseTransaction.Logs == null)
+                throw new ArgumentNullException(nameof(automationTransactionResponseTransaction.Logs), "Property is required for class AutomationTransactionResponseTransaction.");
 
-            writer.WriteString("createdAt", automationGetTransactionsResponseV2DataInnerTransaction.CreatedAt.ToString(CreatedAtFormat));
+            writer.WriteString("createdAt", automationTransactionResponseTransaction.CreatedAt.ToString(CreatedAtFormat));
 
-            if (automationGetTransactionsResponseV2DataInnerTransaction.BlockNumberOption.IsSet)
-                writer.WriteNumber("blockNumber", automationGetTransactionsResponseV2DataInnerTransaction.BlockNumberOption.Value!.Value);
+            if (automationTransactionResponseTransaction.BlockNumberOption.IsSet)
+                writer.WriteNumber("blockNumber", automationTransactionResponseTransaction.BlockNumberOption.Value!.Value);
 
-            if (automationGetTransactionsResponseV2DataInnerTransaction.GasFeeOption.IsSet)
-                writer.WriteString("gasFee", automationGetTransactionsResponseV2DataInnerTransaction.GasFee);
+            if (automationTransactionResponseTransaction.GasFeeOption.IsSet)
+                writer.WriteString("gasFee", automationTransactionResponseTransaction.GasFee);
 
-            if (automationGetTransactionsResponseV2DataInnerTransaction.GasUsedOption.IsSet)
-                writer.WriteString("gasUsed", automationGetTransactionsResponseV2DataInnerTransaction.GasUsed);
+            if (automationTransactionResponseTransaction.GasUsedOption.IsSet)
+                writer.WriteString("gasUsed", automationTransactionResponseTransaction.GasUsed);
 
-            if (automationGetTransactionsResponseV2DataInnerTransaction.HashOption.IsSet)
-                writer.WriteString("hash", automationGetTransactionsResponseV2DataInnerTransaction.Hash);
+            if (automationTransactionResponseTransaction.HashOption.IsSet)
+                writer.WriteString("hash", automationTransactionResponseTransaction.Hash);
 
-            if (automationGetTransactionsResponseV2DataInnerTransaction.LogsOption.IsSet)
+            if (automationTransactionResponseTransaction.LogsOption.IsSet)
             {
                 writer.WritePropertyName("logs");
-                JsonSerializer.Serialize(writer, automationGetTransactionsResponseV2DataInnerTransaction.Logs, jsonSerializerOptions);
+                JsonSerializer.Serialize(writer, automationTransactionResponseTransaction.Logs, jsonSerializerOptions);
             }
-            if (automationGetTransactionsResponseV2DataInnerTransaction.StatusOption.IsSet)
-                writer.WriteNumber("status", automationGetTransactionsResponseV2DataInnerTransaction.StatusOption.Value!.Value);
+            if (automationTransactionResponseTransaction.StatusOption.IsSet)
+                writer.WriteNumber("status", automationTransactionResponseTransaction.StatusOption.Value!.Value);
         }
     }
 }

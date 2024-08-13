@@ -403,7 +403,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IAcceptAssetOfferV2ApiResponse"/>
     /// </summary>
-    public interface IAcceptAssetOfferV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationAcceptOfferResponseV2?>
+    public interface IAcceptAssetOfferV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationTransactionResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -415,7 +415,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IBuyListedAssetV2ApiResponse"/>
     /// </summary>
-    public interface IBuyListedAssetV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationBuyAssetResponseV2?>
+    public interface IBuyListedAssetV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationTransactionResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -427,7 +427,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="ICancelAssetOfferV2ApiResponse"/>
     /// </summary>
-    public interface ICancelAssetOfferV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationCancelOfferResponseV2?>
+    public interface ICancelAssetOfferV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationTransactionResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -439,7 +439,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="ICancelListingV2ApiResponse"/>
     /// </summary>
-    public interface ICancelListingV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationCancelAssetListingResponseV2?>
+    public interface ICancelListingV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationTransactionResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -1123,11 +1123,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.AutomationAcceptOfferResponseV2? Ok()
+            public BeamAutomationClient.Model.AutomationTransactionResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationAcceptOfferResponseV2>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationTransactionResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1136,7 +1136,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationAcceptOfferResponseV2? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationTransactionResponse? result)
             {
                 result = null;
 
@@ -1384,11 +1384,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.AutomationBuyAssetResponseV2? Ok()
+            public BeamAutomationClient.Model.AutomationTransactionResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationBuyAssetResponseV2>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationTransactionResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1397,7 +1397,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationBuyAssetResponseV2? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationTransactionResponse? result)
             {
                 result = null;
 
@@ -1645,11 +1645,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.AutomationCancelOfferResponseV2? Ok()
+            public BeamAutomationClient.Model.AutomationTransactionResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationCancelOfferResponseV2>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationTransactionResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1658,7 +1658,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationCancelOfferResponseV2? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationTransactionResponse? result)
             {
                 result = null;
 
@@ -1919,11 +1919,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.AutomationCancelAssetListingResponseV2? Ok()
+            public BeamAutomationClient.Model.AutomationTransactionResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationCancelAssetListingResponseV2>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationTransactionResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1932,7 +1932,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationCancelAssetListingResponseV2? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationTransactionResponse? result)
             {
                 result = null;
 

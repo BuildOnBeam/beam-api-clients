@@ -37,277 +37,16 @@ namespace BeamAutomationClient.Model
         /// <param name="address">address</param>
         /// <param name="chainId">chainId</param>
         /// <param name="name">name</param>
-        /// <param name="type">type</param>
         [JsonConstructor]
-        public AutomationAddContractRequestInput(string address, int chainId, string name, TypeEnum type)
+        public AutomationAddContractRequestInput(string address, int chainId, string name)
         {
             Address = address;
             ChainId = chainId;
             Name = name;
-            Type = type;
             OnCreated();
         }
 
         partial void OnCreated();
-
-        /// <summary>
-        /// Defines Type
-        /// </summary>
-        [JsonConverter(typeof(TypeEnumJsonConverter))]
-        public enum TypeEnum
-        {
-            /// <summary>
-            /// Enum ERC20 for value: ERC20
-            /// </summary>
-            ERC20 = 1,
-
-            /// <summary>
-            /// Enum ERC721 for value: ERC721
-            /// </summary>
-            ERC721 = 2,
-
-            /// <summary>
-            /// Enum ERC1155 for value: ERC1155
-            /// </summary>
-            ERC1155 = 3,
-
-            /// <summary>
-            /// Enum SEAPORT for value: SEAPORT
-            /// </summary>
-            SEAPORT = 4,
-
-            /// <summary>
-            /// Enum UNISWAPV2 for value: UNISWAPV2
-            /// </summary>
-            UNISWAPV2 = 5,
-
-            /// <summary>
-            /// Enum WETH for value: WETH
-            /// </summary>
-            WETH = 6
-        }
-
-        /// <summary>
-        /// Returns a <see cref="TypeEnum"/>
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public static TypeEnum TypeEnumFromString(string value)
-        {
-            if (value.Equals("ERC20"))
-                return TypeEnum.ERC20;
-
-            if (value.Equals("ERC721"))
-                return TypeEnum.ERC721;
-
-            if (value.Equals("ERC1155"))
-                return TypeEnum.ERC1155;
-
-            if (value.Equals("SEAPORT"))
-                return TypeEnum.SEAPORT;
-
-            if (value.Equals("UNISWAPV2"))
-                return TypeEnum.UNISWAPV2;
-
-            if (value.Equals("WETH"))
-                return TypeEnum.WETH;
-
-            throw new NotImplementedException($"Could not convert value to type TypeEnum: '{value}'");
-        }
-
-        /// <summary>
-        /// Returns a <see cref="TypeEnum"/>
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public static TypeEnum? TypeEnumFromStringOrDefault(string value)
-        {
-            if (value.Equals("ERC20"))
-                return TypeEnum.ERC20;
-
-            if (value.Equals("ERC721"))
-                return TypeEnum.ERC721;
-
-            if (value.Equals("ERC1155"))
-                return TypeEnum.ERC1155;
-
-            if (value.Equals("SEAPORT"))
-                return TypeEnum.SEAPORT;
-
-            if (value.Equals("UNISWAPV2"))
-                return TypeEnum.UNISWAPV2;
-
-            if (value.Equals("WETH"))
-                return TypeEnum.WETH;
-
-            return null;
-        }
-
-        /// <summary>
-        /// Converts the <see cref="TypeEnum"/> to the json value
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public static string TypeEnumToJsonValue(TypeEnum value)
-        {
-            if (value == TypeEnum.ERC20)
-                return "ERC20";
-
-            if (value == TypeEnum.ERC721)
-                return "ERC721";
-
-            if (value == TypeEnum.ERC1155)
-                return "ERC1155";
-
-            if (value == TypeEnum.SEAPORT)
-                return "SEAPORT";
-
-            if (value == TypeEnum.UNISWAPV2)
-                return "UNISWAPV2";
-
-            if (value == TypeEnum.WETH)
-                return "WETH";
-
-            throw new NotImplementedException($"Value could not be handled: '{value}'");
-        }
-
-        /// <summary>
-        /// Converts <see cref="TypeEnum"/> to and from the JSON value
-        /// </summary>
-        public static class TypeEnumValueConverter
-        {
-            /// <summary>
-            /// Parses a given value to <see cref="TypeEnum"/>
-            /// </summary>
-            /// <param name="value"></param>
-            /// <returns></returns>
-            public static TypeEnum FromString(string value)
-            {
-                    if (value.Equals("ERC20"))
-                        return TypeEnum.ERC20;
-
-                    if (value.Equals("ERC721"))
-                        return TypeEnum.ERC721;
-
-                    if (value.Equals("ERC1155"))
-                        return TypeEnum.ERC1155;
-
-                    if (value.Equals("SEAPORT"))
-                        return TypeEnum.SEAPORT;
-
-                    if (value.Equals("UNISWAPV2"))
-                        return TypeEnum.UNISWAPV2;
-
-                    if (value.Equals("WETH"))
-                        return TypeEnum.WETH;
-
-                throw new NotImplementedException($"Could not convert value to type TypeEnum: '{value}'");
-            }
-
-            /// <summary>
-            /// Parses a given value to <see cref="TypeEnum"/>
-            /// </summary>
-            /// <param name="value"></param>
-            /// <returns></returns>
-            public static TypeEnum? FromStringOrDefault(string value)
-            {
-                    if (value.Equals("ERC20"))
-                        return TypeEnum.ERC20;
-
-                    if (value.Equals("ERC721"))
-                        return TypeEnum.ERC721;
-
-                    if (value.Equals("ERC1155"))
-                        return TypeEnum.ERC1155;
-
-                    if (value.Equals("SEAPORT"))
-                        return TypeEnum.SEAPORT;
-
-                    if (value.Equals("UNISWAPV2"))
-                        return TypeEnum.UNISWAPV2;
-
-                    if (value.Equals("WETH"))
-                        return TypeEnum.WETH;
-
-                return null;
-            }
-
-            /// <summary>
-            /// Converts the <see cref="TypeEnum"/> to the json value
-            /// </summary>
-            /// <param name="value"></param>
-            /// <returns></returns>
-            /// <exception cref="NotImplementedException"></exception>
-            public static string ToJsonValue(TypeEnum value)
-            {
-                        if (value == TypeEnum.ERC20)
-                            return "ERC20";
-
-                        if (value == TypeEnum.ERC721)
-                            return "ERC721";
-
-                        if (value == TypeEnum.ERC1155)
-                            return "ERC1155";
-
-                        if (value == TypeEnum.SEAPORT)
-                            return "SEAPORT";
-
-                        if (value == TypeEnum.UNISWAPV2)
-                            return "UNISWAPV2";
-
-                        if (value == TypeEnum.WETH)
-                            return "WETH";
-
-                throw new NotImplementedException($"Value could not be handled: '{value}'");
-            }
-        }
-
-        /// <summary>
-        /// A Json converter for type <see cref="TypeEnum"/>
-        /// </summary>
-        /// <exception cref="NotImplementedException"></exception>
-        public class TypeEnumJsonConverter : JsonConverter<TypeEnum>
-        {
-            /// <summary>
-            /// Returns a TypeEnum from the Json object
-            /// </summary>
-            /// <param name="reader"></param>
-            /// <param name="typeToConvert"></param>
-            /// <param name="options"></param>
-            /// <returns></returns>
-            public override TypeEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            {
-                string? rawValue = reader.GetString();
-
-                TypeEnum? result = rawValue == null
-                    ? null
-                    : TypeEnumValueConverter.FromStringOrDefault(rawValue);
-
-                if (result != null)
-                    return result.Value;
-
-                throw new JsonException();
-            }
-
-            /// <summary>
-            /// Writes the TypeEnum to the json writer
-            /// </summary>
-            /// <param name="writer"></param>
-            /// <param name="typeEnum"></param>
-            /// <param name="options"></param>
-            public override void Write(Utf8JsonWriter writer, TypeEnum typeEnum, JsonSerializerOptions options)
-            {
-                writer.WriteStringValue(TypeEnumValueConverter.ToJsonValue(typeEnum));
-            }
-        }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [JsonPropertyName("type")]
-        public TypeEnum Type { get; set; }
 
         /// <summary>
         /// Gets or Sets Address
@@ -338,7 +77,6 @@ namespace BeamAutomationClient.Model
             sb.Append("  Address: ").Append(Address).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -379,7 +117,6 @@ namespace BeamAutomationClient.Model
             Option<string?> address = default;
             Option<int?> chainId = default;
             Option<string?> name = default;
-            Option<AutomationAddContractRequestInput.TypeEnum?> type = default;
 
             while (utf8JsonReader.Read())
             {
@@ -406,11 +143,6 @@ namespace BeamAutomationClient.Model
                         case "name":
                             name = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "type":
-                            string? typeRawValue = utf8JsonReader.GetString();
-                            if (typeRawValue != null)
-                                type = new Option<AutomationAddContractRequestInput.TypeEnum?>(AutomationAddContractRequestInput.TypeEnumFromStringOrDefault(typeRawValue));
-                            break;
                         default:
                             break;
                     }
@@ -426,9 +158,6 @@ namespace BeamAutomationClient.Model
             if (!name.IsSet)
                 throw new ArgumentException("Property is required for class AutomationAddContractRequestInput.", nameof(name));
 
-            if (!type.IsSet)
-                throw new ArgumentException("Property is required for class AutomationAddContractRequestInput.", nameof(type));
-
             if (address.IsSet && address.Value == null)
                 throw new ArgumentNullException(nameof(address), "Property is not nullable for class AutomationAddContractRequestInput.");
 
@@ -438,10 +167,7 @@ namespace BeamAutomationClient.Model
             if (name.IsSet && name.Value == null)
                 throw new ArgumentNullException(nameof(name), "Property is not nullable for class AutomationAddContractRequestInput.");
 
-            if (type.IsSet && type.Value == null)
-                throw new ArgumentNullException(nameof(type), "Property is not nullable for class AutomationAddContractRequestInput.");
-
-            return new AutomationAddContractRequestInput(address.Value!, chainId.Value!.Value!, name.Value!, type.Value!.Value!);
+            return new AutomationAddContractRequestInput(address.Value!, chainId.Value!.Value!, name.Value!);
         }
 
         /// <summary>
@@ -479,9 +205,6 @@ namespace BeamAutomationClient.Model
             writer.WriteNumber("chainId", automationAddContractRequestInput.ChainId);
 
             writer.WriteString("name", automationAddContractRequestInput.Name);
-
-            var typeRawValue = AutomationAddContractRequestInput.TypeEnumToJsonValue(automationAddContractRequestInput.Type);
-            writer.WriteString("type", typeRawValue);
         }
     }
 }

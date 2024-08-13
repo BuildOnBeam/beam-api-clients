@@ -27,12 +27,12 @@ using BeamAutomationClient.Client;
 namespace BeamAutomationClient.Model
 {
     /// <summary>
-    /// AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInner
+    /// AutomationTransactionResponseIntentInteractionsInner
     /// </summary>
-    public partial class AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInner : IValidatableObject
+    public partial class AutomationTransactionResponseIntentInteractionsInner : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInner" /> class.
+        /// Initializes a new instance of the <see cref="AutomationTransactionResponseIntentInteractionsInner" /> class.
         /// </summary>
         /// <param name="contract">contract</param>
         /// <param name="functionArgs">functionArgs</param>
@@ -40,7 +40,7 @@ namespace BeamAutomationClient.Model
         /// <param name="to">to</param>
         /// <param name="value">value</param>
         [JsonConstructor]
-        public AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInner(Option<string?> contract = default, Option<List<Object>?> functionArgs = default, Option<string?> functionName = default, Option<string?> to = default, Option<string?> value = default)
+        public AutomationTransactionResponseIntentInteractionsInner(Option<string?> contract = default, Option<List<Object>?> functionArgs = default, Option<string?> functionName = default, Option<string?> to = default, Option<string?> value = default)
         {
             ContractOption = contract;
             FunctionArgsOption = functionArgs;
@@ -124,7 +124,7 @@ namespace BeamAutomationClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInner {\n");
+            sb.Append("class AutomationTransactionResponseIntentInteractionsInner {\n");
             sb.Append("  Contract: ").Append(Contract).Append("\n");
             sb.Append("  FunctionArgs: ").Append(FunctionArgs).Append("\n");
             sb.Append("  FunctionName: ").Append(FunctionName).Append("\n");
@@ -146,19 +146,19 @@ namespace BeamAutomationClient.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInner" />
+    /// A Json converter for type <see cref="AutomationTransactionResponseIntentInteractionsInner" />
     /// </summary>
-    public class AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInnerJsonConverter : JsonConverter<AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInner>
+    public class AutomationTransactionResponseIntentInteractionsInnerJsonConverter : JsonConverter<AutomationTransactionResponseIntentInteractionsInner>
     {
         /// <summary>
-        /// Deserializes json to <see cref="AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInner" />
+        /// Deserializes json to <see cref="AutomationTransactionResponseIntentInteractionsInner" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInner Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override AutomationTransactionResponseIntentInteractionsInner Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -211,78 +211,78 @@ namespace BeamAutomationClient.Model
             }
 
             if (contract.IsSet && contract.Value == null)
-                throw new ArgumentNullException(nameof(contract), "Property is not nullable for class AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInner.");
+                throw new ArgumentNullException(nameof(contract), "Property is not nullable for class AutomationTransactionResponseIntentInteractionsInner.");
 
             if (functionArgs.IsSet && functionArgs.Value == null)
-                throw new ArgumentNullException(nameof(functionArgs), "Property is not nullable for class AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInner.");
+                throw new ArgumentNullException(nameof(functionArgs), "Property is not nullable for class AutomationTransactionResponseIntentInteractionsInner.");
 
             if (functionName.IsSet && functionName.Value == null)
-                throw new ArgumentNullException(nameof(functionName), "Property is not nullable for class AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInner.");
+                throw new ArgumentNullException(nameof(functionName), "Property is not nullable for class AutomationTransactionResponseIntentInteractionsInner.");
 
             if (to.IsSet && to.Value == null)
-                throw new ArgumentNullException(nameof(to), "Property is not nullable for class AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInner.");
+                throw new ArgumentNullException(nameof(to), "Property is not nullable for class AutomationTransactionResponseIntentInteractionsInner.");
 
             if (value.IsSet && value.Value == null)
-                throw new ArgumentNullException(nameof(value), "Property is not nullable for class AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInner.");
+                throw new ArgumentNullException(nameof(value), "Property is not nullable for class AutomationTransactionResponseIntentInteractionsInner.");
 
-            return new AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInner(contract, functionArgs, functionName, to, value);
+            return new AutomationTransactionResponseIntentInteractionsInner(contract, functionArgs, functionName, to, value);
         }
 
         /// <summary>
-        /// Serializes a <see cref="AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInner" />
+        /// Serializes a <see cref="AutomationTransactionResponseIntentInteractionsInner" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="automationGetTransactionsResponseV2DataInnerIntentInteractionsInner"></param>
+        /// <param name="automationTransactionResponseIntentInteractionsInner"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInner automationGetTransactionsResponseV2DataInnerIntentInteractionsInner, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, AutomationTransactionResponseIntentInteractionsInner automationTransactionResponseIntentInteractionsInner, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(ref writer, automationGetTransactionsResponseV2DataInnerIntentInteractionsInner, jsonSerializerOptions);
+            WriteProperties(ref writer, automationTransactionResponseIntentInteractionsInner, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInner" />
+        /// Serializes the properties of <see cref="AutomationTransactionResponseIntentInteractionsInner" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="automationGetTransactionsResponseV2DataInnerIntentInteractionsInner"></param>
+        /// <param name="automationTransactionResponseIntentInteractionsInner"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(ref Utf8JsonWriter writer, AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInner automationGetTransactionsResponseV2DataInnerIntentInteractionsInner, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(ref Utf8JsonWriter writer, AutomationTransactionResponseIntentInteractionsInner automationTransactionResponseIntentInteractionsInner, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (automationGetTransactionsResponseV2DataInnerIntentInteractionsInner.ContractOption.IsSet && automationGetTransactionsResponseV2DataInnerIntentInteractionsInner.Contract == null)
-                throw new ArgumentNullException(nameof(automationGetTransactionsResponseV2DataInnerIntentInteractionsInner.Contract), "Property is required for class AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInner.");
+            if (automationTransactionResponseIntentInteractionsInner.ContractOption.IsSet && automationTransactionResponseIntentInteractionsInner.Contract == null)
+                throw new ArgumentNullException(nameof(automationTransactionResponseIntentInteractionsInner.Contract), "Property is required for class AutomationTransactionResponseIntentInteractionsInner.");
 
-            if (automationGetTransactionsResponseV2DataInnerIntentInteractionsInner.FunctionArgsOption.IsSet && automationGetTransactionsResponseV2DataInnerIntentInteractionsInner.FunctionArgs == null)
-                throw new ArgumentNullException(nameof(automationGetTransactionsResponseV2DataInnerIntentInteractionsInner.FunctionArgs), "Property is required for class AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInner.");
+            if (automationTransactionResponseIntentInteractionsInner.FunctionArgsOption.IsSet && automationTransactionResponseIntentInteractionsInner.FunctionArgs == null)
+                throw new ArgumentNullException(nameof(automationTransactionResponseIntentInteractionsInner.FunctionArgs), "Property is required for class AutomationTransactionResponseIntentInteractionsInner.");
 
-            if (automationGetTransactionsResponseV2DataInnerIntentInteractionsInner.FunctionNameOption.IsSet && automationGetTransactionsResponseV2DataInnerIntentInteractionsInner.FunctionName == null)
-                throw new ArgumentNullException(nameof(automationGetTransactionsResponseV2DataInnerIntentInteractionsInner.FunctionName), "Property is required for class AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInner.");
+            if (automationTransactionResponseIntentInteractionsInner.FunctionNameOption.IsSet && automationTransactionResponseIntentInteractionsInner.FunctionName == null)
+                throw new ArgumentNullException(nameof(automationTransactionResponseIntentInteractionsInner.FunctionName), "Property is required for class AutomationTransactionResponseIntentInteractionsInner.");
 
-            if (automationGetTransactionsResponseV2DataInnerIntentInteractionsInner.ToOption.IsSet && automationGetTransactionsResponseV2DataInnerIntentInteractionsInner.To == null)
-                throw new ArgumentNullException(nameof(automationGetTransactionsResponseV2DataInnerIntentInteractionsInner.To), "Property is required for class AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInner.");
+            if (automationTransactionResponseIntentInteractionsInner.ToOption.IsSet && automationTransactionResponseIntentInteractionsInner.To == null)
+                throw new ArgumentNullException(nameof(automationTransactionResponseIntentInteractionsInner.To), "Property is required for class AutomationTransactionResponseIntentInteractionsInner.");
 
-            if (automationGetTransactionsResponseV2DataInnerIntentInteractionsInner.ValueOption.IsSet && automationGetTransactionsResponseV2DataInnerIntentInteractionsInner.Value == null)
-                throw new ArgumentNullException(nameof(automationGetTransactionsResponseV2DataInnerIntentInteractionsInner.Value), "Property is required for class AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInner.");
+            if (automationTransactionResponseIntentInteractionsInner.ValueOption.IsSet && automationTransactionResponseIntentInteractionsInner.Value == null)
+                throw new ArgumentNullException(nameof(automationTransactionResponseIntentInteractionsInner.Value), "Property is required for class AutomationTransactionResponseIntentInteractionsInner.");
 
-            if (automationGetTransactionsResponseV2DataInnerIntentInteractionsInner.ContractOption.IsSet)
-                writer.WriteString("contract", automationGetTransactionsResponseV2DataInnerIntentInteractionsInner.Contract);
+            if (automationTransactionResponseIntentInteractionsInner.ContractOption.IsSet)
+                writer.WriteString("contract", automationTransactionResponseIntentInteractionsInner.Contract);
 
-            if (automationGetTransactionsResponseV2DataInnerIntentInteractionsInner.FunctionArgsOption.IsSet)
+            if (automationTransactionResponseIntentInteractionsInner.FunctionArgsOption.IsSet)
             {
                 writer.WritePropertyName("functionArgs");
-                JsonSerializer.Serialize(writer, automationGetTransactionsResponseV2DataInnerIntentInteractionsInner.FunctionArgs, jsonSerializerOptions);
+                JsonSerializer.Serialize(writer, automationTransactionResponseIntentInteractionsInner.FunctionArgs, jsonSerializerOptions);
             }
-            if (automationGetTransactionsResponseV2DataInnerIntentInteractionsInner.FunctionNameOption.IsSet)
-                writer.WriteString("functionName", automationGetTransactionsResponseV2DataInnerIntentInteractionsInner.FunctionName);
+            if (automationTransactionResponseIntentInteractionsInner.FunctionNameOption.IsSet)
+                writer.WriteString("functionName", automationTransactionResponseIntentInteractionsInner.FunctionName);
 
-            if (automationGetTransactionsResponseV2DataInnerIntentInteractionsInner.ToOption.IsSet)
-                writer.WriteString("to", automationGetTransactionsResponseV2DataInnerIntentInteractionsInner.To);
+            if (automationTransactionResponseIntentInteractionsInner.ToOption.IsSet)
+                writer.WriteString("to", automationTransactionResponseIntentInteractionsInner.To);
 
-            if (automationGetTransactionsResponseV2DataInnerIntentInteractionsInner.ValueOption.IsSet)
-                writer.WriteString("value", automationGetTransactionsResponseV2DataInnerIntentInteractionsInner.Value);
+            if (automationTransactionResponseIntentInteractionsInner.ValueOption.IsSet)
+                writer.WriteString("value", automationTransactionResponseIntentInteractionsInner.Value);
         }
     }
 }

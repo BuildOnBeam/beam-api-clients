@@ -62,7 +62,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="ITradeAssetsApiResponse"/>
     /// </summary>
-    public interface ITradeAssetsApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationTradeTokensResponse?>
+    public interface ITradeAssetsApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationTransactionResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -344,11 +344,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.AutomationTradeTokensResponse? Ok()
+            public BeamAutomationClient.Model.AutomationTransactionResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationTradeTokensResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationTransactionResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -357,7 +357,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationTradeTokensResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationTransactionResponse? result)
             {
                 result = null;
 

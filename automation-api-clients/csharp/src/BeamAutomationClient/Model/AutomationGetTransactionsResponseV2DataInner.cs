@@ -41,7 +41,7 @@ namespace BeamAutomationClient.Model
         /// <param name="updatedAt">updatedAt</param>
         /// <param name="transaction">transaction</param>
         [JsonConstructor]
-        public AutomationGetTransactionsResponseV2DataInner(decimal chainId, DateTime createdAt, string id, AutomationGetTransactionsResponseV2DataInnerIntent intent, DateTime updatedAt, Option<AutomationGetTransactionsResponseV2DataInnerTransaction?> transaction = default)
+        public AutomationGetTransactionsResponseV2DataInner(decimal chainId, DateTime createdAt, string id, AutomationTransactionResponseIntent intent, DateTime updatedAt, Option<AutomationTransactionResponseTransaction?> transaction = default)
         {
             ChainId = chainId;
             CreatedAt = createdAt;
@@ -76,7 +76,7 @@ namespace BeamAutomationClient.Model
         /// Gets or Sets Intent
         /// </summary>
         [JsonPropertyName("intent")]
-        public AutomationGetTransactionsResponseV2DataInnerIntent Intent { get; set; }
+        public AutomationTransactionResponseIntent Intent { get; set; }
 
         /// <summary>
         /// Gets or Sets UpdatedAt
@@ -89,13 +89,13 @@ namespace BeamAutomationClient.Model
         /// </summary>
         [JsonIgnore]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<AutomationGetTransactionsResponseV2DataInnerTransaction?> TransactionOption { get; private set; }
+        public Option<AutomationTransactionResponseTransaction?> TransactionOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Transaction
         /// </summary>
         [JsonPropertyName("transaction")]
-        public AutomationGetTransactionsResponseV2DataInnerTransaction? Transaction { get { return this. TransactionOption; } set { this.TransactionOption = new(value); } }
+        public AutomationTransactionResponseTransaction? Transaction { get { return this. TransactionOption; } set { this.TransactionOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -161,9 +161,9 @@ namespace BeamAutomationClient.Model
             Option<decimal?> chainId = default;
             Option<DateTime?> createdAt = default;
             Option<string?> id = default;
-            Option<AutomationGetTransactionsResponseV2DataInnerIntent?> intent = default;
+            Option<AutomationTransactionResponseIntent?> intent = default;
             Option<DateTime?> updatedAt = default;
-            Option<AutomationGetTransactionsResponseV2DataInnerTransaction?> transaction = default;
+            Option<AutomationTransactionResponseTransaction?> transaction = default;
 
             while (utf8JsonReader.Read())
             {
@@ -193,7 +193,7 @@ namespace BeamAutomationClient.Model
                             break;
                         case "intent":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                intent = new Option<AutomationGetTransactionsResponseV2DataInnerIntent?>(JsonSerializer.Deserialize<AutomationGetTransactionsResponseV2DataInnerIntent>(ref utf8JsonReader, jsonSerializerOptions)!);
+                                intent = new Option<AutomationTransactionResponseIntent?>(JsonSerializer.Deserialize<AutomationTransactionResponseIntent>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "updatedAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
@@ -201,7 +201,7 @@ namespace BeamAutomationClient.Model
                             break;
                         case "transaction":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                transaction = new Option<AutomationGetTransactionsResponseV2DataInnerTransaction?>(JsonSerializer.Deserialize<AutomationGetTransactionsResponseV2DataInnerTransaction>(ref utf8JsonReader, jsonSerializerOptions));
+                                transaction = new Option<AutomationTransactionResponseTransaction?>(JsonSerializer.Deserialize<AutomationTransactionResponseTransaction>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;

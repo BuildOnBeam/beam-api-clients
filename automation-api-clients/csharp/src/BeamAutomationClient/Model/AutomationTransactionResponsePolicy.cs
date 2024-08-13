@@ -27,28 +27,35 @@ using BeamAutomationClient.Client;
 namespace BeamAutomationClient.Model
 {
     /// <summary>
-    /// AutomationGetTransactionResponseV2ProfileWallet
+    /// Policy information related to the transaction
     /// </summary>
-    public partial class AutomationGetTransactionResponseV2ProfileWallet : IValidatableObject
+    public partial class AutomationTransactionResponsePolicy : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AutomationGetTransactionResponseV2ProfileWallet" /> class.
+        /// Initializes a new instance of the <see cref="AutomationTransactionResponsePolicy" /> class.
         /// </summary>
-        /// <param name="address">address</param>
+        /// <param name="id">id</param>
         [JsonConstructor]
-        public AutomationGetTransactionResponseV2ProfileWallet(string address)
+        public AutomationTransactionResponsePolicy(Option<string?> id = default)
         {
-            Address = address;
+            IdOption = id;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets Address
+        /// Used to track the state of Id
         /// </summary>
-        [JsonPropertyName("address")]
-        public string Address { get; set; }
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> IdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Id
+        /// </summary>
+        [JsonPropertyName("id")]
+        public string? Id { get { return this. IdOption; } set { this.IdOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -57,8 +64,8 @@ namespace BeamAutomationClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class AutomationGetTransactionResponseV2ProfileWallet {\n");
-            sb.Append("  Address: ").Append(Address).Append("\n");
+            sb.Append("class AutomationTransactionResponsePolicy {\n");
+            sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,19 +82,19 @@ namespace BeamAutomationClient.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="AutomationGetTransactionResponseV2ProfileWallet" />
+    /// A Json converter for type <see cref="AutomationTransactionResponsePolicy" />
     /// </summary>
-    public class AutomationGetTransactionResponseV2ProfileWalletJsonConverter : JsonConverter<AutomationGetTransactionResponseV2ProfileWallet>
+    public class AutomationTransactionResponsePolicyJsonConverter : JsonConverter<AutomationTransactionResponsePolicy>
     {
         /// <summary>
-        /// Deserializes json to <see cref="AutomationGetTransactionResponseV2ProfileWallet" />
+        /// Deserializes json to <see cref="AutomationTransactionResponsePolicy" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override AutomationGetTransactionResponseV2ProfileWallet Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override AutomationTransactionResponsePolicy Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -96,7 +103,7 @@ namespace BeamAutomationClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<string?> address = default;
+            Option<string?> id = default;
 
             while (utf8JsonReader.Read())
             {
@@ -113,8 +120,8 @@ namespace BeamAutomationClient.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "address":
-                            address = new Option<string?>(utf8JsonReader.GetString()!);
+                        case "id":
+                            id = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -122,43 +129,38 @@ namespace BeamAutomationClient.Model
                 }
             }
 
-            if (!address.IsSet)
-                throw new ArgumentException("Property is required for class AutomationGetTransactionResponseV2ProfileWallet.", nameof(address));
-
-            if (address.IsSet && address.Value == null)
-                throw new ArgumentNullException(nameof(address), "Property is not nullable for class AutomationGetTransactionResponseV2ProfileWallet.");
-
-            return new AutomationGetTransactionResponseV2ProfileWallet(address.Value!);
+            return new AutomationTransactionResponsePolicy(id);
         }
 
         /// <summary>
-        /// Serializes a <see cref="AutomationGetTransactionResponseV2ProfileWallet" />
+        /// Serializes a <see cref="AutomationTransactionResponsePolicy" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="automationGetTransactionResponseV2ProfileWallet"></param>
+        /// <param name="automationTransactionResponsePolicy"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, AutomationGetTransactionResponseV2ProfileWallet automationGetTransactionResponseV2ProfileWallet, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, AutomationTransactionResponsePolicy automationTransactionResponsePolicy, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(ref writer, automationGetTransactionResponseV2ProfileWallet, jsonSerializerOptions);
+            WriteProperties(ref writer, automationTransactionResponsePolicy, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="AutomationGetTransactionResponseV2ProfileWallet" />
+        /// Serializes the properties of <see cref="AutomationTransactionResponsePolicy" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="automationGetTransactionResponseV2ProfileWallet"></param>
+        /// <param name="automationTransactionResponsePolicy"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(ref Utf8JsonWriter writer, AutomationGetTransactionResponseV2ProfileWallet automationGetTransactionResponseV2ProfileWallet, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(ref Utf8JsonWriter writer, AutomationTransactionResponsePolicy automationTransactionResponsePolicy, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (automationGetTransactionResponseV2ProfileWallet.Address == null)
-                throw new ArgumentNullException(nameof(automationGetTransactionResponseV2ProfileWallet.Address), "Property is required for class AutomationGetTransactionResponseV2ProfileWallet.");
-
-            writer.WriteString("address", automationGetTransactionResponseV2ProfileWallet.Address);
+            if (automationTransactionResponsePolicy.IdOption.IsSet)
+                if (automationTransactionResponsePolicy.IdOption.Value != null)
+                    writer.WriteString("id", automationTransactionResponsePolicy.Id);
+                else
+                    writer.WriteNull("id");
         }
     }
 }

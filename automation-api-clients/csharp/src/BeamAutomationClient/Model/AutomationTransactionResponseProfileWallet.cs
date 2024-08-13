@@ -27,28 +27,28 @@ using BeamAutomationClient.Client;
 namespace BeamAutomationClient.Model
 {
     /// <summary>
-    /// AutomationCancelAssetListingResponseV2
+    /// AutomationTransactionResponseProfileWallet
     /// </summary>
-    public partial class AutomationCancelAssetListingResponseV2 : IValidatableObject
+    public partial class AutomationTransactionResponseProfileWallet : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AutomationCancelAssetListingResponseV2" /> class.
+        /// Initializes a new instance of the <see cref="AutomationTransactionResponseProfileWallet" /> class.
         /// </summary>
-        /// <param name="success">success</param>
+        /// <param name="address">address</param>
         [JsonConstructor]
-        public AutomationCancelAssetListingResponseV2(bool success)
+        public AutomationTransactionResponseProfileWallet(string address)
         {
-            Success = success;
+            Address = address;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets Success
+        /// Gets or Sets Address
         /// </summary>
-        [JsonPropertyName("success")]
-        public bool Success { get; set; }
+        [JsonPropertyName("address")]
+        public string Address { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -57,8 +57,8 @@ namespace BeamAutomationClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class AutomationCancelAssetListingResponseV2 {\n");
-            sb.Append("  Success: ").Append(Success).Append("\n");
+            sb.Append("class AutomationTransactionResponseProfileWallet {\n");
+            sb.Append("  Address: ").Append(Address).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,19 +75,19 @@ namespace BeamAutomationClient.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="AutomationCancelAssetListingResponseV2" />
+    /// A Json converter for type <see cref="AutomationTransactionResponseProfileWallet" />
     /// </summary>
-    public class AutomationCancelAssetListingResponseV2JsonConverter : JsonConverter<AutomationCancelAssetListingResponseV2>
+    public class AutomationTransactionResponseProfileWalletJsonConverter : JsonConverter<AutomationTransactionResponseProfileWallet>
     {
         /// <summary>
-        /// Deserializes json to <see cref="AutomationCancelAssetListingResponseV2" />
+        /// Deserializes json to <see cref="AutomationTransactionResponseProfileWallet" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override AutomationCancelAssetListingResponseV2 Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override AutomationTransactionResponseProfileWallet Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -96,7 +96,7 @@ namespace BeamAutomationClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<bool?> success = default;
+            Option<string?> address = default;
 
             while (utf8JsonReader.Read())
             {
@@ -113,9 +113,8 @@ namespace BeamAutomationClient.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "success":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                success = new Option<bool?>(utf8JsonReader.GetBoolean());
+                        case "address":
+                            address = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         default:
                             break;
@@ -123,40 +122,43 @@ namespace BeamAutomationClient.Model
                 }
             }
 
-            if (!success.IsSet)
-                throw new ArgumentException("Property is required for class AutomationCancelAssetListingResponseV2.", nameof(success));
+            if (!address.IsSet)
+                throw new ArgumentException("Property is required for class AutomationTransactionResponseProfileWallet.", nameof(address));
 
-            if (success.IsSet && success.Value == null)
-                throw new ArgumentNullException(nameof(success), "Property is not nullable for class AutomationCancelAssetListingResponseV2.");
+            if (address.IsSet && address.Value == null)
+                throw new ArgumentNullException(nameof(address), "Property is not nullable for class AutomationTransactionResponseProfileWallet.");
 
-            return new AutomationCancelAssetListingResponseV2(success.Value!.Value!);
+            return new AutomationTransactionResponseProfileWallet(address.Value!);
         }
 
         /// <summary>
-        /// Serializes a <see cref="AutomationCancelAssetListingResponseV2" />
+        /// Serializes a <see cref="AutomationTransactionResponseProfileWallet" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="automationCancelAssetListingResponseV2"></param>
+        /// <param name="automationTransactionResponseProfileWallet"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, AutomationCancelAssetListingResponseV2 automationCancelAssetListingResponseV2, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, AutomationTransactionResponseProfileWallet automationTransactionResponseProfileWallet, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(ref writer, automationCancelAssetListingResponseV2, jsonSerializerOptions);
+            WriteProperties(ref writer, automationTransactionResponseProfileWallet, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="AutomationCancelAssetListingResponseV2" />
+        /// Serializes the properties of <see cref="AutomationTransactionResponseProfileWallet" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="automationCancelAssetListingResponseV2"></param>
+        /// <param name="automationTransactionResponseProfileWallet"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(ref Utf8JsonWriter writer, AutomationCancelAssetListingResponseV2 automationCancelAssetListingResponseV2, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(ref Utf8JsonWriter writer, AutomationTransactionResponseProfileWallet automationTransactionResponseProfileWallet, JsonSerializerOptions jsonSerializerOptions)
         {
-            writer.WriteBoolean("success", automationCancelAssetListingResponseV2.Success);
+            if (automationTransactionResponseProfileWallet.Address == null)
+                throw new ArgumentNullException(nameof(automationTransactionResponseProfileWallet.Address), "Property is required for class AutomationTransactionResponseProfileWallet.");
+
+            writer.WriteString("address", automationTransactionResponseProfileWallet.Address);
         }
     }
 }

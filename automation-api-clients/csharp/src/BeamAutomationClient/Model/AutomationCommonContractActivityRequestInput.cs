@@ -27,20 +27,22 @@ using BeamAutomationClient.Client;
 namespace BeamAutomationClient.Model
 {
     /// <summary>
-    /// AutomationCommonActivityRequestInput
+    /// AutomationCommonContractActivityRequestInput
     /// </summary>
-    public partial class AutomationCommonActivityRequestInput : IValidatableObject
+    public partial class AutomationCommonContractActivityRequestInput : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AutomationCommonActivityRequestInput" /> class.
+        /// Initializes a new instance of the <see cref="AutomationCommonContractActivityRequestInput" /> class.
         /// </summary>
         /// <param name="chainId">chainId (default to 13337M)</param>
+        /// <param name="continuation">continuation</param>
         /// <param name="limit">limit (default to 20M)</param>
         /// <param name="types">types</param>
         [JsonConstructor]
-        public AutomationCommonActivityRequestInput(Option<decimal?> chainId = default, Option<decimal?> limit = default, Option<List<AutomationCommonActivityRequestInput.TypesEnum>?> types = default)
+        public AutomationCommonContractActivityRequestInput(Option<decimal?> chainId = default, Option<string?> continuation = default, Option<decimal?> limit = default, Option<List<AutomationCommonContractActivityRequestInput.TypesEnum>?> types = default)
         {
             ChainIdOption = chainId;
+            ContinuationOption = continuation;
             LimitOption = limit;
             TypesOption = types;
             OnCreated();
@@ -338,6 +340,19 @@ namespace BeamAutomationClient.Model
         public decimal? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of Continuation
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> ContinuationOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Continuation
+        /// </summary>
+        [JsonPropertyName("continuation")]
+        public string? Continuation { get { return this. ContinuationOption; } set { this.ContinuationOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of Limit
         /// </summary>
         [JsonIgnore]
@@ -355,13 +370,13 @@ namespace BeamAutomationClient.Model
         /// </summary>
         [JsonIgnore]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<List<AutomationCommonActivityRequestInput.TypesEnum>?> TypesOption { get; private set; }
+        public Option<List<AutomationCommonContractActivityRequestInput.TypesEnum>?> TypesOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Types
         /// </summary>
         [JsonPropertyName("types")]
-        public List<AutomationCommonActivityRequestInput.TypesEnum>? Types { get { return this. TypesOption; } set { this.TypesOption = new(value); } }
+        public List<AutomationCommonContractActivityRequestInput.TypesEnum>? Types { get { return this. TypesOption; } set { this.TypesOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -370,8 +385,9 @@ namespace BeamAutomationClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class AutomationCommonActivityRequestInput {\n");
+            sb.Append("class AutomationCommonContractActivityRequestInput {\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
+            sb.Append("  Continuation: ").Append(Continuation).Append("\n");
             sb.Append("  Limit: ").Append(Limit).Append("\n");
             sb.Append("  Types: ").Append(Types).Append("\n");
             sb.Append("}\n");
@@ -386,9 +402,9 @@ namespace BeamAutomationClient.Model
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             // Limit (decimal) maximum
-            if (this.LimitOption.IsSet && this.LimitOption.Value > (decimal)100)
+            if (this.LimitOption.IsSet && this.LimitOption.Value > (decimal)50)
             {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Limit, must be a value less than or equal to 100.", new [] { "Limit" });
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Limit, must be a value less than or equal to 50.", new [] { "Limit" });
             }
 
             // Limit (decimal) minimum
@@ -402,19 +418,19 @@ namespace BeamAutomationClient.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="AutomationCommonActivityRequestInput" />
+    /// A Json converter for type <see cref="AutomationCommonContractActivityRequestInput" />
     /// </summary>
-    public class AutomationCommonActivityRequestInputJsonConverter : JsonConverter<AutomationCommonActivityRequestInput>
+    public class AutomationCommonContractActivityRequestInputJsonConverter : JsonConverter<AutomationCommonContractActivityRequestInput>
     {
         /// <summary>
-        /// Deserializes json to <see cref="AutomationCommonActivityRequestInput" />
+        /// Deserializes json to <see cref="AutomationCommonContractActivityRequestInput" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override AutomationCommonActivityRequestInput Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override AutomationCommonContractActivityRequestInput Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -424,8 +440,9 @@ namespace BeamAutomationClient.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<decimal?> chainId = default;
+            Option<string?> continuation = default;
             Option<decimal?> limit = default;
-            Option<List<AutomationCommonActivityRequestInput.TypesEnum>?> types = default;
+            Option<List<AutomationCommonContractActivityRequestInput.TypesEnum>?> types = default;
 
             while (utf8JsonReader.Read())
             {
@@ -446,13 +463,16 @@ namespace BeamAutomationClient.Model
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
+                        case "continuation":
+                            continuation = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         case "limit":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 limit = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "types":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                types = new Option<List<AutomationCommonActivityRequestInput.TypesEnum>?>(JsonSerializer.Deserialize<List<AutomationCommonActivityRequestInput.TypesEnum>>(ref utf8JsonReader, jsonSerializerOptions));
+                                types = new Option<List<AutomationCommonContractActivityRequestInput.TypesEnum>?>(JsonSerializer.Deserialize<List<AutomationCommonContractActivityRequestInput.TypesEnum>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -461,49 +481,55 @@ namespace BeamAutomationClient.Model
             }
 
             if (chainId.IsSet && chainId.Value == null)
-                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class AutomationCommonActivityRequestInput.");
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class AutomationCommonContractActivityRequestInput.");
 
             if (limit.IsSet && limit.Value == null)
-                throw new ArgumentNullException(nameof(limit), "Property is not nullable for class AutomationCommonActivityRequestInput.");
+                throw new ArgumentNullException(nameof(limit), "Property is not nullable for class AutomationCommonContractActivityRequestInput.");
 
-            return new AutomationCommonActivityRequestInput(chainId, limit, types);
+            return new AutomationCommonContractActivityRequestInput(chainId, continuation, limit, types);
         }
 
         /// <summary>
-        /// Serializes a <see cref="AutomationCommonActivityRequestInput" />
+        /// Serializes a <see cref="AutomationCommonContractActivityRequestInput" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="automationCommonActivityRequestInput"></param>
+        /// <param name="automationCommonContractActivityRequestInput"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, AutomationCommonActivityRequestInput automationCommonActivityRequestInput, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, AutomationCommonContractActivityRequestInput automationCommonContractActivityRequestInput, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(ref writer, automationCommonActivityRequestInput, jsonSerializerOptions);
+            WriteProperties(ref writer, automationCommonContractActivityRequestInput, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="AutomationCommonActivityRequestInput" />
+        /// Serializes the properties of <see cref="AutomationCommonContractActivityRequestInput" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="automationCommonActivityRequestInput"></param>
+        /// <param name="automationCommonContractActivityRequestInput"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(ref Utf8JsonWriter writer, AutomationCommonActivityRequestInput automationCommonActivityRequestInput, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(ref Utf8JsonWriter writer, AutomationCommonContractActivityRequestInput automationCommonContractActivityRequestInput, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (automationCommonActivityRequestInput.ChainIdOption.IsSet)
-                writer.WriteNumber("chainId", automationCommonActivityRequestInput.ChainIdOption.Value!.Value);
+            if (automationCommonContractActivityRequestInput.ChainIdOption.IsSet)
+                writer.WriteNumber("chainId", automationCommonContractActivityRequestInput.ChainIdOption.Value!.Value);
 
-            if (automationCommonActivityRequestInput.LimitOption.IsSet)
-                writer.WriteNumber("limit", automationCommonActivityRequestInput.LimitOption.Value!.Value);
+            if (automationCommonContractActivityRequestInput.ContinuationOption.IsSet)
+                if (automationCommonContractActivityRequestInput.ContinuationOption.Value != null)
+                    writer.WriteString("continuation", automationCommonContractActivityRequestInput.Continuation);
+                else
+                    writer.WriteNull("continuation");
 
-            if (automationCommonActivityRequestInput.TypesOption.IsSet)
-                if (automationCommonActivityRequestInput.TypesOption.Value != null)
+            if (automationCommonContractActivityRequestInput.LimitOption.IsSet)
+                writer.WriteNumber("limit", automationCommonContractActivityRequestInput.LimitOption.Value!.Value);
+
+            if (automationCommonContractActivityRequestInput.TypesOption.IsSet)
+                if (automationCommonContractActivityRequestInput.TypesOption.Value != null)
                 {
                     writer.WritePropertyName("types");
-                    JsonSerializer.Serialize(writer, automationCommonActivityRequestInput.Types, jsonSerializerOptions);
+                    JsonSerializer.Serialize(writer, automationCommonContractActivityRequestInput.Types, jsonSerializerOptions);
                 }
                 else
                     writer.WriteNull("types");

@@ -29,15 +29,15 @@ namespace BeamAutomationClient.Model
     /// <summary>
     /// Profile and wallet information related to the transaction
     /// </summary>
-    public partial class AutomationGetTransactionResponseV2Profile : IValidatableObject
+    public partial class AutomationTransactionResponseProfile : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AutomationGetTransactionResponseV2Profile" /> class.
+        /// Initializes a new instance of the <see cref="AutomationTransactionResponseProfile" /> class.
         /// </summary>
         /// <param name="wallet">wallet</param>
         /// <param name="id">id</param>
         [JsonConstructor]
-        public AutomationGetTransactionResponseV2Profile(AutomationGetTransactionResponseV2ProfileWallet wallet, Option<string?> id = default)
+        public AutomationTransactionResponseProfile(AutomationTransactionResponseProfileWallet wallet, Option<string?> id = default)
         {
             Wallet = wallet;
             IdOption = id;
@@ -50,7 +50,7 @@ namespace BeamAutomationClient.Model
         /// Gets or Sets Wallet
         /// </summary>
         [JsonPropertyName("wallet")]
-        public AutomationGetTransactionResponseV2ProfileWallet Wallet { get; set; }
+        public AutomationTransactionResponseProfileWallet Wallet { get; set; }
 
         /// <summary>
         /// Used to track the state of Id
@@ -72,7 +72,7 @@ namespace BeamAutomationClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class AutomationGetTransactionResponseV2Profile {\n");
+            sb.Append("class AutomationTransactionResponseProfile {\n");
             sb.Append("  Wallet: ").Append(Wallet).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("}\n");
@@ -91,19 +91,19 @@ namespace BeamAutomationClient.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="AutomationGetTransactionResponseV2Profile" />
+    /// A Json converter for type <see cref="AutomationTransactionResponseProfile" />
     /// </summary>
-    public class AutomationGetTransactionResponseV2ProfileJsonConverter : JsonConverter<AutomationGetTransactionResponseV2Profile>
+    public class AutomationTransactionResponseProfileJsonConverter : JsonConverter<AutomationTransactionResponseProfile>
     {
         /// <summary>
-        /// Deserializes json to <see cref="AutomationGetTransactionResponseV2Profile" />
+        /// Deserializes json to <see cref="AutomationTransactionResponseProfile" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override AutomationGetTransactionResponseV2Profile Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override AutomationTransactionResponseProfile Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -112,7 +112,7 @@ namespace BeamAutomationClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<AutomationGetTransactionResponseV2ProfileWallet?> wallet = default;
+            Option<AutomationTransactionResponseProfileWallet?> wallet = default;
             Option<string?> id = default;
 
             while (utf8JsonReader.Read())
@@ -132,7 +132,7 @@ namespace BeamAutomationClient.Model
                     {
                         case "wallet":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                wallet = new Option<AutomationGetTransactionResponseV2ProfileWallet?>(JsonSerializer.Deserialize<AutomationGetTransactionResponseV2ProfileWallet>(ref utf8JsonReader, jsonSerializerOptions)!);
+                                wallet = new Option<AutomationTransactionResponseProfileWallet?>(JsonSerializer.Deserialize<AutomationTransactionResponseProfileWallet>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "id":
                             id = new Option<string?>(utf8JsonReader.GetString());
@@ -144,46 +144,46 @@ namespace BeamAutomationClient.Model
             }
 
             if (!wallet.IsSet)
-                throw new ArgumentException("Property is required for class AutomationGetTransactionResponseV2Profile.", nameof(wallet));
+                throw new ArgumentException("Property is required for class AutomationTransactionResponseProfile.", nameof(wallet));
 
             if (wallet.IsSet && wallet.Value == null)
-                throw new ArgumentNullException(nameof(wallet), "Property is not nullable for class AutomationGetTransactionResponseV2Profile.");
+                throw new ArgumentNullException(nameof(wallet), "Property is not nullable for class AutomationTransactionResponseProfile.");
 
-            return new AutomationGetTransactionResponseV2Profile(wallet.Value!, id);
+            return new AutomationTransactionResponseProfile(wallet.Value!, id);
         }
 
         /// <summary>
-        /// Serializes a <see cref="AutomationGetTransactionResponseV2Profile" />
+        /// Serializes a <see cref="AutomationTransactionResponseProfile" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="automationGetTransactionResponseV2Profile"></param>
+        /// <param name="automationTransactionResponseProfile"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, AutomationGetTransactionResponseV2Profile automationGetTransactionResponseV2Profile, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, AutomationTransactionResponseProfile automationTransactionResponseProfile, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(ref writer, automationGetTransactionResponseV2Profile, jsonSerializerOptions);
+            WriteProperties(ref writer, automationTransactionResponseProfile, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="AutomationGetTransactionResponseV2Profile" />
+        /// Serializes the properties of <see cref="AutomationTransactionResponseProfile" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="automationGetTransactionResponseV2Profile"></param>
+        /// <param name="automationTransactionResponseProfile"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(ref Utf8JsonWriter writer, AutomationGetTransactionResponseV2Profile automationGetTransactionResponseV2Profile, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(ref Utf8JsonWriter writer, AutomationTransactionResponseProfile automationTransactionResponseProfile, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (automationGetTransactionResponseV2Profile.Wallet == null)
-                throw new ArgumentNullException(nameof(automationGetTransactionResponseV2Profile.Wallet), "Property is required for class AutomationGetTransactionResponseV2Profile.");
+            if (automationTransactionResponseProfile.Wallet == null)
+                throw new ArgumentNullException(nameof(automationTransactionResponseProfile.Wallet), "Property is required for class AutomationTransactionResponseProfile.");
 
             writer.WritePropertyName("wallet");
-            JsonSerializer.Serialize(writer, automationGetTransactionResponseV2Profile.Wallet, jsonSerializerOptions);
-            if (automationGetTransactionResponseV2Profile.IdOption.IsSet)
-                if (automationGetTransactionResponseV2Profile.IdOption.Value != null)
-                    writer.WriteString("id", automationGetTransactionResponseV2Profile.Id);
+            JsonSerializer.Serialize(writer, automationTransactionResponseProfile.Wallet, jsonSerializerOptions);
+            if (automationTransactionResponseProfile.IdOption.IsSet)
+                if (automationTransactionResponseProfile.IdOption.Value != null)
+                    writer.WriteString("id", automationTransactionResponseProfile.Id);
                 else
                     writer.WriteNull("id");
         }

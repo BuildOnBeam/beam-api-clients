@@ -42,12 +42,12 @@ namespace BeamAutomationClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="automationCommonActivityRequestInput"></param>
+        /// <param name="automationCommonAssetActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAssetActivityApiResponse"/>&gt;</returns>
-        Task<IGetAssetActivityApiResponse> GetAssetActivityAsync(AutomationCommonActivityRequestInput automationCommonActivityRequestInput, string assetAddress, string assetId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetAssetActivityApiResponse> GetAssetActivityAsync(AutomationCommonAssetActivityRequestInput automationCommonAssetActivityRequestInput, string assetAddress, string assetId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get asset activity
@@ -55,12 +55,12 @@ namespace BeamAutomationClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="automationCommonActivityRequestInput"></param>
+        /// <param name="automationCommonAssetActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAssetActivityApiResponse"/>?&gt;</returns>
-        Task<IGetAssetActivityApiResponse?> GetAssetActivityOrDefaultAsync(AutomationCommonActivityRequestInput automationCommonActivityRequestInput, string assetAddress, string assetId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetAssetActivityApiResponse?> GetAssetActivityOrDefaultAsync(AutomationCommonAssetActivityRequestInput automationCommonAssetActivityRequestInput, string assetAddress, string assetId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get contract activity
@@ -69,11 +69,11 @@ namespace BeamAutomationClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="automationCommonActivityRequestInput"></param>
+        /// <param name="automationCommonContractActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetContractActivityApiResponse"/>&gt;</returns>
-        Task<IGetContractActivityApiResponse> GetContractActivityAsync(AutomationCommonActivityRequestInput automationCommonActivityRequestInput, string assetAddress, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetContractActivityApiResponse> GetContractActivityAsync(AutomationCommonContractActivityRequestInput automationCommonContractActivityRequestInput, string assetAddress, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get contract activity
@@ -81,11 +81,11 @@ namespace BeamAutomationClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="automationCommonActivityRequestInput"></param>
+        /// <param name="automationCommonContractActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetContractActivityApiResponse"/>?&gt;</returns>
-        Task<IGetContractActivityApiResponse?> GetContractActivityOrDefaultAsync(AutomationCommonActivityRequestInput automationCommonActivityRequestInput, string assetAddress, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetContractActivityApiResponse?> GetContractActivityOrDefaultAsync(AutomationCommonContractActivityRequestInput automationCommonContractActivityRequestInput, string assetAddress, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get profile activity
@@ -94,11 +94,11 @@ namespace BeamAutomationClient.Api
         /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="automationCommonActivityRequestInput"></param>
+        /// <param name="automationCommonUserActivityRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetProfileActivityApiResponse"/>&gt;</returns>
-        Task<IGetProfileActivityApiResponse> GetProfileActivityAsync(AutomationCommonActivityRequestInput automationCommonActivityRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetProfileActivityApiResponse> GetProfileActivityAsync(AutomationCommonUserActivityRequestInput automationCommonUserActivityRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get profile activity
@@ -106,11 +106,11 @@ namespace BeamAutomationClient.Api
         /// <remarks>
         /// 
         /// </remarks>
-        /// <param name="automationCommonActivityRequestInput"></param>
+        /// <param name="automationCommonUserActivityRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetProfileActivityApiResponse"/>?&gt;</returns>
-        Task<IGetProfileActivityApiResponse?> GetProfileActivityOrDefaultAsync(AutomationCommonActivityRequestInput automationCommonActivityRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetProfileActivityApiResponse?> GetProfileActivityOrDefaultAsync(AutomationCommonUserActivityRequestInput automationCommonUserActivityRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
@@ -262,19 +262,19 @@ namespace BeamAutomationClient.Api
             ApiKeyProvider = apiKeyProvider;
         }
 
-        partial void FormatGetAssetActivity(AutomationCommonActivityRequestInput automationCommonActivityRequestInput, ref string assetAddress, ref string assetId);
+        partial void FormatGetAssetActivity(AutomationCommonAssetActivityRequestInput automationCommonAssetActivityRequestInput, ref string assetAddress, ref string assetId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="automationCommonActivityRequestInput"></param>
+        /// <param name="automationCommonAssetActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
         /// <returns></returns>
-        private void ValidateGetAssetActivity(AutomationCommonActivityRequestInput automationCommonActivityRequestInput, string assetAddress, string assetId)
+        private void ValidateGetAssetActivity(AutomationCommonAssetActivityRequestInput automationCommonAssetActivityRequestInput, string assetAddress, string assetId)
         {
-            if (automationCommonActivityRequestInput == null)
-                throw new ArgumentNullException(nameof(automationCommonActivityRequestInput));
+            if (automationCommonAssetActivityRequestInput == null)
+                throw new ArgumentNullException(nameof(automationCommonAssetActivityRequestInput));
 
             if (assetAddress == null)
                 throw new ArgumentNullException(nameof(assetAddress));
@@ -287,13 +287,13 @@ namespace BeamAutomationClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="automationCommonActivityRequestInput"></param>
+        /// <param name="automationCommonAssetActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        private void AfterGetAssetActivityDefaultImplementation(IGetAssetActivityApiResponse apiResponseLocalVar, AutomationCommonActivityRequestInput automationCommonActivityRequestInput, string assetAddress, string assetId)
+        private void AfterGetAssetActivityDefaultImplementation(IGetAssetActivityApiResponse apiResponseLocalVar, AutomationCommonAssetActivityRequestInput automationCommonAssetActivityRequestInput, string assetAddress, string assetId)
         {
             bool suppressDefaultLog = false;
-            AfterGetAssetActivity(ref suppressDefaultLog, apiResponseLocalVar, automationCommonActivityRequestInput, assetAddress, assetId);
+            AfterGetAssetActivity(ref suppressDefaultLog, apiResponseLocalVar, automationCommonAssetActivityRequestInput, assetAddress, assetId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -303,10 +303,10 @@ namespace BeamAutomationClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="automationCommonActivityRequestInput"></param>
+        /// <param name="automationCommonAssetActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        partial void AfterGetAssetActivity(ref bool suppressDefaultLog, IGetAssetActivityApiResponse apiResponseLocalVar, AutomationCommonActivityRequestInput automationCommonActivityRequestInput, string assetAddress, string assetId);
+        partial void AfterGetAssetActivity(ref bool suppressDefaultLog, IGetAssetActivityApiResponse apiResponseLocalVar, AutomationCommonAssetActivityRequestInput automationCommonAssetActivityRequestInput, string assetAddress, string assetId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -314,13 +314,13 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="automationCommonActivityRequestInput"></param>
+        /// <param name="automationCommonAssetActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        private void OnErrorGetAssetActivityDefaultImplementation(Exception exception, string pathFormat, string path, AutomationCommonActivityRequestInput automationCommonActivityRequestInput, string assetAddress, string assetId)
+        private void OnErrorGetAssetActivityDefaultImplementation(Exception exception, string pathFormat, string path, AutomationCommonAssetActivityRequestInput automationCommonAssetActivityRequestInput, string assetAddress, string assetId)
         {
             bool suppressDefaultLog = false;
-            OnErrorGetAssetActivity(ref suppressDefaultLog, exception, pathFormat, path, automationCommonActivityRequestInput, assetAddress, assetId);
+            OnErrorGetAssetActivity(ref suppressDefaultLog, exception, pathFormat, path, automationCommonAssetActivityRequestInput, assetAddress, assetId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -332,24 +332,24 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="automationCommonActivityRequestInput"></param>
+        /// <param name="automationCommonAssetActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
-        partial void OnErrorGetAssetActivity(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationCommonActivityRequestInput automationCommonActivityRequestInput, string assetAddress, string assetId);
+        partial void OnErrorGetAssetActivity(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationCommonAssetActivityRequestInput automationCommonAssetActivityRequestInput, string assetAddress, string assetId);
 
         /// <summary>
         /// Get asset activity 
         /// </summary>
-        /// <param name="automationCommonActivityRequestInput"></param>
+        /// <param name="automationCommonAssetActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAssetActivityApiResponse"/>&gt;</returns>
-        public async Task<IGetAssetActivityApiResponse?> GetAssetActivityOrDefaultAsync(AutomationCommonActivityRequestInput automationCommonActivityRequestInput, string assetAddress, string assetId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetAssetActivityApiResponse?> GetAssetActivityOrDefaultAsync(AutomationCommonAssetActivityRequestInput automationCommonAssetActivityRequestInput, string assetAddress, string assetId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await GetAssetActivityAsync(automationCommonActivityRequestInput, assetAddress, assetId, cancellationToken).ConfigureAwait(false);
+                return await GetAssetActivityAsync(automationCommonAssetActivityRequestInput, assetAddress, assetId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -361,20 +361,20 @@ namespace BeamAutomationClient.Api
         /// Get asset activity 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="automationCommonActivityRequestInput"></param>
+        /// <param name="automationCommonAssetActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="assetId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAssetActivityApiResponse"/>&gt;</returns>
-        public async Task<IGetAssetActivityApiResponse> GetAssetActivityAsync(AutomationCommonActivityRequestInput automationCommonActivityRequestInput, string assetAddress, string assetId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetAssetActivityApiResponse> GetAssetActivityAsync(AutomationCommonAssetActivityRequestInput automationCommonAssetActivityRequestInput, string assetAddress, string assetId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateGetAssetActivity(automationCommonActivityRequestInput, assetAddress, assetId);
+                ValidateGetAssetActivity(automationCommonAssetActivityRequestInput, assetAddress, assetId);
 
-                FormatGetAssetActivity(automationCommonActivityRequestInput, ref assetAddress, ref assetId);
+                FormatGetAssetActivity(automationCommonAssetActivityRequestInput, ref assetAddress, ref assetId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -385,9 +385,9 @@ namespace BeamAutomationClient.Api
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BassetAddress%7D", Uri.EscapeDataString(assetAddress.ToString()));
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BassetId%7D", Uri.EscapeDataString(assetId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (automationCommonActivityRequestInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (automationCommonAssetActivityRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationCommonActivityRequestInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationCommonAssetActivityRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     AutomationApiKeyToken apiKeyTokenLocalVar1 = (AutomationApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -426,7 +426,7 @@ namespace BeamAutomationClient.Api
 
                         GetAssetActivityApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/automation/activity/assets/{assetAddress}/asset/{assetId}", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterGetAssetActivityDefaultImplementation(apiResponseLocalVar, automationCommonActivityRequestInput, assetAddress, assetId);
+                        AfterGetAssetActivityDefaultImplementation(apiResponseLocalVar, automationCommonAssetActivityRequestInput, assetAddress, assetId);
 
                         Events.ExecuteOnGetAssetActivity(apiResponseLocalVar);
 
@@ -440,7 +440,7 @@ namespace BeamAutomationClient.Api
             }
             catch(Exception e)
             {
-                OnErrorGetAssetActivityDefaultImplementation(e, "/v1/automation/activity/assets/{assetAddress}/asset/{assetId}", uriBuilderLocalVar.Path, automationCommonActivityRequestInput, assetAddress, assetId);
+                OnErrorGetAssetActivityDefaultImplementation(e, "/v1/automation/activity/assets/{assetAddress}/asset/{assetId}", uriBuilderLocalVar.Path, automationCommonAssetActivityRequestInput, assetAddress, assetId);
                 Events.ExecuteOnErrorGetAssetActivity(e);
                 throw;
             }
@@ -523,18 +523,18 @@ namespace BeamAutomationClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetContractActivity(AutomationCommonActivityRequestInput automationCommonActivityRequestInput, ref string assetAddress);
+        partial void FormatGetContractActivity(AutomationCommonContractActivityRequestInput automationCommonContractActivityRequestInput, ref string assetAddress);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="automationCommonActivityRequestInput"></param>
+        /// <param name="automationCommonContractActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <returns></returns>
-        private void ValidateGetContractActivity(AutomationCommonActivityRequestInput automationCommonActivityRequestInput, string assetAddress)
+        private void ValidateGetContractActivity(AutomationCommonContractActivityRequestInput automationCommonContractActivityRequestInput, string assetAddress)
         {
-            if (automationCommonActivityRequestInput == null)
-                throw new ArgumentNullException(nameof(automationCommonActivityRequestInput));
+            if (automationCommonContractActivityRequestInput == null)
+                throw new ArgumentNullException(nameof(automationCommonContractActivityRequestInput));
 
             if (assetAddress == null)
                 throw new ArgumentNullException(nameof(assetAddress));
@@ -544,12 +544,12 @@ namespace BeamAutomationClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="automationCommonActivityRequestInput"></param>
+        /// <param name="automationCommonContractActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
-        private void AfterGetContractActivityDefaultImplementation(IGetContractActivityApiResponse apiResponseLocalVar, AutomationCommonActivityRequestInput automationCommonActivityRequestInput, string assetAddress)
+        private void AfterGetContractActivityDefaultImplementation(IGetContractActivityApiResponse apiResponseLocalVar, AutomationCommonContractActivityRequestInput automationCommonContractActivityRequestInput, string assetAddress)
         {
             bool suppressDefaultLog = false;
-            AfterGetContractActivity(ref suppressDefaultLog, apiResponseLocalVar, automationCommonActivityRequestInput, assetAddress);
+            AfterGetContractActivity(ref suppressDefaultLog, apiResponseLocalVar, automationCommonContractActivityRequestInput, assetAddress);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -559,9 +559,9 @@ namespace BeamAutomationClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="automationCommonActivityRequestInput"></param>
+        /// <param name="automationCommonContractActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
-        partial void AfterGetContractActivity(ref bool suppressDefaultLog, IGetContractActivityApiResponse apiResponseLocalVar, AutomationCommonActivityRequestInput automationCommonActivityRequestInput, string assetAddress);
+        partial void AfterGetContractActivity(ref bool suppressDefaultLog, IGetContractActivityApiResponse apiResponseLocalVar, AutomationCommonContractActivityRequestInput automationCommonContractActivityRequestInput, string assetAddress);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -569,12 +569,12 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="automationCommonActivityRequestInput"></param>
+        /// <param name="automationCommonContractActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
-        private void OnErrorGetContractActivityDefaultImplementation(Exception exception, string pathFormat, string path, AutomationCommonActivityRequestInput automationCommonActivityRequestInput, string assetAddress)
+        private void OnErrorGetContractActivityDefaultImplementation(Exception exception, string pathFormat, string path, AutomationCommonContractActivityRequestInput automationCommonContractActivityRequestInput, string assetAddress)
         {
             bool suppressDefaultLog = false;
-            OnErrorGetContractActivity(ref suppressDefaultLog, exception, pathFormat, path, automationCommonActivityRequestInput, assetAddress);
+            OnErrorGetContractActivity(ref suppressDefaultLog, exception, pathFormat, path, automationCommonContractActivityRequestInput, assetAddress);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -586,22 +586,22 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="automationCommonActivityRequestInput"></param>
+        /// <param name="automationCommonContractActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
-        partial void OnErrorGetContractActivity(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationCommonActivityRequestInput automationCommonActivityRequestInput, string assetAddress);
+        partial void OnErrorGetContractActivity(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationCommonContractActivityRequestInput automationCommonContractActivityRequestInput, string assetAddress);
 
         /// <summary>
         /// Get contract activity 
         /// </summary>
-        /// <param name="automationCommonActivityRequestInput"></param>
+        /// <param name="automationCommonContractActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetContractActivityApiResponse"/>&gt;</returns>
-        public async Task<IGetContractActivityApiResponse?> GetContractActivityOrDefaultAsync(AutomationCommonActivityRequestInput automationCommonActivityRequestInput, string assetAddress, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetContractActivityApiResponse?> GetContractActivityOrDefaultAsync(AutomationCommonContractActivityRequestInput automationCommonContractActivityRequestInput, string assetAddress, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await GetContractActivityAsync(automationCommonActivityRequestInput, assetAddress, cancellationToken).ConfigureAwait(false);
+                return await GetContractActivityAsync(automationCommonContractActivityRequestInput, assetAddress, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -613,19 +613,19 @@ namespace BeamAutomationClient.Api
         /// Get contract activity 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="automationCommonActivityRequestInput"></param>
+        /// <param name="automationCommonContractActivityRequestInput"></param>
         /// <param name="assetAddress"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetContractActivityApiResponse"/>&gt;</returns>
-        public async Task<IGetContractActivityApiResponse> GetContractActivityAsync(AutomationCommonActivityRequestInput automationCommonActivityRequestInput, string assetAddress, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetContractActivityApiResponse> GetContractActivityAsync(AutomationCommonContractActivityRequestInput automationCommonContractActivityRequestInput, string assetAddress, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateGetContractActivity(automationCommonActivityRequestInput, assetAddress);
+                ValidateGetContractActivity(automationCommonContractActivityRequestInput, assetAddress);
 
-                FormatGetContractActivity(automationCommonActivityRequestInput, ref assetAddress);
+                FormatGetContractActivity(automationCommonContractActivityRequestInput, ref assetAddress);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -635,9 +635,9 @@ namespace BeamAutomationClient.Api
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/automation/activity/assets/{assetAddress}";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BassetAddress%7D", Uri.EscapeDataString(assetAddress.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (automationCommonActivityRequestInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (automationCommonContractActivityRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationCommonActivityRequestInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationCommonContractActivityRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     AutomationApiKeyToken apiKeyTokenLocalVar1 = (AutomationApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -676,7 +676,7 @@ namespace BeamAutomationClient.Api
 
                         GetContractActivityApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/automation/activity/assets/{assetAddress}", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterGetContractActivityDefaultImplementation(apiResponseLocalVar, automationCommonActivityRequestInput, assetAddress);
+                        AfterGetContractActivityDefaultImplementation(apiResponseLocalVar, automationCommonContractActivityRequestInput, assetAddress);
 
                         Events.ExecuteOnGetContractActivity(apiResponseLocalVar);
 
@@ -690,7 +690,7 @@ namespace BeamAutomationClient.Api
             }
             catch(Exception e)
             {
-                OnErrorGetContractActivityDefaultImplementation(e, "/v1/automation/activity/assets/{assetAddress}", uriBuilderLocalVar.Path, automationCommonActivityRequestInput, assetAddress);
+                OnErrorGetContractActivityDefaultImplementation(e, "/v1/automation/activity/assets/{assetAddress}", uriBuilderLocalVar.Path, automationCommonContractActivityRequestInput, assetAddress);
                 Events.ExecuteOnErrorGetContractActivity(e);
                 throw;
             }
@@ -773,18 +773,18 @@ namespace BeamAutomationClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetProfileActivity(AutomationCommonActivityRequestInput automationCommonActivityRequestInput, ref string entityId);
+        partial void FormatGetProfileActivity(AutomationCommonUserActivityRequestInput automationCommonUserActivityRequestInput, ref string entityId);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="automationCommonActivityRequestInput"></param>
+        /// <param name="automationCommonUserActivityRequestInput"></param>
         /// <param name="entityId"></param>
         /// <returns></returns>
-        private void ValidateGetProfileActivity(AutomationCommonActivityRequestInput automationCommonActivityRequestInput, string entityId)
+        private void ValidateGetProfileActivity(AutomationCommonUserActivityRequestInput automationCommonUserActivityRequestInput, string entityId)
         {
-            if (automationCommonActivityRequestInput == null)
-                throw new ArgumentNullException(nameof(automationCommonActivityRequestInput));
+            if (automationCommonUserActivityRequestInput == null)
+                throw new ArgumentNullException(nameof(automationCommonUserActivityRequestInput));
 
             if (entityId == null)
                 throw new ArgumentNullException(nameof(entityId));
@@ -794,12 +794,12 @@ namespace BeamAutomationClient.Api
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="automationCommonActivityRequestInput"></param>
+        /// <param name="automationCommonUserActivityRequestInput"></param>
         /// <param name="entityId"></param>
-        private void AfterGetProfileActivityDefaultImplementation(IGetProfileActivityApiResponse apiResponseLocalVar, AutomationCommonActivityRequestInput automationCommonActivityRequestInput, string entityId)
+        private void AfterGetProfileActivityDefaultImplementation(IGetProfileActivityApiResponse apiResponseLocalVar, AutomationCommonUserActivityRequestInput automationCommonUserActivityRequestInput, string entityId)
         {
             bool suppressDefaultLog = false;
-            AfterGetProfileActivity(ref suppressDefaultLog, apiResponseLocalVar, automationCommonActivityRequestInput, entityId);
+            AfterGetProfileActivity(ref suppressDefaultLog, apiResponseLocalVar, automationCommonUserActivityRequestInput, entityId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -809,9 +809,9 @@ namespace BeamAutomationClient.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="automationCommonActivityRequestInput"></param>
+        /// <param name="automationCommonUserActivityRequestInput"></param>
         /// <param name="entityId"></param>
-        partial void AfterGetProfileActivity(ref bool suppressDefaultLog, IGetProfileActivityApiResponse apiResponseLocalVar, AutomationCommonActivityRequestInput automationCommonActivityRequestInput, string entityId);
+        partial void AfterGetProfileActivity(ref bool suppressDefaultLog, IGetProfileActivityApiResponse apiResponseLocalVar, AutomationCommonUserActivityRequestInput automationCommonUserActivityRequestInput, string entityId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -819,12 +819,12 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="automationCommonActivityRequestInput"></param>
+        /// <param name="automationCommonUserActivityRequestInput"></param>
         /// <param name="entityId"></param>
-        private void OnErrorGetProfileActivityDefaultImplementation(Exception exception, string pathFormat, string path, AutomationCommonActivityRequestInput automationCommonActivityRequestInput, string entityId)
+        private void OnErrorGetProfileActivityDefaultImplementation(Exception exception, string pathFormat, string path, AutomationCommonUserActivityRequestInput automationCommonUserActivityRequestInput, string entityId)
         {
             bool suppressDefaultLog = false;
-            OnErrorGetProfileActivity(ref suppressDefaultLog, exception, pathFormat, path, automationCommonActivityRequestInput, entityId);
+            OnErrorGetProfileActivity(ref suppressDefaultLog, exception, pathFormat, path, automationCommonUserActivityRequestInput, entityId);
             if (!suppressDefaultLog)
                 Logger.LogError(exception, "An error occurred while sending the request to the server.");
         }
@@ -836,22 +836,22 @@ namespace BeamAutomationClient.Api
         /// <param name="exception"></param>
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
-        /// <param name="automationCommonActivityRequestInput"></param>
+        /// <param name="automationCommonUserActivityRequestInput"></param>
         /// <param name="entityId"></param>
-        partial void OnErrorGetProfileActivity(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationCommonActivityRequestInput automationCommonActivityRequestInput, string entityId);
+        partial void OnErrorGetProfileActivity(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationCommonUserActivityRequestInput automationCommonUserActivityRequestInput, string entityId);
 
         /// <summary>
         /// Get profile activity 
         /// </summary>
-        /// <param name="automationCommonActivityRequestInput"></param>
+        /// <param name="automationCommonUserActivityRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetProfileActivityApiResponse"/>&gt;</returns>
-        public async Task<IGetProfileActivityApiResponse?> GetProfileActivityOrDefaultAsync(AutomationCommonActivityRequestInput automationCommonActivityRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetProfileActivityApiResponse?> GetProfileActivityOrDefaultAsync(AutomationCommonUserActivityRequestInput automationCommonUserActivityRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await GetProfileActivityAsync(automationCommonActivityRequestInput, entityId, cancellationToken).ConfigureAwait(false);
+                return await GetProfileActivityAsync(automationCommonUserActivityRequestInput, entityId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -863,19 +863,19 @@ namespace BeamAutomationClient.Api
         /// Get profile activity 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="automationCommonActivityRequestInput"></param>
+        /// <param name="automationCommonUserActivityRequestInput"></param>
         /// <param name="entityId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetProfileActivityApiResponse"/>&gt;</returns>
-        public async Task<IGetProfileActivityApiResponse> GetProfileActivityAsync(AutomationCommonActivityRequestInput automationCommonActivityRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetProfileActivityApiResponse> GetProfileActivityAsync(AutomationCommonUserActivityRequestInput automationCommonUserActivityRequestInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateGetProfileActivity(automationCommonActivityRequestInput, entityId);
+                ValidateGetProfileActivity(automationCommonUserActivityRequestInput, entityId);
 
-                FormatGetProfileActivity(automationCommonActivityRequestInput, ref entityId);
+                FormatGetProfileActivity(automationCommonUserActivityRequestInput, ref entityId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -885,9 +885,9 @@ namespace BeamAutomationClient.Api
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/automation/activity/profiles/{entityId}";
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (automationCommonActivityRequestInput as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (automationCommonUserActivityRequestInput as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationCommonActivityRequestInput, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationCommonUserActivityRequestInput, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     AutomationApiKeyToken apiKeyTokenLocalVar1 = (AutomationApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
@@ -926,7 +926,7 @@ namespace BeamAutomationClient.Api
 
                         GetProfileActivityApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/automation/activity/profiles/{entityId}", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterGetProfileActivityDefaultImplementation(apiResponseLocalVar, automationCommonActivityRequestInput, entityId);
+                        AfterGetProfileActivityDefaultImplementation(apiResponseLocalVar, automationCommonUserActivityRequestInput, entityId);
 
                         Events.ExecuteOnGetProfileActivity(apiResponseLocalVar);
 
@@ -940,7 +940,7 @@ namespace BeamAutomationClient.Api
             }
             catch(Exception e)
             {
-                OnErrorGetProfileActivityDefaultImplementation(e, "/v1/automation/activity/profiles/{entityId}", uriBuilderLocalVar.Path, automationCommonActivityRequestInput, entityId);
+                OnErrorGetProfileActivityDefaultImplementation(e, "/v1/automation/activity/profiles/{entityId}", uriBuilderLocalVar.Path, automationCommonUserActivityRequestInput, entityId);
                 Events.ExecuteOnErrorGetProfileActivity(e);
                 throw;
             }

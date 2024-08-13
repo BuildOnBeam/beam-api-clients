@@ -120,24 +120,22 @@ namespace BeamAutomationClient.Client
                 return boolean
                     ? "true"
                     : "false";
-            if (obj is AutomationAddContractRequestInput.TypeEnum automationAddContractRequestInputTypeEnum)
-                return AutomationAddContractRequestInput.TypeEnumToJsonValue(automationAddContractRequestInputTypeEnum);
             if (obj is AutomationAddContractResponse.TypeEnum automationAddContractResponseTypeEnum)
                 return AutomationAddContractResponse.TypeEnumToJsonValue(automationAddContractResponseTypeEnum);
-            if (obj is AutomationCommonActivityRequestInput.TypesEnum automationCommonActivityRequestInputTypesEnum)
-                return AutomationCommonActivityRequestInput.TypesEnumToJsonValue(automationCommonActivityRequestInputTypesEnum);
             if (obj is AutomationCommonActivityResponseDataInner.TypeEnum automationCommonActivityResponseDataInnerTypeEnum)
                 return AutomationCommonActivityResponseDataInner.TypeEnumToJsonValue(automationCommonActivityResponseDataInnerTypeEnum);
             if (obj is AutomationCommonAddPolicyRequestInput.RateTypeEnum automationCommonAddPolicyRequestInputRateTypeEnum)
                 return AutomationCommonAddPolicyRequestInput.RateTypeEnumToJsonValue(automationCommonAddPolicyRequestInputRateTypeEnum);
             if (obj is AutomationCommonAddPolicyResponse.RateTypeEnum automationCommonAddPolicyResponseRateTypeEnum)
                 return AutomationCommonAddPolicyResponse.RateTypeEnumToJsonValue(automationCommonAddPolicyResponseRateTypeEnum);
+            if (obj is AutomationCommonAssetActivityRequestInput.TypesEnum automationCommonAssetActivityRequestInputTypesEnum)
+                return AutomationCommonAssetActivityRequestInput.TypesEnumToJsonValue(automationCommonAssetActivityRequestInputTypesEnum);
+            if (obj is AutomationCommonContractActivityRequestInput.TypesEnum automationCommonContractActivityRequestInputTypesEnum)
+                return AutomationCommonContractActivityRequestInput.TypesEnumToJsonValue(automationCommonContractActivityRequestInputTypesEnum);
             if (obj is AutomationCommonGetPoliciesResponseDataInner.RateTypeEnum automationCommonGetPoliciesResponseDataInnerRateTypeEnum)
                 return AutomationCommonGetPoliciesResponseDataInner.RateTypeEnumToJsonValue(automationCommonGetPoliciesResponseDataInnerRateTypeEnum);
-            if (obj is AutomationConvertTokenResponse.StatusEnum automationConvertTokenResponseStatusEnum)
-                return AutomationConvertTokenResponse.StatusEnumToJsonValue(automationConvertTokenResponseStatusEnum);
-            if (obj is AutomationConvertTokenResponse.TypeEnum automationConvertTokenResponseTypeEnum)
-                return AutomationConvertTokenResponse.TypeEnumToJsonValue(automationConvertTokenResponseTypeEnum);
+            if (obj is AutomationCommonUserActivityRequestInput.TypesEnum automationCommonUserActivityRequestInputTypesEnum)
+                return AutomationCommonUserActivityRequestInput.TypesEnumToJsonValue(automationCommonUserActivityRequestInputTypesEnum);
             if (obj is AutomationCreateAssetOfferRequestInputV2.CurrencyEnum automationCreateAssetOfferRequestInputV2CurrencyEnum)
                 return AutomationCreateAssetOfferRequestInputV2.CurrencyEnumToJsonValue(automationCreateAssetOfferRequestInputV2CurrencyEnum);
             if (obj is AutomationCreateWebhookForGame.EventsEnum automationCreateWebhookForGameEventsEnum)
@@ -194,18 +192,10 @@ namespace BeamAutomationClient.Client
                 return AutomationSellAssetRequestInputV2.SellTypeEnumToJsonValue(automationSellAssetRequestInputV2SellTypeEnum);
             if (obj is AutomationSellAssetRequestInputV2.CurrencyEnum automationSellAssetRequestInputV2CurrencyEnum)
                 return AutomationSellAssetRequestInputV2.CurrencyEnumToJsonValue(automationSellAssetRequestInputV2CurrencyEnum);
-            if (obj is AutomationTradeTokensResponse.StatusEnum automationTradeTokensResponseStatusEnum)
-                return AutomationTradeTokensResponse.StatusEnumToJsonValue(automationTradeTokensResponseStatusEnum);
-            if (obj is AutomationTradeTokensResponse.TypeEnum automationTradeTokensResponseTypeEnum)
-                return AutomationTradeTokensResponse.TypeEnumToJsonValue(automationTradeTokensResponseTypeEnum);
-            if (obj is AutomationTransferAssetResponseV2.StatusEnum automationTransferAssetResponseV2StatusEnum)
-                return AutomationTransferAssetResponseV2.StatusEnumToJsonValue(automationTransferAssetResponseV2StatusEnum);
-            if (obj is AutomationTransferAssetResponseV2.TypeEnum automationTransferAssetResponseV2TypeEnum)
-                return AutomationTransferAssetResponseV2.TypeEnumToJsonValue(automationTransferAssetResponseV2TypeEnum);
-            if (obj is AutomationTransferTokenResponseV2.StatusEnum automationTransferTokenResponseV2StatusEnum)
-                return AutomationTransferTokenResponseV2.StatusEnumToJsonValue(automationTransferTokenResponseV2StatusEnum);
-            if (obj is AutomationTransferTokenResponseV2.TypeEnum automationTransferTokenResponseV2TypeEnum)
-                return AutomationTransferTokenResponseV2.TypeEnumToJsonValue(automationTransferTokenResponseV2TypeEnum);
+            if (obj is AutomationTransactionResponse.StatusEnum automationTransactionResponseStatusEnum)
+                return AutomationTransactionResponse.StatusEnumToJsonValue(automationTransactionResponseStatusEnum);
+            if (obj is AutomationTransactionResponse.TypeEnum automationTransactionResponseTypeEnum)
+                return AutomationTransactionResponse.TypeEnumToJsonValue(automationTransactionResponseTypeEnum);
             if (obj is AutomationUpdateGameRequestInput.PegiContentEnum automationUpdateGameRequestInputPegiContentEnum)
                 return AutomationUpdateGameRequestInput.PegiContentEnumToJsonValue(automationUpdateGameRequestInputPegiContentEnum);
             if (obj is AutomationUpdateGameRequestInput.PegiRatingEnum automationUpdateGameRequestInputPegiRatingEnum)

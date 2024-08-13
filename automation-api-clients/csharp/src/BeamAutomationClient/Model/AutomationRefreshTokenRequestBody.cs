@@ -95,6 +95,16 @@ namespace BeamAutomationClient.Model
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            if (this.TokenId != null) {
+                // TokenId (string) pattern
+                Regex regexTokenId = new Regex(@"^\d+$", RegexOptions.CultureInvariant);
+
+                if (!regexTokenId.Match(this.TokenId).Success)
+                {
+                    yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for TokenId, must match a pattern of " + regexTokenId, new [] { "TokenId" });
+                }
+            }
+
             yield break;
         }
     }

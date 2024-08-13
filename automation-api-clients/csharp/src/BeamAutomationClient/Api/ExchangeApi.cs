@@ -142,12 +142,62 @@ namespace BeamAutomationClient.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetQuoteForOutputApiResponse"/>?&gt;</returns>
         Task<IGetQuoteForOutputApiResponse?> GetQuoteForOutputOrDefaultAsync(string tokenIn, string tokenOut, string amountIn, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Unwrap an amount of wrapped to native token
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="automationUnwrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IUnwrapNativeApiResponse"/>&gt;</returns>
+        Task<IUnwrapNativeApiResponse> UnwrapNativeAsync(AutomationUnwrappingTokenInput automationUnwrappingTokenInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Unwrap an amount of wrapped to native token
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="automationUnwrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IUnwrapNativeApiResponse"/>?&gt;</returns>
+        Task<IUnwrapNativeApiResponse?> UnwrapNativeOrDefaultAsync(AutomationUnwrappingTokenInput automationUnwrappingTokenInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Wrap an amount of native token to wrapped native token
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="automationWrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IWrapNativeApiResponse"/>&gt;</returns>
+        Task<IWrapNativeApiResponse> WrapNativeAsync(AutomationWrappingTokenInput automationWrappingTokenInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Wrap an amount of native token to wrapped native token
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="automationWrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IWrapNativeApiResponse"/>?&gt;</returns>
+        Task<IWrapNativeApiResponse?> WrapNativeOrDefaultAsync(AutomationWrappingTokenInput automationWrappingTokenInput, string entityId, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
     /// The <see cref="IConvertInputApiResponse"/>
     /// </summary>
-    public interface IConvertInputApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationConvertTokenResponse?>
+    public interface IConvertInputApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationTransactionResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -159,7 +209,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IConvertToOutputApiResponse"/>
     /// </summary>
-    public interface IConvertToOutputApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationConvertTokenResponse?>
+    public interface IConvertToOutputApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationTransactionResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -184,6 +234,30 @@ namespace BeamAutomationClient.Api
     /// The <see cref="IGetQuoteForOutputApiResponse"/>
     /// </summary>
     public interface IGetQuoteForOutputApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetQuoteResponse?>
+    {
+        /// <summary>
+        /// Returns true if the response is 200 Ok
+        /// </summary>
+        /// <returns></returns>
+        bool IsOk { get; }
+    }
+
+    /// <summary>
+    /// The <see cref="IUnwrapNativeApiResponse"/>
+    /// </summary>
+    public interface IUnwrapNativeApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationTransactionResponse?>
+    {
+        /// <summary>
+        /// Returns true if the response is 200 Ok
+        /// </summary>
+        /// <returns></returns>
+        bool IsOk { get; }
+    }
+
+    /// <summary>
+    /// The <see cref="IWrapNativeApiResponse"/>
+    /// </summary>
+    public interface IWrapNativeApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationTransactionResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -275,6 +349,46 @@ namespace BeamAutomationClient.Api
         internal void ExecuteOnErrorGetQuoteForOutput(Exception exception)
         {
             OnErrorGetQuoteForOutput?.Invoke(this, new ExceptionEventArgs(exception));
+        }
+
+        /// <summary>
+        /// The event raised after the server response
+        /// </summary>
+        public event EventHandler<ApiResponseEventArgs>? OnUnwrapNative;
+
+        /// <summary>
+        /// The event raised after an error querying the server
+        /// </summary>
+        public event EventHandler<ExceptionEventArgs>? OnErrorUnwrapNative;
+
+        internal void ExecuteOnUnwrapNative(AutomationExchangeApi.UnwrapNativeApiResponse apiResponse)
+        {
+            OnUnwrapNative?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+        }
+
+        internal void ExecuteOnErrorUnwrapNative(Exception exception)
+        {
+            OnErrorUnwrapNative?.Invoke(this, new ExceptionEventArgs(exception));
+        }
+
+        /// <summary>
+        /// The event raised after the server response
+        /// </summary>
+        public event EventHandler<ApiResponseEventArgs>? OnWrapNative;
+
+        /// <summary>
+        /// The event raised after an error querying the server
+        /// </summary>
+        public event EventHandler<ExceptionEventArgs>? OnErrorWrapNative;
+
+        internal void ExecuteOnWrapNative(AutomationExchangeApi.WrapNativeApiResponse apiResponse)
+        {
+            OnWrapNative?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+        }
+
+        internal void ExecuteOnErrorWrapNative(Exception exception)
+        {
+            OnErrorWrapNative?.Invoke(this, new ExceptionEventArgs(exception));
         }
     }
 
@@ -536,11 +650,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.AutomationConvertTokenResponse? Ok()
+            public BeamAutomationClient.Model.AutomationTransactionResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationConvertTokenResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationTransactionResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -549,7 +663,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationConvertTokenResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationTransactionResponse? result)
             {
                 result = null;
 
@@ -786,11 +900,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.AutomationConvertTokenResponse? Ok()
+            public BeamAutomationClient.Model.AutomationTransactionResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationConvertTokenResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationTransactionResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -799,7 +913,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationConvertTokenResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationTransactionResponse? result)
             {
                 result = null;
 
@@ -1326,6 +1440,506 @@ namespace BeamAutomationClient.Api
             /// <param name="result"></param>
             /// <returns></returns>
             public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationGetQuoteResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
+        }
+
+        partial void FormatUnwrapNative(AutomationUnwrappingTokenInput automationUnwrappingTokenInput, ref string entityId);
+
+        /// <summary>
+        /// Validates the request parameters
+        /// </summary>
+        /// <param name="automationUnwrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        /// <returns></returns>
+        private void ValidateUnwrapNative(AutomationUnwrappingTokenInput automationUnwrappingTokenInput, string entityId)
+        {
+            if (automationUnwrappingTokenInput == null)
+                throw new ArgumentNullException(nameof(automationUnwrappingTokenInput));
+
+            if (entityId == null)
+                throw new ArgumentNullException(nameof(entityId));
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="automationUnwrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        private void AfterUnwrapNativeDefaultImplementation(IUnwrapNativeApiResponse apiResponseLocalVar, AutomationUnwrappingTokenInput automationUnwrappingTokenInput, string entityId)
+        {
+            bool suppressDefaultLog = false;
+            AfterUnwrapNative(ref suppressDefaultLog, apiResponseLocalVar, automationUnwrappingTokenInput, entityId);
+            if (!suppressDefaultLog)
+                Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="automationUnwrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        partial void AfterUnwrapNative(ref bool suppressDefaultLog, IUnwrapNativeApiResponse apiResponseLocalVar, AutomationUnwrappingTokenInput automationUnwrappingTokenInput, string entityId);
+
+        /// <summary>
+        /// Logs exceptions that occur while retrieving the server response
+        /// </summary>
+        /// <param name="exception"></param>
+        /// <param name="pathFormat"></param>
+        /// <param name="path"></param>
+        /// <param name="automationUnwrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        private void OnErrorUnwrapNativeDefaultImplementation(Exception exception, string pathFormat, string path, AutomationUnwrappingTokenInput automationUnwrappingTokenInput, string entityId)
+        {
+            bool suppressDefaultLog = false;
+            OnErrorUnwrapNative(ref suppressDefaultLog, exception, pathFormat, path, automationUnwrappingTokenInput, entityId);
+            if (!suppressDefaultLog)
+                Logger.LogError(exception, "An error occurred while sending the request to the server.");
+        }
+
+        /// <summary>
+        /// A partial method that gives developers a way to provide customized exception handling
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="exception"></param>
+        /// <param name="pathFormat"></param>
+        /// <param name="path"></param>
+        /// <param name="automationUnwrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        partial void OnErrorUnwrapNative(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationUnwrappingTokenInput automationUnwrappingTokenInput, string entityId);
+
+        /// <summary>
+        /// Unwrap an amount of wrapped to native token 
+        /// </summary>
+        /// <param name="automationUnwrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IUnwrapNativeApiResponse"/>&gt;</returns>
+        public async Task<IUnwrapNativeApiResponse?> UnwrapNativeOrDefaultAsync(AutomationUnwrappingTokenInput automationUnwrappingTokenInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await UnwrapNativeAsync(automationUnwrappingTokenInput, entityId, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Unwrap an amount of wrapped to native token 
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="automationUnwrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IUnwrapNativeApiResponse"/>&gt;</returns>
+        public async Task<IUnwrapNativeApiResponse> UnwrapNativeAsync(AutomationUnwrappingTokenInput automationUnwrappingTokenInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        {
+            UriBuilder uriBuilderLocalVar = new UriBuilder();
+
+            try
+            {
+                ValidateUnwrapNative(automationUnwrappingTokenInput, entityId);
+
+                FormatUnwrapNative(automationUnwrappingTokenInput, ref entityId);
+
+                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
+                {
+                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
+                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
+                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
+                    uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/exchange/profiles/{entityId}/native/unwrap";
+                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
+
+                    httpRequestMessageLocalVar.Content = (automationUnwrappingTokenInput as object) is System.IO.Stream stream
+                        ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationUnwrappingTokenInput, _jsonSerializerOptions));
+
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    AutomationApiKeyToken apiKeyTokenLocalVar1 = (AutomationApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
+                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    string[] contentTypes = new string[] {
+                        "application/json"
+                    };
+
+                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
+
+                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
+                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
+
+                    string[] acceptLocalVars = new string[] {
+                        "application/json"
+                    };
+
+                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+
+                    if (acceptLocalVar != null)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+
+                    httpRequestMessageLocalVar.Method = HttpMethod.Post;
+
+                    DateTime requestedAtLocalVar = DateTime.UtcNow;
+
+                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
+                    {
+                        string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+
+                        ILogger<UnwrapNativeApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<UnwrapNativeApiResponse>();
+
+                        UnwrapNativeApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/exchange/profiles/{entityId}/native/unwrap", requestedAtLocalVar, _jsonSerializerOptions);
+
+                        AfterUnwrapNativeDefaultImplementation(apiResponseLocalVar, automationUnwrappingTokenInput, entityId);
+
+                        Events.ExecuteOnUnwrapNative(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
+
+                        return apiResponseLocalVar;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                OnErrorUnwrapNativeDefaultImplementation(e, "/v1/exchange/profiles/{entityId}/native/unwrap", uriBuilderLocalVar.Path, automationUnwrappingTokenInput, entityId);
+                Events.ExecuteOnErrorUnwrapNative(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="UnwrapNativeApiResponse"/>
+        /// </summary>
+        public partial class UnwrapNativeApiResponse : BeamAutomationClient.Client.ApiResponse, IUnwrapNativeApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<UnwrapNativeApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="UnwrapNativeApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public UnwrapNativeApiResponse(ILogger<UnwrapNativeApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public BeamAutomationClient.Model.AutomationTransactionResponse? Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationTransactionResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationTransactionResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
+        }
+
+        partial void FormatWrapNative(AutomationWrappingTokenInput automationWrappingTokenInput, ref string entityId);
+
+        /// <summary>
+        /// Validates the request parameters
+        /// </summary>
+        /// <param name="automationWrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        /// <returns></returns>
+        private void ValidateWrapNative(AutomationWrappingTokenInput automationWrappingTokenInput, string entityId)
+        {
+            if (automationWrappingTokenInput == null)
+                throw new ArgumentNullException(nameof(automationWrappingTokenInput));
+
+            if (entityId == null)
+                throw new ArgumentNullException(nameof(entityId));
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="automationWrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        private void AfterWrapNativeDefaultImplementation(IWrapNativeApiResponse apiResponseLocalVar, AutomationWrappingTokenInput automationWrappingTokenInput, string entityId)
+        {
+            bool suppressDefaultLog = false;
+            AfterWrapNative(ref suppressDefaultLog, apiResponseLocalVar, automationWrappingTokenInput, entityId);
+            if (!suppressDefaultLog)
+                Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="automationWrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        partial void AfterWrapNative(ref bool suppressDefaultLog, IWrapNativeApiResponse apiResponseLocalVar, AutomationWrappingTokenInput automationWrappingTokenInput, string entityId);
+
+        /// <summary>
+        /// Logs exceptions that occur while retrieving the server response
+        /// </summary>
+        /// <param name="exception"></param>
+        /// <param name="pathFormat"></param>
+        /// <param name="path"></param>
+        /// <param name="automationWrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        private void OnErrorWrapNativeDefaultImplementation(Exception exception, string pathFormat, string path, AutomationWrappingTokenInput automationWrappingTokenInput, string entityId)
+        {
+            bool suppressDefaultLog = false;
+            OnErrorWrapNative(ref suppressDefaultLog, exception, pathFormat, path, automationWrappingTokenInput, entityId);
+            if (!suppressDefaultLog)
+                Logger.LogError(exception, "An error occurred while sending the request to the server.");
+        }
+
+        /// <summary>
+        /// A partial method that gives developers a way to provide customized exception handling
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="exception"></param>
+        /// <param name="pathFormat"></param>
+        /// <param name="path"></param>
+        /// <param name="automationWrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        partial void OnErrorWrapNative(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, AutomationWrappingTokenInput automationWrappingTokenInput, string entityId);
+
+        /// <summary>
+        /// Wrap an amount of native token to wrapped native token 
+        /// </summary>
+        /// <param name="automationWrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IWrapNativeApiResponse"/>&gt;</returns>
+        public async Task<IWrapNativeApiResponse?> WrapNativeOrDefaultAsync(AutomationWrappingTokenInput automationWrappingTokenInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await WrapNativeAsync(automationWrappingTokenInput, entityId, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Wrap an amount of native token to wrapped native token 
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="automationWrappingTokenInput"></param>
+        /// <param name="entityId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IWrapNativeApiResponse"/>&gt;</returns>
+        public async Task<IWrapNativeApiResponse> WrapNativeAsync(AutomationWrappingTokenInput automationWrappingTokenInput, string entityId, System.Threading.CancellationToken cancellationToken = default)
+        {
+            UriBuilder uriBuilderLocalVar = new UriBuilder();
+
+            try
+            {
+                ValidateWrapNative(automationWrappingTokenInput, entityId);
+
+                FormatWrapNative(automationWrappingTokenInput, ref entityId);
+
+                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
+                {
+                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
+                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
+                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
+                    uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/exchange/profiles/{entityId}/native/wrap";
+                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
+
+                    httpRequestMessageLocalVar.Content = (automationWrappingTokenInput as object) is System.IO.Stream stream
+                        ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(automationWrappingTokenInput, _jsonSerializerOptions));
+
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    AutomationApiKeyToken apiKeyTokenLocalVar1 = (AutomationApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
+                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    string[] contentTypes = new string[] {
+                        "application/json"
+                    };
+
+                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
+
+                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
+                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
+
+                    string[] acceptLocalVars = new string[] {
+                        "application/json"
+                    };
+
+                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+
+                    if (acceptLocalVar != null)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+
+                    httpRequestMessageLocalVar.Method = HttpMethod.Post;
+
+                    DateTime requestedAtLocalVar = DateTime.UtcNow;
+
+                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
+                    {
+                        string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+
+                        ILogger<WrapNativeApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<WrapNativeApiResponse>();
+
+                        WrapNativeApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/exchange/profiles/{entityId}/native/wrap", requestedAtLocalVar, _jsonSerializerOptions);
+
+                        AfterWrapNativeDefaultImplementation(apiResponseLocalVar, automationWrappingTokenInput, entityId);
+
+                        Events.ExecuteOnWrapNative(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
+
+                        return apiResponseLocalVar;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                OnErrorWrapNativeDefaultImplementation(e, "/v1/exchange/profiles/{entityId}/native/wrap", uriBuilderLocalVar.Path, automationWrappingTokenInput, entityId);
+                Events.ExecuteOnErrorWrapNative(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="WrapNativeApiResponse"/>
+        /// </summary>
+        public partial class WrapNativeApiResponse : BeamAutomationClient.Client.ApiResponse, IWrapNativeApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<WrapNativeApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="WrapNativeApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public WrapNativeApiResponse(ILogger<WrapNativeApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public BeamAutomationClient.Model.AutomationTransactionResponse? Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationTransactionResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationTransactionResponse? result)
             {
                 result = null;
 

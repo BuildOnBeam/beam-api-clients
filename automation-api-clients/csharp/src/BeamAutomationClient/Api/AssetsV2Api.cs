@@ -305,7 +305,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="ITransferAssetV2ApiResponse"/>
     /// </summary>
-    public interface ITransferAssetV2ApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.AutomationTransferAssetResponseV2?>
+    public interface ITransferAssetV2ApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.AutomationTransactionResponse?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
@@ -317,7 +317,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="ITransferNativeTokenV2ApiResponse"/>
     /// </summary>
-    public interface ITransferNativeTokenV2ApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.AutomationTransferTokenResponseV2?>
+    public interface ITransferNativeTokenV2ApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.AutomationTransactionResponse?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
@@ -329,7 +329,7 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="ITransferTokenV2ApiResponse"/>
     /// </summary>
-    public interface ITransferTokenV2ApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.AutomationTransferTokenResponseV2?>
+    public interface ITransferTokenV2ApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.AutomationTransactionResponse?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
@@ -2015,11 +2015,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.AutomationTransferAssetResponseV2? Created()
+            public BeamAutomationClient.Model.AutomationTransactionResponse? Created()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsCreated
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationTransferAssetResponseV2>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationTransactionResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -2028,7 +2028,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryCreated([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationTransferAssetResponseV2? result)
+            public bool TryCreated([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationTransactionResponse? result)
             {
                 result = null;
 
@@ -2265,11 +2265,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.AutomationTransferTokenResponseV2? Created()
+            public BeamAutomationClient.Model.AutomationTransactionResponse? Created()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsCreated
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationTransferTokenResponseV2>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationTransactionResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -2278,7 +2278,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryCreated([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationTransferTokenResponseV2? result)
+            public bool TryCreated([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationTransactionResponse? result)
             {
                 result = null;
 
@@ -2515,11 +2515,11 @@ namespace BeamAutomationClient.Api
             /// Deserializes the response if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public BeamAutomationClient.Model.AutomationTransferTokenResponseV2? Created()
+            public BeamAutomationClient.Model.AutomationTransactionResponse? Created()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsCreated
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationTransferTokenResponseV2>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationTransactionResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -2528,7 +2528,7 @@ namespace BeamAutomationClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryCreated([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationTransferTokenResponseV2? result)
+            public bool TryCreated([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationTransactionResponse? result)
             {
                 result = null;
 

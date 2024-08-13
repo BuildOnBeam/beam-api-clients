@@ -27,17 +27,17 @@ using BeamAutomationClient.Client;
 namespace BeamAutomationClient.Model
 {
     /// <summary>
-    /// AutomationGetTransactionsResponseV2DataInnerIntent
+    /// AutomationTransactionResponseIntent
     /// </summary>
-    public partial class AutomationGetTransactionsResponseV2DataInnerIntent : IValidatableObject
+    public partial class AutomationTransactionResponseIntent : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AutomationGetTransactionsResponseV2DataInnerIntent" /> class.
+        /// Initializes a new instance of the <see cref="AutomationTransactionResponseIntent" /> class.
         /// </summary>
         /// <param name="hash">hash</param>
         /// <param name="interactions">interactions</param>
         [JsonConstructor]
-        public AutomationGetTransactionsResponseV2DataInnerIntent(Option<string?> hash = default, Option<List<AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInner>?> interactions = default)
+        public AutomationTransactionResponseIntent(Option<string?> hash = default, Option<List<AutomationTransactionResponseIntentInteractionsInner>?> interactions = default)
         {
             HashOption = hash;
             InteractionsOption = interactions;
@@ -64,13 +64,13 @@ namespace BeamAutomationClient.Model
         /// </summary>
         [JsonIgnore]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<List<AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInner>?> InteractionsOption { get; private set; }
+        public Option<List<AutomationTransactionResponseIntentInteractionsInner>?> InteractionsOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Interactions
         /// </summary>
         [JsonPropertyName("interactions")]
-        public List<AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInner>? Interactions { get { return this. InteractionsOption; } set { this.InteractionsOption = new(value); } }
+        public List<AutomationTransactionResponseIntentInteractionsInner>? Interactions { get { return this. InteractionsOption; } set { this.InteractionsOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -79,7 +79,7 @@ namespace BeamAutomationClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class AutomationGetTransactionsResponseV2DataInnerIntent {\n");
+            sb.Append("class AutomationTransactionResponseIntent {\n");
             sb.Append("  Hash: ").Append(Hash).Append("\n");
             sb.Append("  Interactions: ").Append(Interactions).Append("\n");
             sb.Append("}\n");
@@ -98,19 +98,19 @@ namespace BeamAutomationClient.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="AutomationGetTransactionsResponseV2DataInnerIntent" />
+    /// A Json converter for type <see cref="AutomationTransactionResponseIntent" />
     /// </summary>
-    public class AutomationGetTransactionsResponseV2DataInnerIntentJsonConverter : JsonConverter<AutomationGetTransactionsResponseV2DataInnerIntent>
+    public class AutomationTransactionResponseIntentJsonConverter : JsonConverter<AutomationTransactionResponseIntent>
     {
         /// <summary>
-        /// Deserializes json to <see cref="AutomationGetTransactionsResponseV2DataInnerIntent" />
+        /// Deserializes json to <see cref="AutomationTransactionResponseIntent" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override AutomationGetTransactionsResponseV2DataInnerIntent Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override AutomationTransactionResponseIntent Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -120,7 +120,7 @@ namespace BeamAutomationClient.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<string?> hash = default;
-            Option<List<AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInner>?> interactions = default;
+            Option<List<AutomationTransactionResponseIntentInteractionsInner>?> interactions = default;
 
             while (utf8JsonReader.Read())
             {
@@ -142,7 +142,7 @@ namespace BeamAutomationClient.Model
                             break;
                         case "interactions":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                interactions = new Option<List<AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInner>?>(JsonSerializer.Deserialize<List<AutomationGetTransactionsResponseV2DataInnerIntentInteractionsInner>>(ref utf8JsonReader, jsonSerializerOptions));
+                                interactions = new Option<List<AutomationTransactionResponseIntentInteractionsInner>?>(JsonSerializer.Deserialize<List<AutomationTransactionResponseIntentInteractionsInner>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -150,44 +150,44 @@ namespace BeamAutomationClient.Model
                 }
             }
 
-            return new AutomationGetTransactionsResponseV2DataInnerIntent(hash, interactions);
+            return new AutomationTransactionResponseIntent(hash, interactions);
         }
 
         /// <summary>
-        /// Serializes a <see cref="AutomationGetTransactionsResponseV2DataInnerIntent" />
+        /// Serializes a <see cref="AutomationTransactionResponseIntent" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="automationGetTransactionsResponseV2DataInnerIntent"></param>
+        /// <param name="automationTransactionResponseIntent"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, AutomationGetTransactionsResponseV2DataInnerIntent automationGetTransactionsResponseV2DataInnerIntent, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, AutomationTransactionResponseIntent automationTransactionResponseIntent, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(ref writer, automationGetTransactionsResponseV2DataInnerIntent, jsonSerializerOptions);
+            WriteProperties(ref writer, automationTransactionResponseIntent, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="AutomationGetTransactionsResponseV2DataInnerIntent" />
+        /// Serializes the properties of <see cref="AutomationTransactionResponseIntent" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="automationGetTransactionsResponseV2DataInnerIntent"></param>
+        /// <param name="automationTransactionResponseIntent"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(ref Utf8JsonWriter writer, AutomationGetTransactionsResponseV2DataInnerIntent automationGetTransactionsResponseV2DataInnerIntent, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(ref Utf8JsonWriter writer, AutomationTransactionResponseIntent automationTransactionResponseIntent, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (automationGetTransactionsResponseV2DataInnerIntent.HashOption.IsSet)
-                if (automationGetTransactionsResponseV2DataInnerIntent.HashOption.Value != null)
-                    writer.WriteString("hash", automationGetTransactionsResponseV2DataInnerIntent.Hash);
+            if (automationTransactionResponseIntent.HashOption.IsSet)
+                if (automationTransactionResponseIntent.HashOption.Value != null)
+                    writer.WriteString("hash", automationTransactionResponseIntent.Hash);
                 else
                     writer.WriteNull("hash");
 
-            if (automationGetTransactionsResponseV2DataInnerIntent.InteractionsOption.IsSet)
-                if (automationGetTransactionsResponseV2DataInnerIntent.InteractionsOption.Value != null)
+            if (automationTransactionResponseIntent.InteractionsOption.IsSet)
+                if (automationTransactionResponseIntent.InteractionsOption.Value != null)
                 {
                     writer.WritePropertyName("interactions");
-                    JsonSerializer.Serialize(writer, automationGetTransactionsResponseV2DataInnerIntent.Interactions, jsonSerializerOptions);
+                    JsonSerializer.Serialize(writer, automationTransactionResponseIntent.Interactions, jsonSerializerOptions);
                 }
                 else
                     writer.WriteNull("interactions");

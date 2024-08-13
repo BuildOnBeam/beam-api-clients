@@ -45,6 +45,7 @@ namespace BeamAutomationClient.Api
         /// <param name="automationCreateWebhookForGame"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateWebhookApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<ICreateWebhookApiResponse> CreateWebhookAsync(AutomationCreateWebhookForGame automationCreateWebhookForGame, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -56,6 +57,7 @@ namespace BeamAutomationClient.Api
         /// <param name="automationCreateWebhookForGame"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateWebhookApiResponse"/>?&gt;</returns>
+        [Obsolete]
         Task<ICreateWebhookApiResponse?> CreateWebhookOrDefaultAsync(AutomationCreateWebhookForGame automationCreateWebhookForGame, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -68,6 +70,7 @@ namespace BeamAutomationClient.Api
         /// <param name="webhookId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IDeleteWebhookApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IDeleteWebhookApiResponse> DeleteWebhookAsync(string webhookId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -79,6 +82,7 @@ namespace BeamAutomationClient.Api
         /// <param name="webhookId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IDeleteWebhookApiResponse"/>?&gt;</returns>
+        [Obsolete]
         Task<IDeleteWebhookApiResponse?> DeleteWebhookOrDefaultAsync(string webhookId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -90,6 +94,7 @@ namespace BeamAutomationClient.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetWebhooksForGameApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IGetWebhooksForGameApiResponse> GetWebhooksForGameAsync(System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -100,6 +105,7 @@ namespace BeamAutomationClient.Api
         /// </remarks>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetWebhooksForGameApiResponse"/>?&gt;</returns>
+        [Obsolete]
         Task<IGetWebhooksForGameApiResponse?> GetWebhooksForGameOrDefaultAsync(System.Threading.CancellationToken cancellationToken = default);
     }
 
