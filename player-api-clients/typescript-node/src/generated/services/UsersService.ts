@@ -47,4 +47,20 @@ export class UsersService {
       },
     });
   }
+
+  /**
+   * Unlinks an entity ID from a user
+   * @param entityId
+   * @returns GetUserResponse
+   * @throws ApiError
+   */
+  public unlinkUser(entityId: string): CancelablePromise<GetUserResponse> {
+    return this.httpRequest.request({
+      method: 'DELETE',
+      url: '/v1/player/users/{entityId}',
+      path: {
+        entityId: entityId,
+      },
+    });
+  }
 }
