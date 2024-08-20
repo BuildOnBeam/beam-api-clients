@@ -120,8 +120,6 @@ namespace BeamAutomationClient.Client
                 return boolean
                     ? "true"
                     : "false";
-            if (obj is AutomationAddContractResponse.TypeEnum automationAddContractResponseTypeEnum)
-                return AutomationAddContractResponse.TypeEnumToJsonValue(automationAddContractResponseTypeEnum);
             if (obj is AutomationCommonActivityResponseDataInner.TypeEnum automationCommonActivityResponseDataInnerTypeEnum)
                 return AutomationCommonActivityResponseDataInner.TypeEnumToJsonValue(automationCommonActivityResponseDataInnerTypeEnum);
             if (obj is AutomationCommonAddPolicyRequestInput.RateTypeEnum automationCommonAddPolicyRequestInputRateTypeEnum)
@@ -196,20 +194,6 @@ namespace BeamAutomationClient.Client
                 return AutomationTransactionResponse.StatusEnumToJsonValue(automationTransactionResponseStatusEnum);
             if (obj is AutomationTransactionResponse.TypeEnum automationTransactionResponseTypeEnum)
                 return AutomationTransactionResponse.TypeEnumToJsonValue(automationTransactionResponseTypeEnum);
-            if (obj is AutomationUpdateGameRequestInput.PegiContentEnum automationUpdateGameRequestInputPegiContentEnum)
-                return AutomationUpdateGameRequestInput.PegiContentEnumToJsonValue(automationUpdateGameRequestInputPegiContentEnum);
-            if (obj is AutomationUpdateGameRequestInput.PegiRatingEnum automationUpdateGameRequestInputPegiRatingEnum)
-                return AutomationUpdateGameRequestInput.PegiRatingEnumToJsonValue(automationUpdateGameRequestInputPegiRatingEnum);
-            if (obj is AutomationUpdateGameResponse.PegiContentEnum automationUpdateGameResponsePegiContentEnum)
-                return AutomationUpdateGameResponse.PegiContentEnumToJsonValue(automationUpdateGameResponsePegiContentEnum);
-            if (obj is AutomationUpdateGameResponse.PegiRatingEnum automationUpdateGameResponsePegiRatingEnum)
-                return AutomationUpdateGameResponse.PegiRatingEnumToJsonValue(automationUpdateGameResponsePegiRatingEnum);
-            if (obj is AutomationUpdateGameResponsePoliciesInner.ModelEnum automationUpdateGameResponsePoliciesInnerModelEnum)
-                return AutomationUpdateGameResponsePoliciesInner.ModelEnumToJsonValue(automationUpdateGameResponsePoliciesInnerModelEnum);
-            if (obj is AutomationUpdateGameResponsePoliciesInner.TypeEnum automationUpdateGameResponsePoliciesInnerTypeEnum)
-                return AutomationUpdateGameResponsePoliciesInner.TypeEnumToJsonValue(automationUpdateGameResponsePoliciesInnerTypeEnum);
-            if (obj is AutomationUpdateGameResponsePoliciesInner.RateTypeEnum automationUpdateGameResponsePoliciesInnerRateTypeEnum)
-                return AutomationUpdateGameResponsePoliciesInner.RateTypeEnumToJsonValue(automationUpdateGameResponsePoliciesInnerRateTypeEnum);
             if (obj is AutomationWebhookForGameResponse.EventsEnum automationWebhookForGameResponseEventsEnum)
                 return AutomationWebhookForGameResponse.EventsEnumToJsonValue(automationWebhookForGameResponseEventsEnum);
             if (obj is ICollection collection)

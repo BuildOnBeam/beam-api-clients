@@ -11,8 +11,6 @@ export { OpenAPI } from './core/OpenAPI';
 export type { OpenAPIConfig } from './core/OpenAPI';
 
 export type { AcceptAssetOfferRequestInputV2 } from './models/AcceptAssetOfferRequestInputV2';
-export type { AddContractRequestInput } from './models/AddContractRequestInput';
-export { AddContractResponse } from './models/AddContractResponse';
 export type { BuyAssetRequestInputV2 } from './models/BuyAssetRequestInputV2';
 export type { CancelAssetListingRequestInputV2 } from './models/CancelAssetListingRequestInputV2';
 export type { CancelAssetOfferRequestInputV2 } from './models/CancelAssetOfferRequestInputV2';
@@ -61,7 +59,6 @@ export type { GetWebhooksForGameResponse } from './models/GetWebhooksForGameResp
 export type { RefreshContractRequestBody } from './models/RefreshContractRequestBody';
 export type { RefreshTokenRequestBody } from './models/RefreshTokenRequestBody';
 export { RegenerateGameApiKeysResponse } from './models/RegenerateGameApiKeysResponse';
-export type { RemoveContractResponse } from './models/RemoveContractResponse';
 export { SellAssetRequestInputV2 } from './models/SellAssetRequestInputV2';
 export type { SellAssetResponseV2 } from './models/SellAssetResponseV2';
 export type { TradeTokensRequestInput } from './models/TradeTokensRequestInput';
@@ -70,8 +67,6 @@ export type { TransferAssetRequestInputV2 } from './models/TransferAssetRequestI
 export type { TransferNativeTokenRequestInputV2 } from './models/TransferNativeTokenRequestInputV2';
 export type { TransferTokenRequestInputV2 } from './models/TransferTokenRequestInputV2';
 export type { UnwrappingTokenInput } from './models/UnwrappingTokenInput';
-export { UpdateGameRequestInput } from './models/UpdateGameRequestInput';
-export { UpdateGameResponse } from './models/UpdateGameResponse';
 export type { UpdateProfileRequestInput } from './models/UpdateProfileRequestInput';
 export type { UpdateProfileResponse } from './models/UpdateProfileResponse';
 export type { WebhookForGameResponse } from './models/WebhookForGameResponse';

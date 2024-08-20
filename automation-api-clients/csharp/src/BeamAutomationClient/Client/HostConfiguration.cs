@@ -41,8 +41,6 @@ namespace BeamAutomationClient.Client
             _jsonOptions.Converters.Add(new DateTimeJsonConverter());
             _jsonOptions.Converters.Add(new DateTimeNullableJsonConverter());
             _jsonOptions.Converters.Add(new AutomationAcceptAssetOfferRequestInputV2JsonConverter());
-            _jsonOptions.Converters.Add(new AutomationAddContractRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new AutomationAddContractResponseJsonConverter());
             _jsonOptions.Converters.Add(new AutomationBuyAssetRequestInputV2JsonConverter());
             _jsonOptions.Converters.Add(new AutomationCancelAssetListingRequestInputV2JsonConverter());
             _jsonOptions.Converters.Add(new AutomationCancelAssetOfferRequestInputV2JsonConverter());
@@ -128,7 +126,6 @@ namespace BeamAutomationClient.Client
             _jsonOptions.Converters.Add(new AutomationRefreshTokenRequestBodyJsonConverter());
             _jsonOptions.Converters.Add(new AutomationRegenerateGameApiKeysResponseJsonConverter());
             _jsonOptions.Converters.Add(new AutomationRegenerateGameApiKeysResponseApiKeysInnerJsonConverter());
-            _jsonOptions.Converters.Add(new AutomationRemoveContractResponseJsonConverter());
             _jsonOptions.Converters.Add(new AutomationSellAssetRequestInputV2JsonConverter());
             _jsonOptions.Converters.Add(new AutomationSellAssetResponseV2JsonConverter());
             _jsonOptions.Converters.Add(new AutomationTradeTokensRequestInputJsonConverter());
@@ -147,9 +144,6 @@ namespace BeamAutomationClient.Client
             _jsonOptions.Converters.Add(new AutomationTransferNativeTokenRequestInputV2JsonConverter());
             _jsonOptions.Converters.Add(new AutomationTransferTokenRequestInputV2JsonConverter());
             _jsonOptions.Converters.Add(new AutomationUnwrappingTokenInputJsonConverter());
-            _jsonOptions.Converters.Add(new AutomationUpdateGameRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new AutomationUpdateGameResponseJsonConverter());
-            _jsonOptions.Converters.Add(new AutomationUpdateGameResponsePoliciesInnerJsonConverter());
             _jsonOptions.Converters.Add(new AutomationUpdateProfileRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new AutomationUpdateProfileResponseJsonConverter());
             _jsonOptions.Converters.Add(new AutomationWebhookForGameResponseJsonConverter());

@@ -3,8 +3,6 @@
  */
 
 export * from './AcceptAssetOfferRequestInputV2';
-export * from './AddContractRequestInput';
-export * from './AddContractResponse';
 export * from './BuyAssetRequestInputV2';
 export * from './CancelAssetListingRequestInputV2';
 export * from './CancelAssetOfferRequestInputV2';
@@ -53,7 +51,6 @@ export * from './GetWebhooksForGameResponse';
 export * from './RefreshContractRequestBody';
 export * from './RefreshTokenRequestBody';
 export * from './RegenerateGameApiKeysResponse';
-export * from './RemoveContractResponse';
 export * from './SellAssetRequestInputV2';
 export * from './SellAssetResponseV2';
 export * from './TradeTokensRequestInput';
@@ -62,8 +59,6 @@ export * from './TransferAssetRequestInputV2';
 export * from './TransferNativeTokenRequestInputV2';
 export * from './TransferTokenRequestInputV2';
 export * from './UnwrappingTokenInput';
-export * from './UpdateGameRequestInput';
-export * from './UpdateGameResponse';
 export * from './UpdateProfileRequestInput';
 export * from './UpdateProfileResponse';
 export * from './WebhookForGameResponse';
