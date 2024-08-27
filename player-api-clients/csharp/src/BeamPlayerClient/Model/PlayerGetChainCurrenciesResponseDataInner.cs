@@ -70,19 +70,14 @@ namespace BeamPlayerClient.Model
             USDC = 3,
 
             /// <summary>
-            /// Enum USDT for value: USDT
-            /// </summary>
-            USDT = 4,
-
-            /// <summary>
             /// Enum IMX for value: IMX
             /// </summary>
-            IMX = 5,
+            IMX = 4,
 
             /// <summary>
             /// Enum WIMX for value: WIMX
             /// </summary>
-            WIMX = 6
+            WIMX = 5
         }
 
         /// <summary>
@@ -101,9 +96,6 @@ namespace BeamPlayerClient.Model
 
             if (value.Equals("USDC"))
                 return SymbolEnum.USDC;
-
-            if (value.Equals("USDT"))
-                return SymbolEnum.USDT;
 
             if (value.Equals("IMX"))
                 return SymbolEnum.IMX;
@@ -130,9 +122,6 @@ namespace BeamPlayerClient.Model
             if (value.Equals("USDC"))
                 return SymbolEnum.USDC;
 
-            if (value.Equals("USDT"))
-                return SymbolEnum.USDT;
-
             if (value.Equals("IMX"))
                 return SymbolEnum.IMX;
 
@@ -158,9 +147,6 @@ namespace BeamPlayerClient.Model
 
             if (value == SymbolEnum.USDC)
                 return "USDC";
-
-            if (value == SymbolEnum.USDT)
-                return "USDT";
 
             if (value == SymbolEnum.IMX)
                 return "IMX";
@@ -192,9 +178,6 @@ namespace BeamPlayerClient.Model
                     if (value.Equals("USDC"))
                         return SymbolEnum.USDC;
 
-                    if (value.Equals("USDT"))
-                        return SymbolEnum.USDT;
-
                     if (value.Equals("IMX"))
                         return SymbolEnum.IMX;
 
@@ -219,9 +202,6 @@ namespace BeamPlayerClient.Model
 
                     if (value.Equals("USDC"))
                         return SymbolEnum.USDC;
-
-                    if (value.Equals("USDT"))
-                        return SymbolEnum.USDT;
 
                     if (value.Equals("IMX"))
                         return SymbolEnum.IMX;
@@ -248,9 +228,6 @@ namespace BeamPlayerClient.Model
 
                         if (value == SymbolEnum.USDC)
                             return "USDC";
-
-                        if (value == SymbolEnum.USDT)
-                            return "USDT";
 
                         if (value == SymbolEnum.IMX)
                             return "IMX";

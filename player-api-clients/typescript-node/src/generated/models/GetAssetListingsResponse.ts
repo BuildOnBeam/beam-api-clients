@@ -15,7 +15,7 @@ export type GetAssetListingsResponse = {
     price?: {
       currency?: {
         address: string;
-        symbol?: 'BEAM' | 'WBEAM' | 'USDC' | 'USDT' | 'IMX' | 'WIMX' | null;
+        symbol?: 'BEAM' | 'WBEAM' | 'USDC' | 'IMX' | 'WIMX' | null;
         decimals: number;
       } | null;
       amount?: {

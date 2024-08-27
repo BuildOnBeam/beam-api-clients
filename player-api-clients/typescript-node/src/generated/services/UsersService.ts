@@ -4,6 +4,7 @@
 /* eslint-disable */
 import type { GetAllUsersResponse } from '../models/GetAllUsersResponse';
 import type { GetUserResponse } from '../models/GetUserResponse';
+import type { UpdateUserRequest } from '../models/UpdateUserRequest';
 
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -45,6 +46,28 @@ export class UsersService {
       path: {
         entityId: entityId,
       },
+    });
+  }
+
+  /**
+   * Updates entityId for the user
+   * @param entityId
+   * @param requestBody
+   * @returns GetUserResponse
+   * @throws ApiError
+   */
+  public updateUser(
+    entityId: string,
+    requestBody: UpdateUserRequest,
+  ): CancelablePromise<GetUserResponse> {
+    return this.httpRequest.request({
+      method: 'PATCH',
+      url: '/v1/player/users/{entityId}',
+      path: {
+        entityId: entityId,
+      },
+      body: requestBody,
+      mediaType: 'application/json',
     });
   }
 

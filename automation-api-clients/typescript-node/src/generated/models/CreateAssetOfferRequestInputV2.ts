@@ -18,6 +18,5 @@ export namespace CreateAssetOfferRequestInputV2 {
   export enum currency {
     WBEAM = 'WBEAM',
     USDC = 'USDC',
-    USDT = 'USDT',
   }
 }

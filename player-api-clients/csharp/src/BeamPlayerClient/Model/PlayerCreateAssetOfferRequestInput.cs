@@ -76,12 +76,7 @@ namespace BeamPlayerClient.Model
             /// <summary>
             /// Enum USDC for value: USDC
             /// </summary>
-            USDC = 2,
-
-            /// <summary>
-            /// Enum USDT for value: USDT
-            /// </summary>
-            USDT = 3
+            USDC = 2
         }
 
         /// <summary>
@@ -97,9 +92,6 @@ namespace BeamPlayerClient.Model
 
             if (value.Equals("USDC"))
                 return CurrencyEnum.USDC;
-
-            if (value.Equals("USDT"))
-                return CurrencyEnum.USDT;
 
             throw new NotImplementedException($"Could not convert value to type CurrencyEnum: '{value}'");
         }
@@ -117,9 +109,6 @@ namespace BeamPlayerClient.Model
             if (value.Equals("USDC"))
                 return CurrencyEnum.USDC;
 
-            if (value.Equals("USDT"))
-                return CurrencyEnum.USDT;
-
             return null;
         }
 
@@ -136,9 +125,6 @@ namespace BeamPlayerClient.Model
 
             if (value == CurrencyEnum.USDC)
                 return "USDC";
-
-            if (value == CurrencyEnum.USDT)
-                return "USDT";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }
@@ -161,9 +147,6 @@ namespace BeamPlayerClient.Model
                     if (value.Equals("USDC"))
                         return CurrencyEnum.USDC;
 
-                    if (value.Equals("USDT"))
-                        return CurrencyEnum.USDT;
-
                 throw new NotImplementedException($"Could not convert value to type CurrencyEnum: '{value}'");
             }
 
@@ -179,9 +162,6 @@ namespace BeamPlayerClient.Model
 
                     if (value.Equals("USDC"))
                         return CurrencyEnum.USDC;
-
-                    if (value.Equals("USDT"))
-                        return CurrencyEnum.USDT;
 
                 return null;
             }
@@ -199,9 +179,6 @@ namespace BeamPlayerClient.Model
 
                         if (value == CurrencyEnum.USDC)
                             return "USDC";
-
-                        if (value == CurrencyEnum.USDT)
-                            return "USDT";
 
                 throw new NotImplementedException($"Value could not be handled: '{value}'");
             }

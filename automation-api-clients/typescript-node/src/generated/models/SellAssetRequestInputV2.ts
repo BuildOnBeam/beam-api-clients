@@ -35,7 +35,6 @@ export namespace SellAssetRequestInputV2 {
     BEAM = 'BEAM',
     WBEAM = 'WBEAM',
     USDC = 'USDC',
-    USDT = 'USDT',
     IMX = 'IMX',
     WIMX = 'WIMX',
   }

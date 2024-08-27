@@ -53,4 +53,5 @@ export * from './TransferAssetRequestInput';
 export * from './TransferNativeTokenRequestInput';
 export * from './TransferTokenRequestInput';
 export * from './UnwrappingTokenInput';
+export * from './UpdateUserRequest';
 export * from './WrappingTokenInput';

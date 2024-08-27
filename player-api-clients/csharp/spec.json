@@ -1649,6 +1649,50 @@
           }
         ]
       },
+      "patch": {
+        "operationId": "updateUser",
+        "summary": "Updates entityId for the user",
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlayerUpdateUserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerGetUserResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Users"
+        ],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      },
       "delete": {
         "operationId": "unlinkUser",
         "summary": "Unlinks an entity ID from a user",
@@ -3900,7 +3944,6 @@
                             "BEAM",
                             "WBEAM",
                             "USDC",
-                            "USDT",
                             "IMX",
                             "WIMX"
                           ],
@@ -4063,7 +4106,6 @@
               "BEAM",
               "WBEAM",
               "USDC",
-              "USDT",
               "IMX",
               "WIMX"
             ]
@@ -4205,8 +4247,7 @@
             "type": "string",
             "enum": [
               "WBEAM",
-              "USDC",
-              "USDT"
+              "USDC"
             ]
           },
           "chainId": {
@@ -4327,7 +4368,6 @@
                     "BEAM",
                     "WBEAM",
                     "USDC",
-                    "USDT",
                     "IMX",
                     "WIMX"
                   ]
@@ -4997,6 +5037,17 @@
           "gameId",
           "wallets",
           "entities"
+        ]
+      },
+      "PlayerUpdateUserRequest": {
+        "type": "object",
+        "properties": {
+          "newEntityId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "newEntityId"
         ]
       },
       "PlayerCreateOperationRequestInput": {

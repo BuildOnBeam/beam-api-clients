@@ -133,6 +133,7 @@ namespace BeamPlayerClient.Client
             _jsonOptions.Converters.Add(new PlayerTransferNativeTokenRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new PlayerTransferTokenRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new PlayerUnwrappingTokenInputJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerUpdateUserRequestJsonConverter());
             _jsonOptions.Converters.Add(new PlayerWrappingTokenInputJsonConverter());
             PlayerJsonSerializerOptionsProvider jsonSerializerOptionsProvider = new(_jsonOptions);
             _services.AddSingleton(jsonSerializerOptionsProvider);

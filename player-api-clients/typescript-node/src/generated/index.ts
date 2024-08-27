@@ -61,6 +61,7 @@ export { TransferAssetRequestInput } from './models/TransferAssetRequestInput';
 export { TransferNativeTokenRequestInput } from './models/TransferNativeTokenRequestInput';
 export { TransferTokenRequestInput } from './models/TransferTokenRequestInput';
 export { UnwrappingTokenInput } from './models/UnwrappingTokenInput';
+export type { UpdateUserRequest } from './models/UpdateUserRequest';
 export { WrappingTokenInput } from './models/WrappingTokenInput';
 
 export { ActivityService } from './services/ActivityService';

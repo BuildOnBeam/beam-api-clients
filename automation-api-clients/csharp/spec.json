@@ -4373,7 +4373,6 @@
                             "BEAM",
                             "WBEAM",
                             "USDC",
-                            "USDT",
                             "IMX",
                             "WIMX"
                           ],
@@ -4534,7 +4533,6 @@
               "BEAM",
               "WBEAM",
               "USDC",
-              "USDT",
               "IMX",
               "WIMX"
             ]
@@ -4649,8 +4647,7 @@
             "type": "string",
             "enum": [
               "WBEAM",
-              "USDC",
-              "USDT"
+              "USDC"
             ]
           },
           "chainId": {
@@ -4756,7 +4753,6 @@
                     "BEAM",
                     "WBEAM",
                     "USDC",
-                    "USDT",
                     "IMX",
                     "WIMX"
                   ]

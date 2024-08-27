@@ -128,4 +128,5 @@ src/BeamPlayerClient/Model/PlayerTransferAssetRequestInputAssetsInner.cs
 src/BeamPlayerClient/Model/PlayerTransferNativeTokenRequestInput.cs
 src/BeamPlayerClient/Model/PlayerTransferTokenRequestInput.cs
 src/BeamPlayerClient/Model/PlayerUnwrappingTokenInput.cs
+src/BeamPlayerClient/Model/PlayerUpdateUserRequest.cs
 src/BeamPlayerClient/Model/PlayerWrappingTokenInput.cs

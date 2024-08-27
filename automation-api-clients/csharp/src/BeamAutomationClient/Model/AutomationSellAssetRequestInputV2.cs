@@ -299,19 +299,14 @@ namespace BeamAutomationClient.Model
             USDC = 3,
 
             /// <summary>
-            /// Enum USDT for value: USDT
-            /// </summary>
-            USDT = 4,
-
-            /// <summary>
             /// Enum IMX for value: IMX
             /// </summary>
-            IMX = 5,
+            IMX = 4,
 
             /// <summary>
             /// Enum WIMX for value: WIMX
             /// </summary>
-            WIMX = 6
+            WIMX = 5
         }
 
         /// <summary>
@@ -330,9 +325,6 @@ namespace BeamAutomationClient.Model
 
             if (value.Equals("USDC"))
                 return CurrencyEnum.USDC;
-
-            if (value.Equals("USDT"))
-                return CurrencyEnum.USDT;
 
             if (value.Equals("IMX"))
                 return CurrencyEnum.IMX;
@@ -359,9 +351,6 @@ namespace BeamAutomationClient.Model
             if (value.Equals("USDC"))
                 return CurrencyEnum.USDC;
 
-            if (value.Equals("USDT"))
-                return CurrencyEnum.USDT;
-
             if (value.Equals("IMX"))
                 return CurrencyEnum.IMX;
 
@@ -387,9 +376,6 @@ namespace BeamAutomationClient.Model
 
             if (value == CurrencyEnum.USDC)
                 return "USDC";
-
-            if (value == CurrencyEnum.USDT)
-                return "USDT";
 
             if (value == CurrencyEnum.IMX)
                 return "IMX";
@@ -421,9 +407,6 @@ namespace BeamAutomationClient.Model
                     if (value.Equals("USDC"))
                         return CurrencyEnum.USDC;
 
-                    if (value.Equals("USDT"))
-                        return CurrencyEnum.USDT;
-
                     if (value.Equals("IMX"))
                         return CurrencyEnum.IMX;
 
@@ -448,9 +431,6 @@ namespace BeamAutomationClient.Model
 
                     if (value.Equals("USDC"))
                         return CurrencyEnum.USDC;
-
-                    if (value.Equals("USDT"))
-                        return CurrencyEnum.USDT;
 
                     if (value.Equals("IMX"))
                         return CurrencyEnum.IMX;
@@ -477,9 +457,6 @@ namespace BeamAutomationClient.Model
 
                         if (value == CurrencyEnum.USDC)
                             return "USDC";
-
-                        if (value == CurrencyEnum.USDT)
-                            return "USDT";
 
                         if (value == CurrencyEnum.IMX)
                             return "IMX";
