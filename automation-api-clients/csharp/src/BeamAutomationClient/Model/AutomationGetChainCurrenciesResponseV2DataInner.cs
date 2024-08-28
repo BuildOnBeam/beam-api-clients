@@ -60,24 +60,34 @@ namespace BeamAutomationClient.Model
             BEAM = 1,
 
             /// <summary>
-            /// Enum WBEAM for value: WBEAM
-            /// </summary>
-            WBEAM = 2,
-
-            /// <summary>
-            /// Enum USDC for value: USDC
-            /// </summary>
-            USDC = 3,
-
-            /// <summary>
             /// Enum IMX for value: IMX
             /// </summary>
-            IMX = 4,
+            IMX = 2,
+
+            /// <summary>
+            /// Enum SOPH for value: SOPH
+            /// </summary>
+            SOPH = 3,
+
+            /// <summary>
+            /// Enum WBEAM for value: WBEAM
+            /// </summary>
+            WBEAM = 4,
 
             /// <summary>
             /// Enum WIMX for value: WIMX
             /// </summary>
-            WIMX = 5
+            WIMX = 5,
+
+            /// <summary>
+            /// Enum WSOPH for value: WSOPH
+            /// </summary>
+            WSOPH = 6,
+
+            /// <summary>
+            /// Enum USDC for value: USDC
+            /// </summary>
+            USDC = 7
         }
 
         /// <summary>
@@ -91,17 +101,23 @@ namespace BeamAutomationClient.Model
             if (value.Equals("BEAM"))
                 return SymbolEnum.BEAM;
 
-            if (value.Equals("WBEAM"))
-                return SymbolEnum.WBEAM;
-
-            if (value.Equals("USDC"))
-                return SymbolEnum.USDC;
-
             if (value.Equals("IMX"))
                 return SymbolEnum.IMX;
 
+            if (value.Equals("SOPH"))
+                return SymbolEnum.SOPH;
+
+            if (value.Equals("WBEAM"))
+                return SymbolEnum.WBEAM;
+
             if (value.Equals("WIMX"))
                 return SymbolEnum.WIMX;
+
+            if (value.Equals("WSOPH"))
+                return SymbolEnum.WSOPH;
+
+            if (value.Equals("USDC"))
+                return SymbolEnum.USDC;
 
             throw new NotImplementedException($"Could not convert value to type SymbolEnum: '{value}'");
         }
@@ -116,17 +132,23 @@ namespace BeamAutomationClient.Model
             if (value.Equals("BEAM"))
                 return SymbolEnum.BEAM;
 
-            if (value.Equals("WBEAM"))
-                return SymbolEnum.WBEAM;
-
-            if (value.Equals("USDC"))
-                return SymbolEnum.USDC;
-
             if (value.Equals("IMX"))
                 return SymbolEnum.IMX;
 
+            if (value.Equals("SOPH"))
+                return SymbolEnum.SOPH;
+
+            if (value.Equals("WBEAM"))
+                return SymbolEnum.WBEAM;
+
             if (value.Equals("WIMX"))
                 return SymbolEnum.WIMX;
+
+            if (value.Equals("WSOPH"))
+                return SymbolEnum.WSOPH;
+
+            if (value.Equals("USDC"))
+                return SymbolEnum.USDC;
 
             return null;
         }
@@ -142,17 +164,23 @@ namespace BeamAutomationClient.Model
             if (value == SymbolEnum.BEAM)
                 return "BEAM";
 
-            if (value == SymbolEnum.WBEAM)
-                return "WBEAM";
-
-            if (value == SymbolEnum.USDC)
-                return "USDC";
-
             if (value == SymbolEnum.IMX)
                 return "IMX";
 
+            if (value == SymbolEnum.SOPH)
+                return "SOPH";
+
+            if (value == SymbolEnum.WBEAM)
+                return "WBEAM";
+
             if (value == SymbolEnum.WIMX)
                 return "WIMX";
+
+            if (value == SymbolEnum.WSOPH)
+                return "WSOPH";
+
+            if (value == SymbolEnum.USDC)
+                return "USDC";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }
@@ -172,17 +200,23 @@ namespace BeamAutomationClient.Model
                     if (value.Equals("BEAM"))
                         return SymbolEnum.BEAM;
 
-                    if (value.Equals("WBEAM"))
-                        return SymbolEnum.WBEAM;
-
-                    if (value.Equals("USDC"))
-                        return SymbolEnum.USDC;
-
                     if (value.Equals("IMX"))
                         return SymbolEnum.IMX;
 
+                    if (value.Equals("SOPH"))
+                        return SymbolEnum.SOPH;
+
+                    if (value.Equals("WBEAM"))
+                        return SymbolEnum.WBEAM;
+
                     if (value.Equals("WIMX"))
                         return SymbolEnum.WIMX;
+
+                    if (value.Equals("WSOPH"))
+                        return SymbolEnum.WSOPH;
+
+                    if (value.Equals("USDC"))
+                        return SymbolEnum.USDC;
 
                 throw new NotImplementedException($"Could not convert value to type SymbolEnum: '{value}'");
             }
@@ -197,17 +231,23 @@ namespace BeamAutomationClient.Model
                     if (value.Equals("BEAM"))
                         return SymbolEnum.BEAM;
 
-                    if (value.Equals("WBEAM"))
-                        return SymbolEnum.WBEAM;
-
-                    if (value.Equals("USDC"))
-                        return SymbolEnum.USDC;
-
                     if (value.Equals("IMX"))
                         return SymbolEnum.IMX;
 
+                    if (value.Equals("SOPH"))
+                        return SymbolEnum.SOPH;
+
+                    if (value.Equals("WBEAM"))
+                        return SymbolEnum.WBEAM;
+
                     if (value.Equals("WIMX"))
                         return SymbolEnum.WIMX;
+
+                    if (value.Equals("WSOPH"))
+                        return SymbolEnum.WSOPH;
+
+                    if (value.Equals("USDC"))
+                        return SymbolEnum.USDC;
 
                 return null;
             }
@@ -223,17 +263,23 @@ namespace BeamAutomationClient.Model
                         if (value == SymbolEnum.BEAM)
                             return "BEAM";
 
-                        if (value == SymbolEnum.WBEAM)
-                            return "WBEAM";
-
-                        if (value == SymbolEnum.USDC)
-                            return "USDC";
-
                         if (value == SymbolEnum.IMX)
                             return "IMX";
 
+                        if (value == SymbolEnum.SOPH)
+                            return "SOPH";
+
+                        if (value == SymbolEnum.WBEAM)
+                            return "WBEAM";
+
                         if (value == SymbolEnum.WIMX)
                             return "WIMX";
+
+                        if (value == SymbolEnum.WSOPH)
+                            return "WSOPH";
+
+                        if (value == SymbolEnum.USDC)
+                            return "USDC";
 
                 throw new NotImplementedException($"Value could not be handled: '{value}'");
             }

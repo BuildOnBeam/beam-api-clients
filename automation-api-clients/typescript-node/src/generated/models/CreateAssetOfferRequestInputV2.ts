@@ -17,6 +17,8 @@ export type CreateAssetOfferRequestInputV2 = {
 export namespace CreateAssetOfferRequestInputV2 {
   export enum currency {
     WBEAM = 'WBEAM',
+    WIMX = 'WIMX',
+    WSOPH = 'WSOPH',
     USDC = 'USDC',
   }
 }

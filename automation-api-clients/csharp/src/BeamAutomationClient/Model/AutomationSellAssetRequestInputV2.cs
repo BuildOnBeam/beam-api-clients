@@ -289,24 +289,34 @@ namespace BeamAutomationClient.Model
             BEAM = 1,
 
             /// <summary>
-            /// Enum WBEAM for value: WBEAM
-            /// </summary>
-            WBEAM = 2,
-
-            /// <summary>
-            /// Enum USDC for value: USDC
-            /// </summary>
-            USDC = 3,
-
-            /// <summary>
             /// Enum IMX for value: IMX
             /// </summary>
-            IMX = 4,
+            IMX = 2,
+
+            /// <summary>
+            /// Enum SOPH for value: SOPH
+            /// </summary>
+            SOPH = 3,
+
+            /// <summary>
+            /// Enum WBEAM for value: WBEAM
+            /// </summary>
+            WBEAM = 4,
 
             /// <summary>
             /// Enum WIMX for value: WIMX
             /// </summary>
-            WIMX = 5
+            WIMX = 5,
+
+            /// <summary>
+            /// Enum WSOPH for value: WSOPH
+            /// </summary>
+            WSOPH = 6,
+
+            /// <summary>
+            /// Enum USDC for value: USDC
+            /// </summary>
+            USDC = 7
         }
 
         /// <summary>
@@ -320,17 +330,23 @@ namespace BeamAutomationClient.Model
             if (value.Equals("BEAM"))
                 return CurrencyEnum.BEAM;
 
-            if (value.Equals("WBEAM"))
-                return CurrencyEnum.WBEAM;
-
-            if (value.Equals("USDC"))
-                return CurrencyEnum.USDC;
-
             if (value.Equals("IMX"))
                 return CurrencyEnum.IMX;
 
+            if (value.Equals("SOPH"))
+                return CurrencyEnum.SOPH;
+
+            if (value.Equals("WBEAM"))
+                return CurrencyEnum.WBEAM;
+
             if (value.Equals("WIMX"))
                 return CurrencyEnum.WIMX;
+
+            if (value.Equals("WSOPH"))
+                return CurrencyEnum.WSOPH;
+
+            if (value.Equals("USDC"))
+                return CurrencyEnum.USDC;
 
             throw new NotImplementedException($"Could not convert value to type CurrencyEnum: '{value}'");
         }
@@ -345,17 +361,23 @@ namespace BeamAutomationClient.Model
             if (value.Equals("BEAM"))
                 return CurrencyEnum.BEAM;
 
-            if (value.Equals("WBEAM"))
-                return CurrencyEnum.WBEAM;
-
-            if (value.Equals("USDC"))
-                return CurrencyEnum.USDC;
-
             if (value.Equals("IMX"))
                 return CurrencyEnum.IMX;
 
+            if (value.Equals("SOPH"))
+                return CurrencyEnum.SOPH;
+
+            if (value.Equals("WBEAM"))
+                return CurrencyEnum.WBEAM;
+
             if (value.Equals("WIMX"))
                 return CurrencyEnum.WIMX;
+
+            if (value.Equals("WSOPH"))
+                return CurrencyEnum.WSOPH;
+
+            if (value.Equals("USDC"))
+                return CurrencyEnum.USDC;
 
             return null;
         }
@@ -371,17 +393,23 @@ namespace BeamAutomationClient.Model
             if (value == CurrencyEnum.BEAM)
                 return "BEAM";
 
-            if (value == CurrencyEnum.WBEAM)
-                return "WBEAM";
-
-            if (value == CurrencyEnum.USDC)
-                return "USDC";
-
             if (value == CurrencyEnum.IMX)
                 return "IMX";
 
+            if (value == CurrencyEnum.SOPH)
+                return "SOPH";
+
+            if (value == CurrencyEnum.WBEAM)
+                return "WBEAM";
+
             if (value == CurrencyEnum.WIMX)
                 return "WIMX";
+
+            if (value == CurrencyEnum.WSOPH)
+                return "WSOPH";
+
+            if (value == CurrencyEnum.USDC)
+                return "USDC";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }
@@ -401,17 +429,23 @@ namespace BeamAutomationClient.Model
                     if (value.Equals("BEAM"))
                         return CurrencyEnum.BEAM;
 
-                    if (value.Equals("WBEAM"))
-                        return CurrencyEnum.WBEAM;
-
-                    if (value.Equals("USDC"))
-                        return CurrencyEnum.USDC;
-
                     if (value.Equals("IMX"))
                         return CurrencyEnum.IMX;
 
+                    if (value.Equals("SOPH"))
+                        return CurrencyEnum.SOPH;
+
+                    if (value.Equals("WBEAM"))
+                        return CurrencyEnum.WBEAM;
+
                     if (value.Equals("WIMX"))
                         return CurrencyEnum.WIMX;
+
+                    if (value.Equals("WSOPH"))
+                        return CurrencyEnum.WSOPH;
+
+                    if (value.Equals("USDC"))
+                        return CurrencyEnum.USDC;
 
                 throw new NotImplementedException($"Could not convert value to type CurrencyEnum: '{value}'");
             }
@@ -426,17 +460,23 @@ namespace BeamAutomationClient.Model
                     if (value.Equals("BEAM"))
                         return CurrencyEnum.BEAM;
 
-                    if (value.Equals("WBEAM"))
-                        return CurrencyEnum.WBEAM;
-
-                    if (value.Equals("USDC"))
-                        return CurrencyEnum.USDC;
-
                     if (value.Equals("IMX"))
                         return CurrencyEnum.IMX;
 
+                    if (value.Equals("SOPH"))
+                        return CurrencyEnum.SOPH;
+
+                    if (value.Equals("WBEAM"))
+                        return CurrencyEnum.WBEAM;
+
                     if (value.Equals("WIMX"))
                         return CurrencyEnum.WIMX;
+
+                    if (value.Equals("WSOPH"))
+                        return CurrencyEnum.WSOPH;
+
+                    if (value.Equals("USDC"))
+                        return CurrencyEnum.USDC;
 
                 return null;
             }
@@ -452,17 +492,23 @@ namespace BeamAutomationClient.Model
                         if (value == CurrencyEnum.BEAM)
                             return "BEAM";
 
-                        if (value == CurrencyEnum.WBEAM)
-                            return "WBEAM";
-
-                        if (value == CurrencyEnum.USDC)
-                            return "USDC";
-
                         if (value == CurrencyEnum.IMX)
                             return "IMX";
 
+                        if (value == CurrencyEnum.SOPH)
+                            return "SOPH";
+
+                        if (value == CurrencyEnum.WBEAM)
+                            return "WBEAM";
+
                         if (value == CurrencyEnum.WIMX)
                             return "WIMX";
+
+                        if (value == CurrencyEnum.WSOPH)
+                            return "WSOPH";
+
+                        if (value == CurrencyEnum.USDC)
+                            return "USDC";
 
                 throw new NotImplementedException($"Value could not be handled: '{value}'");
             }

@@ -6,7 +6,7 @@
 export type GetChainCurrenciesResponseV2 = {
   data: Array<{
     decimals: number;
-    symbol: 'BEAM' | 'WBEAM' | 'USDC' | 'IMX' | 'WIMX';
+    symbol: 'BEAM' | 'IMX' | 'SOPH' | 'WBEAM' | 'WIMX' | 'WSOPH' | 'USDC';
     address: string;
   }>;
 };

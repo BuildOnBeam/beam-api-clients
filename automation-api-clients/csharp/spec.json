@@ -4371,10 +4371,12 @@
                           "type": "string",
                           "enum": [
                             "BEAM",
-                            "WBEAM",
-                            "USDC",
                             "IMX",
-                            "WIMX"
+                            "SOPH",
+                            "WBEAM",
+                            "WIMX",
+                            "WSOPH",
+                            "USDC"
                           ],
                           "nullable": true
                         },
@@ -4531,10 +4533,12 @@
             "type": "string",
             "enum": [
               "BEAM",
-              "WBEAM",
-              "USDC",
               "IMX",
-              "WIMX"
+              "SOPH",
+              "WBEAM",
+              "WIMX",
+              "WSOPH",
+              "USDC"
             ]
           },
           "sponsor": {
@@ -4647,6 +4651,8 @@
             "type": "string",
             "enum": [
               "WBEAM",
+              "WIMX",
+              "WSOPH",
               "USDC"
             ]
           },
@@ -4751,10 +4757,12 @@
                   "type": "string",
                   "enum": [
                     "BEAM",
-                    "WBEAM",
-                    "USDC",
                     "IMX",
-                    "WIMX"
+                    "SOPH",
+                    "WBEAM",
+                    "WIMX",
+                    "WSOPH",
+                    "USDC"
                   ]
                 },
                 "address": {

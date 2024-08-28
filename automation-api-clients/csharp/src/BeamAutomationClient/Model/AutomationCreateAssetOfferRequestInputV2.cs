@@ -70,9 +70,19 @@ namespace BeamAutomationClient.Model
             WBEAM = 1,
 
             /// <summary>
+            /// Enum WIMX for value: WIMX
+            /// </summary>
+            WIMX = 2,
+
+            /// <summary>
+            /// Enum WSOPH for value: WSOPH
+            /// </summary>
+            WSOPH = 3,
+
+            /// <summary>
             /// Enum USDC for value: USDC
             /// </summary>
-            USDC = 2
+            USDC = 4
         }
 
         /// <summary>
@@ -85,6 +95,12 @@ namespace BeamAutomationClient.Model
         {
             if (value.Equals("WBEAM"))
                 return CurrencyEnum.WBEAM;
+
+            if (value.Equals("WIMX"))
+                return CurrencyEnum.WIMX;
+
+            if (value.Equals("WSOPH"))
+                return CurrencyEnum.WSOPH;
 
             if (value.Equals("USDC"))
                 return CurrencyEnum.USDC;
@@ -102,6 +118,12 @@ namespace BeamAutomationClient.Model
             if (value.Equals("WBEAM"))
                 return CurrencyEnum.WBEAM;
 
+            if (value.Equals("WIMX"))
+                return CurrencyEnum.WIMX;
+
+            if (value.Equals("WSOPH"))
+                return CurrencyEnum.WSOPH;
+
             if (value.Equals("USDC"))
                 return CurrencyEnum.USDC;
 
@@ -118,6 +140,12 @@ namespace BeamAutomationClient.Model
         {
             if (value == CurrencyEnum.WBEAM)
                 return "WBEAM";
+
+            if (value == CurrencyEnum.WIMX)
+                return "WIMX";
+
+            if (value == CurrencyEnum.WSOPH)
+                return "WSOPH";
 
             if (value == CurrencyEnum.USDC)
                 return "USDC";
@@ -140,6 +168,12 @@ namespace BeamAutomationClient.Model
                     if (value.Equals("WBEAM"))
                         return CurrencyEnum.WBEAM;
 
+                    if (value.Equals("WIMX"))
+                        return CurrencyEnum.WIMX;
+
+                    if (value.Equals("WSOPH"))
+                        return CurrencyEnum.WSOPH;
+
                     if (value.Equals("USDC"))
                         return CurrencyEnum.USDC;
 
@@ -155,6 +189,12 @@ namespace BeamAutomationClient.Model
             {
                     if (value.Equals("WBEAM"))
                         return CurrencyEnum.WBEAM;
+
+                    if (value.Equals("WIMX"))
+                        return CurrencyEnum.WIMX;
+
+                    if (value.Equals("WSOPH"))
+                        return CurrencyEnum.WSOPH;
 
                     if (value.Equals("USDC"))
                         return CurrencyEnum.USDC;
@@ -172,6 +212,12 @@ namespace BeamAutomationClient.Model
             {
                         if (value == CurrencyEnum.WBEAM)
                             return "WBEAM";
+
+                        if (value == CurrencyEnum.WIMX)
+                            return "WIMX";
+
+                        if (value == CurrencyEnum.WSOPH)
+                            return "WSOPH";
 
                         if (value == CurrencyEnum.USDC)
                             return "USDC";
