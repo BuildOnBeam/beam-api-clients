@@ -4003,8 +4003,7 @@
                     "ERC721",
                     "ERC1155",
                     "SEAPORT",
-                    "UNISWAPV2",
-                    "WETH"
+                    "UNISWAPV2"
                   ]
                 },
                 "id": {

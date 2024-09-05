@@ -91,12 +91,7 @@ namespace BeamAutomationClient.Model
             /// <summary>
             /// Enum UNISWAPV2 for value: UNISWAPV2
             /// </summary>
-            UNISWAPV2 = 5,
-
-            /// <summary>
-            /// Enum WETH for value: WETH
-            /// </summary>
-            WETH = 6
+            UNISWAPV2 = 5
         }
 
         /// <summary>
@@ -121,9 +116,6 @@ namespace BeamAutomationClient.Model
 
             if (value.Equals("UNISWAPV2"))
                 return TypeEnum.UNISWAPV2;
-
-            if (value.Equals("WETH"))
-                return TypeEnum.WETH;
 
             throw new NotImplementedException($"Could not convert value to type TypeEnum: '{value}'");
         }
@@ -150,9 +142,6 @@ namespace BeamAutomationClient.Model
             if (value.Equals("UNISWAPV2"))
                 return TypeEnum.UNISWAPV2;
 
-            if (value.Equals("WETH"))
-                return TypeEnum.WETH;
-
             return null;
         }
 
@@ -178,9 +167,6 @@ namespace BeamAutomationClient.Model
 
             if (value == TypeEnum.UNISWAPV2)
                 return "UNISWAPV2";
-
-            if (value == TypeEnum.WETH)
-                return "WETH";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }
@@ -212,9 +198,6 @@ namespace BeamAutomationClient.Model
                     if (value.Equals("UNISWAPV2"))
                         return TypeEnum.UNISWAPV2;
 
-                    if (value.Equals("WETH"))
-                        return TypeEnum.WETH;
-
                 throw new NotImplementedException($"Could not convert value to type TypeEnum: '{value}'");
             }
 
@@ -239,9 +222,6 @@ namespace BeamAutomationClient.Model
 
                     if (value.Equals("UNISWAPV2"))
                         return TypeEnum.UNISWAPV2;
-
-                    if (value.Equals("WETH"))
-                        return TypeEnum.WETH;
 
                 return null;
             }
@@ -268,9 +248,6 @@ namespace BeamAutomationClient.Model
 
                         if (value == TypeEnum.UNISWAPV2)
                             return "UNISWAPV2";
-
-                        if (value == TypeEnum.WETH)
-                            return "WETH";
 
                 throw new NotImplementedException($"Value could not be handled: '{value}'");
             }
