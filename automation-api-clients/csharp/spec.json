@@ -3009,7 +3009,8 @@
                 "assetId"
               ]
             },
-            "minItems": 1
+            "minItems": 1,
+            "maxItems": 9
           },
           "optimistic": {
             "default": false,
@@ -4002,6 +4003,7 @@
                     "ERC20",
                     "ERC721",
                     "ERC1155",
+                    "CUSTOM",
                     "SEAPORT",
                     "UNISWAPV2"
                   ]
@@ -4375,6 +4377,7 @@
                             "WBEAM",
                             "WIMX",
                             "WSOPH",
+                            "RAT",
                             "USDC"
                           ],
                           "nullable": true
@@ -4537,6 +4540,7 @@
               "WBEAM",
               "WIMX",
               "WSOPH",
+              "RAT",
               "USDC"
             ]
           },
@@ -4652,6 +4656,7 @@
               "WBEAM",
               "WIMX",
               "WSOPH",
+              "RAT",
               "USDC"
             ]
           },
@@ -4761,6 +4766,7 @@
                     "WBEAM",
                     "WIMX",
                     "WSOPH",
+                    "RAT",
                     "USDC"
                   ]
                 },

@@ -47,7 +47,7 @@ export type GetGameResponse = {
     };
   }>;
   contracts: Array<{
-    type: 'ERC20' | 'ERC721' | 'ERC1155' | 'SEAPORT' | 'UNISWAPV2';
+    type: 'ERC20' | 'ERC721' | 'ERC1155' | 'CUSTOM' | 'SEAPORT' | 'UNISWAPV2';
     id: string;
     createdAt: string;
     updatedAt: string;

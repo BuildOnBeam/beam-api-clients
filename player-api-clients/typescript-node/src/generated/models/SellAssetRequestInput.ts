@@ -40,6 +40,7 @@ export namespace SellAssetRequestInput {
     WBEAM = 'WBEAM',
     WIMX = 'WIMX',
     WSOPH = 'WSOPH',
+    RAT = 'RAT',
     USDC = 'USDC',
   }
 

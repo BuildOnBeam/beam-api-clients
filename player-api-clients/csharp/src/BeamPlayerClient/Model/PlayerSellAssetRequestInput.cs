@@ -318,9 +318,14 @@ namespace BeamPlayerClient.Model
             WSOPH = 6,
 
             /// <summary>
+            /// Enum RAT for value: RAT
+            /// </summary>
+            RAT = 7,
+
+            /// <summary>
             /// Enum USDC for value: USDC
             /// </summary>
-            USDC = 7
+            USDC = 8
         }
 
         /// <summary>
@@ -348,6 +353,9 @@ namespace BeamPlayerClient.Model
 
             if (value.Equals("WSOPH"))
                 return CurrencyEnum.WSOPH;
+
+            if (value.Equals("RAT"))
+                return CurrencyEnum.RAT;
 
             if (value.Equals("USDC"))
                 return CurrencyEnum.USDC;
@@ -380,6 +388,9 @@ namespace BeamPlayerClient.Model
             if (value.Equals("WSOPH"))
                 return CurrencyEnum.WSOPH;
 
+            if (value.Equals("RAT"))
+                return CurrencyEnum.RAT;
+
             if (value.Equals("USDC"))
                 return CurrencyEnum.USDC;
 
@@ -411,6 +422,9 @@ namespace BeamPlayerClient.Model
 
             if (value == CurrencyEnum.WSOPH)
                 return "WSOPH";
+
+            if (value == CurrencyEnum.RAT)
+                return "RAT";
 
             if (value == CurrencyEnum.USDC)
                 return "USDC";
@@ -448,6 +462,9 @@ namespace BeamPlayerClient.Model
                     if (value.Equals("WSOPH"))
                         return CurrencyEnum.WSOPH;
 
+                    if (value.Equals("RAT"))
+                        return CurrencyEnum.RAT;
+
                     if (value.Equals("USDC"))
                         return CurrencyEnum.USDC;
 
@@ -478,6 +495,9 @@ namespace BeamPlayerClient.Model
 
                     if (value.Equals("WSOPH"))
                         return CurrencyEnum.WSOPH;
+
+                    if (value.Equals("RAT"))
+                        return CurrencyEnum.RAT;
 
                     if (value.Equals("USDC"))
                         return CurrencyEnum.USDC;
@@ -510,6 +530,9 @@ namespace BeamPlayerClient.Model
 
                         if (value == CurrencyEnum.WSOPH)
                             return "WSOPH";
+
+                        if (value == CurrencyEnum.RAT)
+                            return "RAT";
 
                         if (value == CurrencyEnum.USDC)
                             return "USDC";

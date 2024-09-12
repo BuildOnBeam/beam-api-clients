@@ -22,6 +22,7 @@ export type GetAssetListingsResponse = {
           | 'WBEAM'
           | 'WIMX'
           | 'WSOPH'
+          | 'RAT'
           | 'USDC'
           | null;
         decimals: number;

@@ -80,9 +80,14 @@ namespace BeamAutomationClient.Model
             WSOPH = 3,
 
             /// <summary>
+            /// Enum RAT for value: RAT
+            /// </summary>
+            RAT = 4,
+
+            /// <summary>
             /// Enum USDC for value: USDC
             /// </summary>
-            USDC = 4
+            USDC = 5
         }
 
         /// <summary>
@@ -101,6 +106,9 @@ namespace BeamAutomationClient.Model
 
             if (value.Equals("WSOPH"))
                 return CurrencyEnum.WSOPH;
+
+            if (value.Equals("RAT"))
+                return CurrencyEnum.RAT;
 
             if (value.Equals("USDC"))
                 return CurrencyEnum.USDC;
@@ -124,6 +132,9 @@ namespace BeamAutomationClient.Model
             if (value.Equals("WSOPH"))
                 return CurrencyEnum.WSOPH;
 
+            if (value.Equals("RAT"))
+                return CurrencyEnum.RAT;
+
             if (value.Equals("USDC"))
                 return CurrencyEnum.USDC;
 
@@ -146,6 +157,9 @@ namespace BeamAutomationClient.Model
 
             if (value == CurrencyEnum.WSOPH)
                 return "WSOPH";
+
+            if (value == CurrencyEnum.RAT)
+                return "RAT";
 
             if (value == CurrencyEnum.USDC)
                 return "USDC";
@@ -174,6 +188,9 @@ namespace BeamAutomationClient.Model
                     if (value.Equals("WSOPH"))
                         return CurrencyEnum.WSOPH;
 
+                    if (value.Equals("RAT"))
+                        return CurrencyEnum.RAT;
+
                     if (value.Equals("USDC"))
                         return CurrencyEnum.USDC;
 
@@ -195,6 +212,9 @@ namespace BeamAutomationClient.Model
 
                     if (value.Equals("WSOPH"))
                         return CurrencyEnum.WSOPH;
+
+                    if (value.Equals("RAT"))
+                        return CurrencyEnum.RAT;
 
                     if (value.Equals("USDC"))
                         return CurrencyEnum.USDC;
@@ -218,6 +238,9 @@ namespace BeamAutomationClient.Model
 
                         if (value == CurrencyEnum.WSOPH)
                             return "WSOPH";
+
+                        if (value == CurrencyEnum.RAT)
+                            return "RAT";
 
                         if (value == CurrencyEnum.USDC)
                             return "USDC";

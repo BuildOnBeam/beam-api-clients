@@ -84,14 +84,19 @@ namespace BeamAutomationClient.Model
             ERC1155 = 3,
 
             /// <summary>
+            /// Enum CUSTOM for value: CUSTOM
+            /// </summary>
+            CUSTOM = 4,
+
+            /// <summary>
             /// Enum SEAPORT for value: SEAPORT
             /// </summary>
-            SEAPORT = 4,
+            SEAPORT = 5,
 
             /// <summary>
             /// Enum UNISWAPV2 for value: UNISWAPV2
             /// </summary>
-            UNISWAPV2 = 5
+            UNISWAPV2 = 6
         }
 
         /// <summary>
@@ -110,6 +115,9 @@ namespace BeamAutomationClient.Model
 
             if (value.Equals("ERC1155"))
                 return TypeEnum.ERC1155;
+
+            if (value.Equals("CUSTOM"))
+                return TypeEnum.CUSTOM;
 
             if (value.Equals("SEAPORT"))
                 return TypeEnum.SEAPORT;
@@ -136,6 +144,9 @@ namespace BeamAutomationClient.Model
             if (value.Equals("ERC1155"))
                 return TypeEnum.ERC1155;
 
+            if (value.Equals("CUSTOM"))
+                return TypeEnum.CUSTOM;
+
             if (value.Equals("SEAPORT"))
                 return TypeEnum.SEAPORT;
 
@@ -161,6 +172,9 @@ namespace BeamAutomationClient.Model
 
             if (value == TypeEnum.ERC1155)
                 return "ERC1155";
+
+            if (value == TypeEnum.CUSTOM)
+                return "CUSTOM";
 
             if (value == TypeEnum.SEAPORT)
                 return "SEAPORT";
@@ -192,6 +206,9 @@ namespace BeamAutomationClient.Model
                     if (value.Equals("ERC1155"))
                         return TypeEnum.ERC1155;
 
+                    if (value.Equals("CUSTOM"))
+                        return TypeEnum.CUSTOM;
+
                     if (value.Equals("SEAPORT"))
                         return TypeEnum.SEAPORT;
 
@@ -216,6 +233,9 @@ namespace BeamAutomationClient.Model
 
                     if (value.Equals("ERC1155"))
                         return TypeEnum.ERC1155;
+
+                    if (value.Equals("CUSTOM"))
+                        return TypeEnum.CUSTOM;
 
                     if (value.Equals("SEAPORT"))
                         return TypeEnum.SEAPORT;
@@ -242,6 +262,9 @@ namespace BeamAutomationClient.Model
 
                         if (value == TypeEnum.ERC1155)
                             return "ERC1155";
+
+                        if (value == TypeEnum.CUSTOM)
+                            return "CUSTOM";
 
                         if (value == TypeEnum.SEAPORT)
                             return "SEAPORT";

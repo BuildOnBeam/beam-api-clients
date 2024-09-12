@@ -85,9 +85,14 @@ namespace BeamPlayerClient.Model
             WSOPH = 6,
 
             /// <summary>
+            /// Enum RAT for value: RAT
+            /// </summary>
+            RAT = 7,
+
+            /// <summary>
             /// Enum USDC for value: USDC
             /// </summary>
-            USDC = 7
+            USDC = 8
         }
 
         /// <summary>
@@ -115,6 +120,9 @@ namespace BeamPlayerClient.Model
 
             if (value.Equals("WSOPH"))
                 return SymbolEnum.WSOPH;
+
+            if (value.Equals("RAT"))
+                return SymbolEnum.RAT;
 
             if (value.Equals("USDC"))
                 return SymbolEnum.USDC;
@@ -147,6 +155,9 @@ namespace BeamPlayerClient.Model
             if (value.Equals("WSOPH"))
                 return SymbolEnum.WSOPH;
 
+            if (value.Equals("RAT"))
+                return SymbolEnum.RAT;
+
             if (value.Equals("USDC"))
                 return SymbolEnum.USDC;
 
@@ -178,6 +189,9 @@ namespace BeamPlayerClient.Model
 
             if (value == SymbolEnum.WSOPH)
                 return "WSOPH";
+
+            if (value == SymbolEnum.RAT)
+                return "RAT";
 
             if (value == SymbolEnum.USDC)
                 return "USDC";
@@ -215,6 +229,9 @@ namespace BeamPlayerClient.Model
                     if (value.Equals("WSOPH"))
                         return SymbolEnum.WSOPH;
 
+                    if (value.Equals("RAT"))
+                        return SymbolEnum.RAT;
+
                     if (value.Equals("USDC"))
                         return SymbolEnum.USDC;
 
@@ -245,6 +262,9 @@ namespace BeamPlayerClient.Model
 
                     if (value.Equals("WSOPH"))
                         return SymbolEnum.WSOPH;
+
+                    if (value.Equals("RAT"))
+                        return SymbolEnum.RAT;
 
                     if (value.Equals("USDC"))
                         return SymbolEnum.USDC;
@@ -277,6 +297,9 @@ namespace BeamPlayerClient.Model
 
                         if (value == SymbolEnum.WSOPH)
                             return "WSOPH";
+
+                        if (value == SymbolEnum.RAT)
+                            return "RAT";
 
                         if (value == SymbolEnum.USDC)
                             return "USDC";

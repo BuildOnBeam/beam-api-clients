@@ -19,6 +19,7 @@ export namespace CreateAssetOfferRequestInputV2 {
     WBEAM = 'WBEAM',
     WIMX = 'WIMX',
     WSOPH = 'WSOPH',
+    RAT = 'RAT',
     USDC = 'USDC',
   }
 }
