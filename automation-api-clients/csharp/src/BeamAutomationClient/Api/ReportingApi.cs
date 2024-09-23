@@ -89,7 +89,7 @@ namespace BeamAutomationClient.Api
         /// <param name="chainId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetTotalGameUsageByChainApiResponse"/>&gt;</returns>
-        Task<IGetTotalGameUsageByChainApiResponse> GetTotalGameUsageByChainAsync(decimal chainId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetTotalGameUsageByChainApiResponse> GetTotalGameUsageByChainAsync(long chainId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get total gas usage for single chain
@@ -100,7 +100,7 @@ namespace BeamAutomationClient.Api
         /// <param name="chainId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetTotalGameUsageByChainApiResponse"/>?&gt;</returns>
-        Task<IGetTotalGameUsageByChainApiResponse?> GetTotalGameUsageByChainOrDefaultAsync(decimal chainId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetTotalGameUsageByChainApiResponse?> GetTotalGameUsageByChainOrDefaultAsync(long chainId, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
@@ -682,14 +682,14 @@ namespace BeamAutomationClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetTotalGameUsageByChain(ref decimal chainId);
+        partial void FormatGetTotalGameUsageByChain(ref long chainId);
 
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="chainId"></param>
-        private void AfterGetTotalGameUsageByChainDefaultImplementation(IGetTotalGameUsageByChainApiResponse apiResponseLocalVar, decimal chainId)
+        private void AfterGetTotalGameUsageByChainDefaultImplementation(IGetTotalGameUsageByChainApiResponse apiResponseLocalVar, long chainId)
         {
             bool suppressDefaultLog = false;
             AfterGetTotalGameUsageByChain(ref suppressDefaultLog, apiResponseLocalVar, chainId);
@@ -703,7 +703,7 @@ namespace BeamAutomationClient.Api
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="chainId"></param>
-        partial void AfterGetTotalGameUsageByChain(ref bool suppressDefaultLog, IGetTotalGameUsageByChainApiResponse apiResponseLocalVar, decimal chainId);
+        partial void AfterGetTotalGameUsageByChain(ref bool suppressDefaultLog, IGetTotalGameUsageByChainApiResponse apiResponseLocalVar, long chainId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -712,7 +712,7 @@ namespace BeamAutomationClient.Api
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
         /// <param name="chainId"></param>
-        private void OnErrorGetTotalGameUsageByChainDefaultImplementation(Exception exception, string pathFormat, string path, decimal chainId)
+        private void OnErrorGetTotalGameUsageByChainDefaultImplementation(Exception exception, string pathFormat, string path, long chainId)
         {
             bool suppressDefaultLog = false;
             OnErrorGetTotalGameUsageByChain(ref suppressDefaultLog, exception, pathFormat, path, chainId);
@@ -728,7 +728,7 @@ namespace BeamAutomationClient.Api
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
         /// <param name="chainId"></param>
-        partial void OnErrorGetTotalGameUsageByChain(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, decimal chainId);
+        partial void OnErrorGetTotalGameUsageByChain(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, long chainId);
 
         /// <summary>
         /// Get total gas usage for single chain 
@@ -736,7 +736,7 @@ namespace BeamAutomationClient.Api
         /// <param name="chainId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetTotalGameUsageByChainApiResponse"/>&gt;</returns>
-        public async Task<IGetTotalGameUsageByChainApiResponse?> GetTotalGameUsageByChainOrDefaultAsync(decimal chainId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetTotalGameUsageByChainApiResponse?> GetTotalGameUsageByChainOrDefaultAsync(long chainId, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -755,7 +755,7 @@ namespace BeamAutomationClient.Api
         /// <param name="chainId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetTotalGameUsageByChainApiResponse"/>&gt;</returns>
-        public async Task<IGetTotalGameUsageByChainApiResponse> GetTotalGameUsageByChainAsync(decimal chainId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetTotalGameUsageByChainApiResponse> GetTotalGameUsageByChainAsync(long chainId, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -769,7 +769,12 @@ namespace BeamAutomationClient.Api
                     uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
                     uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
                     uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/reporting/gas/{chainId}";
-                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BchainId%7D", Uri.EscapeDataString(chainId.ToString()));
+
+                    System.Collections.Specialized.NameValueCollection parseQueryStringLocalVar = System.Web.HttpUtility.ParseQueryString(string.Empty);
+
+                    parseQueryStringLocalVar["chainId"] = chainId.ToString();
+
+                    uriBuilderLocalVar.Query = parseQueryStringLocalVar.ToString();
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     AutomationApiKeyToken apiKeyTokenLocalVar1 = (AutomationApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);

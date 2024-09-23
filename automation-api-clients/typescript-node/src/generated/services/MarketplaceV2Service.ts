@@ -310,7 +310,7 @@ export class MarketplaceV2Service {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v2/marketplace/chain-currencies/{chainId}',
-      path: {
+      query: {
         chainId: chainId,
       },
     });

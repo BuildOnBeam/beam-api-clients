@@ -37,25 +37,25 @@ namespace BeamAutomationClient.Model
         /// <param name="assetAddress">assetAddress</param>
         /// <param name="assetId">assetId</param>
         /// <param name="assetType">assetType</param>
+        /// <param name="chainId">chainId</param>
         /// <param name="imageUrl">imageUrl</param>
         /// <param name="name">name</param>
         /// <param name="supply">supply</param>
         /// <param name="attributes">attributes</param>
-        /// <param name="chainId">chainId (default to 13337M)</param>
         /// <param name="owners">owners</param>
         /// <param name="rarity">rarity</param>
         /// <param name="rarityScore">rarityScore</param>
         [JsonConstructor]
-        public AutomationGetAssetResponseV2(string assetAddress, string assetId, string assetType, string imageUrl, string name, decimal supply, Option<List<AutomationGetAssetsForProfileResponseV2DataInnerAttributesInner>?> attributes = default, Option<decimal?> chainId = default, List<AutomationGetAssetResponseV2OwnersInner>? owners = default, Option<RarityEnum?> rarity = default, Option<decimal?> rarityScore = default)
+        public AutomationGetAssetResponseV2(string assetAddress, string assetId, string assetType, long chainId, string imageUrl, string name, decimal supply, Option<List<AutomationGetAssetsForProfileResponseV2DataInnerAttributesInner>?> attributes = default, List<AutomationGetAssetResponseV2OwnersInner>? owners = default, Option<RarityEnum?> rarity = default, Option<decimal?> rarityScore = default)
         {
             AssetAddress = assetAddress;
             AssetId = assetId;
             AssetType = assetType;
+            ChainId = chainId;
             ImageUrl = imageUrl;
             Name = name;
             Supply = supply;
             AttributesOption = attributes;
-            ChainIdOption = chainId;
             Owners = owners;
             RarityOption = rarity;
             RarityScoreOption = rarityScore;
@@ -329,6 +329,12 @@ namespace BeamAutomationClient.Model
         public string AssetType { get; set; }
 
         /// <summary>
+        /// Gets or Sets ChainId
+        /// </summary>
+        [JsonPropertyName("chainId")]
+        public long ChainId { get; set; }
+
+        /// <summary>
         /// Gets or Sets ImageUrl
         /// </summary>
         [JsonPropertyName("imageUrl")]
@@ -360,19 +366,6 @@ namespace BeamAutomationClient.Model
         public List<AutomationGetAssetsForProfileResponseV2DataInnerAttributesInner>? Attributes { get { return this. AttributesOption; } set { this.AttributesOption = new(value); } }
 
         /// <summary>
-        /// Used to track the state of ChainId
-        /// </summary>
-        [JsonIgnore]
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<decimal?> ChainIdOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets ChainId
-        /// </summary>
-        [JsonPropertyName("chainId")]
-        public decimal? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
-
-        /// <summary>
         /// Gets or Sets Owners
         /// </summary>
         [JsonPropertyName("owners")]
@@ -402,11 +395,11 @@ namespace BeamAutomationClient.Model
             sb.Append("  AssetAddress: ").Append(AssetAddress).Append("\n");
             sb.Append("  AssetId: ").Append(AssetId).Append("\n");
             sb.Append("  AssetType: ").Append(AssetType).Append("\n");
+            sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  ImageUrl: ").Append(ImageUrl).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Supply: ").Append(Supply).Append("\n");
             sb.Append("  Attributes: ").Append(Attributes).Append("\n");
-            sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  Owners: ").Append(Owners).Append("\n");
             sb.Append("  Rarity: ").Append(Rarity).Append("\n");
             sb.Append("  RarityScore: ").Append(RarityScore).Append("\n");
@@ -450,11 +443,11 @@ namespace BeamAutomationClient.Model
             Option<string?> assetAddress = default;
             Option<string?> assetId = default;
             Option<string?> assetType = default;
+            Option<long?> chainId = default;
             Option<string?> imageUrl = default;
             Option<string?> name = default;
             Option<decimal?> supply = default;
             Option<List<AutomationGetAssetsForProfileResponseV2DataInnerAttributesInner>?> attributes = default;
-            Option<decimal?> chainId = default;
             Option<List<AutomationGetAssetResponseV2OwnersInner>?> owners = default;
             Option<AutomationGetAssetResponseV2.RarityEnum?> rarity = default;
             Option<decimal?> rarityScore = default;
@@ -483,6 +476,10 @@ namespace BeamAutomationClient.Model
                         case "assetType":
                             assetType = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
+                        case "chainId":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                chainId = new Option<long?>(utf8JsonReader.GetInt64());
+                            break;
                         case "imageUrl":
                             imageUrl = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
@@ -496,10 +493,6 @@ namespace BeamAutomationClient.Model
                         case "attributes":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 attributes = new Option<List<AutomationGetAssetsForProfileResponseV2DataInnerAttributesInner>?>(JsonSerializer.Deserialize<List<AutomationGetAssetsForProfileResponseV2DataInnerAttributesInner>>(ref utf8JsonReader, jsonSerializerOptions));
-                            break;
-                        case "chainId":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "owners":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
@@ -529,6 +522,9 @@ namespace BeamAutomationClient.Model
             if (!assetType.IsSet)
                 throw new ArgumentException("Property is required for class AutomationGetAssetResponseV2.", nameof(assetType));
 
+            if (!chainId.IsSet)
+                throw new ArgumentException("Property is required for class AutomationGetAssetResponseV2.", nameof(chainId));
+
             if (!imageUrl.IsSet)
                 throw new ArgumentException("Property is required for class AutomationGetAssetResponseV2.", nameof(imageUrl));
 
@@ -550,6 +546,9 @@ namespace BeamAutomationClient.Model
             if (assetType.IsSet && assetType.Value == null)
                 throw new ArgumentNullException(nameof(assetType), "Property is not nullable for class AutomationGetAssetResponseV2.");
 
+            if (chainId.IsSet && chainId.Value == null)
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class AutomationGetAssetResponseV2.");
+
             if (imageUrl.IsSet && imageUrl.Value == null)
                 throw new ArgumentNullException(nameof(imageUrl), "Property is not nullable for class AutomationGetAssetResponseV2.");
 
@@ -559,10 +558,7 @@ namespace BeamAutomationClient.Model
             if (supply.IsSet && supply.Value == null)
                 throw new ArgumentNullException(nameof(supply), "Property is not nullable for class AutomationGetAssetResponseV2.");
 
-            if (chainId.IsSet && chainId.Value == null)
-                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class AutomationGetAssetResponseV2.");
-
-            return new AutomationGetAssetResponseV2(assetAddress.Value!, assetId.Value!, assetType.Value!, imageUrl.Value!, name.Value!, supply.Value!.Value!, attributes, chainId, owners.Value!, rarity, rarityScore);
+            return new AutomationGetAssetResponseV2(assetAddress.Value!, assetId.Value!, assetType.Value!, chainId.Value!.Value!, imageUrl.Value!, name.Value!, supply.Value!.Value!, attributes, owners.Value!, rarity, rarityScore);
         }
 
         /// <summary>
@@ -610,6 +606,8 @@ namespace BeamAutomationClient.Model
 
             writer.WriteString("assetType", automationGetAssetResponseV2.AssetType);
 
+            writer.WriteNumber("chainId", automationGetAssetResponseV2.ChainId);
+
             writer.WriteString("imageUrl", automationGetAssetResponseV2.ImageUrl);
 
             writer.WriteString("name", automationGetAssetResponseV2.Name);
@@ -624,9 +622,6 @@ namespace BeamAutomationClient.Model
                 }
                 else
                     writer.WriteNull("attributes");
-            if (automationGetAssetResponseV2.ChainIdOption.IsSet)
-                writer.WriteNumber("chainId", automationGetAssetResponseV2.ChainIdOption.Value!.Value);
-
             if (automationGetAssetResponseV2.Owners != null)
             {
                 writer.WritePropertyName("owners");

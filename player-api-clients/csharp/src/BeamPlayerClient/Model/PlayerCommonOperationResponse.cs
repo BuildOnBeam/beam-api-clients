@@ -45,7 +45,7 @@ namespace BeamPlayerClient.Model
         /// <param name="userId">userId</param>
         /// <param name="updatedAt">updatedAt</param>
         [JsonConstructor]
-        public PlayerCommonOperationResponse(int chainId, DateTime createdAt, string gameId, string id, ProcessingEnum processing, StatusEnum status, List<PlayerCommonOperationResponseTransactionsInner> transactions, string url, string userId, DateTime? updatedAt = default)
+        public PlayerCommonOperationResponse(long chainId, DateTime createdAt, string gameId, string id, ProcessingEnum processing, StatusEnum status, List<PlayerCommonOperationResponseTransactionsInner> transactions, string url, string userId, DateTime? updatedAt = default)
         {
             ChainId = chainId;
             CreatedAt = createdAt;
@@ -469,7 +469,7 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets ChainId
         /// </summary>
         [JsonPropertyName("chainId")]
-        public int ChainId { get; set; }
+        public long ChainId { get; set; }
 
         /// <summary>
         /// Gets or Sets CreatedAt
@@ -578,7 +578,7 @@ namespace BeamPlayerClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<int?> chainId = default;
+            Option<long?> chainId = default;
             Option<DateTime?> createdAt = default;
             Option<string?> gameId = default;
             Option<string?> id = default;
@@ -606,7 +606,7 @@ namespace BeamPlayerClient.Model
                     {
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = new Option<int?>(utf8JsonReader.GetInt32());
+                                chainId = new Option<long?>(utf8JsonReader.GetInt64());
                             break;
                         case "createdAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)

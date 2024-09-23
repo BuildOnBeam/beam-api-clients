@@ -35,12 +35,12 @@ namespace BeamPlayerClient.Model
         /// Initializes a new instance of the <see cref="PlayerCreateOperationRequestInput" /> class.
         /// </summary>
         /// <param name="entityId">entityId</param>
-        /// <param name="chainId">chainId (default to 13337M)</param>
+        /// <param name="chainId">chainId (default to 13337)</param>
         /// <param name="operationId">operationId</param>
         /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute)</param>
         /// <param name="transactions">transactions</param>
         [JsonConstructor]
-        public PlayerCreateOperationRequestInput(string entityId, Option<decimal?> chainId = default, Option<string?> operationId = default, Option<OperationProcessingEnum?> operationProcessing = default, List<PlayerCreateOperationRequestInputTransactionsInner>? transactions = default)
+        public PlayerCreateOperationRequestInput(string entityId, Option<long?> chainId = default, Option<string?> operationId = default, Option<OperationProcessingEnum?> operationProcessing = default, List<PlayerCreateOperationRequestInputTransactionsInner>? transactions = default)
         {
             EntityId = entityId;
             ChainIdOption = chainId;
@@ -237,13 +237,13 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [JsonIgnore]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<decimal?> ChainIdOption { get; private set; }
+        public Option<long?> ChainIdOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [JsonPropertyName("chainId")]
-        public decimal? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
+        public long? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of OperationId
@@ -315,7 +315,7 @@ namespace BeamPlayerClient.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<string?> entityId = default;
-            Option<decimal?> chainId = default;
+            Option<long?> chainId = default;
             Option<string?> operationId = default;
             Option<PlayerCreateOperationRequestInput.OperationProcessingEnum?> operationProcessing = default;
             Option<List<PlayerCreateOperationRequestInputTransactionsInner>?> transactions = default;
@@ -340,7 +340,7 @@ namespace BeamPlayerClient.Model
                             break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                                chainId = new Option<long?>(utf8JsonReader.GetInt64());
                             break;
                         case "operationId":
                             operationId = new Option<string?>(utf8JsonReader.GetString());

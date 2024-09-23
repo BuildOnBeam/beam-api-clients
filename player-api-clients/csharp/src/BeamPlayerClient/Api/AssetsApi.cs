@@ -49,7 +49,7 @@ namespace BeamPlayerClient.Api
         /// <param name="entityId">If true, will always return &#39;owners&#39; record for this User if he owns the asset (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAssetApiResponse"/>&gt;</returns>
-        Task<IGetAssetApiResponse> GetAssetAsync(string assetAddress, string assetId, Option<bool> owners = default, Option<decimal> chainId = default, Option<string> entityId = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetAssetApiResponse> GetAssetAsync(string assetAddress, string assetId, Option<bool> owners = default, Option<long> chainId = default, Option<string> entityId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a single NFT (e.g. ERC721 / ERC1155)
@@ -64,7 +64,7 @@ namespace BeamPlayerClient.Api
         /// <param name="entityId">If true, will always return &#39;owners&#39; record for this User if he owns the asset (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAssetApiResponse"/>?&gt;</returns>
-        Task<IGetAssetApiResponse?> GetAssetOrDefaultAsync(string assetAddress, string assetId, Option<bool> owners = default, Option<decimal> chainId = default, Option<string> entityId = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetAssetApiResponse?> GetAssetOrDefaultAsync(string assetAddress, string assetId, Option<bool> owners = default, Option<long> chainId = default, Option<string> entityId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155)
@@ -102,7 +102,7 @@ namespace BeamPlayerClient.Api
         /// <param name="assetAddress"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAttributesApiResponse"/>&gt;</returns>
-        Task<IGetAttributesApiResponse> GetAttributesAsync(decimal chainId, string assetAddress, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetAttributesApiResponse> GetAttributesAsync(long chainId, string assetAddress, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -114,7 +114,7 @@ namespace BeamPlayerClient.Api
         /// <param name="assetAddress"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAttributesApiResponse"/>?&gt;</returns>
-        Task<IGetAttributesApiResponse?> GetAttributesOrDefaultAsync(decimal chainId, string assetAddress, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetAttributesApiResponse?> GetAttributesOrDefaultAsync(long chainId, string assetAddress, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -156,7 +156,7 @@ namespace BeamPlayerClient.Api
         /// <param name="offset"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetOwnersApiResponse"/>&gt;</returns>
-        Task<IGetOwnersApiResponse> GetOwnersAsync(decimal chainId, string assetAddress, Option<decimal> limit = default, Option<decimal> offset = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetOwnersApiResponse> GetOwnersAsync(long chainId, string assetAddress, Option<decimal> limit = default, Option<decimal> offset = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -170,7 +170,7 @@ namespace BeamPlayerClient.Api
         /// <param name="offset"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetOwnersApiResponse"/>?&gt;</returns>
-        Task<IGetOwnersApiResponse?> GetOwnersOrDefaultAsync(decimal chainId, string assetAddress, Option<decimal> limit = default, Option<decimal> offset = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetOwnersApiResponse?> GetOwnersOrDefaultAsync(long chainId, string assetAddress, Option<decimal> limit = default, Option<decimal> offset = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all the assets of a profile (NFT assets, e.g. ERC721 / ERC1155)
@@ -208,7 +208,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetUserCurrenciesApiResponse"/>&gt;</returns>
-        Task<IGetUserCurrenciesApiResponse> GetUserCurrenciesAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetUserCurrenciesApiResponse> GetUserCurrenciesAsync(string entityId, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all the currencies owned by an account (ERC20)
@@ -220,7 +220,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetUserCurrenciesApiResponse"/>?&gt;</returns>
-        Task<IGetUserCurrenciesApiResponse?> GetUserCurrenciesOrDefaultAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetUserCurrenciesApiResponse?> GetUserCurrenciesOrDefaultAsync(string entityId, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get the native token balance
@@ -233,7 +233,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetUserNativeCurrencyApiResponse"/>&gt;</returns>
-        Task<IGetUserNativeCurrencyApiResponse> GetUserNativeCurrencyAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetUserNativeCurrencyApiResponse> GetUserNativeCurrencyAsync(string entityId, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get the native token balance
@@ -245,7 +245,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetUserNativeCurrencyApiResponse"/>?&gt;</returns>
-        Task<IGetUserNativeCurrencyApiResponse?> GetUserNativeCurrencyOrDefaultAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetUserNativeCurrencyApiResponse?> GetUserNativeCurrencyOrDefaultAsync(string entityId, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Transfer an asset (NFT assets, ERC721 / ERC1155)
@@ -728,7 +728,7 @@ namespace BeamPlayerClient.Api
             ApiKeyProvider = apiKeyProvider;
         }
 
-        partial void FormatGetAsset(ref string assetAddress, ref string assetId, ref Option<bool> owners, ref Option<decimal> chainId, ref Option<string> entityId);
+        partial void FormatGetAsset(ref string assetAddress, ref string assetId, ref Option<bool> owners, ref Option<long> chainId, ref Option<string> entityId);
 
         /// <summary>
         /// Validates the request parameters
@@ -758,7 +758,7 @@ namespace BeamPlayerClient.Api
         /// <param name="owners"></param>
         /// <param name="chainId"></param>
         /// <param name="entityId"></param>
-        private void AfterGetAssetDefaultImplementation(IGetAssetApiResponse apiResponseLocalVar, string assetAddress, string assetId, Option<bool> owners, Option<decimal> chainId, Option<string> entityId)
+        private void AfterGetAssetDefaultImplementation(IGetAssetApiResponse apiResponseLocalVar, string assetAddress, string assetId, Option<bool> owners, Option<long> chainId, Option<string> entityId)
         {
             bool suppressDefaultLog = false;
             AfterGetAsset(ref suppressDefaultLog, apiResponseLocalVar, assetAddress, assetId, owners, chainId, entityId);
@@ -776,7 +776,7 @@ namespace BeamPlayerClient.Api
         /// <param name="owners"></param>
         /// <param name="chainId"></param>
         /// <param name="entityId"></param>
-        partial void AfterGetAsset(ref bool suppressDefaultLog, IGetAssetApiResponse apiResponseLocalVar, string assetAddress, string assetId, Option<bool> owners, Option<decimal> chainId, Option<string> entityId);
+        partial void AfterGetAsset(ref bool suppressDefaultLog, IGetAssetApiResponse apiResponseLocalVar, string assetAddress, string assetId, Option<bool> owners, Option<long> chainId, Option<string> entityId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -789,7 +789,7 @@ namespace BeamPlayerClient.Api
         /// <param name="owners"></param>
         /// <param name="chainId"></param>
         /// <param name="entityId"></param>
-        private void OnErrorGetAssetDefaultImplementation(Exception exception, string pathFormat, string path, string assetAddress, string assetId, Option<bool> owners, Option<decimal> chainId, Option<string> entityId)
+        private void OnErrorGetAssetDefaultImplementation(Exception exception, string pathFormat, string path, string assetAddress, string assetId, Option<bool> owners, Option<long> chainId, Option<string> entityId)
         {
             bool suppressDefaultLog = false;
             OnErrorGetAsset(ref suppressDefaultLog, exception, pathFormat, path, assetAddress, assetId, owners, chainId, entityId);
@@ -809,7 +809,7 @@ namespace BeamPlayerClient.Api
         /// <param name="owners"></param>
         /// <param name="chainId"></param>
         /// <param name="entityId"></param>
-        partial void OnErrorGetAsset(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string assetAddress, string assetId, Option<bool> owners, Option<decimal> chainId, Option<string> entityId);
+        partial void OnErrorGetAsset(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string assetAddress, string assetId, Option<bool> owners, Option<long> chainId, Option<string> entityId);
 
         /// <summary>
         /// Get a single NFT (e.g. ERC721 / ERC1155) 
@@ -821,7 +821,7 @@ namespace BeamPlayerClient.Api
         /// <param name="entityId">If true, will always return &#39;owners&#39; record for this User if he owns the asset (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAssetApiResponse"/>&gt;</returns>
-        public async Task<IGetAssetApiResponse?> GetAssetOrDefaultAsync(string assetAddress, string assetId, Option<bool> owners = default, Option<decimal> chainId = default, Option<string> entityId = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetAssetApiResponse?> GetAssetOrDefaultAsync(string assetAddress, string assetId, Option<bool> owners = default, Option<long> chainId = default, Option<string> entityId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -844,7 +844,7 @@ namespace BeamPlayerClient.Api
         /// <param name="entityId">If true, will always return &#39;owners&#39; record for this User if he owns the asset (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAssetApiResponse"/>&gt;</returns>
-        public async Task<IGetAssetApiResponse> GetAssetAsync(string assetAddress, string assetId, Option<bool> owners = default, Option<decimal> chainId = default, Option<string> entityId = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetAssetApiResponse> GetAssetAsync(string assetAddress, string assetId, Option<bool> owners = default, Option<long> chainId = default, Option<string> entityId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -1251,7 +1251,7 @@ namespace BeamPlayerClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetAttributes(ref decimal chainId, ref string assetAddress);
+        partial void FormatGetAttributes(ref long chainId, ref string assetAddress);
 
         /// <summary>
         /// Validates the request parameters
@@ -1270,7 +1270,7 @@ namespace BeamPlayerClient.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="chainId"></param>
         /// <param name="assetAddress"></param>
-        private void AfterGetAttributesDefaultImplementation(IGetAttributesApiResponse apiResponseLocalVar, decimal chainId, string assetAddress)
+        private void AfterGetAttributesDefaultImplementation(IGetAttributesApiResponse apiResponseLocalVar, long chainId, string assetAddress)
         {
             bool suppressDefaultLog = false;
             AfterGetAttributes(ref suppressDefaultLog, apiResponseLocalVar, chainId, assetAddress);
@@ -1285,7 +1285,7 @@ namespace BeamPlayerClient.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="chainId"></param>
         /// <param name="assetAddress"></param>
-        partial void AfterGetAttributes(ref bool suppressDefaultLog, IGetAttributesApiResponse apiResponseLocalVar, decimal chainId, string assetAddress);
+        partial void AfterGetAttributes(ref bool suppressDefaultLog, IGetAttributesApiResponse apiResponseLocalVar, long chainId, string assetAddress);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -1295,7 +1295,7 @@ namespace BeamPlayerClient.Api
         /// <param name="path"></param>
         /// <param name="chainId"></param>
         /// <param name="assetAddress"></param>
-        private void OnErrorGetAttributesDefaultImplementation(Exception exception, string pathFormat, string path, decimal chainId, string assetAddress)
+        private void OnErrorGetAttributesDefaultImplementation(Exception exception, string pathFormat, string path, long chainId, string assetAddress)
         {
             bool suppressDefaultLog = false;
             OnErrorGetAttributes(ref suppressDefaultLog, exception, pathFormat, path, chainId, assetAddress);
@@ -1312,7 +1312,7 @@ namespace BeamPlayerClient.Api
         /// <param name="path"></param>
         /// <param name="chainId"></param>
         /// <param name="assetAddress"></param>
-        partial void OnErrorGetAttributes(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, decimal chainId, string assetAddress);
+        partial void OnErrorGetAttributes(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, long chainId, string assetAddress);
 
         /// <summary>
         ///  
@@ -1321,7 +1321,7 @@ namespace BeamPlayerClient.Api
         /// <param name="assetAddress"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAttributesApiResponse"/>&gt;</returns>
-        public async Task<IGetAttributesApiResponse?> GetAttributesOrDefaultAsync(decimal chainId, string assetAddress, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetAttributesApiResponse?> GetAttributesOrDefaultAsync(long chainId, string assetAddress, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -1341,7 +1341,7 @@ namespace BeamPlayerClient.Api
         /// <param name="assetAddress"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAttributesApiResponse"/>&gt;</returns>
-        public async Task<IGetAttributesApiResponse> GetAttributesAsync(decimal chainId, string assetAddress, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetAttributesApiResponse> GetAttributesAsync(long chainId, string assetAddress, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -1751,7 +1751,7 @@ namespace BeamPlayerClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetOwners(ref decimal chainId, ref string assetAddress, ref Option<decimal> limit, ref Option<decimal> offset);
+        partial void FormatGetOwners(ref long chainId, ref string assetAddress, ref Option<decimal> limit, ref Option<decimal> offset);
 
         /// <summary>
         /// Validates the request parameters
@@ -1772,7 +1772,7 @@ namespace BeamPlayerClient.Api
         /// <param name="assetAddress"></param>
         /// <param name="limit"></param>
         /// <param name="offset"></param>
-        private void AfterGetOwnersDefaultImplementation(IGetOwnersApiResponse apiResponseLocalVar, decimal chainId, string assetAddress, Option<decimal> limit, Option<decimal> offset)
+        private void AfterGetOwnersDefaultImplementation(IGetOwnersApiResponse apiResponseLocalVar, long chainId, string assetAddress, Option<decimal> limit, Option<decimal> offset)
         {
             bool suppressDefaultLog = false;
             AfterGetOwners(ref suppressDefaultLog, apiResponseLocalVar, chainId, assetAddress, limit, offset);
@@ -1789,7 +1789,7 @@ namespace BeamPlayerClient.Api
         /// <param name="assetAddress"></param>
         /// <param name="limit"></param>
         /// <param name="offset"></param>
-        partial void AfterGetOwners(ref bool suppressDefaultLog, IGetOwnersApiResponse apiResponseLocalVar, decimal chainId, string assetAddress, Option<decimal> limit, Option<decimal> offset);
+        partial void AfterGetOwners(ref bool suppressDefaultLog, IGetOwnersApiResponse apiResponseLocalVar, long chainId, string assetAddress, Option<decimal> limit, Option<decimal> offset);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -1801,7 +1801,7 @@ namespace BeamPlayerClient.Api
         /// <param name="assetAddress"></param>
         /// <param name="limit"></param>
         /// <param name="offset"></param>
-        private void OnErrorGetOwnersDefaultImplementation(Exception exception, string pathFormat, string path, decimal chainId, string assetAddress, Option<decimal> limit, Option<decimal> offset)
+        private void OnErrorGetOwnersDefaultImplementation(Exception exception, string pathFormat, string path, long chainId, string assetAddress, Option<decimal> limit, Option<decimal> offset)
         {
             bool suppressDefaultLog = false;
             OnErrorGetOwners(ref suppressDefaultLog, exception, pathFormat, path, chainId, assetAddress, limit, offset);
@@ -1820,7 +1820,7 @@ namespace BeamPlayerClient.Api
         /// <param name="assetAddress"></param>
         /// <param name="limit"></param>
         /// <param name="offset"></param>
-        partial void OnErrorGetOwners(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, decimal chainId, string assetAddress, Option<decimal> limit, Option<decimal> offset);
+        partial void OnErrorGetOwners(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, long chainId, string assetAddress, Option<decimal> limit, Option<decimal> offset);
 
         /// <summary>
         ///  
@@ -1831,7 +1831,7 @@ namespace BeamPlayerClient.Api
         /// <param name="offset"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetOwnersApiResponse"/>&gt;</returns>
-        public async Task<IGetOwnersApiResponse?> GetOwnersOrDefaultAsync(decimal chainId, string assetAddress, Option<decimal> limit = default, Option<decimal> offset = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetOwnersApiResponse?> GetOwnersOrDefaultAsync(long chainId, string assetAddress, Option<decimal> limit = default, Option<decimal> offset = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -1853,7 +1853,7 @@ namespace BeamPlayerClient.Api
         /// <param name="offset"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetOwnersApiResponse"/>&gt;</returns>
-        public async Task<IGetOwnersApiResponse> GetOwnersAsync(decimal chainId, string assetAddress, Option<decimal> limit = default, Option<decimal> offset = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetOwnersApiResponse> GetOwnersAsync(long chainId, string assetAddress, Option<decimal> limit = default, Option<decimal> offset = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -2258,7 +2258,7 @@ namespace BeamPlayerClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetUserCurrencies(ref string entityId, ref Option<decimal> chainId);
+        partial void FormatGetUserCurrencies(ref string entityId, ref Option<long> chainId);
 
         /// <summary>
         /// Validates the request parameters
@@ -2277,7 +2277,7 @@ namespace BeamPlayerClient.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="entityId"></param>
         /// <param name="chainId"></param>
-        private void AfterGetUserCurrenciesDefaultImplementation(IGetUserCurrenciesApiResponse apiResponseLocalVar, string entityId, Option<decimal> chainId)
+        private void AfterGetUserCurrenciesDefaultImplementation(IGetUserCurrenciesApiResponse apiResponseLocalVar, string entityId, Option<long> chainId)
         {
             bool suppressDefaultLog = false;
             AfterGetUserCurrencies(ref suppressDefaultLog, apiResponseLocalVar, entityId, chainId);
@@ -2292,7 +2292,7 @@ namespace BeamPlayerClient.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="entityId"></param>
         /// <param name="chainId"></param>
-        partial void AfterGetUserCurrencies(ref bool suppressDefaultLog, IGetUserCurrenciesApiResponse apiResponseLocalVar, string entityId, Option<decimal> chainId);
+        partial void AfterGetUserCurrencies(ref bool suppressDefaultLog, IGetUserCurrenciesApiResponse apiResponseLocalVar, string entityId, Option<long> chainId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -2302,7 +2302,7 @@ namespace BeamPlayerClient.Api
         /// <param name="path"></param>
         /// <param name="entityId"></param>
         /// <param name="chainId"></param>
-        private void OnErrorGetUserCurrenciesDefaultImplementation(Exception exception, string pathFormat, string path, string entityId, Option<decimal> chainId)
+        private void OnErrorGetUserCurrenciesDefaultImplementation(Exception exception, string pathFormat, string path, string entityId, Option<long> chainId)
         {
             bool suppressDefaultLog = false;
             OnErrorGetUserCurrencies(ref suppressDefaultLog, exception, pathFormat, path, entityId, chainId);
@@ -2319,7 +2319,7 @@ namespace BeamPlayerClient.Api
         /// <param name="path"></param>
         /// <param name="entityId"></param>
         /// <param name="chainId"></param>
-        partial void OnErrorGetUserCurrencies(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string entityId, Option<decimal> chainId);
+        partial void OnErrorGetUserCurrencies(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string entityId, Option<long> chainId);
 
         /// <summary>
         /// Get all the currencies owned by an account (ERC20) 
@@ -2328,7 +2328,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetUserCurrenciesApiResponse"/>&gt;</returns>
-        public async Task<IGetUserCurrenciesApiResponse?> GetUserCurrenciesOrDefaultAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetUserCurrenciesApiResponse?> GetUserCurrenciesOrDefaultAsync(string entityId, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -2348,7 +2348,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetUserCurrenciesApiResponse"/>&gt;</returns>
-        public async Task<IGetUserCurrenciesApiResponse> GetUserCurrenciesAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetUserCurrenciesApiResponse> GetUserCurrenciesAsync(string entityId, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -2498,7 +2498,7 @@ namespace BeamPlayerClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetUserNativeCurrency(ref string entityId, ref Option<decimal> chainId);
+        partial void FormatGetUserNativeCurrency(ref string entityId, ref Option<long> chainId);
 
         /// <summary>
         /// Validates the request parameters
@@ -2517,7 +2517,7 @@ namespace BeamPlayerClient.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="entityId"></param>
         /// <param name="chainId"></param>
-        private void AfterGetUserNativeCurrencyDefaultImplementation(IGetUserNativeCurrencyApiResponse apiResponseLocalVar, string entityId, Option<decimal> chainId)
+        private void AfterGetUserNativeCurrencyDefaultImplementation(IGetUserNativeCurrencyApiResponse apiResponseLocalVar, string entityId, Option<long> chainId)
         {
             bool suppressDefaultLog = false;
             AfterGetUserNativeCurrency(ref suppressDefaultLog, apiResponseLocalVar, entityId, chainId);
@@ -2532,7 +2532,7 @@ namespace BeamPlayerClient.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="entityId"></param>
         /// <param name="chainId"></param>
-        partial void AfterGetUserNativeCurrency(ref bool suppressDefaultLog, IGetUserNativeCurrencyApiResponse apiResponseLocalVar, string entityId, Option<decimal> chainId);
+        partial void AfterGetUserNativeCurrency(ref bool suppressDefaultLog, IGetUserNativeCurrencyApiResponse apiResponseLocalVar, string entityId, Option<long> chainId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -2542,7 +2542,7 @@ namespace BeamPlayerClient.Api
         /// <param name="path"></param>
         /// <param name="entityId"></param>
         /// <param name="chainId"></param>
-        private void OnErrorGetUserNativeCurrencyDefaultImplementation(Exception exception, string pathFormat, string path, string entityId, Option<decimal> chainId)
+        private void OnErrorGetUserNativeCurrencyDefaultImplementation(Exception exception, string pathFormat, string path, string entityId, Option<long> chainId)
         {
             bool suppressDefaultLog = false;
             OnErrorGetUserNativeCurrency(ref suppressDefaultLog, exception, pathFormat, path, entityId, chainId);
@@ -2559,7 +2559,7 @@ namespace BeamPlayerClient.Api
         /// <param name="path"></param>
         /// <param name="entityId"></param>
         /// <param name="chainId"></param>
-        partial void OnErrorGetUserNativeCurrency(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string entityId, Option<decimal> chainId);
+        partial void OnErrorGetUserNativeCurrency(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string entityId, Option<long> chainId);
 
         /// <summary>
         /// Get the native token balance 
@@ -2568,7 +2568,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetUserNativeCurrencyApiResponse"/>&gt;</returns>
-        public async Task<IGetUserNativeCurrencyApiResponse?> GetUserNativeCurrencyOrDefaultAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetUserNativeCurrencyApiResponse?> GetUserNativeCurrencyOrDefaultAsync(string entityId, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -2588,7 +2588,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetUserNativeCurrencyApiResponse"/>&gt;</returns>
-        public async Task<IGetUserNativeCurrencyApiResponse> GetUserNativeCurrencyAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetUserNativeCurrencyApiResponse> GetUserNativeCurrencyAsync(string entityId, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 

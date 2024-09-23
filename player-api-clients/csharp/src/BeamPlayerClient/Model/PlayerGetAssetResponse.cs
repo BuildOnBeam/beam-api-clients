@@ -41,12 +41,12 @@ namespace BeamPlayerClient.Model
         /// <param name="name">name</param>
         /// <param name="supply">supply</param>
         /// <param name="attributes">attributes</param>
-        /// <param name="chainId">chainId (default to 13337M)</param>
+        /// <param name="chainId">chainId (default to 13337)</param>
         /// <param name="owners">owners</param>
         /// <param name="rarity">rarity</param>
         /// <param name="rarityScore">rarityScore</param>
         [JsonConstructor]
-        public PlayerGetAssetResponse(string assetAddress, string assetId, string assetType, string imageUrl, string name, decimal supply, Option<List<PlayerGetAssetsForUserResponseDataInnerAttributesInner>?> attributes = default, Option<decimal?> chainId = default, List<PlayerGetAssetResponseOwnersInner>? owners = default, Option<RarityEnum?> rarity = default, Option<decimal?> rarityScore = default)
+        public PlayerGetAssetResponse(string assetAddress, string assetId, string assetType, string imageUrl, string name, decimal supply, Option<List<PlayerGetAssetsForUserResponseDataInnerAttributesInner>?> attributes = default, Option<long?> chainId = default, List<PlayerGetAssetResponseOwnersInner>? owners = default, Option<RarityEnum?> rarity = default, Option<decimal?> rarityScore = default)
         {
             AssetAddress = assetAddress;
             AssetId = assetId;
@@ -364,13 +364,13 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [JsonIgnore]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<decimal?> ChainIdOption { get; private set; }
+        public Option<long?> ChainIdOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [JsonPropertyName("chainId")]
-        public decimal? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
+        public long? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
 
         /// <summary>
         /// Gets or Sets Owners
@@ -454,7 +454,7 @@ namespace BeamPlayerClient.Model
             Option<string?> name = default;
             Option<decimal?> supply = default;
             Option<List<PlayerGetAssetsForUserResponseDataInnerAttributesInner>?> attributes = default;
-            Option<decimal?> chainId = default;
+            Option<long?> chainId = default;
             Option<List<PlayerGetAssetResponseOwnersInner>?> owners = default;
             Option<PlayerGetAssetResponse.RarityEnum?> rarity = default;
             Option<decimal?> rarityScore = default;
@@ -499,7 +499,7 @@ namespace BeamPlayerClient.Model
                             break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                                chainId = new Option<long?>(utf8JsonReader.GetInt64());
                             break;
                         case "owners":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)

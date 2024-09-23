@@ -49,7 +49,7 @@ namespace BeamAutomationClient.Api
         /// <param name="entityId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAssetV2ApiResponse"/>&gt;</returns>
-        Task<IGetAssetV2ApiResponse> GetAssetV2Async(string assetAddress, string assetId, Option<bool> owners = default, Option<decimal> chainId = default, Option<string> entityId = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetAssetV2ApiResponse> GetAssetV2Async(string assetAddress, string assetId, Option<bool> owners = default, Option<long> chainId = default, Option<string> entityId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a single NFT (e.g. ERC721 / ERC1155)
@@ -64,7 +64,7 @@ namespace BeamAutomationClient.Api
         /// <param name="entityId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAssetV2ApiResponse"/>?&gt;</returns>
-        Task<IGetAssetV2ApiResponse?> GetAssetV2OrDefaultAsync(string assetAddress, string assetId, Option<bool> owners = default, Option<decimal> chainId = default, Option<string> entityId = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetAssetV2ApiResponse?> GetAssetV2OrDefaultAsync(string assetAddress, string assetId, Option<bool> owners = default, Option<long> chainId = default, Option<string> entityId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155)
@@ -127,7 +127,7 @@ namespace BeamAutomationClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetProfileCurrenciesV2ApiResponse"/>&gt;</returns>
-        Task<IGetProfileCurrenciesV2ApiResponse> GetProfileCurrenciesV2Async(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetProfileCurrenciesV2ApiResponse> GetProfileCurrenciesV2Async(string entityId, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all the currencies owned by an account (ERC20)
@@ -139,7 +139,7 @@ namespace BeamAutomationClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetProfileCurrenciesV2ApiResponse"/>?&gt;</returns>
-        Task<IGetProfileCurrenciesV2ApiResponse?> GetProfileCurrenciesV2OrDefaultAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetProfileCurrenciesV2ApiResponse?> GetProfileCurrenciesV2OrDefaultAsync(string entityId, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get the native token balance
@@ -152,7 +152,7 @@ namespace BeamAutomationClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetProfileNativeCurrencyV2ApiResponse"/>&gt;</returns>
-        Task<IGetProfileNativeCurrencyV2ApiResponse> GetProfileNativeCurrencyV2Async(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetProfileNativeCurrencyV2ApiResponse> GetProfileNativeCurrencyV2Async(string entityId, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get the native token balance
@@ -164,7 +164,7 @@ namespace BeamAutomationClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetProfileNativeCurrencyV2ApiResponse"/>?&gt;</returns>
-        Task<IGetProfileNativeCurrencyV2ApiResponse?> GetProfileNativeCurrencyV2OrDefaultAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetProfileNativeCurrencyV2ApiResponse?> GetProfileNativeCurrencyV2OrDefaultAsync(string entityId, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Transfer an asset (NFT assets, ERC721 / ERC1155)
@@ -551,7 +551,7 @@ namespace BeamAutomationClient.Api
             ApiKeyProvider = apiKeyProvider;
         }
 
-        partial void FormatGetAssetV2(ref string assetAddress, ref string assetId, ref Option<bool> owners, ref Option<decimal> chainId, ref Option<string> entityId);
+        partial void FormatGetAssetV2(ref string assetAddress, ref string assetId, ref Option<bool> owners, ref Option<long> chainId, ref Option<string> entityId);
 
         /// <summary>
         /// Validates the request parameters
@@ -581,7 +581,7 @@ namespace BeamAutomationClient.Api
         /// <param name="owners"></param>
         /// <param name="chainId"></param>
         /// <param name="entityId"></param>
-        private void AfterGetAssetV2DefaultImplementation(IGetAssetV2ApiResponse apiResponseLocalVar, string assetAddress, string assetId, Option<bool> owners, Option<decimal> chainId, Option<string> entityId)
+        private void AfterGetAssetV2DefaultImplementation(IGetAssetV2ApiResponse apiResponseLocalVar, string assetAddress, string assetId, Option<bool> owners, Option<long> chainId, Option<string> entityId)
         {
             bool suppressDefaultLog = false;
             AfterGetAssetV2(ref suppressDefaultLog, apiResponseLocalVar, assetAddress, assetId, owners, chainId, entityId);
@@ -599,7 +599,7 @@ namespace BeamAutomationClient.Api
         /// <param name="owners"></param>
         /// <param name="chainId"></param>
         /// <param name="entityId"></param>
-        partial void AfterGetAssetV2(ref bool suppressDefaultLog, IGetAssetV2ApiResponse apiResponseLocalVar, string assetAddress, string assetId, Option<bool> owners, Option<decimal> chainId, Option<string> entityId);
+        partial void AfterGetAssetV2(ref bool suppressDefaultLog, IGetAssetV2ApiResponse apiResponseLocalVar, string assetAddress, string assetId, Option<bool> owners, Option<long> chainId, Option<string> entityId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -612,7 +612,7 @@ namespace BeamAutomationClient.Api
         /// <param name="owners"></param>
         /// <param name="chainId"></param>
         /// <param name="entityId"></param>
-        private void OnErrorGetAssetV2DefaultImplementation(Exception exception, string pathFormat, string path, string assetAddress, string assetId, Option<bool> owners, Option<decimal> chainId, Option<string> entityId)
+        private void OnErrorGetAssetV2DefaultImplementation(Exception exception, string pathFormat, string path, string assetAddress, string assetId, Option<bool> owners, Option<long> chainId, Option<string> entityId)
         {
             bool suppressDefaultLog = false;
             OnErrorGetAssetV2(ref suppressDefaultLog, exception, pathFormat, path, assetAddress, assetId, owners, chainId, entityId);
@@ -632,7 +632,7 @@ namespace BeamAutomationClient.Api
         /// <param name="owners"></param>
         /// <param name="chainId"></param>
         /// <param name="entityId"></param>
-        partial void OnErrorGetAssetV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string assetAddress, string assetId, Option<bool> owners, Option<decimal> chainId, Option<string> entityId);
+        partial void OnErrorGetAssetV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string assetAddress, string assetId, Option<bool> owners, Option<long> chainId, Option<string> entityId);
 
         /// <summary>
         /// Get a single NFT (e.g. ERC721 / ERC1155) 
@@ -644,7 +644,7 @@ namespace BeamAutomationClient.Api
         /// <param name="entityId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAssetV2ApiResponse"/>&gt;</returns>
-        public async Task<IGetAssetV2ApiResponse?> GetAssetV2OrDefaultAsync(string assetAddress, string assetId, Option<bool> owners = default, Option<decimal> chainId = default, Option<string> entityId = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetAssetV2ApiResponse?> GetAssetV2OrDefaultAsync(string assetAddress, string assetId, Option<bool> owners = default, Option<long> chainId = default, Option<string> entityId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -667,7 +667,7 @@ namespace BeamAutomationClient.Api
         /// <param name="entityId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAssetV2ApiResponse"/>&gt;</returns>
-        public async Task<IGetAssetV2ApiResponse> GetAssetV2Async(string assetAddress, string assetId, Option<bool> owners = default, Option<decimal> chainId = default, Option<string> entityId = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetAssetV2ApiResponse> GetAssetV2Async(string assetAddress, string assetId, Option<bool> owners = default, Option<long> chainId = default, Option<string> entityId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -1324,7 +1324,7 @@ namespace BeamAutomationClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetProfileCurrenciesV2(ref string entityId, ref Option<decimal> chainId);
+        partial void FormatGetProfileCurrenciesV2(ref string entityId, ref Option<long> chainId);
 
         /// <summary>
         /// Validates the request parameters
@@ -1343,7 +1343,7 @@ namespace BeamAutomationClient.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="entityId"></param>
         /// <param name="chainId"></param>
-        private void AfterGetProfileCurrenciesV2DefaultImplementation(IGetProfileCurrenciesV2ApiResponse apiResponseLocalVar, string entityId, Option<decimal> chainId)
+        private void AfterGetProfileCurrenciesV2DefaultImplementation(IGetProfileCurrenciesV2ApiResponse apiResponseLocalVar, string entityId, Option<long> chainId)
         {
             bool suppressDefaultLog = false;
             AfterGetProfileCurrenciesV2(ref suppressDefaultLog, apiResponseLocalVar, entityId, chainId);
@@ -1358,7 +1358,7 @@ namespace BeamAutomationClient.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="entityId"></param>
         /// <param name="chainId"></param>
-        partial void AfterGetProfileCurrenciesV2(ref bool suppressDefaultLog, IGetProfileCurrenciesV2ApiResponse apiResponseLocalVar, string entityId, Option<decimal> chainId);
+        partial void AfterGetProfileCurrenciesV2(ref bool suppressDefaultLog, IGetProfileCurrenciesV2ApiResponse apiResponseLocalVar, string entityId, Option<long> chainId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -1368,7 +1368,7 @@ namespace BeamAutomationClient.Api
         /// <param name="path"></param>
         /// <param name="entityId"></param>
         /// <param name="chainId"></param>
-        private void OnErrorGetProfileCurrenciesV2DefaultImplementation(Exception exception, string pathFormat, string path, string entityId, Option<decimal> chainId)
+        private void OnErrorGetProfileCurrenciesV2DefaultImplementation(Exception exception, string pathFormat, string path, string entityId, Option<long> chainId)
         {
             bool suppressDefaultLog = false;
             OnErrorGetProfileCurrenciesV2(ref suppressDefaultLog, exception, pathFormat, path, entityId, chainId);
@@ -1385,7 +1385,7 @@ namespace BeamAutomationClient.Api
         /// <param name="path"></param>
         /// <param name="entityId"></param>
         /// <param name="chainId"></param>
-        partial void OnErrorGetProfileCurrenciesV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string entityId, Option<decimal> chainId);
+        partial void OnErrorGetProfileCurrenciesV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string entityId, Option<long> chainId);
 
         /// <summary>
         /// Get all the currencies owned by an account (ERC20) 
@@ -1394,7 +1394,7 @@ namespace BeamAutomationClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetProfileCurrenciesV2ApiResponse"/>&gt;</returns>
-        public async Task<IGetProfileCurrenciesV2ApiResponse?> GetProfileCurrenciesV2OrDefaultAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetProfileCurrenciesV2ApiResponse?> GetProfileCurrenciesV2OrDefaultAsync(string entityId, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -1414,7 +1414,7 @@ namespace BeamAutomationClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetProfileCurrenciesV2ApiResponse"/>&gt;</returns>
-        public async Task<IGetProfileCurrenciesV2ApiResponse> GetProfileCurrenciesV2Async(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetProfileCurrenciesV2ApiResponse> GetProfileCurrenciesV2Async(string entityId, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -1564,7 +1564,7 @@ namespace BeamAutomationClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetProfileNativeCurrencyV2(ref string entityId, ref Option<decimal> chainId);
+        partial void FormatGetProfileNativeCurrencyV2(ref string entityId, ref Option<long> chainId);
 
         /// <summary>
         /// Validates the request parameters
@@ -1583,7 +1583,7 @@ namespace BeamAutomationClient.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="entityId"></param>
         /// <param name="chainId"></param>
-        private void AfterGetProfileNativeCurrencyV2DefaultImplementation(IGetProfileNativeCurrencyV2ApiResponse apiResponseLocalVar, string entityId, Option<decimal> chainId)
+        private void AfterGetProfileNativeCurrencyV2DefaultImplementation(IGetProfileNativeCurrencyV2ApiResponse apiResponseLocalVar, string entityId, Option<long> chainId)
         {
             bool suppressDefaultLog = false;
             AfterGetProfileNativeCurrencyV2(ref suppressDefaultLog, apiResponseLocalVar, entityId, chainId);
@@ -1598,7 +1598,7 @@ namespace BeamAutomationClient.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="entityId"></param>
         /// <param name="chainId"></param>
-        partial void AfterGetProfileNativeCurrencyV2(ref bool suppressDefaultLog, IGetProfileNativeCurrencyV2ApiResponse apiResponseLocalVar, string entityId, Option<decimal> chainId);
+        partial void AfterGetProfileNativeCurrencyV2(ref bool suppressDefaultLog, IGetProfileNativeCurrencyV2ApiResponse apiResponseLocalVar, string entityId, Option<long> chainId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -1608,7 +1608,7 @@ namespace BeamAutomationClient.Api
         /// <param name="path"></param>
         /// <param name="entityId"></param>
         /// <param name="chainId"></param>
-        private void OnErrorGetProfileNativeCurrencyV2DefaultImplementation(Exception exception, string pathFormat, string path, string entityId, Option<decimal> chainId)
+        private void OnErrorGetProfileNativeCurrencyV2DefaultImplementation(Exception exception, string pathFormat, string path, string entityId, Option<long> chainId)
         {
             bool suppressDefaultLog = false;
             OnErrorGetProfileNativeCurrencyV2(ref suppressDefaultLog, exception, pathFormat, path, entityId, chainId);
@@ -1625,7 +1625,7 @@ namespace BeamAutomationClient.Api
         /// <param name="path"></param>
         /// <param name="entityId"></param>
         /// <param name="chainId"></param>
-        partial void OnErrorGetProfileNativeCurrencyV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string entityId, Option<decimal> chainId);
+        partial void OnErrorGetProfileNativeCurrencyV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string entityId, Option<long> chainId);
 
         /// <summary>
         /// Get the native token balance 
@@ -1634,7 +1634,7 @@ namespace BeamAutomationClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetProfileNativeCurrencyV2ApiResponse"/>&gt;</returns>
-        public async Task<IGetProfileNativeCurrencyV2ApiResponse?> GetProfileNativeCurrencyV2OrDefaultAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetProfileNativeCurrencyV2ApiResponse?> GetProfileNativeCurrencyV2OrDefaultAsync(string entityId, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -1654,7 +1654,7 @@ namespace BeamAutomationClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetProfileNativeCurrencyV2ApiResponse"/>&gt;</returns>
-        public async Task<IGetProfileNativeCurrencyV2ApiResponse> GetProfileNativeCurrencyV2Async(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetProfileNativeCurrencyV2ApiResponse> GetProfileNativeCurrencyV2Async(string entityId, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 

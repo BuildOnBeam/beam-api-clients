@@ -35,14 +35,14 @@ namespace BeamAutomationClient.Model
         /// Initializes a new instance of the <see cref="AutomationTransferNativeTokenRequestInputV2" /> class.
         /// </summary>
         /// <param name="amountToTransfer">amountToTransfer</param>
-        /// <param name="chainId">chainId (default to 13337M)</param>
+        /// <param name="chainId">chainId (default to 13337)</param>
         /// <param name="optimistic">optimistic (default to false)</param>
         /// <param name="policyId">policyId</param>
         /// <param name="receiverEntityId">receiverEntityId</param>
         /// <param name="receiverWalletAddress">receiverWalletAddress</param>
         /// <param name="sponsor">sponsor (default to true)</param>
         [JsonConstructor]
-        public AutomationTransferNativeTokenRequestInputV2(string amountToTransfer, Option<decimal?> chainId = default, Option<bool?> optimistic = default, Option<string?> policyId = default, Option<string?> receiverEntityId = default, Option<string?> receiverWalletAddress = default, Option<bool?> sponsor = default)
+        public AutomationTransferNativeTokenRequestInputV2(string amountToTransfer, Option<long?> chainId = default, Option<bool?> optimistic = default, Option<string?> policyId = default, Option<string?> receiverEntityId = default, Option<string?> receiverWalletAddress = default, Option<bool?> sponsor = default)
         {
             AmountToTransfer = amountToTransfer;
             ChainIdOption = chainId;
@@ -67,13 +67,13 @@ namespace BeamAutomationClient.Model
         /// </summary>
         [JsonIgnore]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<decimal?> ChainIdOption { get; private set; }
+        public Option<long?> ChainIdOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [JsonPropertyName("chainId")]
-        public decimal? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
+        public long? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Optimistic
@@ -193,7 +193,7 @@ namespace BeamAutomationClient.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<string?> amountToTransfer = default;
-            Option<decimal?> chainId = default;
+            Option<long?> chainId = default;
             Option<bool?> optimistic = default;
             Option<string?> policyId = default;
             Option<string?> receiverEntityId = default;
@@ -220,7 +220,7 @@ namespace BeamAutomationClient.Model
                             break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                                chainId = new Option<long?>(utf8JsonReader.GetInt64());
                             break;
                         case "optimistic":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)

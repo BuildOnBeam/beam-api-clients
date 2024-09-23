@@ -48,7 +48,7 @@ namespace BeamAutomationClient.Model
         /// <param name="transaction">transaction</param>
         /// <param name="transactionHash">transactionHash</param>
         [JsonConstructor]
-        public AutomationTransactionResponse(decimal chainId, DateTime createdAt, string explorerUrl, string id, AutomationTransactionResponseIntent intent, AutomationTransactionResponsePolicy policy, AutomationTransactionResponseProfile profile, StatusEnum status, bool success, TypeEnum type, DateTime updatedAt, Option<AutomationTransactionResponseTransaction?> transaction = default, Option<string?> transactionHash = default)
+        public AutomationTransactionResponse(long chainId, DateTime createdAt, string explorerUrl, string id, AutomationTransactionResponseIntent intent, AutomationTransactionResponsePolicy policy, AutomationTransactionResponseProfile profile, StatusEnum status, bool success, TypeEnum type, DateTime updatedAt, Option<AutomationTransactionResponseTransaction?> transaction = default, Option<string?> transactionHash = default)
         {
             ChainId = chainId;
             CreatedAt = createdAt;
@@ -406,7 +406,7 @@ namespace BeamAutomationClient.Model
         /// Gets or Sets ChainId
         /// </summary>
         [JsonPropertyName("chainId")]
-        public decimal ChainId { get; set; }
+        public long ChainId { get; set; }
 
         /// <summary>
         /// Gets or Sets CreatedAt
@@ -550,7 +550,7 @@ namespace BeamAutomationClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<decimal?> chainId = default;
+            Option<long?> chainId = default;
             Option<DateTime?> createdAt = default;
             Option<string?> explorerUrl = default;
             Option<string?> id = default;
@@ -581,7 +581,7 @@ namespace BeamAutomationClient.Model
                     {
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                                chainId = new Option<long?>(utf8JsonReader.GetInt64());
                             break;
                         case "createdAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)

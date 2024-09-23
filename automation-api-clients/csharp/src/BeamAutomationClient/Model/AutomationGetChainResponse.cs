@@ -38,7 +38,7 @@ namespace BeamAutomationClient.Model
         /// <param name="chainId">chainId</param>
         /// <param name="nativeCurrency">nativeCurrency</param>
         [JsonConstructor]
-        public AutomationGetChainResponse(decimal blockNumber, decimal chainId, AutomationGetChainResponseNativeCurrency nativeCurrency)
+        public AutomationGetChainResponse(decimal blockNumber, long chainId, AutomationGetChainResponseNativeCurrency nativeCurrency)
         {
             BlockNumber = blockNumber;
             ChainId = chainId;
@@ -58,7 +58,7 @@ namespace BeamAutomationClient.Model
         /// Gets or Sets ChainId
         /// </summary>
         [JsonPropertyName("chainId")]
-        public decimal ChainId { get; set; }
+        public long ChainId { get; set; }
 
         /// <summary>
         /// Gets or Sets NativeCurrency
@@ -115,7 +115,7 @@ namespace BeamAutomationClient.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<decimal?> blockNumber = default;
-            Option<decimal?> chainId = default;
+            Option<long?> chainId = default;
             Option<AutomationGetChainResponseNativeCurrency?> nativeCurrency = default;
 
             while (utf8JsonReader.Read())
@@ -139,7 +139,7 @@ namespace BeamAutomationClient.Model
                             break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                                chainId = new Option<long?>(utf8JsonReader.GetInt64());
                             break;
                         case "nativeCurrency":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)

@@ -34,7 +34,7 @@ namespace BeamAutomationClient.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="AutomationGetAssetsForProfileBodyInputV2" /> class.
         /// </summary>
-        /// <param name="chainId">chainId (default to 13337M)</param>
+        /// <param name="chainId">chainId (default to 13337)</param>
         /// <param name="continuation">continuation</param>
         /// <param name="contract">contract</param>
         /// <param name="includeAttributes">includeAttributes (default to false)</param>
@@ -42,7 +42,7 @@ namespace BeamAutomationClient.Model
         /// <param name="sortBy">sortBy (default to SortByEnum.AcquiredAt)</param>
         /// <param name="sortDirection">sortDirection (default to SortDirectionEnum.Asc)</param>
         [JsonConstructor]
-        public AutomationGetAssetsForProfileBodyInputV2(Option<decimal?> chainId = default, Option<string?> continuation = default, Option<string?> contract = default, Option<bool?> includeAttributes = default, Option<decimal?> limit = default, Option<SortByEnum?> sortBy = default, Option<SortDirectionEnum?> sortDirection = default)
+        public AutomationGetAssetsForProfileBodyInputV2(Option<long?> chainId = default, Option<string?> continuation = default, Option<string?> contract = default, Option<bool?> includeAttributes = default, Option<decimal?> limit = default, Option<SortByEnum?> sortBy = default, Option<SortDirectionEnum?> sortDirection = default)
         {
             ChainIdOption = chainId;
             ContinuationOption = continuation;
@@ -409,13 +409,13 @@ namespace BeamAutomationClient.Model
         /// </summary>
         [JsonIgnore]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<decimal?> ChainIdOption { get; private set; }
+        public Option<long?> ChainIdOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [JsonPropertyName("chainId")]
-        public decimal? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
+        public long? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Continuation
@@ -533,7 +533,7 @@ namespace BeamAutomationClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<decimal?> chainId = default;
+            Option<long?> chainId = default;
             Option<string?> continuation = default;
             Option<string?> contract = default;
             Option<bool?> includeAttributes = default;
@@ -558,7 +558,7 @@ namespace BeamAutomationClient.Model
                     {
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                                chainId = new Option<long?>(utf8JsonReader.GetInt64());
                             break;
                         case "continuation":
                             continuation = new Option<string?>(utf8JsonReader.GetString());

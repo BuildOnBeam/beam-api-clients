@@ -36,12 +36,12 @@ namespace BeamAutomationClient.Model
         /// </summary>
         /// <param name="offerId">offerId</param>
         /// <param name="quantity">quantity</param>
-        /// <param name="chainId">chainId (default to 13337M)</param>
+        /// <param name="chainId">chainId (default to 13337)</param>
         /// <param name="optimistic">optimistic (default to false)</param>
         /// <param name="policyId">policyId</param>
         /// <param name="sponsor">sponsor (default to true)</param>
         [JsonConstructor]
-        public AutomationAcceptAssetOfferRequestInputV2(string offerId, decimal quantity, Option<decimal?> chainId = default, Option<bool?> optimistic = default, Option<string?> policyId = default, Option<bool?> sponsor = default)
+        public AutomationAcceptAssetOfferRequestInputV2(string offerId, decimal quantity, Option<long?> chainId = default, Option<bool?> optimistic = default, Option<string?> policyId = default, Option<bool?> sponsor = default)
         {
             OfferId = offerId;
             Quantity = quantity;
@@ -71,13 +71,13 @@ namespace BeamAutomationClient.Model
         /// </summary>
         [JsonIgnore]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<decimal?> ChainIdOption { get; private set; }
+        public Option<long?> ChainIdOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [JsonPropertyName("chainId")]
-        public decimal? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
+        public long? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Optimistic
@@ -177,7 +177,7 @@ namespace BeamAutomationClient.Model
 
             Option<string?> offerId = default;
             Option<decimal?> quantity = default;
-            Option<decimal?> chainId = default;
+            Option<long?> chainId = default;
             Option<bool?> optimistic = default;
             Option<string?> policyId = default;
             Option<bool?> sponsor = default;
@@ -206,7 +206,7 @@ namespace BeamAutomationClient.Model
                             break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                                chainId = new Option<long?>(utf8JsonReader.GetInt64());
                             break;
                         case "optimistic":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)

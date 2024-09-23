@@ -41,7 +41,7 @@ namespace BeamPlayerClient.Model
         /// <param name="updatedAt">updatedAt</param>
         /// <param name="transaction">transaction</param>
         [JsonConstructor]
-        public PlayerGetTransactionsResponseDataInner(decimal chainId, DateTime createdAt, string id, PlayerGetTransactionsResponseDataInnerIntent intent, DateTime updatedAt, Option<PlayerGetTransactionsResponseDataInnerTransaction?> transaction = default)
+        public PlayerGetTransactionsResponseDataInner(long chainId, DateTime createdAt, string id, PlayerGetTransactionsResponseDataInnerIntent intent, DateTime updatedAt, Option<PlayerGetTransactionsResponseDataInnerTransaction?> transaction = default)
         {
             ChainId = chainId;
             CreatedAt = createdAt;
@@ -58,7 +58,7 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets ChainId
         /// </summary>
         [JsonPropertyName("chainId")]
-        public decimal ChainId { get; set; }
+        public long ChainId { get; set; }
 
         /// <summary>
         /// Gets or Sets CreatedAt
@@ -158,7 +158,7 @@ namespace BeamPlayerClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<decimal?> chainId = default;
+            Option<long?> chainId = default;
             Option<DateTime?> createdAt = default;
             Option<string?> id = default;
             Option<PlayerGetTransactionsResponseDataInnerIntent?> intent = default;
@@ -182,7 +182,7 @@ namespace BeamPlayerClient.Model
                     {
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                                chainId = new Option<long?>(utf8JsonReader.GetInt64());
                             break;
                         case "createdAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)

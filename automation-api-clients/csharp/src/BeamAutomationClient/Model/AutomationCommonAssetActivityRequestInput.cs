@@ -34,12 +34,12 @@ namespace BeamAutomationClient.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="AutomationCommonAssetActivityRequestInput" /> class.
         /// </summary>
-        /// <param name="chainId">chainId (default to 13337M)</param>
+        /// <param name="chainId">chainId (default to 13337)</param>
         /// <param name="continuation">continuation</param>
         /// <param name="limit">limit (default to 20M)</param>
         /// <param name="types">types</param>
         [JsonConstructor]
-        public AutomationCommonAssetActivityRequestInput(Option<decimal?> chainId = default, Option<string?> continuation = default, Option<decimal?> limit = default, Option<List<AutomationCommonAssetActivityRequestInput.TypesEnum>?> types = default)
+        public AutomationCommonAssetActivityRequestInput(Option<long?> chainId = default, Option<string?> continuation = default, Option<decimal?> limit = default, Option<List<AutomationCommonAssetActivityRequestInput.TypesEnum>?> types = default)
         {
             ChainIdOption = chainId;
             ContinuationOption = continuation;
@@ -331,13 +331,13 @@ namespace BeamAutomationClient.Model
         /// </summary>
         [JsonIgnore]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<decimal?> ChainIdOption { get; private set; }
+        public Option<long?> ChainIdOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [JsonPropertyName("chainId")]
-        public decimal? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
+        public long? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Continuation
@@ -439,7 +439,7 @@ namespace BeamAutomationClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<decimal?> chainId = default;
+            Option<long?> chainId = default;
             Option<string?> continuation = default;
             Option<decimal?> limit = default;
             Option<List<AutomationCommonAssetActivityRequestInput.TypesEnum>?> types = default;
@@ -461,7 +461,7 @@ namespace BeamAutomationClient.Model
                     {
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                                chainId = new Option<long?>(utf8JsonReader.GetInt64());
                             break;
                         case "continuation":
                             continuation = new Option<string?>(utf8JsonReader.GetString());

@@ -45,7 +45,7 @@ namespace BeamAutomationClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IChainApiResponse"/>&gt;</returns>
-        Task<IChainApiResponse> ChainAsync(Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IChainApiResponse> ChainAsync(Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -56,7 +56,7 @@ namespace BeamAutomationClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IChainApiResponse"/>?&gt;</returns>
-        Task<IChainApiResponse?> ChainOrDefaultAsync(Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IChainApiResponse?> ChainOrDefaultAsync(Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Estimate gas fee for a transaction on behalf of a profile
@@ -201,14 +201,14 @@ namespace BeamAutomationClient.Api
             ApiKeyProvider = apiKeyProvider;
         }
 
-        partial void FormatChain(ref Option<decimal> chainId);
+        partial void FormatChain(ref Option<long> chainId);
 
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="chainId"></param>
-        private void AfterChainDefaultImplementation(IChainApiResponse apiResponseLocalVar, Option<decimal> chainId)
+        private void AfterChainDefaultImplementation(IChainApiResponse apiResponseLocalVar, Option<long> chainId)
         {
             bool suppressDefaultLog = false;
             AfterChain(ref suppressDefaultLog, apiResponseLocalVar, chainId);
@@ -222,7 +222,7 @@ namespace BeamAutomationClient.Api
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="chainId"></param>
-        partial void AfterChain(ref bool suppressDefaultLog, IChainApiResponse apiResponseLocalVar, Option<decimal> chainId);
+        partial void AfterChain(ref bool suppressDefaultLog, IChainApiResponse apiResponseLocalVar, Option<long> chainId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -231,7 +231,7 @@ namespace BeamAutomationClient.Api
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
         /// <param name="chainId"></param>
-        private void OnErrorChainDefaultImplementation(Exception exception, string pathFormat, string path, Option<decimal> chainId)
+        private void OnErrorChainDefaultImplementation(Exception exception, string pathFormat, string path, Option<long> chainId)
         {
             bool suppressDefaultLog = false;
             OnErrorChain(ref suppressDefaultLog, exception, pathFormat, path, chainId);
@@ -247,7 +247,7 @@ namespace BeamAutomationClient.Api
         /// <param name="pathFormat"></param>
         /// <param name="path"></param>
         /// <param name="chainId"></param>
-        partial void OnErrorChain(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, Option<decimal> chainId);
+        partial void OnErrorChain(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, Option<long> chainId);
 
         /// <summary>
         ///  
@@ -255,7 +255,7 @@ namespace BeamAutomationClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IChainApiResponse"/>&gt;</returns>
-        public async Task<IChainApiResponse?> ChainOrDefaultAsync(Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IChainApiResponse?> ChainOrDefaultAsync(Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -274,7 +274,7 @@ namespace BeamAutomationClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IChainApiResponse"/>&gt;</returns>
-        public async Task<IChainApiResponse> ChainAsync(Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IChainApiResponse> ChainAsync(Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 

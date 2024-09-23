@@ -41,11 +41,11 @@ namespace BeamAutomationClient.Model
         /// <param name="name">name</param>
         /// <param name="supply">supply</param>
         /// <param name="attributes">attributes</param>
-        /// <param name="chainId">chainId (default to 13337M)</param>
+        /// <param name="chainId">chainId (default to 13337)</param>
         /// <param name="rarity">rarity</param>
         /// <param name="rarityScore">rarityScore</param>
         [JsonConstructor]
-        public AutomationGetAssetsForContractResponseV2DataInner(string assetAddress, string assetId, string assetType, string imageUrl, string name, decimal supply, Option<List<AutomationGetAssetsForProfileResponseV2DataInnerAttributesInner>?> attributes = default, Option<decimal?> chainId = default, Option<RarityEnum?> rarity = default, Option<decimal?> rarityScore = default)
+        public AutomationGetAssetsForContractResponseV2DataInner(string assetAddress, string assetId, string assetType, string imageUrl, string name, decimal supply, Option<List<AutomationGetAssetsForProfileResponseV2DataInnerAttributesInner>?> attributes = default, Option<long?> chainId = default, Option<RarityEnum?> rarity = default, Option<decimal?> rarityScore = default)
         {
             AssetAddress = assetAddress;
             AssetId = assetId;
@@ -362,13 +362,13 @@ namespace BeamAutomationClient.Model
         /// </summary>
         [JsonIgnore]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<decimal?> ChainIdOption { get; private set; }
+        public Option<long?> ChainIdOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [JsonPropertyName("chainId")]
-        public decimal? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
+        public long? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of RarityScore
@@ -445,7 +445,7 @@ namespace BeamAutomationClient.Model
             Option<string?> name = default;
             Option<decimal?> supply = default;
             Option<List<AutomationGetAssetsForProfileResponseV2DataInnerAttributesInner>?> attributes = default;
-            Option<decimal?> chainId = default;
+            Option<long?> chainId = default;
             Option<AutomationGetAssetsForContractResponseV2DataInner.RarityEnum?> rarity = default;
             Option<decimal?> rarityScore = default;
 
@@ -489,7 +489,7 @@ namespace BeamAutomationClient.Model
                             break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                                chainId = new Option<long?>(utf8JsonReader.GetInt64());
                             break;
                         case "rarity":
                             string? rarityRawValue = utf8JsonReader.GetString();

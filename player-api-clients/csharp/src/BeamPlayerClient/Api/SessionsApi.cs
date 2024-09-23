@@ -72,7 +72,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetActiveSessionApiResponse"/>&gt;</returns>
-        Task<IGetActiveSessionApiResponse> GetActiveSessionAsync(string entityId, string accountAddress, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetActiveSessionApiResponse> GetActiveSessionAsync(string entityId, string accountAddress, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -85,7 +85,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetActiveSessionApiResponse"/>?&gt;</returns>
-        Task<IGetActiveSessionApiResponse?> GetActiveSessionOrDefaultAsync(string entityId, string accountAddress, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetActiveSessionApiResponse?> GetActiveSessionOrDefaultAsync(string entityId, string accountAddress, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -98,7 +98,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAllActiveSessionsApiResponse"/>&gt;</returns>
-        Task<IGetAllActiveSessionsApiResponse> GetAllActiveSessionsAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetAllActiveSessionsApiResponse> GetAllActiveSessionsAsync(string entityId, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -110,7 +110,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAllActiveSessionsApiResponse"/>?&gt;</returns>
-        Task<IGetAllActiveSessionsApiResponse?> GetAllActiveSessionsOrDefaultAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetAllActiveSessionsApiResponse?> GetAllActiveSessionsOrDefaultAsync(string entityId, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -624,7 +624,7 @@ namespace BeamPlayerClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetActiveSession(ref string entityId, ref string accountAddress, ref Option<decimal> chainId);
+        partial void FormatGetActiveSession(ref string entityId, ref string accountAddress, ref Option<long> chainId);
 
         /// <summary>
         /// Validates the request parameters
@@ -648,7 +648,7 @@ namespace BeamPlayerClient.Api
         /// <param name="entityId"></param>
         /// <param name="accountAddress"></param>
         /// <param name="chainId"></param>
-        private void AfterGetActiveSessionDefaultImplementation(IGetActiveSessionApiResponse apiResponseLocalVar, string entityId, string accountAddress, Option<decimal> chainId)
+        private void AfterGetActiveSessionDefaultImplementation(IGetActiveSessionApiResponse apiResponseLocalVar, string entityId, string accountAddress, Option<long> chainId)
         {
             bool suppressDefaultLog = false;
             AfterGetActiveSession(ref suppressDefaultLog, apiResponseLocalVar, entityId, accountAddress, chainId);
@@ -664,7 +664,7 @@ namespace BeamPlayerClient.Api
         /// <param name="entityId"></param>
         /// <param name="accountAddress"></param>
         /// <param name="chainId"></param>
-        partial void AfterGetActiveSession(ref bool suppressDefaultLog, IGetActiveSessionApiResponse apiResponseLocalVar, string entityId, string accountAddress, Option<decimal> chainId);
+        partial void AfterGetActiveSession(ref bool suppressDefaultLog, IGetActiveSessionApiResponse apiResponseLocalVar, string entityId, string accountAddress, Option<long> chainId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -675,7 +675,7 @@ namespace BeamPlayerClient.Api
         /// <param name="entityId"></param>
         /// <param name="accountAddress"></param>
         /// <param name="chainId"></param>
-        private void OnErrorGetActiveSessionDefaultImplementation(Exception exception, string pathFormat, string path, string entityId, string accountAddress, Option<decimal> chainId)
+        private void OnErrorGetActiveSessionDefaultImplementation(Exception exception, string pathFormat, string path, string entityId, string accountAddress, Option<long> chainId)
         {
             bool suppressDefaultLog = false;
             OnErrorGetActiveSession(ref suppressDefaultLog, exception, pathFormat, path, entityId, accountAddress, chainId);
@@ -693,7 +693,7 @@ namespace BeamPlayerClient.Api
         /// <param name="entityId"></param>
         /// <param name="accountAddress"></param>
         /// <param name="chainId"></param>
-        partial void OnErrorGetActiveSession(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string entityId, string accountAddress, Option<decimal> chainId);
+        partial void OnErrorGetActiveSession(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string entityId, string accountAddress, Option<long> chainId);
 
         /// <summary>
         ///  
@@ -703,7 +703,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetActiveSessionApiResponse"/>&gt;</returns>
-        public async Task<IGetActiveSessionApiResponse?> GetActiveSessionOrDefaultAsync(string entityId, string accountAddress, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetActiveSessionApiResponse?> GetActiveSessionOrDefaultAsync(string entityId, string accountAddress, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -724,7 +724,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetActiveSessionApiResponse"/>&gt;</returns>
-        public async Task<IGetActiveSessionApiResponse> GetActiveSessionAsync(string entityId, string accountAddress, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetActiveSessionApiResponse> GetActiveSessionAsync(string entityId, string accountAddress, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -875,7 +875,7 @@ namespace BeamPlayerClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetAllActiveSessions(ref string entityId, ref Option<decimal> chainId);
+        partial void FormatGetAllActiveSessions(ref string entityId, ref Option<long> chainId);
 
         /// <summary>
         /// Validates the request parameters
@@ -894,7 +894,7 @@ namespace BeamPlayerClient.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="entityId"></param>
         /// <param name="chainId"></param>
-        private void AfterGetAllActiveSessionsDefaultImplementation(IGetAllActiveSessionsApiResponse apiResponseLocalVar, string entityId, Option<decimal> chainId)
+        private void AfterGetAllActiveSessionsDefaultImplementation(IGetAllActiveSessionsApiResponse apiResponseLocalVar, string entityId, Option<long> chainId)
         {
             bool suppressDefaultLog = false;
             AfterGetAllActiveSessions(ref suppressDefaultLog, apiResponseLocalVar, entityId, chainId);
@@ -909,7 +909,7 @@ namespace BeamPlayerClient.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="entityId"></param>
         /// <param name="chainId"></param>
-        partial void AfterGetAllActiveSessions(ref bool suppressDefaultLog, IGetAllActiveSessionsApiResponse apiResponseLocalVar, string entityId, Option<decimal> chainId);
+        partial void AfterGetAllActiveSessions(ref bool suppressDefaultLog, IGetAllActiveSessionsApiResponse apiResponseLocalVar, string entityId, Option<long> chainId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -919,7 +919,7 @@ namespace BeamPlayerClient.Api
         /// <param name="path"></param>
         /// <param name="entityId"></param>
         /// <param name="chainId"></param>
-        private void OnErrorGetAllActiveSessionsDefaultImplementation(Exception exception, string pathFormat, string path, string entityId, Option<decimal> chainId)
+        private void OnErrorGetAllActiveSessionsDefaultImplementation(Exception exception, string pathFormat, string path, string entityId, Option<long> chainId)
         {
             bool suppressDefaultLog = false;
             OnErrorGetAllActiveSessions(ref suppressDefaultLog, exception, pathFormat, path, entityId, chainId);
@@ -936,7 +936,7 @@ namespace BeamPlayerClient.Api
         /// <param name="path"></param>
         /// <param name="entityId"></param>
         /// <param name="chainId"></param>
-        partial void OnErrorGetAllActiveSessions(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string entityId, Option<decimal> chainId);
+        partial void OnErrorGetAllActiveSessions(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string entityId, Option<long> chainId);
 
         /// <summary>
         ///  
@@ -945,7 +945,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAllActiveSessionsApiResponse"/>&gt;</returns>
-        public async Task<IGetAllActiveSessionsApiResponse?> GetAllActiveSessionsOrDefaultAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetAllActiveSessionsApiResponse?> GetAllActiveSessionsOrDefaultAsync(string entityId, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -965,7 +965,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAllActiveSessionsApiResponse"/>&gt;</returns>
-        public async Task<IGetAllActiveSessionsApiResponse> GetAllActiveSessionsAsync(string entityId, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetAllActiveSessionsApiResponse> GetAllActiveSessionsAsync(string entityId, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 

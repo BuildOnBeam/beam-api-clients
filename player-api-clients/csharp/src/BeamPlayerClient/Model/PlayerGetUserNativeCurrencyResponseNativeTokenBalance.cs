@@ -41,7 +41,7 @@ namespace BeamPlayerClient.Model
         /// <param name="symbol">symbol</param>
         /// <param name="logoUri">logoUri</param>
         [JsonConstructor]
-        public PlayerGetUserNativeCurrencyResponseNativeTokenBalance(string balance, decimal chainId, decimal decimals, string name, string symbol, Option<string?> logoUri = default)
+        public PlayerGetUserNativeCurrencyResponseNativeTokenBalance(string balance, long chainId, decimal decimals, string name, string symbol, Option<string?> logoUri = default)
         {
             Balance = balance;
             ChainId = chainId;
@@ -64,7 +64,7 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets ChainId
         /// </summary>
         [JsonPropertyName("chainId")]
-        public decimal ChainId { get; set; }
+        public long ChainId { get; set; }
 
         /// <summary>
         /// Gets or Sets Decimals
@@ -149,7 +149,7 @@ namespace BeamPlayerClient.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<string?> balance = default;
-            Option<decimal?> chainId = default;
+            Option<long?> chainId = default;
             Option<decimal?> decimals = default;
             Option<string?> name = default;
             Option<string?> symbol = default;
@@ -175,7 +175,7 @@ namespace BeamPlayerClient.Model
                             break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                                chainId = new Option<long?>(utf8JsonReader.GetInt64());
                             break;
                         case "decimals":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)

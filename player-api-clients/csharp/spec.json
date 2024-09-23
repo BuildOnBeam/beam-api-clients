@@ -233,7 +233,8 @@
             "required": false,
             "in": "query",
             "schema": {
-              "type": "number"
+              "format": "int64",
+              "type": "integer"
             }
           }
         ],
@@ -277,7 +278,8 @@
             "required": false,
             "in": "query",
             "schema": {
-              "type": "number"
+              "format": "int64",
+              "type": "integer"
             }
           }
         ],
@@ -497,7 +499,8 @@
             "required": false,
             "in": "query",
             "schema": {
-              "type": "number"
+              "format": "int64",
+              "type": "integer"
             }
           },
           {
@@ -575,7 +578,8 @@
             "required": true,
             "in": "query",
             "schema": {
-              "type": "number"
+              "format": "int64",
+              "type": "integer"
             }
           }
         ],
@@ -619,7 +623,8 @@
             "required": true,
             "in": "query",
             "schema": {
-              "type": "number"
+              "format": "int64",
+              "type": "integer"
             }
           },
           {
@@ -908,7 +913,8 @@
             "required": false,
             "in": "query",
             "schema": {
-              "type": "number"
+              "format": "int64",
+              "type": "integer"
             }
           },
           {
@@ -1014,7 +1020,8 @@
             "required": false,
             "in": "query",
             "schema": {
-              "type": "number"
+              "format": "int64",
+              "type": "integer"
             }
           },
           {
@@ -1090,7 +1097,8 @@
             "required": false,
             "in": "query",
             "schema": {
-              "type": "number"
+              "format": "int64",
+              "type": "integer"
             }
           },
           {
@@ -1258,7 +1266,8 @@
             "required": false,
             "in": "query",
             "schema": {
-              "type": "number"
+              "format": "int64",
+              "type": "integer"
             }
           },
           {
@@ -1302,7 +1311,8 @@
             "required": true,
             "in": "path",
             "schema": {
-              "type": "number"
+              "format": "int64",
+              "type": "integer"
             }
           }
         ],
@@ -1949,7 +1959,8 @@
             "required": false,
             "in": "query",
             "schema": {
-              "type": "number"
+              "format": "int64",
+              "type": "integer"
             }
           }
         ],
@@ -2009,7 +2020,8 @@
             "required": false,
             "in": "query",
             "schema": {
-              "type": "number"
+              "format": "int64",
+              "type": "integer"
             }
           }
         ],
@@ -2365,7 +2377,8 @@
             "required": false,
             "in": "query",
             "schema": {
-              "type": "number"
+              "format": "int64",
+              "type": "integer"
             }
           }
         ],
@@ -2417,7 +2430,8 @@
             "required": false,
             "in": "query",
             "schema": {
-              "type": "number"
+              "format": "int64",
+              "type": "integer"
             }
           }
         ],
@@ -2849,7 +2863,8 @@
           },
           "chainId": {
             "default": 13337,
-            "type": "number"
+            "type": "integer",
+            "format": "int64"
           },
           "limit": {
             "default": 20,
@@ -2931,7 +2946,8 @@
                 },
                 "chainId": {
                   "default": 13337,
-                  "type": "number"
+                  "type": "integer",
+                  "format": "int64"
                 },
                 "ownedQuantity": {
                   "type": "number"
@@ -2982,7 +2998,8 @@
                   "type": "string"
                 },
                 "chainId": {
-                  "type": "number"
+                  "type": "integer",
+                  "format": "int64"
                 },
                 "balance": {
                   "type": "string"
@@ -3022,7 +3039,8 @@
                 "type": "string"
               },
               "chainId": {
-                "type": "number"
+                "type": "integer",
+                "format": "int64"
               },
               "balance": {
                 "type": "string"
@@ -3093,7 +3111,8 @@
           },
           "chainId": {
             "default": 13337,
-            "type": "number"
+            "type": "integer",
+            "format": "int64"
           },
           "operationProcessing": {
             "default": "Execute",
@@ -3152,7 +3171,8 @@
             "type": "string"
           },
           "chainId": {
-            "type": "integer"
+            "type": "integer",
+            "format": "int64"
           },
           "url": {
             "type": "string",
@@ -3265,7 +3285,8 @@
           },
           "chainId": {
             "default": 13337,
-            "type": "number"
+            "type": "integer",
+            "format": "int64"
           },
           "operationProcessing": {
             "default": "Execute",
@@ -3313,7 +3334,8 @@
           },
           "chainId": {
             "default": 13337,
-            "type": "number"
+            "type": "integer",
+            "format": "int64"
           },
           "operationProcessing": {
             "default": "Execute",
@@ -3342,7 +3364,8 @@
           },
           "chainId": {
             "default": 13337,
-            "type": "number"
+            "type": "integer",
+            "format": "int64"
           },
           "minRarityRank": {
             "default": null,
@@ -3487,7 +3510,8 @@
                 },
                 "chainId": {
                   "default": 13337,
-                  "type": "number"
+                  "type": "integer",
+                  "format": "int64"
                 }
               },
               "required": [
@@ -3599,7 +3623,8 @@
           },
           "chainId": {
             "default": 13337,
-            "type": "number"
+            "type": "integer",
+            "format": "int64"
           }
         },
         "required": [
@@ -3738,7 +3763,8 @@
           },
           "chainId": {
             "default": 13337,
-            "type": "number"
+            "type": "integer",
+            "format": "int64"
           },
           "limit": {
             "default": 20,
@@ -3820,7 +3846,8 @@
                 },
                 "chainId": {
                   "default": 13337,
-                  "type": "number"
+                  "type": "integer",
+                  "format": "int64"
                 },
                 "ownedQuantity": {
                   "type": "number"
@@ -3884,7 +3911,8 @@
           },
           "chainId": {
             "default": 13337,
-            "type": "number"
+            "type": "integer",
+            "format": "int64"
           },
           "continuation": {
             "default": null,
@@ -4129,7 +4157,8 @@
           },
           "chainId": {
             "default": 13337,
-            "type": "number"
+            "type": "integer",
+            "format": "int64"
           },
           "operationProcessing": {
             "default": "Execute",
@@ -4174,7 +4203,8 @@
           },
           "chainId": {
             "default": 13337,
-            "type": "number"
+            "type": "integer",
+            "format": "int64"
           },
           "operationProcessing": {
             "default": "Execute",
@@ -4262,7 +4292,8 @@
           },
           "chainId": {
             "default": 13337,
-            "type": "number"
+            "type": "integer",
+            "format": "int64"
           },
           "operationProcessing": {
             "default": "Execute",
@@ -4307,7 +4338,8 @@
           },
           "chainId": {
             "default": 13337,
-            "type": "number"
+            "type": "integer",
+            "format": "int64"
           },
           "operationProcessing": {
             "default": "Execute",
@@ -4357,7 +4389,8 @@
           },
           "chainId": {
             "default": 13337,
-            "type": "number"
+            "type": "integer",
+            "format": "int64"
           }
         }
       },
@@ -4413,7 +4446,8 @@
           },
           "chainId": {
             "default": 13337,
-            "type": "number"
+            "type": "integer",
+            "format": "int64"
           }
         },
         "required": [
@@ -4429,7 +4463,8 @@
           },
           "chainId": {
             "default": 13337,
-            "type": "number"
+            "type": "integer",
+            "format": "int64"
           }
         },
         "required": [
@@ -4456,7 +4491,8 @@
                   "format": "date-time"
                 },
                 "chainId": {
-                  "type": "number"
+                  "type": "integer",
+                  "format": "int64"
                 },
                 "intent": {
                   "type": "object",
@@ -4624,7 +4660,8 @@
             "format": "date-time"
           },
           "chainId": {
-            "type": "number"
+            "type": "integer",
+            "format": "int64"
           },
           "intent": {
             "type": "object",
@@ -4846,7 +4883,8 @@
           },
           "chainId": {
             "default": 13337,
-            "type": "number"
+            "type": "integer",
+            "format": "int64"
           },
           "operationProcessing": {
             "default": "Execute",
@@ -4900,7 +4938,8 @@
                         "type": "string"
                       },
                       "chainId": {
-                        "type": "integer"
+                        "type": "integer",
+                        "format": "int64"
                       },
                       "profileId": {
                         "type": "string",
@@ -5006,7 +5045,8 @@
                   "type": "string"
                 },
                 "chainId": {
-                  "type": "integer"
+                  "type": "integer",
+                  "format": "int64"
                 },
                 "profileId": {
                   "type": "string",
@@ -5092,7 +5132,8 @@
           },
           "chainId": {
             "default": 13337,
-            "type": "number"
+            "type": "integer",
+            "format": "int64"
           },
           "operationProcessing": {
             "default": "Execute",
@@ -5206,7 +5247,8 @@
           },
           "chainId": {
             "default": 13337,
-            "type": "number"
+            "type": "integer",
+            "format": "int64"
           },
           "operationProcessing": {
             "default": "Execute",
@@ -5250,7 +5292,8 @@
           },
           "chainId": {
             "default": 13337,
-            "type": "number"
+            "type": "integer",
+            "format": "int64"
           },
           "operationProcessing": {
             "default": "Execute",
@@ -5291,7 +5334,8 @@
           },
           "chainId": {
             "default": 13337,
-            "type": "number"
+            "type": "integer",
+            "format": "int64"
           },
           "operationProcessing": {
             "default": "Execute",
@@ -5318,7 +5362,8 @@
           },
           "chainId": {
             "default": 13337,
-            "type": "number"
+            "type": "integer",
+            "format": "int64"
           }
         },
         "required": [
@@ -5350,7 +5395,8 @@
             "nullable": true
           },
           "chainId": {
-            "type": "integer"
+            "type": "integer",
+            "format": "int64"
           },
           "openfortId": {
             "type": "string",
@@ -5396,7 +5442,8 @@
           },
           "chainId": {
             "default": 13337,
-            "type": "number"
+            "type": "integer",
+            "format": "int64"
           }
         },
         "required": [
@@ -5428,7 +5475,8 @@
             "nullable": true
           },
           "chainId": {
-            "type": "integer"
+            "type": "integer",
+            "format": "int64"
           },
           "openfortId": {
             "type": "string",
@@ -5527,7 +5575,8 @@
           },
           "chainId": {
             "default": 13337,
-            "type": "number"
+            "type": "integer",
+            "format": "int64"
           }
         },
         "required": [
@@ -5628,7 +5677,8 @@
           },
           "chainId": {
             "default": 13337,
-            "type": "number"
+            "type": "integer",
+            "format": "int64"
           }
         }
       },
@@ -5682,7 +5732,8 @@
           },
           "chainId": {
             "default": 13337,
-            "type": "number"
+            "type": "integer",
+            "format": "int64"
           },
           "continuation": {
             "default": null,
@@ -5810,7 +5861,8 @@
           },
           "chainId": {
             "default": 13337,
-            "type": "number"
+            "type": "integer",
+            "format": "int64"
           },
           "continuation": {
             "default": null,
@@ -5846,7 +5898,8 @@
           },
           "chainId": {
             "default": 13337,
-            "type": "number"
+            "type": "integer",
+            "format": "int64"
           },
           "continuation": {
             "default": null,

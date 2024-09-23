@@ -38,14 +38,14 @@ namespace BeamPlayerClient.Model
         /// <param name="assetId">assetId</param>
         /// <param name="price">price</param>
         /// <param name="quantity">quantity</param>
-        /// <param name="chainId">chainId (default to 13337M)</param>
+        /// <param name="chainId">chainId (default to 13337)</param>
         /// <param name="currency">currency (default to CurrencyEnum.WBEAM)</param>
         /// <param name="endTime">endTime</param>
         /// <param name="operationId">operationId</param>
         /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute)</param>
         /// <param name="startTime">startTime</param>
         [JsonConstructor]
-        public PlayerCreateAssetOfferRequestInput(string assetAddress, string assetId, string price, decimal quantity, Option<decimal?> chainId = default, Option<CurrencyEnum?> currency = default, Option<DateTime?> endTime = default, Option<string?> operationId = default, Option<OperationProcessingEnum?> operationProcessing = default, Option<DateTime?> startTime = default)
+        public PlayerCreateAssetOfferRequestInput(string assetAddress, string assetId, string price, decimal quantity, Option<long?> chainId = default, Option<CurrencyEnum?> currency = default, Option<DateTime?> endTime = default, Option<string?> operationId = default, Option<OperationProcessingEnum?> operationProcessing = default, Option<DateTime?> startTime = default)
         {
             AssetAddress = assetAddress;
             AssetId = assetId;
@@ -508,13 +508,13 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [JsonIgnore]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<decimal?> ChainIdOption { get; private set; }
+        public Option<long?> ChainIdOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [JsonPropertyName("chainId")]
-        public decimal? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
+        public long? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of EndTime
@@ -640,7 +640,7 @@ namespace BeamPlayerClient.Model
             Option<string?> assetId = default;
             Option<string?> price = default;
             Option<decimal?> quantity = default;
-            Option<decimal?> chainId = default;
+            Option<long?> chainId = default;
             Option<PlayerCreateAssetOfferRequestInput.CurrencyEnum?> currency = default;
             Option<DateTime?> endTime = default;
             Option<string?> operationId = default;
@@ -677,7 +677,7 @@ namespace BeamPlayerClient.Model
                             break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                                chainId = new Option<long?>(utf8JsonReader.GetInt64());
                             break;
                         case "currency":
                             string? currencyRawValue = utf8JsonReader.GetString();

@@ -98,7 +98,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetQuoteForInputApiResponse"/>&gt;</returns>
-        Task<IGetQuoteForInputApiResponse> GetQuoteForInputAsync(string tokenIn, string tokenOut, string amountOut, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetQuoteForInputApiResponse> GetQuoteForInputAsync(string tokenIn, string tokenOut, string amountOut, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns the maximum necessary input amount for a token trade, given a desired output amount
@@ -112,7 +112,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetQuoteForInputApiResponse"/>?&gt;</returns>
-        Task<IGetQuoteForInputApiResponse?> GetQuoteForInputOrDefaultAsync(string tokenIn, string tokenOut, string amountOut, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetQuoteForInputApiResponse?> GetQuoteForInputOrDefaultAsync(string tokenIn, string tokenOut, string amountOut, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns the minimum expected output amount for a token trade, given an input amount
@@ -127,7 +127,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetQuoteForOutputApiResponse"/>&gt;</returns>
-        Task<IGetQuoteForOutputApiResponse> GetQuoteForOutputAsync(string tokenIn, string tokenOut, string amountIn, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetQuoteForOutputApiResponse> GetQuoteForOutputAsync(string tokenIn, string tokenOut, string amountIn, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Returns the minimum expected output amount for a token trade, given an input amount
@@ -141,7 +141,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetQuoteForOutputApiResponse"/>?&gt;</returns>
-        Task<IGetQuoteForOutputApiResponse?> GetQuoteForOutputOrDefaultAsync(string tokenIn, string tokenOut, string amountIn, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetQuoteForOutputApiResponse?> GetQuoteForOutputOrDefaultAsync(string tokenIn, string tokenOut, string amountIn, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Unwrap an amount of wrapped to native token
@@ -939,7 +939,7 @@ namespace BeamPlayerClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetQuoteForInput(ref string tokenIn, ref string tokenOut, ref string amountOut, ref Option<decimal> chainId);
+        partial void FormatGetQuoteForInput(ref string tokenIn, ref string tokenOut, ref string amountOut, ref Option<long> chainId);
 
         /// <summary>
         /// Validates the request parameters
@@ -968,7 +968,7 @@ namespace BeamPlayerClient.Api
         /// <param name="tokenOut"></param>
         /// <param name="amountOut"></param>
         /// <param name="chainId"></param>
-        private void AfterGetQuoteForInputDefaultImplementation(IGetQuoteForInputApiResponse apiResponseLocalVar, string tokenIn, string tokenOut, string amountOut, Option<decimal> chainId)
+        private void AfterGetQuoteForInputDefaultImplementation(IGetQuoteForInputApiResponse apiResponseLocalVar, string tokenIn, string tokenOut, string amountOut, Option<long> chainId)
         {
             bool suppressDefaultLog = false;
             AfterGetQuoteForInput(ref suppressDefaultLog, apiResponseLocalVar, tokenIn, tokenOut, amountOut, chainId);
@@ -985,7 +985,7 @@ namespace BeamPlayerClient.Api
         /// <param name="tokenOut"></param>
         /// <param name="amountOut"></param>
         /// <param name="chainId"></param>
-        partial void AfterGetQuoteForInput(ref bool suppressDefaultLog, IGetQuoteForInputApiResponse apiResponseLocalVar, string tokenIn, string tokenOut, string amountOut, Option<decimal> chainId);
+        partial void AfterGetQuoteForInput(ref bool suppressDefaultLog, IGetQuoteForInputApiResponse apiResponseLocalVar, string tokenIn, string tokenOut, string amountOut, Option<long> chainId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -997,7 +997,7 @@ namespace BeamPlayerClient.Api
         /// <param name="tokenOut"></param>
         /// <param name="amountOut"></param>
         /// <param name="chainId"></param>
-        private void OnErrorGetQuoteForInputDefaultImplementation(Exception exception, string pathFormat, string path, string tokenIn, string tokenOut, string amountOut, Option<decimal> chainId)
+        private void OnErrorGetQuoteForInputDefaultImplementation(Exception exception, string pathFormat, string path, string tokenIn, string tokenOut, string amountOut, Option<long> chainId)
         {
             bool suppressDefaultLog = false;
             OnErrorGetQuoteForInput(ref suppressDefaultLog, exception, pathFormat, path, tokenIn, tokenOut, amountOut, chainId);
@@ -1016,7 +1016,7 @@ namespace BeamPlayerClient.Api
         /// <param name="tokenOut"></param>
         /// <param name="amountOut"></param>
         /// <param name="chainId"></param>
-        partial void OnErrorGetQuoteForInput(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string tokenIn, string tokenOut, string amountOut, Option<decimal> chainId);
+        partial void OnErrorGetQuoteForInput(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string tokenIn, string tokenOut, string amountOut, Option<long> chainId);
 
         /// <summary>
         /// Returns the maximum necessary input amount for a token trade, given a desired output amount 
@@ -1027,7 +1027,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetQuoteForInputApiResponse"/>&gt;</returns>
-        public async Task<IGetQuoteForInputApiResponse?> GetQuoteForInputOrDefaultAsync(string tokenIn, string tokenOut, string amountOut, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetQuoteForInputApiResponse?> GetQuoteForInputOrDefaultAsync(string tokenIn, string tokenOut, string amountOut, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -1049,7 +1049,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetQuoteForInputApiResponse"/>&gt;</returns>
-        public async Task<IGetQuoteForInputApiResponse> GetQuoteForInputAsync(string tokenIn, string tokenOut, string amountOut, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetQuoteForInputApiResponse> GetQuoteForInputAsync(string tokenIn, string tokenOut, string amountOut, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -1202,7 +1202,7 @@ namespace BeamPlayerClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetQuoteForOutput(ref string tokenIn, ref string tokenOut, ref string amountIn, ref Option<decimal> chainId);
+        partial void FormatGetQuoteForOutput(ref string tokenIn, ref string tokenOut, ref string amountIn, ref Option<long> chainId);
 
         /// <summary>
         /// Validates the request parameters
@@ -1231,7 +1231,7 @@ namespace BeamPlayerClient.Api
         /// <param name="tokenOut"></param>
         /// <param name="amountIn"></param>
         /// <param name="chainId"></param>
-        private void AfterGetQuoteForOutputDefaultImplementation(IGetQuoteForOutputApiResponse apiResponseLocalVar, string tokenIn, string tokenOut, string amountIn, Option<decimal> chainId)
+        private void AfterGetQuoteForOutputDefaultImplementation(IGetQuoteForOutputApiResponse apiResponseLocalVar, string tokenIn, string tokenOut, string amountIn, Option<long> chainId)
         {
             bool suppressDefaultLog = false;
             AfterGetQuoteForOutput(ref suppressDefaultLog, apiResponseLocalVar, tokenIn, tokenOut, amountIn, chainId);
@@ -1248,7 +1248,7 @@ namespace BeamPlayerClient.Api
         /// <param name="tokenOut"></param>
         /// <param name="amountIn"></param>
         /// <param name="chainId"></param>
-        partial void AfterGetQuoteForOutput(ref bool suppressDefaultLog, IGetQuoteForOutputApiResponse apiResponseLocalVar, string tokenIn, string tokenOut, string amountIn, Option<decimal> chainId);
+        partial void AfterGetQuoteForOutput(ref bool suppressDefaultLog, IGetQuoteForOutputApiResponse apiResponseLocalVar, string tokenIn, string tokenOut, string amountIn, Option<long> chainId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -1260,7 +1260,7 @@ namespace BeamPlayerClient.Api
         /// <param name="tokenOut"></param>
         /// <param name="amountIn"></param>
         /// <param name="chainId"></param>
-        private void OnErrorGetQuoteForOutputDefaultImplementation(Exception exception, string pathFormat, string path, string tokenIn, string tokenOut, string amountIn, Option<decimal> chainId)
+        private void OnErrorGetQuoteForOutputDefaultImplementation(Exception exception, string pathFormat, string path, string tokenIn, string tokenOut, string amountIn, Option<long> chainId)
         {
             bool suppressDefaultLog = false;
             OnErrorGetQuoteForOutput(ref suppressDefaultLog, exception, pathFormat, path, tokenIn, tokenOut, amountIn, chainId);
@@ -1279,7 +1279,7 @@ namespace BeamPlayerClient.Api
         /// <param name="tokenOut"></param>
         /// <param name="amountIn"></param>
         /// <param name="chainId"></param>
-        partial void OnErrorGetQuoteForOutput(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string tokenIn, string tokenOut, string amountIn, Option<decimal> chainId);
+        partial void OnErrorGetQuoteForOutput(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string tokenIn, string tokenOut, string amountIn, Option<long> chainId);
 
         /// <summary>
         /// Returns the minimum expected output amount for a token trade, given an input amount 
@@ -1290,7 +1290,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetQuoteForOutputApiResponse"/>&gt;</returns>
-        public async Task<IGetQuoteForOutputApiResponse?> GetQuoteForOutputOrDefaultAsync(string tokenIn, string tokenOut, string amountIn, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetQuoteForOutputApiResponse?> GetQuoteForOutputOrDefaultAsync(string tokenIn, string tokenOut, string amountIn, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -1312,7 +1312,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetQuoteForOutputApiResponse"/>&gt;</returns>
-        public async Task<IGetQuoteForOutputApiResponse> GetQuoteForOutputAsync(string tokenIn, string tokenOut, string amountIn, Option<decimal> chainId = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetQuoteForOutputApiResponse> GetQuoteForOutputAsync(string tokenIn, string tokenOut, string amountIn, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 

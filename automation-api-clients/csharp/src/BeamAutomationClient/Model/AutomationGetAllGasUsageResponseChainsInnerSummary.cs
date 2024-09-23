@@ -39,9 +39,9 @@ namespace BeamAutomationClient.Model
         /// <param name="totalTransactionFee">totalTransactionFee</param>
         /// <param name="totalTransactionFeeInUSD">totalTransactionFeeInUSD</param>
         /// <param name="transactionCount">transactionCount</param>
-        /// <param name="chainId">chainId (default to 13337M)</param>
+        /// <param name="chainId">chainId (default to 13337)</param>
         [JsonConstructor]
-        public AutomationGetAllGasUsageResponseChainsInnerSummary(string averageTransactionFee, decimal profilesCount, string totalTransactionFee, string totalTransactionFeeInUSD, decimal transactionCount, Option<decimal?> chainId = default)
+        public AutomationGetAllGasUsageResponseChainsInnerSummary(string averageTransactionFee, decimal profilesCount, string totalTransactionFee, string totalTransactionFeeInUSD, decimal transactionCount, Option<long?> chainId = default)
         {
             AverageTransactionFee = averageTransactionFee;
             ProfilesCount = profilesCount;
@@ -89,13 +89,13 @@ namespace BeamAutomationClient.Model
         /// </summary>
         [JsonIgnore]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<decimal?> ChainIdOption { get; private set; }
+        public Option<long?> ChainIdOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [JsonPropertyName("chainId")]
-        public decimal? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
+        public long? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -153,7 +153,7 @@ namespace BeamAutomationClient.Model
             Option<string?> totalTransactionFee = default;
             Option<string?> totalTransactionFeeInUSD = default;
             Option<decimal?> transactionCount = default;
-            Option<decimal?> chainId = default;
+            Option<long?> chainId = default;
 
             while (utf8JsonReader.Read())
             {
@@ -189,7 +189,7 @@ namespace BeamAutomationClient.Model
                             break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                                chainId = new Option<long?>(utf8JsonReader.GetInt64());
                             break;
                         default:
                             break;

@@ -24,7 +24,7 @@ export type GetAssetResponseV2 = {
     type?: string | null;
     value?: string | null;
   }> | null;
-  chainId?: number;
+  chainId: number;
 };
 
 export namespace GetAssetResponseV2 {
