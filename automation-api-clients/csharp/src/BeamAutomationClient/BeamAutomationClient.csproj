@@ -26,9 +26,9 @@
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\BeamAutomationClient.xml</DocumentationFile>
 
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/Merit-Circle/beam-api-clients.git</RepositoryUrl>
+    <RepositoryUrl>https://github.com/BuildOnBeam/beam-api-clients.git</RepositoryUrl>
 
-    <PackageProjectUrl>https://github.com/Merit-Circle/beam-api-clients.git</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/BuildOnBeam/beam-api-clients.git</PackageProjectUrl>
 
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
