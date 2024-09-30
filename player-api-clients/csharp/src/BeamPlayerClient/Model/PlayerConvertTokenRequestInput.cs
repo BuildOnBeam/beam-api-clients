@@ -44,9 +44,10 @@ namespace BeamPlayerClient.Model
         /// <param name="optimistic">optimistic (default to false)</param>
         /// <param name="policyId">policyId</param>
         /// <param name="receiverEntityId">receiverEntityId</param>
+        /// <param name="receiverWalletAddress">receiverWalletAddress</param>
         /// <param name="sponsor">sponsor (default to true)</param>
         [JsonConstructor]
-        public PlayerConvertTokenRequestInput(string amountIn, string amountOut, string tokenIn, string tokenOut, Option<long?> chainId = default, Option<string?> operationId = default, Option<OperationProcessingEnum?> operationProcessing = default, Option<bool?> optimistic = default, Option<string?> policyId = default, Option<string?> receiverEntityId = default, Option<bool?> sponsor = default)
+        public PlayerConvertTokenRequestInput(string amountIn, string amountOut, string tokenIn, string tokenOut, Option<long?> chainId = default, Option<string?> operationId = default, Option<OperationProcessingEnum?> operationProcessing = default, Option<bool?> optimistic = default, Option<string?> policyId = default, Option<string?> receiverEntityId = default, Option<string?> receiverWalletAddress = default, Option<bool?> sponsor = default)
         {
             AmountIn = amountIn;
             AmountOut = amountOut;
@@ -58,6 +59,7 @@ namespace BeamPlayerClient.Model
             OptimisticOption = optimistic;
             PolicyIdOption = policyId;
             ReceiverEntityIdOption = receiverEntityId;
+            ReceiverWalletAddressOption = receiverWalletAddress;
             SponsorOption = sponsor;
             OnCreated();
         }
@@ -328,6 +330,19 @@ namespace BeamPlayerClient.Model
         public string? ReceiverEntityId { get { return this. ReceiverEntityIdOption; } set { this.ReceiverEntityIdOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of ReceiverWalletAddress
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> ReceiverWalletAddressOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ReceiverWalletAddress
+        /// </summary>
+        [JsonPropertyName("receiverWalletAddress")]
+        public string? ReceiverWalletAddress { get { return this. ReceiverWalletAddressOption; } set { this.ReceiverWalletAddressOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of Sponsor
         /// </summary>
         [JsonIgnore]
@@ -358,6 +373,7 @@ namespace BeamPlayerClient.Model
             sb.Append("  Optimistic: ").Append(Optimistic).Append("\n");
             sb.Append("  PolicyId: ").Append(PolicyId).Append("\n");
             sb.Append("  ReceiverEntityId: ").Append(ReceiverEntityId).Append("\n");
+            sb.Append("  ReceiverWalletAddress: ").Append(ReceiverWalletAddress).Append("\n");
             sb.Append("  Sponsor: ").Append(Sponsor).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -406,6 +422,7 @@ namespace BeamPlayerClient.Model
             Option<bool?> optimistic = default;
             Option<string?> policyId = default;
             Option<string?> receiverEntityId = default;
+            Option<string?> receiverWalletAddress = default;
             Option<bool?> sponsor = default;
 
             while (utf8JsonReader.Read())
@@ -457,6 +474,9 @@ namespace BeamPlayerClient.Model
                         case "receiverEntityId":
                             receiverEntityId = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
+                        case "receiverWalletAddress":
+                            receiverWalletAddress = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
                         case "sponsor":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 sponsor = new Option<bool?>(utf8JsonReader.GetBoolean());
@@ -503,10 +523,13 @@ namespace BeamPlayerClient.Model
             if (receiverEntityId.IsSet && receiverEntityId.Value == null)
                 throw new ArgumentNullException(nameof(receiverEntityId), "Property is not nullable for class PlayerConvertTokenRequestInput.");
 
+            if (receiverWalletAddress.IsSet && receiverWalletAddress.Value == null)
+                throw new ArgumentNullException(nameof(receiverWalletAddress), "Property is not nullable for class PlayerConvertTokenRequestInput.");
+
             if (sponsor.IsSet && sponsor.Value == null)
                 throw new ArgumentNullException(nameof(sponsor), "Property is not nullable for class PlayerConvertTokenRequestInput.");
 
-            return new PlayerConvertTokenRequestInput(amountIn.Value!, amountOut.Value!, tokenIn.Value!, tokenOut.Value!, chainId, operationId, operationProcessing, optimistic, policyId, receiverEntityId, sponsor);
+            return new PlayerConvertTokenRequestInput(amountIn.Value!, amountOut.Value!, tokenIn.Value!, tokenOut.Value!, chainId, operationId, operationProcessing, optimistic, policyId, receiverEntityId, receiverWalletAddress, sponsor);
         }
 
         /// <summary>
@@ -548,6 +571,9 @@ namespace BeamPlayerClient.Model
             if (playerConvertTokenRequestInput.ReceiverEntityIdOption.IsSet && playerConvertTokenRequestInput.ReceiverEntityId == null)
                 throw new ArgumentNullException(nameof(playerConvertTokenRequestInput.ReceiverEntityId), "Property is required for class PlayerConvertTokenRequestInput.");
 
+            if (playerConvertTokenRequestInput.ReceiverWalletAddressOption.IsSet && playerConvertTokenRequestInput.ReceiverWalletAddress == null)
+                throw new ArgumentNullException(nameof(playerConvertTokenRequestInput.ReceiverWalletAddress), "Property is required for class PlayerConvertTokenRequestInput.");
+
             writer.WriteString("amountIn", playerConvertTokenRequestInput.AmountIn);
 
             writer.WriteString("amountOut", playerConvertTokenRequestInput.AmountOut);
@@ -578,6 +604,9 @@ namespace BeamPlayerClient.Model
 
             if (playerConvertTokenRequestInput.ReceiverEntityIdOption.IsSet)
                 writer.WriteString("receiverEntityId", playerConvertTokenRequestInput.ReceiverEntityId);
+
+            if (playerConvertTokenRequestInput.ReceiverWalletAddressOption.IsSet)
+                writer.WriteString("receiverWalletAddress", playerConvertTokenRequestInput.ReceiverWalletAddress);
 
             if (playerConvertTokenRequestInput.SponsorOption.IsSet)
                 writer.WriteBoolean("sponsor", playerConvertTokenRequestInput.SponsorOption.Value!.Value);

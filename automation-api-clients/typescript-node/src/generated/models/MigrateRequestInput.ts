@@ -3,8 +3,8 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type GenerateSessionUrlRequestInput = {
-  address: string;
-  suggestedExpiry?: string;
+export type MigrateRequestInput = {
+  profileEntityId: string;
+  userEntityId: string;
   chainId?: number;
 };

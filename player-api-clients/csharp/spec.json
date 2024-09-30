@@ -5231,6 +5231,9 @@
           "receiverEntityId": {
             "type": "string"
           },
+          "receiverWalletAddress": {
+            "type": "string"
+          },
           "optimistic": {
             "default": false,
             "type": "boolean"
@@ -5359,6 +5362,10 @@
         "properties": {
           "address": {
             "type": "string"
+          },
+          "suggestedExpiry": {
+            "type": "string",
+            "format": "date-time"
           },
           "chainId": {
             "default": 13337,

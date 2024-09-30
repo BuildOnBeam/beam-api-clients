@@ -36,11 +36,13 @@ namespace BeamPlayerClient.Model
         /// </summary>
         /// <param name="address">address</param>
         /// <param name="chainId">chainId (default to 13337)</param>
+        /// <param name="suggestedExpiry">suggestedExpiry</param>
         [JsonConstructor]
-        public PlayerGenerateSessionUrlRequestInput(string address, Option<long?> chainId = default)
+        public PlayerGenerateSessionUrlRequestInput(string address, Option<long?> chainId = default, Option<DateTime?> suggestedExpiry = default)
         {
             Address = address;
             ChainIdOption = chainId;
+            SuggestedExpiryOption = suggestedExpiry;
             OnCreated();
         }
 
@@ -66,6 +68,19 @@ namespace BeamPlayerClient.Model
         public long? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of SuggestedExpiry
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<DateTime?> SuggestedExpiryOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets SuggestedExpiry
+        /// </summary>
+        [JsonPropertyName("suggestedExpiry")]
+        public DateTime? SuggestedExpiry { get { return this. SuggestedExpiryOption; } set { this.SuggestedExpiryOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -75,6 +90,7 @@ namespace BeamPlayerClient.Model
             sb.Append("class PlayerGenerateSessionUrlRequestInput {\n");
             sb.Append("  Address: ").Append(Address).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
+            sb.Append("  SuggestedExpiry: ").Append(SuggestedExpiry).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -96,6 +112,11 @@ namespace BeamPlayerClient.Model
     public class PlayerGenerateSessionUrlRequestInputJsonConverter : JsonConverter<PlayerGenerateSessionUrlRequestInput>
     {
         /// <summary>
+        /// The format to use to serialize SuggestedExpiry
+        /// </summary>
+        public static string SuggestedExpiryFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
         /// Deserializes json to <see cref="PlayerGenerateSessionUrlRequestInput" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
@@ -114,6 +135,7 @@ namespace BeamPlayerClient.Model
 
             Option<string?> address = default;
             Option<long?> chainId = default;
+            Option<DateTime?> suggestedExpiry = default;
 
             while (utf8JsonReader.Read())
             {
@@ -137,6 +159,10 @@ namespace BeamPlayerClient.Model
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 chainId = new Option<long?>(utf8JsonReader.GetInt64());
                             break;
+                        case "suggestedExpiry":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                suggestedExpiry = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
                         default:
                             break;
                     }
@@ -152,7 +178,10 @@ namespace BeamPlayerClient.Model
             if (chainId.IsSet && chainId.Value == null)
                 throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class PlayerGenerateSessionUrlRequestInput.");
 
-            return new PlayerGenerateSessionUrlRequestInput(address.Value!, chainId);
+            if (suggestedExpiry.IsSet && suggestedExpiry.Value == null)
+                throw new ArgumentNullException(nameof(suggestedExpiry), "Property is not nullable for class PlayerGenerateSessionUrlRequestInput.");
+
+            return new PlayerGenerateSessionUrlRequestInput(address.Value!, chainId, suggestedExpiry);
         }
 
         /// <summary>
@@ -186,6 +215,9 @@ namespace BeamPlayerClient.Model
 
             if (playerGenerateSessionUrlRequestInput.ChainIdOption.IsSet)
                 writer.WriteNumber("chainId", playerGenerateSessionUrlRequestInput.ChainIdOption.Value!.Value);
+
+            if (playerGenerateSessionUrlRequestInput.SuggestedExpiryOption.IsSet)
+                writer.WriteString("suggestedExpiry", playerGenerateSessionUrlRequestInput.SuggestedExpiryOption.Value!.Value.ToString(SuggestedExpiryFormat));
         }
     }
 }

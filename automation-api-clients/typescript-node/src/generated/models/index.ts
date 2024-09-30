@@ -48,6 +48,8 @@ export * from './GetProfileResponse';
 export * from './GetQuoteResponse';
 export * from './GetTransactionsResponseV2';
 export * from './GetWebhooksForGameResponse';
+export * from './MigrateRequestInput';
+export * from './MigrateResponse';
 export * from './RefreshContractRequestBody';
 export * from './RefreshTokenRequestBody';
 export * from './RegenerateGameApiKeysResponse';

@@ -2688,6 +2688,43 @@
           }
         ]
       }
+    },
+    "/v1/migration/migrate": {
+      "post": {
+        "operationId": "migrateProfileAssets",
+        "summary": "Migrate all the native token, ERC20 tokens and NFTs registered for your game from an Automation API profile to a Player API user",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationMigrateRequestInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationMigrateResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Migration"
+        ],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
     }
   },
   "info": {
@@ -3758,6 +3795,9 @@
             "type": "string"
           },
           "receiverEntityId": {
+            "type": "string"
+          },
+          "receiverWalletAddress": {
             "type": "string"
           },
           "optimistic": {
@@ -6482,6 +6522,37 @@
             "nullable": true
           }
         }
+      },
+      "AutomationMigrateRequestInput": {
+        "type": "object",
+        "properties": {
+          "profileEntityId": {
+            "type": "string"
+          },
+          "userEntityId": {
+            "type": "string"
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "required": [
+          "profileEntityId",
+          "userEntityId"
+        ]
+      },
+      "AutomationMigrateResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "success"
+        ]
       }
     }
   }

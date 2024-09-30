@@ -42,9 +42,10 @@ namespace BeamAutomationClient.Model
         /// <param name="optimistic">optimistic (default to false)</param>
         /// <param name="policyId">policyId</param>
         /// <param name="receiverEntityId">receiverEntityId</param>
+        /// <param name="receiverWalletAddress">receiverWalletAddress</param>
         /// <param name="sponsor">sponsor (default to true)</param>
         [JsonConstructor]
-        public AutomationConvertTokenRequestInput(string amountIn, string amountOut, string tokenIn, string tokenOut, Option<long?> chainId = default, Option<bool?> optimistic = default, Option<string?> policyId = default, Option<string?> receiverEntityId = default, Option<bool?> sponsor = default)
+        public AutomationConvertTokenRequestInput(string amountIn, string amountOut, string tokenIn, string tokenOut, Option<long?> chainId = default, Option<bool?> optimistic = default, Option<string?> policyId = default, Option<string?> receiverEntityId = default, Option<string?> receiverWalletAddress = default, Option<bool?> sponsor = default)
         {
             AmountIn = amountIn;
             AmountOut = amountOut;
@@ -54,6 +55,7 @@ namespace BeamAutomationClient.Model
             OptimisticOption = optimistic;
             PolicyIdOption = policyId;
             ReceiverEntityIdOption = receiverEntityId;
+            ReceiverWalletAddressOption = receiverWalletAddress;
             SponsorOption = sponsor;
             OnCreated();
         }
@@ -137,6 +139,19 @@ namespace BeamAutomationClient.Model
         public string? ReceiverEntityId { get { return this. ReceiverEntityIdOption; } set { this.ReceiverEntityIdOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of ReceiverWalletAddress
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> ReceiverWalletAddressOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ReceiverWalletAddress
+        /// </summary>
+        [JsonPropertyName("receiverWalletAddress")]
+        public string? ReceiverWalletAddress { get { return this. ReceiverWalletAddressOption; } set { this.ReceiverWalletAddressOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of Sponsor
         /// </summary>
         [JsonIgnore]
@@ -165,6 +180,7 @@ namespace BeamAutomationClient.Model
             sb.Append("  Optimistic: ").Append(Optimistic).Append("\n");
             sb.Append("  PolicyId: ").Append(PolicyId).Append("\n");
             sb.Append("  ReceiverEntityId: ").Append(ReceiverEntityId).Append("\n");
+            sb.Append("  ReceiverWalletAddress: ").Append(ReceiverWalletAddress).Append("\n");
             sb.Append("  Sponsor: ").Append(Sponsor).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -211,6 +227,7 @@ namespace BeamAutomationClient.Model
             Option<bool?> optimistic = default;
             Option<string?> policyId = default;
             Option<string?> receiverEntityId = default;
+            Option<string?> receiverWalletAddress = default;
             Option<bool?> sponsor = default;
 
             while (utf8JsonReader.Read())
@@ -253,6 +270,9 @@ namespace BeamAutomationClient.Model
                             break;
                         case "receiverEntityId":
                             receiverEntityId = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
+                        case "receiverWalletAddress":
+                            receiverWalletAddress = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "sponsor":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
@@ -297,10 +317,13 @@ namespace BeamAutomationClient.Model
             if (receiverEntityId.IsSet && receiverEntityId.Value == null)
                 throw new ArgumentNullException(nameof(receiverEntityId), "Property is not nullable for class AutomationConvertTokenRequestInput.");
 
+            if (receiverWalletAddress.IsSet && receiverWalletAddress.Value == null)
+                throw new ArgumentNullException(nameof(receiverWalletAddress), "Property is not nullable for class AutomationConvertTokenRequestInput.");
+
             if (sponsor.IsSet && sponsor.Value == null)
                 throw new ArgumentNullException(nameof(sponsor), "Property is not nullable for class AutomationConvertTokenRequestInput.");
 
-            return new AutomationConvertTokenRequestInput(amountIn.Value!, amountOut.Value!, tokenIn.Value!, tokenOut.Value!, chainId, optimistic, policyId, receiverEntityId, sponsor);
+            return new AutomationConvertTokenRequestInput(amountIn.Value!, amountOut.Value!, tokenIn.Value!, tokenOut.Value!, chainId, optimistic, policyId, receiverEntityId, receiverWalletAddress, sponsor);
         }
 
         /// <summary>
@@ -342,6 +365,9 @@ namespace BeamAutomationClient.Model
             if (automationConvertTokenRequestInput.ReceiverEntityIdOption.IsSet && automationConvertTokenRequestInput.ReceiverEntityId == null)
                 throw new ArgumentNullException(nameof(automationConvertTokenRequestInput.ReceiverEntityId), "Property is required for class AutomationConvertTokenRequestInput.");
 
+            if (automationConvertTokenRequestInput.ReceiverWalletAddressOption.IsSet && automationConvertTokenRequestInput.ReceiverWalletAddress == null)
+                throw new ArgumentNullException(nameof(automationConvertTokenRequestInput.ReceiverWalletAddress), "Property is required for class AutomationConvertTokenRequestInput.");
+
             writer.WriteString("amountIn", automationConvertTokenRequestInput.AmountIn);
 
             writer.WriteString("amountOut", automationConvertTokenRequestInput.AmountOut);
@@ -364,6 +390,9 @@ namespace BeamAutomationClient.Model
 
             if (automationConvertTokenRequestInput.ReceiverEntityIdOption.IsSet)
                 writer.WriteString("receiverEntityId", automationConvertTokenRequestInput.ReceiverEntityId);
+
+            if (automationConvertTokenRequestInput.ReceiverWalletAddressOption.IsSet)
+                writer.WriteString("receiverWalletAddress", automationConvertTokenRequestInput.ReceiverWalletAddress);
 
             if (automationConvertTokenRequestInput.SponsorOption.IsSet)
                 writer.WriteBoolean("sponsor", automationConvertTokenRequestInput.SponsorOption.Value!.Value);

@@ -122,6 +122,8 @@ namespace BeamAutomationClient.Client
             _jsonOptions.Converters.Add(new AutomationGetTransactionsResponseV2DataInnerJsonConverter());
             _jsonOptions.Converters.Add(new AutomationGetWebhooksForGameResponseJsonConverter());
             _jsonOptions.Converters.Add(new AutomationGetWebhooksForGameResponseWebhooksInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationMigrateRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationMigrateResponseJsonConverter());
             _jsonOptions.Converters.Add(new AutomationRefreshContractRequestBodyJsonConverter());
             _jsonOptions.Converters.Add(new AutomationRefreshTokenRequestBodyJsonConverter());
             _jsonOptions.Converters.Add(new AutomationRegenerateGameApiKeysResponseJsonConverter());
@@ -168,6 +170,8 @@ namespace BeamAutomationClient.Client
             _services.AddTransient<IAutomationHealthApi, AutomationHealthApi>();
             _services.AddSingleton<AutomationMarketplaceV2ApiEvents>();
             _services.AddTransient<IAutomationMarketplaceV2Api, AutomationMarketplaceV2Api>();
+            _services.AddSingleton<AutomationMigrationApiEvents>();
+            _services.AddTransient<IAutomationMigrationApi, AutomationMigrationApi>();
             _services.AddSingleton<AutomationPolicyApiEvents>();
             _services.AddTransient<IAutomationPolicyApi, AutomationPolicyApi>();
             _services.AddSingleton<AutomationProfilesApiEvents>();
@@ -206,6 +210,7 @@ namespace BeamAutomationClient.Client
             builders.Add(_services.AddHttpClient<IAutomationGameApi, AutomationGameApi>(client));
             builders.Add(_services.AddHttpClient<IAutomationHealthApi, AutomationHealthApi>(client));
             builders.Add(_services.AddHttpClient<IAutomationMarketplaceV2Api, AutomationMarketplaceV2Api>(client));
+            builders.Add(_services.AddHttpClient<IAutomationMigrationApi, AutomationMigrationApi>(client));
             builders.Add(_services.AddHttpClient<IAutomationPolicyApi, AutomationPolicyApi>(client));
             builders.Add(_services.AddHttpClient<IAutomationProfilesApi, AutomationProfilesApi>(client));
             builders.Add(_services.AddHttpClient<IAutomationReportingApi, AutomationReportingApi>(client));

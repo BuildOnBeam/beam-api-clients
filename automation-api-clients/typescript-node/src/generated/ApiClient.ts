@@ -13,6 +13,7 @@ import { ExchangeService } from './services/ExchangeService';
 import { GameService } from './services/GameService';
 import { HealthService } from './services/HealthService';
 import { MarketplaceV2Service } from './services/MarketplaceV2Service';
+import { MigrationService } from './services/MigrationService';
 import { PolicyService } from './services/PolicyService';
 import { ProfilesService } from './services/ProfilesService';
 import { ReportingService } from './services/ReportingService';
@@ -31,6 +32,7 @@ export class ApiClient {
   public readonly game: GameService;
   public readonly health: HealthService;
   public readonly marketplaceV2: MarketplaceV2Service;
+  public readonly migration: MigrationService;
   public readonly policy: PolicyService;
   public readonly profiles: ProfilesService;
   public readonly reporting: ReportingService;
@@ -64,6 +66,7 @@ export class ApiClient {
     this.game = new GameService(this.request);
     this.health = new HealthService(this.request);
     this.marketplaceV2 = new MarketplaceV2Service(this.request);
+    this.migration = new MigrationService(this.request);
     this.policy = new PolicyService(this.request);
     this.profiles = new ProfilesService(this.request);
     this.reporting = new ReportingService(this.request);

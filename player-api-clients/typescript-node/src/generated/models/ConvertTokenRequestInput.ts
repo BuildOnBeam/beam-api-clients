@@ -9,6 +9,7 @@ export type ConvertTokenRequestInput = {
   amountIn: string;
   amountOut: string;
   receiverEntityId?: string;
+  receiverWalletAddress?: string;
   optimistic?: boolean;
   sponsor?: boolean;
   policyId?: string | null;
