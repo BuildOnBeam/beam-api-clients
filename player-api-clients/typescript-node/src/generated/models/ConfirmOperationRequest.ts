@@ -9,12 +9,16 @@ export type ConfirmOperationRequest = {
     id: string;
     signature: string;
   }> | null;
+  actions?: Array<{
+    id: string;
+    signature: string;
+  }> | null;
 };
 
 export namespace ConfirmOperationRequest {
   export enum status {
-    SIGNED = 'Signed',
     PENDING = 'Pending',
+    SIGNED = 'Signed',
     REJECTED = 'Rejected',
     EXECUTED = 'Executed',
     ERROR = 'Error',

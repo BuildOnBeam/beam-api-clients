@@ -13,6 +13,7 @@ import { ExchangeService } from './services/ExchangeService';
 import { HealthService } from './services/HealthService';
 import { MarketplaceService } from './services/MarketplaceService';
 import { OperationService } from './services/OperationService';
+import { RampService } from './services/RampService';
 import { SessionsService } from './services/SessionsService';
 import { StatsService } from './services/StatsService';
 import { TransactionsService } from './services/TransactionsService';
@@ -28,6 +29,7 @@ export class ApiClient {
   public readonly health: HealthService;
   public readonly marketplace: MarketplaceService;
   public readonly operation: OperationService;
+  public readonly ramp: RampService;
   public readonly sessions: SessionsService;
   public readonly stats: StatsService;
   public readonly transactions: TransactionsService;
@@ -58,6 +60,7 @@ export class ApiClient {
     this.health = new HealthService(this.request);
     this.marketplace = new MarketplaceService(this.request);
     this.operation = new OperationService(this.request);
+    this.ramp = new RampService(this.request);
     this.sessions = new SessionsService(this.request);
     this.stats = new StatsService(this.request);
     this.transactions = new TransactionsService(this.request);

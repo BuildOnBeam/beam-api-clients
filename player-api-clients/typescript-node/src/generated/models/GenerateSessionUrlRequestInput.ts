@@ -5,6 +5,6 @@
 
 export type GenerateSessionUrlRequestInput = {
   address: string;
-  suggestedExpiry?: string;
+  suggestedExpiry?: string | null;
   chainId?: number;
 };

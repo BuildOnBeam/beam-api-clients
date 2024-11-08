@@ -12,27 +12,365 @@ export type CommonOperationResponse = {
   gameId: string;
   userId: string;
   chainId: number;
-  url: string;
+  actions: ({
+    type:
+      | 'Sign'
+      | 'SessionRevoke'
+      | 'MarketplaceCreateOffer'
+      | 'MarketplaceCancelOffer'
+      | 'MarketplaceAcceptOffer'
+      | 'MarketplaceBuyAsset'
+      | 'MarketplaceListAsset'
+      | 'MarketplaceCancelListing'
+      | 'ExchangeConvert'
+      | 'ExchangeWrap'
+      | 'ExchangeUnwrap'
+      | 'TransferNFTs'
+      | 'TransferToken'
+      | 'CustomTransaction';
+    id: string;
+    index: number;
+    operationId: string | null;
+  } & (
+    | {
+        type: 'TransferNFTs';
+        context: {
+          assets: Array<{
+            receiverAddress: string;
+            contractAddress: string;
+            assetId: string;
+            amount: number;
+          }>;
+        };
+        signature: {
+          type: 'Message';
+          id: string;
+          data: string;
+          signature: string | null;
+          actionId: string | null;
+        } & {
+          hash: string;
+        };
+        transaction: {
+          status: 'Pending' | 'Signed' | 'Rejected' | 'Executed' | 'Error';
+          id: string;
+          openfortId: string | null;
+          sponsored: boolean;
+          actionId: string | null;
+          hash: string | null;
+        };
+      }
+    | {
+        type: 'TransferToken';
+        context: {
+          amount: string;
+          contractAddress: string;
+          receiverAddress: string;
+        };
+        signature: {
+          type: 'Message';
+          id: string;
+          data: string;
+          signature: string | null;
+          actionId: string | null;
+        } & {
+          hash: string;
+        };
+        transaction: {
+          status: 'Pending' | 'Signed' | 'Rejected' | 'Executed' | 'Error';
+          id: string;
+          openfortId: string | null;
+          sponsored: boolean;
+          actionId: string | null;
+          hash: string | null;
+        };
+      }
+    | {
+        type: 'MarketplaceCreateOffer';
+        signature: {
+          type: 'TypedData';
+          id: string;
+          data?: any;
+          signature: string | null;
+          actionId: string | null;
+        } & {
+          hash: string;
+        };
+        transaction: {
+          status: 'Pending' | 'Signed' | 'Rejected' | 'Executed' | 'Error';
+          id: string;
+          openfortId: string | null;
+          sponsored: boolean;
+          actionId: string | null;
+          hash: string | null;
+        };
+      }
+    | {
+        type: 'MarketplaceCancelOffer';
+        signature: {
+          type: 'Message';
+          id: string;
+          data: string;
+          signature: string | null;
+          actionId: string | null;
+        } & {
+          hash: string;
+        };
+        transaction: {
+          status: 'Pending' | 'Signed' | 'Rejected' | 'Executed' | 'Error';
+          id: string;
+          openfortId: string | null;
+          sponsored: boolean;
+          actionId: string | null;
+          hash: string | null;
+        };
+      }
+    | {
+        type: 'MarketplaceAcceptOffer';
+        signature: {
+          type: 'Message';
+          id: string;
+          data: string;
+          signature: string | null;
+          actionId: string | null;
+        } & {
+          hash: string;
+        };
+        transaction: {
+          status: 'Pending' | 'Signed' | 'Rejected' | 'Executed' | 'Error';
+          id: string;
+          openfortId: string | null;
+          sponsored: boolean;
+          actionId: string | null;
+          hash: string | null;
+        };
+      }
+    | {
+        type: 'MarketplaceListAsset';
+        signature: {
+          type: 'TypedData';
+          id: string;
+          data?: any;
+          signature: string | null;
+          actionId: string | null;
+        } & {
+          hash: string;
+        };
+      }
+    | {
+        type: 'MarketplaceBuyAsset';
+        signature: {
+          type: 'Message';
+          id: string;
+          data: string;
+          signature: string | null;
+          actionId: string | null;
+        } & {
+          hash: string;
+        };
+        transaction: {
+          status: 'Pending' | 'Signed' | 'Rejected' | 'Executed' | 'Error';
+          id: string;
+          openfortId: string | null;
+          sponsored: boolean;
+          actionId: string | null;
+          hash: string | null;
+        };
+      }
+    | {
+        type: 'MarketplaceCancelListing';
+        signature: {
+          type: 'Message';
+          id: string;
+          data: string;
+          signature: string | null;
+          actionId: string | null;
+        } & {
+          hash: string;
+        };
+        transaction: {
+          status: 'Pending' | 'Signed' | 'Rejected' | 'Executed' | 'Error';
+          id: string;
+          openfortId: string | null;
+          sponsored: boolean;
+          actionId: string | null;
+          hash: string | null;
+        };
+      }
+    | {
+        type: 'SessionRevoke';
+        signature: {
+          type: 'Message';
+          id: string;
+          data: string;
+          signature: string | null;
+          actionId: string | null;
+        } & {
+          hash: string;
+        };
+        transaction: {
+          status: 'Pending' | 'Signed' | 'Rejected' | 'Executed' | 'Error';
+          id: string;
+          openfortId: string | null;
+          sponsored: boolean;
+          actionId: string | null;
+          hash: string | null;
+        };
+      }
+    | {
+        type: 'ExchangeConvert';
+        context: {
+          input: {
+            address: string;
+            amount: string;
+          };
+          output: {
+            address: string;
+            amount: string;
+          };
+        };
+        signature: {
+          type: 'Message';
+          id: string;
+          data: string;
+          signature: string | null;
+          actionId: string | null;
+        } & {
+          hash: string;
+        };
+        transaction: {
+          status: 'Pending' | 'Signed' | 'Rejected' | 'Executed' | 'Error';
+          id: string;
+          openfortId: string | null;
+          sponsored: boolean;
+          actionId: string | null;
+          hash: string | null;
+        };
+      }
+    | {
+        type: 'ExchangeWrap';
+        context: {
+          amount: string;
+        };
+        signature: {
+          type: 'Message';
+          id: string;
+          data: string;
+          signature: string | null;
+          actionId: string | null;
+        } & {
+          hash: string;
+        };
+        transaction: {
+          status: 'Pending' | 'Signed' | 'Rejected' | 'Executed' | 'Error';
+          id: string;
+          openfortId: string | null;
+          sponsored: boolean;
+          actionId: string | null;
+          hash: string | null;
+        };
+      }
+    | {
+        type: 'ExchangeUnwrap';
+        context: {
+          amount: string;
+        };
+        signature: {
+          type: 'Message';
+          id: string;
+          data: string;
+          signature: string | null;
+          actionId: string | null;
+        } & {
+          hash: string;
+        };
+        transaction: {
+          status: 'Pending' | 'Signed' | 'Rejected' | 'Executed' | 'Error';
+          id: string;
+          openfortId: string | null;
+          sponsored: boolean;
+          actionId: string | null;
+          hash: string | null;
+        };
+      }
+    | {
+        type: 'CustomTransaction';
+        signature:
+          | ({
+              type: 'Message';
+              id: string;
+              data: string;
+              signature: string | null;
+              actionId: string | null;
+            } & {
+              hash: string;
+            })
+          | ({
+              type: 'TypedData';
+              id: string;
+              data?: any;
+              signature: string | null;
+              actionId: string | null;
+            } & {
+              hash: string;
+            });
+        transaction: {
+          status: 'Pending' | 'Signed' | 'Rejected' | 'Executed' | 'Error';
+          id: string;
+          openfortId: string | null;
+          sponsored: boolean;
+          actionId: string | null;
+          hash: string | null;
+        };
+      }
+    | {
+        type: 'Sign';
+        signature:
+          | ({
+              type: 'Message';
+              id: string;
+              data: string;
+              signature: string | null;
+              actionId: string | null;
+            } & {
+              hash: string;
+            })
+          | ({
+              type: 'TypedData';
+              id: string;
+              data?: any;
+              signature: string | null;
+              actionId: string | null;
+            } & {
+              hash: string;
+            });
+      }
+  ))[];
   transactions: Array<{
+    status: 'Pending' | 'Signed' | 'Rejected' | 'Executed' | 'Error';
+    id: string;
+    openfortId: string | null;
+    sponsored: boolean;
+    actionId: string | null;
+    hash: string;
     type:
       | 'OpenfortTransaction'
       | 'OpenfortReservoirOrder'
-      | 'OpenfortRevokeSession';
-    status: 'Pending' | 'Signed' | 'Rejected' | 'Executed' | 'Error';
-    id: string;
+      | 'OpenfortRevokeSession'
+      | null;
     externalId: string | null;
     signature: string | null;
     transactionHash: string | null;
     operationId: string | null;
     data?: any;
-    hash: string;
   }>;
+  url: string;
 };
 
 export namespace CommonOperationResponse {
   export enum status {
-    SIGNED = 'Signed',
     PENDING = 'Pending',
+    SIGNED = 'Signed',
     REJECTED = 'Rejected',
     EXECUTED = 'Executed',
     ERROR = 'Error',

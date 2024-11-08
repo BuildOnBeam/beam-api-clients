@@ -162,7 +162,7 @@ export class MarketplaceV2Service {
   }
 
   /**
-   * Get all offers that player created
+   * Get all offers that a profile created
    * @param entityId
    * @param chainId
    * @param continuation

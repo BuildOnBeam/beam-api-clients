@@ -34,6 +34,7 @@ namespace BeamPlayerClient.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="PlayerCommonOperationResponse" /> class.
         /// </summary>
+        /// <param name="actions">actions</param>
         /// <param name="chainId">chainId</param>
         /// <param name="createdAt">createdAt</param>
         /// <param name="gameId">gameId</param>
@@ -45,8 +46,9 @@ namespace BeamPlayerClient.Model
         /// <param name="userId">userId</param>
         /// <param name="updatedAt">updatedAt</param>
         [JsonConstructor]
-        public PlayerCommonOperationResponse(long chainId, DateTime createdAt, string gameId, string id, ProcessingEnum processing, StatusEnum status, List<PlayerCommonOperationResponseTransactionsInner> transactions, string url, string userId, DateTime? updatedAt = default)
+        public PlayerCommonOperationResponse(List<PlayerCommonOperationResponseActionsInner> actions, long chainId, DateTime createdAt, string gameId, string id, ProcessingEnum processing, StatusEnum status, List<PlayerCommonOperationResponseTransactionsInner> transactions, string url, string userId, DateTime? updatedAt = default)
         {
+            Actions = actions;
             ChainId = chainId;
             CreatedAt = createdAt;
             GameId = gameId;
@@ -236,14 +238,14 @@ namespace BeamPlayerClient.Model
         public enum StatusEnum
         {
             /// <summary>
-            /// Enum Signed for value: Signed
-            /// </summary>
-            Signed = 1,
-
-            /// <summary>
             /// Enum Pending for value: Pending
             /// </summary>
-            Pending = 2,
+            Pending = 1,
+
+            /// <summary>
+            /// Enum Signed for value: Signed
+            /// </summary>
+            Signed = 2,
 
             /// <summary>
             /// Enum Rejected for value: Rejected
@@ -269,11 +271,11 @@ namespace BeamPlayerClient.Model
         /// <exception cref="NotImplementedException"></exception>
         public static StatusEnum StatusEnumFromString(string value)
         {
-            if (value.Equals("Signed"))
-                return StatusEnum.Signed;
-
             if (value.Equals("Pending"))
                 return StatusEnum.Pending;
+
+            if (value.Equals("Signed"))
+                return StatusEnum.Signed;
 
             if (value.Equals("Rejected"))
                 return StatusEnum.Rejected;
@@ -294,11 +296,11 @@ namespace BeamPlayerClient.Model
         /// <returns></returns>
         public static StatusEnum? StatusEnumFromStringOrDefault(string value)
         {
-            if (value.Equals("Signed"))
-                return StatusEnum.Signed;
-
             if (value.Equals("Pending"))
                 return StatusEnum.Pending;
+
+            if (value.Equals("Signed"))
+                return StatusEnum.Signed;
 
             if (value.Equals("Rejected"))
                 return StatusEnum.Rejected;
@@ -320,11 +322,11 @@ namespace BeamPlayerClient.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string StatusEnumToJsonValue(StatusEnum value)
         {
-            if (value == StatusEnum.Signed)
-                return "Signed";
-
             if (value == StatusEnum.Pending)
                 return "Pending";
+
+            if (value == StatusEnum.Signed)
+                return "Signed";
 
             if (value == StatusEnum.Rejected)
                 return "Rejected";
@@ -350,11 +352,11 @@ namespace BeamPlayerClient.Model
             /// <returns></returns>
             public static StatusEnum FromString(string value)
             {
-                    if (value.Equals("Signed"))
-                        return StatusEnum.Signed;
-
                     if (value.Equals("Pending"))
                         return StatusEnum.Pending;
+
+                    if (value.Equals("Signed"))
+                        return StatusEnum.Signed;
 
                     if (value.Equals("Rejected"))
                         return StatusEnum.Rejected;
@@ -375,11 +377,11 @@ namespace BeamPlayerClient.Model
             /// <returns></returns>
             public static StatusEnum? FromStringOrDefault(string value)
             {
-                    if (value.Equals("Signed"))
-                        return StatusEnum.Signed;
-
                     if (value.Equals("Pending"))
                         return StatusEnum.Pending;
+
+                    if (value.Equals("Signed"))
+                        return StatusEnum.Signed;
 
                     if (value.Equals("Rejected"))
                         return StatusEnum.Rejected;
@@ -401,11 +403,11 @@ namespace BeamPlayerClient.Model
             /// <exception cref="NotImplementedException"></exception>
             public static string ToJsonValue(StatusEnum value)
             {
-                        if (value == StatusEnum.Signed)
-                            return "Signed";
-
                         if (value == StatusEnum.Pending)
                             return "Pending";
+
+                        if (value == StatusEnum.Signed)
+                            return "Signed";
 
                         if (value == StatusEnum.Rejected)
                             return "Rejected";
@@ -466,6 +468,12 @@ namespace BeamPlayerClient.Model
         public StatusEnum Status { get; set; }
 
         /// <summary>
+        /// Gets or Sets Actions
+        /// </summary>
+        [JsonPropertyName("actions")]
+        public List<PlayerCommonOperationResponseActionsInner> Actions { get; set; }
+
+        /// <summary>
         /// Gets or Sets ChainId
         /// </summary>
         [JsonPropertyName("chainId")]
@@ -521,6 +529,7 @@ namespace BeamPlayerClient.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class PlayerCommonOperationResponse {\n");
+            sb.Append("  Actions: ").Append(Actions).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  GameId: ").Append(GameId).Append("\n");
@@ -578,6 +587,7 @@ namespace BeamPlayerClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
+            Option<List<PlayerCommonOperationResponseActionsInner>?> actions = default;
             Option<long?> chainId = default;
             Option<DateTime?> createdAt = default;
             Option<string?> gameId = default;
@@ -604,6 +614,10 @@ namespace BeamPlayerClient.Model
 
                     switch (localVarJsonPropertyName)
                     {
+                        case "actions":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                actions = new Option<List<PlayerCommonOperationResponseActionsInner>?>(JsonSerializer.Deserialize<List<PlayerCommonOperationResponseActionsInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 chainId = new Option<long?>(utf8JsonReader.GetInt64());
@@ -648,6 +662,9 @@ namespace BeamPlayerClient.Model
                 }
             }
 
+            if (!actions.IsSet)
+                throw new ArgumentException("Property is required for class PlayerCommonOperationResponse.", nameof(actions));
+
             if (!chainId.IsSet)
                 throw new ArgumentException("Property is required for class PlayerCommonOperationResponse.", nameof(chainId));
 
@@ -678,6 +695,9 @@ namespace BeamPlayerClient.Model
             if (!updatedAt.IsSet)
                 throw new ArgumentException("Property is required for class PlayerCommonOperationResponse.", nameof(updatedAt));
 
+            if (actions.IsSet && actions.Value == null)
+                throw new ArgumentNullException(nameof(actions), "Property is not nullable for class PlayerCommonOperationResponse.");
+
             if (chainId.IsSet && chainId.Value == null)
                 throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class PlayerCommonOperationResponse.");
 
@@ -705,7 +725,7 @@ namespace BeamPlayerClient.Model
             if (userId.IsSet && userId.Value == null)
                 throw new ArgumentNullException(nameof(userId), "Property is not nullable for class PlayerCommonOperationResponse.");
 
-            return new PlayerCommonOperationResponse(chainId.Value!.Value!, createdAt.Value!.Value!, gameId.Value!, id.Value!, processing.Value!.Value!, status.Value!.Value!, transactions.Value!, url.Value!, userId.Value!, updatedAt.Value!);
+            return new PlayerCommonOperationResponse(actions.Value!, chainId.Value!.Value!, createdAt.Value!.Value!, gameId.Value!, id.Value!, processing.Value!.Value!, status.Value!.Value!, transactions.Value!, url.Value!, userId.Value!, updatedAt.Value!);
         }
 
         /// <summary>
@@ -732,6 +752,9 @@ namespace BeamPlayerClient.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, PlayerCommonOperationResponse playerCommonOperationResponse, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (playerCommonOperationResponse.Actions == null)
+                throw new ArgumentNullException(nameof(playerCommonOperationResponse.Actions), "Property is required for class PlayerCommonOperationResponse.");
+
             if (playerCommonOperationResponse.GameId == null)
                 throw new ArgumentNullException(nameof(playerCommonOperationResponse.GameId), "Property is required for class PlayerCommonOperationResponse.");
 
@@ -747,6 +770,8 @@ namespace BeamPlayerClient.Model
             if (playerCommonOperationResponse.UserId == null)
                 throw new ArgumentNullException(nameof(playerCommonOperationResponse.UserId), "Property is required for class PlayerCommonOperationResponse.");
 
+            writer.WritePropertyName("actions");
+            JsonSerializer.Serialize(writer, playerCommonOperationResponse.Actions, jsonSerializerOptions);
             writer.WriteNumber("chainId", playerCommonOperationResponse.ChainId);
 
             writer.WriteString("createdAt", playerCommonOperationResponse.CreatedAt.ToString(CreatedAtFormat));

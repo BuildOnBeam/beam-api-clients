@@ -45,10 +45,11 @@ namespace BeamAutomationClient.Model
         /// <param name="updatedAt">updatedAt</param>
         /// <param name="amount">amount</param>
         /// <param name="depositorId">depositorId</param>
+        /// <param name="paymasterId">paymasterId</param>
         /// <param name="rateType">rateType</param>
         /// <param name="token">token</param>
         [JsonConstructor]
-        public AutomationGetGameResponsePoliciesInner(int chainId, DateTime createdAt, string externalId, string gameId, string id, ModelEnum model, string name, TypeEnum type, DateTime updatedAt, string? amount = default, string? depositorId = default, Option<RateTypeEnum?> rateType = default, string? token = default)
+        public AutomationGetGameResponsePoliciesInner(int chainId, DateTime createdAt, string externalId, string gameId, string id, ModelEnum model, string name, TypeEnum type, DateTime updatedAt, string? amount = default, string? depositorId = default, string? paymasterId = default, Option<RateTypeEnum?> rateType = default, string? token = default)
         {
             ChainId = chainId;
             CreatedAt = createdAt;
@@ -61,6 +62,7 @@ namespace BeamAutomationClient.Model
             UpdatedAt = updatedAt;
             Amount = amount;
             DepositorId = depositorId;
+            PaymasterId = paymasterId;
             RateTypeOption = rateType;
             Token = token;
             OnCreated();
@@ -634,6 +636,12 @@ namespace BeamAutomationClient.Model
         public string? DepositorId { get; set; }
 
         /// <summary>
+        /// Gets or Sets PaymasterId
+        /// </summary>
+        [JsonPropertyName("paymasterId")]
+        public string? PaymasterId { get; set; }
+
+        /// <summary>
         /// Gets or Sets Token
         /// </summary>
         [JsonPropertyName("token")]
@@ -658,6 +666,7 @@ namespace BeamAutomationClient.Model
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
             sb.Append("  Amount: ").Append(Amount).Append("\n");
             sb.Append("  DepositorId: ").Append(DepositorId).Append("\n");
+            sb.Append("  PaymasterId: ").Append(PaymasterId).Append("\n");
             sb.Append("  RateType: ").Append(RateType).Append("\n");
             sb.Append("  Token: ").Append(Token).Append("\n");
             sb.Append("}\n");
@@ -718,6 +727,7 @@ namespace BeamAutomationClient.Model
             Option<DateTime?> updatedAt = default;
             Option<string?> amount = default;
             Option<string?> depositorId = default;
+            Option<string?> paymasterId = default;
             Option<AutomationGetGameResponsePoliciesInner.RateTypeEnum?> rateType = default;
             Option<string?> token = default;
 
@@ -776,6 +786,9 @@ namespace BeamAutomationClient.Model
                         case "depositorId":
                             depositorId = new Option<string?>(utf8JsonReader.GetString());
                             break;
+                        case "paymasterId":
+                            paymasterId = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         case "rateType":
                             string? rateTypeRawValue = utf8JsonReader.GetString();
                             if (rateTypeRawValue != null)
@@ -823,6 +836,9 @@ namespace BeamAutomationClient.Model
             if (!depositorId.IsSet)
                 throw new ArgumentException("Property is required for class AutomationGetGameResponsePoliciesInner.", nameof(depositorId));
 
+            if (!paymasterId.IsSet)
+                throw new ArgumentException("Property is required for class AutomationGetGameResponsePoliciesInner.", nameof(paymasterId));
+
             if (!token.IsSet)
                 throw new ArgumentException("Property is required for class AutomationGetGameResponsePoliciesInner.", nameof(token));
 
@@ -853,7 +869,7 @@ namespace BeamAutomationClient.Model
             if (updatedAt.IsSet && updatedAt.Value == null)
                 throw new ArgumentNullException(nameof(updatedAt), "Property is not nullable for class AutomationGetGameResponsePoliciesInner.");
 
-            return new AutomationGetGameResponsePoliciesInner(chainId.Value!.Value!, createdAt.Value!.Value!, externalId.Value!, gameId.Value!, id.Value!, model.Value!.Value!, name.Value!, type.Value!.Value!, updatedAt.Value!.Value!, amount.Value!, depositorId.Value!, rateType, token.Value!);
+            return new AutomationGetGameResponsePoliciesInner(chainId.Value!.Value!, createdAt.Value!.Value!, externalId.Value!, gameId.Value!, id.Value!, model.Value!.Value!, name.Value!, type.Value!.Value!, updatedAt.Value!.Value!, amount.Value!, depositorId.Value!, paymasterId.Value!, rateType, token.Value!);
         }
 
         /// <summary>
@@ -919,6 +935,11 @@ namespace BeamAutomationClient.Model
                 writer.WriteString("depositorId", automationGetGameResponsePoliciesInner.DepositorId);
             else
                 writer.WriteNull("depositorId");
+
+            if (automationGetGameResponsePoliciesInner.PaymasterId != null)
+                writer.WriteString("paymasterId", automationGetGameResponsePoliciesInner.PaymasterId);
+            else
+                writer.WriteNull("paymasterId");
 
             var rateTypeRawValue = AutomationGetGameResponsePoliciesInner.RateTypeEnumToJsonValue(automationGetGameResponsePoliciesInner.RateTypeOption.Value!.Value);
             if (rateTypeRawValue != null)

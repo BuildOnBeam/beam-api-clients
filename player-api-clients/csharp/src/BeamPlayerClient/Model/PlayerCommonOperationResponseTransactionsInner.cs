@@ -36,25 +36,31 @@ namespace BeamPlayerClient.Model
         /// </summary>
         /// <param name="hash">hash</param>
         /// <param name="id">id</param>
+        /// <param name="sponsored">sponsored</param>
         /// <param name="status">status</param>
-        /// <param name="type">type</param>
+        /// <param name="actionId">actionId</param>
         /// <param name="data">data</param>
         /// <param name="externalId">externalId</param>
+        /// <param name="openfortId">openfortId</param>
         /// <param name="operationId">operationId</param>
         /// <param name="signature">signature</param>
         /// <param name="transactionHash">transactionHash</param>
+        /// <param name="type">type</param>
         [JsonConstructor]
-        public PlayerCommonOperationResponseTransactionsInner(string hash, string id, StatusEnum status, TypeEnum type, Option<Object?> data = default, string? externalId = default, string? operationId = default, string? signature = default, string? transactionHash = default)
+        public PlayerCommonOperationResponseTransactionsInner(string hash, string id, bool sponsored, StatusEnum status, string? actionId = default, Option<Object?> data = default, string? externalId = default, string? openfortId = default, string? operationId = default, string? signature = default, string? transactionHash = default, TypeEnum? type = default)
         {
             Hash = hash;
             Id = id;
+            Sponsored = sponsored;
             Status = status;
-            Type = type;
+            ActionId = actionId;
             DataOption = data;
             ExternalId = externalId;
+            OpenfortId = openfortId;
             OperationId = operationId;
             Signature = signature;
             TransactionHash = transactionHash;
+            Type = type;
             OnCreated();
         }
 
@@ -363,8 +369,11 @@ namespace BeamPlayerClient.Model
         /// <param name="value"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public static string TypeEnumToJsonValue(TypeEnum value)
+        public static string? TypeEnumToJsonValue(TypeEnum? value)
         {
+            if (value == null)
+                return null;
+
             if (value == TypeEnum.OpenfortTransaction)
                 return "OpenfortTransaction";
 
@@ -484,7 +493,7 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Type
         /// </summary>
         [JsonPropertyName("type")]
-        public TypeEnum Type { get; set; }
+        public TypeEnum? Type { get; set; }
 
         /// <summary>
         /// Gets or Sets Hash
@@ -497,6 +506,18 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [JsonPropertyName("id")]
         public string Id { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Sponsored
+        /// </summary>
+        [JsonPropertyName("sponsored")]
+        public bool Sponsored { get; set; }
+
+        /// <summary>
+        /// Gets or Sets ActionId
+        /// </summary>
+        [JsonPropertyName("actionId")]
+        public string? ActionId { get; set; }
 
         /// <summary>
         /// Used to track the state of Data
@@ -516,6 +537,12 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [JsonPropertyName("externalId")]
         public string? ExternalId { get; set; }
+
+        /// <summary>
+        /// Gets or Sets OpenfortId
+        /// </summary>
+        [JsonPropertyName("openfortId")]
+        public string? OpenfortId { get; set; }
 
         /// <summary>
         /// Gets or Sets OperationId
@@ -545,13 +572,16 @@ namespace BeamPlayerClient.Model
             sb.Append("class PlayerCommonOperationResponseTransactionsInner {\n");
             sb.Append("  Hash: ").Append(Hash).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
+            sb.Append("  Sponsored: ").Append(Sponsored).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("  ActionId: ").Append(ActionId).Append("\n");
             sb.Append("  Data: ").Append(Data).Append("\n");
             sb.Append("  ExternalId: ").Append(ExternalId).Append("\n");
+            sb.Append("  OpenfortId: ").Append(OpenfortId).Append("\n");
             sb.Append("  OperationId: ").Append(OperationId).Append("\n");
             sb.Append("  Signature: ").Append(Signature).Append("\n");
             sb.Append("  TransactionHash: ").Append(TransactionHash).Append("\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -591,13 +621,16 @@ namespace BeamPlayerClient.Model
 
             Option<string?> hash = default;
             Option<string?> id = default;
+            Option<bool?> sponsored = default;
             Option<PlayerCommonOperationResponseTransactionsInner.StatusEnum?> status = default;
-            Option<PlayerCommonOperationResponseTransactionsInner.TypeEnum?> type = default;
+            Option<string?> actionId = default;
             Option<Object?> data = default;
             Option<string?> externalId = default;
+            Option<string?> openfortId = default;
             Option<string?> operationId = default;
             Option<string?> signature = default;
             Option<string?> transactionHash = default;
+            Option<PlayerCommonOperationResponseTransactionsInner.TypeEnum?> type = default;
 
             while (utf8JsonReader.Read())
             {
@@ -620,15 +653,17 @@ namespace BeamPlayerClient.Model
                         case "id":
                             id = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
+                        case "sponsored":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                sponsored = new Option<bool?>(utf8JsonReader.GetBoolean());
+                            break;
                         case "status":
                             string? statusRawValue = utf8JsonReader.GetString();
                             if (statusRawValue != null)
                                 status = new Option<PlayerCommonOperationResponseTransactionsInner.StatusEnum?>(PlayerCommonOperationResponseTransactionsInner.StatusEnumFromStringOrDefault(statusRawValue));
                             break;
-                        case "type":
-                            string? typeRawValue = utf8JsonReader.GetString();
-                            if (typeRawValue != null)
-                                type = new Option<PlayerCommonOperationResponseTransactionsInner.TypeEnum?>(PlayerCommonOperationResponseTransactionsInner.TypeEnumFromStringOrDefault(typeRawValue));
+                        case "actionId":
+                            actionId = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "data":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
@@ -636,6 +671,9 @@ namespace BeamPlayerClient.Model
                             break;
                         case "externalId":
                             externalId = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "openfortId":
+                            openfortId = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "operationId":
                             operationId = new Option<string?>(utf8JsonReader.GetString());
@@ -645,6 +683,11 @@ namespace BeamPlayerClient.Model
                             break;
                         case "transactionHash":
                             transactionHash = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "type":
+                            string? typeRawValue = utf8JsonReader.GetString();
+                            if (typeRawValue != null)
+                                type = new Option<PlayerCommonOperationResponseTransactionsInner.TypeEnum?>(PlayerCommonOperationResponseTransactionsInner.TypeEnumFromStringOrDefault(typeRawValue));
                             break;
                         default:
                             break;
@@ -658,14 +701,20 @@ namespace BeamPlayerClient.Model
             if (!id.IsSet)
                 throw new ArgumentException("Property is required for class PlayerCommonOperationResponseTransactionsInner.", nameof(id));
 
+            if (!sponsored.IsSet)
+                throw new ArgumentException("Property is required for class PlayerCommonOperationResponseTransactionsInner.", nameof(sponsored));
+
             if (!status.IsSet)
                 throw new ArgumentException("Property is required for class PlayerCommonOperationResponseTransactionsInner.", nameof(status));
 
-            if (!type.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCommonOperationResponseTransactionsInner.", nameof(type));
+            if (!actionId.IsSet)
+                throw new ArgumentException("Property is required for class PlayerCommonOperationResponseTransactionsInner.", nameof(actionId));
 
             if (!externalId.IsSet)
                 throw new ArgumentException("Property is required for class PlayerCommonOperationResponseTransactionsInner.", nameof(externalId));
+
+            if (!openfortId.IsSet)
+                throw new ArgumentException("Property is required for class PlayerCommonOperationResponseTransactionsInner.", nameof(openfortId));
 
             if (!operationId.IsSet)
                 throw new ArgumentException("Property is required for class PlayerCommonOperationResponseTransactionsInner.", nameof(operationId));
@@ -676,19 +725,22 @@ namespace BeamPlayerClient.Model
             if (!transactionHash.IsSet)
                 throw new ArgumentException("Property is required for class PlayerCommonOperationResponseTransactionsInner.", nameof(transactionHash));
 
+            if (!type.IsSet)
+                throw new ArgumentException("Property is required for class PlayerCommonOperationResponseTransactionsInner.", nameof(type));
+
             if (hash.IsSet && hash.Value == null)
                 throw new ArgumentNullException(nameof(hash), "Property is not nullable for class PlayerCommonOperationResponseTransactionsInner.");
 
             if (id.IsSet && id.Value == null)
                 throw new ArgumentNullException(nameof(id), "Property is not nullable for class PlayerCommonOperationResponseTransactionsInner.");
 
+            if (sponsored.IsSet && sponsored.Value == null)
+                throw new ArgumentNullException(nameof(sponsored), "Property is not nullable for class PlayerCommonOperationResponseTransactionsInner.");
+
             if (status.IsSet && status.Value == null)
                 throw new ArgumentNullException(nameof(status), "Property is not nullable for class PlayerCommonOperationResponseTransactionsInner.");
 
-            if (type.IsSet && type.Value == null)
-                throw new ArgumentNullException(nameof(type), "Property is not nullable for class PlayerCommonOperationResponseTransactionsInner.");
-
-            return new PlayerCommonOperationResponseTransactionsInner(hash.Value!, id.Value!, status.Value!.Value!, type.Value!.Value!, data, externalId.Value!, operationId.Value!, signature.Value!, transactionHash.Value!);
+            return new PlayerCommonOperationResponseTransactionsInner(hash.Value!, id.Value!, sponsored.Value!.Value!, status.Value!.Value!, actionId.Value!, data, externalId.Value!, openfortId.Value!, operationId.Value!, signature.Value!, transactionHash.Value!, type.Value!);
         }
 
         /// <summary>
@@ -725,10 +777,15 @@ namespace BeamPlayerClient.Model
 
             writer.WriteString("id", playerCommonOperationResponseTransactionsInner.Id);
 
+            writer.WriteBoolean("sponsored", playerCommonOperationResponseTransactionsInner.Sponsored);
+
             var statusRawValue = PlayerCommonOperationResponseTransactionsInner.StatusEnumToJsonValue(playerCommonOperationResponseTransactionsInner.Status);
             writer.WriteString("status", statusRawValue);
-            var typeRawValue = PlayerCommonOperationResponseTransactionsInner.TypeEnumToJsonValue(playerCommonOperationResponseTransactionsInner.Type);
-            writer.WriteString("type", typeRawValue);
+            if (playerCommonOperationResponseTransactionsInner.ActionId != null)
+                writer.WriteString("actionId", playerCommonOperationResponseTransactionsInner.ActionId);
+            else
+                writer.WriteNull("actionId");
+
             if (playerCommonOperationResponseTransactionsInner.DataOption.IsSet)
                 if (playerCommonOperationResponseTransactionsInner.DataOption.Value != null)
                 {
@@ -741,6 +798,11 @@ namespace BeamPlayerClient.Model
                 writer.WriteString("externalId", playerCommonOperationResponseTransactionsInner.ExternalId);
             else
                 writer.WriteNull("externalId");
+
+            if (playerCommonOperationResponseTransactionsInner.OpenfortId != null)
+                writer.WriteString("openfortId", playerCommonOperationResponseTransactionsInner.OpenfortId);
+            else
+                writer.WriteNull("openfortId");
 
             if (playerCommonOperationResponseTransactionsInner.OperationId != null)
                 writer.WriteString("operationId", playerCommonOperationResponseTransactionsInner.OperationId);
@@ -756,6 +818,12 @@ namespace BeamPlayerClient.Model
                 writer.WriteString("transactionHash", playerCommonOperationResponseTransactionsInner.TransactionHash);
             else
                 writer.WriteNull("transactionHash");
+
+            var typeRawValue = PlayerCommonOperationResponseTransactionsInner.TypeEnumToJsonValue(playerCommonOperationResponseTransactionsInner.Type!.Value);
+            if (typeRawValue != null)
+                writer.WriteString("type", typeRawValue);
+            else
+                writer.WriteNull("type");
         }
     }
 }

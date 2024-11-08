@@ -161,7 +161,7 @@ namespace BeamPlayerClient.Model
                             break;
                         case "suggestedExpiry":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                suggestedExpiry = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
+                                suggestedExpiry = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime?>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -177,9 +177,6 @@ namespace BeamPlayerClient.Model
 
             if (chainId.IsSet && chainId.Value == null)
                 throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class PlayerGenerateSessionUrlRequestInput.");
-
-            if (suggestedExpiry.IsSet && suggestedExpiry.Value == null)
-                throw new ArgumentNullException(nameof(suggestedExpiry), "Property is not nullable for class PlayerGenerateSessionUrlRequestInput.");
 
             return new PlayerGenerateSessionUrlRequestInput(address.Value!, chainId, suggestedExpiry);
         }
@@ -217,7 +214,10 @@ namespace BeamPlayerClient.Model
                 writer.WriteNumber("chainId", playerGenerateSessionUrlRequestInput.ChainIdOption.Value!.Value);
 
             if (playerGenerateSessionUrlRequestInput.SuggestedExpiryOption.IsSet)
-                writer.WriteString("suggestedExpiry", playerGenerateSessionUrlRequestInput.SuggestedExpiryOption.Value!.Value.ToString(SuggestedExpiryFormat));
+                if (playerGenerateSessionUrlRequestInput.SuggestedExpiryOption.Value != null)
+                    writer.WriteString("suggestedExpiry", playerGenerateSessionUrlRequestInput.SuggestedExpiryOption.Value!.Value.ToString(SuggestedExpiryFormat));
+                else
+                    writer.WriteNull("suggestedExpiry");
         }
     }
 }

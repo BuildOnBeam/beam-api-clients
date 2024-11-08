@@ -35,18 +35,20 @@ namespace BeamPlayerClient.Model
         /// Initializes a new instance of the <see cref="PlayerCreateOperationRequestInput" /> class.
         /// </summary>
         /// <param name="entityId">entityId</param>
+        /// <param name="actions">actions</param>
         /// <param name="chainId">chainId (default to 13337)</param>
         /// <param name="operationId">operationId</param>
         /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute)</param>
         /// <param name="transactions">transactions</param>
         [JsonConstructor]
-        public PlayerCreateOperationRequestInput(string entityId, Option<long?> chainId = default, Option<string?> operationId = default, Option<OperationProcessingEnum?> operationProcessing = default, List<PlayerCreateOperationRequestInputTransactionsInner>? transactions = default)
+        public PlayerCreateOperationRequestInput(string entityId, Option<List<PlayerCreateOperationRequestInputActionsInner>?> actions = default, Option<long?> chainId = default, Option<string?> operationId = default, Option<OperationProcessingEnum?> operationProcessing = default, Option<List<PlayerCreateOperationRequestInputTransactionsInner>?> transactions = default)
         {
             EntityId = entityId;
+            ActionsOption = actions;
             ChainIdOption = chainId;
             OperationIdOption = operationId;
             OperationProcessingOption = operationProcessing;
-            Transactions = transactions;
+            TransactionsOption = transactions;
             OnCreated();
         }
 
@@ -233,6 +235,19 @@ namespace BeamPlayerClient.Model
         public string EntityId { get; set; }
 
         /// <summary>
+        /// Used to track the state of Actions
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<PlayerCreateOperationRequestInputActionsInner>?> ActionsOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Actions
+        /// </summary>
+        [JsonPropertyName("actions")]
+        public List<PlayerCreateOperationRequestInputActionsInner>? Actions { get { return this. ActionsOption; } set { this.ActionsOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of ChainId
         /// </summary>
         [JsonIgnore]
@@ -259,10 +274,17 @@ namespace BeamPlayerClient.Model
         public string? OperationId { get { return this. OperationIdOption; } set { this.OperationIdOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of Transactions
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<PlayerCreateOperationRequestInputTransactionsInner>?> TransactionsOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets Transactions
         /// </summary>
         [JsonPropertyName("transactions")]
-        public List<PlayerCreateOperationRequestInputTransactionsInner>? Transactions { get; set; }
+        public List<PlayerCreateOperationRequestInputTransactionsInner>? Transactions { get { return this. TransactionsOption; } set { this.TransactionsOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -273,6 +295,7 @@ namespace BeamPlayerClient.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class PlayerCreateOperationRequestInput {\n");
             sb.Append("  EntityId: ").Append(EntityId).Append("\n");
+            sb.Append("  Actions: ").Append(Actions).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  OperationId: ").Append(OperationId).Append("\n");
             sb.Append("  OperationProcessing: ").Append(OperationProcessing).Append("\n");
@@ -315,6 +338,7 @@ namespace BeamPlayerClient.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<string?> entityId = default;
+            Option<List<PlayerCreateOperationRequestInputActionsInner>?> actions = default;
             Option<long?> chainId = default;
             Option<string?> operationId = default;
             Option<PlayerCreateOperationRequestInput.OperationProcessingEnum?> operationProcessing = default;
@@ -337,6 +361,10 @@ namespace BeamPlayerClient.Model
                     {
                         case "entityId":
                             entityId = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
+                        case "actions":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                actions = new Option<List<PlayerCreateOperationRequestInputActionsInner>?>(JsonSerializer.Deserialize<List<PlayerCreateOperationRequestInputActionsInner>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
@@ -363,9 +391,6 @@ namespace BeamPlayerClient.Model
             if (!entityId.IsSet)
                 throw new ArgumentException("Property is required for class PlayerCreateOperationRequestInput.", nameof(entityId));
 
-            if (!transactions.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCreateOperationRequestInput.", nameof(transactions));
-
             if (entityId.IsSet && entityId.Value == null)
                 throw new ArgumentNullException(nameof(entityId), "Property is not nullable for class PlayerCreateOperationRequestInput.");
 
@@ -375,7 +400,7 @@ namespace BeamPlayerClient.Model
             if (operationProcessing.IsSet && operationProcessing.Value == null)
                 throw new ArgumentNullException(nameof(operationProcessing), "Property is not nullable for class PlayerCreateOperationRequestInput.");
 
-            return new PlayerCreateOperationRequestInput(entityId.Value!, chainId, operationId, operationProcessing, transactions.Value!);
+            return new PlayerCreateOperationRequestInput(entityId.Value!, actions, chainId, operationId, operationProcessing, transactions);
         }
 
         /// <summary>
@@ -407,6 +432,14 @@ namespace BeamPlayerClient.Model
 
             writer.WriteString("entityId", playerCreateOperationRequestInput.EntityId);
 
+            if (playerCreateOperationRequestInput.ActionsOption.IsSet)
+                if (playerCreateOperationRequestInput.ActionsOption.Value != null)
+                {
+                    writer.WritePropertyName("actions");
+                    JsonSerializer.Serialize(writer, playerCreateOperationRequestInput.Actions, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("actions");
             if (playerCreateOperationRequestInput.ChainIdOption.IsSet)
                 writer.WriteNumber("chainId", playerCreateOperationRequestInput.ChainIdOption.Value!.Value);
 
@@ -418,13 +451,14 @@ namespace BeamPlayerClient.Model
 
             var operationProcessingRawValue = PlayerCreateOperationRequestInput.OperationProcessingEnumToJsonValue(playerCreateOperationRequestInput.OperationProcessingOption.Value!.Value);
             writer.WriteString("operationProcessing", operationProcessingRawValue);
-            if (playerCreateOperationRequestInput.Transactions != null)
-            {
-                writer.WritePropertyName("transactions");
-                JsonSerializer.Serialize(writer, playerCreateOperationRequestInput.Transactions, jsonSerializerOptions);
-            }
-            else
-                writer.WriteNull("transactions");
+            if (playerCreateOperationRequestInput.TransactionsOption.IsSet)
+                if (playerCreateOperationRequestInput.TransactionsOption.Value != null)
+                {
+                    writer.WritePropertyName("transactions");
+                    JsonSerializer.Serialize(writer, playerCreateOperationRequestInput.Transactions, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("transactions");
         }
     }
 }

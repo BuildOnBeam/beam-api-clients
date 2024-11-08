@@ -39,15 +39,17 @@ namespace BeamAutomationClient.Model
         /// <param name="totalTransactionFee">totalTransactionFee</param>
         /// <param name="totalTransactionFeeInUSD">totalTransactionFeeInUSD</param>
         /// <param name="transactionCount">transactionCount</param>
+        /// <param name="usersCount">usersCount</param>
         /// <param name="chainId">chainId (default to 13337)</param>
         [JsonConstructor]
-        public AutomationGetAllGasUsageResponseChainsInnerSummary(string averageTransactionFee, decimal profilesCount, string totalTransactionFee, string totalTransactionFeeInUSD, decimal transactionCount, Option<long?> chainId = default)
+        public AutomationGetAllGasUsageResponseChainsInnerSummary(string averageTransactionFee, decimal profilesCount, string totalTransactionFee, string totalTransactionFeeInUSD, decimal transactionCount, decimal usersCount, Option<long?> chainId = default)
         {
             AverageTransactionFee = averageTransactionFee;
             ProfilesCount = profilesCount;
             TotalTransactionFee = totalTransactionFee;
             TotalTransactionFeeInUSD = totalTransactionFeeInUSD;
             TransactionCount = transactionCount;
+            UsersCount = usersCount;
             ChainIdOption = chainId;
             OnCreated();
         }
@@ -85,6 +87,12 @@ namespace BeamAutomationClient.Model
         public decimal TransactionCount { get; set; }
 
         /// <summary>
+        /// Gets or Sets UsersCount
+        /// </summary>
+        [JsonPropertyName("usersCount")]
+        public decimal UsersCount { get; set; }
+
+        /// <summary>
         /// Used to track the state of ChainId
         /// </summary>
         [JsonIgnore]
@@ -110,6 +118,7 @@ namespace BeamAutomationClient.Model
             sb.Append("  TotalTransactionFee: ").Append(TotalTransactionFee).Append("\n");
             sb.Append("  TotalTransactionFeeInUSD: ").Append(TotalTransactionFeeInUSD).Append("\n");
             sb.Append("  TransactionCount: ").Append(TransactionCount).Append("\n");
+            sb.Append("  UsersCount: ").Append(UsersCount).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -153,6 +162,7 @@ namespace BeamAutomationClient.Model
             Option<string?> totalTransactionFee = default;
             Option<string?> totalTransactionFeeInUSD = default;
             Option<decimal?> transactionCount = default;
+            Option<decimal?> usersCount = default;
             Option<long?> chainId = default;
 
             while (utf8JsonReader.Read())
@@ -187,6 +197,10 @@ namespace BeamAutomationClient.Model
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 transactionCount = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
+                        case "usersCount":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                usersCount = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                            break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 chainId = new Option<long?>(utf8JsonReader.GetInt64());
@@ -212,6 +226,9 @@ namespace BeamAutomationClient.Model
             if (!transactionCount.IsSet)
                 throw new ArgumentException("Property is required for class AutomationGetAllGasUsageResponseChainsInnerSummary.", nameof(transactionCount));
 
+            if (!usersCount.IsSet)
+                throw new ArgumentException("Property is required for class AutomationGetAllGasUsageResponseChainsInnerSummary.", nameof(usersCount));
+
             if (averageTransactionFee.IsSet && averageTransactionFee.Value == null)
                 throw new ArgumentNullException(nameof(averageTransactionFee), "Property is not nullable for class AutomationGetAllGasUsageResponseChainsInnerSummary.");
 
@@ -227,10 +244,13 @@ namespace BeamAutomationClient.Model
             if (transactionCount.IsSet && transactionCount.Value == null)
                 throw new ArgumentNullException(nameof(transactionCount), "Property is not nullable for class AutomationGetAllGasUsageResponseChainsInnerSummary.");
 
+            if (usersCount.IsSet && usersCount.Value == null)
+                throw new ArgumentNullException(nameof(usersCount), "Property is not nullable for class AutomationGetAllGasUsageResponseChainsInnerSummary.");
+
             if (chainId.IsSet && chainId.Value == null)
                 throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class AutomationGetAllGasUsageResponseChainsInnerSummary.");
 
-            return new AutomationGetAllGasUsageResponseChainsInnerSummary(averageTransactionFee.Value!, profilesCount.Value!.Value!, totalTransactionFee.Value!, totalTransactionFeeInUSD.Value!, transactionCount.Value!.Value!, chainId);
+            return new AutomationGetAllGasUsageResponseChainsInnerSummary(averageTransactionFee.Value!, profilesCount.Value!.Value!, totalTransactionFee.Value!, totalTransactionFeeInUSD.Value!, transactionCount.Value!.Value!, usersCount.Value!.Value!, chainId);
         }
 
         /// <summary>
@@ -275,6 +295,8 @@ namespace BeamAutomationClient.Model
             writer.WriteString("totalTransactionFeeInUSD", automationGetAllGasUsageResponseChainsInnerSummary.TotalTransactionFeeInUSD);
 
             writer.WriteNumber("transactionCount", automationGetAllGasUsageResponseChainsInnerSummary.TransactionCount);
+
+            writer.WriteNumber("usersCount", automationGetAllGasUsageResponseChainsInnerSummary.UsersCount);
 
             if (automationGetAllGasUsageResponseChainsInnerSummary.ChainIdOption.IsSet)
                 writer.WriteNumber("chainId", automationGetAllGasUsageResponseChainsInnerSummary.ChainIdOption.Value!.Value);

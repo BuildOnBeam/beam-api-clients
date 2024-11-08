@@ -5,9 +5,11 @@
 
 export type RevokeSessionRequestInput = {
   address: string;
-  operationId?: string | null;
-  operationProcessing?: RevokeSessionRequestInput.operationProcessing;
+  sponsor?: boolean;
+  policyId?: string | null;
   chainId?: number;
+  operationProcessing?: RevokeSessionRequestInput.operationProcessing;
+  operationId?: string | null;
 };
 
 export namespace RevokeSessionRequestInput {

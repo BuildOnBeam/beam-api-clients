@@ -2775,6 +2775,55 @@
           }
         ]
       }
+    },
+    "/v1/player/ramp/on/{entityId}": {
+      "post": {
+        "operationId": "createOnrampRequest",
+        "summary": "",
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlayerCreateOnrampRequestInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerCreateOnrampRequestResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Ramp"
+        ],
+        "security": [
+          {
+            "beam-api-key": []
+          },
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
     }
   },
   "info": {
@@ -3124,6 +3173,7 @@
           },
           "operationId": {
             "type": "string",
+            "format": "cuid",
             "nullable": true
           }
         },
@@ -3137,8 +3187,8 @@
           "status": {
             "type": "string",
             "enum": [
-              "Signed",
               "Pending",
+              "Signed",
               "Rejected",
               "Executed",
               "Error"
@@ -3174,23 +3224,1675 @@
             "type": "integer",
             "format": "int64"
           },
-          "url": {
-            "type": "string",
-            "format": "uri"
+          "actions": {
+            "type": "array",
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "Sign",
+                        "SessionRevoke",
+                        "MarketplaceCreateOffer",
+                        "MarketplaceCancelOffer",
+                        "MarketplaceAcceptOffer",
+                        "MarketplaceBuyAsset",
+                        "MarketplaceListAsset",
+                        "MarketplaceCancelListing",
+                        "ExchangeConvert",
+                        "ExchangeWrap",
+                        "ExchangeUnwrap",
+                        "TransferNFTs",
+                        "TransferToken",
+                        "CustomTransaction"
+                      ]
+                    },
+                    "id": {
+                      "type": "string",
+                      "format": "cuid"
+                    },
+                    "index": {
+                      "type": "integer"
+                    },
+                    "operationId": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "id",
+                    "index",
+                    "operationId"
+                  ]
+                },
+                {
+                  "discriminator": {
+                    "propertyName": "type"
+                  },
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "TransferNFTs"
+                          ]
+                        },
+                        "context": {
+                          "type": "object",
+                          "properties": {
+                            "assets": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "receiverAddress": {
+                                    "type": "string"
+                                  },
+                                  "contractAddress": {
+                                    "type": "string"
+                                  },
+                                  "assetId": {
+                                    "type": "string"
+                                  },
+                                  "amount": {
+                                    "type": "number"
+                                  }
+                                },
+                                "required": [
+                                  "receiverAddress",
+                                  "contractAddress",
+                                  "assetId",
+                                  "amount"
+                                ]
+                              }
+                            }
+                          },
+                          "required": [
+                            "assets"
+                          ]
+                        },
+                        "signature": {
+                          "allOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "Message"
+                                  ]
+                                },
+                                "id": {
+                                  "type": "string",
+                                  "format": "cuid"
+                                },
+                                "data": {
+                                  "type": "string"
+                                },
+                                "signature": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "actionId": {
+                                  "type": "string",
+                                  "nullable": true
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "id",
+                                "data",
+                                "signature",
+                                "actionId"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "hash": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "hash"
+                              ]
+                            }
+                          ]
+                        },
+                        "transaction": {
+                          "type": "object",
+                          "properties": {
+                            "status": {
+                              "type": "string",
+                              "enum": [
+                                "Pending",
+                                "Signed",
+                                "Rejected",
+                                "Executed",
+                                "Error"
+                              ]
+                            },
+                            "id": {
+                              "type": "string",
+                              "format": "cuid"
+                            },
+                            "openfortId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "sponsored": {
+                              "type": "boolean"
+                            },
+                            "actionId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "hash": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          },
+                          "required": [
+                            "status",
+                            "id",
+                            "openfortId",
+                            "sponsored",
+                            "actionId",
+                            "hash"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "context",
+                        "signature",
+                        "transaction"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "TransferToken"
+                          ]
+                        },
+                        "context": {
+                          "type": "object",
+                          "properties": {
+                            "amount": {
+                              "type": "string"
+                            },
+                            "contractAddress": {
+                              "type": "string"
+                            },
+                            "receiverAddress": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "amount",
+                            "contractAddress",
+                            "receiverAddress"
+                          ]
+                        },
+                        "signature": {
+                          "allOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "Message"
+                                  ]
+                                },
+                                "id": {
+                                  "type": "string",
+                                  "format": "cuid"
+                                },
+                                "data": {
+                                  "type": "string"
+                                },
+                                "signature": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "actionId": {
+                                  "type": "string",
+                                  "nullable": true
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "id",
+                                "data",
+                                "signature",
+                                "actionId"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "hash": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "hash"
+                              ]
+                            }
+                          ]
+                        },
+                        "transaction": {
+                          "type": "object",
+                          "properties": {
+                            "status": {
+                              "type": "string",
+                              "enum": [
+                                "Pending",
+                                "Signed",
+                                "Rejected",
+                                "Executed",
+                                "Error"
+                              ]
+                            },
+                            "id": {
+                              "type": "string",
+                              "format": "cuid"
+                            },
+                            "openfortId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "sponsored": {
+                              "type": "boolean"
+                            },
+                            "actionId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "hash": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          },
+                          "required": [
+                            "status",
+                            "id",
+                            "openfortId",
+                            "sponsored",
+                            "actionId",
+                            "hash"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "context",
+                        "signature",
+                        "transaction"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "MarketplaceCreateOffer"
+                          ]
+                        },
+                        "signature": {
+                          "allOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "TypedData"
+                                  ]
+                                },
+                                "id": {
+                                  "type": "string",
+                                  "format": "cuid"
+                                },
+                                "data": {},
+                                "signature": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "actionId": {
+                                  "type": "string",
+                                  "nullable": true
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "id",
+                                "signature",
+                                "actionId"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "hash": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "hash"
+                              ]
+                            }
+                          ]
+                        },
+                        "transaction": {
+                          "type": "object",
+                          "properties": {
+                            "status": {
+                              "type": "string",
+                              "enum": [
+                                "Pending",
+                                "Signed",
+                                "Rejected",
+                                "Executed",
+                                "Error"
+                              ]
+                            },
+                            "id": {
+                              "type": "string",
+                              "format": "cuid"
+                            },
+                            "openfortId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "sponsored": {
+                              "type": "boolean"
+                            },
+                            "actionId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "hash": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          },
+                          "required": [
+                            "status",
+                            "id",
+                            "openfortId",
+                            "sponsored",
+                            "actionId",
+                            "hash"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "signature",
+                        "transaction"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "MarketplaceCancelOffer"
+                          ]
+                        },
+                        "signature": {
+                          "allOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "Message"
+                                  ]
+                                },
+                                "id": {
+                                  "type": "string",
+                                  "format": "cuid"
+                                },
+                                "data": {
+                                  "type": "string"
+                                },
+                                "signature": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "actionId": {
+                                  "type": "string",
+                                  "nullable": true
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "id",
+                                "data",
+                                "signature",
+                                "actionId"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "hash": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "hash"
+                              ]
+                            }
+                          ]
+                        },
+                        "transaction": {
+                          "type": "object",
+                          "properties": {
+                            "status": {
+                              "type": "string",
+                              "enum": [
+                                "Pending",
+                                "Signed",
+                                "Rejected",
+                                "Executed",
+                                "Error"
+                              ]
+                            },
+                            "id": {
+                              "type": "string",
+                              "format": "cuid"
+                            },
+                            "openfortId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "sponsored": {
+                              "type": "boolean"
+                            },
+                            "actionId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "hash": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          },
+                          "required": [
+                            "status",
+                            "id",
+                            "openfortId",
+                            "sponsored",
+                            "actionId",
+                            "hash"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "signature",
+                        "transaction"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "MarketplaceAcceptOffer"
+                          ]
+                        },
+                        "signature": {
+                          "allOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "Message"
+                                  ]
+                                },
+                                "id": {
+                                  "type": "string",
+                                  "format": "cuid"
+                                },
+                                "data": {
+                                  "type": "string"
+                                },
+                                "signature": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "actionId": {
+                                  "type": "string",
+                                  "nullable": true
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "id",
+                                "data",
+                                "signature",
+                                "actionId"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "hash": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "hash"
+                              ]
+                            }
+                          ]
+                        },
+                        "transaction": {
+                          "type": "object",
+                          "properties": {
+                            "status": {
+                              "type": "string",
+                              "enum": [
+                                "Pending",
+                                "Signed",
+                                "Rejected",
+                                "Executed",
+                                "Error"
+                              ]
+                            },
+                            "id": {
+                              "type": "string",
+                              "format": "cuid"
+                            },
+                            "openfortId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "sponsored": {
+                              "type": "boolean"
+                            },
+                            "actionId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "hash": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          },
+                          "required": [
+                            "status",
+                            "id",
+                            "openfortId",
+                            "sponsored",
+                            "actionId",
+                            "hash"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "signature",
+                        "transaction"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "MarketplaceListAsset"
+                          ]
+                        },
+                        "signature": {
+                          "allOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "TypedData"
+                                  ]
+                                },
+                                "id": {
+                                  "type": "string",
+                                  "format": "cuid"
+                                },
+                                "data": {},
+                                "signature": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "actionId": {
+                                  "type": "string",
+                                  "nullable": true
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "id",
+                                "signature",
+                                "actionId"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "hash": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "hash"
+                              ]
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "signature"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "MarketplaceBuyAsset"
+                          ]
+                        },
+                        "signature": {
+                          "allOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "Message"
+                                  ]
+                                },
+                                "id": {
+                                  "type": "string",
+                                  "format": "cuid"
+                                },
+                                "data": {
+                                  "type": "string"
+                                },
+                                "signature": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "actionId": {
+                                  "type": "string",
+                                  "nullable": true
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "id",
+                                "data",
+                                "signature",
+                                "actionId"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "hash": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "hash"
+                              ]
+                            }
+                          ]
+                        },
+                        "transaction": {
+                          "type": "object",
+                          "properties": {
+                            "status": {
+                              "type": "string",
+                              "enum": [
+                                "Pending",
+                                "Signed",
+                                "Rejected",
+                                "Executed",
+                                "Error"
+                              ]
+                            },
+                            "id": {
+                              "type": "string",
+                              "format": "cuid"
+                            },
+                            "openfortId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "sponsored": {
+                              "type": "boolean"
+                            },
+                            "actionId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "hash": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          },
+                          "required": [
+                            "status",
+                            "id",
+                            "openfortId",
+                            "sponsored",
+                            "actionId",
+                            "hash"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "signature",
+                        "transaction"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "MarketplaceCancelListing"
+                          ]
+                        },
+                        "signature": {
+                          "allOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "Message"
+                                  ]
+                                },
+                                "id": {
+                                  "type": "string",
+                                  "format": "cuid"
+                                },
+                                "data": {
+                                  "type": "string"
+                                },
+                                "signature": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "actionId": {
+                                  "type": "string",
+                                  "nullable": true
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "id",
+                                "data",
+                                "signature",
+                                "actionId"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "hash": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "hash"
+                              ]
+                            }
+                          ]
+                        },
+                        "transaction": {
+                          "type": "object",
+                          "properties": {
+                            "status": {
+                              "type": "string",
+                              "enum": [
+                                "Pending",
+                                "Signed",
+                                "Rejected",
+                                "Executed",
+                                "Error"
+                              ]
+                            },
+                            "id": {
+                              "type": "string",
+                              "format": "cuid"
+                            },
+                            "openfortId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "sponsored": {
+                              "type": "boolean"
+                            },
+                            "actionId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "hash": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          },
+                          "required": [
+                            "status",
+                            "id",
+                            "openfortId",
+                            "sponsored",
+                            "actionId",
+                            "hash"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "signature",
+                        "transaction"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "SessionRevoke"
+                          ]
+                        },
+                        "signature": {
+                          "allOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "Message"
+                                  ]
+                                },
+                                "id": {
+                                  "type": "string",
+                                  "format": "cuid"
+                                },
+                                "data": {
+                                  "type": "string"
+                                },
+                                "signature": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "actionId": {
+                                  "type": "string",
+                                  "nullable": true
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "id",
+                                "data",
+                                "signature",
+                                "actionId"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "hash": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "hash"
+                              ]
+                            }
+                          ]
+                        },
+                        "transaction": {
+                          "type": "object",
+                          "properties": {
+                            "status": {
+                              "type": "string",
+                              "enum": [
+                                "Pending",
+                                "Signed",
+                                "Rejected",
+                                "Executed",
+                                "Error"
+                              ]
+                            },
+                            "id": {
+                              "type": "string",
+                              "format": "cuid"
+                            },
+                            "openfortId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "sponsored": {
+                              "type": "boolean"
+                            },
+                            "actionId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "hash": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          },
+                          "required": [
+                            "status",
+                            "id",
+                            "openfortId",
+                            "sponsored",
+                            "actionId",
+                            "hash"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "signature",
+                        "transaction"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "ExchangeConvert"
+                          ]
+                        },
+                        "context": {
+                          "type": "object",
+                          "properties": {
+                            "input": {
+                              "type": "object",
+                              "properties": {
+                                "address": {
+                                  "type": "string"
+                                },
+                                "amount": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "address",
+                                "amount"
+                              ]
+                            },
+                            "output": {
+                              "type": "object",
+                              "properties": {
+                                "address": {
+                                  "type": "string"
+                                },
+                                "amount": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "address",
+                                "amount"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "input",
+                            "output"
+                          ]
+                        },
+                        "signature": {
+                          "allOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "Message"
+                                  ]
+                                },
+                                "id": {
+                                  "type": "string",
+                                  "format": "cuid"
+                                },
+                                "data": {
+                                  "type": "string"
+                                },
+                                "signature": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "actionId": {
+                                  "type": "string",
+                                  "nullable": true
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "id",
+                                "data",
+                                "signature",
+                                "actionId"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "hash": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "hash"
+                              ]
+                            }
+                          ]
+                        },
+                        "transaction": {
+                          "type": "object",
+                          "properties": {
+                            "status": {
+                              "type": "string",
+                              "enum": [
+                                "Pending",
+                                "Signed",
+                                "Rejected",
+                                "Executed",
+                                "Error"
+                              ]
+                            },
+                            "id": {
+                              "type": "string",
+                              "format": "cuid"
+                            },
+                            "openfortId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "sponsored": {
+                              "type": "boolean"
+                            },
+                            "actionId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "hash": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          },
+                          "required": [
+                            "status",
+                            "id",
+                            "openfortId",
+                            "sponsored",
+                            "actionId",
+                            "hash"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "context",
+                        "signature",
+                        "transaction"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "ExchangeWrap"
+                          ]
+                        },
+                        "context": {
+                          "type": "object",
+                          "properties": {
+                            "amount": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "amount"
+                          ]
+                        },
+                        "signature": {
+                          "allOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "Message"
+                                  ]
+                                },
+                                "id": {
+                                  "type": "string",
+                                  "format": "cuid"
+                                },
+                                "data": {
+                                  "type": "string"
+                                },
+                                "signature": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "actionId": {
+                                  "type": "string",
+                                  "nullable": true
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "id",
+                                "data",
+                                "signature",
+                                "actionId"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "hash": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "hash"
+                              ]
+                            }
+                          ]
+                        },
+                        "transaction": {
+                          "type": "object",
+                          "properties": {
+                            "status": {
+                              "type": "string",
+                              "enum": [
+                                "Pending",
+                                "Signed",
+                                "Rejected",
+                                "Executed",
+                                "Error"
+                              ]
+                            },
+                            "id": {
+                              "type": "string",
+                              "format": "cuid"
+                            },
+                            "openfortId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "sponsored": {
+                              "type": "boolean"
+                            },
+                            "actionId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "hash": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          },
+                          "required": [
+                            "status",
+                            "id",
+                            "openfortId",
+                            "sponsored",
+                            "actionId",
+                            "hash"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "context",
+                        "signature",
+                        "transaction"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "ExchangeUnwrap"
+                          ]
+                        },
+                        "context": {
+                          "type": "object",
+                          "properties": {
+                            "amount": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "amount"
+                          ]
+                        },
+                        "signature": {
+                          "allOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "Message"
+                                  ]
+                                },
+                                "id": {
+                                  "type": "string",
+                                  "format": "cuid"
+                                },
+                                "data": {
+                                  "type": "string"
+                                },
+                                "signature": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "actionId": {
+                                  "type": "string",
+                                  "nullable": true
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "id",
+                                "data",
+                                "signature",
+                                "actionId"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "hash": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "hash"
+                              ]
+                            }
+                          ]
+                        },
+                        "transaction": {
+                          "type": "object",
+                          "properties": {
+                            "status": {
+                              "type": "string",
+                              "enum": [
+                                "Pending",
+                                "Signed",
+                                "Rejected",
+                                "Executed",
+                                "Error"
+                              ]
+                            },
+                            "id": {
+                              "type": "string",
+                              "format": "cuid"
+                            },
+                            "openfortId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "sponsored": {
+                              "type": "boolean"
+                            },
+                            "actionId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "hash": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          },
+                          "required": [
+                            "status",
+                            "id",
+                            "openfortId",
+                            "sponsored",
+                            "actionId",
+                            "hash"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "context",
+                        "signature",
+                        "transaction"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "CustomTransaction"
+                          ]
+                        },
+                        "signature": {
+                          "oneOf": [
+                            {
+                              "allOf": [
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "type": {
+                                      "type": "string",
+                                      "enum": [
+                                        "Message"
+                                      ]
+                                    },
+                                    "id": {
+                                      "type": "string",
+                                      "format": "cuid"
+                                    },
+                                    "data": {
+                                      "type": "string"
+                                    },
+                                    "signature": {
+                                      "type": "string",
+                                      "nullable": true
+                                    },
+                                    "actionId": {
+                                      "type": "string",
+                                      "nullable": true
+                                    }
+                                  },
+                                  "required": [
+                                    "type",
+                                    "id",
+                                    "data",
+                                    "signature",
+                                    "actionId"
+                                  ]
+                                },
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "hash": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "hash"
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "allOf": [
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "type": {
+                                      "type": "string",
+                                      "enum": [
+                                        "TypedData"
+                                      ]
+                                    },
+                                    "id": {
+                                      "type": "string",
+                                      "format": "cuid"
+                                    },
+                                    "data": {},
+                                    "signature": {
+                                      "type": "string",
+                                      "nullable": true
+                                    },
+                                    "actionId": {
+                                      "type": "string",
+                                      "nullable": true
+                                    }
+                                  },
+                                  "required": [
+                                    "type",
+                                    "id",
+                                    "signature",
+                                    "actionId"
+                                  ]
+                                },
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "hash": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "hash"
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        "transaction": {
+                          "type": "object",
+                          "properties": {
+                            "status": {
+                              "type": "string",
+                              "enum": [
+                                "Pending",
+                                "Signed",
+                                "Rejected",
+                                "Executed",
+                                "Error"
+                              ]
+                            },
+                            "id": {
+                              "type": "string",
+                              "format": "cuid"
+                            },
+                            "openfortId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "sponsored": {
+                              "type": "boolean"
+                            },
+                            "actionId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "hash": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          },
+                          "required": [
+                            "status",
+                            "id",
+                            "openfortId",
+                            "sponsored",
+                            "actionId",
+                            "hash"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "signature",
+                        "transaction"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "Sign"
+                          ]
+                        },
+                        "signature": {
+                          "oneOf": [
+                            {
+                              "allOf": [
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "type": {
+                                      "type": "string",
+                                      "enum": [
+                                        "Message"
+                                      ]
+                                    },
+                                    "id": {
+                                      "type": "string",
+                                      "format": "cuid"
+                                    },
+                                    "data": {
+                                      "type": "string"
+                                    },
+                                    "signature": {
+                                      "type": "string",
+                                      "nullable": true
+                                    },
+                                    "actionId": {
+                                      "type": "string",
+                                      "nullable": true
+                                    }
+                                  },
+                                  "required": [
+                                    "type",
+                                    "id",
+                                    "data",
+                                    "signature",
+                                    "actionId"
+                                  ]
+                                },
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "hash": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "hash"
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "allOf": [
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "type": {
+                                      "type": "string",
+                                      "enum": [
+                                        "TypedData"
+                                      ]
+                                    },
+                                    "id": {
+                                      "type": "string",
+                                      "format": "cuid"
+                                    },
+                                    "data": {},
+                                    "signature": {
+                                      "type": "string",
+                                      "nullable": true
+                                    },
+                                    "actionId": {
+                                      "type": "string",
+                                      "nullable": true
+                                    }
+                                  },
+                                  "required": [
+                                    "type",
+                                    "id",
+                                    "signature",
+                                    "actionId"
+                                  ]
+                                },
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "hash": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "hash"
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "signature"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
           },
           "transactions": {
             "type": "array",
             "items": {
               "type": "object",
               "properties": {
-                "type": {
-                  "type": "string",
-                  "enum": [
-                    "OpenfortTransaction",
-                    "OpenfortReservoirOrder",
-                    "OpenfortRevokeSession"
-                  ]
-                },
                 "status": {
                   "type": "string",
                   "enum": [
@@ -3204,6 +4906,29 @@
                 "id": {
                   "type": "string",
                   "format": "cuid"
+                },
+                "openfortId": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "sponsored": {
+                  "type": "boolean"
+                },
+                "actionId": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "hash": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "OpenfortTransaction",
+                    "OpenfortReservoirOrder",
+                    "OpenfortRevokeSession"
+                  ],
+                  "nullable": true
                 },
                 "externalId": {
                   "type": "string",
@@ -3219,26 +4944,31 @@
                 },
                 "operationId": {
                   "type": "string",
+                  "format": "cuid",
                   "nullable": true
                 },
                 "data": {
                   "nullable": true
-                },
-                "hash": {
-                  "type": "string"
                 }
               },
               "required": [
-                "type",
                 "status",
                 "id",
+                "openfortId",
+                "sponsored",
+                "actionId",
+                "hash",
+                "type",
                 "externalId",
                 "signature",
                 "transactionHash",
-                "operationId",
-                "hash"
+                "operationId"
               ]
             }
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
           }
         },
         "required": [
@@ -3250,8 +4980,9 @@
           "gameId",
           "userId",
           "chainId",
-          "url",
-          "transactions"
+          "actions",
+          "transactions",
+          "url"
         ]
       },
       "PlayerTransferTokenRequestInput": {
@@ -3298,6 +5029,7 @@
           },
           "operationId": {
             "type": "string",
+            "format": "cuid",
             "nullable": true
           }
         },
@@ -3347,6 +5079,7 @@
           },
           "operationId": {
             "type": "string",
+            "format": "cuid",
             "nullable": true
           }
         },
@@ -4170,6 +5903,7 @@
           },
           "operationId": {
             "type": "string",
+            "format": "cuid",
             "nullable": true
           }
         },
@@ -4216,6 +5950,7 @@
           },
           "operationId": {
             "type": "string",
+            "format": "cuid",
             "nullable": true
           }
         },
@@ -4250,6 +5985,7 @@
           },
           "operationId": {
             "type": "string",
+            "format": "cuid",
             "nullable": true
           }
         }
@@ -4305,6 +6041,7 @@
           },
           "operationId": {
             "type": "string",
+            "format": "cuid",
             "nullable": true
           }
         },
@@ -4351,6 +6088,7 @@
           },
           "operationId": {
             "type": "string",
+            "format": "cuid",
             "nullable": true
           }
         },
@@ -4385,6 +6123,7 @@
           },
           "operationId": {
             "type": "string",
+            "format": "cuid",
             "nullable": true
           },
           "chainId": {
@@ -4896,6 +6635,7 @@
           },
           "operationId": {
             "type": "string",
+            "format": "cuid",
             "nullable": true
           }
         },
@@ -5109,6 +6849,837 @@
           "entityId": {
             "type": "string"
           },
+          "actions": {
+            "type": "array",
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "Sign",
+                        "SessionRevoke",
+                        "MarketplaceCreateOffer",
+                        "MarketplaceCancelOffer",
+                        "MarketplaceAcceptOffer",
+                        "MarketplaceBuyAsset",
+                        "MarketplaceListAsset",
+                        "MarketplaceCancelListing",
+                        "ExchangeConvert",
+                        "ExchangeWrap",
+                        "ExchangeUnwrap",
+                        "TransferNFTs",
+                        "TransferToken",
+                        "CustomTransaction"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "type"
+                  ]
+                },
+                {
+                  "discriminator": {
+                    "propertyName": "type"
+                  },
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "TransferNFTs"
+                          ]
+                        },
+                        "signature": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "Message"
+                              ]
+                            },
+                            "data": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "data"
+                          ]
+                        },
+                        "transaction": {
+                          "type": "object",
+                          "properties": {
+                            "openfortId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "sponsored": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "sponsored"
+                          ]
+                        },
+                        "context": {
+                          "type": "object",
+                          "properties": {
+                            "assets": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "receiverAddress": {
+                                    "type": "string"
+                                  },
+                                  "contractAddress": {
+                                    "type": "string"
+                                  },
+                                  "assetId": {
+                                    "type": "string"
+                                  },
+                                  "amount": {
+                                    "type": "number"
+                                  }
+                                },
+                                "required": [
+                                  "receiverAddress",
+                                  "contractAddress",
+                                  "assetId",
+                                  "amount"
+                                ]
+                              }
+                            }
+                          },
+                          "required": [
+                            "assets"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "signature",
+                        "transaction",
+                        "context"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "TransferToken"
+                          ]
+                        },
+                        "signature": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "Message"
+                              ]
+                            },
+                            "data": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "data"
+                          ]
+                        },
+                        "transaction": {
+                          "type": "object",
+                          "properties": {
+                            "openfortId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "sponsored": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "sponsored"
+                          ]
+                        },
+                        "context": {
+                          "type": "object",
+                          "properties": {
+                            "amount": {
+                              "type": "string"
+                            },
+                            "contractAddress": {
+                              "type": "string"
+                            },
+                            "receiverAddress": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "amount",
+                            "contractAddress",
+                            "receiverAddress"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "signature",
+                        "transaction",
+                        "context"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "MarketplaceCreateOffer"
+                          ]
+                        },
+                        "signature": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "TypedData"
+                              ]
+                            },
+                            "data": {}
+                          },
+                          "required": [
+                            "type"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "signature"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "MarketplaceCancelOffer"
+                          ]
+                        },
+                        "signature": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "Message"
+                              ]
+                            },
+                            "data": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "data"
+                          ]
+                        },
+                        "transaction": {
+                          "type": "object",
+                          "properties": {
+                            "openfortId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "sponsored": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "sponsored"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "signature",
+                        "transaction"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "MarketplaceAcceptOffer"
+                          ]
+                        },
+                        "signature": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "Message"
+                              ]
+                            },
+                            "data": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "data"
+                          ]
+                        },
+                        "transaction": {
+                          "type": "object",
+                          "properties": {
+                            "openfortId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "sponsored": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "sponsored"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "signature",
+                        "transaction"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "MarketplaceListAsset"
+                          ]
+                        },
+                        "signature": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "TypedData"
+                              ]
+                            },
+                            "data": {}
+                          },
+                          "required": [
+                            "type"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "signature"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "MarketplaceBuyAsset"
+                          ]
+                        },
+                        "signature": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "Message"
+                              ]
+                            },
+                            "data": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "data"
+                          ]
+                        },
+                        "transaction": {
+                          "type": "object",
+                          "properties": {
+                            "openfortId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "sponsored": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "sponsored"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "signature",
+                        "transaction"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "MarketplaceCancelListing"
+                          ]
+                        },
+                        "signature": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "Message"
+                              ]
+                            },
+                            "data": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "data"
+                          ]
+                        },
+                        "transaction": {
+                          "type": "object",
+                          "properties": {
+                            "openfortId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "sponsored": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "sponsored"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "signature",
+                        "transaction"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "SessionRevoke"
+                          ]
+                        },
+                        "signature": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "Message"
+                              ]
+                            },
+                            "data": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "data"
+                          ]
+                        },
+                        "transaction": {
+                          "type": "object",
+                          "properties": {
+                            "openfortId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "sponsored": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "sponsored"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "signature",
+                        "transaction"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "ExchangeConvert"
+                          ]
+                        },
+                        "context": {
+                          "type": "object",
+                          "properties": {
+                            "input": {
+                              "type": "object",
+                              "properties": {
+                                "address": {
+                                  "type": "string"
+                                },
+                                "amount": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "address",
+                                "amount"
+                              ]
+                            },
+                            "output": {
+                              "type": "object",
+                              "properties": {
+                                "address": {
+                                  "type": "string"
+                                },
+                                "amount": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "address",
+                                "amount"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "input",
+                            "output"
+                          ]
+                        },
+                        "signature": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "Message"
+                              ]
+                            },
+                            "data": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "data"
+                          ]
+                        },
+                        "transaction": {
+                          "type": "object",
+                          "properties": {
+                            "openfortId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "sponsored": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "sponsored"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "context",
+                        "signature",
+                        "transaction"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "ExchangeWrap"
+                          ]
+                        },
+                        "context": {
+                          "type": "object",
+                          "properties": {
+                            "amount": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "amount"
+                          ]
+                        },
+                        "signature": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "Message"
+                              ]
+                            },
+                            "data": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "data"
+                          ]
+                        },
+                        "transaction": {
+                          "type": "object",
+                          "properties": {
+                            "openfortId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "sponsored": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "sponsored"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "context",
+                        "signature",
+                        "transaction"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "ExchangeUnwrap"
+                          ]
+                        },
+                        "context": {
+                          "type": "object",
+                          "properties": {
+                            "amount": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "amount"
+                          ]
+                        },
+                        "signature": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "Message"
+                              ]
+                            },
+                            "data": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "data"
+                          ]
+                        },
+                        "transaction": {
+                          "type": "object",
+                          "properties": {
+                            "openfortId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "sponsored": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "sponsored"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "context",
+                        "signature",
+                        "transaction"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "CustomTransaction"
+                          ]
+                        },
+                        "signature": {
+                          "oneOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "Message"
+                                  ]
+                                },
+                                "data": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "data"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "TypedData"
+                                  ]
+                                },
+                                "data": {}
+                              },
+                              "required": [
+                                "type"
+                              ]
+                            }
+                          ]
+                        },
+                        "transaction": {
+                          "type": "object",
+                          "properties": {
+                            "openfortId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "sponsored": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "sponsored"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "signature",
+                        "transaction"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "Sign"
+                          ]
+                        },
+                        "signature": {
+                          "oneOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "Message"
+                                  ]
+                                },
+                                "data": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "data"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "TypedData"
+                                  ]
+                                },
+                                "data": {}
+                              },
+                              "required": [
+                                "type"
+                              ]
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "signature"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "nullable": true
+          },
           "transactions": {
             "type": "array",
             "items": {
@@ -5145,12 +7716,12 @@
           },
           "operationId": {
             "type": "string",
+            "format": "cuid",
             "nullable": true
           }
         },
         "required": [
-          "entityId",
-          "transactions"
+          "entityId"
         ]
       },
       "PlayerConfirmOperationRequest": {
@@ -5159,14 +7730,33 @@
           "status": {
             "type": "string",
             "enum": [
-              "Signed",
               "Pending",
+              "Signed",
               "Rejected",
               "Executed",
               "Error"
             ]
           },
           "transactions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "signature": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "signature"
+              ]
+            },
+            "nullable": true
+          },
+          "actions": {
             "type": "array",
             "items": {
               "type": "object",
@@ -5263,6 +7853,7 @@
           },
           "operationId": {
             "type": "string",
+            "format": "cuid",
             "nullable": true
           }
         },
@@ -5308,6 +7899,7 @@
           },
           "operationId": {
             "type": "string",
+            "format": "cuid",
             "nullable": true
           }
         },
@@ -5350,6 +7942,7 @@
           },
           "operationId": {
             "type": "string",
+            "format": "cuid",
             "nullable": true
           }
         },
@@ -5365,7 +7958,8 @@
           },
           "suggestedExpiry": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
           "chainId": {
             "default": 13337,
@@ -5434,10 +8028,20 @@
           "address": {
             "type": "string"
           },
-          "operationId": {
+          "sponsor": {
+            "default": true,
+            "type": "boolean"
+          },
+          "policyId": {
+            "default": null,
             "type": "string",
             "format": "cuid",
             "nullable": true
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "integer",
+            "format": "int64"
           },
           "operationProcessing": {
             "default": "Execute",
@@ -5447,10 +8051,10 @@
               "Execute"
             ]
           },
-          "chainId": {
-            "default": 13337,
-            "type": "integer",
-            "format": "int64"
+          "operationId": {
+            "type": "string",
+            "format": "cuid",
+            "nullable": true
           }
         },
         "required": [
@@ -5914,6 +8518,49 @@
             "nullable": true
           }
         }
+      },
+      "PlayerCreateOnrampRequestInput": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "default": "BEAM",
+            "type": "string",
+            "enum": [
+              "BEAM"
+            ]
+          },
+          "tokenAmount": {
+            "default": "100",
+            "type": "string"
+          },
+          "fiatAmount": {
+            "type": "string"
+          },
+          "paymentCurrency": {
+            "default": "USD",
+            "type": "string",
+            "enum": [
+              "USD",
+              "EUR"
+            ]
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "PlayerCreateOnrampRequestResponse": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url"
+        ]
       }
     }
   }

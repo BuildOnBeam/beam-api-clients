@@ -302,7 +302,7 @@ namespace BeamAutomationClient.Api
         Task<IGetPlayerAssetOffersV2ApiResponse?> GetPlayerAssetOffersV2OrDefaultAsync(string entityId, string assetAddress, string assetId, Option<long> chainId = default, Option<string> continuation = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Get all offers that player created
+        /// Get all offers that a profile created
         /// </summary>
         /// <remarks>
         /// 
@@ -316,7 +316,7 @@ namespace BeamAutomationClient.Api
         Task<IGetPlayerOffersV2ApiResponse> GetPlayerOffersV2Async(string entityId, Option<long> chainId = default, Option<string> continuation = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Get all offers that player created
+        /// Get all offers that a profile created
         /// </summary>
         /// <remarks>
         /// 
@@ -3527,7 +3527,7 @@ namespace BeamAutomationClient.Api
         partial void OnErrorGetPlayerOffersV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string entityId, Option<long> chainId, Option<string> continuation);
 
         /// <summary>
-        /// Get all offers that player created 
+        /// Get all offers that a profile created 
         /// </summary>
         /// <param name="entityId"></param>
         /// <param name="chainId"> (optional)</param>
@@ -3547,7 +3547,7 @@ namespace BeamAutomationClient.Api
         }
 
         /// <summary>
-        /// Get all offers that player created 
+        /// Get all offers that a profile created 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="entityId"></param>

@@ -18,6 +18,8 @@ export * from './ConvertTokenRequestInput';
 export * from './CreateAssetOfferRequestInput';
 export * from './CreateConnectionRequestInput';
 export * from './CreateConnectionRequestResponse';
+export * from './CreateOnrampRequestInput';
+export * from './CreateOnrampRequestResponse';
 export * from './CreateOperationRequestInput';
 export * from './CreateTransactionRequestInput';
 export * from './GenerateSessionRequestResponse';

@@ -1292,7 +1292,7 @@
       },
       "get": {
         "operationId": "getPlayerOffersV2",
-        "summary": "Get all offers that player created",
+        "summary": "Get all offers that a profile created",
         "parameters": [
           {
             "name": "chainId",
@@ -4169,6 +4169,10 @@
                 "chainId": {
                   "type": "integer"
                 },
+                "paymasterId": {
+                  "type": "string",
+                  "nullable": true
+                },
                 "gameId": {
                   "type": "string"
                 },
@@ -4194,6 +4198,7 @@
                 "externalId",
                 "name",
                 "chainId",
+                "paymasterId",
                 "gameId",
                 "token",
                 "amount",
@@ -5619,6 +5624,9 @@
                       "type": "integer",
                       "format": "int64"
                     },
+                    "usersCount": {
+                      "type": "number"
+                    },
                     "profilesCount": {
                       "type": "number"
                     }
@@ -5628,6 +5636,7 @@
                     "totalTransactionFee",
                     "averageTransactionFee",
                     "transactionCount",
+                    "usersCount",
                     "profilesCount"
                   ]
                 }
@@ -5761,6 +5770,9 @@
                 "type": "integer",
                 "format": "int64"
               },
+              "usersCount": {
+                "type": "number"
+              },
               "profilesCount": {
                 "type": "number"
               }
@@ -5770,6 +5782,7 @@
               "totalTransactionFee",
               "averageTransactionFee",
               "transactionCount",
+              "usersCount",
               "profilesCount"
             ]
           }

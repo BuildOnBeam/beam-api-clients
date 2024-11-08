@@ -68,6 +68,7 @@ export type GetGameResponse = {
     externalId: string;
     name: string;
     chainId: number;
+    paymasterId: string | null;
     gameId: string;
     token: string | null;
     amount: string | null;
