@@ -34,12 +34,14 @@ namespace BeamPlayerClient.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="PlayerCreateOperationRequestInputActionsInnerAllOfOneOf8" /> class.
         /// </summary>
+        /// <param name="context">context</param>
         /// <param name="signature">signature</param>
         /// <param name="transaction">transaction</param>
         /// <param name="type">type</param>
         [JsonConstructor]
-        public PlayerCreateOperationRequestInputActionsInnerAllOfOneOf8(PlayerCreateOperationRequestInputActionsInnerAllOfOneOfSignature signature, PlayerCreateOperationRequestInputActionsInnerAllOfOneOfTransaction transaction, TypeEnum type)
+        public PlayerCreateOperationRequestInputActionsInnerAllOfOneOf8(PlayerCommonOperationResponseActionsInnerAllOfOneOf8Context context, PlayerCreateOperationRequestInputActionsInnerAllOfOneOfSignature signature, PlayerCreateOperationRequestInputActionsInnerAllOfOneOfTransaction transaction, TypeEnum type)
         {
+            Context = context;
             Signature = signature;
             Transaction = transaction;
             Type = type;
@@ -193,6 +195,12 @@ namespace BeamPlayerClient.Model
         public TypeEnum Type { get; set; }
 
         /// <summary>
+        /// Gets or Sets Context
+        /// </summary>
+        [JsonPropertyName("context")]
+        public PlayerCommonOperationResponseActionsInnerAllOfOneOf8Context Context { get; set; }
+
+        /// <summary>
         /// Gets or Sets Signature
         /// </summary>
         [JsonPropertyName("signature")]
@@ -212,6 +220,7 @@ namespace BeamPlayerClient.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class PlayerCreateOperationRequestInputActionsInnerAllOfOneOf8 {\n");
+            sb.Append("  Context: ").Append(Context).Append("\n");
             sb.Append("  Signature: ").Append(Signature).Append("\n");
             sb.Append("  Transaction: ").Append(Transaction).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
@@ -252,6 +261,7 @@ namespace BeamPlayerClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
+            Option<PlayerCommonOperationResponseActionsInnerAllOfOneOf8Context?> context = default;
             Option<PlayerCreateOperationRequestInputActionsInnerAllOfOneOfSignature?> signature = default;
             Option<PlayerCreateOperationRequestInputActionsInnerAllOfOneOfTransaction?> transaction = default;
             Option<PlayerCreateOperationRequestInputActionsInnerAllOfOneOf8.TypeEnum?> type = default;
@@ -271,6 +281,10 @@ namespace BeamPlayerClient.Model
 
                     switch (localVarJsonPropertyName)
                     {
+                        case "context":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                context = new Option<PlayerCommonOperationResponseActionsInnerAllOfOneOf8Context?>(JsonSerializer.Deserialize<PlayerCommonOperationResponseActionsInnerAllOfOneOf8Context>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
                         case "signature":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 signature = new Option<PlayerCreateOperationRequestInputActionsInnerAllOfOneOfSignature?>(JsonSerializer.Deserialize<PlayerCreateOperationRequestInputActionsInnerAllOfOneOfSignature>(ref utf8JsonReader, jsonSerializerOptions)!);
@@ -290,6 +304,9 @@ namespace BeamPlayerClient.Model
                 }
             }
 
+            if (!context.IsSet)
+                throw new ArgumentException("Property is required for class PlayerCreateOperationRequestInputActionsInnerAllOfOneOf8.", nameof(context));
+
             if (!signature.IsSet)
                 throw new ArgumentException("Property is required for class PlayerCreateOperationRequestInputActionsInnerAllOfOneOf8.", nameof(signature));
 
@@ -298,6 +315,9 @@ namespace BeamPlayerClient.Model
 
             if (!type.IsSet)
                 throw new ArgumentException("Property is required for class PlayerCreateOperationRequestInputActionsInnerAllOfOneOf8.", nameof(type));
+
+            if (context.IsSet && context.Value == null)
+                throw new ArgumentNullException(nameof(context), "Property is not nullable for class PlayerCreateOperationRequestInputActionsInnerAllOfOneOf8.");
 
             if (signature.IsSet && signature.Value == null)
                 throw new ArgumentNullException(nameof(signature), "Property is not nullable for class PlayerCreateOperationRequestInputActionsInnerAllOfOneOf8.");
@@ -308,7 +328,7 @@ namespace BeamPlayerClient.Model
             if (type.IsSet && type.Value == null)
                 throw new ArgumentNullException(nameof(type), "Property is not nullable for class PlayerCreateOperationRequestInputActionsInnerAllOfOneOf8.");
 
-            return new PlayerCreateOperationRequestInputActionsInnerAllOfOneOf8(signature.Value!, transaction.Value!, type.Value!.Value!);
+            return new PlayerCreateOperationRequestInputActionsInnerAllOfOneOf8(context.Value!, signature.Value!, transaction.Value!, type.Value!.Value!);
         }
 
         /// <summary>
@@ -335,12 +355,17 @@ namespace BeamPlayerClient.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, PlayerCreateOperationRequestInputActionsInnerAllOfOneOf8 playerCreateOperationRequestInputActionsInnerAllOfOneOf8, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (playerCreateOperationRequestInputActionsInnerAllOfOneOf8.Context == null)
+                throw new ArgumentNullException(nameof(playerCreateOperationRequestInputActionsInnerAllOfOneOf8.Context), "Property is required for class PlayerCreateOperationRequestInputActionsInnerAllOfOneOf8.");
+
             if (playerCreateOperationRequestInputActionsInnerAllOfOneOf8.Signature == null)
                 throw new ArgumentNullException(nameof(playerCreateOperationRequestInputActionsInnerAllOfOneOf8.Signature), "Property is required for class PlayerCreateOperationRequestInputActionsInnerAllOfOneOf8.");
 
             if (playerCreateOperationRequestInputActionsInnerAllOfOneOf8.Transaction == null)
                 throw new ArgumentNullException(nameof(playerCreateOperationRequestInputActionsInnerAllOfOneOf8.Transaction), "Property is required for class PlayerCreateOperationRequestInputActionsInnerAllOfOneOf8.");
 
+            writer.WritePropertyName("context");
+            JsonSerializer.Serialize(writer, playerCreateOperationRequestInputActionsInnerAllOfOneOf8.Context, jsonSerializerOptions);
             writer.WritePropertyName("signature");
             JsonSerializer.Serialize(writer, playerCreateOperationRequestInputActionsInnerAllOfOneOf8.Signature, jsonSerializerOptions);
             writer.WritePropertyName("transaction");

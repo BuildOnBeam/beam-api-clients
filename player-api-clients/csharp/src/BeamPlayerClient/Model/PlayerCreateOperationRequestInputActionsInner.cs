@@ -39,7 +39,7 @@ namespace BeamPlayerClient.Model
         /// <param name="transaction">transaction</param>
         /// <param name="type">type</param>
         [JsonConstructor]
-        public PlayerCreateOperationRequestInputActionsInner(PlayerCommonOperationResponseActionsInnerAllOfOneOf10Context context, PlayerCreateOperationRequestInputActionsInnerAllOfOneOf12Signature signature, PlayerCreateOperationRequestInputActionsInnerAllOfOneOfTransaction transaction, TypeEnum type)
+        public PlayerCreateOperationRequestInputActionsInner(Object context, PlayerCreateOperationRequestInputActionsInnerAllOfOneOf12Signature signature, PlayerCreateOperationRequestInputActionsInnerAllOfOneOfTransaction transaction, TypeEnum type)
         {
             Context = context;
             Signature = signature;
@@ -198,7 +198,7 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Context
         /// </summary>
         [JsonPropertyName("context")]
-        public PlayerCommonOperationResponseActionsInnerAllOfOneOf10Context Context { get; set; }
+        public Object Context { get; set; }
 
         /// <summary>
         /// Gets or Sets Signature
@@ -271,7 +271,7 @@ namespace BeamPlayerClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<PlayerCommonOperationResponseActionsInnerAllOfOneOf10Context?> context = default;
+            Option<Object?> context = default;
             Option<PlayerCreateOperationRequestInputActionsInnerAllOfOneOf12Signature?> signature = default;
             Option<PlayerCreateOperationRequestInputActionsInnerAllOfOneOfTransaction?> transaction = default;
             Option<PlayerCreateOperationRequestInputActionsInner.TypeEnum?> type = default;
@@ -293,7 +293,7 @@ namespace BeamPlayerClient.Model
                     {
                         case "context":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                context = new Option<PlayerCommonOperationResponseActionsInnerAllOfOneOf10Context?>(JsonSerializer.Deserialize<PlayerCommonOperationResponseActionsInnerAllOfOneOf10Context>(ref utf8JsonReader, jsonSerializerOptions)!);
+                                context = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "signature":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)

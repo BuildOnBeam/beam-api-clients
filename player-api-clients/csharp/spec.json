@@ -3636,12 +3636,36 @@
                             "actionId",
                             "hash"
                           ]
+                        },
+                        "context": {
+                          "type": "object",
+                          "properties": {
+                            "currencyAmount": {
+                              "type": "string"
+                            },
+                            "currencyAddress": {
+                              "type": "string"
+                            },
+                            "assetId": {
+                              "type": "string"
+                            },
+                            "assetAddress": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "currencyAmount",
+                            "currencyAddress",
+                            "assetId",
+                            "assetAddress"
+                          ]
                         }
                       },
                       "required": [
                         "type",
                         "signature",
-                        "transaction"
+                        "transaction",
+                        "context"
                       ]
                     },
                     {
@@ -3742,12 +3766,24 @@
                             "actionId",
                             "hash"
                           ]
+                        },
+                        "context": {
+                          "type": "object",
+                          "properties": {
+                            "offerId": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "offerId"
+                          ]
                         }
                       },
                       "required": [
                         "type",
                         "signature",
-                        "transaction"
+                        "transaction",
+                        "context"
                       ]
                     },
                     {
@@ -3848,12 +3884,24 @@
                             "actionId",
                             "hash"
                           ]
+                        },
+                        "context": {
+                          "type": "object",
+                          "properties": {
+                            "offerId": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "offerId"
+                          ]
                         }
                       },
                       "required": [
                         "type",
                         "signature",
-                        "transaction"
+                        "transaction",
+                        "context"
                       ]
                     },
                     {
@@ -3863,6 +3911,29 @@
                           "type": "string",
                           "enum": [
                             "MarketplaceListAsset"
+                          ]
+                        },
+                        "context": {
+                          "type": "object",
+                          "properties": {
+                            "assetAddress": {
+                              "type": "string"
+                            },
+                            "assetId": {
+                              "type": "string"
+                            },
+                            "currencyAddress": {
+                              "type": "string"
+                            },
+                            "currencyAmount": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "assetAddress",
+                            "assetId",
+                            "currencyAddress",
+                            "currencyAmount"
                           ]
                         },
                         "signature": {
@@ -3913,6 +3984,7 @@
                       },
                       "required": [
                         "type",
+                        "context",
                         "signature"
                       ]
                     },
@@ -4014,12 +4086,24 @@
                             "actionId",
                             "hash"
                           ]
+                        },
+                        "context": {
+                          "type": "object",
+                          "properties": {
+                            "orderId": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "orderId"
+                          ]
                         }
                       },
                       "required": [
                         "type",
                         "signature",
-                        "transaction"
+                        "transaction",
+                        "context"
                       ]
                     },
                     {
@@ -4120,12 +4204,24 @@
                             "actionId",
                             "hash"
                           ]
+                        },
+                        "context": {
+                          "type": "object",
+                          "properties": {
+                            "orderId": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "orderId"
+                          ]
                         }
                       },
                       "required": [
                         "type",
                         "signature",
-                        "transaction"
+                        "transaction",
+                        "context"
                       ]
                     },
                     {
@@ -4226,12 +4322,24 @@
                             "actionId",
                             "hash"
                           ]
+                        },
+                        "context": {
+                          "type": "object",
+                          "properties": {
+                            "sessionAddress": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "sessionAddress"
+                          ]
                         }
                       },
                       "required": [
                         "type",
                         "signature",
-                        "transaction"
+                        "transaction",
+                        "context"
                       ]
                     },
                     {
@@ -4625,6 +4733,10 @@
                             "CustomTransaction"
                           ]
                         },
+                        "context": {
+                          "type": "object",
+                          "properties": {}
+                        },
                         "signature": {
                           "oneOf": [
                             {
@@ -4767,6 +4879,7 @@
                       },
                       "required": [
                         "type",
+                        "context",
                         "signature",
                         "transaction"
                       ]
@@ -5704,10 +5817,8 @@
                           "type": "string",
                           "enum": [
                             "BEAM",
-                            "IMX",
                             "SOPH",
                             "WBEAM",
-                            "WIMX",
                             "WSOPH",
                             "RAT",
                             "USDC"
@@ -5869,10 +5980,8 @@
             "type": "string",
             "enum": [
               "BEAM",
-              "IMX",
               "SOPH",
               "WBEAM",
-              "WIMX",
               "WSOPH",
               "RAT",
               "USDC"
@@ -6020,7 +6129,6 @@
             "type": "string",
             "enum": [
               "WBEAM",
-              "WIMX",
               "WSOPH",
               "RAT",
               "USDC"
@@ -6148,10 +6256,8 @@
                   "type": "string",
                   "enum": [
                     "BEAM",
-                    "IMX",
                     "SOPH",
                     "WBEAM",
-                    "WIMX",
                     "WSOPH",
                     "RAT",
                     "USDC"
@@ -7061,11 +7167,35 @@
                           "required": [
                             "type"
                           ]
+                        },
+                        "context": {
+                          "type": "object",
+                          "properties": {
+                            "currencyAmount": {
+                              "type": "string"
+                            },
+                            "currencyAddress": {
+                              "type": "string"
+                            },
+                            "assetId": {
+                              "type": "string"
+                            },
+                            "assetAddress": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "currencyAmount",
+                            "currencyAddress",
+                            "assetId",
+                            "assetAddress"
+                          ]
                         }
                       },
                       "required": [
                         "type",
-                        "signature"
+                        "signature",
+                        "context"
                       ]
                     },
                     {
@@ -7109,12 +7239,24 @@
                           "required": [
                             "sponsored"
                           ]
+                        },
+                        "context": {
+                          "type": "object",
+                          "properties": {
+                            "offerId": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "offerId"
+                          ]
                         }
                       },
                       "required": [
                         "type",
                         "signature",
-                        "transaction"
+                        "transaction",
+                        "context"
                       ]
                     },
                     {
@@ -7158,12 +7300,24 @@
                           "required": [
                             "sponsored"
                           ]
+                        },
+                        "context": {
+                          "type": "object",
+                          "properties": {
+                            "offerId": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "offerId"
+                          ]
                         }
                       },
                       "required": [
                         "type",
                         "signature",
-                        "transaction"
+                        "transaction",
+                        "context"
                       ]
                     },
                     {
@@ -7173,6 +7327,29 @@
                           "type": "string",
                           "enum": [
                             "MarketplaceListAsset"
+                          ]
+                        },
+                        "context": {
+                          "type": "object",
+                          "properties": {
+                            "assetAddress": {
+                              "type": "string"
+                            },
+                            "assetId": {
+                              "type": "string"
+                            },
+                            "currencyAddress": {
+                              "type": "string"
+                            },
+                            "currencyAmount": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "assetAddress",
+                            "assetId",
+                            "currencyAddress",
+                            "currencyAmount"
                           ]
                         },
                         "signature": {
@@ -7193,6 +7370,7 @@
                       },
                       "required": [
                         "type",
+                        "context",
                         "signature"
                       ]
                     },
@@ -7203,6 +7381,17 @@
                           "type": "string",
                           "enum": [
                             "MarketplaceBuyAsset"
+                          ]
+                        },
+                        "context": {
+                          "type": "object",
+                          "properties": {
+                            "orderId": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "orderId"
                           ]
                         },
                         "signature": {
@@ -7241,6 +7430,7 @@
                       },
                       "required": [
                         "type",
+                        "context",
                         "signature",
                         "transaction"
                       ]
@@ -7254,6 +7444,17 @@
                             "MarketplaceCancelListing"
                           ]
                         },
+                        "context": {
+                          "type": "object",
+                          "properties": {
+                            "orderId": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "orderId"
+                          ]
+                        },
                         "signature": {
                           "type": "object",
                           "properties": {
@@ -7290,6 +7491,7 @@
                       },
                       "required": [
                         "type",
+                        "context",
                         "signature",
                         "transaction"
                       ]
@@ -7303,6 +7505,17 @@
                             "SessionRevoke"
                           ]
                         },
+                        "context": {
+                          "type": "object",
+                          "properties": {
+                            "sessionAddress": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "sessionAddress"
+                          ]
+                        },
                         "signature": {
                           "type": "object",
                           "properties": {
@@ -7339,6 +7552,7 @@
                       },
                       "required": [
                         "type",
+                        "context",
                         "signature",
                         "transaction"
                       ]
@@ -7563,6 +7777,10 @@
                             "CustomTransaction"
                           ]
                         },
+                        "context": {
+                          "type": "object",
+                          "properties": {}
+                        },
                         "signature": {
                           "oneOf": [
                             {
@@ -7618,6 +7836,7 @@
                       },
                       "required": [
                         "type",
+                        "context",
                         "signature",
                         "transaction"
                       ]

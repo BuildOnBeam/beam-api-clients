@@ -4446,10 +4446,8 @@
                           "type": "string",
                           "enum": [
                             "BEAM",
-                            "IMX",
                             "SOPH",
                             "WBEAM",
-                            "WIMX",
                             "WSOPH",
                             "RAT",
                             "USDC"
@@ -4609,10 +4607,8 @@
             "type": "string",
             "enum": [
               "BEAM",
-              "IMX",
               "SOPH",
               "WBEAM",
-              "WIMX",
               "WSOPH",
               "RAT",
               "USDC"
@@ -4730,7 +4726,6 @@
             "type": "string",
             "enum": [
               "WBEAM",
-              "WIMX",
               "WSOPH",
               "RAT",
               "USDC"
@@ -4840,10 +4835,8 @@
                   "type": "string",
                   "enum": [
                     "BEAM",
-                    "IMX",
                     "SOPH",
                     "WBEAM",
-                    "WIMX",
                     "WSOPH",
                     "RAT",
                     "USDC"

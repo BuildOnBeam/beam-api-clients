@@ -42,7 +42,7 @@ namespace BeamPlayerClient.Model
         /// <param name="operationId">operationId</param>
         /// <param name="signature">signature</param>
         [JsonConstructor]
-        public PlayerCommonOperationResponseActionsInner(PlayerCommonOperationResponseActionsInnerAllOfOneOf10Context context, string id, int index, PlayerCommonOperationResponseActionsInnerAllOfOneOfTransaction transaction, TypeEnum type, string? operationId = default, OneOf? signature = default)
+        public PlayerCommonOperationResponseActionsInner(Object context, string id, int index, PlayerCommonOperationResponseActionsInnerAllOfOneOfTransaction transaction, TypeEnum type, string? operationId = default, OneOf? signature = default)
         {
             Context = context;
             Id = id;
@@ -204,7 +204,7 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Context
         /// </summary>
         [JsonPropertyName("context")]
-        public PlayerCommonOperationResponseActionsInnerAllOfOneOf10Context Context { get; set; }
+        public Object Context { get; set; }
 
         /// <summary>
         /// Gets or Sets Id
@@ -298,7 +298,7 @@ namespace BeamPlayerClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<PlayerCommonOperationResponseActionsInnerAllOfOneOf10Context?> context = default;
+            Option<Object?> context = default;
             Option<string?> id = default;
             Option<int?> index = default;
             Option<PlayerCommonOperationResponseActionsInnerAllOfOneOfTransaction?> transaction = default;
@@ -323,7 +323,7 @@ namespace BeamPlayerClient.Model
                     {
                         case "context":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                context = new Option<PlayerCommonOperationResponseActionsInnerAllOfOneOf10Context?>(JsonSerializer.Deserialize<PlayerCommonOperationResponseActionsInnerAllOfOneOf10Context>(ref utf8JsonReader, jsonSerializerOptions)!);
+                                context = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "id":
                             id = new Option<string?>(utf8JsonReader.GetString()!);

@@ -34,12 +34,14 @@ namespace BeamPlayerClient.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="PlayerCommonOperationResponseActionsInnerAllOfOneOf12" /> class.
         /// </summary>
+        /// <param name="context">context</param>
         /// <param name="transaction">transaction</param>
         /// <param name="type">type</param>
         /// <param name="signature">signature</param>
         [JsonConstructor]
-        public PlayerCommonOperationResponseActionsInnerAllOfOneOf12(PlayerCommonOperationResponseActionsInnerAllOfOneOfTransaction transaction, TypeEnum type, OneOf? signature = default)
+        public PlayerCommonOperationResponseActionsInnerAllOfOneOf12(Object context, PlayerCommonOperationResponseActionsInnerAllOfOneOfTransaction transaction, TypeEnum type, OneOf? signature = default)
         {
+            Context = context;
             Transaction = transaction;
             Type = type;
             Signature = signature;
@@ -193,6 +195,12 @@ namespace BeamPlayerClient.Model
         public TypeEnum Type { get; set; }
 
         /// <summary>
+        /// Gets or Sets Context
+        /// </summary>
+        [JsonPropertyName("context")]
+        public Object Context { get; set; }
+
+        /// <summary>
         /// Gets or Sets Transaction
         /// </summary>
         [JsonPropertyName("transaction")]
@@ -212,6 +220,7 @@ namespace BeamPlayerClient.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class PlayerCommonOperationResponseActionsInnerAllOfOneOf12 {\n");
+            sb.Append("  Context: ").Append(Context).Append("\n");
             sb.Append("  Transaction: ").Append(Transaction).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Signature: ").Append(Signature).Append("\n");
@@ -252,6 +261,7 @@ namespace BeamPlayerClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
+            Option<Object?> context = default;
             Option<PlayerCommonOperationResponseActionsInnerAllOfOneOfTransaction?> transaction = default;
             Option<PlayerCommonOperationResponseActionsInnerAllOfOneOf12.TypeEnum?> type = default;
             Option<OneOf?> signature = default;
@@ -271,6 +281,10 @@ namespace BeamPlayerClient.Model
 
                     switch (localVarJsonPropertyName)
                     {
+                        case "context":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                context = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
                         case "transaction":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 transaction = new Option<PlayerCommonOperationResponseActionsInnerAllOfOneOfTransaction?>(JsonSerializer.Deserialize<PlayerCommonOperationResponseActionsInnerAllOfOneOfTransaction>(ref utf8JsonReader, jsonSerializerOptions)!);
@@ -290,6 +304,9 @@ namespace BeamPlayerClient.Model
                 }
             }
 
+            if (!context.IsSet)
+                throw new ArgumentException("Property is required for class PlayerCommonOperationResponseActionsInnerAllOfOneOf12.", nameof(context));
+
             if (!transaction.IsSet)
                 throw new ArgumentException("Property is required for class PlayerCommonOperationResponseActionsInnerAllOfOneOf12.", nameof(transaction));
 
@@ -299,13 +316,16 @@ namespace BeamPlayerClient.Model
             if (!signature.IsSet)
                 throw new ArgumentException("Property is required for class PlayerCommonOperationResponseActionsInnerAllOfOneOf12.", nameof(signature));
 
+            if (context.IsSet && context.Value == null)
+                throw new ArgumentNullException(nameof(context), "Property is not nullable for class PlayerCommonOperationResponseActionsInnerAllOfOneOf12.");
+
             if (transaction.IsSet && transaction.Value == null)
                 throw new ArgumentNullException(nameof(transaction), "Property is not nullable for class PlayerCommonOperationResponseActionsInnerAllOfOneOf12.");
 
             if (type.IsSet && type.Value == null)
                 throw new ArgumentNullException(nameof(type), "Property is not nullable for class PlayerCommonOperationResponseActionsInnerAllOfOneOf12.");
 
-            return new PlayerCommonOperationResponseActionsInnerAllOfOneOf12(transaction.Value!, type.Value!.Value!, signature.Value!);
+            return new PlayerCommonOperationResponseActionsInnerAllOfOneOf12(context.Value!, transaction.Value!, type.Value!.Value!, signature.Value!);
         }
 
         /// <summary>
@@ -332,9 +352,14 @@ namespace BeamPlayerClient.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, PlayerCommonOperationResponseActionsInnerAllOfOneOf12 playerCommonOperationResponseActionsInnerAllOfOneOf12, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (playerCommonOperationResponseActionsInnerAllOfOneOf12.Context == null)
+                throw new ArgumentNullException(nameof(playerCommonOperationResponseActionsInnerAllOfOneOf12.Context), "Property is required for class PlayerCommonOperationResponseActionsInnerAllOfOneOf12.");
+
             if (playerCommonOperationResponseActionsInnerAllOfOneOf12.Transaction == null)
                 throw new ArgumentNullException(nameof(playerCommonOperationResponseActionsInnerAllOfOneOf12.Transaction), "Property is required for class PlayerCommonOperationResponseActionsInnerAllOfOneOf12.");
 
+            writer.WritePropertyName("context");
+            JsonSerializer.Serialize(writer, playerCommonOperationResponseActionsInnerAllOfOneOf12.Context, jsonSerializerOptions);
             writer.WritePropertyName("transaction");
             JsonSerializer.Serialize(writer, playerCommonOperationResponseActionsInnerAllOfOneOf12.Transaction, jsonSerializerOptions);
             var typeRawValue = PlayerCommonOperationResponseActionsInnerAllOfOneOf12.TypeEnumToJsonValue(playerCommonOperationResponseActionsInnerAllOfOneOf12.Type);

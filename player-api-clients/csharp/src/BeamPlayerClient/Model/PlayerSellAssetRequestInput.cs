@@ -293,39 +293,29 @@ namespace BeamPlayerClient.Model
             BEAM = 1,
 
             /// <summary>
-            /// Enum IMX for value: IMX
-            /// </summary>
-            IMX = 2,
-
-            /// <summary>
             /// Enum SOPH for value: SOPH
             /// </summary>
-            SOPH = 3,
+            SOPH = 2,
 
             /// <summary>
             /// Enum WBEAM for value: WBEAM
             /// </summary>
-            WBEAM = 4,
-
-            /// <summary>
-            /// Enum WIMX for value: WIMX
-            /// </summary>
-            WIMX = 5,
+            WBEAM = 3,
 
             /// <summary>
             /// Enum WSOPH for value: WSOPH
             /// </summary>
-            WSOPH = 6,
+            WSOPH = 4,
 
             /// <summary>
             /// Enum RAT for value: RAT
             /// </summary>
-            RAT = 7,
+            RAT = 5,
 
             /// <summary>
             /// Enum USDC for value: USDC
             /// </summary>
-            USDC = 8
+            USDC = 6
         }
 
         /// <summary>
@@ -339,17 +329,11 @@ namespace BeamPlayerClient.Model
             if (value.Equals("BEAM"))
                 return CurrencyEnum.BEAM;
 
-            if (value.Equals("IMX"))
-                return CurrencyEnum.IMX;
-
             if (value.Equals("SOPH"))
                 return CurrencyEnum.SOPH;
 
             if (value.Equals("WBEAM"))
                 return CurrencyEnum.WBEAM;
-
-            if (value.Equals("WIMX"))
-                return CurrencyEnum.WIMX;
 
             if (value.Equals("WSOPH"))
                 return CurrencyEnum.WSOPH;
@@ -373,17 +357,11 @@ namespace BeamPlayerClient.Model
             if (value.Equals("BEAM"))
                 return CurrencyEnum.BEAM;
 
-            if (value.Equals("IMX"))
-                return CurrencyEnum.IMX;
-
             if (value.Equals("SOPH"))
                 return CurrencyEnum.SOPH;
 
             if (value.Equals("WBEAM"))
                 return CurrencyEnum.WBEAM;
-
-            if (value.Equals("WIMX"))
-                return CurrencyEnum.WIMX;
 
             if (value.Equals("WSOPH"))
                 return CurrencyEnum.WSOPH;
@@ -408,17 +386,11 @@ namespace BeamPlayerClient.Model
             if (value == CurrencyEnum.BEAM)
                 return "BEAM";
 
-            if (value == CurrencyEnum.IMX)
-                return "IMX";
-
             if (value == CurrencyEnum.SOPH)
                 return "SOPH";
 
             if (value == CurrencyEnum.WBEAM)
                 return "WBEAM";
-
-            if (value == CurrencyEnum.WIMX)
-                return "WIMX";
 
             if (value == CurrencyEnum.WSOPH)
                 return "WSOPH";
@@ -447,17 +419,11 @@ namespace BeamPlayerClient.Model
                     if (value.Equals("BEAM"))
                         return CurrencyEnum.BEAM;
 
-                    if (value.Equals("IMX"))
-                        return CurrencyEnum.IMX;
-
                     if (value.Equals("SOPH"))
                         return CurrencyEnum.SOPH;
 
                     if (value.Equals("WBEAM"))
                         return CurrencyEnum.WBEAM;
-
-                    if (value.Equals("WIMX"))
-                        return CurrencyEnum.WIMX;
 
                     if (value.Equals("WSOPH"))
                         return CurrencyEnum.WSOPH;
@@ -481,17 +447,11 @@ namespace BeamPlayerClient.Model
                     if (value.Equals("BEAM"))
                         return CurrencyEnum.BEAM;
 
-                    if (value.Equals("IMX"))
-                        return CurrencyEnum.IMX;
-
                     if (value.Equals("SOPH"))
                         return CurrencyEnum.SOPH;
 
                     if (value.Equals("WBEAM"))
                         return CurrencyEnum.WBEAM;
-
-                    if (value.Equals("WIMX"))
-                        return CurrencyEnum.WIMX;
 
                     if (value.Equals("WSOPH"))
                         return CurrencyEnum.WSOPH;
@@ -516,17 +476,11 @@ namespace BeamPlayerClient.Model
                         if (value == CurrencyEnum.BEAM)
                             return "BEAM";
 
-                        if (value == CurrencyEnum.IMX)
-                            return "IMX";
-
                         if (value == CurrencyEnum.SOPH)
                             return "SOPH";
 
                         if (value == CurrencyEnum.WBEAM)
                             return "WBEAM";
-
-                        if (value == CurrencyEnum.WIMX)
-                            return "WIMX";
 
                         if (value == CurrencyEnum.WSOPH)
                             return "WSOPH";

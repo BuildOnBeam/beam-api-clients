@@ -104,6 +104,12 @@ export type CommonOperationResponse = {
           actionId: string | null;
           hash: string | null;
         };
+        context: {
+          currencyAmount: string;
+          currencyAddress: string;
+          assetId: string;
+          assetAddress: string;
+        };
       }
     | {
         type: 'MarketplaceCancelOffer';
@@ -123,6 +129,9 @@ export type CommonOperationResponse = {
           sponsored: boolean;
           actionId: string | null;
           hash: string | null;
+        };
+        context: {
+          offerId: string;
         };
       }
     | {
@@ -144,9 +153,18 @@ export type CommonOperationResponse = {
           actionId: string | null;
           hash: string | null;
         };
+        context: {
+          offerId: string;
+        };
       }
     | {
         type: 'MarketplaceListAsset';
+        context: {
+          assetAddress: string;
+          assetId: string;
+          currencyAddress: string;
+          currencyAmount: string;
+        };
         signature: {
           type: 'TypedData';
           id: string;
@@ -176,6 +194,9 @@ export type CommonOperationResponse = {
           actionId: string | null;
           hash: string | null;
         };
+        context: {
+          orderId: string;
+        };
       }
     | {
         type: 'MarketplaceCancelListing';
@@ -196,6 +217,9 @@ export type CommonOperationResponse = {
           actionId: string | null;
           hash: string | null;
         };
+        context: {
+          orderId: string;
+        };
       }
     | {
         type: 'SessionRevoke';
@@ -215,6 +239,9 @@ export type CommonOperationResponse = {
           sponsored: boolean;
           actionId: string | null;
           hash: string | null;
+        };
+        context: {
+          sessionAddress: string;
         };
       }
     | {
@@ -295,6 +322,7 @@ export type CommonOperationResponse = {
       }
     | {
         type: 'CustomTransaction';
+        context: any;
         signature:
           | ({
               type: 'Message';

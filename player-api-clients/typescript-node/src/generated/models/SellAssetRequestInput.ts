@@ -35,10 +35,8 @@ export namespace SellAssetRequestInput {
 
   export enum currency {
     BEAM = 'BEAM',
-    IMX = 'IMX',
     SOPH = 'SOPH',
     WBEAM = 'WBEAM',
-    WIMX = 'WIMX',
     WSOPH = 'WSOPH',
     RAT = 'RAT',
     USDC = 'USDC',

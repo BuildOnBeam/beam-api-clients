@@ -64,6 +64,12 @@ export type CreateOperationRequestInput = {
               type: 'TypedData';
               data?: any;
             };
+            context: {
+              currencyAmount: string;
+              currencyAddress: string;
+              assetId: string;
+              assetAddress: string;
+            };
           }
         | {
             type: 'MarketplaceCancelOffer';
@@ -74,6 +80,9 @@ export type CreateOperationRequestInput = {
             transaction: {
               openfortId?: string | null;
               sponsored: boolean;
+            };
+            context: {
+              offerId: string;
             };
           }
         | {
@@ -86,9 +95,18 @@ export type CreateOperationRequestInput = {
               openfortId?: string | null;
               sponsored: boolean;
             };
+            context: {
+              offerId: string;
+            };
           }
         | {
             type: 'MarketplaceListAsset';
+            context: {
+              assetAddress: string;
+              assetId: string;
+              currencyAddress: string;
+              currencyAmount: string;
+            };
             signature: {
               type: 'TypedData';
               data?: any;
@@ -96,6 +114,9 @@ export type CreateOperationRequestInput = {
           }
         | {
             type: 'MarketplaceBuyAsset';
+            context: {
+              orderId: string;
+            };
             signature: {
               type: 'Message';
               data: string;
@@ -107,6 +128,9 @@ export type CreateOperationRequestInput = {
           }
         | {
             type: 'MarketplaceCancelListing';
+            context: {
+              orderId: string;
+            };
             signature: {
               type: 'Message';
               data: string;
@@ -118,6 +142,9 @@ export type CreateOperationRequestInput = {
           }
         | {
             type: 'SessionRevoke';
+            context: {
+              sessionAddress: string;
+            };
             signature: {
               type: 'Message';
               data: string;
@@ -178,6 +205,7 @@ export type CreateOperationRequestInput = {
           }
         | {
             type: 'CustomTransaction';
+            context: any;
             signature:
               | {
                   type: 'Message';

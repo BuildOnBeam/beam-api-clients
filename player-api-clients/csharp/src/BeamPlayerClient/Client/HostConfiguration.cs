@@ -66,13 +66,18 @@ namespace BeamPlayerClient.Client
             _jsonOptions.Converters.Add(new PlayerCommonOperationResponseActionsInnerAllOfOneOf13JsonConverter());
             _jsonOptions.Converters.Add(new PlayerCommonOperationResponseActionsInnerAllOfOneOf1ContextJsonConverter());
             _jsonOptions.Converters.Add(new PlayerCommonOperationResponseActionsInnerAllOfOneOf2JsonConverter());
+            _jsonOptions.Converters.Add(new PlayerCommonOperationResponseActionsInnerAllOfOneOf2ContextJsonConverter());
             _jsonOptions.Converters.Add(new PlayerCommonOperationResponseActionsInnerAllOfOneOf2SignatureJsonConverter());
             _jsonOptions.Converters.Add(new PlayerCommonOperationResponseActionsInnerAllOfOneOf3JsonConverter());
+            _jsonOptions.Converters.Add(new PlayerCommonOperationResponseActionsInnerAllOfOneOf3ContextJsonConverter());
             _jsonOptions.Converters.Add(new PlayerCommonOperationResponseActionsInnerAllOfOneOf4JsonConverter());
             _jsonOptions.Converters.Add(new PlayerCommonOperationResponseActionsInnerAllOfOneOf5JsonConverter());
+            _jsonOptions.Converters.Add(new PlayerCommonOperationResponseActionsInnerAllOfOneOf5ContextJsonConverter());
             _jsonOptions.Converters.Add(new PlayerCommonOperationResponseActionsInnerAllOfOneOf6JsonConverter());
+            _jsonOptions.Converters.Add(new PlayerCommonOperationResponseActionsInnerAllOfOneOf6ContextJsonConverter());
             _jsonOptions.Converters.Add(new PlayerCommonOperationResponseActionsInnerAllOfOneOf7JsonConverter());
             _jsonOptions.Converters.Add(new PlayerCommonOperationResponseActionsInnerAllOfOneOf8JsonConverter());
+            _jsonOptions.Converters.Add(new PlayerCommonOperationResponseActionsInnerAllOfOneOf8ContextJsonConverter());
             _jsonOptions.Converters.Add(new PlayerCommonOperationResponseActionsInnerAllOfOneOf9JsonConverter());
             _jsonOptions.Converters.Add(new PlayerCommonOperationResponseActionsInnerAllOfOneOf9ContextJsonConverter());
             _jsonOptions.Converters.Add(new PlayerCommonOperationResponseActionsInnerAllOfOneOf9ContextInputJsonConverter());
