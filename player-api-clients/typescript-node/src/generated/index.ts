@@ -17,7 +17,6 @@ export { CancelAssetOfferRequestInput } from './models/CancelAssetOfferRequestIn
 export type { CommonActivityResponse } from './models/CommonActivityResponse';
 export type { CommonAssetActivityRequestInput } from './models/CommonAssetActivityRequestInput';
 export type { CommonContractActivityRequestInput } from './models/CommonContractActivityRequestInput';
-export { CommonOperationResponse } from './models/CommonOperationResponse';
 export type { CommonStatsRequestInput } from './models/CommonStatsRequestInput';
 export type { CommonStatsResponse } from './models/CommonStatsResponse';
 export type { CommonUserActivityRequestInput } from './models/CommonUserActivityRequestInput';
@@ -28,7 +27,6 @@ export type { CreateConnectionRequestInput } from './models/CreateConnectionRequ
 export { CreateConnectionRequestResponse } from './models/CreateConnectionRequestResponse';
 export { CreateOnrampRequestInput } from './models/CreateOnrampRequestInput';
 export type { CreateOnrampRequestResponse } from './models/CreateOnrampRequestResponse';
-export { CreateOperationRequestInput } from './models/CreateOperationRequestInput';
 export { CreateTransactionRequestInput } from './models/CreateTransactionRequestInput';
 export { GenerateSessionRequestResponse } from './models/GenerateSessionRequestResponse';
 export type { GenerateSessionUrlRequestInput } from './models/GenerateSessionUrlRequestInput';
@@ -55,6 +53,7 @@ export type { GetTransactionsResponse } from './models/GetTransactionsResponse';
 export type { GetUserCurrenciesResponse } from './models/GetUserCurrenciesResponse';
 export type { GetUserNativeCurrencyResponse } from './models/GetUserNativeCurrencyResponse';
 export type { GetUserResponse } from './models/GetUserResponse';
+export { PlayerOperationResponse } from './models/PlayerOperationResponse';
 export type { RefreshContractRequestBody } from './models/RefreshContractRequestBody';
 export type { RefreshTokenRequestBody } from './models/RefreshTokenRequestBody';
 export { RevokeSessionRequestInput } from './models/RevokeSessionRequestInput';

@@ -22,7 +22,6 @@ export type SellAssetRequestInput = {
   policyId?: string | null;
   chainId?: number;
   operationProcessing?: SellAssetRequestInput.operationProcessing;
-  operationId?: string | null;
 };
 
 export namespace SellAssetRequestInput {

@@ -8,7 +8,6 @@ export type CancelAssetOfferRequestInput = {
   sponsor?: boolean;
   policyId?: string | null;
   operationProcessing?: CancelAssetOfferRequestInput.operationProcessing;
-  operationId?: string | null;
   chainId?: number;
 };
 

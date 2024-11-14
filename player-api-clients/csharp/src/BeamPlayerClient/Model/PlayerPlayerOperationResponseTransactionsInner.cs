@@ -27,12 +27,12 @@ using BeamPlayerClient.Client;
 namespace BeamPlayerClient.Model
 {
     /// <summary>
-    /// PlayerCommonOperationResponseTransactionsInner
+    /// PlayerPlayerOperationResponseTransactionsInner
     /// </summary>
-    public partial class PlayerCommonOperationResponseTransactionsInner : IValidatableObject
+    public partial class PlayerPlayerOperationResponseTransactionsInner : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PlayerCommonOperationResponseTransactionsInner" /> class.
+        /// Initializes a new instance of the <see cref="PlayerPlayerOperationResponseTransactionsInner" /> class.
         /// </summary>
         /// <param name="hash">hash</param>
         /// <param name="id">id</param>
@@ -47,7 +47,7 @@ namespace BeamPlayerClient.Model
         /// <param name="transactionHash">transactionHash</param>
         /// <param name="type">type</param>
         [JsonConstructor]
-        public PlayerCommonOperationResponseTransactionsInner(string hash, string id, bool sponsored, StatusEnum status, string? actionId = default, Option<Object?> data = default, string? externalId = default, string? openfortId = default, string? operationId = default, string? signature = default, string? transactionHash = default, TypeEnum? type = default)
+        public PlayerPlayerOperationResponseTransactionsInner(string hash, string id, bool sponsored, StatusEnum status, string? actionId = default, Option<Object?> data = default, string? externalId = default, string? openfortId = default, string? operationId = default, string? signature = default, string? transactionHash = default, TypeEnum? type = default)
         {
             Hash = hash;
             Id = id;
@@ -569,7 +569,7 @@ namespace BeamPlayerClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class PlayerCommonOperationResponseTransactionsInner {\n");
+            sb.Append("class PlayerPlayerOperationResponseTransactionsInner {\n");
             sb.Append("  Hash: ").Append(Hash).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Sponsored: ").Append(Sponsored).Append("\n");
@@ -598,19 +598,19 @@ namespace BeamPlayerClient.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="PlayerCommonOperationResponseTransactionsInner" />
+    /// A Json converter for type <see cref="PlayerPlayerOperationResponseTransactionsInner" />
     /// </summary>
-    public class PlayerCommonOperationResponseTransactionsInnerJsonConverter : JsonConverter<PlayerCommonOperationResponseTransactionsInner>
+    public class PlayerPlayerOperationResponseTransactionsInnerJsonConverter : JsonConverter<PlayerPlayerOperationResponseTransactionsInner>
     {
         /// <summary>
-        /// Deserializes json to <see cref="PlayerCommonOperationResponseTransactionsInner" />
+        /// Deserializes json to <see cref="PlayerPlayerOperationResponseTransactionsInner" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override PlayerCommonOperationResponseTransactionsInner Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override PlayerPlayerOperationResponseTransactionsInner Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -622,7 +622,7 @@ namespace BeamPlayerClient.Model
             Option<string?> hash = default;
             Option<string?> id = default;
             Option<bool?> sponsored = default;
-            Option<PlayerCommonOperationResponseTransactionsInner.StatusEnum?> status = default;
+            Option<PlayerPlayerOperationResponseTransactionsInner.StatusEnum?> status = default;
             Option<string?> actionId = default;
             Option<Object?> data = default;
             Option<string?> externalId = default;
@@ -630,7 +630,7 @@ namespace BeamPlayerClient.Model
             Option<string?> operationId = default;
             Option<string?> signature = default;
             Option<string?> transactionHash = default;
-            Option<PlayerCommonOperationResponseTransactionsInner.TypeEnum?> type = default;
+            Option<PlayerPlayerOperationResponseTransactionsInner.TypeEnum?> type = default;
 
             while (utf8JsonReader.Read())
             {
@@ -660,7 +660,7 @@ namespace BeamPlayerClient.Model
                         case "status":
                             string? statusRawValue = utf8JsonReader.GetString();
                             if (statusRawValue != null)
-                                status = new Option<PlayerCommonOperationResponseTransactionsInner.StatusEnum?>(PlayerCommonOperationResponseTransactionsInner.StatusEnumFromStringOrDefault(statusRawValue));
+                                status = new Option<PlayerPlayerOperationResponseTransactionsInner.StatusEnum?>(PlayerPlayerOperationResponseTransactionsInner.StatusEnumFromStringOrDefault(statusRawValue));
                             break;
                         case "actionId":
                             actionId = new Option<string?>(utf8JsonReader.GetString());
@@ -687,7 +687,7 @@ namespace BeamPlayerClient.Model
                         case "type":
                             string? typeRawValue = utf8JsonReader.GetString();
                             if (typeRawValue != null)
-                                type = new Option<PlayerCommonOperationResponseTransactionsInner.TypeEnum?>(PlayerCommonOperationResponseTransactionsInner.TypeEnumFromStringOrDefault(typeRawValue));
+                                type = new Option<PlayerPlayerOperationResponseTransactionsInner.TypeEnum?>(PlayerPlayerOperationResponseTransactionsInner.TypeEnumFromStringOrDefault(typeRawValue));
                             break;
                         default:
                             break;
@@ -696,130 +696,130 @@ namespace BeamPlayerClient.Model
             }
 
             if (!hash.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCommonOperationResponseTransactionsInner.", nameof(hash));
+                throw new ArgumentException("Property is required for class PlayerPlayerOperationResponseTransactionsInner.", nameof(hash));
 
             if (!id.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCommonOperationResponseTransactionsInner.", nameof(id));
+                throw new ArgumentException("Property is required for class PlayerPlayerOperationResponseTransactionsInner.", nameof(id));
 
             if (!sponsored.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCommonOperationResponseTransactionsInner.", nameof(sponsored));
+                throw new ArgumentException("Property is required for class PlayerPlayerOperationResponseTransactionsInner.", nameof(sponsored));
 
             if (!status.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCommonOperationResponseTransactionsInner.", nameof(status));
+                throw new ArgumentException("Property is required for class PlayerPlayerOperationResponseTransactionsInner.", nameof(status));
 
             if (!actionId.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCommonOperationResponseTransactionsInner.", nameof(actionId));
+                throw new ArgumentException("Property is required for class PlayerPlayerOperationResponseTransactionsInner.", nameof(actionId));
 
             if (!externalId.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCommonOperationResponseTransactionsInner.", nameof(externalId));
+                throw new ArgumentException("Property is required for class PlayerPlayerOperationResponseTransactionsInner.", nameof(externalId));
 
             if (!openfortId.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCommonOperationResponseTransactionsInner.", nameof(openfortId));
+                throw new ArgumentException("Property is required for class PlayerPlayerOperationResponseTransactionsInner.", nameof(openfortId));
 
             if (!operationId.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCommonOperationResponseTransactionsInner.", nameof(operationId));
+                throw new ArgumentException("Property is required for class PlayerPlayerOperationResponseTransactionsInner.", nameof(operationId));
 
             if (!signature.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCommonOperationResponseTransactionsInner.", nameof(signature));
+                throw new ArgumentException("Property is required for class PlayerPlayerOperationResponseTransactionsInner.", nameof(signature));
 
             if (!transactionHash.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCommonOperationResponseTransactionsInner.", nameof(transactionHash));
+                throw new ArgumentException("Property is required for class PlayerPlayerOperationResponseTransactionsInner.", nameof(transactionHash));
 
             if (!type.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCommonOperationResponseTransactionsInner.", nameof(type));
+                throw new ArgumentException("Property is required for class PlayerPlayerOperationResponseTransactionsInner.", nameof(type));
 
             if (hash.IsSet && hash.Value == null)
-                throw new ArgumentNullException(nameof(hash), "Property is not nullable for class PlayerCommonOperationResponseTransactionsInner.");
+                throw new ArgumentNullException(nameof(hash), "Property is not nullable for class PlayerPlayerOperationResponseTransactionsInner.");
 
             if (id.IsSet && id.Value == null)
-                throw new ArgumentNullException(nameof(id), "Property is not nullable for class PlayerCommonOperationResponseTransactionsInner.");
+                throw new ArgumentNullException(nameof(id), "Property is not nullable for class PlayerPlayerOperationResponseTransactionsInner.");
 
             if (sponsored.IsSet && sponsored.Value == null)
-                throw new ArgumentNullException(nameof(sponsored), "Property is not nullable for class PlayerCommonOperationResponseTransactionsInner.");
+                throw new ArgumentNullException(nameof(sponsored), "Property is not nullable for class PlayerPlayerOperationResponseTransactionsInner.");
 
             if (status.IsSet && status.Value == null)
-                throw new ArgumentNullException(nameof(status), "Property is not nullable for class PlayerCommonOperationResponseTransactionsInner.");
+                throw new ArgumentNullException(nameof(status), "Property is not nullable for class PlayerPlayerOperationResponseTransactionsInner.");
 
-            return new PlayerCommonOperationResponseTransactionsInner(hash.Value!, id.Value!, sponsored.Value!.Value!, status.Value!.Value!, actionId.Value!, data, externalId.Value!, openfortId.Value!, operationId.Value!, signature.Value!, transactionHash.Value!, type.Value!);
+            return new PlayerPlayerOperationResponseTransactionsInner(hash.Value!, id.Value!, sponsored.Value!.Value!, status.Value!.Value!, actionId.Value!, data, externalId.Value!, openfortId.Value!, operationId.Value!, signature.Value!, transactionHash.Value!, type.Value!);
         }
 
         /// <summary>
-        /// Serializes a <see cref="PlayerCommonOperationResponseTransactionsInner" />
+        /// Serializes a <see cref="PlayerPlayerOperationResponseTransactionsInner" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="playerCommonOperationResponseTransactionsInner"></param>
+        /// <param name="playerPlayerOperationResponseTransactionsInner"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, PlayerCommonOperationResponseTransactionsInner playerCommonOperationResponseTransactionsInner, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, PlayerPlayerOperationResponseTransactionsInner playerPlayerOperationResponseTransactionsInner, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(ref writer, playerCommonOperationResponseTransactionsInner, jsonSerializerOptions);
+            WriteProperties(ref writer, playerPlayerOperationResponseTransactionsInner, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="PlayerCommonOperationResponseTransactionsInner" />
+        /// Serializes the properties of <see cref="PlayerPlayerOperationResponseTransactionsInner" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="playerCommonOperationResponseTransactionsInner"></param>
+        /// <param name="playerPlayerOperationResponseTransactionsInner"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(ref Utf8JsonWriter writer, PlayerCommonOperationResponseTransactionsInner playerCommonOperationResponseTransactionsInner, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(ref Utf8JsonWriter writer, PlayerPlayerOperationResponseTransactionsInner playerPlayerOperationResponseTransactionsInner, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (playerCommonOperationResponseTransactionsInner.Hash == null)
-                throw new ArgumentNullException(nameof(playerCommonOperationResponseTransactionsInner.Hash), "Property is required for class PlayerCommonOperationResponseTransactionsInner.");
+            if (playerPlayerOperationResponseTransactionsInner.Hash == null)
+                throw new ArgumentNullException(nameof(playerPlayerOperationResponseTransactionsInner.Hash), "Property is required for class PlayerPlayerOperationResponseTransactionsInner.");
 
-            if (playerCommonOperationResponseTransactionsInner.Id == null)
-                throw new ArgumentNullException(nameof(playerCommonOperationResponseTransactionsInner.Id), "Property is required for class PlayerCommonOperationResponseTransactionsInner.");
+            if (playerPlayerOperationResponseTransactionsInner.Id == null)
+                throw new ArgumentNullException(nameof(playerPlayerOperationResponseTransactionsInner.Id), "Property is required for class PlayerPlayerOperationResponseTransactionsInner.");
 
-            writer.WriteString("hash", playerCommonOperationResponseTransactionsInner.Hash);
+            writer.WriteString("hash", playerPlayerOperationResponseTransactionsInner.Hash);
 
-            writer.WriteString("id", playerCommonOperationResponseTransactionsInner.Id);
+            writer.WriteString("id", playerPlayerOperationResponseTransactionsInner.Id);
 
-            writer.WriteBoolean("sponsored", playerCommonOperationResponseTransactionsInner.Sponsored);
+            writer.WriteBoolean("sponsored", playerPlayerOperationResponseTransactionsInner.Sponsored);
 
-            var statusRawValue = PlayerCommonOperationResponseTransactionsInner.StatusEnumToJsonValue(playerCommonOperationResponseTransactionsInner.Status);
+            var statusRawValue = PlayerPlayerOperationResponseTransactionsInner.StatusEnumToJsonValue(playerPlayerOperationResponseTransactionsInner.Status);
             writer.WriteString("status", statusRawValue);
-            if (playerCommonOperationResponseTransactionsInner.ActionId != null)
-                writer.WriteString("actionId", playerCommonOperationResponseTransactionsInner.ActionId);
+            if (playerPlayerOperationResponseTransactionsInner.ActionId != null)
+                writer.WriteString("actionId", playerPlayerOperationResponseTransactionsInner.ActionId);
             else
                 writer.WriteNull("actionId");
 
-            if (playerCommonOperationResponseTransactionsInner.DataOption.IsSet)
-                if (playerCommonOperationResponseTransactionsInner.DataOption.Value != null)
+            if (playerPlayerOperationResponseTransactionsInner.DataOption.IsSet)
+                if (playerPlayerOperationResponseTransactionsInner.DataOption.Value != null)
                 {
                     writer.WritePropertyName("data");
-                    JsonSerializer.Serialize(writer, playerCommonOperationResponseTransactionsInner.Data, jsonSerializerOptions);
+                    JsonSerializer.Serialize(writer, playerPlayerOperationResponseTransactionsInner.Data, jsonSerializerOptions);
                 }
                 else
                     writer.WriteNull("data");
-            if (playerCommonOperationResponseTransactionsInner.ExternalId != null)
-                writer.WriteString("externalId", playerCommonOperationResponseTransactionsInner.ExternalId);
+            if (playerPlayerOperationResponseTransactionsInner.ExternalId != null)
+                writer.WriteString("externalId", playerPlayerOperationResponseTransactionsInner.ExternalId);
             else
                 writer.WriteNull("externalId");
 
-            if (playerCommonOperationResponseTransactionsInner.OpenfortId != null)
-                writer.WriteString("openfortId", playerCommonOperationResponseTransactionsInner.OpenfortId);
+            if (playerPlayerOperationResponseTransactionsInner.OpenfortId != null)
+                writer.WriteString("openfortId", playerPlayerOperationResponseTransactionsInner.OpenfortId);
             else
                 writer.WriteNull("openfortId");
 
-            if (playerCommonOperationResponseTransactionsInner.OperationId != null)
-                writer.WriteString("operationId", playerCommonOperationResponseTransactionsInner.OperationId);
+            if (playerPlayerOperationResponseTransactionsInner.OperationId != null)
+                writer.WriteString("operationId", playerPlayerOperationResponseTransactionsInner.OperationId);
             else
                 writer.WriteNull("operationId");
 
-            if (playerCommonOperationResponseTransactionsInner.Signature != null)
-                writer.WriteString("signature", playerCommonOperationResponseTransactionsInner.Signature);
+            if (playerPlayerOperationResponseTransactionsInner.Signature != null)
+                writer.WriteString("signature", playerPlayerOperationResponseTransactionsInner.Signature);
             else
                 writer.WriteNull("signature");
 
-            if (playerCommonOperationResponseTransactionsInner.TransactionHash != null)
-                writer.WriteString("transactionHash", playerCommonOperationResponseTransactionsInner.TransactionHash);
+            if (playerPlayerOperationResponseTransactionsInner.TransactionHash != null)
+                writer.WriteString("transactionHash", playerPlayerOperationResponseTransactionsInner.TransactionHash);
             else
                 writer.WriteNull("transactionHash");
 
-            var typeRawValue = PlayerCommonOperationResponseTransactionsInner.TypeEnumToJsonValue(playerCommonOperationResponseTransactionsInner.Type!.Value);
+            var typeRawValue = PlayerPlayerOperationResponseTransactionsInner.TypeEnumToJsonValue(playerPlayerOperationResponseTransactionsInner.Type!.Value);
             if (typeRawValue != null)
                 writer.WriteString("type", typeRawValue);
             else

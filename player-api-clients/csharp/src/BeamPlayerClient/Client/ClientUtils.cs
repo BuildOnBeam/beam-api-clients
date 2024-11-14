@@ -134,50 +134,6 @@ namespace BeamPlayerClient.Client
                 return PlayerCommonAssetActivityRequestInput.TypesEnumToJsonValue(playerCommonAssetActivityRequestInputTypesEnum);
             if (obj is PlayerCommonContractActivityRequestInput.TypesEnum playerCommonContractActivityRequestInputTypesEnum)
                 return PlayerCommonContractActivityRequestInput.TypesEnumToJsonValue(playerCommonContractActivityRequestInputTypesEnum);
-            if (obj is PlayerCommonOperationResponse.ProcessingEnum playerCommonOperationResponseProcessingEnum)
-                return PlayerCommonOperationResponse.ProcessingEnumToJsonValue(playerCommonOperationResponseProcessingEnum);
-            if (obj is PlayerCommonOperationResponse.StatusEnum playerCommonOperationResponseStatusEnum)
-                return PlayerCommonOperationResponse.StatusEnumToJsonValue(playerCommonOperationResponseStatusEnum);
-            if (obj is PlayerCommonOperationResponseActionsInner.TypeEnum playerCommonOperationResponseActionsInnerTypeEnum)
-                return PlayerCommonOperationResponseActionsInner.TypeEnumToJsonValue(playerCommonOperationResponseActionsInnerTypeEnum);
-            if (obj is PlayerCommonOperationResponseActionsInnerAllOfOneOf.TypeEnum playerCommonOperationResponseActionsInnerAllOfOneOfTypeEnum)
-                return PlayerCommonOperationResponseActionsInnerAllOfOneOf.TypeEnumToJsonValue(playerCommonOperationResponseActionsInnerAllOfOneOfTypeEnum);
-            if (obj is PlayerCommonOperationResponseActionsInnerAllOfOneOf1.TypeEnum playerCommonOperationResponseActionsInnerAllOfOneOf1TypeEnum)
-                return PlayerCommonOperationResponseActionsInnerAllOfOneOf1.TypeEnumToJsonValue(playerCommonOperationResponseActionsInnerAllOfOneOf1TypeEnum);
-            if (obj is PlayerCommonOperationResponseActionsInnerAllOfOneOf10.TypeEnum playerCommonOperationResponseActionsInnerAllOfOneOf10TypeEnum)
-                return PlayerCommonOperationResponseActionsInnerAllOfOneOf10.TypeEnumToJsonValue(playerCommonOperationResponseActionsInnerAllOfOneOf10TypeEnum);
-            if (obj is PlayerCommonOperationResponseActionsInnerAllOfOneOf11.TypeEnum playerCommonOperationResponseActionsInnerAllOfOneOf11TypeEnum)
-                return PlayerCommonOperationResponseActionsInnerAllOfOneOf11.TypeEnumToJsonValue(playerCommonOperationResponseActionsInnerAllOfOneOf11TypeEnum);
-            if (obj is PlayerCommonOperationResponseActionsInnerAllOfOneOf12.TypeEnum playerCommonOperationResponseActionsInnerAllOfOneOf12TypeEnum)
-                return PlayerCommonOperationResponseActionsInnerAllOfOneOf12.TypeEnumToJsonValue(playerCommonOperationResponseActionsInnerAllOfOneOf12TypeEnum);
-            if (obj is PlayerCommonOperationResponseActionsInnerAllOfOneOf13.TypeEnum playerCommonOperationResponseActionsInnerAllOfOneOf13TypeEnum)
-                return PlayerCommonOperationResponseActionsInnerAllOfOneOf13.TypeEnumToJsonValue(playerCommonOperationResponseActionsInnerAllOfOneOf13TypeEnum);
-            if (obj is PlayerCommonOperationResponseActionsInnerAllOfOneOf2.TypeEnum playerCommonOperationResponseActionsInnerAllOfOneOf2TypeEnum)
-                return PlayerCommonOperationResponseActionsInnerAllOfOneOf2.TypeEnumToJsonValue(playerCommonOperationResponseActionsInnerAllOfOneOf2TypeEnum);
-            if (obj is PlayerCommonOperationResponseActionsInnerAllOfOneOf2Signature.TypeEnum playerCommonOperationResponseActionsInnerAllOfOneOf2SignatureTypeEnum)
-                return PlayerCommonOperationResponseActionsInnerAllOfOneOf2Signature.TypeEnumToJsonValue(playerCommonOperationResponseActionsInnerAllOfOneOf2SignatureTypeEnum);
-            if (obj is PlayerCommonOperationResponseActionsInnerAllOfOneOf3.TypeEnum playerCommonOperationResponseActionsInnerAllOfOneOf3TypeEnum)
-                return PlayerCommonOperationResponseActionsInnerAllOfOneOf3.TypeEnumToJsonValue(playerCommonOperationResponseActionsInnerAllOfOneOf3TypeEnum);
-            if (obj is PlayerCommonOperationResponseActionsInnerAllOfOneOf4.TypeEnum playerCommonOperationResponseActionsInnerAllOfOneOf4TypeEnum)
-                return PlayerCommonOperationResponseActionsInnerAllOfOneOf4.TypeEnumToJsonValue(playerCommonOperationResponseActionsInnerAllOfOneOf4TypeEnum);
-            if (obj is PlayerCommonOperationResponseActionsInnerAllOfOneOf5.TypeEnum playerCommonOperationResponseActionsInnerAllOfOneOf5TypeEnum)
-                return PlayerCommonOperationResponseActionsInnerAllOfOneOf5.TypeEnumToJsonValue(playerCommonOperationResponseActionsInnerAllOfOneOf5TypeEnum);
-            if (obj is PlayerCommonOperationResponseActionsInnerAllOfOneOf6.TypeEnum playerCommonOperationResponseActionsInnerAllOfOneOf6TypeEnum)
-                return PlayerCommonOperationResponseActionsInnerAllOfOneOf6.TypeEnumToJsonValue(playerCommonOperationResponseActionsInnerAllOfOneOf6TypeEnum);
-            if (obj is PlayerCommonOperationResponseActionsInnerAllOfOneOf7.TypeEnum playerCommonOperationResponseActionsInnerAllOfOneOf7TypeEnum)
-                return PlayerCommonOperationResponseActionsInnerAllOfOneOf7.TypeEnumToJsonValue(playerCommonOperationResponseActionsInnerAllOfOneOf7TypeEnum);
-            if (obj is PlayerCommonOperationResponseActionsInnerAllOfOneOf8.TypeEnum playerCommonOperationResponseActionsInnerAllOfOneOf8TypeEnum)
-                return PlayerCommonOperationResponseActionsInnerAllOfOneOf8.TypeEnumToJsonValue(playerCommonOperationResponseActionsInnerAllOfOneOf8TypeEnum);
-            if (obj is PlayerCommonOperationResponseActionsInnerAllOfOneOf9.TypeEnum playerCommonOperationResponseActionsInnerAllOfOneOf9TypeEnum)
-                return PlayerCommonOperationResponseActionsInnerAllOfOneOf9.TypeEnumToJsonValue(playerCommonOperationResponseActionsInnerAllOfOneOf9TypeEnum);
-            if (obj is PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature.TypeEnum playerCommonOperationResponseActionsInnerAllOfOneOfSignatureTypeEnum)
-                return PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature.TypeEnumToJsonValue(playerCommonOperationResponseActionsInnerAllOfOneOfSignatureTypeEnum);
-            if (obj is PlayerCommonOperationResponseActionsInnerAllOfOneOfTransaction.StatusEnum playerCommonOperationResponseActionsInnerAllOfOneOfTransactionStatusEnum)
-                return PlayerCommonOperationResponseActionsInnerAllOfOneOfTransaction.StatusEnumToJsonValue(playerCommonOperationResponseActionsInnerAllOfOneOfTransactionStatusEnum);
-            if (obj is PlayerCommonOperationResponseTransactionsInner.StatusEnum playerCommonOperationResponseTransactionsInnerStatusEnum)
-                return PlayerCommonOperationResponseTransactionsInner.StatusEnumToJsonValue(playerCommonOperationResponseTransactionsInnerStatusEnum);
-            if (obj is PlayerCommonOperationResponseTransactionsInner.TypeEnum playerCommonOperationResponseTransactionsInnerTypeEnum)
-                return PlayerCommonOperationResponseTransactionsInner.TypeEnumToJsonValue(playerCommonOperationResponseTransactionsInnerTypeEnum);
             if (obj is PlayerCommonUserActivityRequestInput.TypesEnum playerCommonUserActivityRequestInputTypesEnum)
                 return PlayerCommonUserActivityRequestInput.TypesEnumToJsonValue(playerCommonUserActivityRequestInputTypesEnum);
             if (obj is PlayerConfirmOperationRequest.StatusEnum playerConfirmOperationRequestStatusEnum)
@@ -194,44 +150,6 @@ namespace BeamPlayerClient.Client
                 return PlayerCreateOnrampRequestInput.PaymentCurrencyEnumToJsonValue(playerCreateOnrampRequestInputPaymentCurrencyEnum);
             if (obj is PlayerCreateOnrampRequestInput.TokenEnum playerCreateOnrampRequestInputTokenEnum)
                 return PlayerCreateOnrampRequestInput.TokenEnumToJsonValue(playerCreateOnrampRequestInputTokenEnum);
-            if (obj is PlayerCreateOperationRequestInput.OperationProcessingEnum playerCreateOperationRequestInputOperationProcessingEnum)
-                return PlayerCreateOperationRequestInput.OperationProcessingEnumToJsonValue(playerCreateOperationRequestInputOperationProcessingEnum);
-            if (obj is PlayerCreateOperationRequestInputActionsInner.TypeEnum playerCreateOperationRequestInputActionsInnerTypeEnum)
-                return PlayerCreateOperationRequestInputActionsInner.TypeEnumToJsonValue(playerCreateOperationRequestInputActionsInnerTypeEnum);
-            if (obj is PlayerCreateOperationRequestInputActionsInnerAllOfOneOf.TypeEnum playerCreateOperationRequestInputActionsInnerAllOfOneOfTypeEnum)
-                return PlayerCreateOperationRequestInputActionsInnerAllOfOneOf.TypeEnumToJsonValue(playerCreateOperationRequestInputActionsInnerAllOfOneOfTypeEnum);
-            if (obj is PlayerCreateOperationRequestInputActionsInnerAllOfOneOf1.TypeEnum playerCreateOperationRequestInputActionsInnerAllOfOneOf1TypeEnum)
-                return PlayerCreateOperationRequestInputActionsInnerAllOfOneOf1.TypeEnumToJsonValue(playerCreateOperationRequestInputActionsInnerAllOfOneOf1TypeEnum);
-            if (obj is PlayerCreateOperationRequestInputActionsInnerAllOfOneOf10.TypeEnum playerCreateOperationRequestInputActionsInnerAllOfOneOf10TypeEnum)
-                return PlayerCreateOperationRequestInputActionsInnerAllOfOneOf10.TypeEnumToJsonValue(playerCreateOperationRequestInputActionsInnerAllOfOneOf10TypeEnum);
-            if (obj is PlayerCreateOperationRequestInputActionsInnerAllOfOneOf11.TypeEnum playerCreateOperationRequestInputActionsInnerAllOfOneOf11TypeEnum)
-                return PlayerCreateOperationRequestInputActionsInnerAllOfOneOf11.TypeEnumToJsonValue(playerCreateOperationRequestInputActionsInnerAllOfOneOf11TypeEnum);
-            if (obj is PlayerCreateOperationRequestInputActionsInnerAllOfOneOf12.TypeEnum playerCreateOperationRequestInputActionsInnerAllOfOneOf12TypeEnum)
-                return PlayerCreateOperationRequestInputActionsInnerAllOfOneOf12.TypeEnumToJsonValue(playerCreateOperationRequestInputActionsInnerAllOfOneOf12TypeEnum);
-            if (obj is PlayerCreateOperationRequestInputActionsInnerAllOfOneOf13.TypeEnum playerCreateOperationRequestInputActionsInnerAllOfOneOf13TypeEnum)
-                return PlayerCreateOperationRequestInputActionsInnerAllOfOneOf13.TypeEnumToJsonValue(playerCreateOperationRequestInputActionsInnerAllOfOneOf13TypeEnum);
-            if (obj is PlayerCreateOperationRequestInputActionsInnerAllOfOneOf2.TypeEnum playerCreateOperationRequestInputActionsInnerAllOfOneOf2TypeEnum)
-                return PlayerCreateOperationRequestInputActionsInnerAllOfOneOf2.TypeEnumToJsonValue(playerCreateOperationRequestInputActionsInnerAllOfOneOf2TypeEnum);
-            if (obj is PlayerCreateOperationRequestInputActionsInnerAllOfOneOf2Signature.TypeEnum playerCreateOperationRequestInputActionsInnerAllOfOneOf2SignatureTypeEnum)
-                return PlayerCreateOperationRequestInputActionsInnerAllOfOneOf2Signature.TypeEnumToJsonValue(playerCreateOperationRequestInputActionsInnerAllOfOneOf2SignatureTypeEnum);
-            if (obj is PlayerCreateOperationRequestInputActionsInnerAllOfOneOf3.TypeEnum playerCreateOperationRequestInputActionsInnerAllOfOneOf3TypeEnum)
-                return PlayerCreateOperationRequestInputActionsInnerAllOfOneOf3.TypeEnumToJsonValue(playerCreateOperationRequestInputActionsInnerAllOfOneOf3TypeEnum);
-            if (obj is PlayerCreateOperationRequestInputActionsInnerAllOfOneOf4.TypeEnum playerCreateOperationRequestInputActionsInnerAllOfOneOf4TypeEnum)
-                return PlayerCreateOperationRequestInputActionsInnerAllOfOneOf4.TypeEnumToJsonValue(playerCreateOperationRequestInputActionsInnerAllOfOneOf4TypeEnum);
-            if (obj is PlayerCreateOperationRequestInputActionsInnerAllOfOneOf5.TypeEnum playerCreateOperationRequestInputActionsInnerAllOfOneOf5TypeEnum)
-                return PlayerCreateOperationRequestInputActionsInnerAllOfOneOf5.TypeEnumToJsonValue(playerCreateOperationRequestInputActionsInnerAllOfOneOf5TypeEnum);
-            if (obj is PlayerCreateOperationRequestInputActionsInnerAllOfOneOf6.TypeEnum playerCreateOperationRequestInputActionsInnerAllOfOneOf6TypeEnum)
-                return PlayerCreateOperationRequestInputActionsInnerAllOfOneOf6.TypeEnumToJsonValue(playerCreateOperationRequestInputActionsInnerAllOfOneOf6TypeEnum);
-            if (obj is PlayerCreateOperationRequestInputActionsInnerAllOfOneOf7.TypeEnum playerCreateOperationRequestInputActionsInnerAllOfOneOf7TypeEnum)
-                return PlayerCreateOperationRequestInputActionsInnerAllOfOneOf7.TypeEnumToJsonValue(playerCreateOperationRequestInputActionsInnerAllOfOneOf7TypeEnum);
-            if (obj is PlayerCreateOperationRequestInputActionsInnerAllOfOneOf8.TypeEnum playerCreateOperationRequestInputActionsInnerAllOfOneOf8TypeEnum)
-                return PlayerCreateOperationRequestInputActionsInnerAllOfOneOf8.TypeEnumToJsonValue(playerCreateOperationRequestInputActionsInnerAllOfOneOf8TypeEnum);
-            if (obj is PlayerCreateOperationRequestInputActionsInnerAllOfOneOf9.TypeEnum playerCreateOperationRequestInputActionsInnerAllOfOneOf9TypeEnum)
-                return PlayerCreateOperationRequestInputActionsInnerAllOfOneOf9.TypeEnumToJsonValue(playerCreateOperationRequestInputActionsInnerAllOfOneOf9TypeEnum);
-            if (obj is PlayerCreateOperationRequestInputActionsInnerAllOfOneOfSignature.TypeEnum playerCreateOperationRequestInputActionsInnerAllOfOneOfSignatureTypeEnum)
-                return PlayerCreateOperationRequestInputActionsInnerAllOfOneOfSignature.TypeEnumToJsonValue(playerCreateOperationRequestInputActionsInnerAllOfOneOfSignatureTypeEnum);
-            if (obj is PlayerCreateOperationRequestInputTransactionsInner.TypeEnum playerCreateOperationRequestInputTransactionsInnerTypeEnum)
-                return PlayerCreateOperationRequestInputTransactionsInner.TypeEnumToJsonValue(playerCreateOperationRequestInputTransactionsInnerTypeEnum);
             if (obj is PlayerCreateTransactionRequestInput.OperationProcessingEnum playerCreateTransactionRequestInputOperationProcessingEnum)
                 return PlayerCreateTransactionRequestInput.OperationProcessingEnumToJsonValue(playerCreateTransactionRequestInputOperationProcessingEnum);
             if (obj is PlayerGenerateSessionRequestResponse.StatusEnum playerGenerateSessionRequestResponseStatusEnum)
@@ -270,6 +188,20 @@ namespace BeamPlayerClient.Client
                 return PlayerGetOwnerAssetsBodyInput.SortDirectionEnumToJsonValue(playerGetOwnerAssetsBodyInputSortDirectionEnum);
             if (obj is PlayerGetSessionRequestResponse.StatusEnum playerGetSessionRequestResponseStatusEnum)
                 return PlayerGetSessionRequestResponse.StatusEnumToJsonValue(playerGetSessionRequestResponseStatusEnum);
+            if (obj is PlayerOperationAction.TypeEnum playerOperationActionTypeEnum)
+                return PlayerOperationAction.TypeEnumToJsonValue(playerOperationActionTypeEnum);
+            if (obj is PlayerOperationActionSignature.TypeEnum playerOperationActionSignatureTypeEnum)
+                return PlayerOperationActionSignature.TypeEnumToJsonValue(playerOperationActionSignatureTypeEnum);
+            if (obj is PlayerOperationActionTransaction.StatusEnum playerOperationActionTransactionStatusEnum)
+                return PlayerOperationActionTransaction.StatusEnumToJsonValue(playerOperationActionTransactionStatusEnum);
+            if (obj is PlayerPlayerOperationResponse.ProcessingEnum playerPlayerOperationResponseProcessingEnum)
+                return PlayerPlayerOperationResponse.ProcessingEnumToJsonValue(playerPlayerOperationResponseProcessingEnum);
+            if (obj is PlayerPlayerOperationResponse.StatusEnum playerPlayerOperationResponseStatusEnum)
+                return PlayerPlayerOperationResponse.StatusEnumToJsonValue(playerPlayerOperationResponseStatusEnum);
+            if (obj is PlayerPlayerOperationResponseTransactionsInner.StatusEnum playerPlayerOperationResponseTransactionsInnerStatusEnum)
+                return PlayerPlayerOperationResponseTransactionsInner.StatusEnumToJsonValue(playerPlayerOperationResponseTransactionsInnerStatusEnum);
+            if (obj is PlayerPlayerOperationResponseTransactionsInner.TypeEnum playerPlayerOperationResponseTransactionsInnerTypeEnum)
+                return PlayerPlayerOperationResponseTransactionsInner.TypeEnumToJsonValue(playerPlayerOperationResponseTransactionsInnerTypeEnum);
             if (obj is PlayerRevokeSessionRequestInput.OperationProcessingEnum playerRevokeSessionRequestInputOperationProcessingEnum)
                 return PlayerRevokeSessionRequestInput.OperationProcessingEnumToJsonValue(playerRevokeSessionRequestInputOperationProcessingEnum);
             if (obj is PlayerSellAssetRequestInput.SellTypeEnum playerSellAssetRequestInputSellTypeEnum)

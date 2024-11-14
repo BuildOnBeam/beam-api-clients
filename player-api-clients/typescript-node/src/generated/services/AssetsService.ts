@@ -2,7 +2,6 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { CommonOperationResponse } from '../models/CommonOperationResponse';
 import type { GetAssetResponse } from '../models/GetAssetResponse';
 import type { GetAssetsForContractBodyInput } from '../models/GetAssetsForContractBodyInput';
 import type { GetAssetsForContractResponse } from '../models/GetAssetsForContractResponse';
@@ -14,6 +13,7 @@ import type { GetOwnerAssetsResponse } from '../models/GetOwnerAssetsResponse';
 import type { GetOwnersResponse } from '../models/GetOwnersResponse';
 import type { GetUserCurrenciesResponse } from '../models/GetUserCurrenciesResponse';
 import type { GetUserNativeCurrencyResponse } from '../models/GetUserNativeCurrencyResponse';
+import type { PlayerOperationResponse } from '../models/PlayerOperationResponse';
 import type { TransferAssetRequestInput } from '../models/TransferAssetRequestInput';
 import type { TransferNativeTokenRequestInput } from '../models/TransferNativeTokenRequestInput';
 import type { TransferTokenRequestInput } from '../models/TransferTokenRequestInput';
@@ -96,13 +96,13 @@ export class AssetsService {
    * Transfer an asset (NFT assets, ERC721 / ERC1155)
    * @param entityId
    * @param requestBody
-   * @returns CommonOperationResponse
+   * @returns PlayerOperationResponse
    * @throws ApiError
    */
   public transferAsset(
     entityId: string,
     requestBody: TransferAssetRequestInput,
-  ): CancelablePromise<CommonOperationResponse> {
+  ): CancelablePromise<PlayerOperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v1/player/assets/users/{entityId}/transfer-asset',
@@ -118,13 +118,13 @@ export class AssetsService {
    * Transfer a token (token assets, ERC20)
    * @param entityId
    * @param requestBody
-   * @returns CommonOperationResponse
+   * @returns PlayerOperationResponse
    * @throws ApiError
    */
   public transferToken(
     entityId: string,
     requestBody: TransferTokenRequestInput,
-  ): CancelablePromise<CommonOperationResponse> {
+  ): CancelablePromise<PlayerOperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v1/player/assets/users/{entityId}/transfer-token',
@@ -140,13 +140,13 @@ export class AssetsService {
    * Transfer the native token
    * @param entityId
    * @param requestBody
-   * @returns CommonOperationResponse
+   * @returns PlayerOperationResponse
    * @throws ApiError
    */
   public transferNativeToken(
     entityId: string,
     requestBody: TransferNativeTokenRequestInput,
-  ): CancelablePromise<CommonOperationResponse> {
+  ): CancelablePromise<PlayerOperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v1/player/assets/users/{entityId}/transfer-native',

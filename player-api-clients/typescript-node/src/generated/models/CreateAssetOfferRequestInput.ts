@@ -13,7 +13,6 @@ export type CreateAssetOfferRequestInput = {
   currency?: CreateAssetOfferRequestInput.currency;
   chainId?: number;
   operationProcessing?: CreateAssetOfferRequestInput.operationProcessing;
-  operationId?: string | null;
 };
 
 export namespace CreateAssetOfferRequestInput {

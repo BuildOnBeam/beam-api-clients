@@ -2,9 +2,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { CommonOperationResponse } from '../models/CommonOperationResponse';
 import type { ConvertTokenRequestInput } from '../models/ConvertTokenRequestInput';
 import type { GetQuoteResponse } from '../models/GetQuoteResponse';
+import type { PlayerOperationResponse } from '../models/PlayerOperationResponse';
 import type { UnwrappingTokenInput } from '../models/UnwrappingTokenInput';
 import type { WrappingTokenInput } from '../models/WrappingTokenInput';
 
@@ -72,13 +72,13 @@ export class ExchangeService {
    * Swap an exact amount of `tokenIn` for a minimum amount of `tokenOut`
    * @param entityId
    * @param requestBody
-   * @returns CommonOperationResponse
+   * @returns PlayerOperationResponse
    * @throws ApiError
    */
   public convertInput(
     entityId: string,
     requestBody: ConvertTokenRequestInput,
-  ): CancelablePromise<CommonOperationResponse> {
+  ): CancelablePromise<PlayerOperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v1/player/exchange/users/{entityId}/convert/input',
@@ -94,13 +94,13 @@ export class ExchangeService {
    * Swap a maximum amount of `tokenIn` for an exact amount of `tokenOut`
    * @param entityId
    * @param requestBody
-   * @returns CommonOperationResponse
+   * @returns PlayerOperationResponse
    * @throws ApiError
    */
   public convertToOutput(
     entityId: string,
     requestBody: ConvertTokenRequestInput,
-  ): CancelablePromise<CommonOperationResponse> {
+  ): CancelablePromise<PlayerOperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v1/player/exchange/users/{entityId}/convert/output',
@@ -116,13 +116,13 @@ export class ExchangeService {
    * Wrap an amount of native token to wrapped native token
    * @param entityId
    * @param requestBody
-   * @returns CommonOperationResponse
+   * @returns PlayerOperationResponse
    * @throws ApiError
    */
   public wrapNative(
     entityId: string,
     requestBody: WrappingTokenInput,
-  ): CancelablePromise<CommonOperationResponse> {
+  ): CancelablePromise<PlayerOperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v1/player/exchange/users/{entityId}/native/wrap',
@@ -138,13 +138,13 @@ export class ExchangeService {
    * Unwrap an amount of wrapped to native token
    * @param entityId
    * @param requestBody
-   * @returns CommonOperationResponse
+   * @returns PlayerOperationResponse
    * @throws ApiError
    */
   public unwrapNative(
     entityId: string,
     requestBody: UnwrappingTokenInput,
-  ): CancelablePromise<CommonOperationResponse> {
+  ): CancelablePromise<PlayerOperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v1/player/exchange/users/{entityId}/native/unwrap',

@@ -34,15 +34,13 @@ namespace BeamPlayerClient.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="PlayerCancelAssetListingRequestInput" /> class.
         /// </summary>
-        /// <param name="operationId">operationId</param>
         /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute)</param>
         /// <param name="optimistic">optimistic (default to false)</param>
         /// <param name="policyId">policyId</param>
         /// <param name="sponsor">sponsor (default to true)</param>
         [JsonConstructor]
-        public PlayerCancelAssetListingRequestInput(Option<string?> operationId = default, Option<OperationProcessingEnum?> operationProcessing = default, Option<bool?> optimistic = default, Option<string?> policyId = default, Option<bool?> sponsor = default)
+        public PlayerCancelAssetListingRequestInput(Option<OperationProcessingEnum?> operationProcessing = default, Option<bool?> optimistic = default, Option<string?> policyId = default, Option<bool?> sponsor = default)
         {
-            OperationIdOption = operationId;
             OperationProcessingOption = operationProcessing;
             OptimisticOption = optimistic;
             PolicyIdOption = policyId;
@@ -227,19 +225,6 @@ namespace BeamPlayerClient.Model
         public OperationProcessingEnum? OperationProcessing { get { return this.OperationProcessingOption; } set { this.OperationProcessingOption = new(value); } }
 
         /// <summary>
-        /// Used to track the state of OperationId
-        /// </summary>
-        [JsonIgnore]
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> OperationIdOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets OperationId
-        /// </summary>
-        [JsonPropertyName("operationId")]
-        public string? OperationId { get { return this. OperationIdOption; } set { this.OperationIdOption = new(value); } }
-
-        /// <summary>
         /// Used to track the state of Optimistic
         /// </summary>
         [JsonIgnore]
@@ -286,7 +271,6 @@ namespace BeamPlayerClient.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class PlayerCancelAssetListingRequestInput {\n");
-            sb.Append("  OperationId: ").Append(OperationId).Append("\n");
             sb.Append("  OperationProcessing: ").Append(OperationProcessing).Append("\n");
             sb.Append("  Optimistic: ").Append(Optimistic).Append("\n");
             sb.Append("  PolicyId: ").Append(PolicyId).Append("\n");
@@ -328,7 +312,6 @@ namespace BeamPlayerClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<string?> operationId = default;
             Option<PlayerCancelAssetListingRequestInput.OperationProcessingEnum?> operationProcessing = default;
             Option<bool?> optimistic = default;
             Option<string?> policyId = default;
@@ -349,9 +332,6 @@ namespace BeamPlayerClient.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "operationId":
-                            operationId = new Option<string?>(utf8JsonReader.GetString());
-                            break;
                         case "operationProcessing":
                             string? operationProcessingRawValue = utf8JsonReader.GetString();
                             if (operationProcessingRawValue != null)
@@ -383,7 +363,7 @@ namespace BeamPlayerClient.Model
             if (sponsor.IsSet && sponsor.Value == null)
                 throw new ArgumentNullException(nameof(sponsor), "Property is not nullable for class PlayerCancelAssetListingRequestInput.");
 
-            return new PlayerCancelAssetListingRequestInput(operationId, operationProcessing, optimistic, policyId, sponsor);
+            return new PlayerCancelAssetListingRequestInput(operationProcessing, optimistic, policyId, sponsor);
         }
 
         /// <summary>
@@ -410,12 +390,6 @@ namespace BeamPlayerClient.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, PlayerCancelAssetListingRequestInput playerCancelAssetListingRequestInput, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (playerCancelAssetListingRequestInput.OperationIdOption.IsSet)
-                if (playerCancelAssetListingRequestInput.OperationIdOption.Value != null)
-                    writer.WriteString("operationId", playerCancelAssetListingRequestInput.OperationId);
-                else
-                    writer.WriteNull("operationId");
-
             var operationProcessingRawValue = PlayerCancelAssetListingRequestInput.OperationProcessingEnumToJsonValue(playerCancelAssetListingRequestInput.OperationProcessingOption.Value!.Value);
             writer.WriteString("operationProcessing", operationProcessingRawValue);
             if (playerCancelAssetListingRequestInput.OptimisticOption.IsSet)

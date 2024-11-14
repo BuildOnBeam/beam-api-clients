@@ -212,7 +212,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="IRevokeSessionApiResponse"/>
     /// </summary>
-    public interface IRevokeSessionApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerCommonOperationResponse?>
+    public interface IRevokeSessionApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerPlayerOperationResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -1553,11 +1553,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.PlayerCommonOperationResponse? Ok()
+            public BeamPlayerClient.Model.PlayerPlayerOperationResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerCommonOperationResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerPlayerOperationResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1566,7 +1566,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerCommonOperationResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerPlayerOperationResponse? result)
             {
                 result = null;
 

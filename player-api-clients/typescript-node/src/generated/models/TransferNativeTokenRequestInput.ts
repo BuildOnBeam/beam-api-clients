@@ -12,7 +12,6 @@ export type TransferNativeTokenRequestInput = {
   policyId?: string | null;
   chainId?: number;
   operationProcessing?: TransferNativeTokenRequestInput.operationProcessing;
-  operationId?: string | null;
 };
 
 export namespace TransferNativeTokenRequestInput {

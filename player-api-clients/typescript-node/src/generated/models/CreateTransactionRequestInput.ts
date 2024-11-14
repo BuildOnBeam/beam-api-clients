@@ -15,7 +15,6 @@ export type CreateTransactionRequestInput = {
   policyId?: string | null;
   chainId?: number;
   operationProcessing?: CreateTransactionRequestInput.operationProcessing;
-  operationId?: string | null;
 };
 
 export namespace CreateTransactionRequestInput {

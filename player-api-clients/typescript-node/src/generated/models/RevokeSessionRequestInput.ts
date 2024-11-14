@@ -9,7 +9,6 @@ export type RevokeSessionRequestInput = {
   policyId?: string | null;
   chainId?: number;
   operationProcessing?: RevokeSessionRequestInput.operationProcessing;
-  operationId?: string | null;
 };
 
 export namespace RevokeSessionRequestInput {

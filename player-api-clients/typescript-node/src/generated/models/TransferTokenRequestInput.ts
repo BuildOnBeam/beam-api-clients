@@ -13,7 +13,6 @@ export type TransferTokenRequestInput = {
   policyId?: string | null;
   chainId?: number;
   operationProcessing?: TransferTokenRequestInput.operationProcessing;
-  operationId?: string | null;
 };
 
 export namespace TransferTokenRequestInput {

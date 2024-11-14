@@ -39,7 +39,6 @@ namespace BeamPlayerClient.Model
         /// <param name="tokenIn">tokenIn</param>
         /// <param name="tokenOut">tokenOut</param>
         /// <param name="chainId">chainId (default to 13337)</param>
-        /// <param name="operationId">operationId</param>
         /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute)</param>
         /// <param name="optimistic">optimistic (default to false)</param>
         /// <param name="policyId">policyId</param>
@@ -47,14 +46,13 @@ namespace BeamPlayerClient.Model
         /// <param name="receiverWalletAddress">receiverWalletAddress</param>
         /// <param name="sponsor">sponsor (default to true)</param>
         [JsonConstructor]
-        public PlayerConvertTokenRequestInput(string amountIn, string amountOut, string tokenIn, string tokenOut, Option<long?> chainId = default, Option<string?> operationId = default, Option<OperationProcessingEnum?> operationProcessing = default, Option<bool?> optimistic = default, Option<string?> policyId = default, Option<string?> receiverEntityId = default, Option<string?> receiverWalletAddress = default, Option<bool?> sponsor = default)
+        public PlayerConvertTokenRequestInput(string amountIn, string amountOut, string tokenIn, string tokenOut, Option<long?> chainId = default, Option<OperationProcessingEnum?> operationProcessing = default, Option<bool?> optimistic = default, Option<string?> policyId = default, Option<string?> receiverEntityId = default, Option<string?> receiverWalletAddress = default, Option<bool?> sponsor = default)
         {
             AmountIn = amountIn;
             AmountOut = amountOut;
             TokenIn = tokenIn;
             TokenOut = tokenOut;
             ChainIdOption = chainId;
-            OperationIdOption = operationId;
             OperationProcessingOption = operationProcessing;
             OptimisticOption = optimistic;
             PolicyIdOption = policyId;
@@ -278,19 +276,6 @@ namespace BeamPlayerClient.Model
         public long? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
 
         /// <summary>
-        /// Used to track the state of OperationId
-        /// </summary>
-        [JsonIgnore]
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> OperationIdOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets OperationId
-        /// </summary>
-        [JsonPropertyName("operationId")]
-        public string? OperationId { get { return this. OperationIdOption; } set { this.OperationIdOption = new(value); } }
-
-        /// <summary>
         /// Used to track the state of Optimistic
         /// </summary>
         [JsonIgnore]
@@ -368,7 +353,6 @@ namespace BeamPlayerClient.Model
             sb.Append("  TokenIn: ").Append(TokenIn).Append("\n");
             sb.Append("  TokenOut: ").Append(TokenOut).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
-            sb.Append("  OperationId: ").Append(OperationId).Append("\n");
             sb.Append("  OperationProcessing: ").Append(OperationProcessing).Append("\n");
             sb.Append("  Optimistic: ").Append(Optimistic).Append("\n");
             sb.Append("  PolicyId: ").Append(PolicyId).Append("\n");
@@ -417,7 +401,6 @@ namespace BeamPlayerClient.Model
             Option<string?> tokenIn = default;
             Option<string?> tokenOut = default;
             Option<long?> chainId = default;
-            Option<string?> operationId = default;
             Option<PlayerConvertTokenRequestInput.OperationProcessingEnum?> operationProcessing = default;
             Option<bool?> optimistic = default;
             Option<string?> policyId = default;
@@ -455,9 +438,6 @@ namespace BeamPlayerClient.Model
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 chainId = new Option<long?>(utf8JsonReader.GetInt64());
-                            break;
-                        case "operationId":
-                            operationId = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "operationProcessing":
                             string? operationProcessingRawValue = utf8JsonReader.GetString();
@@ -529,7 +509,7 @@ namespace BeamPlayerClient.Model
             if (sponsor.IsSet && sponsor.Value == null)
                 throw new ArgumentNullException(nameof(sponsor), "Property is not nullable for class PlayerConvertTokenRequestInput.");
 
-            return new PlayerConvertTokenRequestInput(amountIn.Value!, amountOut.Value!, tokenIn.Value!, tokenOut.Value!, chainId, operationId, operationProcessing, optimistic, policyId, receiverEntityId, receiverWalletAddress, sponsor);
+            return new PlayerConvertTokenRequestInput(amountIn.Value!, amountOut.Value!, tokenIn.Value!, tokenOut.Value!, chainId, operationProcessing, optimistic, policyId, receiverEntityId, receiverWalletAddress, sponsor);
         }
 
         /// <summary>
@@ -584,12 +564,6 @@ namespace BeamPlayerClient.Model
 
             if (playerConvertTokenRequestInput.ChainIdOption.IsSet)
                 writer.WriteNumber("chainId", playerConvertTokenRequestInput.ChainIdOption.Value!.Value);
-
-            if (playerConvertTokenRequestInput.OperationIdOption.IsSet)
-                if (playerConvertTokenRequestInput.OperationIdOption.Value != null)
-                    writer.WriteString("operationId", playerConvertTokenRequestInput.OperationId);
-                else
-                    writer.WriteNull("operationId");
 
             var operationProcessingRawValue = PlayerConvertTokenRequestInput.OperationProcessingEnumToJsonValue(playerConvertTokenRequestInput.OperationProcessingOption.Value!.Value);
             writer.WriteString("operationProcessing", operationProcessingRawValue);

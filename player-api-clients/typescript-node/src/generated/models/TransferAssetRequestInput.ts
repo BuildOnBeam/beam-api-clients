@@ -16,7 +16,6 @@ export type TransferAssetRequestInput = {
   policyId?: string | null;
   chainId?: number;
   operationProcessing?: TransferAssetRequestInput.operationProcessing;
-  operationId?: string | null;
 };
 
 export namespace TransferAssetRequestInput {

@@ -15,7 +15,6 @@ export type ConvertTokenRequestInput = {
   policyId?: string | null;
   chainId?: number;
   operationProcessing?: ConvertTokenRequestInput.operationProcessing;
-  operationId?: string | null;
 };
 
 export namespace ConvertTokenRequestInput {

@@ -37,7 +37,6 @@ namespace BeamPlayerClient.Model
         /// <param name="amountToTransfer">amountToTransfer</param>
         /// <param name="assetAddress">assetAddress</param>
         /// <param name="chainId">chainId (default to 13337)</param>
-        /// <param name="operationId">operationId</param>
         /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute)</param>
         /// <param name="optimistic">optimistic (default to false)</param>
         /// <param name="policyId">policyId</param>
@@ -45,12 +44,11 @@ namespace BeamPlayerClient.Model
         /// <param name="receiverWalletAddress">receiverWalletAddress</param>
         /// <param name="sponsor">sponsor (default to true)</param>
         [JsonConstructor]
-        public PlayerTransferTokenRequestInput(string amountToTransfer, string assetAddress, Option<long?> chainId = default, Option<string?> operationId = default, Option<OperationProcessingEnum?> operationProcessing = default, Option<bool?> optimistic = default, Option<string?> policyId = default, Option<string?> receiverEntityId = default, Option<string?> receiverWalletAddress = default, Option<bool?> sponsor = default)
+        public PlayerTransferTokenRequestInput(string amountToTransfer, string assetAddress, Option<long?> chainId = default, Option<OperationProcessingEnum?> operationProcessing = default, Option<bool?> optimistic = default, Option<string?> policyId = default, Option<string?> receiverEntityId = default, Option<string?> receiverWalletAddress = default, Option<bool?> sponsor = default)
         {
             AmountToTransfer = amountToTransfer;
             AssetAddress = assetAddress;
             ChainIdOption = chainId;
-            OperationIdOption = operationId;
             OperationProcessingOption = operationProcessing;
             OptimisticOption = optimistic;
             PolicyIdOption = policyId;
@@ -262,19 +260,6 @@ namespace BeamPlayerClient.Model
         public long? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
 
         /// <summary>
-        /// Used to track the state of OperationId
-        /// </summary>
-        [JsonIgnore]
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> OperationIdOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets OperationId
-        /// </summary>
-        [JsonPropertyName("operationId")]
-        public string? OperationId { get { return this. OperationIdOption; } set { this.OperationIdOption = new(value); } }
-
-        /// <summary>
         /// Used to track the state of Optimistic
         /// </summary>
         [JsonIgnore]
@@ -350,7 +335,6 @@ namespace BeamPlayerClient.Model
             sb.Append("  AmountToTransfer: ").Append(AmountToTransfer).Append("\n");
             sb.Append("  AssetAddress: ").Append(AssetAddress).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
-            sb.Append("  OperationId: ").Append(OperationId).Append("\n");
             sb.Append("  OperationProcessing: ").Append(OperationProcessing).Append("\n");
             sb.Append("  Optimistic: ").Append(Optimistic).Append("\n");
             sb.Append("  PolicyId: ").Append(PolicyId).Append("\n");
@@ -397,7 +381,6 @@ namespace BeamPlayerClient.Model
             Option<string?> amountToTransfer = default;
             Option<string?> assetAddress = default;
             Option<long?> chainId = default;
-            Option<string?> operationId = default;
             Option<PlayerTransferTokenRequestInput.OperationProcessingEnum?> operationProcessing = default;
             Option<bool?> optimistic = default;
             Option<string?> policyId = default;
@@ -429,9 +412,6 @@ namespace BeamPlayerClient.Model
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 chainId = new Option<long?>(utf8JsonReader.GetInt64());
-                            break;
-                        case "operationId":
-                            operationId = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "operationProcessing":
                             string? operationProcessingRawValue = utf8JsonReader.GetString();
@@ -491,7 +471,7 @@ namespace BeamPlayerClient.Model
             if (sponsor.IsSet && sponsor.Value == null)
                 throw new ArgumentNullException(nameof(sponsor), "Property is not nullable for class PlayerTransferTokenRequestInput.");
 
-            return new PlayerTransferTokenRequestInput(amountToTransfer.Value!, assetAddress.Value!, chainId, operationId, operationProcessing, optimistic, policyId, receiverEntityId, receiverWalletAddress, sponsor);
+            return new PlayerTransferTokenRequestInput(amountToTransfer.Value!, assetAddress.Value!, chainId, operationProcessing, optimistic, policyId, receiverEntityId, receiverWalletAddress, sponsor);
         }
 
         /// <summary>
@@ -536,12 +516,6 @@ namespace BeamPlayerClient.Model
 
             if (playerTransferTokenRequestInput.ChainIdOption.IsSet)
                 writer.WriteNumber("chainId", playerTransferTokenRequestInput.ChainIdOption.Value!.Value);
-
-            if (playerTransferTokenRequestInput.OperationIdOption.IsSet)
-                if (playerTransferTokenRequestInput.OperationIdOption.Value != null)
-                    writer.WriteString("operationId", playerTransferTokenRequestInput.OperationId);
-                else
-                    writer.WriteNull("operationId");
 
             var operationProcessingRawValue = PlayerTransferTokenRequestInput.OperationProcessingEnumToJsonValue(playerTransferTokenRequestInput.OperationProcessingOption.Value!.Value);
             writer.WriteString("operationProcessing", operationProcessingRawValue);

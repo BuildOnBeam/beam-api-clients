@@ -403,7 +403,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="IAcceptAssetOfferApiResponse"/>
     /// </summary>
-    public interface IAcceptAssetOfferApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerCommonOperationResponse?>
+    public interface IAcceptAssetOfferApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerPlayerOperationResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -415,7 +415,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="IBuyListedAssetApiResponse"/>
     /// </summary>
-    public interface IBuyListedAssetApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerCommonOperationResponse?>
+    public interface IBuyListedAssetApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerPlayerOperationResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -427,7 +427,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="ICancelAssetOfferApiResponse"/>
     /// </summary>
-    public interface ICancelAssetOfferApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerCommonOperationResponse?>
+    public interface ICancelAssetOfferApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerPlayerOperationResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -439,7 +439,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="ICancelListingApiResponse"/>
     /// </summary>
-    public interface ICancelListingApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerCommonOperationResponse?>
+    public interface ICancelListingApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerPlayerOperationResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -451,7 +451,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="ICreateAssetOfferApiResponse"/>
     /// </summary>
-    public interface ICreateAssetOfferApiResponse : BeamPlayerClient.Client.IApiResponse, ICreated<BeamPlayerClient.Model.PlayerCommonOperationResponse?>
+    public interface ICreateAssetOfferApiResponse : BeamPlayerClient.Client.IApiResponse, ICreated<BeamPlayerClient.Model.PlayerPlayerOperationResponse?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
@@ -535,7 +535,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="IListAssetApiResponse"/>
     /// </summary>
-    public interface IListAssetApiResponse : BeamPlayerClient.Client.IApiResponse, ICreated<BeamPlayerClient.Model.PlayerCommonOperationResponse?>
+    public interface IListAssetApiResponse : BeamPlayerClient.Client.IApiResponse, ICreated<BeamPlayerClient.Model.PlayerPlayerOperationResponse?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
@@ -1123,11 +1123,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.PlayerCommonOperationResponse? Ok()
+            public BeamPlayerClient.Model.PlayerPlayerOperationResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerCommonOperationResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerPlayerOperationResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1136,7 +1136,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerCommonOperationResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerPlayerOperationResponse? result)
             {
                 result = null;
 
@@ -1384,11 +1384,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.PlayerCommonOperationResponse? Ok()
+            public BeamPlayerClient.Model.PlayerPlayerOperationResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerCommonOperationResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerPlayerOperationResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1397,7 +1397,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerCommonOperationResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerPlayerOperationResponse? result)
             {
                 result = null;
 
@@ -1645,11 +1645,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.PlayerCommonOperationResponse? Ok()
+            public BeamPlayerClient.Model.PlayerPlayerOperationResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerCommonOperationResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerPlayerOperationResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1658,7 +1658,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerCommonOperationResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerPlayerOperationResponse? result)
             {
                 result = null;
 
@@ -1919,11 +1919,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.PlayerCommonOperationResponse? Ok()
+            public BeamPlayerClient.Model.PlayerPlayerOperationResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerCommonOperationResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerPlayerOperationResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1932,7 +1932,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerCommonOperationResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerPlayerOperationResponse? result)
             {
                 result = null;
 
@@ -2169,11 +2169,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.PlayerCommonOperationResponse? Created()
+            public BeamPlayerClient.Model.PlayerPlayerOperationResponse? Created()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsCreated
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerCommonOperationResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerPlayerOperationResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -2182,7 +2182,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryCreated([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerCommonOperationResponse? result)
+            public bool TryCreated([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerPlayerOperationResponse? result)
             {
                 result = null;
 
@@ -3914,11 +3914,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.PlayerCommonOperationResponse? Created()
+            public BeamPlayerClient.Model.PlayerPlayerOperationResponse? Created()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsCreated
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerCommonOperationResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerPlayerOperationResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -3927,7 +3927,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryCreated([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerCommonOperationResponse? result)
+            public bool TryCreated([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerPlayerOperationResponse? result)
             {
                 result = null;
 

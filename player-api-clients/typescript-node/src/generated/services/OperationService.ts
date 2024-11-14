@@ -2,9 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { CommonOperationResponse } from '../models/CommonOperationResponse';
 import type { ConfirmOperationRequest } from '../models/ConfirmOperationRequest';
-import type { CreateOperationRequestInput } from '../models/CreateOperationRequestInput';
+import type { PlayerOperationResponse } from '../models/PlayerOperationResponse';
 
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -15,12 +14,12 @@ export class OperationService {
   /**
    * Returns operation data for given id. Used by Game SDKs to get transaction results.
    * @param opId
-   * @returns CommonOperationResponse
+   * @returns PlayerOperationResponse
    * @throws ApiError
    */
   public getOperation(
     opId: string,
-  ): CancelablePromise<CommonOperationResponse> {
+  ): CancelablePromise<PlayerOperationResponse> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v1/player/operation/{opId}',
@@ -34,13 +33,13 @@ export class OperationService {
    * Updates operation result for given id
    * @param opId
    * @param requestBody
-   * @returns CommonOperationResponse
+   * @returns PlayerOperationResponse
    * @throws ApiError
    */
   public processOperation(
     opId: string,
     requestBody: ConfirmOperationRequest,
-  ): CancelablePromise<CommonOperationResponse> {
+  ): CancelablePromise<PlayerOperationResponse> {
     return this.httpRequest.request({
       method: 'PATCH',
       url: '/v1/player/operation/{opId}',
@@ -55,12 +54,12 @@ export class OperationService {
   /**
    * Delete an operation
    * @param opId
-   * @returns CommonOperationResponse
+   * @returns PlayerOperationResponse
    * @throws ApiError
    */
   public deleteOperation(
     opId: string,
-  ): CancelablePromise<CommonOperationResponse> {
+  ): CancelablePromise<PlayerOperationResponse> {
     return this.httpRequest.request({
       method: 'DELETE',
       url: '/v1/player/operation/{opId}',
@@ -71,31 +70,14 @@ export class OperationService {
   }
 
   /**
-   * Initializes an operation. Used by Game SDKs to get transaction results.
-   * @param requestBody
-   * @returns CommonOperationResponse
-   * @throws ApiError
-   */
-  public createOperation(
-    requestBody: CreateOperationRequestInput,
-  ): CancelablePromise<CommonOperationResponse> {
-    return this.httpRequest.request({
-      method: 'POST',
-      url: '/v1/player/operation',
-      body: requestBody,
-      mediaType: 'application/json',
-    });
-  }
-
-  /**
    * Executes operation for given id
    * @param opId
-   * @returns CommonOperationResponse
+   * @returns PlayerOperationResponse
    * @throws ApiError
    */
   public executeSignedOperation(
     opId: string,
-  ): CancelablePromise<CommonOperationResponse> {
+  ): CancelablePromise<PlayerOperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v1/player/operation/{opId}/execute',

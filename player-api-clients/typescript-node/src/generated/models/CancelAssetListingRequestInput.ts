@@ -8,7 +8,6 @@ export type CancelAssetListingRequestInput = {
   sponsor?: boolean;
   policyId?: string | null;
   operationProcessing?: CancelAssetListingRequestInput.operationProcessing;
-  operationId?: string | null;
 };
 
 export namespace CancelAssetListingRequestInput {

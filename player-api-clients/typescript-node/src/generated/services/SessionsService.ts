@@ -2,12 +2,12 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { CommonOperationResponse } from '../models/CommonOperationResponse';
 import type { GenerateSessionRequestResponse } from '../models/GenerateSessionRequestResponse';
 import type { GenerateSessionUrlRequestInput } from '../models/GenerateSessionUrlRequestInput';
 import type { GetActiveSessionResponse } from '../models/GetActiveSessionResponse';
 import type { GetActiveSessionsResponse } from '../models/GetActiveSessionsResponse';
 import type { GetSessionRequestResponse } from '../models/GetSessionRequestResponse';
+import type { PlayerOperationResponse } from '../models/PlayerOperationResponse';
 import type { RevokeSessionRequestInput } from '../models/RevokeSessionRequestInput';
 
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
@@ -40,13 +40,13 @@ export class SessionsService {
   /**
    * @param entityId
    * @param requestBody
-   * @returns CommonOperationResponse
+   * @returns PlayerOperationResponse
    * @throws ApiError
    */
   public revokeSession(
     entityId: string,
     requestBody: RevokeSessionRequestInput,
-  ): CancelablePromise<CommonOperationResponse> {
+  ): CancelablePromise<PlayerOperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v1/player/sessions/users/{entityId}/revoke',

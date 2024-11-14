@@ -36,16 +36,14 @@ namespace BeamPlayerClient.Model
         /// </summary>
         /// <param name="address">address</param>
         /// <param name="chainId">chainId (default to 13337)</param>
-        /// <param name="operationId">operationId</param>
         /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute)</param>
         /// <param name="policyId">policyId</param>
         /// <param name="sponsor">sponsor (default to true)</param>
         [JsonConstructor]
-        public PlayerRevokeSessionRequestInput(string address, Option<long?> chainId = default, Option<string?> operationId = default, Option<OperationProcessingEnum?> operationProcessing = default, Option<string?> policyId = default, Option<bool?> sponsor = default)
+        public PlayerRevokeSessionRequestInput(string address, Option<long?> chainId = default, Option<OperationProcessingEnum?> operationProcessing = default, Option<string?> policyId = default, Option<bool?> sponsor = default)
         {
             Address = address;
             ChainIdOption = chainId;
-            OperationIdOption = operationId;
             OperationProcessingOption = operationProcessing;
             PolicyIdOption = policyId;
             SponsorOption = sponsor;
@@ -248,19 +246,6 @@ namespace BeamPlayerClient.Model
         public long? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
 
         /// <summary>
-        /// Used to track the state of OperationId
-        /// </summary>
-        [JsonIgnore]
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> OperationIdOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets OperationId
-        /// </summary>
-        [JsonPropertyName("operationId")]
-        public string? OperationId { get { return this. OperationIdOption; } set { this.OperationIdOption = new(value); } }
-
-        /// <summary>
         /// Used to track the state of PolicyId
         /// </summary>
         [JsonIgnore]
@@ -296,7 +281,6 @@ namespace BeamPlayerClient.Model
             sb.Append("class PlayerRevokeSessionRequestInput {\n");
             sb.Append("  Address: ").Append(Address).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
-            sb.Append("  OperationId: ").Append(OperationId).Append("\n");
             sb.Append("  OperationProcessing: ").Append(OperationProcessing).Append("\n");
             sb.Append("  PolicyId: ").Append(PolicyId).Append("\n");
             sb.Append("  Sponsor: ").Append(Sponsor).Append("\n");
@@ -339,7 +323,6 @@ namespace BeamPlayerClient.Model
 
             Option<string?> address = default;
             Option<long?> chainId = default;
-            Option<string?> operationId = default;
             Option<PlayerRevokeSessionRequestInput.OperationProcessingEnum?> operationProcessing = default;
             Option<string?> policyId = default;
             Option<bool?> sponsor = default;
@@ -365,9 +348,6 @@ namespace BeamPlayerClient.Model
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 chainId = new Option<long?>(utf8JsonReader.GetInt64());
-                            break;
-                        case "operationId":
-                            operationId = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "operationProcessing":
                             string? operationProcessingRawValue = utf8JsonReader.GetString();
@@ -402,7 +382,7 @@ namespace BeamPlayerClient.Model
             if (sponsor.IsSet && sponsor.Value == null)
                 throw new ArgumentNullException(nameof(sponsor), "Property is not nullable for class PlayerRevokeSessionRequestInput.");
 
-            return new PlayerRevokeSessionRequestInput(address.Value!, chainId, operationId, operationProcessing, policyId, sponsor);
+            return new PlayerRevokeSessionRequestInput(address.Value!, chainId, operationProcessing, policyId, sponsor);
         }
 
         /// <summary>
@@ -436,12 +416,6 @@ namespace BeamPlayerClient.Model
 
             if (playerRevokeSessionRequestInput.ChainIdOption.IsSet)
                 writer.WriteNumber("chainId", playerRevokeSessionRequestInput.ChainIdOption.Value!.Value);
-
-            if (playerRevokeSessionRequestInput.OperationIdOption.IsSet)
-                if (playerRevokeSessionRequestInput.OperationIdOption.Value != null)
-                    writer.WriteString("operationId", playerRevokeSessionRequestInput.OperationId);
-                else
-                    writer.WriteNull("operationId");
 
             var operationProcessingRawValue = PlayerRevokeSessionRequestInput.OperationProcessingEnumToJsonValue(playerRevokeSessionRequestInput.OperationProcessingOption.Value!.Value);
             writer.WriteString("operationProcessing", operationProcessingRawValue);

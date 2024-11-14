@@ -41,11 +41,10 @@ namespace BeamPlayerClient.Model
         /// <param name="chainId">chainId (default to 13337)</param>
         /// <param name="currency">currency (default to CurrencyEnum.WBEAM)</param>
         /// <param name="endTime">endTime</param>
-        /// <param name="operationId">operationId</param>
         /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute)</param>
         /// <param name="startTime">startTime</param>
         [JsonConstructor]
-        public PlayerCreateAssetOfferRequestInput(string assetAddress, string assetId, string price, decimal quantity, Option<long?> chainId = default, Option<CurrencyEnum?> currency = default, Option<DateTime?> endTime = default, Option<string?> operationId = default, Option<OperationProcessingEnum?> operationProcessing = default, Option<DateTime?> startTime = default)
+        public PlayerCreateAssetOfferRequestInput(string assetAddress, string assetId, string price, decimal quantity, Option<long?> chainId = default, Option<CurrencyEnum?> currency = default, Option<DateTime?> endTime = default, Option<OperationProcessingEnum?> operationProcessing = default, Option<DateTime?> startTime = default)
         {
             AssetAddress = assetAddress;
             AssetId = assetId;
@@ -54,7 +53,6 @@ namespace BeamPlayerClient.Model
             ChainIdOption = chainId;
             CurrencyOption = currency;
             EndTimeOption = endTime;
-            OperationIdOption = operationId;
             OperationProcessingOption = operationProcessing;
             StartTimeOption = startTime;
             OnCreated();
@@ -507,19 +505,6 @@ namespace BeamPlayerClient.Model
         public DateTime? EndTime { get { return this. EndTimeOption; } set { this.EndTimeOption = new(value); } }
 
         /// <summary>
-        /// Used to track the state of OperationId
-        /// </summary>
-        [JsonIgnore]
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> OperationIdOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets OperationId
-        /// </summary>
-        [JsonPropertyName("operationId")]
-        public string? OperationId { get { return this. OperationIdOption; } set { this.OperationIdOption = new(value); } }
-
-        /// <summary>
         /// Used to track the state of StartTime
         /// </summary>
         [JsonIgnore]
@@ -547,7 +532,6 @@ namespace BeamPlayerClient.Model
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  Currency: ").Append(Currency).Append("\n");
             sb.Append("  EndTime: ").Append(EndTime).Append("\n");
-            sb.Append("  OperationId: ").Append(OperationId).Append("\n");
             sb.Append("  OperationProcessing: ").Append(OperationProcessing).Append("\n");
             sb.Append("  StartTime: ").Append(StartTime).Append("\n");
             sb.Append("}\n");
@@ -620,7 +604,6 @@ namespace BeamPlayerClient.Model
             Option<long?> chainId = default;
             Option<PlayerCreateAssetOfferRequestInput.CurrencyEnum?> currency = default;
             Option<DateTime?> endTime = default;
-            Option<string?> operationId = default;
             Option<PlayerCreateAssetOfferRequestInput.OperationProcessingEnum?> operationProcessing = default;
             Option<DateTime?> startTime = default;
 
@@ -664,9 +647,6 @@ namespace BeamPlayerClient.Model
                         case "endTime":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 endTime = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
-                            break;
-                        case "operationId":
-                            operationId = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "operationProcessing":
                             string? operationProcessingRawValue = utf8JsonReader.GetString();
@@ -722,7 +702,7 @@ namespace BeamPlayerClient.Model
             if (startTime.IsSet && startTime.Value == null)
                 throw new ArgumentNullException(nameof(startTime), "Property is not nullable for class PlayerCreateAssetOfferRequestInput.");
 
-            return new PlayerCreateAssetOfferRequestInput(assetAddress.Value!, assetId.Value!, price.Value!, quantity.Value!.Value!, chainId, currency, endTime, operationId, operationProcessing, startTime);
+            return new PlayerCreateAssetOfferRequestInput(assetAddress.Value!, assetId.Value!, price.Value!, quantity.Value!.Value!, chainId, currency, endTime, operationProcessing, startTime);
         }
 
         /// <summary>
@@ -773,12 +753,6 @@ namespace BeamPlayerClient.Model
             writer.WriteString("currency", currencyRawValue);
             if (playerCreateAssetOfferRequestInput.EndTimeOption.IsSet)
                 writer.WriteString("endTime", playerCreateAssetOfferRequestInput.EndTimeOption.Value!.Value.ToString(EndTimeFormat));
-
-            if (playerCreateAssetOfferRequestInput.OperationIdOption.IsSet)
-                if (playerCreateAssetOfferRequestInput.OperationIdOption.Value != null)
-                    writer.WriteString("operationId", playerCreateAssetOfferRequestInput.OperationId);
-                else
-                    writer.WriteNull("operationId");
 
             var operationProcessingRawValue = PlayerCreateAssetOfferRequestInput.OperationProcessingEnumToJsonValue(playerCreateAssetOfferRequestInput.OperationProcessingOption.Value!.Value);
             writer.WriteString("operationProcessing", operationProcessingRawValue);

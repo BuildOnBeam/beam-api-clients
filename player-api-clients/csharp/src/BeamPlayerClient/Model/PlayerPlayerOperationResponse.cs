@@ -27,12 +27,12 @@ using BeamPlayerClient.Client;
 namespace BeamPlayerClient.Model
 {
     /// <summary>
-    /// PlayerCommonOperationResponse
+    /// PlayerPlayerOperationResponse
     /// </summary>
-    public partial class PlayerCommonOperationResponse : IValidatableObject
+    public partial class PlayerPlayerOperationResponse : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PlayerCommonOperationResponse" /> class.
+        /// Initializes a new instance of the <see cref="PlayerPlayerOperationResponse" /> class.
         /// </summary>
         /// <param name="actions">actions</param>
         /// <param name="chainId">chainId</param>
@@ -46,7 +46,7 @@ namespace BeamPlayerClient.Model
         /// <param name="userId">userId</param>
         /// <param name="updatedAt">updatedAt</param>
         [JsonConstructor]
-        public PlayerCommonOperationResponse(List<PlayerCommonOperationResponseActionsInner> actions, long chainId, DateTime createdAt, string gameId, string id, ProcessingEnum processing, StatusEnum status, List<PlayerCommonOperationResponseTransactionsInner> transactions, string url, string userId, DateTime? updatedAt = default)
+        public PlayerPlayerOperationResponse(List<PlayerOperationAction> actions, long chainId, DateTime createdAt, string gameId, string id, ProcessingEnum processing, StatusEnum status, List<PlayerPlayerOperationResponseTransactionsInner> transactions, string url, string userId, DateTime? updatedAt = default)
         {
             Actions = actions;
             ChainId = chainId;
@@ -471,7 +471,7 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Actions
         /// </summary>
         [JsonPropertyName("actions")]
-        public List<PlayerCommonOperationResponseActionsInner> Actions { get; set; }
+        public List<PlayerOperationAction> Actions { get; set; }
 
         /// <summary>
         /// Gets or Sets ChainId
@@ -501,7 +501,8 @@ namespace BeamPlayerClient.Model
         /// Gets or Sets Transactions
         /// </summary>
         [JsonPropertyName("transactions")]
-        public List<PlayerCommonOperationResponseTransactionsInner> Transactions { get; set; }
+        [Obsolete]
+        public List<PlayerPlayerOperationResponseTransactionsInner> Transactions { get; set; }
 
         /// <summary>
         /// Gets or Sets Url
@@ -528,7 +529,7 @@ namespace BeamPlayerClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class PlayerCommonOperationResponse {\n");
+            sb.Append("class PlayerPlayerOperationResponse {\n");
             sb.Append("  Actions: ").Append(Actions).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
@@ -556,9 +557,9 @@ namespace BeamPlayerClient.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="PlayerCommonOperationResponse" />
+    /// A Json converter for type <see cref="PlayerPlayerOperationResponse" />
     /// </summary>
-    public class PlayerCommonOperationResponseJsonConverter : JsonConverter<PlayerCommonOperationResponse>
+    public class PlayerPlayerOperationResponseJsonConverter : JsonConverter<PlayerPlayerOperationResponse>
     {
         /// <summary>
         /// The format to use to serialize CreatedAt
@@ -571,14 +572,14 @@ namespace BeamPlayerClient.Model
         public static string UpdatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
 
         /// <summary>
-        /// Deserializes json to <see cref="PlayerCommonOperationResponse" />
+        /// Deserializes json to <see cref="PlayerPlayerOperationResponse" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override PlayerCommonOperationResponse Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override PlayerPlayerOperationResponse Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -587,14 +588,14 @@ namespace BeamPlayerClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<List<PlayerCommonOperationResponseActionsInner>?> actions = default;
+            Option<List<PlayerOperationAction>?> actions = default;
             Option<long?> chainId = default;
             Option<DateTime?> createdAt = default;
             Option<string?> gameId = default;
             Option<string?> id = default;
-            Option<PlayerCommonOperationResponse.ProcessingEnum?> processing = default;
-            Option<PlayerCommonOperationResponse.StatusEnum?> status = default;
-            Option<List<PlayerCommonOperationResponseTransactionsInner>?> transactions = default;
+            Option<PlayerPlayerOperationResponse.ProcessingEnum?> processing = default;
+            Option<PlayerPlayerOperationResponse.StatusEnum?> status = default;
+            Option<List<PlayerPlayerOperationResponseTransactionsInner>?> transactions = default;
             Option<string?> url = default;
             Option<string?> userId = default;
             Option<DateTime?> updatedAt = default;
@@ -616,7 +617,7 @@ namespace BeamPlayerClient.Model
                     {
                         case "actions":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                actions = new Option<List<PlayerCommonOperationResponseActionsInner>?>(JsonSerializer.Deserialize<List<PlayerCommonOperationResponseActionsInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                                actions = new Option<List<PlayerOperationAction>?>(JsonSerializer.Deserialize<List<PlayerOperationAction>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
@@ -635,16 +636,16 @@ namespace BeamPlayerClient.Model
                         case "processing":
                             string? processingRawValue = utf8JsonReader.GetString();
                             if (processingRawValue != null)
-                                processing = new Option<PlayerCommonOperationResponse.ProcessingEnum?>(PlayerCommonOperationResponse.ProcessingEnumFromStringOrDefault(processingRawValue));
+                                processing = new Option<PlayerPlayerOperationResponse.ProcessingEnum?>(PlayerPlayerOperationResponse.ProcessingEnumFromStringOrDefault(processingRawValue));
                             break;
                         case "status":
                             string? statusRawValue = utf8JsonReader.GetString();
                             if (statusRawValue != null)
-                                status = new Option<PlayerCommonOperationResponse.StatusEnum?>(PlayerCommonOperationResponse.StatusEnumFromStringOrDefault(statusRawValue));
+                                status = new Option<PlayerPlayerOperationResponse.StatusEnum?>(PlayerPlayerOperationResponse.StatusEnumFromStringOrDefault(statusRawValue));
                             break;
                         case "transactions":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                transactions = new Option<List<PlayerCommonOperationResponseTransactionsInner>?>(JsonSerializer.Deserialize<List<PlayerCommonOperationResponseTransactionsInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                                transactions = new Option<List<PlayerPlayerOperationResponseTransactionsInner>?>(JsonSerializer.Deserialize<List<PlayerPlayerOperationResponseTransactionsInner>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "url":
                             url = new Option<string?>(utf8JsonReader.GetString()!);
@@ -663,135 +664,135 @@ namespace BeamPlayerClient.Model
             }
 
             if (!actions.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCommonOperationResponse.", nameof(actions));
+                throw new ArgumentException("Property is required for class PlayerPlayerOperationResponse.", nameof(actions));
 
             if (!chainId.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCommonOperationResponse.", nameof(chainId));
+                throw new ArgumentException("Property is required for class PlayerPlayerOperationResponse.", nameof(chainId));
 
             if (!createdAt.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCommonOperationResponse.", nameof(createdAt));
+                throw new ArgumentException("Property is required for class PlayerPlayerOperationResponse.", nameof(createdAt));
 
             if (!gameId.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCommonOperationResponse.", nameof(gameId));
+                throw new ArgumentException("Property is required for class PlayerPlayerOperationResponse.", nameof(gameId));
 
             if (!id.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCommonOperationResponse.", nameof(id));
+                throw new ArgumentException("Property is required for class PlayerPlayerOperationResponse.", nameof(id));
 
             if (!processing.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCommonOperationResponse.", nameof(processing));
+                throw new ArgumentException("Property is required for class PlayerPlayerOperationResponse.", nameof(processing));
 
             if (!status.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCommonOperationResponse.", nameof(status));
+                throw new ArgumentException("Property is required for class PlayerPlayerOperationResponse.", nameof(status));
 
             if (!transactions.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCommonOperationResponse.", nameof(transactions));
+                throw new ArgumentException("Property is required for class PlayerPlayerOperationResponse.", nameof(transactions));
 
             if (!url.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCommonOperationResponse.", nameof(url));
+                throw new ArgumentException("Property is required for class PlayerPlayerOperationResponse.", nameof(url));
 
             if (!userId.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCommonOperationResponse.", nameof(userId));
+                throw new ArgumentException("Property is required for class PlayerPlayerOperationResponse.", nameof(userId));
 
             if (!updatedAt.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCommonOperationResponse.", nameof(updatedAt));
+                throw new ArgumentException("Property is required for class PlayerPlayerOperationResponse.", nameof(updatedAt));
 
             if (actions.IsSet && actions.Value == null)
-                throw new ArgumentNullException(nameof(actions), "Property is not nullable for class PlayerCommonOperationResponse.");
+                throw new ArgumentNullException(nameof(actions), "Property is not nullable for class PlayerPlayerOperationResponse.");
 
             if (chainId.IsSet && chainId.Value == null)
-                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class PlayerCommonOperationResponse.");
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class PlayerPlayerOperationResponse.");
 
             if (createdAt.IsSet && createdAt.Value == null)
-                throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class PlayerCommonOperationResponse.");
+                throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class PlayerPlayerOperationResponse.");
 
             if (gameId.IsSet && gameId.Value == null)
-                throw new ArgumentNullException(nameof(gameId), "Property is not nullable for class PlayerCommonOperationResponse.");
+                throw new ArgumentNullException(nameof(gameId), "Property is not nullable for class PlayerPlayerOperationResponse.");
 
             if (id.IsSet && id.Value == null)
-                throw new ArgumentNullException(nameof(id), "Property is not nullable for class PlayerCommonOperationResponse.");
+                throw new ArgumentNullException(nameof(id), "Property is not nullable for class PlayerPlayerOperationResponse.");
 
             if (processing.IsSet && processing.Value == null)
-                throw new ArgumentNullException(nameof(processing), "Property is not nullable for class PlayerCommonOperationResponse.");
+                throw new ArgumentNullException(nameof(processing), "Property is not nullable for class PlayerPlayerOperationResponse.");
 
             if (status.IsSet && status.Value == null)
-                throw new ArgumentNullException(nameof(status), "Property is not nullable for class PlayerCommonOperationResponse.");
+                throw new ArgumentNullException(nameof(status), "Property is not nullable for class PlayerPlayerOperationResponse.");
 
             if (transactions.IsSet && transactions.Value == null)
-                throw new ArgumentNullException(nameof(transactions), "Property is not nullable for class PlayerCommonOperationResponse.");
+                throw new ArgumentNullException(nameof(transactions), "Property is not nullable for class PlayerPlayerOperationResponse.");
 
             if (url.IsSet && url.Value == null)
-                throw new ArgumentNullException(nameof(url), "Property is not nullable for class PlayerCommonOperationResponse.");
+                throw new ArgumentNullException(nameof(url), "Property is not nullable for class PlayerPlayerOperationResponse.");
 
             if (userId.IsSet && userId.Value == null)
-                throw new ArgumentNullException(nameof(userId), "Property is not nullable for class PlayerCommonOperationResponse.");
+                throw new ArgumentNullException(nameof(userId), "Property is not nullable for class PlayerPlayerOperationResponse.");
 
-            return new PlayerCommonOperationResponse(actions.Value!, chainId.Value!.Value!, createdAt.Value!.Value!, gameId.Value!, id.Value!, processing.Value!.Value!, status.Value!.Value!, transactions.Value!, url.Value!, userId.Value!, updatedAt.Value!);
+            return new PlayerPlayerOperationResponse(actions.Value!, chainId.Value!.Value!, createdAt.Value!.Value!, gameId.Value!, id.Value!, processing.Value!.Value!, status.Value!.Value!, transactions.Value!, url.Value!, userId.Value!, updatedAt.Value!);
         }
 
         /// <summary>
-        /// Serializes a <see cref="PlayerCommonOperationResponse" />
+        /// Serializes a <see cref="PlayerPlayerOperationResponse" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="playerCommonOperationResponse"></param>
+        /// <param name="playerPlayerOperationResponse"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, PlayerCommonOperationResponse playerCommonOperationResponse, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, PlayerPlayerOperationResponse playerPlayerOperationResponse, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(ref writer, playerCommonOperationResponse, jsonSerializerOptions);
+            WriteProperties(ref writer, playerPlayerOperationResponse, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="PlayerCommonOperationResponse" />
+        /// Serializes the properties of <see cref="PlayerPlayerOperationResponse" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="playerCommonOperationResponse"></param>
+        /// <param name="playerPlayerOperationResponse"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(ref Utf8JsonWriter writer, PlayerCommonOperationResponse playerCommonOperationResponse, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(ref Utf8JsonWriter writer, PlayerPlayerOperationResponse playerPlayerOperationResponse, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (playerCommonOperationResponse.Actions == null)
-                throw new ArgumentNullException(nameof(playerCommonOperationResponse.Actions), "Property is required for class PlayerCommonOperationResponse.");
+            if (playerPlayerOperationResponse.Actions == null)
+                throw new ArgumentNullException(nameof(playerPlayerOperationResponse.Actions), "Property is required for class PlayerPlayerOperationResponse.");
 
-            if (playerCommonOperationResponse.GameId == null)
-                throw new ArgumentNullException(nameof(playerCommonOperationResponse.GameId), "Property is required for class PlayerCommonOperationResponse.");
+            if (playerPlayerOperationResponse.GameId == null)
+                throw new ArgumentNullException(nameof(playerPlayerOperationResponse.GameId), "Property is required for class PlayerPlayerOperationResponse.");
 
-            if (playerCommonOperationResponse.Id == null)
-                throw new ArgumentNullException(nameof(playerCommonOperationResponse.Id), "Property is required for class PlayerCommonOperationResponse.");
+            if (playerPlayerOperationResponse.Id == null)
+                throw new ArgumentNullException(nameof(playerPlayerOperationResponse.Id), "Property is required for class PlayerPlayerOperationResponse.");
 
-            if (playerCommonOperationResponse.Transactions == null)
-                throw new ArgumentNullException(nameof(playerCommonOperationResponse.Transactions), "Property is required for class PlayerCommonOperationResponse.");
+            if (playerPlayerOperationResponse.Transactions == null)
+                throw new ArgumentNullException(nameof(playerPlayerOperationResponse.Transactions), "Property is required for class PlayerPlayerOperationResponse.");
 
-            if (playerCommonOperationResponse.Url == null)
-                throw new ArgumentNullException(nameof(playerCommonOperationResponse.Url), "Property is required for class PlayerCommonOperationResponse.");
+            if (playerPlayerOperationResponse.Url == null)
+                throw new ArgumentNullException(nameof(playerPlayerOperationResponse.Url), "Property is required for class PlayerPlayerOperationResponse.");
 
-            if (playerCommonOperationResponse.UserId == null)
-                throw new ArgumentNullException(nameof(playerCommonOperationResponse.UserId), "Property is required for class PlayerCommonOperationResponse.");
+            if (playerPlayerOperationResponse.UserId == null)
+                throw new ArgumentNullException(nameof(playerPlayerOperationResponse.UserId), "Property is required for class PlayerPlayerOperationResponse.");
 
             writer.WritePropertyName("actions");
-            JsonSerializer.Serialize(writer, playerCommonOperationResponse.Actions, jsonSerializerOptions);
-            writer.WriteNumber("chainId", playerCommonOperationResponse.ChainId);
+            JsonSerializer.Serialize(writer, playerPlayerOperationResponse.Actions, jsonSerializerOptions);
+            writer.WriteNumber("chainId", playerPlayerOperationResponse.ChainId);
 
-            writer.WriteString("createdAt", playerCommonOperationResponse.CreatedAt.ToString(CreatedAtFormat));
+            writer.WriteString("createdAt", playerPlayerOperationResponse.CreatedAt.ToString(CreatedAtFormat));
 
-            writer.WriteString("gameId", playerCommonOperationResponse.GameId);
+            writer.WriteString("gameId", playerPlayerOperationResponse.GameId);
 
-            writer.WriteString("id", playerCommonOperationResponse.Id);
+            writer.WriteString("id", playerPlayerOperationResponse.Id);
 
-            var processingRawValue = PlayerCommonOperationResponse.ProcessingEnumToJsonValue(playerCommonOperationResponse.Processing);
+            var processingRawValue = PlayerPlayerOperationResponse.ProcessingEnumToJsonValue(playerPlayerOperationResponse.Processing);
             writer.WriteString("processing", processingRawValue);
-            var statusRawValue = PlayerCommonOperationResponse.StatusEnumToJsonValue(playerCommonOperationResponse.Status);
+            var statusRawValue = PlayerPlayerOperationResponse.StatusEnumToJsonValue(playerPlayerOperationResponse.Status);
             writer.WriteString("status", statusRawValue);
             writer.WritePropertyName("transactions");
-            JsonSerializer.Serialize(writer, playerCommonOperationResponse.Transactions, jsonSerializerOptions);
-            writer.WriteString("url", playerCommonOperationResponse.Url);
+            JsonSerializer.Serialize(writer, playerPlayerOperationResponse.Transactions, jsonSerializerOptions);
+            writer.WriteString("url", playerPlayerOperationResponse.Url);
 
-            writer.WriteString("userId", playerCommonOperationResponse.UserId);
+            writer.WriteString("userId", playerPlayerOperationResponse.UserId);
 
-            if (playerCommonOperationResponse.UpdatedAt != null)
-                writer.WriteString("updatedAt", playerCommonOperationResponse.UpdatedAt.Value.ToString(UpdatedAtFormat));
+            if (playerPlayerOperationResponse.UpdatedAt != null)
+                writer.WriteString("updatedAt", playerPlayerOperationResponse.UpdatedAt.Value.ToString(UpdatedAtFormat));
             else
                 writer.WriteNull("updatedAt");
         }

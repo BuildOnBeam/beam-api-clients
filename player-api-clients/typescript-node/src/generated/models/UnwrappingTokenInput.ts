@@ -10,7 +10,6 @@ export type UnwrappingTokenInput = {
   policyId?: string | null;
   chainId?: number;
   operationProcessing?: UnwrappingTokenInput.operationProcessing;
-  operationId?: string | null;
 };
 
 export namespace UnwrappingTokenInput {

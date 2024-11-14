@@ -36,17 +36,15 @@ namespace BeamPlayerClient.Model
         /// </summary>
         /// <param name="interactions">interactions</param>
         /// <param name="chainId">chainId (default to 13337)</param>
-        /// <param name="operationId">operationId</param>
         /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute)</param>
         /// <param name="optimistic">optimistic (default to false)</param>
         /// <param name="policyId">policyId</param>
         /// <param name="sponsor">sponsor (default to true)</param>
         [JsonConstructor]
-        public PlayerCreateTransactionRequestInput(List<PlayerCreateTransactionRequestInputInteractionsInner> interactions, Option<long?> chainId = default, Option<string?> operationId = default, Option<OperationProcessingEnum?> operationProcessing = default, Option<bool?> optimistic = default, Option<string?> policyId = default, Option<bool?> sponsor = default)
+        public PlayerCreateTransactionRequestInput(List<PlayerCreateTransactionRequestInputInteractionsInner> interactions, Option<long?> chainId = default, Option<OperationProcessingEnum?> operationProcessing = default, Option<bool?> optimistic = default, Option<string?> policyId = default, Option<bool?> sponsor = default)
         {
             Interactions = interactions;
             ChainIdOption = chainId;
-            OperationIdOption = operationId;
             OperationProcessingOption = operationProcessing;
             OptimisticOption = optimistic;
             PolicyIdOption = policyId;
@@ -250,19 +248,6 @@ namespace BeamPlayerClient.Model
         public long? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
 
         /// <summary>
-        /// Used to track the state of OperationId
-        /// </summary>
-        [JsonIgnore]
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> OperationIdOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets OperationId
-        /// </summary>
-        [JsonPropertyName("operationId")]
-        public string? OperationId { get { return this. OperationIdOption; } set { this.OperationIdOption = new(value); } }
-
-        /// <summary>
         /// Used to track the state of Optimistic
         /// </summary>
         [JsonIgnore]
@@ -311,7 +296,6 @@ namespace BeamPlayerClient.Model
             sb.Append("class PlayerCreateTransactionRequestInput {\n");
             sb.Append("  Interactions: ").Append(Interactions).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
-            sb.Append("  OperationId: ").Append(OperationId).Append("\n");
             sb.Append("  OperationProcessing: ").Append(OperationProcessing).Append("\n");
             sb.Append("  Optimistic: ").Append(Optimistic).Append("\n");
             sb.Append("  PolicyId: ").Append(PolicyId).Append("\n");
@@ -355,7 +339,6 @@ namespace BeamPlayerClient.Model
 
             Option<List<PlayerCreateTransactionRequestInputInteractionsInner>?> interactions = default;
             Option<long?> chainId = default;
-            Option<string?> operationId = default;
             Option<PlayerCreateTransactionRequestInput.OperationProcessingEnum?> operationProcessing = default;
             Option<bool?> optimistic = default;
             Option<string?> policyId = default;
@@ -383,9 +366,6 @@ namespace BeamPlayerClient.Model
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 chainId = new Option<long?>(utf8JsonReader.GetInt64());
-                            break;
-                        case "operationId":
-                            operationId = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "operationProcessing":
                             string? operationProcessingRawValue = utf8JsonReader.GetString();
@@ -427,7 +407,7 @@ namespace BeamPlayerClient.Model
             if (sponsor.IsSet && sponsor.Value == null)
                 throw new ArgumentNullException(nameof(sponsor), "Property is not nullable for class PlayerCreateTransactionRequestInput.");
 
-            return new PlayerCreateTransactionRequestInput(interactions.Value!, chainId, operationId, operationProcessing, optimistic, policyId, sponsor);
+            return new PlayerCreateTransactionRequestInput(interactions.Value!, chainId, operationProcessing, optimistic, policyId, sponsor);
         }
 
         /// <summary>
@@ -461,12 +441,6 @@ namespace BeamPlayerClient.Model
             JsonSerializer.Serialize(writer, playerCreateTransactionRequestInput.Interactions, jsonSerializerOptions);
             if (playerCreateTransactionRequestInput.ChainIdOption.IsSet)
                 writer.WriteNumber("chainId", playerCreateTransactionRequestInput.ChainIdOption.Value!.Value);
-
-            if (playerCreateTransactionRequestInput.OperationIdOption.IsSet)
-                if (playerCreateTransactionRequestInput.OperationIdOption.Value != null)
-                    writer.WriteString("operationId", playerCreateTransactionRequestInput.OperationId);
-                else
-                    writer.WriteNull("operationId");
 
             var operationProcessingRawValue = PlayerCreateTransactionRequestInput.OperationProcessingEnumToJsonValue(playerCreateTransactionRequestInput.OperationProcessingOption.Value!.Value);
             writer.WriteString("operationProcessing", operationProcessingRawValue);

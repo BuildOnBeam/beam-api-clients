@@ -139,7 +139,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="ICreateUserTransactionApiResponse"/>
     /// </summary>
-    public interface ICreateUserTransactionApiResponse : BeamPlayerClient.Client.IApiResponse, ICreated<BeamPlayerClient.Model.PlayerCommonOperationResponse?>
+    public interface ICreateUserTransactionApiResponse : BeamPlayerClient.Client.IApiResponse, ICreated<BeamPlayerClient.Model.PlayerPlayerOperationResponse?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
@@ -528,11 +528,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 201 Created
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.PlayerCommonOperationResponse? Created()
+            public BeamPlayerClient.Model.PlayerPlayerOperationResponse? Created()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsCreated
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerCommonOperationResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerPlayerOperationResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -541,7 +541,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryCreated([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerCommonOperationResponse? result)
+            public bool TryCreated([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerPlayerOperationResponse? result)
             {
                 result = null;
 

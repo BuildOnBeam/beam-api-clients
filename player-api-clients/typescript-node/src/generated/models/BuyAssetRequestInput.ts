@@ -10,7 +10,6 @@ export type BuyAssetRequestInput = {
   policyId?: string | null;
   chainId?: number;
   operationProcessing?: BuyAssetRequestInput.operationProcessing;
-  operationId?: string | null;
 };
 
 export namespace BuyAssetRequestInput {

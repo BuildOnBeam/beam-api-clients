@@ -10,7 +10,6 @@ export type AcceptAssetOfferRequestInput = {
   policyId?: string | null;
   chainId?: number;
   operationProcessing?: AcceptAssetOfferRequestInput.operationProcessing;
-  operationId?: string | null;
 };
 
 export namespace AcceptAssetOfferRequestInput {

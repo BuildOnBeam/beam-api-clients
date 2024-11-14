@@ -10,7 +10,6 @@ export type WrappingTokenInput = {
   policyId?: string | null;
   chainId?: number;
   operationProcessing?: WrappingTokenInput.operationProcessing;
-  operationId?: string | null;
 };
 
 export namespace WrappingTokenInput {

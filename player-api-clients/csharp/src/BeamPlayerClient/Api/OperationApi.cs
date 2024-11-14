@@ -36,29 +36,6 @@ namespace BeamPlayerClient.Api
         PlayerOperationApiEvents Events { get; }
 
         /// <summary>
-        /// Initializes an operation. Used by Game SDKs to get transaction results.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="playerCreateOperationRequestInput"></param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="ICreateOperationApiResponse"/>&gt;</returns>
-        Task<ICreateOperationApiResponse> CreateOperationAsync(PlayerCreateOperationRequestInput playerCreateOperationRequestInput, System.Threading.CancellationToken cancellationToken = default);
-
-        /// <summary>
-        /// Initializes an operation. Used by Game SDKs to get transaction results.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <param name="playerCreateOperationRequestInput"></param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="ICreateOperationApiResponse"/>?&gt;</returns>
-        Task<ICreateOperationApiResponse?> CreateOperationOrDefaultAsync(PlayerCreateOperationRequestInput playerCreateOperationRequestInput, System.Threading.CancellationToken cancellationToken = default);
-
-        /// <summary>
         /// Delete an operation
         /// </summary>
         /// <remarks>
@@ -154,21 +131,9 @@ namespace BeamPlayerClient.Api
     }
 
     /// <summary>
-    /// The <see cref="ICreateOperationApiResponse"/>
-    /// </summary>
-    public interface ICreateOperationApiResponse : BeamPlayerClient.Client.IApiResponse, ICreated<BeamPlayerClient.Model.PlayerCommonOperationResponse?>
-    {
-        /// <summary>
-        /// Returns true if the response is 201 Created
-        /// </summary>
-        /// <returns></returns>
-        bool IsCreated { get; }
-    }
-
-    /// <summary>
     /// The <see cref="IDeleteOperationApiResponse"/>
     /// </summary>
-    public interface IDeleteOperationApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerCommonOperationResponse?>
+    public interface IDeleteOperationApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerPlayerOperationResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -180,7 +145,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="IExecuteSignedOperationApiResponse"/>
     /// </summary>
-    public interface IExecuteSignedOperationApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerCommonOperationResponse?>
+    public interface IExecuteSignedOperationApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerPlayerOperationResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -192,7 +157,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="IGetOperationApiResponse"/>
     /// </summary>
-    public interface IGetOperationApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerCommonOperationResponse?>
+    public interface IGetOperationApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerPlayerOperationResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -204,7 +169,7 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="IProcessOperationApiResponse"/>
     /// </summary>
-    public interface IProcessOperationApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerCommonOperationResponse?>
+    public interface IProcessOperationApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerPlayerOperationResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -218,26 +183,6 @@ namespace BeamPlayerClient.Api
     /// </summary>
     public class PlayerOperationApiEvents
     {
-        /// <summary>
-        /// The event raised after the server response
-        /// </summary>
-        public event EventHandler<ApiResponseEventArgs>? OnCreateOperation;
-
-        /// <summary>
-        /// The event raised after an error querying the server
-        /// </summary>
-        public event EventHandler<ExceptionEventArgs>? OnErrorCreateOperation;
-
-        internal void ExecuteOnCreateOperation(PlayerOperationApi.CreateOperationApiResponse apiResponse)
-        {
-            OnCreateOperation?.Invoke(this, new ApiResponseEventArgs(apiResponse));
-        }
-
-        internal void ExecuteOnErrorCreateOperation(Exception exception)
-        {
-            OnErrorCreateOperation?.Invoke(this, new ExceptionEventArgs(exception));
-        }
-
         /// <summary>
         /// The event raised after the server response
         /// </summary>
@@ -364,245 +309,6 @@ namespace BeamPlayerClient.Api
             HttpClient = httpClient;
             Events = playerOperationApiEvents;
             ApiKeyProvider = apiKeyProvider;
-        }
-
-        partial void FormatCreateOperation(PlayerCreateOperationRequestInput playerCreateOperationRequestInput);
-
-        /// <summary>
-        /// Validates the request parameters
-        /// </summary>
-        /// <param name="playerCreateOperationRequestInput"></param>
-        /// <returns></returns>
-        private void ValidateCreateOperation(PlayerCreateOperationRequestInput playerCreateOperationRequestInput)
-        {
-            if (playerCreateOperationRequestInput == null)
-                throw new ArgumentNullException(nameof(playerCreateOperationRequestInput));
-        }
-
-        /// <summary>
-        /// Processes the server response
-        /// </summary>
-        /// <param name="apiResponseLocalVar"></param>
-        /// <param name="playerCreateOperationRequestInput"></param>
-        private void AfterCreateOperationDefaultImplementation(ICreateOperationApiResponse apiResponseLocalVar, PlayerCreateOperationRequestInput playerCreateOperationRequestInput)
-        {
-            bool suppressDefaultLog = false;
-            AfterCreateOperation(ref suppressDefaultLog, apiResponseLocalVar, playerCreateOperationRequestInput);
-            if (!suppressDefaultLog)
-                Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
-        }
-
-        /// <summary>
-        /// Processes the server response
-        /// </summary>
-        /// <param name="suppressDefaultLog"></param>
-        /// <param name="apiResponseLocalVar"></param>
-        /// <param name="playerCreateOperationRequestInput"></param>
-        partial void AfterCreateOperation(ref bool suppressDefaultLog, ICreateOperationApiResponse apiResponseLocalVar, PlayerCreateOperationRequestInput playerCreateOperationRequestInput);
-
-        /// <summary>
-        /// Logs exceptions that occur while retrieving the server response
-        /// </summary>
-        /// <param name="exception"></param>
-        /// <param name="pathFormat"></param>
-        /// <param name="path"></param>
-        /// <param name="playerCreateOperationRequestInput"></param>
-        private void OnErrorCreateOperationDefaultImplementation(Exception exception, string pathFormat, string path, PlayerCreateOperationRequestInput playerCreateOperationRequestInput)
-        {
-            bool suppressDefaultLog = false;
-            OnErrorCreateOperation(ref suppressDefaultLog, exception, pathFormat, path, playerCreateOperationRequestInput);
-            if (!suppressDefaultLog)
-                Logger.LogError(exception, "An error occurred while sending the request to the server.");
-        }
-
-        /// <summary>
-        /// A partial method that gives developers a way to provide customized exception handling
-        /// </summary>
-        /// <param name="suppressDefaultLog"></param>
-        /// <param name="exception"></param>
-        /// <param name="pathFormat"></param>
-        /// <param name="path"></param>
-        /// <param name="playerCreateOperationRequestInput"></param>
-        partial void OnErrorCreateOperation(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, PlayerCreateOperationRequestInput playerCreateOperationRequestInput);
-
-        /// <summary>
-        /// Initializes an operation. Used by Game SDKs to get transaction results. 
-        /// </summary>
-        /// <param name="playerCreateOperationRequestInput"></param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="ICreateOperationApiResponse"/>&gt;</returns>
-        public async Task<ICreateOperationApiResponse?> CreateOperationOrDefaultAsync(PlayerCreateOperationRequestInput playerCreateOperationRequestInput, System.Threading.CancellationToken cancellationToken = default)
-        {
-            try
-            {
-                return await CreateOperationAsync(playerCreateOperationRequestInput, cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// Initializes an operation. Used by Game SDKs to get transaction results. 
-        /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="playerCreateOperationRequestInput"></param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="ICreateOperationApiResponse"/>&gt;</returns>
-        public async Task<ICreateOperationApiResponse> CreateOperationAsync(PlayerCreateOperationRequestInput playerCreateOperationRequestInput, System.Threading.CancellationToken cancellationToken = default)
-        {
-            UriBuilder uriBuilderLocalVar = new UriBuilder();
-
-            try
-            {
-                ValidateCreateOperation(playerCreateOperationRequestInput);
-
-                FormatCreateOperation(playerCreateOperationRequestInput);
-
-                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
-                {
-                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
-                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
-                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
-                    uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/player/operation";
-
-                    httpRequestMessageLocalVar.Content = (playerCreateOperationRequestInput as object) is System.IO.Stream stream
-                        ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(playerCreateOperationRequestInput, _jsonSerializerOptions));
-
-                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
-                    PlayerApiKeyToken apiKeyTokenLocalVar1 = (PlayerApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
-                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
-                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
-
-                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
-
-                    string[] contentTypes = new string[] {
-                        "application/json"
-                    };
-
-                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
-
-                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
-                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
-
-                    string[] acceptLocalVars = new string[] {
-                        "application/json"
-                    };
-
-                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
-
-                    if (acceptLocalVar != null)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
-
-                    httpRequestMessageLocalVar.Method = HttpMethod.Post;
-
-                    DateTime requestedAtLocalVar = DateTime.UtcNow;
-
-                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
-                    {
-                        string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
-
-                        ILogger<CreateOperationApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<CreateOperationApiResponse>();
-
-                        CreateOperationApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/player/operation", requestedAtLocalVar, _jsonSerializerOptions);
-
-                        AfterCreateOperationDefaultImplementation(apiResponseLocalVar, playerCreateOperationRequestInput);
-
-                        Events.ExecuteOnCreateOperation(apiResponseLocalVar);
-
-                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
-                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
-                                tokenBaseLocalVar.BeginRateLimit();
-
-                        return apiResponseLocalVar;
-                    }
-                }
-            }
-            catch(Exception e)
-            {
-                OnErrorCreateOperationDefaultImplementation(e, "/v1/player/operation", uriBuilderLocalVar.Path, playerCreateOperationRequestInput);
-                Events.ExecuteOnErrorCreateOperation(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// The <see cref="CreateOperationApiResponse"/>
-        /// </summary>
-        public partial class CreateOperationApiResponse : BeamPlayerClient.Client.ApiResponse, ICreateOperationApiResponse
-        {
-            /// <summary>
-            /// The logger
-            /// </summary>
-            public ILogger<CreateOperationApiResponse> Logger { get; }
-
-            /// <summary>
-            /// The <see cref="CreateOperationApiResponse"/>
-            /// </summary>
-            /// <param name="logger"></param>
-            /// <param name="httpRequestMessage"></param>
-            /// <param name="httpResponseMessage"></param>
-            /// <param name="rawContent"></param>
-            /// <param name="path"></param>
-            /// <param name="requestedAt"></param>
-            /// <param name="jsonSerializerOptions"></param>
-            public CreateOperationApiResponse(ILogger<CreateOperationApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
-            {
-                Logger = logger;
-                OnCreated(httpRequestMessage, httpResponseMessage);
-            }
-
-            partial void OnCreated(System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
-
-            /// <summary>
-            /// Returns true if the response is 201 Created
-            /// </summary>
-            /// <returns></returns>
-            public bool IsCreated => 201 == (int)StatusCode;
-
-            /// <summary>
-            /// Deserializes the response if the response is 201 Created
-            /// </summary>
-            /// <returns></returns>
-            public BeamPlayerClient.Model.PlayerCommonOperationResponse? Created()
-            {
-                // This logic may be modified with the AsModel.mustache template
-                return IsCreated
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerCommonOperationResponse>(RawContent, _jsonSerializerOptions)
-                    : null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 201 Created and the deserialized response is not null
-            /// </summary>
-            /// <param name="result"></param>
-            /// <returns></returns>
-            public bool TryCreated([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerCommonOperationResponse? result)
-            {
-                result = null;
-
-                try
-                {
-                    result = Created();
-                } catch (Exception e)
-                {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)201);
-                }
-
-                return result != null;
-            }
-
-            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
-            {
-                bool suppressDefaultLog = false;
-                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
-                if (!suppressDefaultLog)
-                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
-            }
-
-            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
         partial void FormatDeleteOperation(ref string opId);
@@ -793,11 +499,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.PlayerCommonOperationResponse? Ok()
+            public BeamPlayerClient.Model.PlayerPlayerOperationResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerCommonOperationResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerPlayerOperationResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -806,7 +512,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerCommonOperationResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerPlayerOperationResponse? result)
             {
                 result = null;
 
@@ -1020,11 +726,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.PlayerCommonOperationResponse? Ok()
+            public BeamPlayerClient.Model.PlayerPlayerOperationResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerCommonOperationResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerPlayerOperationResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1033,7 +739,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerCommonOperationResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerPlayerOperationResponse? result)
             {
                 result = null;
 
@@ -1247,11 +953,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.PlayerCommonOperationResponse? Ok()
+            public BeamPlayerClient.Model.PlayerPlayerOperationResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerCommonOperationResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerPlayerOperationResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1260,7 +966,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerCommonOperationResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerPlayerOperationResponse? result)
             {
                 result = null;
 
@@ -1497,11 +1203,11 @@ namespace BeamPlayerClient.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public BeamPlayerClient.Model.PlayerCommonOperationResponse? Ok()
+            public BeamPlayerClient.Model.PlayerPlayerOperationResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerCommonOperationResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerPlayerOperationResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1510,7 +1216,7 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerCommonOperationResponse? result)
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerPlayerOperationResponse? result)
             {
                 result = null;
 

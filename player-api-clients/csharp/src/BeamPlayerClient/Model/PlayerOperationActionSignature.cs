@@ -27,27 +27,27 @@ using BeamPlayerClient.Client;
 namespace BeamPlayerClient.Model
 {
     /// <summary>
-    /// PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature
+    /// PlayerOperationActionSignature
     /// </summary>
-    public partial class PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature : IValidatableObject
+    public partial class PlayerOperationActionSignature : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature" /> class.
+        /// Initializes a new instance of the <see cref="PlayerOperationActionSignature" /> class.
         /// </summary>
-        /// <param name="data">data</param>
-        /// <param name="hash">hash</param>
         /// <param name="id">id</param>
         /// <param name="type">type</param>
         /// <param name="actionId">actionId</param>
+        /// <param name="data">data</param>
+        /// <param name="hash">hash</param>
         /// <param name="signature">signature</param>
         [JsonConstructor]
-        public PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature(string data, string hash, string id, TypeEnum type, string? actionId = default, string? signature = default)
+        public PlayerOperationActionSignature(string id, TypeEnum type, string? actionId = default, Option<Object?> data = default, Option<string?> hash = default, string? signature = default)
         {
-            Data = data;
-            Hash = hash;
             Id = id;
             Type = type;
             ActionId = actionId;
+            DataOption = data;
+            HashOption = hash;
             Signature = signature;
             OnCreated();
         }
@@ -63,7 +63,12 @@ namespace BeamPlayerClient.Model
             /// <summary>
             /// Enum Message for value: Message
             /// </summary>
-            Message = 1
+            Message = 1,
+
+            /// <summary>
+            /// Enum TypedData for value: TypedData
+            /// </summary>
+            TypedData = 2
         }
 
         /// <summary>
@@ -76,6 +81,9 @@ namespace BeamPlayerClient.Model
         {
             if (value.Equals("Message"))
                 return TypeEnum.Message;
+
+            if (value.Equals("TypedData"))
+                return TypeEnum.TypedData;
 
             throw new NotImplementedException($"Could not convert value to type TypeEnum: '{value}'");
         }
@@ -90,6 +98,9 @@ namespace BeamPlayerClient.Model
             if (value.Equals("Message"))
                 return TypeEnum.Message;
 
+            if (value.Equals("TypedData"))
+                return TypeEnum.TypedData;
+
             return null;
         }
 
@@ -103,6 +114,9 @@ namespace BeamPlayerClient.Model
         {
             if (value == TypeEnum.Message)
                 return "Message";
+
+            if (value == TypeEnum.TypedData)
+                return "TypedData";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }
@@ -122,6 +136,9 @@ namespace BeamPlayerClient.Model
                     if (value.Equals("Message"))
                         return TypeEnum.Message;
 
+                    if (value.Equals("TypedData"))
+                        return TypeEnum.TypedData;
+
                 throw new NotImplementedException($"Could not convert value to type TypeEnum: '{value}'");
             }
 
@@ -134,6 +151,9 @@ namespace BeamPlayerClient.Model
             {
                     if (value.Equals("Message"))
                         return TypeEnum.Message;
+
+                    if (value.Equals("TypedData"))
+                        return TypeEnum.TypedData;
 
                 return null;
             }
@@ -148,6 +168,9 @@ namespace BeamPlayerClient.Model
             {
                         if (value == TypeEnum.Message)
                             return "Message";
+
+                        if (value == TypeEnum.TypedData)
+                            return "TypedData";
 
                 throw new NotImplementedException($"Value could not be handled: '{value}'");
             }
@@ -199,18 +222,6 @@ namespace BeamPlayerClient.Model
         public TypeEnum Type { get; set; }
 
         /// <summary>
-        /// Gets or Sets Data
-        /// </summary>
-        [JsonPropertyName("data")]
-        public string Data { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Hash
-        /// </summary>
-        [JsonPropertyName("hash")]
-        public string Hash { get; set; }
-
-        /// <summary>
         /// Gets or Sets Id
         /// </summary>
         [JsonPropertyName("id")]
@@ -221,6 +232,32 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [JsonPropertyName("actionId")]
         public string? ActionId { get; set; }
+
+        /// <summary>
+        /// Used to track the state of Data
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<Object?> DataOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Data
+        /// </summary>
+        [JsonPropertyName("data")]
+        public Object? Data { get { return this. DataOption; } set { this.DataOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Hash
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> HashOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Hash
+        /// </summary>
+        [JsonPropertyName("hash")]
+        public string? Hash { get { return this. HashOption; } set { this.HashOption = new(value); } }
 
         /// <summary>
         /// Gets or Sets Signature
@@ -235,12 +272,12 @@ namespace BeamPlayerClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature {\n");
-            sb.Append("  Data: ").Append(Data).Append("\n");
-            sb.Append("  Hash: ").Append(Hash).Append("\n");
+            sb.Append("class PlayerOperationActionSignature {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  ActionId: ").Append(ActionId).Append("\n");
+            sb.Append("  Data: ").Append(Data).Append("\n");
+            sb.Append("  Hash: ").Append(Hash).Append("\n");
             sb.Append("  Signature: ").Append(Signature).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -258,19 +295,19 @@ namespace BeamPlayerClient.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature" />
+    /// A Json converter for type <see cref="PlayerOperationActionSignature" />
     /// </summary>
-    public class PlayerCommonOperationResponseActionsInnerAllOfOneOfSignatureJsonConverter : JsonConverter<PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature>
+    public class PlayerOperationActionSignatureJsonConverter : JsonConverter<PlayerOperationActionSignature>
     {
         /// <summary>
-        /// Deserializes json to <see cref="PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature" />
+        /// Deserializes json to <see cref="PlayerOperationActionSignature" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override PlayerOperationActionSignature Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -279,11 +316,11 @@ namespace BeamPlayerClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<string?> data = default;
-            Option<string?> hash = default;
             Option<string?> id = default;
-            Option<PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature.TypeEnum?> type = default;
+            Option<PlayerOperationActionSignature.TypeEnum?> type = default;
             Option<string?> actionId = default;
+            Option<Object?> data = default;
+            Option<string?> hash = default;
             Option<string?> signature = default;
 
             while (utf8JsonReader.Read())
@@ -301,22 +338,23 @@ namespace BeamPlayerClient.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "data":
-                            data = new Option<string?>(utf8JsonReader.GetString()!);
-                            break;
-                        case "hash":
-                            hash = new Option<string?>(utf8JsonReader.GetString()!);
-                            break;
                         case "id":
                             id = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "type":
                             string? typeRawValue = utf8JsonReader.GetString();
                             if (typeRawValue != null)
-                                type = new Option<PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature.TypeEnum?>(PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature.TypeEnumFromStringOrDefault(typeRawValue));
+                                type = new Option<PlayerOperationActionSignature.TypeEnum?>(PlayerOperationActionSignature.TypeEnumFromStringOrDefault(typeRawValue));
                             break;
                         case "actionId":
                             actionId = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "data":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                data = new Option<Object?>(JsonSerializer.Deserialize<Object>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "hash":
+                            hash = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "signature":
                             signature = new Option<string?>(utf8JsonReader.GetString());
@@ -327,87 +365,79 @@ namespace BeamPlayerClient.Model
                 }
             }
 
-            if (!data.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature.", nameof(data));
-
-            if (!hash.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature.", nameof(hash));
-
             if (!id.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature.", nameof(id));
+                throw new ArgumentException("Property is required for class PlayerOperationActionSignature.", nameof(id));
 
             if (!type.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature.", nameof(type));
+                throw new ArgumentException("Property is required for class PlayerOperationActionSignature.", nameof(type));
 
             if (!actionId.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature.", nameof(actionId));
+                throw new ArgumentException("Property is required for class PlayerOperationActionSignature.", nameof(actionId));
 
             if (!signature.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature.", nameof(signature));
-
-            if (data.IsSet && data.Value == null)
-                throw new ArgumentNullException(nameof(data), "Property is not nullable for class PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature.");
-
-            if (hash.IsSet && hash.Value == null)
-                throw new ArgumentNullException(nameof(hash), "Property is not nullable for class PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature.");
+                throw new ArgumentException("Property is required for class PlayerOperationActionSignature.", nameof(signature));
 
             if (id.IsSet && id.Value == null)
-                throw new ArgumentNullException(nameof(id), "Property is not nullable for class PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature.");
+                throw new ArgumentNullException(nameof(id), "Property is not nullable for class PlayerOperationActionSignature.");
 
             if (type.IsSet && type.Value == null)
-                throw new ArgumentNullException(nameof(type), "Property is not nullable for class PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature.");
+                throw new ArgumentNullException(nameof(type), "Property is not nullable for class PlayerOperationActionSignature.");
 
-            return new PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature(data.Value!, hash.Value!, id.Value!, type.Value!.Value!, actionId.Value!, signature.Value!);
+            return new PlayerOperationActionSignature(id.Value!, type.Value!.Value!, actionId.Value!, data, hash, signature.Value!);
         }
 
         /// <summary>
-        /// Serializes a <see cref="PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature" />
+        /// Serializes a <see cref="PlayerOperationActionSignature" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="playerCommonOperationResponseActionsInnerAllOfOneOfSignature"></param>
+        /// <param name="playerOperationActionSignature"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature playerCommonOperationResponseActionsInnerAllOfOneOfSignature, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, PlayerOperationActionSignature playerOperationActionSignature, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(ref writer, playerCommonOperationResponseActionsInnerAllOfOneOfSignature, jsonSerializerOptions);
+            WriteProperties(ref writer, playerOperationActionSignature, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature" />
+        /// Serializes the properties of <see cref="PlayerOperationActionSignature" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="playerCommonOperationResponseActionsInnerAllOfOneOfSignature"></param>
+        /// <param name="playerOperationActionSignature"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(ref Utf8JsonWriter writer, PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature playerCommonOperationResponseActionsInnerAllOfOneOfSignature, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(ref Utf8JsonWriter writer, PlayerOperationActionSignature playerOperationActionSignature, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (playerCommonOperationResponseActionsInnerAllOfOneOfSignature.Data == null)
-                throw new ArgumentNullException(nameof(playerCommonOperationResponseActionsInnerAllOfOneOfSignature.Data), "Property is required for class PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature.");
+            if (playerOperationActionSignature.Id == null)
+                throw new ArgumentNullException(nameof(playerOperationActionSignature.Id), "Property is required for class PlayerOperationActionSignature.");
 
-            if (playerCommonOperationResponseActionsInnerAllOfOneOfSignature.Hash == null)
-                throw new ArgumentNullException(nameof(playerCommonOperationResponseActionsInnerAllOfOneOfSignature.Hash), "Property is required for class PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature.");
+            writer.WriteString("id", playerOperationActionSignature.Id);
 
-            if (playerCommonOperationResponseActionsInnerAllOfOneOfSignature.Id == null)
-                throw new ArgumentNullException(nameof(playerCommonOperationResponseActionsInnerAllOfOneOfSignature.Id), "Property is required for class PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature.");
-
-            writer.WriteString("data", playerCommonOperationResponseActionsInnerAllOfOneOfSignature.Data);
-
-            writer.WriteString("hash", playerCommonOperationResponseActionsInnerAllOfOneOfSignature.Hash);
-
-            writer.WriteString("id", playerCommonOperationResponseActionsInnerAllOfOneOfSignature.Id);
-
-            var typeRawValue = PlayerCommonOperationResponseActionsInnerAllOfOneOfSignature.TypeEnumToJsonValue(playerCommonOperationResponseActionsInnerAllOfOneOfSignature.Type);
+            var typeRawValue = PlayerOperationActionSignature.TypeEnumToJsonValue(playerOperationActionSignature.Type);
             writer.WriteString("type", typeRawValue);
-            if (playerCommonOperationResponseActionsInnerAllOfOneOfSignature.ActionId != null)
-                writer.WriteString("actionId", playerCommonOperationResponseActionsInnerAllOfOneOfSignature.ActionId);
+            if (playerOperationActionSignature.ActionId != null)
+                writer.WriteString("actionId", playerOperationActionSignature.ActionId);
             else
                 writer.WriteNull("actionId");
 
-            if (playerCommonOperationResponseActionsInnerAllOfOneOfSignature.Signature != null)
-                writer.WriteString("signature", playerCommonOperationResponseActionsInnerAllOfOneOfSignature.Signature);
+            if (playerOperationActionSignature.DataOption.IsSet)
+                if (playerOperationActionSignature.DataOption.Value != null)
+                {
+                    writer.WritePropertyName("data");
+                    JsonSerializer.Serialize(writer, playerOperationActionSignature.Data, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("data");
+            if (playerOperationActionSignature.HashOption.IsSet)
+                if (playerOperationActionSignature.HashOption.Value != null)
+                    writer.WriteString("hash", playerOperationActionSignature.Hash);
+                else
+                    writer.WriteNull("hash");
+
+            if (playerOperationActionSignature.Signature != null)
+                writer.WriteString("signature", playerOperationActionSignature.Signature);
             else
                 writer.WriteNull("signature");
         }
