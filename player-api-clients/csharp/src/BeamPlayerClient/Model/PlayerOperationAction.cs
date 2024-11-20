@@ -63,74 +63,79 @@ namespace BeamPlayerClient.Model
         public enum TypeEnum
         {
             /// <summary>
+            /// Enum FiatOnRamp for value: FiatOnRamp
+            /// </summary>
+            FiatOnRamp = 1,
+
+            /// <summary>
             /// Enum Sign for value: Sign
             /// </summary>
-            Sign = 1,
+            Sign = 2,
 
             /// <summary>
             /// Enum SessionRevoke for value: SessionRevoke
             /// </summary>
-            SessionRevoke = 2,
+            SessionRevoke = 3,
 
             /// <summary>
             /// Enum MarketplaceCreateOffer for value: MarketplaceCreateOffer
             /// </summary>
-            MarketplaceCreateOffer = 3,
+            MarketplaceCreateOffer = 4,
 
             /// <summary>
             /// Enum MarketplaceCancelOffer for value: MarketplaceCancelOffer
             /// </summary>
-            MarketplaceCancelOffer = 4,
+            MarketplaceCancelOffer = 5,
 
             /// <summary>
             /// Enum MarketplaceAcceptOffer for value: MarketplaceAcceptOffer
             /// </summary>
-            MarketplaceAcceptOffer = 5,
+            MarketplaceAcceptOffer = 6,
 
             /// <summary>
             /// Enum MarketplaceBuyAsset for value: MarketplaceBuyAsset
             /// </summary>
-            MarketplaceBuyAsset = 6,
+            MarketplaceBuyAsset = 7,
 
             /// <summary>
             /// Enum MarketplaceListAsset for value: MarketplaceListAsset
             /// </summary>
-            MarketplaceListAsset = 7,
+            MarketplaceListAsset = 8,
 
             /// <summary>
             /// Enum MarketplaceCancelListing for value: MarketplaceCancelListing
             /// </summary>
-            MarketplaceCancelListing = 8,
+            MarketplaceCancelListing = 9,
 
             /// <summary>
             /// Enum ExchangeConvert for value: ExchangeConvert
             /// </summary>
-            ExchangeConvert = 9,
+            ExchangeConvert = 10,
 
             /// <summary>
             /// Enum ExchangeWrap for value: ExchangeWrap
             /// </summary>
-            ExchangeWrap = 10,
+            ExchangeWrap = 11,
 
             /// <summary>
             /// Enum ExchangeUnwrap for value: ExchangeUnwrap
             /// </summary>
-            ExchangeUnwrap = 11,
+            ExchangeUnwrap = 12,
 
             /// <summary>
             /// Enum TransferNFTs for value: TransferNFTs
             /// </summary>
-            TransferNFTs = 12,
+            TransferNFTs = 13,
 
             /// <summary>
             /// Enum TransferToken for value: TransferToken
             /// </summary>
-            TransferToken = 13,
+            TransferToken = 14,
 
             /// <summary>
             /// Enum CustomTransaction for value: CustomTransaction
             /// </summary>
-            CustomTransaction = 14
+            CustomTransaction = 15
         }
 
         /// <summary>
@@ -141,6 +146,9 @@ namespace BeamPlayerClient.Model
         /// <exception cref="NotImplementedException"></exception>
         public static TypeEnum TypeEnumFromString(string value)
         {
+            if (value.Equals("FiatOnRamp"))
+                return TypeEnum.FiatOnRamp;
+
             if (value.Equals("Sign"))
                 return TypeEnum.Sign;
 
@@ -193,6 +201,9 @@ namespace BeamPlayerClient.Model
         /// <returns></returns>
         public static TypeEnum? TypeEnumFromStringOrDefault(string value)
         {
+            if (value.Equals("FiatOnRamp"))
+                return TypeEnum.FiatOnRamp;
+
             if (value.Equals("Sign"))
                 return TypeEnum.Sign;
 
@@ -246,6 +257,9 @@ namespace BeamPlayerClient.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string TypeEnumToJsonValue(TypeEnum value)
         {
+            if (value == TypeEnum.FiatOnRamp)
+                return "FiatOnRamp";
+
             if (value == TypeEnum.Sign)
                 return "Sign";
 
@@ -303,6 +317,9 @@ namespace BeamPlayerClient.Model
             /// <returns></returns>
             public static TypeEnum FromString(string value)
             {
+                    if (value.Equals("FiatOnRamp"))
+                        return TypeEnum.FiatOnRamp;
+
                     if (value.Equals("Sign"))
                         return TypeEnum.Sign;
 
@@ -355,6 +372,9 @@ namespace BeamPlayerClient.Model
             /// <returns></returns>
             public static TypeEnum? FromStringOrDefault(string value)
             {
+                    if (value.Equals("FiatOnRamp"))
+                        return TypeEnum.FiatOnRamp;
+
                     if (value.Equals("Sign"))
                         return TypeEnum.Sign;
 
@@ -408,6 +428,9 @@ namespace BeamPlayerClient.Model
             /// <exception cref="NotImplementedException"></exception>
             public static string ToJsonValue(TypeEnum value)
             {
+                        if (value == TypeEnum.FiatOnRamp)
+                            return "FiatOnRamp";
+
                         if (value == TypeEnum.Sign)
                             return "Sign";
 

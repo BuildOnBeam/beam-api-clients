@@ -43,10 +43,12 @@ namespace BeamPlayerClient.Model
         /// <param name="supply">supply</param>
         /// <param name="attributes">attributes</param>
         /// <param name="chainId">chainId (default to 13337)</param>
+        /// <param name="mintedAt">mintedAt</param>
         /// <param name="rarity">rarity</param>
         /// <param name="rarityScore">rarityScore</param>
+        /// <param name="updatedAt">updatedAt</param>
         [JsonConstructor]
-        public PlayerGetAssetsForUserResponseDataInner(string assetAddress, string assetId, string assetType, string imageUrl, string name, decimal ownedQuantity, decimal supply, Option<List<PlayerGetAssetsForUserResponseDataInnerAttributesInner>?> attributes = default, Option<long?> chainId = default, Option<RarityEnum?> rarity = default, Option<decimal?> rarityScore = default)
+        public PlayerGetAssetsForUserResponseDataInner(string assetAddress, string assetId, string assetType, string imageUrl, string name, decimal ownedQuantity, decimal supply, Option<List<PlayerGetAssetsForUserResponseDataInnerAttributesInner>?> attributes = default, Option<long?> chainId = default, Option<DateTime?> mintedAt = default, Option<RarityEnum?> rarity = default, Option<decimal?> rarityScore = default, Option<DateTime?> updatedAt = default)
         {
             AssetAddress = assetAddress;
             AssetId = assetId;
@@ -57,8 +59,10 @@ namespace BeamPlayerClient.Model
             Supply = supply;
             AttributesOption = attributes;
             ChainIdOption = chainId;
+            MintedAtOption = mintedAt;
             RarityOption = rarity;
             RarityScoreOption = rarityScore;
+            UpdatedAtOption = updatedAt;
             OnCreated();
         }
 
@@ -379,6 +383,19 @@ namespace BeamPlayerClient.Model
         public long? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of MintedAt
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<DateTime?> MintedAtOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets MintedAt
+        /// </summary>
+        [JsonPropertyName("mintedAt")]
+        public DateTime? MintedAt { get { return this. MintedAtOption; } set { this.MintedAtOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of RarityScore
         /// </summary>
         [JsonIgnore]
@@ -390,6 +407,19 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [JsonPropertyName("rarityScore")]
         public decimal? RarityScore { get { return this. RarityScoreOption; } set { this.RarityScoreOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of UpdatedAt
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<DateTime?> UpdatedAtOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets UpdatedAt
+        /// </summary>
+        [JsonPropertyName("updatedAt")]
+        public DateTime? UpdatedAt { get { return this. UpdatedAtOption; } set { this.UpdatedAtOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -408,8 +438,10 @@ namespace BeamPlayerClient.Model
             sb.Append("  Supply: ").Append(Supply).Append("\n");
             sb.Append("  Attributes: ").Append(Attributes).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
+            sb.Append("  MintedAt: ").Append(MintedAt).Append("\n");
             sb.Append("  Rarity: ").Append(Rarity).Append("\n");
             sb.Append("  RarityScore: ").Append(RarityScore).Append("\n");
+            sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -430,6 +462,16 @@ namespace BeamPlayerClient.Model
     /// </summary>
     public class PlayerGetAssetsForUserResponseDataInnerJsonConverter : JsonConverter<PlayerGetAssetsForUserResponseDataInner>
     {
+        /// <summary>
+        /// The format to use to serialize MintedAt
+        /// </summary>
+        public static string MintedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
+        /// The format to use to serialize UpdatedAt
+        /// </summary>
+        public static string UpdatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
         /// <summary>
         /// Deserializes json to <see cref="PlayerGetAssetsForUserResponseDataInner" />
         /// </summary>
@@ -456,8 +498,10 @@ namespace BeamPlayerClient.Model
             Option<decimal?> supply = default;
             Option<List<PlayerGetAssetsForUserResponseDataInnerAttributesInner>?> attributes = default;
             Option<long?> chainId = default;
+            Option<DateTime?> mintedAt = default;
             Option<PlayerGetAssetsForUserResponseDataInner.RarityEnum?> rarity = default;
             Option<decimal?> rarityScore = default;
+            Option<DateTime?> updatedAt = default;
 
             while (utf8JsonReader.Read())
             {
@@ -505,6 +549,10 @@ namespace BeamPlayerClient.Model
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 chainId = new Option<long?>(utf8JsonReader.GetInt64());
                             break;
+                        case "mintedAt":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                mintedAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime?>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
                         case "rarity":
                             string? rarityRawValue = utf8JsonReader.GetString();
                             if (rarityRawValue != null)
@@ -513,6 +561,10 @@ namespace BeamPlayerClient.Model
                         case "rarityScore":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 rarityScore = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                            break;
+                        case "updatedAt":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                updatedAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime?>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -565,7 +617,7 @@ namespace BeamPlayerClient.Model
             if (chainId.IsSet && chainId.Value == null)
                 throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class PlayerGetAssetsForUserResponseDataInner.");
 
-            return new PlayerGetAssetsForUserResponseDataInner(assetAddress.Value!, assetId.Value!, assetType.Value!, imageUrl.Value!, name.Value!, ownedQuantity.Value!.Value!, supply.Value!.Value!, attributes, chainId, rarity, rarityScore);
+            return new PlayerGetAssetsForUserResponseDataInner(assetAddress.Value!, assetId.Value!, assetType.Value!, imageUrl.Value!, name.Value!, ownedQuantity.Value!.Value!, supply.Value!.Value!, attributes, chainId, mintedAt, rarity, rarityScore, updatedAt);
         }
 
         /// <summary>
@@ -632,6 +684,12 @@ namespace BeamPlayerClient.Model
             if (playerGetAssetsForUserResponseDataInner.ChainIdOption.IsSet)
                 writer.WriteNumber("chainId", playerGetAssetsForUserResponseDataInner.ChainIdOption.Value!.Value);
 
+            if (playerGetAssetsForUserResponseDataInner.MintedAtOption.IsSet)
+                if (playerGetAssetsForUserResponseDataInner.MintedAtOption.Value != null)
+                    writer.WriteString("mintedAt", playerGetAssetsForUserResponseDataInner.MintedAtOption.Value!.Value.ToString(MintedAtFormat));
+                else
+                    writer.WriteNull("mintedAt");
+
             var rarityRawValue = PlayerGetAssetsForUserResponseDataInner.RarityEnumToJsonValue(playerGetAssetsForUserResponseDataInner.RarityOption.Value!.Value);
             if (rarityRawValue != null)
                 writer.WriteString("rarity", rarityRawValue);
@@ -643,6 +701,12 @@ namespace BeamPlayerClient.Model
                     writer.WriteNumber("rarityScore", playerGetAssetsForUserResponseDataInner.RarityScoreOption.Value!.Value);
                 else
                     writer.WriteNull("rarityScore");
+
+            if (playerGetAssetsForUserResponseDataInner.UpdatedAtOption.IsSet)
+                if (playerGetAssetsForUserResponseDataInner.UpdatedAtOption.Value != null)
+                    writer.WriteString("updatedAt", playerGetAssetsForUserResponseDataInner.UpdatedAtOption.Value!.Value.ToString(UpdatedAtFormat));
+                else
+                    writer.WriteNull("updatedAt");
         }
     }
 }

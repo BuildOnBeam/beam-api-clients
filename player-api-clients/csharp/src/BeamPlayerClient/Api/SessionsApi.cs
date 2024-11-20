@@ -72,6 +72,7 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetActiveSessionApiResponse"/>&gt;</returns>
+        [Obsolete]
         Task<IGetActiveSessionApiResponse> GetActiveSessionAsync(string entityId, string accountAddress, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -85,7 +86,35 @@ namespace BeamPlayerClient.Api
         /// <param name="chainId"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetActiveSessionApiResponse"/>?&gt;</returns>
+        [Obsolete]
         Task<IGetActiveSessionApiResponse?> GetActiveSessionOrDefaultAsync(string entityId, string accountAddress, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="accountAddress"></param>
+        /// <param name="chainId"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetActiveSessionV2ApiResponse"/>&gt;</returns>
+        Task<IGetActiveSessionV2ApiResponse> GetActiveSessionV2Async(string entityId, string accountAddress, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="entityId"></param>
+        /// <param name="accountAddress"></param>
+        /// <param name="chainId"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetActiveSessionV2ApiResponse"/>?&gt;</returns>
+        Task<IGetActiveSessionV2ApiResponse?> GetActiveSessionV2OrDefaultAsync(string entityId, string accountAddress, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -164,61 +193,145 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="ICreateSessionRequestApiResponse"/>
     /// </summary>
-    public interface ICreateSessionRequestApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGenerateSessionRequestResponse?>
+    public interface ICreateSessionRequestApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGenerateSessionRequestResponse?>, ICustomHttpStatusCode4xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>, ICustomHttpStatusCode5xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
         /// </summary>
         /// <returns></returns>
         bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode4xx { get; }
+
+        /// <summary>
+        /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode5xx { get; }
     }
 
     /// <summary>
     /// The <see cref="IGetActiveSessionApiResponse"/>
     /// </summary>
-    public interface IGetActiveSessionApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetActiveSessionResponse?>
+    public interface IGetActiveSessionApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetActiveSessionResponse?>, ICustomHttpStatusCode4xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>, ICustomHttpStatusCode5xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
         /// </summary>
         /// <returns></returns>
         bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode4xx { get; }
+
+        /// <summary>
+        /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode5xx { get; }
+    }
+
+    /// <summary>
+    /// The <see cref="IGetActiveSessionV2ApiResponse"/>
+    /// </summary>
+    public interface IGetActiveSessionV2ApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetActiveSessionResponseV2?>, ICustomHttpStatusCode4xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>, ICustomHttpStatusCode5xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>
+    {
+        /// <summary>
+        /// Returns true if the response is 200 Ok
+        /// </summary>
+        /// <returns></returns>
+        bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode4xx { get; }
+
+        /// <summary>
+        /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode5xx { get; }
     }
 
     /// <summary>
     /// The <see cref="IGetAllActiveSessionsApiResponse"/>
     /// </summary>
-    public interface IGetAllActiveSessionsApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetActiveSessionsResponse?>
+    public interface IGetAllActiveSessionsApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetActiveSessionsResponse?>, ICustomHttpStatusCode4xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>, ICustomHttpStatusCode5xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
         /// </summary>
         /// <returns></returns>
         bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode4xx { get; }
+
+        /// <summary>
+        /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode5xx { get; }
     }
 
     /// <summary>
     /// The <see cref="IGetSessionRequestApiResponse"/>
     /// </summary>
-    public interface IGetSessionRequestApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetSessionRequestResponse?>
+    public interface IGetSessionRequestApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetSessionRequestResponse?>, ICustomHttpStatusCode4xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>, ICustomHttpStatusCode5xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
         /// </summary>
         /// <returns></returns>
         bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode4xx { get; }
+
+        /// <summary>
+        /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode5xx { get; }
     }
 
     /// <summary>
     /// The <see cref="IRevokeSessionApiResponse"/>
     /// </summary>
-    public interface IRevokeSessionApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerPlayerOperationResponse?>
+    public interface IRevokeSessionApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerPlayerOperationResponse?>, ICustomHttpStatusCode4xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>, ICustomHttpStatusCode5xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
         /// </summary>
         /// <returns></returns>
         bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode4xx { get; }
+
+        /// <summary>
+        /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode5xx { get; }
     }
 
     /// <summary>
@@ -264,6 +377,26 @@ namespace BeamPlayerClient.Api
         internal void ExecuteOnErrorGetActiveSession(Exception exception)
         {
             OnErrorGetActiveSession?.Invoke(this, new ExceptionEventArgs(exception));
+        }
+
+        /// <summary>
+        /// The event raised after the server response
+        /// </summary>
+        public event EventHandler<ApiResponseEventArgs>? OnGetActiveSessionV2;
+
+        /// <summary>
+        /// The event raised after an error querying the server
+        /// </summary>
+        public event EventHandler<ExceptionEventArgs>? OnErrorGetActiveSessionV2;
+
+        internal void ExecuteOnGetActiveSessionV2(PlayerSessionsApi.GetActiveSessionV2ApiResponse apiResponse)
+        {
+            OnGetActiveSessionV2?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+        }
+
+        internal void ExecuteOnErrorGetActiveSessionV2(Exception exception)
+        {
+            OnErrorGetActiveSessionV2?.Invoke(this, new ExceptionEventArgs(exception));
         }
 
         /// <summary>
@@ -613,6 +746,82 @@ namespace BeamPlayerClient.Api
                 return result != null;
             }
 
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode4xx => 4XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode4xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode4xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode4xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode4xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)4XX);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode5xx => 5XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode5xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode5xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode5xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode5xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)5XX);
+                }
+
+                return result != null;
+            }
+
             private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
             {
                 bool suppressDefaultLog = false;
@@ -864,6 +1073,409 @@ namespace BeamPlayerClient.Api
                 return result != null;
             }
 
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode4xx => 4XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode4xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode4xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode4xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode4xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)4XX);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode5xx => 5XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode5xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode5xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode5xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode5xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)5XX);
+                }
+
+                return result != null;
+            }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
+        }
+
+        partial void FormatGetActiveSessionV2(ref string entityId, ref string accountAddress, ref Option<long> chainId);
+
+        /// <summary>
+        /// Validates the request parameters
+        /// </summary>
+        /// <param name="entityId"></param>
+        /// <param name="accountAddress"></param>
+        /// <returns></returns>
+        private void ValidateGetActiveSessionV2(string entityId, string accountAddress)
+        {
+            if (entityId == null)
+                throw new ArgumentNullException(nameof(entityId));
+
+            if (accountAddress == null)
+                throw new ArgumentNullException(nameof(accountAddress));
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="entityId"></param>
+        /// <param name="accountAddress"></param>
+        /// <param name="chainId"></param>
+        private void AfterGetActiveSessionV2DefaultImplementation(IGetActiveSessionV2ApiResponse apiResponseLocalVar, string entityId, string accountAddress, Option<long> chainId)
+        {
+            bool suppressDefaultLog = false;
+            AfterGetActiveSessionV2(ref suppressDefaultLog, apiResponseLocalVar, entityId, accountAddress, chainId);
+            if (!suppressDefaultLog)
+                Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="entityId"></param>
+        /// <param name="accountAddress"></param>
+        /// <param name="chainId"></param>
+        partial void AfterGetActiveSessionV2(ref bool suppressDefaultLog, IGetActiveSessionV2ApiResponse apiResponseLocalVar, string entityId, string accountAddress, Option<long> chainId);
+
+        /// <summary>
+        /// Logs exceptions that occur while retrieving the server response
+        /// </summary>
+        /// <param name="exception"></param>
+        /// <param name="pathFormat"></param>
+        /// <param name="path"></param>
+        /// <param name="entityId"></param>
+        /// <param name="accountAddress"></param>
+        /// <param name="chainId"></param>
+        private void OnErrorGetActiveSessionV2DefaultImplementation(Exception exception, string pathFormat, string path, string entityId, string accountAddress, Option<long> chainId)
+        {
+            bool suppressDefaultLog = false;
+            OnErrorGetActiveSessionV2(ref suppressDefaultLog, exception, pathFormat, path, entityId, accountAddress, chainId);
+            if (!suppressDefaultLog)
+                Logger.LogError(exception, "An error occurred while sending the request to the server.");
+        }
+
+        /// <summary>
+        /// A partial method that gives developers a way to provide customized exception handling
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="exception"></param>
+        /// <param name="pathFormat"></param>
+        /// <param name="path"></param>
+        /// <param name="entityId"></param>
+        /// <param name="accountAddress"></param>
+        /// <param name="chainId"></param>
+        partial void OnErrorGetActiveSessionV2(ref bool suppressDefaultLog, Exception exception, string pathFormat, string path, string entityId, string accountAddress, Option<long> chainId);
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <param name="entityId"></param>
+        /// <param name="accountAddress"></param>
+        /// <param name="chainId"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetActiveSessionV2ApiResponse"/>&gt;</returns>
+        public async Task<IGetActiveSessionV2ApiResponse?> GetActiveSessionV2OrDefaultAsync(string entityId, string accountAddress, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await GetActiveSessionV2Async(entityId, accountAddress, chainId, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="accountAddress"></param>
+        /// <param name="chainId"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetActiveSessionV2ApiResponse"/>&gt;</returns>
+        public async Task<IGetActiveSessionV2ApiResponse> GetActiveSessionV2Async(string entityId, string accountAddress, Option<long> chainId = default, System.Threading.CancellationToken cancellationToken = default)
+        {
+            UriBuilder uriBuilderLocalVar = new UriBuilder();
+
+            try
+            {
+                ValidateGetActiveSessionV2(entityId, accountAddress);
+
+                FormatGetActiveSessionV2(ref entityId, ref accountAddress, ref chainId);
+
+                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
+                {
+                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
+                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
+                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
+                    uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v2/player/sessions/users/{entityId}/{accountAddress}/active";
+                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
+                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BaccountAddress%7D", Uri.EscapeDataString(accountAddress.ToString()));
+
+                    System.Collections.Specialized.NameValueCollection parseQueryStringLocalVar = System.Web.HttpUtility.ParseQueryString(string.Empty);
+
+                    if (chainId.IsSet)
+                        parseQueryStringLocalVar["chainId"] = chainId.Value.ToString();
+
+                    uriBuilderLocalVar.Query = parseQueryStringLocalVar.ToString();
+
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    PlayerApiKeyToken apiKeyTokenLocalVar1 = (PlayerApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
+                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    string[] acceptLocalVars = new string[] {
+                        "application/json"
+                    };
+
+                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+
+                    if (acceptLocalVar != null)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+
+                    httpRequestMessageLocalVar.Method = HttpMethod.Get;
+
+                    DateTime requestedAtLocalVar = DateTime.UtcNow;
+
+                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
+                    {
+                        string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+
+                        ILogger<GetActiveSessionV2ApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<GetActiveSessionV2ApiResponse>();
+
+                        GetActiveSessionV2ApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v2/player/sessions/users/{entityId}/{accountAddress}/active", requestedAtLocalVar, _jsonSerializerOptions);
+
+                        AfterGetActiveSessionV2DefaultImplementation(apiResponseLocalVar, entityId, accountAddress, chainId);
+
+                        Events.ExecuteOnGetActiveSessionV2(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
+
+                        return apiResponseLocalVar;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                OnErrorGetActiveSessionV2DefaultImplementation(e, "/v2/player/sessions/users/{entityId}/{accountAddress}/active", uriBuilderLocalVar.Path, entityId, accountAddress, chainId);
+                Events.ExecuteOnErrorGetActiveSessionV2(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="GetActiveSessionV2ApiResponse"/>
+        /// </summary>
+        public partial class GetActiveSessionV2ApiResponse : BeamPlayerClient.Client.ApiResponse, IGetActiveSessionV2ApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<GetActiveSessionV2ApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="GetActiveSessionV2ApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public GetActiveSessionV2ApiResponse(ILogger<GetActiveSessionV2ApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerGetActiveSessionResponseV2? Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerGetActiveSessionResponseV2>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerGetActiveSessionResponseV2? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode4xx => 4XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode4xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode4xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode4xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode4xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)4XX);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode5xx => 5XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode5xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode5xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode5xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode5xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)5XX);
+                }
+
+                return result != null;
+            }
+
             private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
             {
                 bool suppressDefaultLog = false;
@@ -1104,6 +1716,82 @@ namespace BeamPlayerClient.Api
                 return result != null;
             }
 
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode4xx => 4XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode4xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode4xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode4xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode4xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)4XX);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode5xx => 5XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode5xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode5xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode5xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode5xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)5XX);
+                }
+
+                return result != null;
+            }
+
             private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
             {
                 bool suppressDefaultLog = false;
@@ -1326,6 +2014,82 @@ namespace BeamPlayerClient.Api
                 } catch (Exception e)
                 {
                     OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode4xx => 4XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode4xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode4xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode4xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode4xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)4XX);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode5xx => 5XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode5xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode5xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode5xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode5xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)5XX);
                 }
 
                 return result != null;
@@ -1576,6 +2340,82 @@ namespace BeamPlayerClient.Api
                 } catch (Exception e)
                 {
                     OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode4xx => 4XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode4xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode4xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode4xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode4xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)4XX);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode5xx => 5XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode5xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode5xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode5xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode5xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)5XX);
                 }
 
                 return result != null;

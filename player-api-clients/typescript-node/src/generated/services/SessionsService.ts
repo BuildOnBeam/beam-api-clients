@@ -5,6 +5,7 @@
 import type { GenerateSessionRequestResponse } from '../models/GenerateSessionRequestResponse';
 import type { GenerateSessionUrlRequestInput } from '../models/GenerateSessionUrlRequestInput';
 import type { GetActiveSessionResponse } from '../models/GetActiveSessionResponse';
+import type { GetActiveSessionResponseV2 } from '../models/GetActiveSessionResponseV2';
 import type { GetActiveSessionsResponse } from '../models/GetActiveSessionsResponse';
 import type { GetSessionRequestResponse } from '../models/GetSessionRequestResponse';
 import type { PlayerOperationResponse } from '../models/PlayerOperationResponse';
@@ -98,6 +99,7 @@ export class SessionsService {
   }
 
   /**
+   * @deprecated
    * @param entityId
    * @param accountAddress
    * @param chainId
@@ -112,6 +114,31 @@ export class SessionsService {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v1/player/sessions/users/{entityId}/{accountAddress}/active',
+      path: {
+        entityId: entityId,
+        accountAddress: accountAddress,
+      },
+      query: {
+        chainId: chainId,
+      },
+    });
+  }
+
+  /**
+   * @param entityId
+   * @param accountAddress
+   * @param chainId
+   * @returns GetActiveSessionResponseV2
+   * @throws ApiError
+   */
+  public getActiveSessionV2(
+    entityId: string,
+    accountAddress: string,
+    chainId?: number,
+  ): CancelablePromise<GetActiveSessionResponseV2> {
+    return this.httpRequest.request({
+      method: 'GET',
+      url: '/v2/player/sessions/users/{entityId}/{accountAddress}/active',
       path: {
         entityId: entityId,
         accountAddress: accountAddress,

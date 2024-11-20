@@ -44,6 +44,7 @@ namespace BeamPlayerClient.Client
             _jsonOptions.Converters.Add(new Check200ResponseInfoValueJsonConverter());
             _jsonOptions.Converters.Add(new Check503ResponseJsonConverter());
             _jsonOptions.Converters.Add(new PlayerAcceptAssetOfferRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerBeamErrorResponseJsonConverter());
             _jsonOptions.Converters.Add(new PlayerBuyAssetRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new PlayerCancelAssetListingRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new PlayerCancelAssetOfferRequestInputJsonConverter());
@@ -66,12 +67,13 @@ namespace BeamPlayerClient.Client
             _jsonOptions.Converters.Add(new PlayerCreateConnectionRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new PlayerCreateConnectionRequestResponseJsonConverter());
             _jsonOptions.Converters.Add(new PlayerCreateOnrampRequestInputJsonConverter());
-            _jsonOptions.Converters.Add(new PlayerCreateOnrampRequestResponseJsonConverter());
             _jsonOptions.Converters.Add(new PlayerCreateTransactionRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new PlayerCreateTransactionRequestInputInteractionsInnerJsonConverter());
             _jsonOptions.Converters.Add(new PlayerGenerateSessionRequestResponseJsonConverter());
             _jsonOptions.Converters.Add(new PlayerGenerateSessionUrlRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new PlayerGetActiveSessionResponseJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetActiveSessionResponseV2JsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetActiveSessionResponseV2SessionJsonConverter());
             _jsonOptions.Converters.Add(new PlayerGetActiveSessionsResponseJsonConverter());
             _jsonOptions.Converters.Add(new PlayerGetActiveSessionsResponseSessionsInnerJsonConverter());
             _jsonOptions.Converters.Add(new PlayerGetAllUsersResponseJsonConverter());

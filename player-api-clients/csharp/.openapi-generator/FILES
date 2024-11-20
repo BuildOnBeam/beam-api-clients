@@ -40,6 +40,7 @@ src/BeamPlayerClient/Model/Check200Response.cs
 src/BeamPlayerClient/Model/Check200ResponseInfoValue.cs
 src/BeamPlayerClient/Model/Check503Response.cs
 src/BeamPlayerClient/Model/PlayerAcceptAssetOfferRequestInput.cs
+src/BeamPlayerClient/Model/PlayerBeamErrorResponse.cs
 src/BeamPlayerClient/Model/PlayerBuyAssetRequestInput.cs
 src/BeamPlayerClient/Model/PlayerCancelAssetListingRequestInput.cs
 src/BeamPlayerClient/Model/PlayerCancelAssetOfferRequestInput.cs
@@ -62,12 +63,13 @@ src/BeamPlayerClient/Model/PlayerCreateAssetOfferRequestInput.cs
 src/BeamPlayerClient/Model/PlayerCreateConnectionRequestInput.cs
 src/BeamPlayerClient/Model/PlayerCreateConnectionRequestResponse.cs
 src/BeamPlayerClient/Model/PlayerCreateOnrampRequestInput.cs
-src/BeamPlayerClient/Model/PlayerCreateOnrampRequestResponse.cs
 src/BeamPlayerClient/Model/PlayerCreateTransactionRequestInput.cs
 src/BeamPlayerClient/Model/PlayerCreateTransactionRequestInputInteractionsInner.cs
 src/BeamPlayerClient/Model/PlayerGenerateSessionRequestResponse.cs
 src/BeamPlayerClient/Model/PlayerGenerateSessionUrlRequestInput.cs
 src/BeamPlayerClient/Model/PlayerGetActiveSessionResponse.cs
+src/BeamPlayerClient/Model/PlayerGetActiveSessionResponseV2.cs
+src/BeamPlayerClient/Model/PlayerGetActiveSessionResponseV2Session.cs
 src/BeamPlayerClient/Model/PlayerGetActiveSessionsResponse.cs
 src/BeamPlayerClient/Model/PlayerGetActiveSessionsResponseSessionsInner.cs
 src/BeamPlayerClient/Model/PlayerGetAllUsersResponse.cs

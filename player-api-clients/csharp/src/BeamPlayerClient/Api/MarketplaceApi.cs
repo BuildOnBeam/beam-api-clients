@@ -403,169 +403,337 @@ namespace BeamPlayerClient.Api
     /// <summary>
     /// The <see cref="IAcceptAssetOfferApiResponse"/>
     /// </summary>
-    public interface IAcceptAssetOfferApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerPlayerOperationResponse?>
+    public interface IAcceptAssetOfferApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerPlayerOperationResponse?>, ICustomHttpStatusCode4xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>, ICustomHttpStatusCode5xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
         /// </summary>
         /// <returns></returns>
         bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode4xx { get; }
+
+        /// <summary>
+        /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode5xx { get; }
     }
 
     /// <summary>
     /// The <see cref="IBuyListedAssetApiResponse"/>
     /// </summary>
-    public interface IBuyListedAssetApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerPlayerOperationResponse?>
+    public interface IBuyListedAssetApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerPlayerOperationResponse?>, ICustomHttpStatusCode4xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>, ICustomHttpStatusCode5xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
         /// </summary>
         /// <returns></returns>
         bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode4xx { get; }
+
+        /// <summary>
+        /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode5xx { get; }
     }
 
     /// <summary>
     /// The <see cref="ICancelAssetOfferApiResponse"/>
     /// </summary>
-    public interface ICancelAssetOfferApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerPlayerOperationResponse?>
+    public interface ICancelAssetOfferApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerPlayerOperationResponse?>, ICustomHttpStatusCode4xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>, ICustomHttpStatusCode5xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
         /// </summary>
         /// <returns></returns>
         bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode4xx { get; }
+
+        /// <summary>
+        /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode5xx { get; }
     }
 
     /// <summary>
     /// The <see cref="ICancelListingApiResponse"/>
     /// </summary>
-    public interface ICancelListingApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerPlayerOperationResponse?>
+    public interface ICancelListingApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerPlayerOperationResponse?>, ICustomHttpStatusCode4xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>, ICustomHttpStatusCode5xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
         /// </summary>
         /// <returns></returns>
         bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode4xx { get; }
+
+        /// <summary>
+        /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode5xx { get; }
     }
 
     /// <summary>
     /// The <see cref="ICreateAssetOfferApiResponse"/>
     /// </summary>
-    public interface ICreateAssetOfferApiResponse : BeamPlayerClient.Client.IApiResponse, ICreated<BeamPlayerClient.Model.PlayerPlayerOperationResponse?>
+    public interface ICreateAssetOfferApiResponse : BeamPlayerClient.Client.IApiResponse, ICreated<BeamPlayerClient.Model.PlayerPlayerOperationResponse?>, ICustomHttpStatusCode4xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>, ICustomHttpStatusCode5xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
         /// </summary>
         /// <returns></returns>
         bool IsCreated { get; }
+
+        /// <summary>
+        /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode4xx { get; }
+
+        /// <summary>
+        /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode5xx { get; }
     }
 
     /// <summary>
     /// The <see cref="IGetAssetOffersApiResponse"/>
     /// </summary>
-    public interface IGetAssetOffersApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetAssetListingsResponse?>
+    public interface IGetAssetOffersApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetAssetListingsResponse?>, ICustomHttpStatusCode4xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>, ICustomHttpStatusCode5xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
         /// </summary>
         /// <returns></returns>
         bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode4xx { get; }
+
+        /// <summary>
+        /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode5xx { get; }
     }
 
     /// <summary>
     /// The <see cref="IGetChainCurrenciesApiResponse"/>
     /// </summary>
-    public interface IGetChainCurrenciesApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetChainCurrenciesResponse?>
+    public interface IGetChainCurrenciesApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetChainCurrenciesResponse?>, ICustomHttpStatusCode4xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>, ICustomHttpStatusCode5xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
         /// </summary>
         /// <returns></returns>
         bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode4xx { get; }
+
+        /// <summary>
+        /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode5xx { get; }
     }
 
     /// <summary>
     /// The <see cref="IGetListedAssetsApiResponse"/>
     /// </summary>
-    public interface IGetListedAssetsApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetAssetListingsResponse?>
+    public interface IGetListedAssetsApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetAssetListingsResponse?>, ICustomHttpStatusCode4xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>, ICustomHttpStatusCode5xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
         /// </summary>
         /// <returns></returns>
         bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode4xx { get; }
+
+        /// <summary>
+        /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode5xx { get; }
     }
 
     /// <summary>
     /// The <see cref="IGetListedAssetsForUserApiResponse"/>
     /// </summary>
-    public interface IGetListedAssetsForUserApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetAssetListingsResponse?>
+    public interface IGetListedAssetsForUserApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetAssetListingsResponse?>, ICustomHttpStatusCode4xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>, ICustomHttpStatusCode5xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
         /// </summary>
         /// <returns></returns>
         bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode4xx { get; }
+
+        /// <summary>
+        /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode5xx { get; }
     }
 
     /// <summary>
     /// The <see cref="IGetUserAssetOffersApiResponse"/>
     /// </summary>
-    public interface IGetUserAssetOffersApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetAssetListingsResponse?>
+    public interface IGetUserAssetOffersApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetAssetListingsResponse?>, ICustomHttpStatusCode4xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>, ICustomHttpStatusCode5xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
         /// </summary>
         /// <returns></returns>
         bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode4xx { get; }
+
+        /// <summary>
+        /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode5xx { get; }
     }
 
     /// <summary>
     /// The <see cref="IGetUserOffersApiResponse"/>
     /// </summary>
-    public interface IGetUserOffersApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetAssetListingsResponse?>
+    public interface IGetUserOffersApiResponse : BeamPlayerClient.Client.IApiResponse, IOk<BeamPlayerClient.Model.PlayerGetAssetListingsResponse?>, ICustomHttpStatusCode4xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>, ICustomHttpStatusCode5xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
         /// </summary>
         /// <returns></returns>
         bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode4xx { get; }
+
+        /// <summary>
+        /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode5xx { get; }
     }
 
     /// <summary>
     /// The <see cref="IListAssetApiResponse"/>
     /// </summary>
-    public interface IListAssetApiResponse : BeamPlayerClient.Client.IApiResponse, ICreated<BeamPlayerClient.Model.PlayerPlayerOperationResponse?>
+    public interface IListAssetApiResponse : BeamPlayerClient.Client.IApiResponse, ICreated<BeamPlayerClient.Model.PlayerPlayerOperationResponse?>, ICustomHttpStatusCode4xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>, ICustomHttpStatusCode5xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
         /// </summary>
         /// <returns></returns>
         bool IsCreated { get; }
+
+        /// <summary>
+        /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode4xx { get; }
+
+        /// <summary>
+        /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode5xx { get; }
     }
 
     /// <summary>
     /// The <see cref="IRefreshContractApiResponse"/>
     /// </summary>
-    public interface IRefreshContractApiResponse : BeamPlayerClient.Client.IApiResponse
+    public interface IRefreshContractApiResponse : BeamPlayerClient.Client.IApiResponse, ICustomHttpStatusCode4xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>, ICustomHttpStatusCode5xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
         /// </summary>
         /// <returns></returns>
         bool IsCreated { get; }
+
+        /// <summary>
+        /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode4xx { get; }
+
+        /// <summary>
+        /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode5xx { get; }
     }
 
     /// <summary>
     /// The <see cref="IRefreshTokenApiResponse"/>
     /// </summary>
-    public interface IRefreshTokenApiResponse : BeamPlayerClient.Client.IApiResponse
+    public interface IRefreshTokenApiResponse : BeamPlayerClient.Client.IApiResponse, ICustomHttpStatusCode4xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>, ICustomHttpStatusCode5xx<BeamPlayerClient.Model.PlayerBeamErrorResponse?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
         /// </summary>
         /// <returns></returns>
         bool IsCreated { get; }
+
+        /// <summary>
+        /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode4xx { get; }
+
+        /// <summary>
+        /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode5xx { get; }
     }
 
     /// <summary>
@@ -1151,6 +1319,82 @@ namespace BeamPlayerClient.Api
                 return result != null;
             }
 
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode4xx => 4XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode4xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode4xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode4xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode4xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)4XX);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode5xx => 5XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode5xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode5xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode5xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode5xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)5XX);
+                }
+
+                return result != null;
+            }
+
             private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
             {
                 bool suppressDefaultLog = false;
@@ -1412,6 +1656,82 @@ namespace BeamPlayerClient.Api
                 return result != null;
             }
 
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode4xx => 4XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode4xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode4xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode4xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode4xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)4XX);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode5xx => 5XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode5xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode5xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode5xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode5xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)5XX);
+                }
+
+                return result != null;
+            }
+
             private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
             {
                 bool suppressDefaultLog = false;
@@ -1668,6 +1988,82 @@ namespace BeamPlayerClient.Api
                 } catch (Exception e)
                 {
                     OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode4xx => 4XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode4xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode4xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode4xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode4xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)4XX);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode5xx => 5XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode5xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode5xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode5xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode5xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)5XX);
                 }
 
                 return result != null;
@@ -1947,6 +2343,82 @@ namespace BeamPlayerClient.Api
                 return result != null;
             }
 
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode4xx => 4XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode4xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode4xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode4xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode4xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)4XX);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode5xx => 5XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode5xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode5xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode5xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode5xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)5XX);
+                }
+
+                return result != null;
+            }
+
             private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
             {
                 bool suppressDefaultLog = false;
@@ -2192,6 +2664,82 @@ namespace BeamPlayerClient.Api
                 } catch (Exception e)
                 {
                     OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)201);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode4xx => 4XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode4xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode4xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode4xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode4xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)4XX);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode5xx => 5XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode5xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode5xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode5xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode5xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)5XX);
                 }
 
                 return result != null;
@@ -2461,6 +3009,82 @@ namespace BeamPlayerClient.Api
                 return result != null;
             }
 
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode4xx => 4XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode4xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode4xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode4xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode4xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)4XX);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode5xx => 5XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode5xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode5xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode5xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode5xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)5XX);
+                }
+
+                return result != null;
+            }
+
             private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
             {
                 bool suppressDefaultLog = false;
@@ -2670,6 +3294,82 @@ namespace BeamPlayerClient.Api
                 } catch (Exception e)
                 {
                     OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode4xx => 4XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode4xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode4xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode4xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode4xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)4XX);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode5xx => 5XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode5xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode5xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode5xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode5xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)5XX);
                 }
 
                 return result != null;
@@ -2909,6 +3609,82 @@ namespace BeamPlayerClient.Api
                 } catch (Exception e)
                 {
                     OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode4xx => 4XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode4xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode4xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode4xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode4xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)4XX);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode5xx => 5XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode5xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode5xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode5xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode5xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)5XX);
                 }
 
                 return result != null;
@@ -3159,6 +3935,82 @@ namespace BeamPlayerClient.Api
                 } catch (Exception e)
                 {
                     OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode4xx => 4XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode4xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode4xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode4xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode4xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)4XX);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode5xx => 5XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode5xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode5xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode5xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode5xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)5XX);
                 }
 
                 return result != null;
@@ -3439,6 +4291,82 @@ namespace BeamPlayerClient.Api
                 return result != null;
             }
 
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode4xx => 4XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode4xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode4xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode4xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode4xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)4XX);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode5xx => 5XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode5xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode5xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode5xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode5xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)5XX);
+                }
+
+                return result != null;
+            }
+
             private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
             {
                 bool suppressDefaultLog = false;
@@ -3687,6 +4615,82 @@ namespace BeamPlayerClient.Api
                 } catch (Exception e)
                 {
                     OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode4xx => 4XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode4xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode4xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode4xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode4xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)4XX);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode5xx => 5XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode5xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode5xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode5xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode5xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)5XX);
                 }
 
                 return result != null;
@@ -3942,6 +4946,82 @@ namespace BeamPlayerClient.Api
                 return result != null;
             }
 
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode4xx => 4XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode4xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode4xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode4xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode4xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)4XX);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode5xx => 5XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode5xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode5xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode5xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode5xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)5XX);
+                }
+
+                return result != null;
+            }
+
             private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
             {
                 bool suppressDefaultLog = false;
@@ -4074,6 +5154,15 @@ namespace BeamPlayerClient.Api
                     if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
                         httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
 
+                    string[] acceptLocalVars = new string[] {
+                        "application/json"
+                    };
+
+                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+
+                    if (acceptLocalVar != null)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+
                     httpRequestMessageLocalVar.Method = HttpMethod.Post;
 
                     DateTime requestedAtLocalVar = DateTime.UtcNow;
@@ -4139,6 +5228,82 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <returns></returns>
             public bool IsCreated => 201 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode4xx => 4XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode4xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode4xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode4xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode4xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)4XX);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode5xx => 5XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode5xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode5xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode5xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode5xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)5XX);
+                }
+
+                return result != null;
+            }
 
             private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
             {
@@ -4272,6 +5437,15 @@ namespace BeamPlayerClient.Api
                     if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
                         httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
 
+                    string[] acceptLocalVars = new string[] {
+                        "application/json"
+                    };
+
+                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+
+                    if (acceptLocalVar != null)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+
                     httpRequestMessageLocalVar.Method = HttpMethod.Post;
 
                     DateTime requestedAtLocalVar = DateTime.UtcNow;
@@ -4337,6 +5511,82 @@ namespace BeamPlayerClient.Api
             /// </summary>
             /// <returns></returns>
             public bool IsCreated => 201 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode4xx => 4XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode4xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode4xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode4xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode4xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)4XX);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode5xx => 5XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse? CustomHttpStatusCode5xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode5xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode5xx([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode5xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)5XX);
+                }
+
+                return result != null;
+            }
 
             private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
             {

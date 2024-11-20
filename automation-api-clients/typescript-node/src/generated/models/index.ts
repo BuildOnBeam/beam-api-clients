@@ -3,6 +3,7 @@
  */
 
 export * from './AcceptAssetOfferRequestInputV2';
+export * from './BeamErrorResponse';
 export * from './BuyAssetRequestInputV2';
 export * from './CancelAssetListingRequestInputV2';
 export * from './CancelAssetOfferRequestInputV2';

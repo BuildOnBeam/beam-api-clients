@@ -3,6 +3,7 @@
  */
 
 export * from './AcceptAssetOfferRequestInput';
+export * from './BeamErrorResponse';
 export * from './BuyAssetRequestInput';
 export * from './CancelAssetListingRequestInput';
 export * from './CancelAssetOfferRequestInput';
@@ -18,11 +19,11 @@ export * from './CreateAssetOfferRequestInput';
 export * from './CreateConnectionRequestInput';
 export * from './CreateConnectionRequestResponse';
 export * from './CreateOnrampRequestInput';
-export * from './CreateOnrampRequestResponse';
 export * from './CreateTransactionRequestInput';
 export * from './GenerateSessionRequestResponse';
 export * from './GenerateSessionUrlRequestInput';
 export * from './GetActiveSessionResponse';
+export * from './GetActiveSessionResponseV2';
 export * from './GetActiveSessionsResponse';
 export * from './GetAllUsersResponse';
 export * from './GetAssetListingsResponse';

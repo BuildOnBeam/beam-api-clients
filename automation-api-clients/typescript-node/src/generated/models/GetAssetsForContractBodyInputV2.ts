@@ -31,5 +31,6 @@ export namespace GetAssetsForContractBodyInputV2 {
     TOKEN_ID = 'tokenId',
     RARITY = 'rarity',
     UPDATED_AT = 'updatedAt',
+    MINTED_AT = 'mintedAt',
   }
 }

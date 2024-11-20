@@ -11,6 +11,7 @@ export { OpenAPI } from './core/OpenAPI';
 export type { OpenAPIConfig } from './core/OpenAPI';
 
 export type { AcceptAssetOfferRequestInputV2 } from './models/AcceptAssetOfferRequestInputV2';
+export type { BeamErrorResponse } from './models/BeamErrorResponse';
 export type { BuyAssetRequestInputV2 } from './models/BuyAssetRequestInputV2';
 export type { CancelAssetListingRequestInputV2 } from './models/CancelAssetListingRequestInputV2';
 export type { CancelAssetOfferRequestInputV2 } from './models/CancelAssetOfferRequestInputV2';

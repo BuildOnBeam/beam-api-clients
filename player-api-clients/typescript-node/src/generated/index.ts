@@ -11,6 +11,7 @@ export { OpenAPI } from './core/OpenAPI';
 export type { OpenAPIConfig } from './core/OpenAPI';
 
 export { AcceptAssetOfferRequestInput } from './models/AcceptAssetOfferRequestInput';
+export type { BeamErrorResponse } from './models/BeamErrorResponse';
 export { BuyAssetRequestInput } from './models/BuyAssetRequestInput';
 export { CancelAssetListingRequestInput } from './models/CancelAssetListingRequestInput';
 export { CancelAssetOfferRequestInput } from './models/CancelAssetOfferRequestInput';
@@ -26,11 +27,11 @@ export { CreateAssetOfferRequestInput } from './models/CreateAssetOfferRequestIn
 export type { CreateConnectionRequestInput } from './models/CreateConnectionRequestInput';
 export { CreateConnectionRequestResponse } from './models/CreateConnectionRequestResponse';
 export { CreateOnrampRequestInput } from './models/CreateOnrampRequestInput';
-export type { CreateOnrampRequestResponse } from './models/CreateOnrampRequestResponse';
 export { CreateTransactionRequestInput } from './models/CreateTransactionRequestInput';
 export { GenerateSessionRequestResponse } from './models/GenerateSessionRequestResponse';
 export type { GenerateSessionUrlRequestInput } from './models/GenerateSessionUrlRequestInput';
 export type { GetActiveSessionResponse } from './models/GetActiveSessionResponse';
+export type { GetActiveSessionResponseV2 } from './models/GetActiveSessionResponseV2';
 export type { GetActiveSessionsResponse } from './models/GetActiveSessionsResponse';
 export type { GetAllUsersResponse } from './models/GetAllUsersResponse';
 export type { GetAssetListingsResponse } from './models/GetAssetListingsResponse';

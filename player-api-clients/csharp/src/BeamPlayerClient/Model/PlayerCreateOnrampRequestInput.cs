@@ -36,11 +36,11 @@ namespace BeamPlayerClient.Model
         /// </summary>
         /// <param name="chainId">chainId (default to 13337)</param>
         /// <param name="fiatAmount">fiatAmount</param>
-        /// <param name="paymentCurrency">paymentCurrency (default to PaymentCurrencyEnum.USD)</param>
+        /// <param name="paymentCurrency">paymentCurrency (default to &quot;USD&quot;)</param>
         /// <param name="token">token (default to TokenEnum.BEAM)</param>
         /// <param name="tokenAmount">tokenAmount (default to &quot;100&quot;)</param>
         [JsonConstructor]
-        public PlayerCreateOnrampRequestInput(Option<long?> chainId = default, Option<string?> fiatAmount = default, Option<PaymentCurrencyEnum?> paymentCurrency = default, Option<TokenEnum?> token = default, Option<string?> tokenAmount = default)
+        public PlayerCreateOnrampRequestInput(Option<long?> chainId = default, Option<string?> fiatAmount = default, Option<string?> paymentCurrency = default, Option<TokenEnum?> token = default, Option<string?> tokenAmount = default)
         {
             ChainIdOption = chainId;
             FiatAmountOption = fiatAmount;
@@ -51,180 +51,6 @@ namespace BeamPlayerClient.Model
         }
 
         partial void OnCreated();
-
-        /// <summary>
-        /// Defines PaymentCurrency
-        /// </summary>
-        [JsonConverter(typeof(PaymentCurrencyEnumJsonConverter))]
-        public enum PaymentCurrencyEnum
-        {
-            /// <summary>
-            /// Enum USD for value: USD
-            /// </summary>
-            USD = 1,
-
-            /// <summary>
-            /// Enum EUR for value: EUR
-            /// </summary>
-            EUR = 2
-        }
-
-        /// <summary>
-        /// Returns a <see cref="PaymentCurrencyEnum"/>
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public static PaymentCurrencyEnum PaymentCurrencyEnumFromString(string value)
-        {
-            if (value.Equals("USD"))
-                return PaymentCurrencyEnum.USD;
-
-            if (value.Equals("EUR"))
-                return PaymentCurrencyEnum.EUR;
-
-            throw new NotImplementedException($"Could not convert value to type PaymentCurrencyEnum: '{value}'");
-        }
-
-        /// <summary>
-        /// Returns a <see cref="PaymentCurrencyEnum"/>
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public static PaymentCurrencyEnum? PaymentCurrencyEnumFromStringOrDefault(string value)
-        {
-            if (value.Equals("USD"))
-                return PaymentCurrencyEnum.USD;
-
-            if (value.Equals("EUR"))
-                return PaymentCurrencyEnum.EUR;
-
-            return null;
-        }
-
-        /// <summary>
-        /// Converts the <see cref="PaymentCurrencyEnum"/> to the json value
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public static string PaymentCurrencyEnumToJsonValue(PaymentCurrencyEnum? value)
-        {
-            if (value == PaymentCurrencyEnum.USD)
-                return "USD";
-
-            if (value == PaymentCurrencyEnum.EUR)
-                return "EUR";
-
-            throw new NotImplementedException($"Value could not be handled: '{value}'");
-        }
-
-        /// <summary>
-        /// Converts <see cref="PaymentCurrencyEnum"/> to and from the JSON value
-        /// </summary>
-        public static class PaymentCurrencyEnumValueConverter
-        {
-            /// <summary>
-            /// Parses a given value to <see cref="PaymentCurrencyEnum"/>
-            /// </summary>
-            /// <param name="value"></param>
-            /// <returns></returns>
-            public static PaymentCurrencyEnum FromString(string value)
-            {
-                    if (value.Equals("USD"))
-                        return PaymentCurrencyEnum.USD;
-
-                    if (value.Equals("EUR"))
-                        return PaymentCurrencyEnum.EUR;
-
-                throw new NotImplementedException($"Could not convert value to type PaymentCurrencyEnum: '{value}'");
-            }
-
-            /// <summary>
-            /// Parses a given value to <see cref="PaymentCurrencyEnum"/>
-            /// </summary>
-            /// <param name="value"></param>
-            /// <returns></returns>
-            public static PaymentCurrencyEnum? FromStringOrDefault(string value)
-            {
-                    if (value.Equals("USD"))
-                        return PaymentCurrencyEnum.USD;
-
-                    if (value.Equals("EUR"))
-                        return PaymentCurrencyEnum.EUR;
-
-                return null;
-            }
-
-            /// <summary>
-            /// Converts the <see cref="PaymentCurrencyEnum"/> to the json value
-            /// </summary>
-            /// <param name="value"></param>
-            /// <returns></returns>
-            /// <exception cref="NotImplementedException"></exception>
-            public static string ToJsonValue(PaymentCurrencyEnum value)
-            {
-                        if (value == PaymentCurrencyEnum.USD)
-                            return "USD";
-
-                        if (value == PaymentCurrencyEnum.EUR)
-                            return "EUR";
-
-                throw new NotImplementedException($"Value could not be handled: '{value}'");
-            }
-        }
-
-        /// <summary>
-        /// A Json converter for type <see cref="PaymentCurrencyEnum"/>
-        /// </summary>
-        /// <exception cref="NotImplementedException"></exception>
-        public class PaymentCurrencyEnumJsonConverter : JsonConverter<PaymentCurrencyEnum>
-        {
-            /// <summary>
-            /// Returns a PaymentCurrencyEnum from the Json object
-            /// </summary>
-            /// <param name="reader"></param>
-            /// <param name="typeToConvert"></param>
-            /// <param name="options"></param>
-            /// <returns></returns>
-            public override PaymentCurrencyEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            {
-                string? rawValue = reader.GetString();
-
-                PaymentCurrencyEnum? result = rawValue == null
-                    ? null
-                    : PaymentCurrencyEnumValueConverter.FromStringOrDefault(rawValue);
-
-                if (result != null)
-                    return result.Value;
-
-                throw new JsonException();
-            }
-
-            /// <summary>
-            /// Writes the PaymentCurrencyEnum to the json writer
-            /// </summary>
-            /// <param name="writer"></param>
-            /// <param name="paymentCurrencyEnum"></param>
-            /// <param name="options"></param>
-            public override void Write(Utf8JsonWriter writer, PaymentCurrencyEnum paymentCurrencyEnum, JsonSerializerOptions options)
-            {
-                writer.WriteStringValue(PaymentCurrencyEnumValueConverter.ToJsonValue(paymentCurrencyEnum));
-            }
-        }
-
-        /// <summary>
-        /// Used to track the state of PaymentCurrency
-        /// </summary>
-        [JsonIgnore]
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<PaymentCurrencyEnum?> PaymentCurrencyOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets PaymentCurrency
-        /// </summary>
-        [JsonPropertyName("paymentCurrency")]
-        public PaymentCurrencyEnum? PaymentCurrency { get { return this.PaymentCurrencyOption; } set { this.PaymentCurrencyOption = new(value); } }
 
         /// <summary>
         /// Defines Token
@@ -404,6 +230,19 @@ namespace BeamPlayerClient.Model
         public string? FiatAmount { get { return this. FiatAmountOption; } set { this.FiatAmountOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of PaymentCurrency
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> PaymentCurrencyOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets PaymentCurrency
+        /// </summary>
+        [JsonPropertyName("paymentCurrency")]
+        public string? PaymentCurrency { get { return this. PaymentCurrencyOption; } set { this.PaymentCurrencyOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of TokenAmount
         /// </summary>
         [JsonIgnore]
@@ -468,7 +307,7 @@ namespace BeamPlayerClient.Model
 
             Option<long?> chainId = default;
             Option<string?> fiatAmount = default;
-            Option<PlayerCreateOnrampRequestInput.PaymentCurrencyEnum?> paymentCurrency = default;
+            Option<string?> paymentCurrency = default;
             Option<PlayerCreateOnrampRequestInput.TokenEnum?> token = default;
             Option<string?> tokenAmount = default;
 
@@ -495,9 +334,7 @@ namespace BeamPlayerClient.Model
                             fiatAmount = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "paymentCurrency":
-                            string? paymentCurrencyRawValue = utf8JsonReader.GetString();
-                            if (paymentCurrencyRawValue != null)
-                                paymentCurrency = new Option<PlayerCreateOnrampRequestInput.PaymentCurrencyEnum?>(PlayerCreateOnrampRequestInput.PaymentCurrencyEnumFromStringOrDefault(paymentCurrencyRawValue));
+                            paymentCurrency = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "token":
                             string? tokenRawValue = utf8JsonReader.GetString();
@@ -558,6 +395,9 @@ namespace BeamPlayerClient.Model
             if (playerCreateOnrampRequestInput.FiatAmountOption.IsSet && playerCreateOnrampRequestInput.FiatAmount == null)
                 throw new ArgumentNullException(nameof(playerCreateOnrampRequestInput.FiatAmount), "Property is required for class PlayerCreateOnrampRequestInput.");
 
+            if (playerCreateOnrampRequestInput.PaymentCurrencyOption.IsSet && playerCreateOnrampRequestInput.PaymentCurrency == null)
+                throw new ArgumentNullException(nameof(playerCreateOnrampRequestInput.PaymentCurrency), "Property is required for class PlayerCreateOnrampRequestInput.");
+
             if (playerCreateOnrampRequestInput.TokenAmountOption.IsSet && playerCreateOnrampRequestInput.TokenAmount == null)
                 throw new ArgumentNullException(nameof(playerCreateOnrampRequestInput.TokenAmount), "Property is required for class PlayerCreateOnrampRequestInput.");
 
@@ -567,8 +407,9 @@ namespace BeamPlayerClient.Model
             if (playerCreateOnrampRequestInput.FiatAmountOption.IsSet)
                 writer.WriteString("fiatAmount", playerCreateOnrampRequestInput.FiatAmount);
 
-            var paymentCurrencyRawValue = PlayerCreateOnrampRequestInput.PaymentCurrencyEnumToJsonValue(playerCreateOnrampRequestInput.PaymentCurrencyOption.Value!.Value);
-            writer.WriteString("paymentCurrency", paymentCurrencyRawValue);
+            if (playerCreateOnrampRequestInput.PaymentCurrencyOption.IsSet)
+                writer.WriteString("paymentCurrency", playerCreateOnrampRequestInput.PaymentCurrency);
+
             var tokenRawValue = PlayerCreateOnrampRequestInput.TokenEnumToJsonValue(playerCreateOnrampRequestInput.TokenOption.Value!.Value);
             writer.WriteString("token", tokenRawValue);
             if (playerCreateOnrampRequestInput.TokenAmountOption.IsSet)

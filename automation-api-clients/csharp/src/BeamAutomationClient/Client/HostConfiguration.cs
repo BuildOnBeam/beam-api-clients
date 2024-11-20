@@ -41,6 +41,7 @@ namespace BeamAutomationClient.Client
             _jsonOptions.Converters.Add(new DateTimeJsonConverter());
             _jsonOptions.Converters.Add(new DateTimeNullableJsonConverter());
             _jsonOptions.Converters.Add(new AutomationAcceptAssetOfferRequestInputV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationBeamErrorResponseJsonConverter());
             _jsonOptions.Converters.Add(new AutomationBuyAssetRequestInputV2JsonConverter());
             _jsonOptions.Converters.Add(new AutomationCancelAssetListingRequestInputV2JsonConverter());
             _jsonOptions.Converters.Add(new AutomationCancelAssetOfferRequestInputV2JsonConverter());

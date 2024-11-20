@@ -7,17 +7,12 @@ export type CreateOnrampRequestInput = {
   token?: CreateOnrampRequestInput.token;
   tokenAmount?: string;
   fiatAmount?: string;
-  paymentCurrency?: CreateOnrampRequestInput.paymentCurrency;
+  paymentCurrency?: string;
   chainId?: number;
 };
 
 export namespace CreateOnrampRequestInput {
   export enum token {
     BEAM = 'BEAM',
-  }
-
-  export enum paymentCurrency {
-    USD = 'USD',
-    EUR = 'EUR',
   }
 }

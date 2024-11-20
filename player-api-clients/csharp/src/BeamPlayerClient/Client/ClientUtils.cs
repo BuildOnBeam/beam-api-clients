@@ -146,8 +146,6 @@ namespace BeamPlayerClient.Client
                 return PlayerCreateAssetOfferRequestInput.OperationProcessingEnumToJsonValue(playerCreateAssetOfferRequestInputOperationProcessingEnum);
             if (obj is PlayerCreateConnectionRequestResponse.StatusEnum playerCreateConnectionRequestResponseStatusEnum)
                 return PlayerCreateConnectionRequestResponse.StatusEnumToJsonValue(playerCreateConnectionRequestResponseStatusEnum);
-            if (obj is PlayerCreateOnrampRequestInput.PaymentCurrencyEnum playerCreateOnrampRequestInputPaymentCurrencyEnum)
-                return PlayerCreateOnrampRequestInput.PaymentCurrencyEnumToJsonValue(playerCreateOnrampRequestInputPaymentCurrencyEnum);
             if (obj is PlayerCreateOnrampRequestInput.TokenEnum playerCreateOnrampRequestInputTokenEnum)
                 return PlayerCreateOnrampRequestInput.TokenEnumToJsonValue(playerCreateOnrampRequestInputTokenEnum);
             if (obj is PlayerCreateTransactionRequestInput.OperationProcessingEnum playerCreateTransactionRequestInputOperationProcessingEnum)

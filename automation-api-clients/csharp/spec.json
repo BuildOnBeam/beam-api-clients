@@ -162,6 +162,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -200,6 +220,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AutomationGetAssetsForProfileResponseV2"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
                 }
               }
             }
@@ -248,6 +288,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -290,6 +350,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AutomationGetProfileNativeCurrencyResponseV2"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
                 }
               }
             }
@@ -339,6 +419,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -382,6 +482,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AutomationTransactionResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
                 }
               }
             }
@@ -431,6 +551,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -474,6 +614,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AutomationGetAssetsForContractResponseV2"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
                 }
               }
             }
@@ -547,6 +707,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -580,6 +760,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AutomationGetChainResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
                 }
               }
             }
@@ -626,6 +826,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AutomationGetEstimateResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
                 }
               }
             }
@@ -690,6 +910,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -751,6 +991,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -794,6 +1054,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AutomationTransactionResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
                 }
               }
             }
@@ -843,6 +1123,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -886,6 +1186,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AutomationTransactionResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
                 }
               }
             }
@@ -935,6 +1255,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -962,6 +1302,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -986,6 +1346,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AutomationRegenerateGameApiKeysResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
                 }
               }
             }
@@ -1023,6 +1403,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AutomationGetAssetListingsResponseV2"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
                 }
               }
             }
@@ -1072,6 +1472,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -1115,6 +1535,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AutomationSellAssetResponseV2"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
                 }
               }
             }
@@ -1169,6 +1609,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AutomationTransactionResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
                 }
               }
             }
@@ -1233,6 +1693,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -1276,6 +1756,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AutomationCreateOfferResponseV2"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
                 }
               }
             }
@@ -1327,6 +1827,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AutomationGetAssetListingsResponseV2"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
                 }
               }
             }
@@ -1399,6 +1919,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -1453,6 +1993,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -1504,6 +2064,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AutomationTransactionResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
                 }
               }
             }
@@ -1568,6 +2148,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -1605,6 +2205,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -1635,6 +2255,26 @@
         "responses": {
           "201": {
             "description": ""
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -1665,6 +2305,26 @@
         "responses": {
           "201": {
             "description": ""
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -1702,6 +2362,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -1724,6 +2404,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AutomationCommonGetPoliciesResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
                 }
               }
             }
@@ -1763,6 +2463,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -1797,6 +2517,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AutomationCreateProfileResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
                 }
               }
             }
@@ -1844,6 +2584,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -1877,6 +2637,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AutomationGetProfileResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
                 }
               }
             }
@@ -1921,6 +2701,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AutomationUpdateProfileResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
                 }
               }
             }
@@ -1971,6 +2771,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -2018,6 +2838,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -2042,6 +2882,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AutomationGetAllGasUsageResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
                 }
               }
             }
@@ -2082,6 +2942,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -2115,6 +2995,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AutomationGetPolicyUsageResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
                 }
               }
             }
@@ -2164,6 +3064,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -2197,6 +3117,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AutomationTransactionResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
                 }
               }
             }
@@ -2254,6 +3194,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -2298,6 +3258,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -2334,6 +3314,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -2360,6 +3360,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AutomationGetWebhooksForGameResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
                 }
               }
             }
@@ -2400,6 +3420,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -2431,6 +3471,26 @@
         "responses": {
           "204": {
             "description": ""
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -2474,6 +3534,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AutomationCommonStatsResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
                 }
               }
             }
@@ -2531,6 +3611,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -2577,6 +3677,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -2620,6 +3740,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AutomationCommonActivityResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
                 }
               }
             }
@@ -2677,6 +3817,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -2711,6 +3871,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AutomationMigrateResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
                 }
               }
             }
@@ -2797,6 +3977,44 @@
       }
     },
     "schemas": {
+      "AutomationBeamErrorResponse": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "integer",
+            "minimum": 400,
+            "maximum": 599
+          },
+          "error": {
+            "type": "string"
+          },
+          "validation": {
+            "type": "array",
+            "items": {}
+          },
+          "type": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "traceId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "timestamp",
+          "status"
+        ]
+      },
       "AutomationGetAssetsForProfileBodyInputV2": {
         "type": "object",
         "properties": {
@@ -2883,6 +4101,16 @@
                 },
                 "rarityScore": {
                   "type": "number",
+                  "nullable": true
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time",
+                  "nullable": true
+                },
+                "mintedAt": {
+                  "type": "string",
+                  "format": "date-time",
                   "nullable": true
                 },
                 "attributes": {
@@ -3444,7 +4672,8 @@
               "floorAskPrice",
               "tokenId",
               "rarity",
-              "updatedAt"
+              "updatedAt",
+              "mintedAt"
             ]
           },
           "limit": {
@@ -3494,6 +4723,16 @@
                 },
                 "rarityScore": {
                   "type": "number",
+                  "nullable": true
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time",
+                  "nullable": true
+                },
+                "mintedAt": {
+                  "type": "string",
+                  "format": "date-time",
                   "nullable": true
                 },
                 "attributes": {

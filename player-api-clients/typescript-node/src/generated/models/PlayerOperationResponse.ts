@@ -14,6 +14,7 @@ export type PlayerOperationResponse = {
   chainId: number;
   actions: Array<{
     type:
+      | 'FiatOnRamp'
       | 'Sign'
       | 'SessionRevoke'
       | 'MarketplaceCreateOffer'

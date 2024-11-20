@@ -245,97 +245,193 @@ namespace BeamAutomationClient.Api
     /// <summary>
     /// The <see cref="IGetAssetV2ApiResponse"/>
     /// </summary>
-    public interface IGetAssetV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetAssetResponseV2?>
+    public interface IGetAssetV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetAssetResponseV2?>, ICustomHttpStatusCode4xx<BeamAutomationClient.Model.AutomationBeamErrorResponse?>, ICustomHttpStatusCode5xx<BeamAutomationClient.Model.AutomationBeamErrorResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
         /// </summary>
         /// <returns></returns>
         bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode4xx { get; }
+
+        /// <summary>
+        /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode5xx { get; }
     }
 
     /// <summary>
     /// The <see cref="IGetContractAssetsPostV2ApiResponse"/>
     /// </summary>
-    public interface IGetContractAssetsPostV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetAssetsForContractResponseV2?>
+    public interface IGetContractAssetsPostV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetAssetsForContractResponseV2?>, ICustomHttpStatusCode4xx<BeamAutomationClient.Model.AutomationBeamErrorResponse?>, ICustomHttpStatusCode5xx<BeamAutomationClient.Model.AutomationBeamErrorResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
         /// </summary>
         /// <returns></returns>
         bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode4xx { get; }
+
+        /// <summary>
+        /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode5xx { get; }
     }
 
     /// <summary>
     /// The <see cref="IGetProfileAssetsForGamePostV2ApiResponse"/>
     /// </summary>
-    public interface IGetProfileAssetsForGamePostV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetAssetsForProfileResponseV2?>
+    public interface IGetProfileAssetsForGamePostV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetAssetsForProfileResponseV2?>, ICustomHttpStatusCode4xx<BeamAutomationClient.Model.AutomationBeamErrorResponse?>, ICustomHttpStatusCode5xx<BeamAutomationClient.Model.AutomationBeamErrorResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
         /// </summary>
         /// <returns></returns>
         bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode4xx { get; }
+
+        /// <summary>
+        /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode5xx { get; }
     }
 
     /// <summary>
     /// The <see cref="IGetProfileCurrenciesV2ApiResponse"/>
     /// </summary>
-    public interface IGetProfileCurrenciesV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetProfileCurrenciesResponseV2?>
+    public interface IGetProfileCurrenciesV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetProfileCurrenciesResponseV2?>, ICustomHttpStatusCode4xx<BeamAutomationClient.Model.AutomationBeamErrorResponse?>, ICustomHttpStatusCode5xx<BeamAutomationClient.Model.AutomationBeamErrorResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
         /// </summary>
         /// <returns></returns>
         bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode4xx { get; }
+
+        /// <summary>
+        /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode5xx { get; }
     }
 
     /// <summary>
     /// The <see cref="IGetProfileNativeCurrencyV2ApiResponse"/>
     /// </summary>
-    public interface IGetProfileNativeCurrencyV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetProfileNativeCurrencyResponseV2?>
+    public interface IGetProfileNativeCurrencyV2ApiResponse : BeamAutomationClient.Client.IApiResponse, IOk<BeamAutomationClient.Model.AutomationGetProfileNativeCurrencyResponseV2?>, ICustomHttpStatusCode4xx<BeamAutomationClient.Model.AutomationBeamErrorResponse?>, ICustomHttpStatusCode5xx<BeamAutomationClient.Model.AutomationBeamErrorResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
         /// </summary>
         /// <returns></returns>
         bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode4xx { get; }
+
+        /// <summary>
+        /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode5xx { get; }
     }
 
     /// <summary>
     /// The <see cref="ITransferAssetV2ApiResponse"/>
     /// </summary>
-    public interface ITransferAssetV2ApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.AutomationTransactionResponse?>
+    public interface ITransferAssetV2ApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.AutomationTransactionResponse?>, ICustomHttpStatusCode4xx<BeamAutomationClient.Model.AutomationBeamErrorResponse?>, ICustomHttpStatusCode5xx<BeamAutomationClient.Model.AutomationBeamErrorResponse?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
         /// </summary>
         /// <returns></returns>
         bool IsCreated { get; }
+
+        /// <summary>
+        /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode4xx { get; }
+
+        /// <summary>
+        /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode5xx { get; }
     }
 
     /// <summary>
     /// The <see cref="ITransferNativeTokenV2ApiResponse"/>
     /// </summary>
-    public interface ITransferNativeTokenV2ApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.AutomationTransactionResponse?>
+    public interface ITransferNativeTokenV2ApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.AutomationTransactionResponse?>, ICustomHttpStatusCode4xx<BeamAutomationClient.Model.AutomationBeamErrorResponse?>, ICustomHttpStatusCode5xx<BeamAutomationClient.Model.AutomationBeamErrorResponse?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
         /// </summary>
         /// <returns></returns>
         bool IsCreated { get; }
+
+        /// <summary>
+        /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode4xx { get; }
+
+        /// <summary>
+        /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode5xx { get; }
     }
 
     /// <summary>
     /// The <see cref="ITransferTokenV2ApiResponse"/>
     /// </summary>
-    public interface ITransferTokenV2ApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.AutomationTransactionResponse?>
+    public interface ITransferTokenV2ApiResponse : BeamAutomationClient.Client.IApiResponse, ICreated<BeamAutomationClient.Model.AutomationTransactionResponse?>, ICustomHttpStatusCode4xx<BeamAutomationClient.Model.AutomationBeamErrorResponse?>, ICustomHttpStatusCode5xx<BeamAutomationClient.Model.AutomationBeamErrorResponse?>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
         /// </summary>
         /// <returns></returns>
         bool IsCreated { get; }
+
+        /// <summary>
+        /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode4xx { get; }
+
+        /// <summary>
+        /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode5xx { get; }
     }
 
     /// <summary>
@@ -813,6 +909,82 @@ namespace BeamAutomationClient.Api
                 return result != null;
             }
 
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode4xx => 4XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamAutomationClient.Model.AutomationBeamErrorResponse? CustomHttpStatusCode4xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode4xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode4xx([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode4xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)4XX);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode5xx => 5XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamAutomationClient.Model.AutomationBeamErrorResponse? CustomHttpStatusCode5xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode5xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode5xx([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode5xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)5XX);
+                }
+
+                return result != null;
+            }
+
             private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
             {
                 bool suppressDefaultLog = false;
@@ -1058,6 +1230,82 @@ namespace BeamAutomationClient.Api
                 } catch (Exception e)
                 {
                     OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode4xx => 4XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamAutomationClient.Model.AutomationBeamErrorResponse? CustomHttpStatusCode4xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode4xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode4xx([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode4xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)4XX);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode5xx => 5XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamAutomationClient.Model.AutomationBeamErrorResponse? CustomHttpStatusCode5xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode5xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode5xx([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode5xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)5XX);
                 }
 
                 return result != null;
@@ -1313,6 +1561,82 @@ namespace BeamAutomationClient.Api
                 return result != null;
             }
 
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode4xx => 4XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamAutomationClient.Model.AutomationBeamErrorResponse? CustomHttpStatusCode4xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode4xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode4xx([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode4xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)4XX);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode5xx => 5XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamAutomationClient.Model.AutomationBeamErrorResponse? CustomHttpStatusCode5xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode5xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode5xx([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode5xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)5XX);
+                }
+
+                return result != null;
+            }
+
             private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
             {
                 bool suppressDefaultLog = false;
@@ -1553,6 +1877,82 @@ namespace BeamAutomationClient.Api
                 return result != null;
             }
 
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode4xx => 4XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamAutomationClient.Model.AutomationBeamErrorResponse? CustomHttpStatusCode4xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode4xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode4xx([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode4xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)4XX);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode5xx => 5XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamAutomationClient.Model.AutomationBeamErrorResponse? CustomHttpStatusCode5xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode5xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode5xx([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode5xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)5XX);
+                }
+
+                return result != null;
+            }
+
             private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
             {
                 bool suppressDefaultLog = false;
@@ -1788,6 +2188,82 @@ namespace BeamAutomationClient.Api
                 } catch (Exception e)
                 {
                     OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode4xx => 4XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamAutomationClient.Model.AutomationBeamErrorResponse? CustomHttpStatusCode4xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode4xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode4xx([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode4xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)4XX);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode5xx => 5XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamAutomationClient.Model.AutomationBeamErrorResponse? CustomHttpStatusCode5xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode5xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode5xx([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode5xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)5XX);
                 }
 
                 return result != null;
@@ -2043,6 +2519,82 @@ namespace BeamAutomationClient.Api
                 return result != null;
             }
 
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode4xx => 4XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamAutomationClient.Model.AutomationBeamErrorResponse? CustomHttpStatusCode4xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode4xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode4xx([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode4xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)4XX);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode5xx => 5XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamAutomationClient.Model.AutomationBeamErrorResponse? CustomHttpStatusCode5xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode5xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode5xx([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode5xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)5XX);
+                }
+
+                return result != null;
+            }
+
             private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
             {
                 bool suppressDefaultLog = false;
@@ -2293,6 +2845,82 @@ namespace BeamAutomationClient.Api
                 return result != null;
             }
 
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode4xx => 4XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamAutomationClient.Model.AutomationBeamErrorResponse? CustomHttpStatusCode4xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode4xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode4xx([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode4xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)4XX);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode5xx => 5XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamAutomationClient.Model.AutomationBeamErrorResponse? CustomHttpStatusCode5xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode5xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode5xx([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode5xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)5XX);
+                }
+
+                return result != null;
+            }
+
             private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
             {
                 bool suppressDefaultLog = false;
@@ -2538,6 +3166,82 @@ namespace BeamAutomationClient.Api
                 } catch (Exception e)
                 {
                     OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)201);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode4xx => 4XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 4XX CustomHttpStatusCode4xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamAutomationClient.Model.AutomationBeamErrorResponse? CustomHttpStatusCode4xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode4xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX CustomHttpStatusCode4xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode4xx([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode4xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)4XX);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode5xx => 5XX == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 5XX CustomHttpStatusCode5xx
+            /// </summary>
+            /// <returns></returns>
+            public BeamAutomationClient.Model.AutomationBeamErrorResponse? CustomHttpStatusCode5xx()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode5xx
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamAutomationClient.Model.AutomationBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX CustomHttpStatusCode5xx and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode5xx([NotNullWhen(true)]out BeamAutomationClient.Model.AutomationBeamErrorResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode5xx();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)5XX);
                 }
 
                 return result != null;

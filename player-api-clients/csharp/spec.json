@@ -162,6 +162,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -200,6 +220,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlayerGetAssetsForUserResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
                 }
               }
             }
@@ -248,6 +288,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -290,6 +350,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlayerGetUserNativeCurrencyResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
                 }
               }
             }
@@ -339,6 +419,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -382,6 +482,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlayerPlayerOperationResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
                 }
               }
             }
@@ -431,6 +551,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -474,6 +614,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlayerGetAssetsForContractResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
                 }
               }
             }
@@ -548,6 +708,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -590,6 +770,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlayerGetAttributesResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
                 }
               }
             }
@@ -656,6 +856,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -710,6 +930,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -744,6 +984,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlayerGetAssetListingsResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
                 }
               }
             }
@@ -793,6 +1053,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -836,6 +1116,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlayerPlayerOperationResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
                 }
               }
             }
@@ -890,6 +1190,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlayerPlayerOperationResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
                 }
               }
             }
@@ -954,6 +1274,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -997,6 +1337,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlayerPlayerOperationResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
                 }
               }
             }
@@ -1048,6 +1408,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlayerGetAssetListingsResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
                 }
               }
             }
@@ -1120,6 +1500,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -1174,6 +1574,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -1225,6 +1645,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlayerPlayerOperationResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
                 }
               }
             }
@@ -1289,6 +1729,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -1326,6 +1786,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -1356,6 +1836,26 @@
         "responses": {
           "201": {
             "description": ""
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -1386,6 +1886,26 @@
         "responses": {
           "201": {
             "description": ""
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -1432,6 +1952,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -1465,6 +2005,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlayerGetTransactionResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
                 }
               }
             }
@@ -1522,6 +2082,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -1563,6 +2143,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlayerPlayerOperationResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
                 }
               }
             }
@@ -1612,6 +2212,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -1645,6 +2265,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlayerGetUserResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
                 }
               }
             }
@@ -1692,6 +2332,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -1723,6 +2383,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlayerGetUserResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
                 }
               }
             }
@@ -1759,6 +2439,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlayerPlayerOperationResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
                 }
               }
             }
@@ -1806,6 +2506,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -1837,6 +2557,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlayerPlayerOperationResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
                 }
               }
             }
@@ -1873,6 +2613,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlayerPlayerOperationResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
                 }
               }
             }
@@ -1937,6 +2697,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -1998,6 +2778,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -2041,6 +2841,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlayerPlayerOperationResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
                 }
               }
             }
@@ -2090,6 +2910,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -2133,6 +2973,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlayerPlayerOperationResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
                 }
               }
             }
@@ -2182,6 +3042,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -2225,6 +3105,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlayerGenerateSessionRequestResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
                 }
               }
             }
@@ -2274,6 +3174,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -2307,6 +3227,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlayerGetSessionRequestResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
                 }
               }
             }
@@ -2355,6 +3295,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -2370,7 +3330,9 @@
     "/v1/player/sessions/users/{entityId}/{accountAddress}/active": {
       "get": {
         "operationId": "getActiveSession",
+        "x-sunset": "2025-03-01",
         "summary": "",
+        "deprecated": true,
         "parameters": [
           {
             "name": "entityId",
@@ -2405,6 +3367,99 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlayerGetActiveSessionResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Sessions"
+        ],
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/player/sessions/users/{entityId}/{accountAddress}/active": {
+      "get": {
+        "operationId": "getActiveSessionV2",
+        "summary": "",
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "accountAddress",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chainId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerGetActiveSessionResponseV2"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
                 }
               }
             }
@@ -2445,6 +3500,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -2478,6 +3553,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlayerGetConnectionRequestResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
                 }
               }
             }
@@ -2524,6 +3619,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlayerCommonStatsResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
                 }
               }
             }
@@ -2581,6 +3696,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -2627,6 +3762,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -2670,6 +3825,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlayerCommonActivityResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
                 }
               }
             }
@@ -2727,6 +3902,26 @@
                 }
               }
             }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -2769,7 +3964,27 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PlayerCreateOnrampRequestResponse"
+                  "$ref": "#/components/schemas/PlayerPlayerOperationResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
                 }
               }
             }
@@ -2839,6 +4054,44 @@
       }
     },
     "schemas": {
+      "PlayerBeamErrorResponse": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "integer",
+            "minimum": 400,
+            "maximum": 599
+          },
+          "error": {
+            "type": "string"
+          },
+          "validation": {
+            "type": "array",
+            "items": {}
+          },
+          "type": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "traceId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "timestamp",
+          "status"
+        ]
+      },
       "PlayerGetAssetsForUserBodyInput": {
         "type": "object",
         "properties": {
@@ -2925,6 +4178,16 @@
                 },
                 "rarityScore": {
                   "type": "number",
+                  "nullable": true
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time",
+                  "nullable": true
+                },
+                "mintedAt": {
+                  "type": "string",
+                  "format": "date-time",
                   "nullable": true
                 },
                 "attributes": {
@@ -3190,6 +4453,7 @@
                 "type": {
                   "type": "string",
                   "enum": [
+                    "FiatOnRamp",
                     "Sign",
                     "SessionRevoke",
                     "MarketplaceCreateOffer",
@@ -3574,7 +4838,8 @@
               "floorAskPrice",
               "tokenId",
               "rarity",
-              "updatedAt"
+              "updatedAt",
+              "mintedAt"
             ]
           },
           "limit": {
@@ -3624,6 +4889,16 @@
                 },
                 "rarityScore": {
                   "type": "number",
+                  "nullable": true
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time",
+                  "nullable": true
+                },
+                "mintedAt": {
+                  "type": "string",
+                  "format": "date-time",
                   "nullable": true
                 },
                 "attributes": {
@@ -3960,6 +5235,16 @@
                 },
                 "rarityScore": {
                   "type": "number",
+                  "nullable": true
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time",
+                  "nullable": true
+                },
+                "mintedAt": {
+                  "type": "string",
+                  "format": "date-time",
                   "nullable": true
                 },
                 "attributes": {
@@ -5647,6 +6932,41 @@
           "sessionAddress"
         ]
       },
+      "PlayerGetActiveSessionResponseV2": {
+        "type": "object",
+        "properties": {
+          "session": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "isActive": {
+                "type": "boolean"
+              },
+              "startTime": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "endTime": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "sessionAddress": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "isActive",
+              "startTime",
+              "endTime",
+              "sessionAddress"
+            ],
+            "nullable": true
+          }
+        }
+      },
       "PlayerCreateConnectionRequestInput": {
         "type": "object",
         "properties": {
@@ -6009,11 +7329,7 @@
           },
           "paymentCurrency": {
             "default": "USD",
-            "type": "string",
-            "enum": [
-              "USD",
-              "EUR"
-            ]
+            "type": "string"
           },
           "chainId": {
             "default": 13337,
@@ -6021,17 +7337,6 @@
             "format": "int64"
           }
         }
-      },
-      "PlayerCreateOnrampRequestResponse": {
-        "type": "object",
-        "properties": {
-          "url": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "url"
-        ]
       }
     }
   }

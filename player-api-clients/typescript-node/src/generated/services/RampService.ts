@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { CreateOnrampRequestInput } from '../models/CreateOnrampRequestInput';
-import type { CreateOnrampRequestResponse } from '../models/CreateOnrampRequestResponse';
+import type { PlayerOperationResponse } from '../models/PlayerOperationResponse';
 
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -14,13 +14,13 @@ export class RampService {
   /**
    * @param entityId
    * @param requestBody
-   * @returns CreateOnrampRequestResponse
+   * @returns PlayerOperationResponse
    * @throws ApiError
    */
   public createOnrampRequest(
     entityId: string,
     requestBody: CreateOnrampRequestInput,
-  ): CancelablePromise<CreateOnrampRequestResponse> {
+  ): CancelablePromise<PlayerOperationResponse> {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v1/player/ramp/on/{entityId}',

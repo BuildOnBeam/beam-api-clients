@@ -154,6 +154,46 @@ namespace BeamPlayerClient.Client
     /// An interface for responses of type 
     /// </summary>
     /// <typeparam name="TType"></typeparam>
+    public interface ICustomHttpStatusCode4xx<TType> : IApiResponse
+    {
+        /// <summary>
+        /// Deserializes the response if the response is CustomHttpStatusCode4xx
+        /// </summary>
+        /// <returns></returns>
+        TType CustomHttpStatusCode4xx();
+
+        /// <summary>
+        /// Returns true if the response is CustomHttpStatusCode4xx and the deserialized response is not null
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        bool TryCustomHttpStatusCode4xx([NotNullWhen(true)]out TType? result);
+    }
+
+    /// <summary>
+    /// An interface for responses of type 
+    /// </summary>
+    /// <typeparam name="TType"></typeparam>
+    public interface ICustomHttpStatusCode5xx<TType> : IApiResponse
+    {
+        /// <summary>
+        /// Deserializes the response if the response is CustomHttpStatusCode5xx
+        /// </summary>
+        /// <returns></returns>
+        TType CustomHttpStatusCode5xx();
+
+        /// <summary>
+        /// Returns true if the response is CustomHttpStatusCode5xx and the deserialized response is not null
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        bool TryCustomHttpStatusCode5xx([NotNullWhen(true)]out TType? result);
+    }
+
+    /// <summary>
+    /// An interface for responses of type 
+    /// </summary>
+    /// <typeparam name="TType"></typeparam>
     public interface IServiceUnavailable<TType> : IApiResponse
     {
         /// <summary>

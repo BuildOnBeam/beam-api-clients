@@ -42,10 +42,12 @@ namespace BeamAutomationClient.Model
         /// <param name="supply">supply</param>
         /// <param name="attributes">attributes</param>
         /// <param name="chainId">chainId (default to 13337)</param>
+        /// <param name="mintedAt">mintedAt</param>
         /// <param name="rarity">rarity</param>
         /// <param name="rarityScore">rarityScore</param>
+        /// <param name="updatedAt">updatedAt</param>
         [JsonConstructor]
-        public AutomationGetAssetsForContractResponseV2DataInner(string assetAddress, string assetId, string assetType, string imageUrl, string name, decimal supply, Option<List<AutomationGetAssetsForProfileResponseV2DataInnerAttributesInner>?> attributes = default, Option<long?> chainId = default, Option<RarityEnum?> rarity = default, Option<decimal?> rarityScore = default)
+        public AutomationGetAssetsForContractResponseV2DataInner(string assetAddress, string assetId, string assetType, string imageUrl, string name, decimal supply, Option<List<AutomationGetAssetsForProfileResponseV2DataInnerAttributesInner>?> attributes = default, Option<long?> chainId = default, Option<DateTime?> mintedAt = default, Option<RarityEnum?> rarity = default, Option<decimal?> rarityScore = default, Option<DateTime?> updatedAt = default)
         {
             AssetAddress = assetAddress;
             AssetId = assetId;
@@ -55,8 +57,10 @@ namespace BeamAutomationClient.Model
             Supply = supply;
             AttributesOption = attributes;
             ChainIdOption = chainId;
+            MintedAtOption = mintedAt;
             RarityOption = rarity;
             RarityScoreOption = rarityScore;
+            UpdatedAtOption = updatedAt;
             OnCreated();
         }
 
@@ -371,6 +375,19 @@ namespace BeamAutomationClient.Model
         public long? ChainId { get { return this. ChainIdOption; } set { this.ChainIdOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of MintedAt
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<DateTime?> MintedAtOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets MintedAt
+        /// </summary>
+        [JsonPropertyName("mintedAt")]
+        public DateTime? MintedAt { get { return this. MintedAtOption; } set { this.MintedAtOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of RarityScore
         /// </summary>
         [JsonIgnore]
@@ -382,6 +399,19 @@ namespace BeamAutomationClient.Model
         /// </summary>
         [JsonPropertyName("rarityScore")]
         public decimal? RarityScore { get { return this. RarityScoreOption; } set { this.RarityScoreOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of UpdatedAt
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<DateTime?> UpdatedAtOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets UpdatedAt
+        /// </summary>
+        [JsonPropertyName("updatedAt")]
+        public DateTime? UpdatedAt { get { return this. UpdatedAtOption; } set { this.UpdatedAtOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -399,8 +429,10 @@ namespace BeamAutomationClient.Model
             sb.Append("  Supply: ").Append(Supply).Append("\n");
             sb.Append("  Attributes: ").Append(Attributes).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
+            sb.Append("  MintedAt: ").Append(MintedAt).Append("\n");
             sb.Append("  Rarity: ").Append(Rarity).Append("\n");
             sb.Append("  RarityScore: ").Append(RarityScore).Append("\n");
+            sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -421,6 +453,16 @@ namespace BeamAutomationClient.Model
     /// </summary>
     public class AutomationGetAssetsForContractResponseV2DataInnerJsonConverter : JsonConverter<AutomationGetAssetsForContractResponseV2DataInner>
     {
+        /// <summary>
+        /// The format to use to serialize MintedAt
+        /// </summary>
+        public static string MintedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
+        /// The format to use to serialize UpdatedAt
+        /// </summary>
+        public static string UpdatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
         /// <summary>
         /// Deserializes json to <see cref="AutomationGetAssetsForContractResponseV2DataInner" />
         /// </summary>
@@ -446,8 +488,10 @@ namespace BeamAutomationClient.Model
             Option<decimal?> supply = default;
             Option<List<AutomationGetAssetsForProfileResponseV2DataInnerAttributesInner>?> attributes = default;
             Option<long?> chainId = default;
+            Option<DateTime?> mintedAt = default;
             Option<AutomationGetAssetsForContractResponseV2DataInner.RarityEnum?> rarity = default;
             Option<decimal?> rarityScore = default;
+            Option<DateTime?> updatedAt = default;
 
             while (utf8JsonReader.Read())
             {
@@ -491,6 +535,10 @@ namespace BeamAutomationClient.Model
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 chainId = new Option<long?>(utf8JsonReader.GetInt64());
                             break;
+                        case "mintedAt":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                mintedAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime?>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
                         case "rarity":
                             string? rarityRawValue = utf8JsonReader.GetString();
                             if (rarityRawValue != null)
@@ -499,6 +547,10 @@ namespace BeamAutomationClient.Model
                         case "rarityScore":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 rarityScore = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                            break;
+                        case "updatedAt":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                updatedAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime?>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -545,7 +597,7 @@ namespace BeamAutomationClient.Model
             if (chainId.IsSet && chainId.Value == null)
                 throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class AutomationGetAssetsForContractResponseV2DataInner.");
 
-            return new AutomationGetAssetsForContractResponseV2DataInner(assetAddress.Value!, assetId.Value!, assetType.Value!, imageUrl.Value!, name.Value!, supply.Value!.Value!, attributes, chainId, rarity, rarityScore);
+            return new AutomationGetAssetsForContractResponseV2DataInner(assetAddress.Value!, assetId.Value!, assetType.Value!, imageUrl.Value!, name.Value!, supply.Value!.Value!, attributes, chainId, mintedAt, rarity, rarityScore, updatedAt);
         }
 
         /// <summary>
@@ -610,6 +662,12 @@ namespace BeamAutomationClient.Model
             if (automationGetAssetsForContractResponseV2DataInner.ChainIdOption.IsSet)
                 writer.WriteNumber("chainId", automationGetAssetsForContractResponseV2DataInner.ChainIdOption.Value!.Value);
 
+            if (automationGetAssetsForContractResponseV2DataInner.MintedAtOption.IsSet)
+                if (automationGetAssetsForContractResponseV2DataInner.MintedAtOption.Value != null)
+                    writer.WriteString("mintedAt", automationGetAssetsForContractResponseV2DataInner.MintedAtOption.Value!.Value.ToString(MintedAtFormat));
+                else
+                    writer.WriteNull("mintedAt");
+
             var rarityRawValue = AutomationGetAssetsForContractResponseV2DataInner.RarityEnumToJsonValue(automationGetAssetsForContractResponseV2DataInner.RarityOption.Value!.Value);
             if (rarityRawValue != null)
                 writer.WriteString("rarity", rarityRawValue);
@@ -621,6 +679,12 @@ namespace BeamAutomationClient.Model
                     writer.WriteNumber("rarityScore", automationGetAssetsForContractResponseV2DataInner.RarityScoreOption.Value!.Value);
                 else
                     writer.WriteNull("rarityScore");
+
+            if (automationGetAssetsForContractResponseV2DataInner.UpdatedAtOption.IsSet)
+                if (automationGetAssetsForContractResponseV2DataInner.UpdatedAtOption.Value != null)
+                    writer.WriteString("updatedAt", automationGetAssetsForContractResponseV2DataInner.UpdatedAtOption.Value!.Value.ToString(UpdatedAtFormat));
+                else
+                    writer.WriteNull("updatedAt");
         }
     }
 }

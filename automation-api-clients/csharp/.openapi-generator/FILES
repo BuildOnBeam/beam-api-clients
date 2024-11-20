@@ -40,6 +40,7 @@ src/BeamAutomationClient/Extensions/IHostBuilderExtensions.cs
 src/BeamAutomationClient/Extensions/IHttpClientBuilderExtensions.cs
 src/BeamAutomationClient/Extensions/IServiceCollectionExtensions.cs
 src/BeamAutomationClient/Model/AutomationAcceptAssetOfferRequestInputV2.cs
+src/BeamAutomationClient/Model/AutomationBeamErrorResponse.cs
 src/BeamAutomationClient/Model/AutomationBuyAssetRequestInputV2.cs
 src/BeamAutomationClient/Model/AutomationCancelAssetListingRequestInputV2.cs
 src/BeamAutomationClient/Model/AutomationCancelAssetOfferRequestInputV2.cs

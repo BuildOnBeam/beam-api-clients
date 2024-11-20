@@ -19,6 +19,8 @@ export type GetOwnerAssetsResponse = {
       | 'ExtremelyRare'
       | null;
     rarityScore?: number | null;
+    updatedAt?: string | null;
+    mintedAt?: string | null;
     attributes?: Array<{
       displayType?: string | null;
       maxValue?: number | null;

@@ -88,7 +88,12 @@ namespace BeamAutomationClient.Model
             /// <summary>
             /// Enum UpdatedAt for value: updatedAt
             /// </summary>
-            UpdatedAt = 4
+            UpdatedAt = 4,
+
+            /// <summary>
+            /// Enum MintedAt for value: mintedAt
+            /// </summary>
+            MintedAt = 5
         }
 
         /// <summary>
@@ -110,6 +115,9 @@ namespace BeamAutomationClient.Model
 
             if (value.Equals("updatedAt"))
                 return SortByEnum.UpdatedAt;
+
+            if (value.Equals("mintedAt"))
+                return SortByEnum.MintedAt;
 
             throw new NotImplementedException($"Could not convert value to type SortByEnum: '{value}'");
         }
@@ -133,6 +141,9 @@ namespace BeamAutomationClient.Model
             if (value.Equals("updatedAt"))
                 return SortByEnum.UpdatedAt;
 
+            if (value.Equals("mintedAt"))
+                return SortByEnum.MintedAt;
+
             return null;
         }
 
@@ -155,6 +166,9 @@ namespace BeamAutomationClient.Model
 
             if (value == SortByEnum.UpdatedAt)
                 return "updatedAt";
+
+            if (value == SortByEnum.MintedAt)
+                return "mintedAt";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }
@@ -183,6 +197,9 @@ namespace BeamAutomationClient.Model
                     if (value.Equals("updatedAt"))
                         return SortByEnum.UpdatedAt;
 
+                    if (value.Equals("mintedAt"))
+                        return SortByEnum.MintedAt;
+
                 throw new NotImplementedException($"Could not convert value to type SortByEnum: '{value}'");
             }
 
@@ -204,6 +221,9 @@ namespace BeamAutomationClient.Model
 
                     if (value.Equals("updatedAt"))
                         return SortByEnum.UpdatedAt;
+
+                    if (value.Equals("mintedAt"))
+                        return SortByEnum.MintedAt;
 
                 return null;
             }
@@ -227,6 +247,9 @@ namespace BeamAutomationClient.Model
 
                         if (value == SortByEnum.UpdatedAt)
                             return "updatedAt";
+
+                        if (value == SortByEnum.MintedAt)
+                            return "mintedAt";
 
                 throw new NotImplementedException($"Value could not be handled: '{value}'");
             }

@@ -27,28 +27,35 @@ using BeamPlayerClient.Client;
 namespace BeamPlayerClient.Model
 {
     /// <summary>
-    /// PlayerCreateOnrampRequestResponse
+    /// PlayerGetActiveSessionResponseV2
     /// </summary>
-    public partial class PlayerCreateOnrampRequestResponse : IValidatableObject
+    public partial class PlayerGetActiveSessionResponseV2 : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PlayerCreateOnrampRequestResponse" /> class.
+        /// Initializes a new instance of the <see cref="PlayerGetActiveSessionResponseV2" /> class.
         /// </summary>
-        /// <param name="url">url</param>
+        /// <param name="session">session</param>
         [JsonConstructor]
-        public PlayerCreateOnrampRequestResponse(string url)
+        public PlayerGetActiveSessionResponseV2(Option<PlayerGetActiveSessionResponseV2Session?> session = default)
         {
-            Url = url;
+            SessionOption = session;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets Url
+        /// Used to track the state of Session
         /// </summary>
-        [JsonPropertyName("url")]
-        public string Url { get; set; }
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<PlayerGetActiveSessionResponseV2Session?> SessionOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Session
+        /// </summary>
+        [JsonPropertyName("session")]
+        public PlayerGetActiveSessionResponseV2Session? Session { get { return this. SessionOption; } set { this.SessionOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -57,8 +64,8 @@ namespace BeamPlayerClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class PlayerCreateOnrampRequestResponse {\n");
-            sb.Append("  Url: ").Append(Url).Append("\n");
+            sb.Append("class PlayerGetActiveSessionResponseV2 {\n");
+            sb.Append("  Session: ").Append(Session).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,19 +82,19 @@ namespace BeamPlayerClient.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="PlayerCreateOnrampRequestResponse" />
+    /// A Json converter for type <see cref="PlayerGetActiveSessionResponseV2" />
     /// </summary>
-    public class PlayerCreateOnrampRequestResponseJsonConverter : JsonConverter<PlayerCreateOnrampRequestResponse>
+    public class PlayerGetActiveSessionResponseV2JsonConverter : JsonConverter<PlayerGetActiveSessionResponseV2>
     {
         /// <summary>
-        /// Deserializes json to <see cref="PlayerCreateOnrampRequestResponse" />
+        /// Deserializes json to <see cref="PlayerGetActiveSessionResponseV2" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override PlayerCreateOnrampRequestResponse Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override PlayerGetActiveSessionResponseV2 Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -96,7 +103,7 @@ namespace BeamPlayerClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<string?> url = default;
+            Option<PlayerGetActiveSessionResponseV2Session?> session = default;
 
             while (utf8JsonReader.Read())
             {
@@ -113,8 +120,9 @@ namespace BeamPlayerClient.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "url":
-                            url = new Option<string?>(utf8JsonReader.GetString()!);
+                        case "session":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                session = new Option<PlayerGetActiveSessionResponseV2Session?>(JsonSerializer.Deserialize<PlayerGetActiveSessionResponseV2Session>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -122,43 +130,41 @@ namespace BeamPlayerClient.Model
                 }
             }
 
-            if (!url.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCreateOnrampRequestResponse.", nameof(url));
-
-            if (url.IsSet && url.Value == null)
-                throw new ArgumentNullException(nameof(url), "Property is not nullable for class PlayerCreateOnrampRequestResponse.");
-
-            return new PlayerCreateOnrampRequestResponse(url.Value!);
+            return new PlayerGetActiveSessionResponseV2(session);
         }
 
         /// <summary>
-        /// Serializes a <see cref="PlayerCreateOnrampRequestResponse" />
+        /// Serializes a <see cref="PlayerGetActiveSessionResponseV2" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="playerCreateOnrampRequestResponse"></param>
+        /// <param name="playerGetActiveSessionResponseV2"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, PlayerCreateOnrampRequestResponse playerCreateOnrampRequestResponse, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, PlayerGetActiveSessionResponseV2 playerGetActiveSessionResponseV2, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(ref writer, playerCreateOnrampRequestResponse, jsonSerializerOptions);
+            WriteProperties(ref writer, playerGetActiveSessionResponseV2, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="PlayerCreateOnrampRequestResponse" />
+        /// Serializes the properties of <see cref="PlayerGetActiveSessionResponseV2" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="playerCreateOnrampRequestResponse"></param>
+        /// <param name="playerGetActiveSessionResponseV2"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(ref Utf8JsonWriter writer, PlayerCreateOnrampRequestResponse playerCreateOnrampRequestResponse, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(ref Utf8JsonWriter writer, PlayerGetActiveSessionResponseV2 playerGetActiveSessionResponseV2, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (playerCreateOnrampRequestResponse.Url == null)
-                throw new ArgumentNullException(nameof(playerCreateOnrampRequestResponse.Url), "Property is required for class PlayerCreateOnrampRequestResponse.");
-
-            writer.WriteString("url", playerCreateOnrampRequestResponse.Url);
+            if (playerGetActiveSessionResponseV2.SessionOption.IsSet)
+                if (playerGetActiveSessionResponseV2.SessionOption.Value != null)
+                {
+                    writer.WritePropertyName("session");
+                    JsonSerializer.Serialize(writer, playerGetActiveSessionResponseV2.Session, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("session");
         }
     }
 }
