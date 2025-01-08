@@ -20,7 +20,6 @@ import { ReportingService } from './services/ReportingService';
 import { StatsService } from './services/StatsService';
 import { TradingService } from './services/TradingService';
 import { TransactionsV2Service } from './services/TransactionsV2Service';
-import { WebhooksService } from './services/WebhooksService';
 
 type HttpRequestConstructor = new (config: OpenAPIConfig) => BaseHttpRequest;
 
@@ -39,7 +38,6 @@ export class ApiClient {
   public readonly stats: StatsService;
   public readonly trading: TradingService;
   public readonly transactionsV2: TransactionsV2Service;
-  public readonly webhooks: WebhooksService;
 
   public readonly request: BaseHttpRequest;
 
@@ -73,6 +71,5 @@ export class ApiClient {
     this.stats = new StatsService(this.request);
     this.trading = new TradingService(this.request);
     this.transactionsV2 = new TransactionsV2Service(this.request);
-    this.webhooks = new WebhooksService(this.request);
   }
 }

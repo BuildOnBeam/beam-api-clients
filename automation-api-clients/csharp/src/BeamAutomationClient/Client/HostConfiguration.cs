@@ -70,7 +70,6 @@ namespace BeamAutomationClient.Client
             _jsonOptions.Converters.Add(new AutomationCreateProfileResponseWalletsInnerJsonConverter());
             _jsonOptions.Converters.Add(new AutomationCreateTransactionRequestInputV2JsonConverter());
             _jsonOptions.Converters.Add(new AutomationCreateTransactionRequestInputV2InteractionsInnerJsonConverter());
-            _jsonOptions.Converters.Add(new AutomationCreateWebhookForGameJsonConverter());
             _jsonOptions.Converters.Add(new AutomationGenerateLinkCodeRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new AutomationGenerateLinkCodeResponseJsonConverter());
             _jsonOptions.Converters.Add(new AutomationGenerateSignInCodeRequestInputJsonConverter());
@@ -121,8 +120,6 @@ namespace BeamAutomationClient.Client
             _jsonOptions.Converters.Add(new AutomationGetQuoteResponseJsonConverter());
             _jsonOptions.Converters.Add(new AutomationGetTransactionsResponseV2JsonConverter());
             _jsonOptions.Converters.Add(new AutomationGetTransactionsResponseV2DataInnerJsonConverter());
-            _jsonOptions.Converters.Add(new AutomationGetWebhooksForGameResponseJsonConverter());
-            _jsonOptions.Converters.Add(new AutomationGetWebhooksForGameResponseWebhooksInnerJsonConverter());
             _jsonOptions.Converters.Add(new AutomationMigrateRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new AutomationMigrateResponseJsonConverter());
             _jsonOptions.Converters.Add(new AutomationRefreshContractRequestBodyJsonConverter());
@@ -149,7 +146,6 @@ namespace BeamAutomationClient.Client
             _jsonOptions.Converters.Add(new AutomationUnwrappingTokenInputJsonConverter());
             _jsonOptions.Converters.Add(new AutomationUpdateProfileRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new AutomationUpdateProfileResponseJsonConverter());
-            _jsonOptions.Converters.Add(new AutomationWebhookForGameResponseJsonConverter());
             _jsonOptions.Converters.Add(new AutomationWrappingTokenInputJsonConverter());
             _jsonOptions.Converters.Add(new Check200ResponseJsonConverter());
             _jsonOptions.Converters.Add(new Check200ResponseInfoValueJsonConverter());
@@ -185,8 +181,6 @@ namespace BeamAutomationClient.Client
             _services.AddTransient<IAutomationTradingApi, AutomationTradingApi>();
             _services.AddSingleton<AutomationTransactionsV2ApiEvents>();
             _services.AddTransient<IAutomationTransactionsV2Api, AutomationTransactionsV2Api>();
-            _services.AddSingleton<AutomationWebhooksApiEvents>();
-            _services.AddTransient<IAutomationWebhooksApi, AutomationWebhooksApi>();
         }
 
         /// <summary>
@@ -218,7 +212,6 @@ namespace BeamAutomationClient.Client
             builders.Add(_services.AddHttpClient<IAutomationStatsApi, AutomationStatsApi>(client));
             builders.Add(_services.AddHttpClient<IAutomationTradingApi, AutomationTradingApi>(client));
             builders.Add(_services.AddHttpClient<IAutomationTransactionsV2Api, AutomationTransactionsV2Api>(client));
-            builders.Add(_services.AddHttpClient<IAutomationWebhooksApi, AutomationWebhooksApi>(client));
             
             if (builder != null)
                 foreach (IHttpClientBuilder instance in builders)

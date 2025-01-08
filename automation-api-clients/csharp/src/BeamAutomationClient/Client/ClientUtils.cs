@@ -136,8 +136,6 @@ namespace BeamAutomationClient.Client
                 return AutomationCommonUserActivityRequestInput.TypesEnumToJsonValue(automationCommonUserActivityRequestInputTypesEnum);
             if (obj is AutomationCreateAssetOfferRequestInputV2.CurrencyEnum automationCreateAssetOfferRequestInputV2CurrencyEnum)
                 return AutomationCreateAssetOfferRequestInputV2.CurrencyEnumToJsonValue(automationCreateAssetOfferRequestInputV2CurrencyEnum);
-            if (obj is AutomationCreateWebhookForGame.EventsEnum automationCreateWebhookForGameEventsEnum)
-                return AutomationCreateWebhookForGame.EventsEnumToJsonValue(automationCreateWebhookForGameEventsEnum);
             if (obj is AutomationGetAllGasUsageResponseChainsInnerPoliciesInnerPolicy.ModelEnum automationGetAllGasUsageResponseChainsInnerPoliciesInnerPolicyModelEnum)
                 return AutomationGetAllGasUsageResponseChainsInnerPoliciesInnerPolicy.ModelEnumToJsonValue(automationGetAllGasUsageResponseChainsInnerPoliciesInnerPolicyModelEnum);
             if (obj is AutomationGetAssetListingsResponseV2DataInner.StatusEnum automationGetAssetListingsResponseV2DataInnerStatusEnum)
@@ -178,8 +176,6 @@ namespace BeamAutomationClient.Client
                 return AutomationGetListedAssetsBodyInputV2.SortByEnumToJsonValue(automationGetListedAssetsBodyInputV2SortByEnum);
             if (obj is AutomationGetListedAssetsBodyInputV2.SortDirectionEnum automationGetListedAssetsBodyInputV2SortDirectionEnum)
                 return AutomationGetListedAssetsBodyInputV2.SortDirectionEnumToJsonValue(automationGetListedAssetsBodyInputV2SortDirectionEnum);
-            if (obj is AutomationGetWebhooksForGameResponseWebhooksInner.EventsEnum automationGetWebhooksForGameResponseWebhooksInnerEventsEnum)
-                return AutomationGetWebhooksForGameResponseWebhooksInner.EventsEnumToJsonValue(automationGetWebhooksForGameResponseWebhooksInnerEventsEnum);
             if (obj is AutomationRegenerateGameApiKeysResponse.PegiContentEnum automationRegenerateGameApiKeysResponsePegiContentEnum)
                 return AutomationRegenerateGameApiKeysResponse.PegiContentEnumToJsonValue(automationRegenerateGameApiKeysResponsePegiContentEnum);
             if (obj is AutomationRegenerateGameApiKeysResponse.PegiRatingEnum automationRegenerateGameApiKeysResponsePegiRatingEnum)
@@ -194,8 +190,6 @@ namespace BeamAutomationClient.Client
                 return AutomationTransactionResponse.StatusEnumToJsonValue(automationTransactionResponseStatusEnum);
             if (obj is AutomationTransactionResponse.TypeEnum automationTransactionResponseTypeEnum)
                 return AutomationTransactionResponse.TypeEnumToJsonValue(automationTransactionResponseTypeEnum);
-            if (obj is AutomationWebhookForGameResponse.EventsEnum automationWebhookForGameResponseEventsEnum)
-                return AutomationWebhookForGameResponse.EventsEnumToJsonValue(automationWebhookForGameResponseEventsEnum);
             if (obj is ICollection collection)
             {
                 List<string?> entries = new();

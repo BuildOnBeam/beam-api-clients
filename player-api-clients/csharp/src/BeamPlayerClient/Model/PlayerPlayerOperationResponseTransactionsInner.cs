@@ -34,28 +34,28 @@ namespace BeamPlayerClient.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="PlayerPlayerOperationResponseTransactionsInner" /> class.
         /// </summary>
-        /// <param name="hash">hash</param>
         /// <param name="id">id</param>
         /// <param name="sponsored">sponsored</param>
         /// <param name="status">status</param>
         /// <param name="actionId">actionId</param>
         /// <param name="data">data</param>
         /// <param name="externalId">externalId</param>
+        /// <param name="hash">hash</param>
         /// <param name="openfortId">openfortId</param>
         /// <param name="operationId">operationId</param>
         /// <param name="signature">signature</param>
         /// <param name="transactionHash">transactionHash</param>
         /// <param name="type">type</param>
         [JsonConstructor]
-        public PlayerPlayerOperationResponseTransactionsInner(string hash, string id, bool sponsored, StatusEnum status, string? actionId = default, Option<Object?> data = default, string? externalId = default, string? openfortId = default, string? operationId = default, string? signature = default, string? transactionHash = default, TypeEnum? type = default)
+        public PlayerPlayerOperationResponseTransactionsInner(string id, bool sponsored, StatusEnum status, string? actionId = default, Option<Object?> data = default, string? externalId = default, Option<string?> hash = default, string? openfortId = default, string? operationId = default, string? signature = default, string? transactionHash = default, TypeEnum? type = default)
         {
-            Hash = hash;
             Id = id;
             Sponsored = sponsored;
             Status = status;
             ActionId = actionId;
             DataOption = data;
             ExternalId = externalId;
+            HashOption = hash;
             OpenfortId = openfortId;
             OperationId = operationId;
             Signature = signature;
@@ -496,12 +496,6 @@ namespace BeamPlayerClient.Model
         public TypeEnum? Type { get; set; }
 
         /// <summary>
-        /// Gets or Sets Hash
-        /// </summary>
-        [JsonPropertyName("hash")]
-        public string Hash { get; set; }
-
-        /// <summary>
         /// Gets or Sets Id
         /// </summary>
         [JsonPropertyName("id")]
@@ -539,6 +533,19 @@ namespace BeamPlayerClient.Model
         public string? ExternalId { get; set; }
 
         /// <summary>
+        /// Used to track the state of Hash
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> HashOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Hash
+        /// </summary>
+        [JsonPropertyName("hash")]
+        public string? Hash { get { return this. HashOption; } set { this.HashOption = new(value); } }
+
+        /// <summary>
         /// Gets or Sets OpenfortId
         /// </summary>
         [JsonPropertyName("openfortId")]
@@ -570,13 +577,13 @@ namespace BeamPlayerClient.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class PlayerPlayerOperationResponseTransactionsInner {\n");
-            sb.Append("  Hash: ").Append(Hash).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Sponsored: ").Append(Sponsored).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  ActionId: ").Append(ActionId).Append("\n");
             sb.Append("  Data: ").Append(Data).Append("\n");
             sb.Append("  ExternalId: ").Append(ExternalId).Append("\n");
+            sb.Append("  Hash: ").Append(Hash).Append("\n");
             sb.Append("  OpenfortId: ").Append(OpenfortId).Append("\n");
             sb.Append("  OperationId: ").Append(OperationId).Append("\n");
             sb.Append("  Signature: ").Append(Signature).Append("\n");
@@ -619,13 +626,13 @@ namespace BeamPlayerClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<string?> hash = default;
             Option<string?> id = default;
             Option<bool?> sponsored = default;
             Option<PlayerPlayerOperationResponseTransactionsInner.StatusEnum?> status = default;
             Option<string?> actionId = default;
             Option<Object?> data = default;
             Option<string?> externalId = default;
+            Option<string?> hash = default;
             Option<string?> openfortId = default;
             Option<string?> operationId = default;
             Option<string?> signature = default;
@@ -647,9 +654,6 @@ namespace BeamPlayerClient.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "hash":
-                            hash = new Option<string?>(utf8JsonReader.GetString()!);
-                            break;
                         case "id":
                             id = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
@@ -671,6 +675,9 @@ namespace BeamPlayerClient.Model
                             break;
                         case "externalId":
                             externalId = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "hash":
+                            hash = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "openfortId":
                             openfortId = new Option<string?>(utf8JsonReader.GetString());
@@ -694,9 +701,6 @@ namespace BeamPlayerClient.Model
                     }
                 }
             }
-
-            if (!hash.IsSet)
-                throw new ArgumentException("Property is required for class PlayerPlayerOperationResponseTransactionsInner.", nameof(hash));
 
             if (!id.IsSet)
                 throw new ArgumentException("Property is required for class PlayerPlayerOperationResponseTransactionsInner.", nameof(id));
@@ -728,9 +732,6 @@ namespace BeamPlayerClient.Model
             if (!type.IsSet)
                 throw new ArgumentException("Property is required for class PlayerPlayerOperationResponseTransactionsInner.", nameof(type));
 
-            if (hash.IsSet && hash.Value == null)
-                throw new ArgumentNullException(nameof(hash), "Property is not nullable for class PlayerPlayerOperationResponseTransactionsInner.");
-
             if (id.IsSet && id.Value == null)
                 throw new ArgumentNullException(nameof(id), "Property is not nullable for class PlayerPlayerOperationResponseTransactionsInner.");
 
@@ -740,7 +741,7 @@ namespace BeamPlayerClient.Model
             if (status.IsSet && status.Value == null)
                 throw new ArgumentNullException(nameof(status), "Property is not nullable for class PlayerPlayerOperationResponseTransactionsInner.");
 
-            return new PlayerPlayerOperationResponseTransactionsInner(hash.Value!, id.Value!, sponsored.Value!.Value!, status.Value!.Value!, actionId.Value!, data, externalId.Value!, openfortId.Value!, operationId.Value!, signature.Value!, transactionHash.Value!, type.Value!);
+            return new PlayerPlayerOperationResponseTransactionsInner(id.Value!, sponsored.Value!.Value!, status.Value!.Value!, actionId.Value!, data, externalId.Value!, hash, openfortId.Value!, operationId.Value!, signature.Value!, transactionHash.Value!, type.Value!);
         }
 
         /// <summary>
@@ -767,13 +768,8 @@ namespace BeamPlayerClient.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(ref Utf8JsonWriter writer, PlayerPlayerOperationResponseTransactionsInner playerPlayerOperationResponseTransactionsInner, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (playerPlayerOperationResponseTransactionsInner.Hash == null)
-                throw new ArgumentNullException(nameof(playerPlayerOperationResponseTransactionsInner.Hash), "Property is required for class PlayerPlayerOperationResponseTransactionsInner.");
-
             if (playerPlayerOperationResponseTransactionsInner.Id == null)
                 throw new ArgumentNullException(nameof(playerPlayerOperationResponseTransactionsInner.Id), "Property is required for class PlayerPlayerOperationResponseTransactionsInner.");
-
-            writer.WriteString("hash", playerPlayerOperationResponseTransactionsInner.Hash);
 
             writer.WriteString("id", playerPlayerOperationResponseTransactionsInner.Id);
 
@@ -798,6 +794,12 @@ namespace BeamPlayerClient.Model
                 writer.WriteString("externalId", playerPlayerOperationResponseTransactionsInner.ExternalId);
             else
                 writer.WriteNull("externalId");
+
+            if (playerPlayerOperationResponseTransactionsInner.HashOption.IsSet)
+                if (playerPlayerOperationResponseTransactionsInner.HashOption.Value != null)
+                    writer.WriteString("hash", playerPlayerOperationResponseTransactionsInner.Hash);
+                else
+                    writer.WriteNull("hash");
 
             if (playerPlayerOperationResponseTransactionsInner.OpenfortId != null)
                 writer.WriteString("openfortId", playerPlayerOperationResponseTransactionsInner.OpenfortId);

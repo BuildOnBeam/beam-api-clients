@@ -8,6 +8,7 @@ export type CreateOnrampRequestInput = {
   tokenAmount?: string;
   fiatAmount?: string;
   paymentCurrency?: string;
+  canChangeAmount?: boolean;
   chainId?: number;
 };
 

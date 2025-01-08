@@ -4606,7 +4606,8 @@
                   "nullable": true
                 },
                 "hash": {
-                  "type": "string"
+                  "type": "string",
+                  "nullable": true
                 },
                 "type": {
                   "type": "string",
@@ -4644,7 +4645,6 @@
                 "openfortId",
                 "sponsored",
                 "actionId",
-                "hash",
                 "type",
                 "externalId",
                 "signature",
@@ -7321,7 +7321,6 @@
             ]
           },
           "tokenAmount": {
-            "default": "100",
             "type": "string"
           },
           "fiatAmount": {
@@ -7330,6 +7329,10 @@
           "paymentCurrency": {
             "default": "USD",
             "type": "string"
+          },
+          "canChangeAmount": {
+            "default": false,
+            "type": "boolean"
           },
           "chainId": {
             "default": 13337,

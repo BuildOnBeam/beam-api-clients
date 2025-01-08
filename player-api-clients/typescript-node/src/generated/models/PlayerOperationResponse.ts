@@ -59,7 +59,7 @@ export type PlayerOperationResponse = {
     openfortId: string | null;
     sponsored: boolean;
     actionId: string | null;
-    hash: string;
+    hash?: string | null;
     type:
       | 'OpenfortTransaction'
       | 'OpenfortReservoirOrder'

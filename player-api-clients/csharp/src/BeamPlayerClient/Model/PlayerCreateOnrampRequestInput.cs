@@ -34,14 +34,16 @@ namespace BeamPlayerClient.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="PlayerCreateOnrampRequestInput" /> class.
         /// </summary>
+        /// <param name="canChangeAmount">canChangeAmount (default to false)</param>
         /// <param name="chainId">chainId (default to 13337)</param>
         /// <param name="fiatAmount">fiatAmount</param>
         /// <param name="paymentCurrency">paymentCurrency (default to &quot;USD&quot;)</param>
         /// <param name="token">token (default to TokenEnum.BEAM)</param>
-        /// <param name="tokenAmount">tokenAmount (default to &quot;100&quot;)</param>
+        /// <param name="tokenAmount">tokenAmount</param>
         [JsonConstructor]
-        public PlayerCreateOnrampRequestInput(Option<long?> chainId = default, Option<string?> fiatAmount = default, Option<string?> paymentCurrency = default, Option<TokenEnum?> token = default, Option<string?> tokenAmount = default)
+        public PlayerCreateOnrampRequestInput(Option<bool?> canChangeAmount = default, Option<long?> chainId = default, Option<string?> fiatAmount = default, Option<string?> paymentCurrency = default, Option<TokenEnum?> token = default, Option<string?> tokenAmount = default)
         {
+            CanChangeAmountOption = canChangeAmount;
             ChainIdOption = chainId;
             FiatAmountOption = fiatAmount;
             PaymentCurrencyOption = paymentCurrency;
@@ -204,6 +206,19 @@ namespace BeamPlayerClient.Model
         public TokenEnum? Token { get { return this.TokenOption; } set { this.TokenOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of CanChangeAmount
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> CanChangeAmountOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets CanChangeAmount
+        /// </summary>
+        [JsonPropertyName("canChangeAmount")]
+        public bool? CanChangeAmount { get { return this. CanChangeAmountOption; } set { this.CanChangeAmountOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of ChainId
         /// </summary>
         [JsonIgnore]
@@ -263,6 +278,7 @@ namespace BeamPlayerClient.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class PlayerCreateOnrampRequestInput {\n");
+            sb.Append("  CanChangeAmount: ").Append(CanChangeAmount).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  FiatAmount: ").Append(FiatAmount).Append("\n");
             sb.Append("  PaymentCurrency: ").Append(PaymentCurrency).Append("\n");
@@ -305,6 +321,7 @@ namespace BeamPlayerClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
+            Option<bool?> canChangeAmount = default;
             Option<long?> chainId = default;
             Option<string?> fiatAmount = default;
             Option<string?> paymentCurrency = default;
@@ -326,6 +343,10 @@ namespace BeamPlayerClient.Model
 
                     switch (localVarJsonPropertyName)
                     {
+                        case "canChangeAmount":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                canChangeAmount = new Option<bool?>(utf8JsonReader.GetBoolean());
+                            break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 chainId = new Option<long?>(utf8JsonReader.GetInt64());
@@ -350,6 +371,9 @@ namespace BeamPlayerClient.Model
                 }
             }
 
+            if (canChangeAmount.IsSet && canChangeAmount.Value == null)
+                throw new ArgumentNullException(nameof(canChangeAmount), "Property is not nullable for class PlayerCreateOnrampRequestInput.");
+
             if (chainId.IsSet && chainId.Value == null)
                 throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class PlayerCreateOnrampRequestInput.");
 
@@ -365,7 +389,7 @@ namespace BeamPlayerClient.Model
             if (tokenAmount.IsSet && tokenAmount.Value == null)
                 throw new ArgumentNullException(nameof(tokenAmount), "Property is not nullable for class PlayerCreateOnrampRequestInput.");
 
-            return new PlayerCreateOnrampRequestInput(chainId, fiatAmount, paymentCurrency, token, tokenAmount);
+            return new PlayerCreateOnrampRequestInput(canChangeAmount, chainId, fiatAmount, paymentCurrency, token, tokenAmount);
         }
 
         /// <summary>
@@ -400,6 +424,9 @@ namespace BeamPlayerClient.Model
 
             if (playerCreateOnrampRequestInput.TokenAmountOption.IsSet && playerCreateOnrampRequestInput.TokenAmount == null)
                 throw new ArgumentNullException(nameof(playerCreateOnrampRequestInput.TokenAmount), "Property is required for class PlayerCreateOnrampRequestInput.");
+
+            if (playerCreateOnrampRequestInput.CanChangeAmountOption.IsSet)
+                writer.WriteBoolean("canChangeAmount", playerCreateOnrampRequestInput.CanChangeAmountOption.Value!.Value);
 
             if (playerCreateOnrampRequestInput.ChainIdOption.IsSet)
                 writer.WriteNumber("chainId", playerCreateOnrampRequestInput.ChainIdOption.Value!.Value);
