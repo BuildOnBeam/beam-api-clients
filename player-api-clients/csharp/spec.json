@@ -192,7 +192,6 @@
     "/v1/player/assets/users/{entityId}": {
       "post": {
         "operationId": "getUserAssetsForGamePost",
-        "summary": "Get all the assets of a profile (NFT assets, e.g. ERC721 / ERC1155)",
         "parameters": [
           {
             "name": "entityId",
@@ -245,20 +244,20 @@
             }
           }
         },
-        "tags": [
-          "Assets"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Get all the assets of a profile (NFT assets, e.g. ERC721 / ERC1155)",
+        "tags": [
+          "Assets"
         ]
       }
     },
     "/v1/player/assets/users/{entityId}/currencies": {
       "get": {
         "operationId": "getUserCurrencies",
-        "summary": "Get all the currencies owned by an account (ERC20)",
         "parameters": [
           {
             "name": "entityId",
@@ -310,20 +309,20 @@
             }
           }
         },
-        "tags": [
-          "Assets"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Get all the currencies owned by an account (ERC20)",
+        "tags": [
+          "Assets"
         ]
       }
     },
     "/v1/player/assets/users/{entityId}/native": {
       "get": {
         "operationId": "getUserNativeCurrency",
-        "summary": "Get the native token balance",
         "parameters": [
           {
             "name": "entityId",
@@ -375,20 +374,20 @@
             }
           }
         },
-        "tags": [
-          "Assets"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Get the native token balance",
+        "tags": [
+          "Assets"
         ]
       }
     },
     "/v1/player/assets/users/{entityId}/transfer-asset": {
       "post": {
         "operationId": "TransferAsset",
-        "summary": "Transfer an asset (NFT assets, ERC721 / ERC1155)",
         "parameters": [
           {
             "name": "entityId",
@@ -441,20 +440,20 @@
             }
           }
         },
-        "tags": [
-          "Assets"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Transfer an asset (NFT assets, ERC721 / ERC1155)",
+        "tags": [
+          "Assets"
         ]
       }
     },
     "/v1/player/assets/users/{entityId}/transfer-token": {
       "post": {
         "operationId": "TransferToken",
-        "summary": "Transfer a token (token assets, ERC20)",
         "parameters": [
           {
             "name": "entityId",
@@ -507,20 +506,20 @@
             }
           }
         },
-        "tags": [
-          "Assets"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Transfer a token (token assets, ERC20)",
+        "tags": [
+          "Assets"
         ]
       }
     },
     "/v1/player/assets/users/{entityId}/transfer-native": {
       "post": {
         "operationId": "TransferNativeToken",
-        "summary": "Transfer the native token",
         "parameters": [
           {
             "name": "entityId",
@@ -573,20 +572,20 @@
             }
           }
         },
-        "tags": [
-          "Assets"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Transfer the native token",
+        "tags": [
+          "Assets"
         ]
       }
     },
     "/v1/player/assets/{assetAddress}/assets": {
       "post": {
         "operationId": "getAssetsForContract",
-        "summary": "Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155)",
         "parameters": [
           {
             "name": "assetAddress",
@@ -639,20 +638,20 @@
             }
           }
         },
-        "tags": [
-          "Assets"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155)",
+        "tags": [
+          "Assets"
         ]
       }
     },
     "/v1/player/assets/{assetAddress}/assets/{assetId}": {
       "get": {
         "operationId": "getAsset",
-        "summary": "Get a single NFT (e.g. ERC721 / ERC1155)",
         "parameters": [
           {
             "name": "chainId",
@@ -730,20 +729,20 @@
             }
           }
         },
-        "tags": [
-          "Assets"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Get a single NFT (e.g. ERC721 / ERC1155)",
+        "tags": [
+          "Assets"
         ]
       }
     },
     "/v1/player/assets/{assetAddress}/attributes": {
       "get": {
         "operationId": "getAttributes",
-        "summary": "",
         "parameters": [
           {
             "name": "assetAddress",
@@ -795,20 +794,20 @@
             }
           }
         },
-        "tags": [
-          "Assets"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "",
+        "tags": [
+          "Assets"
         ]
       }
     },
     "/v1/player/assets/{assetAddress}/owners": {
       "get": {
         "operationId": "getOwners",
-        "summary": "",
         "parameters": [
           {
             "name": "assetAddress",
@@ -878,20 +877,20 @@
             }
           }
         },
-        "tags": [
-          "Assets"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "",
+        "tags": [
+          "Assets"
         ]
       }
     },
     "/v1/player/assets/{assetAddress}/owners/{ownerAddress}/assets": {
       "post": {
         "operationId": "getOwnerAssets",
-        "summary": "",
         "parameters": [
           {
             "name": "assetAddress",
@@ -952,20 +951,20 @@
             }
           }
         },
-        "tags": [
-          "Assets"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "",
+        "tags": [
+          "Assets"
         ]
       }
     },
     "/v1/player/marketplace": {
       "post": {
         "operationId": "getListedAssets",
-        "summary": "Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155)",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -1009,20 +1008,20 @@
             }
           }
         },
-        "tags": [
-          "Marketplace"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155)",
+        "tags": [
+          "Marketplace"
         ]
       }
     },
     "/v1/player/marketplace/users/{entityId}": {
       "post": {
         "operationId": "getListedAssetsForUser",
-        "summary": "Get all the assets listed by a profile (NFT assets, e.g. ERC721 / ERC1155)",
         "parameters": [
           {
             "name": "entityId",
@@ -1075,20 +1074,20 @@
             }
           }
         },
-        "tags": [
-          "Marketplace"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Get all the assets listed by a profile (NFT assets, e.g. ERC721 / ERC1155)",
+        "tags": [
+          "Marketplace"
         ]
       }
     },
     "/v1/player/marketplace/users/{entityId}/listing": {
       "post": {
         "operationId": "listAsset",
-        "summary": "List an asset for sale",
         "parameters": [
           {
             "name": "entityId",
@@ -1141,20 +1140,20 @@
             }
           }
         },
-        "tags": [
-          "Marketplace"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "List an asset for sale",
+        "tags": [
+          "Marketplace"
         ]
       }
     },
     "/v1/player/marketplace/users/{entityId}/listing/{orderId}": {
       "post": {
         "operationId": "buyListedAsset",
-        "summary": "Buy listed asset",
         "parameters": [
           {
             "name": "entityId",
@@ -1215,18 +1214,18 @@
             }
           }
         },
-        "tags": [
-          "Marketplace"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Buy listed asset",
+        "tags": [
+          "Marketplace"
         ]
       },
       "delete": {
         "operationId": "cancelListing",
-        "summary": "Cancel asset listing",
         "parameters": [
           {
             "name": "chainId",
@@ -1296,20 +1295,20 @@
             }
           }
         },
-        "tags": [
-          "Marketplace"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Cancel asset listing",
+        "tags": [
+          "Marketplace"
         ]
       }
     },
     "/v1/player/marketplace/users/{entityId}/offers": {
       "post": {
         "operationId": "createAssetOffer",
-        "summary": "Make an offer for an asset",
         "parameters": [
           {
             "name": "entityId",
@@ -1362,18 +1361,18 @@
             }
           }
         },
-        "tags": [
-          "Marketplace"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Make an offer for an asset",
+        "tags": [
+          "Marketplace"
         ]
       },
       "get": {
         "operationId": "getUserOffers",
-        "summary": "Get all offers that a user created",
         "parameters": [
           {
             "name": "chainId",
@@ -1433,20 +1432,20 @@
             }
           }
         },
-        "tags": [
-          "Marketplace"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Get all offers that a user created",
+        "tags": [
+          "Marketplace"
         ]
       }
     },
     "/v1/player/marketplace/users/{entityId}/offers/asset/{assetAddress}/{assetId}": {
       "get": {
         "operationId": "getUserAssetOffers",
-        "summary": "Get all asset offers that a user created for a specific asset",
         "parameters": [
           {
             "name": "entityId",
@@ -1522,20 +1521,20 @@
             }
           }
         },
-        "tags": [
-          "Marketplace"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Get all asset offers that a user created for a specific asset",
+        "tags": [
+          "Marketplace"
         ]
       }
     },
     "/v1/player/marketplace/users/{entityId}/offers/{offerId}/accept": {
       "post": {
         "operationId": "acceptAssetOffer",
-        "summary": "Accept an offer for an asset",
         "parameters": [
           {
             "name": "entityId",
@@ -1596,20 +1595,20 @@
             }
           }
         },
-        "tags": [
-          "Marketplace"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Accept an offer for an asset",
+        "tags": [
+          "Marketplace"
         ]
       }
     },
     "/v1/player/marketplace/users/{entityId}/offers/{offerId}": {
       "delete": {
         "operationId": "cancelAssetOffer",
-        "summary": "Cancel an offer for an asset",
         "parameters": [
           {
             "name": "entityId",
@@ -1670,20 +1669,20 @@
             }
           }
         },
-        "tags": [
-          "Marketplace"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Cancel an offer for an asset",
+        "tags": [
+          "Marketplace"
         ]
       }
     },
     "/v1/player/marketplace/offers/asset/{assetAddress}/{assetId}": {
       "get": {
         "operationId": "getAssetOffers",
-        "summary": "Get all offers for an asset",
         "parameters": [
           {
             "name": "assetAddress",
@@ -1751,20 +1750,20 @@
             }
           }
         },
-        "tags": [
-          "Marketplace"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Get all offers for an asset",
+        "tags": [
+          "Marketplace"
         ]
       }
     },
     "/v1/player/marketplace/chain-currencies/{chainId}": {
       "get": {
         "operationId": "getChainCurrencies",
-        "summary": "Get available currencies for given chain",
         "parameters": [
           {
             "name": "chainId",
@@ -1808,20 +1807,20 @@
             }
           }
         },
-        "tags": [
-          "Marketplace"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Get available currencies for given chain",
+        "tags": [
+          "Marketplace"
         ]
       }
     },
     "/v1/player/marketplace/refresh/token": {
       "post": {
         "operationId": "refreshToken",
-        "summary": "Schedule a token refresh in the indexer",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -1858,20 +1857,20 @@
             }
           }
         },
-        "tags": [
-          "Marketplace"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Schedule a token refresh in the indexer",
+        "tags": [
+          "Marketplace"
         ]
       }
     },
     "/v1/player/marketplace/refresh/contract": {
       "post": {
         "operationId": "refreshContract",
-        "summary": "Schedule a contract refresh in the indexer",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -1908,20 +1907,20 @@
             }
           }
         },
-        "tags": [
-          "Marketplace"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Schedule a contract refresh in the indexer",
+        "tags": [
+          "Marketplace"
         ]
       }
     },
     "/v1/player/transactions": {
       "get": {
         "operationId": "getTransactions",
-        "summary": "Get a paginated list of transactions from your game",
         "parameters": [
           {
             "name": "limit",
@@ -1974,20 +1973,20 @@
             }
           }
         },
-        "tags": [
-          "Transactions"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Get a paginated list of transactions from your game",
+        "tags": [
+          "Transactions"
         ]
       }
     },
     "/v1/player/transactions/{transactionId}": {
       "get": {
         "operationId": "getTransaction",
-        "summary": "Getting a transaction",
         "parameters": [
           {
             "name": "transactionId",
@@ -2030,20 +2029,20 @@
             }
           }
         },
-        "tags": [
-          "Transactions"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Getting a transaction",
+        "tags": [
+          "Transactions"
         ]
       }
     },
     "/v1/player/transactions/users/{entityId}": {
       "get": {
         "operationId": "getUserTransactions",
-        "summary": "Get a paginated list of transactions created on behalf of a user",
         "parameters": [
           {
             "name": "entityId",
@@ -2104,18 +2103,18 @@
             }
           }
         },
-        "tags": [
-          "Transactions"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Get a paginated list of transactions created on behalf of a user",
+        "tags": [
+          "Transactions"
         ]
       },
       "post": {
         "operationId": "createUserTransaction",
-        "summary": "Creating a new transaction on behalf of a user",
         "parameters": [
           {
             "name": "entityId",
@@ -2168,20 +2167,20 @@
             }
           }
         },
-        "tags": [
-          "Transactions"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Creating a new transaction on behalf of a user",
+        "tags": [
+          "Transactions"
         ]
       }
     },
     "/v1/player/users": {
       "get": {
         "operationId": "getAllUsers",
-        "summary": "Returns a list of users",
         "parameters": [
           {
             "name": "limit",
@@ -2234,20 +2233,20 @@
             }
           }
         },
-        "tags": [
-          "Users"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Returns a list of users",
+        "tags": [
+          "Users"
         ]
       }
     },
     "/v1/player/users/{entityId}": {
       "get": {
         "operationId": "getUser",
-        "summary": "Returns a particular user",
         "parameters": [
           {
             "name": "entityId",
@@ -2290,18 +2289,18 @@
             }
           }
         },
-        "tags": [
-          "Users"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Returns a particular user",
+        "tags": [
+          "Users"
         ]
       },
       "patch": {
         "operationId": "updateUser",
-        "summary": "Updates entityId for the user",
         "parameters": [
           {
             "name": "entityId",
@@ -2354,18 +2353,18 @@
             }
           }
         },
-        "tags": [
-          "Users"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Updates entityId for the user",
+        "tags": [
+          "Users"
         ]
       },
       "delete": {
         "operationId": "unlinkUser",
-        "summary": "Unlinks an entity ID from a user",
         "parameters": [
           {
             "name": "entityId",
@@ -2408,20 +2407,20 @@
             }
           }
         },
-        "tags": [
-          "Users"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Unlinks an entity ID from a user",
+        "tags": [
+          "Users"
         ]
       }
     },
     "/v1/player/operation/{opId}": {
       "get": {
         "operationId": "getOperation",
-        "summary": "Returns operation data for given id. Used by Game SDKs to get transaction results.",
         "parameters": [
           {
             "name": "opId",
@@ -2464,18 +2463,18 @@
             }
           }
         },
-        "tags": [
-          "Operation"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Returns operation data for given id. Used by Game SDKs to get transaction results.",
+        "tags": [
+          "Operation"
         ]
       },
       "patch": {
         "operationId": "processOperation",
-        "summary": "Updates operation result for given id",
         "parameters": [
           {
             "name": "opId",
@@ -2528,18 +2527,18 @@
             }
           }
         },
-        "tags": [
-          "Operation"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Updates operation result for given id",
+        "tags": [
+          "Operation"
         ]
       },
       "delete": {
         "operationId": "deleteOperation",
-        "summary": "Delete an operation",
         "parameters": [
           {
             "name": "opId",
@@ -2582,20 +2581,20 @@
             }
           }
         },
-        "tags": [
-          "Operation"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Delete an operation",
+        "tags": [
+          "Operation"
         ]
       }
     },
     "/v1/player/operation/{opId}/execute": {
       "post": {
         "operationId": "executeSignedOperation",
-        "summary": "Executes operation for given id",
         "parameters": [
           {
             "name": "opId",
@@ -2638,20 +2637,20 @@
             }
           }
         },
-        "tags": [
-          "Operation"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Executes operation for given id",
+        "tags": [
+          "Operation"
         ]
       }
     },
     "/v1/player/exchange/quote/input": {
       "get": {
         "operationId": "getQuoteForInput",
-        "summary": "Returns the maximum necessary input amount for a token trade, given a desired output amount",
         "parameters": [
           {
             "name": "tokenIn",
@@ -2719,20 +2718,20 @@
             }
           }
         },
-        "tags": [
-          "Exchange"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Returns the maximum necessary input amount for a token trade, given a desired output amount",
+        "tags": [
+          "Exchange"
         ]
       }
     },
     "/v1/player/exchange/quote/output": {
       "get": {
         "operationId": "getQuoteForOutput",
-        "summary": "Returns the minimum expected output amount for a token trade, given an input amount",
         "parameters": [
           {
             "name": "tokenIn",
@@ -2800,20 +2799,20 @@
             }
           }
         },
-        "tags": [
-          "Exchange"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Returns the minimum expected output amount for a token trade, given an input amount",
+        "tags": [
+          "Exchange"
         ]
       }
     },
     "/v1/player/exchange/users/{entityId}/convert/input": {
       "post": {
         "operationId": "convertInput",
-        "summary": "Swap an exact amount of `tokenIn` for a minimum amount of `tokenOut`",
         "parameters": [
           {
             "name": "entityId",
@@ -2866,20 +2865,20 @@
             }
           }
         },
-        "tags": [
-          "Exchange"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Swap an exact amount of `tokenIn` for a minimum amount of `tokenOut`",
+        "tags": [
+          "Exchange"
         ]
       }
     },
     "/v1/player/exchange/users/{entityId}/convert/output": {
       "post": {
         "operationId": "convertToOutput",
-        "summary": "Swap a maximum amount of `tokenIn` for an exact amount of `tokenOut`",
         "parameters": [
           {
             "name": "entityId",
@@ -2932,20 +2931,20 @@
             }
           }
         },
-        "tags": [
-          "Exchange"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Swap a maximum amount of `tokenIn` for an exact amount of `tokenOut`",
+        "tags": [
+          "Exchange"
         ]
       }
     },
     "/v1/player/exchange/users/{entityId}/native/wrap": {
       "post": {
         "operationId": "wrapNative",
-        "summary": "Wrap an amount of native token to wrapped native token",
         "parameters": [
           {
             "name": "entityId",
@@ -2998,20 +2997,20 @@
             }
           }
         },
-        "tags": [
-          "Exchange"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Wrap an amount of native token to wrapped native token",
+        "tags": [
+          "Exchange"
         ]
       }
     },
     "/v1/player/exchange/users/{entityId}/native/unwrap": {
       "post": {
         "operationId": "unwrapNative",
-        "summary": "Unwrap an amount of wrapped to native token",
         "parameters": [
           {
             "name": "entityId",
@@ -3064,20 +3063,20 @@
             }
           }
         },
-        "tags": [
-          "Exchange"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Unwrap an amount of wrapped to native token",
+        "tags": [
+          "Exchange"
         ]
       }
     },
     "/v1/player/sessions/users/{entityId}/request": {
       "post": {
         "operationId": "createSessionRequest",
-        "summary": "",
         "parameters": [
           {
             "name": "entityId",
@@ -3130,20 +3129,20 @@
             }
           }
         },
-        "tags": [
-          "Sessions"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "",
+        "tags": [
+          "Sessions"
         ]
       }
     },
     "/v1/player/sessions/users/{entityId}/revoke": {
       "post": {
         "operationId": "revokeSession",
-        "summary": "",
         "parameters": [
           {
             "name": "entityId",
@@ -3196,20 +3195,20 @@
             }
           }
         },
-        "tags": [
-          "Sessions"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "",
+        "tags": [
+          "Sessions"
         ]
       }
     },
     "/v1/player/sessions/request/{requestId}": {
       "get": {
         "operationId": "getSessionRequest",
-        "summary": "",
         "parameters": [
           {
             "name": "requestId",
@@ -3252,20 +3251,20 @@
             }
           }
         },
-        "tags": [
-          "Sessions"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "",
+        "tags": [
+          "Sessions"
         ]
       }
     },
     "/v1/player/sessions/users/{entityId}/active": {
       "get": {
         "operationId": "getAllActiveSessions",
-        "summary": "",
         "parameters": [
           {
             "name": "entityId",
@@ -3317,22 +3316,21 @@
             }
           }
         },
-        "tags": [
-          "Sessions"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "",
+        "tags": [
+          "Sessions"
         ]
       }
     },
     "/v1/player/sessions/users/{entityId}/{accountAddress}/active": {
       "get": {
-        "operationId": "getActiveSession",
-        "x-sunset": "2025-03-01",
-        "summary": "",
         "deprecated": true,
+        "operationId": "getActiveSession",
         "parameters": [
           {
             "name": "entityId",
@@ -3392,20 +3390,21 @@
             }
           }
         },
-        "tags": [
-          "Sessions"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
-        ]
+        ],
+        "summary": "",
+        "tags": [
+          "Sessions"
+        ],
+        "x-sunset": "2025-03-01"
       }
     },
     "/v2/player/sessions/users/{entityId}/{accountAddress}/active": {
       "get": {
         "operationId": "getActiveSessionV2",
-        "summary": "",
         "parameters": [
           {
             "name": "entityId",
@@ -3465,20 +3464,20 @@
             }
           }
         },
-        "tags": [
-          "Sessions"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "",
+        "tags": [
+          "Sessions"
         ]
       }
     },
     "/v1/connection/request": {
       "post": {
         "operationId": "createConnectionRequest",
-        "summary": "",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -3522,20 +3521,20 @@
             }
           }
         },
-        "tags": [
-          "Connector"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "",
+        "tags": [
+          "Connector"
         ]
       }
     },
     "/v1/connection/request/{requestId}": {
       "get": {
         "operationId": "getConnectionRequest",
-        "summary": "",
         "parameters": [
           {
             "name": "requestId",
@@ -3578,20 +3577,20 @@
             }
           }
         },
-        "tags": [
-          "Connector"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "",
+        "tags": [
+          "Connector"
         ]
       }
     },
     "/v1/player/stats/{assetAddress}": {
       "post": {
         "operationId": "getContractStats",
-        "summary": "Get contract stats",
         "parameters": [
           {
             "name": "assetAddress",
@@ -3644,20 +3643,20 @@
             }
           }
         },
-        "tags": [
-          "Stats"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Get contract stats",
+        "tags": [
+          "Stats"
         ]
       }
     },
     "/v1/player/stats/{assetAddress}/assets/{assetId}": {
       "post": {
         "operationId": "getAssetStats",
-        "summary": "Get asset stats",
         "parameters": [
           {
             "name": "assetAddress",
@@ -3718,20 +3717,20 @@
             }
           }
         },
-        "tags": [
-          "Stats"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Get asset stats",
+        "tags": [
+          "Stats"
         ]
       }
     },
     "/v1/player/activity/users/{entityId}": {
       "post": {
         "operationId": "getUserActivity",
-        "summary": "Get user activity",
         "parameters": [
           {
             "name": "entityId",
@@ -3784,20 +3783,20 @@
             }
           }
         },
-        "tags": [
-          "Activity"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Get user activity",
+        "tags": [
+          "Activity"
         ]
       }
     },
     "/v1/player/activity/assets/{assetAddress}": {
       "post": {
         "operationId": "getContractActivity",
-        "summary": "Get contract activity",
         "parameters": [
           {
             "name": "assetAddress",
@@ -3850,20 +3849,20 @@
             }
           }
         },
-        "tags": [
-          "Activity"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Get contract activity",
+        "tags": [
+          "Activity"
         ]
       }
     },
     "/v1/player/activity/assets/{assetAddress}/asset/{assetId}": {
       "post": {
         "operationId": "getAssetActivity",
-        "summary": "Get asset activity",
         "parameters": [
           {
             "name": "assetAddress",
@@ -3924,20 +3923,20 @@
             }
           }
         },
-        "tags": [
-          "Activity"
-        ],
         "security": [
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "Get asset activity",
+        "tags": [
+          "Activity"
         ]
       }
     },
     "/v1/player/ramp/on/{entityId}": {
       "post": {
         "operationId": "createOnrampRequest",
-        "summary": "",
         "parameters": [
           {
             "name": "entityId",
@@ -3990,9 +3989,6 @@
             }
           }
         },
-        "tags": [
-          "Ramp"
-        ],
         "security": [
           {
             "beam-api-key": []
@@ -4000,6 +3996,10 @@
           {
             "beam-api-key": []
           }
+        ],
+        "summary": "",
+        "tags": [
+          "Ramp"
         ]
       }
     }
@@ -4395,7 +4395,20 @@
             "enum": [
               "SignOnly",
               "Execute"
-            ]
+            ],
+            "description": "Operation processing type. If Execute is used, Operation will be executed automatically right after User signs it. If you prefer to have more control, use SignOnly then Process it using ProcessOperation."
+          },
+          "authProvider": {
+            "default": "Any",
+            "type": "string",
+            "enum": [
+              "Any",
+              "Google",
+              "Discord",
+              "Apple"
+            ],
+            "nullable": true,
+            "description": "Auth Provider for the user to use. If it's Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI."
           }
         },
         "required": [
@@ -4420,6 +4433,15 @@
             "enum": [
               "SignOnly",
               "Execute"
+            ]
+          },
+          "authProvider": {
+            "type": "string",
+            "enum": [
+              "Any",
+              "Google",
+              "Discord",
+              "Apple"
             ]
           },
           "id": {
@@ -4662,6 +4684,7 @@
         "required": [
           "status",
           "processing",
+          "authProvider",
           "id",
           "createdAt",
           "updatedAt",
@@ -4713,7 +4736,20 @@
             "enum": [
               "SignOnly",
               "Execute"
-            ]
+            ],
+            "description": "Operation processing type. If Execute is used, Operation will be executed automatically right after User signs it. If you prefer to have more control, use SignOnly then Process it using ProcessOperation."
+          },
+          "authProvider": {
+            "default": "Any",
+            "type": "string",
+            "enum": [
+              "Any",
+              "Google",
+              "Discord",
+              "Apple"
+            ],
+            "nullable": true,
+            "description": "Auth Provider for the user to use. If it's Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI."
           }
         },
         "required": [
@@ -4758,7 +4794,20 @@
             "enum": [
               "SignOnly",
               "Execute"
-            ]
+            ],
+            "description": "Operation processing type. If Execute is used, Operation will be executed automatically right after User signs it. If you prefer to have more control, use SignOnly then Process it using ProcessOperation."
+          },
+          "authProvider": {
+            "default": "Any",
+            "type": "string",
+            "enum": [
+              "Any",
+              "Google",
+              "Discord",
+              "Apple"
+            ],
+            "nullable": true,
+            "description": "Auth Provider for the user to use. If it's Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI."
           }
         },
         "required": [
@@ -5594,7 +5643,20 @@
             "enum": [
               "SignOnly",
               "Execute"
-            ]
+            ],
+            "description": "Operation processing type. If Execute is used, Operation will be executed automatically right after User signs it. If you prefer to have more control, use SignOnly then Process it using ProcessOperation."
+          },
+          "authProvider": {
+            "default": "Any",
+            "type": "string",
+            "enum": [
+              "Any",
+              "Google",
+              "Discord",
+              "Apple"
+            ],
+            "nullable": true,
+            "description": "Auth Provider for the user to use. If it's Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI."
           }
         },
         "required": [
@@ -5636,7 +5698,20 @@
             "enum": [
               "SignOnly",
               "Execute"
-            ]
+            ],
+            "description": "Operation processing type. If Execute is used, Operation will be executed automatically right after User signs it. If you prefer to have more control, use SignOnly then Process it using ProcessOperation."
+          },
+          "authProvider": {
+            "default": "Any",
+            "type": "string",
+            "enum": [
+              "Any",
+              "Google",
+              "Discord",
+              "Apple"
+            ],
+            "nullable": true,
+            "description": "Auth Provider for the user to use. If it's Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI."
           }
         },
         "required": [
@@ -5666,7 +5741,20 @@
             "enum": [
               "SignOnly",
               "Execute"
-            ]
+            ],
+            "description": "Operation processing type. If Execute is used, Operation will be executed automatically right after User signs it. If you prefer to have more control, use SignOnly then Process it using ProcessOperation."
+          },
+          "authProvider": {
+            "default": "Any",
+            "type": "string",
+            "enum": [
+              "Any",
+              "Google",
+              "Discord",
+              "Apple"
+            ],
+            "nullable": true,
+            "description": "Auth Provider for the user to use. If it's Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI."
           }
         }
       },
@@ -5716,7 +5804,20 @@
             "enum": [
               "SignOnly",
               "Execute"
-            ]
+            ],
+            "description": "Operation processing type. If Execute is used, Operation will be executed automatically right after User signs it. If you prefer to have more control, use SignOnly then Process it using ProcessOperation."
+          },
+          "authProvider": {
+            "default": "Any",
+            "type": "string",
+            "enum": [
+              "Any",
+              "Google",
+              "Discord",
+              "Apple"
+            ],
+            "nullable": true,
+            "description": "Auth Provider for the user to use. If it's Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI."
           }
         },
         "required": [
@@ -5758,7 +5859,20 @@
             "enum": [
               "SignOnly",
               "Execute"
-            ]
+            ],
+            "description": "Operation processing type. If Execute is used, Operation will be executed automatically right after User signs it. If you prefer to have more control, use SignOnly then Process it using ProcessOperation."
+          },
+          "authProvider": {
+            "default": "Any",
+            "type": "string",
+            "enum": [
+              "Any",
+              "Google",
+              "Discord",
+              "Apple"
+            ],
+            "nullable": true,
+            "description": "Auth Provider for the user to use. If it's Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI."
           }
         },
         "required": [
@@ -5788,7 +5902,20 @@
             "enum": [
               "SignOnly",
               "Execute"
-            ]
+            ],
+            "description": "Operation processing type. If Execute is used, Operation will be executed automatically right after User signs it. If you prefer to have more control, use SignOnly then Process it using ProcessOperation."
+          },
+          "authProvider": {
+            "default": "Any",
+            "type": "string",
+            "enum": [
+              "Any",
+              "Google",
+              "Discord",
+              "Apple"
+            ],
+            "nullable": true,
+            "description": "Auth Provider for the user to use. If it's Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI."
           },
           "chainId": {
             "default": 13337,
@@ -6293,7 +6420,20 @@
             "enum": [
               "SignOnly",
               "Execute"
-            ]
+            ],
+            "description": "Operation processing type. If Execute is used, Operation will be executed automatically right after User signs it. If you prefer to have more control, use SignOnly then Process it using ProcessOperation."
+          },
+          "authProvider": {
+            "default": "Any",
+            "type": "string",
+            "enum": [
+              "Any",
+              "Google",
+              "Discord",
+              "Apple"
+            ],
+            "nullable": true,
+            "description": "Auth Provider for the user to use. If it's Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI."
           }
         },
         "required": [
@@ -6625,7 +6765,20 @@
             "enum": [
               "SignOnly",
               "Execute"
-            ]
+            ],
+            "description": "Operation processing type. If Execute is used, Operation will be executed automatically right after User signs it. If you prefer to have more control, use SignOnly then Process it using ProcessOperation."
+          },
+          "authProvider": {
+            "default": "Any",
+            "type": "string",
+            "enum": [
+              "Any",
+              "Google",
+              "Discord",
+              "Apple"
+            ],
+            "nullable": true,
+            "description": "Auth Provider for the user to use. If it's Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI."
           }
         },
         "required": [
@@ -6666,7 +6819,20 @@
             "enum": [
               "SignOnly",
               "Execute"
-            ]
+            ],
+            "description": "Operation processing type. If Execute is used, Operation will be executed automatically right after User signs it. If you prefer to have more control, use SignOnly then Process it using ProcessOperation."
+          },
+          "authProvider": {
+            "default": "Any",
+            "type": "string",
+            "enum": [
+              "Any",
+              "Google",
+              "Discord",
+              "Apple"
+            ],
+            "nullable": true,
+            "description": "Auth Provider for the user to use. If it's Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI."
           }
         },
         "required": [
@@ -6704,7 +6870,20 @@
             "enum": [
               "SignOnly",
               "Execute"
-            ]
+            ],
+            "description": "Operation processing type. If Execute is used, Operation will be executed automatically right after User signs it. If you prefer to have more control, use SignOnly then Process it using ProcessOperation."
+          },
+          "authProvider": {
+            "default": "Any",
+            "type": "string",
+            "enum": [
+              "Any",
+              "Google",
+              "Discord",
+              "Apple"
+            ],
+            "nullable": true,
+            "description": "Auth Provider for the user to use. If it's Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI."
           }
         },
         "required": [
@@ -6721,6 +6900,18 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
+          },
+          "authProvider": {
+            "default": "Any",
+            "type": "string",
+            "enum": [
+              "Any",
+              "Google",
+              "Discord",
+              "Apple"
+            ],
+            "nullable": true,
+            "description": "Auth Provider for the user to use. If it's Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI."
           },
           "chainId": {
             "default": 13337,
@@ -6810,7 +7001,20 @@
             "enum": [
               "SignOnly",
               "Execute"
-            ]
+            ],
+            "description": "Operation processing type. If Execute is used, Operation will be executed automatically right after User signs it. If you prefer to have more control, use SignOnly then Process it using ProcessOperation."
+          },
+          "authProvider": {
+            "default": "Any",
+            "type": "string",
+            "enum": [
+              "Any",
+              "Google",
+              "Discord",
+              "Apple"
+            ],
+            "nullable": true,
+            "description": "Auth Provider for the user to use. If it's Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI."
           }
         },
         "required": [
@@ -6974,6 +7178,18 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 250
+          },
+          "authProvider": {
+            "default": "Any",
+            "type": "string",
+            "enum": [
+              "Any",
+              "Google",
+              "Discord",
+              "Apple"
+            ],
+            "nullable": true,
+            "description": "Auth Provider for the user to use. If it's Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI."
           },
           "chainId": {
             "default": 13337,
@@ -7338,6 +7554,18 @@
             "default": 13337,
             "type": "integer",
             "format": "int64"
+          },
+          "authProvider": {
+            "default": "Any",
+            "type": "string",
+            "enum": [
+              "Any",
+              "Google",
+              "Discord",
+              "Apple"
+            ],
+            "nullable": true,
+            "description": "Auth Provider for the user to use. If it's Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI."
           }
         }
       }

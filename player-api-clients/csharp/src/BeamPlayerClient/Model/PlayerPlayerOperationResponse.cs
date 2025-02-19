@@ -35,6 +35,7 @@ namespace BeamPlayerClient.Model
         /// Initializes a new instance of the <see cref="PlayerPlayerOperationResponse" /> class.
         /// </summary>
         /// <param name="actions">actions</param>
+        /// <param name="authProvider">authProvider</param>
         /// <param name="chainId">chainId</param>
         /// <param name="createdAt">createdAt</param>
         /// <param name="gameId">gameId</param>
@@ -46,9 +47,10 @@ namespace BeamPlayerClient.Model
         /// <param name="userId">userId</param>
         /// <param name="updatedAt">updatedAt</param>
         [JsonConstructor]
-        public PlayerPlayerOperationResponse(List<PlayerOperationAction> actions, long chainId, DateTime createdAt, string gameId, string id, ProcessingEnum processing, StatusEnum status, List<PlayerPlayerOperationResponseTransactionsInner> transactions, string url, string userId, DateTime? updatedAt = default)
+        public PlayerPlayerOperationResponse(List<PlayerOperationAction> actions, AuthProviderEnum authProvider, long chainId, DateTime createdAt, string gameId, string id, ProcessingEnum processing, StatusEnum status, List<PlayerPlayerOperationResponseTransactionsInner> transactions, string url, string userId, DateTime? updatedAt = default)
         {
             Actions = actions;
+            AuthProvider = authProvider;
             ChainId = chainId;
             CreatedAt = createdAt;
             GameId = gameId;
@@ -63,6 +65,219 @@ namespace BeamPlayerClient.Model
         }
 
         partial void OnCreated();
+
+        /// <summary>
+        /// Defines AuthProvider
+        /// </summary>
+        [JsonConverter(typeof(AuthProviderEnumJsonConverter))]
+        public enum AuthProviderEnum
+        {
+            /// <summary>
+            /// Enum Any for value: Any
+            /// </summary>
+            Any = 1,
+
+            /// <summary>
+            /// Enum Google for value: Google
+            /// </summary>
+            Google = 2,
+
+            /// <summary>
+            /// Enum Discord for value: Discord
+            /// </summary>
+            Discord = 3,
+
+            /// <summary>
+            /// Enum Apple for value: Apple
+            /// </summary>
+            Apple = 4
+        }
+
+        /// <summary>
+        /// Returns a <see cref="AuthProviderEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static AuthProviderEnum AuthProviderEnumFromString(string value)
+        {
+            if (value.Equals("Any"))
+                return AuthProviderEnum.Any;
+
+            if (value.Equals("Google"))
+                return AuthProviderEnum.Google;
+
+            if (value.Equals("Discord"))
+                return AuthProviderEnum.Discord;
+
+            if (value.Equals("Apple"))
+                return AuthProviderEnum.Apple;
+
+            throw new NotImplementedException($"Could not convert value to type AuthProviderEnum: '{value}'");
+        }
+
+        /// <summary>
+        /// Returns a <see cref="AuthProviderEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static AuthProviderEnum? AuthProviderEnumFromStringOrDefault(string value)
+        {
+            if (value.Equals("Any"))
+                return AuthProviderEnum.Any;
+
+            if (value.Equals("Google"))
+                return AuthProviderEnum.Google;
+
+            if (value.Equals("Discord"))
+                return AuthProviderEnum.Discord;
+
+            if (value.Equals("Apple"))
+                return AuthProviderEnum.Apple;
+
+            return null;
+        }
+
+        /// <summary>
+        /// Converts the <see cref="AuthProviderEnum"/> to the json value
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static string AuthProviderEnumToJsonValue(AuthProviderEnum value)
+        {
+            if (value == AuthProviderEnum.Any)
+                return "Any";
+
+            if (value == AuthProviderEnum.Google)
+                return "Google";
+
+            if (value == AuthProviderEnum.Discord)
+                return "Discord";
+
+            if (value == AuthProviderEnum.Apple)
+                return "Apple";
+
+            throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Converts <see cref="AuthProviderEnum"/> to and from the JSON value
+        /// </summary>
+        public static class AuthProviderEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="AuthProviderEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static AuthProviderEnum FromString(string value)
+            {
+                    if (value.Equals("Any"))
+                        return AuthProviderEnum.Any;
+
+                    if (value.Equals("Google"))
+                        return AuthProviderEnum.Google;
+
+                    if (value.Equals("Discord"))
+                        return AuthProviderEnum.Discord;
+
+                    if (value.Equals("Apple"))
+                        return AuthProviderEnum.Apple;
+
+                throw new NotImplementedException($"Could not convert value to type AuthProviderEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="AuthProviderEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static AuthProviderEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("Any"))
+                        return AuthProviderEnum.Any;
+
+                    if (value.Equals("Google"))
+                        return AuthProviderEnum.Google;
+
+                    if (value.Equals("Discord"))
+                        return AuthProviderEnum.Discord;
+
+                    if (value.Equals("Apple"))
+                        return AuthProviderEnum.Apple;
+
+                return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="AuthProviderEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(AuthProviderEnum value)
+            {
+                        if (value == AuthProviderEnum.Any)
+                            return "Any";
+
+                        if (value == AuthProviderEnum.Google)
+                            return "Google";
+
+                        if (value == AuthProviderEnum.Discord)
+                            return "Discord";
+
+                        if (value == AuthProviderEnum.Apple)
+                            return "Apple";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="AuthProviderEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class AuthProviderEnumJsonConverter : JsonConverter<AuthProviderEnum>
+        {
+            /// <summary>
+            /// Returns a AuthProviderEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override AuthProviderEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string? rawValue = reader.GetString();
+
+                AuthProviderEnum? result = rawValue == null
+                    ? null
+                    : AuthProviderEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                    return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the AuthProviderEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="authProviderEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, AuthProviderEnum authProviderEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(AuthProviderEnumValueConverter.ToJsonValue(authProviderEnum));
+            }
+        }
+
+        /// <summary>
+        /// Gets or Sets AuthProvider
+        /// </summary>
+        [JsonPropertyName("authProvider")]
+        public AuthProviderEnum AuthProvider { get; set; }
 
         /// <summary>
         /// Defines Processing
@@ -531,6 +746,7 @@ namespace BeamPlayerClient.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class PlayerPlayerOperationResponse {\n");
             sb.Append("  Actions: ").Append(Actions).Append("\n");
+            sb.Append("  AuthProvider: ").Append(AuthProvider).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  GameId: ").Append(GameId).Append("\n");
@@ -589,6 +805,7 @@ namespace BeamPlayerClient.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<List<PlayerOperationAction>?> actions = default;
+            Option<PlayerPlayerOperationResponse.AuthProviderEnum?> authProvider = default;
             Option<long?> chainId = default;
             Option<DateTime?> createdAt = default;
             Option<string?> gameId = default;
@@ -618,6 +835,11 @@ namespace BeamPlayerClient.Model
                         case "actions":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 actions = new Option<List<PlayerOperationAction>?>(JsonSerializer.Deserialize<List<PlayerOperationAction>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
+                        case "authProvider":
+                            string? authProviderRawValue = utf8JsonReader.GetString();
+                            if (authProviderRawValue != null)
+                                authProvider = new Option<PlayerPlayerOperationResponse.AuthProviderEnum?>(PlayerPlayerOperationResponse.AuthProviderEnumFromStringOrDefault(authProviderRawValue));
                             break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
@@ -666,6 +888,9 @@ namespace BeamPlayerClient.Model
             if (!actions.IsSet)
                 throw new ArgumentException("Property is required for class PlayerPlayerOperationResponse.", nameof(actions));
 
+            if (!authProvider.IsSet)
+                throw new ArgumentException("Property is required for class PlayerPlayerOperationResponse.", nameof(authProvider));
+
             if (!chainId.IsSet)
                 throw new ArgumentException("Property is required for class PlayerPlayerOperationResponse.", nameof(chainId));
 
@@ -699,6 +924,9 @@ namespace BeamPlayerClient.Model
             if (actions.IsSet && actions.Value == null)
                 throw new ArgumentNullException(nameof(actions), "Property is not nullable for class PlayerPlayerOperationResponse.");
 
+            if (authProvider.IsSet && authProvider.Value == null)
+                throw new ArgumentNullException(nameof(authProvider), "Property is not nullable for class PlayerPlayerOperationResponse.");
+
             if (chainId.IsSet && chainId.Value == null)
                 throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class PlayerPlayerOperationResponse.");
 
@@ -726,7 +954,7 @@ namespace BeamPlayerClient.Model
             if (userId.IsSet && userId.Value == null)
                 throw new ArgumentNullException(nameof(userId), "Property is not nullable for class PlayerPlayerOperationResponse.");
 
-            return new PlayerPlayerOperationResponse(actions.Value!, chainId.Value!.Value!, createdAt.Value!.Value!, gameId.Value!, id.Value!, processing.Value!.Value!, status.Value!.Value!, transactions.Value!, url.Value!, userId.Value!, updatedAt.Value!);
+            return new PlayerPlayerOperationResponse(actions.Value!, authProvider.Value!.Value!, chainId.Value!.Value!, createdAt.Value!.Value!, gameId.Value!, id.Value!, processing.Value!.Value!, status.Value!.Value!, transactions.Value!, url.Value!, userId.Value!, updatedAt.Value!);
         }
 
         /// <summary>
@@ -773,6 +1001,8 @@ namespace BeamPlayerClient.Model
 
             writer.WritePropertyName("actions");
             JsonSerializer.Serialize(writer, playerPlayerOperationResponse.Actions, jsonSerializerOptions);
+            var authProviderRawValue = PlayerPlayerOperationResponse.AuthProviderEnumToJsonValue(playerPlayerOperationResponse.AuthProvider);
+            writer.WriteString("authProvider", authProviderRawValue);
             writer.WriteNumber("chainId", playerPlayerOperationResponse.ChainId);
 
             writer.WriteString("createdAt", playerPlayerOperationResponse.CreatedAt.ToString(CreatedAtFormat));

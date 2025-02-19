@@ -120,12 +120,20 @@ namespace BeamPlayerClient.Client
                 return boolean
                     ? "true"
                     : "false";
+            if (obj is PlayerAcceptAssetOfferRequestInput.AuthProviderEnum playerAcceptAssetOfferRequestInputAuthProviderEnum)
+                return PlayerAcceptAssetOfferRequestInput.AuthProviderEnumToJsonValue(playerAcceptAssetOfferRequestInputAuthProviderEnum);
             if (obj is PlayerAcceptAssetOfferRequestInput.OperationProcessingEnum playerAcceptAssetOfferRequestInputOperationProcessingEnum)
                 return PlayerAcceptAssetOfferRequestInput.OperationProcessingEnumToJsonValue(playerAcceptAssetOfferRequestInputOperationProcessingEnum);
+            if (obj is PlayerBuyAssetRequestInput.AuthProviderEnum playerBuyAssetRequestInputAuthProviderEnum)
+                return PlayerBuyAssetRequestInput.AuthProviderEnumToJsonValue(playerBuyAssetRequestInputAuthProviderEnum);
             if (obj is PlayerBuyAssetRequestInput.OperationProcessingEnum playerBuyAssetRequestInputOperationProcessingEnum)
                 return PlayerBuyAssetRequestInput.OperationProcessingEnumToJsonValue(playerBuyAssetRequestInputOperationProcessingEnum);
+            if (obj is PlayerCancelAssetListingRequestInput.AuthProviderEnum playerCancelAssetListingRequestInputAuthProviderEnum)
+                return PlayerCancelAssetListingRequestInput.AuthProviderEnumToJsonValue(playerCancelAssetListingRequestInputAuthProviderEnum);
             if (obj is PlayerCancelAssetListingRequestInput.OperationProcessingEnum playerCancelAssetListingRequestInputOperationProcessingEnum)
                 return PlayerCancelAssetListingRequestInput.OperationProcessingEnumToJsonValue(playerCancelAssetListingRequestInputOperationProcessingEnum);
+            if (obj is PlayerCancelAssetOfferRequestInput.AuthProviderEnum playerCancelAssetOfferRequestInputAuthProviderEnum)
+                return PlayerCancelAssetOfferRequestInput.AuthProviderEnumToJsonValue(playerCancelAssetOfferRequestInputAuthProviderEnum);
             if (obj is PlayerCancelAssetOfferRequestInput.OperationProcessingEnum playerCancelAssetOfferRequestInputOperationProcessingEnum)
                 return PlayerCancelAssetOfferRequestInput.OperationProcessingEnumToJsonValue(playerCancelAssetOfferRequestInputOperationProcessingEnum);
             if (obj is PlayerCommonActivityResponseDataInner.TypeEnum playerCommonActivityResponseDataInnerTypeEnum)
@@ -138,20 +146,32 @@ namespace BeamPlayerClient.Client
                 return PlayerCommonUserActivityRequestInput.TypesEnumToJsonValue(playerCommonUserActivityRequestInputTypesEnum);
             if (obj is PlayerConfirmOperationRequest.StatusEnum playerConfirmOperationRequestStatusEnum)
                 return PlayerConfirmOperationRequest.StatusEnumToJsonValue(playerConfirmOperationRequestStatusEnum);
+            if (obj is PlayerConvertTokenRequestInput.AuthProviderEnum playerConvertTokenRequestInputAuthProviderEnum)
+                return PlayerConvertTokenRequestInput.AuthProviderEnumToJsonValue(playerConvertTokenRequestInputAuthProviderEnum);
             if (obj is PlayerConvertTokenRequestInput.OperationProcessingEnum playerConvertTokenRequestInputOperationProcessingEnum)
                 return PlayerConvertTokenRequestInput.OperationProcessingEnumToJsonValue(playerConvertTokenRequestInputOperationProcessingEnum);
+            if (obj is PlayerCreateAssetOfferRequestInput.AuthProviderEnum playerCreateAssetOfferRequestInputAuthProviderEnum)
+                return PlayerCreateAssetOfferRequestInput.AuthProviderEnumToJsonValue(playerCreateAssetOfferRequestInputAuthProviderEnum);
             if (obj is PlayerCreateAssetOfferRequestInput.CurrencyEnum playerCreateAssetOfferRequestInputCurrencyEnum)
                 return PlayerCreateAssetOfferRequestInput.CurrencyEnumToJsonValue(playerCreateAssetOfferRequestInputCurrencyEnum);
             if (obj is PlayerCreateAssetOfferRequestInput.OperationProcessingEnum playerCreateAssetOfferRequestInputOperationProcessingEnum)
                 return PlayerCreateAssetOfferRequestInput.OperationProcessingEnumToJsonValue(playerCreateAssetOfferRequestInputOperationProcessingEnum);
+            if (obj is PlayerCreateConnectionRequestInput.AuthProviderEnum playerCreateConnectionRequestInputAuthProviderEnum)
+                return PlayerCreateConnectionRequestInput.AuthProviderEnumToJsonValue(playerCreateConnectionRequestInputAuthProviderEnum);
             if (obj is PlayerCreateConnectionRequestResponse.StatusEnum playerCreateConnectionRequestResponseStatusEnum)
                 return PlayerCreateConnectionRequestResponse.StatusEnumToJsonValue(playerCreateConnectionRequestResponseStatusEnum);
+            if (obj is PlayerCreateOnrampRequestInput.AuthProviderEnum playerCreateOnrampRequestInputAuthProviderEnum)
+                return PlayerCreateOnrampRequestInput.AuthProviderEnumToJsonValue(playerCreateOnrampRequestInputAuthProviderEnum);
             if (obj is PlayerCreateOnrampRequestInput.TokenEnum playerCreateOnrampRequestInputTokenEnum)
                 return PlayerCreateOnrampRequestInput.TokenEnumToJsonValue(playerCreateOnrampRequestInputTokenEnum);
+            if (obj is PlayerCreateTransactionRequestInput.AuthProviderEnum playerCreateTransactionRequestInputAuthProviderEnum)
+                return PlayerCreateTransactionRequestInput.AuthProviderEnumToJsonValue(playerCreateTransactionRequestInputAuthProviderEnum);
             if (obj is PlayerCreateTransactionRequestInput.OperationProcessingEnum playerCreateTransactionRequestInputOperationProcessingEnum)
                 return PlayerCreateTransactionRequestInput.OperationProcessingEnumToJsonValue(playerCreateTransactionRequestInputOperationProcessingEnum);
             if (obj is PlayerGenerateSessionRequestResponse.StatusEnum playerGenerateSessionRequestResponseStatusEnum)
                 return PlayerGenerateSessionRequestResponse.StatusEnumToJsonValue(playerGenerateSessionRequestResponseStatusEnum);
+            if (obj is PlayerGenerateSessionUrlRequestInput.AuthProviderEnum playerGenerateSessionUrlRequestInputAuthProviderEnum)
+                return PlayerGenerateSessionUrlRequestInput.AuthProviderEnumToJsonValue(playerGenerateSessionUrlRequestInputAuthProviderEnum);
             if (obj is PlayerGetAssetListingsResponseDataInner.StatusEnum playerGetAssetListingsResponseDataInnerStatusEnum)
                 return PlayerGetAssetListingsResponseDataInner.StatusEnumToJsonValue(playerGetAssetListingsResponseDataInnerStatusEnum);
             if (obj is PlayerGetAssetListingsResponseDataInnerPriceCurrency.SymbolEnum playerGetAssetListingsResponseDataInnerPriceCurrencySymbolEnum)
@@ -192,6 +212,8 @@ namespace BeamPlayerClient.Client
                 return PlayerOperationActionSignature.TypeEnumToJsonValue(playerOperationActionSignatureTypeEnum);
             if (obj is PlayerOperationActionTransaction.StatusEnum playerOperationActionTransactionStatusEnum)
                 return PlayerOperationActionTransaction.StatusEnumToJsonValue(playerOperationActionTransactionStatusEnum);
+            if (obj is PlayerPlayerOperationResponse.AuthProviderEnum playerPlayerOperationResponseAuthProviderEnum)
+                return PlayerPlayerOperationResponse.AuthProviderEnumToJsonValue(playerPlayerOperationResponseAuthProviderEnum);
             if (obj is PlayerPlayerOperationResponse.ProcessingEnum playerPlayerOperationResponseProcessingEnum)
                 return PlayerPlayerOperationResponse.ProcessingEnumToJsonValue(playerPlayerOperationResponseProcessingEnum);
             if (obj is PlayerPlayerOperationResponse.StatusEnum playerPlayerOperationResponseStatusEnum)
@@ -200,22 +222,36 @@ namespace BeamPlayerClient.Client
                 return PlayerPlayerOperationResponseTransactionsInner.StatusEnumToJsonValue(playerPlayerOperationResponseTransactionsInnerStatusEnum);
             if (obj is PlayerPlayerOperationResponseTransactionsInner.TypeEnum playerPlayerOperationResponseTransactionsInnerTypeEnum)
                 return PlayerPlayerOperationResponseTransactionsInner.TypeEnumToJsonValue(playerPlayerOperationResponseTransactionsInnerTypeEnum);
+            if (obj is PlayerRevokeSessionRequestInput.AuthProviderEnum playerRevokeSessionRequestInputAuthProviderEnum)
+                return PlayerRevokeSessionRequestInput.AuthProviderEnumToJsonValue(playerRevokeSessionRequestInputAuthProviderEnum);
             if (obj is PlayerRevokeSessionRequestInput.OperationProcessingEnum playerRevokeSessionRequestInputOperationProcessingEnum)
                 return PlayerRevokeSessionRequestInput.OperationProcessingEnumToJsonValue(playerRevokeSessionRequestInputOperationProcessingEnum);
             if (obj is PlayerSellAssetRequestInput.SellTypeEnum playerSellAssetRequestInputSellTypeEnum)
                 return PlayerSellAssetRequestInput.SellTypeEnumToJsonValue(playerSellAssetRequestInputSellTypeEnum);
+            if (obj is PlayerSellAssetRequestInput.AuthProviderEnum playerSellAssetRequestInputAuthProviderEnum)
+                return PlayerSellAssetRequestInput.AuthProviderEnumToJsonValue(playerSellAssetRequestInputAuthProviderEnum);
             if (obj is PlayerSellAssetRequestInput.CurrencyEnum playerSellAssetRequestInputCurrencyEnum)
                 return PlayerSellAssetRequestInput.CurrencyEnumToJsonValue(playerSellAssetRequestInputCurrencyEnum);
             if (obj is PlayerSellAssetRequestInput.OperationProcessingEnum playerSellAssetRequestInputOperationProcessingEnum)
                 return PlayerSellAssetRequestInput.OperationProcessingEnumToJsonValue(playerSellAssetRequestInputOperationProcessingEnum);
+            if (obj is PlayerTransferAssetRequestInput.AuthProviderEnum playerTransferAssetRequestInputAuthProviderEnum)
+                return PlayerTransferAssetRequestInput.AuthProviderEnumToJsonValue(playerTransferAssetRequestInputAuthProviderEnum);
             if (obj is PlayerTransferAssetRequestInput.OperationProcessingEnum playerTransferAssetRequestInputOperationProcessingEnum)
                 return PlayerTransferAssetRequestInput.OperationProcessingEnumToJsonValue(playerTransferAssetRequestInputOperationProcessingEnum);
+            if (obj is PlayerTransferNativeTokenRequestInput.AuthProviderEnum playerTransferNativeTokenRequestInputAuthProviderEnum)
+                return PlayerTransferNativeTokenRequestInput.AuthProviderEnumToJsonValue(playerTransferNativeTokenRequestInputAuthProviderEnum);
             if (obj is PlayerTransferNativeTokenRequestInput.OperationProcessingEnum playerTransferNativeTokenRequestInputOperationProcessingEnum)
                 return PlayerTransferNativeTokenRequestInput.OperationProcessingEnumToJsonValue(playerTransferNativeTokenRequestInputOperationProcessingEnum);
+            if (obj is PlayerTransferTokenRequestInput.AuthProviderEnum playerTransferTokenRequestInputAuthProviderEnum)
+                return PlayerTransferTokenRequestInput.AuthProviderEnumToJsonValue(playerTransferTokenRequestInputAuthProviderEnum);
             if (obj is PlayerTransferTokenRequestInput.OperationProcessingEnum playerTransferTokenRequestInputOperationProcessingEnum)
                 return PlayerTransferTokenRequestInput.OperationProcessingEnumToJsonValue(playerTransferTokenRequestInputOperationProcessingEnum);
+            if (obj is PlayerUnwrappingTokenInput.AuthProviderEnum playerUnwrappingTokenInputAuthProviderEnum)
+                return PlayerUnwrappingTokenInput.AuthProviderEnumToJsonValue(playerUnwrappingTokenInputAuthProviderEnum);
             if (obj is PlayerUnwrappingTokenInput.OperationProcessingEnum playerUnwrappingTokenInputOperationProcessingEnum)
                 return PlayerUnwrappingTokenInput.OperationProcessingEnumToJsonValue(playerUnwrappingTokenInputOperationProcessingEnum);
+            if (obj is PlayerWrappingTokenInput.AuthProviderEnum playerWrappingTokenInputAuthProviderEnum)
+                return PlayerWrappingTokenInput.AuthProviderEnumToJsonValue(playerWrappingTokenInputAuthProviderEnum);
             if (obj is PlayerWrappingTokenInput.OperationProcessingEnum playerWrappingTokenInputOperationProcessingEnum)
                 return PlayerWrappingTokenInput.OperationProcessingEnumToJsonValue(playerWrappingTokenInputOperationProcessingEnum);
             if (obj is ICollection collection)

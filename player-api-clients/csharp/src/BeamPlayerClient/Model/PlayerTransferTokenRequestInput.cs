@@ -36,18 +36,20 @@ namespace BeamPlayerClient.Model
         /// </summary>
         /// <param name="amountToTransfer">amountToTransfer</param>
         /// <param name="assetAddress">assetAddress</param>
+        /// <param name="authProvider">Auth Provider for the user to use. If it&#39;s Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI. (default to AuthProviderEnum.Any)</param>
         /// <param name="chainId">chainId (default to 13337)</param>
-        /// <param name="operationProcessing">operationProcessing (default to OperationProcessingEnum.Execute)</param>
+        /// <param name="operationProcessing">Operation processing type. If Execute is used, Operation will be executed automatically right after User signs it. If you prefer to have more control, use SignOnly then Process it using ProcessOperation. (default to OperationProcessingEnum.Execute)</param>
         /// <param name="optimistic">optimistic (default to false)</param>
         /// <param name="policyId">policyId</param>
         /// <param name="receiverEntityId">receiverEntityId</param>
         /// <param name="receiverWalletAddress">receiverWalletAddress</param>
         /// <param name="sponsor">sponsor (default to true)</param>
         [JsonConstructor]
-        public PlayerTransferTokenRequestInput(string amountToTransfer, string assetAddress, Option<long?> chainId = default, Option<OperationProcessingEnum?> operationProcessing = default, Option<bool?> optimistic = default, Option<string?> policyId = default, Option<string?> receiverEntityId = default, Option<string?> receiverWalletAddress = default, Option<bool?> sponsor = default)
+        public PlayerTransferTokenRequestInput(string amountToTransfer, string assetAddress, Option<AuthProviderEnum?> authProvider = default, Option<long?> chainId = default, Option<OperationProcessingEnum?> operationProcessing = default, Option<bool?> optimistic = default, Option<string?> policyId = default, Option<string?> receiverEntityId = default, Option<string?> receiverWalletAddress = default, Option<bool?> sponsor = default)
         {
             AmountToTransfer = amountToTransfer;
             AssetAddress = assetAddress;
+            AuthProviderOption = authProvider;
             ChainIdOption = chainId;
             OperationProcessingOption = operationProcessing;
             OptimisticOption = optimistic;
@@ -61,8 +63,234 @@ namespace BeamPlayerClient.Model
         partial void OnCreated();
 
         /// <summary>
-        /// Defines OperationProcessing
+        /// Auth Provider for the user to use. If it&#39;s Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI.
         /// </summary>
+        /// <value>Auth Provider for the user to use. If it&#39;s Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI.</value>
+        [JsonConverter(typeof(AuthProviderEnumJsonConverter))]
+        public enum AuthProviderEnum
+        {
+            /// <summary>
+            /// Enum Any for value: Any
+            /// </summary>
+            Any = 1,
+
+            /// <summary>
+            /// Enum Google for value: Google
+            /// </summary>
+            Google = 2,
+
+            /// <summary>
+            /// Enum Discord for value: Discord
+            /// </summary>
+            Discord = 3,
+
+            /// <summary>
+            /// Enum Apple for value: Apple
+            /// </summary>
+            Apple = 4
+        }
+
+        /// <summary>
+        /// Returns a <see cref="AuthProviderEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static AuthProviderEnum AuthProviderEnumFromString(string value)
+        {
+            if (value.Equals("Any"))
+                return AuthProviderEnum.Any;
+
+            if (value.Equals("Google"))
+                return AuthProviderEnum.Google;
+
+            if (value.Equals("Discord"))
+                return AuthProviderEnum.Discord;
+
+            if (value.Equals("Apple"))
+                return AuthProviderEnum.Apple;
+
+            throw new NotImplementedException($"Could not convert value to type AuthProviderEnum: '{value}'");
+        }
+
+        /// <summary>
+        /// Returns a <see cref="AuthProviderEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static AuthProviderEnum? AuthProviderEnumFromStringOrDefault(string value)
+        {
+            if (value.Equals("Any"))
+                return AuthProviderEnum.Any;
+
+            if (value.Equals("Google"))
+                return AuthProviderEnum.Google;
+
+            if (value.Equals("Discord"))
+                return AuthProviderEnum.Discord;
+
+            if (value.Equals("Apple"))
+                return AuthProviderEnum.Apple;
+
+            return null;
+        }
+
+        /// <summary>
+        /// Converts the <see cref="AuthProviderEnum"/> to the json value
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static string? AuthProviderEnumToJsonValue(AuthProviderEnum? value)
+        {
+            if (value == null)
+                return null;
+
+            if (value == AuthProviderEnum.Any)
+                return "Any";
+
+            if (value == AuthProviderEnum.Google)
+                return "Google";
+
+            if (value == AuthProviderEnum.Discord)
+                return "Discord";
+
+            if (value == AuthProviderEnum.Apple)
+                return "Apple";
+
+            throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Converts <see cref="AuthProviderEnum"/> to and from the JSON value
+        /// </summary>
+        public static class AuthProviderEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="AuthProviderEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static AuthProviderEnum FromString(string value)
+            {
+                    if (value.Equals("Any"))
+                        return AuthProviderEnum.Any;
+
+                    if (value.Equals("Google"))
+                        return AuthProviderEnum.Google;
+
+                    if (value.Equals("Discord"))
+                        return AuthProviderEnum.Discord;
+
+                    if (value.Equals("Apple"))
+                        return AuthProviderEnum.Apple;
+
+                throw new NotImplementedException($"Could not convert value to type AuthProviderEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="AuthProviderEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static AuthProviderEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("Any"))
+                        return AuthProviderEnum.Any;
+
+                    if (value.Equals("Google"))
+                        return AuthProviderEnum.Google;
+
+                    if (value.Equals("Discord"))
+                        return AuthProviderEnum.Discord;
+
+                    if (value.Equals("Apple"))
+                        return AuthProviderEnum.Apple;
+
+                return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="AuthProviderEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(AuthProviderEnum value)
+            {
+                        if (value == AuthProviderEnum.Any)
+                            return "Any";
+
+                        if (value == AuthProviderEnum.Google)
+                            return "Google";
+
+                        if (value == AuthProviderEnum.Discord)
+                            return "Discord";
+
+                        if (value == AuthProviderEnum.Apple)
+                            return "Apple";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="AuthProviderEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class AuthProviderEnumJsonConverter : JsonConverter<AuthProviderEnum>
+        {
+            /// <summary>
+            /// Returns a AuthProviderEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override AuthProviderEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string? rawValue = reader.GetString();
+
+                AuthProviderEnum? result = rawValue == null
+                    ? null
+                    : AuthProviderEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                    return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the AuthProviderEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="authProviderEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, AuthProviderEnum authProviderEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(AuthProviderEnumValueConverter.ToJsonValue(authProviderEnum));
+            }
+        }
+
+        /// <summary>
+        /// Used to track the state of AuthProvider
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<AuthProviderEnum?> AuthProviderOption { get; private set; }
+
+        /// <summary>
+        /// Auth Provider for the user to use. If it&#39;s Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI.
+        /// </summary>
+        /// <value>Auth Provider for the user to use. If it&#39;s Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI.</value>
+        [JsonPropertyName("authProvider")]
+        public AuthProviderEnum? AuthProvider { get { return this.AuthProviderOption; } set { this.AuthProviderOption = new(value); } }
+
+        /// <summary>
+        /// Operation processing type. If Execute is used, Operation will be executed automatically right after User signs it. If you prefer to have more control, use SignOnly then Process it using ProcessOperation.
+        /// </summary>
+        /// <value>Operation processing type. If Execute is used, Operation will be executed automatically right after User signs it. If you prefer to have more control, use SignOnly then Process it using ProcessOperation.</value>
         [JsonConverter(typeof(OperationProcessingEnumJsonConverter))]
         public enum OperationProcessingEnum
         {
@@ -229,8 +457,9 @@ namespace BeamPlayerClient.Model
         public Option<OperationProcessingEnum?> OperationProcessingOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets OperationProcessing
+        /// Operation processing type. If Execute is used, Operation will be executed automatically right after User signs it. If you prefer to have more control, use SignOnly then Process it using ProcessOperation.
         /// </summary>
+        /// <value>Operation processing type. If Execute is used, Operation will be executed automatically right after User signs it. If you prefer to have more control, use SignOnly then Process it using ProcessOperation.</value>
         [JsonPropertyName("operationProcessing")]
         public OperationProcessingEnum? OperationProcessing { get { return this.OperationProcessingOption; } set { this.OperationProcessingOption = new(value); } }
 
@@ -334,6 +563,7 @@ namespace BeamPlayerClient.Model
             sb.Append("class PlayerTransferTokenRequestInput {\n");
             sb.Append("  AmountToTransfer: ").Append(AmountToTransfer).Append("\n");
             sb.Append("  AssetAddress: ").Append(AssetAddress).Append("\n");
+            sb.Append("  AuthProvider: ").Append(AuthProvider).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  OperationProcessing: ").Append(OperationProcessing).Append("\n");
             sb.Append("  Optimistic: ").Append(Optimistic).Append("\n");
@@ -380,6 +610,7 @@ namespace BeamPlayerClient.Model
 
             Option<string?> amountToTransfer = default;
             Option<string?> assetAddress = default;
+            Option<PlayerTransferTokenRequestInput.AuthProviderEnum?> authProvider = default;
             Option<long?> chainId = default;
             Option<PlayerTransferTokenRequestInput.OperationProcessingEnum?> operationProcessing = default;
             Option<bool?> optimistic = default;
@@ -408,6 +639,11 @@ namespace BeamPlayerClient.Model
                             break;
                         case "assetAddress":
                             assetAddress = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
+                        case "authProvider":
+                            string? authProviderRawValue = utf8JsonReader.GetString();
+                            if (authProviderRawValue != null)
+                                authProvider = new Option<PlayerTransferTokenRequestInput.AuthProviderEnum?>(PlayerTransferTokenRequestInput.AuthProviderEnumFromStringOrDefault(authProviderRawValue));
                             break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
@@ -471,7 +707,7 @@ namespace BeamPlayerClient.Model
             if (sponsor.IsSet && sponsor.Value == null)
                 throw new ArgumentNullException(nameof(sponsor), "Property is not nullable for class PlayerTransferTokenRequestInput.");
 
-            return new PlayerTransferTokenRequestInput(amountToTransfer.Value!, assetAddress.Value!, chainId, operationProcessing, optimistic, policyId, receiverEntityId, receiverWalletAddress, sponsor);
+            return new PlayerTransferTokenRequestInput(amountToTransfer.Value!, assetAddress.Value!, authProvider, chainId, operationProcessing, optimistic, policyId, receiverEntityId, receiverWalletAddress, sponsor);
         }
 
         /// <summary>
@@ -513,6 +749,12 @@ namespace BeamPlayerClient.Model
             writer.WriteString("amountToTransfer", playerTransferTokenRequestInput.AmountToTransfer);
 
             writer.WriteString("assetAddress", playerTransferTokenRequestInput.AssetAddress);
+
+            var authProviderRawValue = PlayerTransferTokenRequestInput.AuthProviderEnumToJsonValue(playerTransferTokenRequestInput.AuthProviderOption.Value!.Value);
+            if (authProviderRawValue != null)
+                writer.WriteString("authProvider", authProviderRawValue);
+            else
+                writer.WriteNull("authProvider");
 
             if (playerTransferTokenRequestInput.ChainIdOption.IsSet)
                 writer.WriteNumber("chainId", playerTransferTokenRequestInput.ChainIdOption.Value!.Value);

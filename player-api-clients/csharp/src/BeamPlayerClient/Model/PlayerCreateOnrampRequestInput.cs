@@ -34,6 +34,7 @@ namespace BeamPlayerClient.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="PlayerCreateOnrampRequestInput" /> class.
         /// </summary>
+        /// <param name="authProvider">Auth Provider for the user to use. If it&#39;s Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI. (default to AuthProviderEnum.Any)</param>
         /// <param name="canChangeAmount">canChangeAmount (default to false)</param>
         /// <param name="chainId">chainId (default to 13337)</param>
         /// <param name="fiatAmount">fiatAmount</param>
@@ -41,8 +42,9 @@ namespace BeamPlayerClient.Model
         /// <param name="token">token (default to TokenEnum.BEAM)</param>
         /// <param name="tokenAmount">tokenAmount</param>
         [JsonConstructor]
-        public PlayerCreateOnrampRequestInput(Option<bool?> canChangeAmount = default, Option<long?> chainId = default, Option<string?> fiatAmount = default, Option<string?> paymentCurrency = default, Option<TokenEnum?> token = default, Option<string?> tokenAmount = default)
+        public PlayerCreateOnrampRequestInput(Option<AuthProviderEnum?> authProvider = default, Option<bool?> canChangeAmount = default, Option<long?> chainId = default, Option<string?> fiatAmount = default, Option<string?> paymentCurrency = default, Option<TokenEnum?> token = default, Option<string?> tokenAmount = default)
         {
+            AuthProviderOption = authProvider;
             CanChangeAmountOption = canChangeAmount;
             ChainIdOption = chainId;
             FiatAmountOption = fiatAmount;
@@ -53,6 +55,231 @@ namespace BeamPlayerClient.Model
         }
 
         partial void OnCreated();
+
+        /// <summary>
+        /// Auth Provider for the user to use. If it&#39;s Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI.
+        /// </summary>
+        /// <value>Auth Provider for the user to use. If it&#39;s Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI.</value>
+        [JsonConverter(typeof(AuthProviderEnumJsonConverter))]
+        public enum AuthProviderEnum
+        {
+            /// <summary>
+            /// Enum Any for value: Any
+            /// </summary>
+            Any = 1,
+
+            /// <summary>
+            /// Enum Google for value: Google
+            /// </summary>
+            Google = 2,
+
+            /// <summary>
+            /// Enum Discord for value: Discord
+            /// </summary>
+            Discord = 3,
+
+            /// <summary>
+            /// Enum Apple for value: Apple
+            /// </summary>
+            Apple = 4
+        }
+
+        /// <summary>
+        /// Returns a <see cref="AuthProviderEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static AuthProviderEnum AuthProviderEnumFromString(string value)
+        {
+            if (value.Equals("Any"))
+                return AuthProviderEnum.Any;
+
+            if (value.Equals("Google"))
+                return AuthProviderEnum.Google;
+
+            if (value.Equals("Discord"))
+                return AuthProviderEnum.Discord;
+
+            if (value.Equals("Apple"))
+                return AuthProviderEnum.Apple;
+
+            throw new NotImplementedException($"Could not convert value to type AuthProviderEnum: '{value}'");
+        }
+
+        /// <summary>
+        /// Returns a <see cref="AuthProviderEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static AuthProviderEnum? AuthProviderEnumFromStringOrDefault(string value)
+        {
+            if (value.Equals("Any"))
+                return AuthProviderEnum.Any;
+
+            if (value.Equals("Google"))
+                return AuthProviderEnum.Google;
+
+            if (value.Equals("Discord"))
+                return AuthProviderEnum.Discord;
+
+            if (value.Equals("Apple"))
+                return AuthProviderEnum.Apple;
+
+            return null;
+        }
+
+        /// <summary>
+        /// Converts the <see cref="AuthProviderEnum"/> to the json value
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static string? AuthProviderEnumToJsonValue(AuthProviderEnum? value)
+        {
+            if (value == null)
+                return null;
+
+            if (value == AuthProviderEnum.Any)
+                return "Any";
+
+            if (value == AuthProviderEnum.Google)
+                return "Google";
+
+            if (value == AuthProviderEnum.Discord)
+                return "Discord";
+
+            if (value == AuthProviderEnum.Apple)
+                return "Apple";
+
+            throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Converts <see cref="AuthProviderEnum"/> to and from the JSON value
+        /// </summary>
+        public static class AuthProviderEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="AuthProviderEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static AuthProviderEnum FromString(string value)
+            {
+                    if (value.Equals("Any"))
+                        return AuthProviderEnum.Any;
+
+                    if (value.Equals("Google"))
+                        return AuthProviderEnum.Google;
+
+                    if (value.Equals("Discord"))
+                        return AuthProviderEnum.Discord;
+
+                    if (value.Equals("Apple"))
+                        return AuthProviderEnum.Apple;
+
+                throw new NotImplementedException($"Could not convert value to type AuthProviderEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="AuthProviderEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static AuthProviderEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("Any"))
+                        return AuthProviderEnum.Any;
+
+                    if (value.Equals("Google"))
+                        return AuthProviderEnum.Google;
+
+                    if (value.Equals("Discord"))
+                        return AuthProviderEnum.Discord;
+
+                    if (value.Equals("Apple"))
+                        return AuthProviderEnum.Apple;
+
+                return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="AuthProviderEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(AuthProviderEnum value)
+            {
+                        if (value == AuthProviderEnum.Any)
+                            return "Any";
+
+                        if (value == AuthProviderEnum.Google)
+                            return "Google";
+
+                        if (value == AuthProviderEnum.Discord)
+                            return "Discord";
+
+                        if (value == AuthProviderEnum.Apple)
+                            return "Apple";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="AuthProviderEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class AuthProviderEnumJsonConverter : JsonConverter<AuthProviderEnum>
+        {
+            /// <summary>
+            /// Returns a AuthProviderEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override AuthProviderEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string? rawValue = reader.GetString();
+
+                AuthProviderEnum? result = rawValue == null
+                    ? null
+                    : AuthProviderEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                    return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the AuthProviderEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="authProviderEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, AuthProviderEnum authProviderEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(AuthProviderEnumValueConverter.ToJsonValue(authProviderEnum));
+            }
+        }
+
+        /// <summary>
+        /// Used to track the state of AuthProvider
+        /// </summary>
+        [JsonIgnore]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<AuthProviderEnum?> AuthProviderOption { get; private set; }
+
+        /// <summary>
+        /// Auth Provider for the user to use. If it&#39;s Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI.
+        /// </summary>
+        /// <value>Auth Provider for the user to use. If it&#39;s Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI.</value>
+        [JsonPropertyName("authProvider")]
+        public AuthProviderEnum? AuthProvider { get { return this.AuthProviderOption; } set { this.AuthProviderOption = new(value); } }
 
         /// <summary>
         /// Defines Token
@@ -278,6 +505,7 @@ namespace BeamPlayerClient.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class PlayerCreateOnrampRequestInput {\n");
+            sb.Append("  AuthProvider: ").Append(AuthProvider).Append("\n");
             sb.Append("  CanChangeAmount: ").Append(CanChangeAmount).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  FiatAmount: ").Append(FiatAmount).Append("\n");
@@ -321,6 +549,7 @@ namespace BeamPlayerClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
+            Option<PlayerCreateOnrampRequestInput.AuthProviderEnum?> authProvider = default;
             Option<bool?> canChangeAmount = default;
             Option<long?> chainId = default;
             Option<string?> fiatAmount = default;
@@ -343,6 +572,11 @@ namespace BeamPlayerClient.Model
 
                     switch (localVarJsonPropertyName)
                     {
+                        case "authProvider":
+                            string? authProviderRawValue = utf8JsonReader.GetString();
+                            if (authProviderRawValue != null)
+                                authProvider = new Option<PlayerCreateOnrampRequestInput.AuthProviderEnum?>(PlayerCreateOnrampRequestInput.AuthProviderEnumFromStringOrDefault(authProviderRawValue));
+                            break;
                         case "canChangeAmount":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 canChangeAmount = new Option<bool?>(utf8JsonReader.GetBoolean());
@@ -389,7 +623,7 @@ namespace BeamPlayerClient.Model
             if (tokenAmount.IsSet && tokenAmount.Value == null)
                 throw new ArgumentNullException(nameof(tokenAmount), "Property is not nullable for class PlayerCreateOnrampRequestInput.");
 
-            return new PlayerCreateOnrampRequestInput(canChangeAmount, chainId, fiatAmount, paymentCurrency, token, tokenAmount);
+            return new PlayerCreateOnrampRequestInput(authProvider, canChangeAmount, chainId, fiatAmount, paymentCurrency, token, tokenAmount);
         }
 
         /// <summary>
@@ -424,6 +658,12 @@ namespace BeamPlayerClient.Model
 
             if (playerCreateOnrampRequestInput.TokenAmountOption.IsSet && playerCreateOnrampRequestInput.TokenAmount == null)
                 throw new ArgumentNullException(nameof(playerCreateOnrampRequestInput.TokenAmount), "Property is required for class PlayerCreateOnrampRequestInput.");
+
+            var authProviderRawValue = PlayerCreateOnrampRequestInput.AuthProviderEnumToJsonValue(playerCreateOnrampRequestInput.AuthProviderOption.Value!.Value);
+            if (authProviderRawValue != null)
+                writer.WriteString("authProvider", authProviderRawValue);
+            else
+                writer.WriteNull("authProvider");
 
             if (playerCreateOnrampRequestInput.CanChangeAmountOption.IsSet)
                 writer.WriteBoolean("canChangeAmount", playerCreateOnrampRequestInput.CanChangeAmountOption.Value!.Value);

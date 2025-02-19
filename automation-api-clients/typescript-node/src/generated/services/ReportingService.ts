@@ -36,7 +36,7 @@ export class ReportingService {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v1/reporting/gas/{chainId}',
-      query: {
+      path: {
         chainId: chainId,
       },
     });

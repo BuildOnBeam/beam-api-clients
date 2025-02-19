@@ -24,12 +24,12 @@ export type { CommonUserActivityRequestInput } from './models/CommonUserActivity
 export { ConfirmOperationRequest } from './models/ConfirmOperationRequest';
 export { ConvertTokenRequestInput } from './models/ConvertTokenRequestInput';
 export { CreateAssetOfferRequestInput } from './models/CreateAssetOfferRequestInput';
-export type { CreateConnectionRequestInput } from './models/CreateConnectionRequestInput';
+export { CreateConnectionRequestInput } from './models/CreateConnectionRequestInput';
 export { CreateConnectionRequestResponse } from './models/CreateConnectionRequestResponse';
 export { CreateOnrampRequestInput } from './models/CreateOnrampRequestInput';
 export { CreateTransactionRequestInput } from './models/CreateTransactionRequestInput';
 export { GenerateSessionRequestResponse } from './models/GenerateSessionRequestResponse';
-export type { GenerateSessionUrlRequestInput } from './models/GenerateSessionUrlRequestInput';
+export { GenerateSessionUrlRequestInput } from './models/GenerateSessionUrlRequestInput';
 export type { GetActiveSessionResponse } from './models/GetActiveSessionResponse';
 export type { GetActiveSessionResponseV2 } from './models/GetActiveSessionResponseV2';
 export type { GetActiveSessionsResponse } from './models/GetActiveSessionsResponse';

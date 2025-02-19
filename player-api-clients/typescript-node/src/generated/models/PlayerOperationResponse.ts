@@ -6,6 +6,7 @@
 export type PlayerOperationResponse = {
   status: PlayerOperationResponse.status;
   processing: PlayerOperationResponse.processing;
+  authProvider: PlayerOperationResponse.authProvider;
   id: string;
   createdAt: string;
   updatedAt: string | null;
@@ -86,5 +87,12 @@ export namespace PlayerOperationResponse {
   export enum processing {
     SIGN_ONLY = 'SignOnly',
     EXECUTE = 'Execute',
+  }
+
+  export enum authProvider {
+    ANY = 'Any',
+    GOOGLE = 'Google',
+    DISCORD = 'Discord',
+    APPLE = 'Apple',
   }
 }
