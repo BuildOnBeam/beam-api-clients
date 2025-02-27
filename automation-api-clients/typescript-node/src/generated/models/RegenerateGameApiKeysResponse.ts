@@ -23,6 +23,7 @@ export type RegenerateGameApiKeysResponse = {
   coverImageUrl: string | null;
   logoImageUrl: string | null;
   backgroundImageUrl: string | null;
+  androidCallbackDeepLink: string | null;
   chainIds: number[];
   apiKeys: Array<{
     type: 'Regenerate' | 'Publishable' | 'Secret';

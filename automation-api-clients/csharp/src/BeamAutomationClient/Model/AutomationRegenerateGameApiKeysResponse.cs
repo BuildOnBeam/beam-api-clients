@@ -41,13 +41,14 @@ namespace BeamAutomationClient.Model
         /// <param name="name">name</param>
         /// <param name="pegiContent">pegiContent</param>
         /// <param name="updatedAt">updatedAt</param>
+        /// <param name="androidCallbackDeepLink">androidCallbackDeepLink</param>
         /// <param name="backgroundImageUrl">backgroundImageUrl</param>
         /// <param name="coverImageUrl">coverImageUrl</param>
         /// <param name="description">description</param>
         /// <param name="logoImageUrl">logoImageUrl</param>
         /// <param name="pegiRating">pegiRating</param>
         [JsonConstructor]
-        public AutomationRegenerateGameApiKeysResponse(List<AutomationRegenerateGameApiKeysResponseApiKeysInner> apiKeys, List<int> chainIds, DateTime createdAt, string id, string name, List<AutomationRegenerateGameApiKeysResponse.PegiContentEnum> pegiContent, DateTime updatedAt, string? backgroundImageUrl = default, string? coverImageUrl = default, string? description = default, string? logoImageUrl = default, PegiRatingEnum? pegiRating = default)
+        public AutomationRegenerateGameApiKeysResponse(List<AutomationRegenerateGameApiKeysResponseApiKeysInner> apiKeys, List<int> chainIds, DateTime createdAt, string id, string name, List<AutomationRegenerateGameApiKeysResponse.PegiContentEnum> pegiContent, DateTime updatedAt, string? androidCallbackDeepLink = default, string? backgroundImageUrl = default, string? coverImageUrl = default, string? description = default, string? logoImageUrl = default, PegiRatingEnum? pegiRating = default)
         {
             ApiKeys = apiKeys;
             ChainIds = chainIds;
@@ -56,6 +57,7 @@ namespace BeamAutomationClient.Model
             Name = name;
             PegiContent = pegiContent;
             UpdatedAt = updatedAt;
+            AndroidCallbackDeepLink = androidCallbackDeepLink;
             BackgroundImageUrl = backgroundImageUrl;
             CoverImageUrl = coverImageUrl;
             Description = description;
@@ -647,6 +649,12 @@ namespace BeamAutomationClient.Model
         public DateTime UpdatedAt { get; set; }
 
         /// <summary>
+        /// Gets or Sets AndroidCallbackDeepLink
+        /// </summary>
+        [JsonPropertyName("androidCallbackDeepLink")]
+        public string? AndroidCallbackDeepLink { get; set; }
+
+        /// <summary>
         /// Gets or Sets BackgroundImageUrl
         /// </summary>
         [JsonPropertyName("backgroundImageUrl")]
@@ -685,6 +693,7 @@ namespace BeamAutomationClient.Model
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  PegiContent: ").Append(PegiContent).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
+            sb.Append("  AndroidCallbackDeepLink: ").Append(AndroidCallbackDeepLink).Append("\n");
             sb.Append("  BackgroundImageUrl: ").Append(BackgroundImageUrl).Append("\n");
             sb.Append("  CoverImageUrl: ").Append(CoverImageUrl).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
@@ -744,6 +753,7 @@ namespace BeamAutomationClient.Model
             Option<string?> name = default;
             Option<List<AutomationRegenerateGameApiKeysResponse.PegiContentEnum>?> pegiContent = default;
             Option<DateTime?> updatedAt = default;
+            Option<string?> androidCallbackDeepLink = default;
             Option<string?> backgroundImageUrl = default;
             Option<string?> coverImageUrl = default;
             Option<string?> description = default;
@@ -791,6 +801,9 @@ namespace BeamAutomationClient.Model
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 updatedAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
+                        case "androidCallbackDeepLink":
+                            androidCallbackDeepLink = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         case "backgroundImageUrl":
                             backgroundImageUrl = new Option<string?>(utf8JsonReader.GetString());
                             break;
@@ -835,6 +848,9 @@ namespace BeamAutomationClient.Model
             if (!updatedAt.IsSet)
                 throw new ArgumentException("Property is required for class AutomationRegenerateGameApiKeysResponse.", nameof(updatedAt));
 
+            if (!androidCallbackDeepLink.IsSet)
+                throw new ArgumentException("Property is required for class AutomationRegenerateGameApiKeysResponse.", nameof(androidCallbackDeepLink));
+
             if (!backgroundImageUrl.IsSet)
                 throw new ArgumentException("Property is required for class AutomationRegenerateGameApiKeysResponse.", nameof(backgroundImageUrl));
 
@@ -871,7 +887,7 @@ namespace BeamAutomationClient.Model
             if (updatedAt.IsSet && updatedAt.Value == null)
                 throw new ArgumentNullException(nameof(updatedAt), "Property is not nullable for class AutomationRegenerateGameApiKeysResponse.");
 
-            return new AutomationRegenerateGameApiKeysResponse(apiKeys.Value!, chainIds.Value!, createdAt.Value!.Value!, id.Value!, name.Value!, pegiContent.Value!, updatedAt.Value!.Value!, backgroundImageUrl.Value!, coverImageUrl.Value!, description.Value!, logoImageUrl.Value!, pegiRating.Value!);
+            return new AutomationRegenerateGameApiKeysResponse(apiKeys.Value!, chainIds.Value!, createdAt.Value!.Value!, id.Value!, name.Value!, pegiContent.Value!, updatedAt.Value!.Value!, androidCallbackDeepLink.Value!, backgroundImageUrl.Value!, coverImageUrl.Value!, description.Value!, logoImageUrl.Value!, pegiRating.Value!);
         }
 
         /// <summary>
@@ -926,6 +942,11 @@ namespace BeamAutomationClient.Model
             writer.WritePropertyName("pegiContent");
             JsonSerializer.Serialize(writer, automationRegenerateGameApiKeysResponse.PegiContent, jsonSerializerOptions);
             writer.WriteString("updatedAt", automationRegenerateGameApiKeysResponse.UpdatedAt.ToString(UpdatedAtFormat));
+
+            if (automationRegenerateGameApiKeysResponse.AndroidCallbackDeepLink != null)
+                writer.WriteString("androidCallbackDeepLink", automationRegenerateGameApiKeysResponse.AndroidCallbackDeepLink);
+            else
+                writer.WriteNull("androidCallbackDeepLink");
 
             if (automationRegenerateGameApiKeysResponse.BackgroundImageUrl != null)
                 writer.WriteString("backgroundImageUrl", automationRegenerateGameApiKeysResponse.BackgroundImageUrl);

@@ -5024,6 +5024,10 @@
             "type": "string",
             "nullable": true
           },
+          "androidCallbackDeepLink": {
+            "type": "string",
+            "nullable": true
+          },
           "chainIds": {
             "type": "array",
             "items": {
@@ -5296,6 +5300,7 @@
           "coverImageUrl",
           "logoImageUrl",
           "backgroundImageUrl",
+          "androidCallbackDeepLink",
           "chainIds",
           "developers",
           "contracts",
@@ -5363,6 +5368,10 @@
             "type": "string",
             "nullable": true
           },
+          "androidCallbackDeepLink": {
+            "type": "string",
+            "nullable": true
+          },
           "chainIds": {
             "type": "array",
             "items": {
@@ -5423,6 +5432,7 @@
           "coverImageUrl",
           "logoImageUrl",
           "backgroundImageUrl",
+          "androidCallbackDeepLink",
           "chainIds",
           "apiKeys"
         ]

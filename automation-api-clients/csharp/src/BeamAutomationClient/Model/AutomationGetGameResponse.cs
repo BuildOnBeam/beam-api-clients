@@ -43,6 +43,7 @@ namespace BeamAutomationClient.Model
         /// <param name="pegiContent">pegiContent</param>
         /// <param name="policies">policies</param>
         /// <param name="updatedAt">updatedAt</param>
+        /// <param name="androidCallbackDeepLink">androidCallbackDeepLink</param>
         /// <param name="backgroundImageUrl">backgroundImageUrl</param>
         /// <param name="coverImageUrl">coverImageUrl</param>
         /// <param name="depositor">depositor</param>
@@ -50,7 +51,7 @@ namespace BeamAutomationClient.Model
         /// <param name="logoImageUrl">logoImageUrl</param>
         /// <param name="pegiRating">pegiRating</param>
         [JsonConstructor]
-        public AutomationGetGameResponse(List<int> chainIds, List<AutomationGetGameResponseContractsInner> contracts, DateTime createdAt, List<AutomationGetGameResponseDevelopersInner> developers, string id, string name, List<AutomationGetGameResponse.PegiContentEnum> pegiContent, List<AutomationGetGameResponsePoliciesInner> policies, DateTime updatedAt, string? backgroundImageUrl = default, string? coverImageUrl = default, Option<AutomationGetGameResponseDepositor?> depositor = default, string? description = default, string? logoImageUrl = default, PegiRatingEnum? pegiRating = default)
+        public AutomationGetGameResponse(List<int> chainIds, List<AutomationGetGameResponseContractsInner> contracts, DateTime createdAt, List<AutomationGetGameResponseDevelopersInner> developers, string id, string name, List<AutomationGetGameResponse.PegiContentEnum> pegiContent, List<AutomationGetGameResponsePoliciesInner> policies, DateTime updatedAt, string? androidCallbackDeepLink = default, string? backgroundImageUrl = default, string? coverImageUrl = default, Option<AutomationGetGameResponseDepositor?> depositor = default, string? description = default, string? logoImageUrl = default, PegiRatingEnum? pegiRating = default)
         {
             ChainIds = chainIds;
             Contracts = contracts;
@@ -61,6 +62,7 @@ namespace BeamAutomationClient.Model
             PegiContent = pegiContent;
             Policies = policies;
             UpdatedAt = updatedAt;
+            AndroidCallbackDeepLink = androidCallbackDeepLink;
             BackgroundImageUrl = backgroundImageUrl;
             CoverImageUrl = coverImageUrl;
             DepositorOption = depositor;
@@ -665,6 +667,12 @@ namespace BeamAutomationClient.Model
         public DateTime UpdatedAt { get; set; }
 
         /// <summary>
+        /// Gets or Sets AndroidCallbackDeepLink
+        /// </summary>
+        [JsonPropertyName("androidCallbackDeepLink")]
+        public string? AndroidCallbackDeepLink { get; set; }
+
+        /// <summary>
         /// Gets or Sets BackgroundImageUrl
         /// </summary>
         [JsonPropertyName("backgroundImageUrl")]
@@ -718,6 +726,7 @@ namespace BeamAutomationClient.Model
             sb.Append("  PegiContent: ").Append(PegiContent).Append("\n");
             sb.Append("  Policies: ").Append(Policies).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
+            sb.Append("  AndroidCallbackDeepLink: ").Append(AndroidCallbackDeepLink).Append("\n");
             sb.Append("  BackgroundImageUrl: ").Append(BackgroundImageUrl).Append("\n");
             sb.Append("  CoverImageUrl: ").Append(CoverImageUrl).Append("\n");
             sb.Append("  Depositor: ").Append(Depositor).Append("\n");
@@ -780,6 +789,7 @@ namespace BeamAutomationClient.Model
             Option<List<AutomationGetGameResponse.PegiContentEnum>?> pegiContent = default;
             Option<List<AutomationGetGameResponsePoliciesInner>?> policies = default;
             Option<DateTime?> updatedAt = default;
+            Option<string?> androidCallbackDeepLink = default;
             Option<string?> backgroundImageUrl = default;
             Option<string?> coverImageUrl = default;
             Option<AutomationGetGameResponseDepositor?> depositor = default;
@@ -836,6 +846,9 @@ namespace BeamAutomationClient.Model
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 updatedAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
+                        case "androidCallbackDeepLink":
+                            androidCallbackDeepLink = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         case "backgroundImageUrl":
                             backgroundImageUrl = new Option<string?>(utf8JsonReader.GetString());
                             break;
@@ -890,6 +903,9 @@ namespace BeamAutomationClient.Model
             if (!updatedAt.IsSet)
                 throw new ArgumentException("Property is required for class AutomationGetGameResponse.", nameof(updatedAt));
 
+            if (!androidCallbackDeepLink.IsSet)
+                throw new ArgumentException("Property is required for class AutomationGetGameResponse.", nameof(androidCallbackDeepLink));
+
             if (!backgroundImageUrl.IsSet)
                 throw new ArgumentException("Property is required for class AutomationGetGameResponse.", nameof(backgroundImageUrl));
 
@@ -932,7 +948,7 @@ namespace BeamAutomationClient.Model
             if (updatedAt.IsSet && updatedAt.Value == null)
                 throw new ArgumentNullException(nameof(updatedAt), "Property is not nullable for class AutomationGetGameResponse.");
 
-            return new AutomationGetGameResponse(chainIds.Value!, contracts.Value!, createdAt.Value!.Value!, developers.Value!, id.Value!, name.Value!, pegiContent.Value!, policies.Value!, updatedAt.Value!.Value!, backgroundImageUrl.Value!, coverImageUrl.Value!, depositor, description.Value!, logoImageUrl.Value!, pegiRating.Value!);
+            return new AutomationGetGameResponse(chainIds.Value!, contracts.Value!, createdAt.Value!.Value!, developers.Value!, id.Value!, name.Value!, pegiContent.Value!, policies.Value!, updatedAt.Value!.Value!, androidCallbackDeepLink.Value!, backgroundImageUrl.Value!, coverImageUrl.Value!, depositor, description.Value!, logoImageUrl.Value!, pegiRating.Value!);
         }
 
         /// <summary>
@@ -997,6 +1013,11 @@ namespace BeamAutomationClient.Model
             writer.WritePropertyName("policies");
             JsonSerializer.Serialize(writer, automationGetGameResponse.Policies, jsonSerializerOptions);
             writer.WriteString("updatedAt", automationGetGameResponse.UpdatedAt.ToString(UpdatedAtFormat));
+
+            if (automationGetGameResponse.AndroidCallbackDeepLink != null)
+                writer.WriteString("androidCallbackDeepLink", automationGetGameResponse.AndroidCallbackDeepLink);
+            else
+                writer.WriteNull("androidCallbackDeepLink");
 
             if (automationGetGameResponse.BackgroundImageUrl != null)
                 writer.WriteString("backgroundImageUrl", automationGetGameResponse.BackgroundImageUrl);
