@@ -1,8 +1,7 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 export type GetAssetResponseV2 = {
   name: string;
   imageUrl: string;
@@ -26,7 +25,6 @@ export type GetAssetResponseV2 = {
   }> | null;
   chainId: number;
 };
-
 export namespace GetAssetResponseV2 {
   export enum rarity {
     COMMON = 'Common',
@@ -36,3 +34,4 @@ export namespace GetAssetResponseV2 {
     EXTREMELY_RARE = 'ExtremelyRare',
   }
 }
+

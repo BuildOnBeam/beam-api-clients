@@ -1,12 +1,7 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import FormData from 'form-data';
-import fetch, { Headers } from 'node-fetch';
-import type { RequestInit, Response } from 'node-fetch';
-import type { AbortSignal } from 'node-fetch/externals';
-
 import { ApiError } from './ApiError';
 import type { ApiRequestOptions } from './ApiRequestOptions';
 import type { ApiResult } from './ApiResult';
@@ -142,10 +137,12 @@ export const resolve = async <T>(options: ApiRequestOptions, resolver?: T | Reso
 };
 
 export const getHeaders = async (config: OpenAPIConfig, options: ApiRequestOptions): Promise<Headers> => {
-  const token = await resolve(options, config.TOKEN);
-  const username = await resolve(options, config.USERNAME);
-  const password = await resolve(options, config.PASSWORD);
-  const additionalHeaders = await resolve(options, config.HEADERS);
+  const [token, username, password, additionalHeaders] = await Promise.all([
+    resolve(options, config.TOKEN),
+    resolve(options, config.USERNAME),
+    resolve(options, config.PASSWORD),
+    resolve(options, config.HEADERS),
+  ]);
 
   const headers = Object.entries({
     Accept: 'application/json',
@@ -167,11 +164,11 @@ export const getHeaders = async (config: OpenAPIConfig, options: ApiRequestOptio
     headers['Authorization'] = `Basic ${credentials}`;
   }
 
-  if (options.body) {
+  if (options.body !== undefined) {
     if (options.mediaType) {
       headers['Content-Type'] = options.mediaType;
     } else if (isBlob(options.body)) {
-      headers['Content-Type'] = 'application/octet-stream';
+      headers['Content-Type'] = options.body.type || 'application/octet-stream';
     } else if (isString(options.body)) {
       headers['Content-Type'] = 'text/plain';
     } else if (!isFormData(options.body)) {
@@ -187,7 +184,7 @@ export const getRequestBody = (options: ApiRequestOptions): any => {
     if (options.mediaType?.includes('/json')) {
       return JSON.stringify(options.body)
     } else if (isString(options.body) || isBlob(options.body) || isFormData(options.body)) {
-      return options.body as any;
+      return options.body;
     } else {
       return JSON.stringify(options.body);
     }
@@ -196,6 +193,7 @@ export const getRequestBody = (options: ApiRequestOptions): any => {
 };
 
 export const sendRequest = async (
+  config: OpenAPIConfig,
   options: ApiRequestOptions,
   url: string,
   body: any,
@@ -207,10 +205,14 @@ export const sendRequest = async (
 
   const request: RequestInit = {
     headers,
-    method: options.method,
     body: body ?? formData,
-    signal: controller.signal as AbortSignal,
+    method: options.method,
+    signal: controller.signal,
   };
+
+  if (config.WITH_CREDENTIALS) {
+    request.credentials = config.CREDENTIALS;
+  }
 
   onCancel(() => controller.abort());
 
@@ -297,7 +299,7 @@ export const request = <T>(config: OpenAPIConfig, options: ApiRequestOptions): C
       const headers = await getHeaders(config, options);
 
       if (!onCancel.isCancelled) {
-        const response = await sendRequest(options, url, body, formData, headers, onCancel);
+        const response = await sendRequest(config, options, url, body, formData, headers, onCancel);
         const responseBody = await getResponseBody(response);
         const responseHeader = getResponseHeader(response, options.responseHeader);
 

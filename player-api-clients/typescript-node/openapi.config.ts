@@ -4,6 +4,6 @@ OpenAPI.generate({
   input: 'https://api.testnet.onbeam.com/api/player-json',
   output: './src/generated',
   clientName: 'ApiClient',
-  httpClient: 'node',
+  httpClient: 'fetch',
   indent: '2',
 });

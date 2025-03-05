@@ -1,4 +1,4 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -10,13 +10,10 @@ import type { GetActiveSessionsResponse } from '../models/GetActiveSessionsRespo
 import type { GetSessionRequestResponse } from '../models/GetSessionRequestResponse';
 import type { PlayerOperationResponse } from '../models/PlayerOperationResponse';
 import type { RevokeSessionRequestInput } from '../models/RevokeSessionRequestInput';
-
-import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 import type { CancelablePromise } from '../core/CancelablePromise';
-
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class SessionsService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
-
   /**
    * @param entityId
    * @param requestBody
@@ -31,13 +28,12 @@ export class SessionsService {
       method: 'POST',
       url: '/v1/player/sessions/users/{entityId}/request',
       path: {
-        entityId: entityId,
+        'entityId': entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
-
   /**
    * @param entityId
    * @param requestBody
@@ -52,13 +48,12 @@ export class SessionsService {
       method: 'POST',
       url: '/v1/player/sessions/users/{entityId}/revoke',
       path: {
-        entityId: entityId,
+        'entityId': entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
-
   /**
    * @param requestId
    * @returns GetSessionRequestResponse
@@ -71,11 +66,10 @@ export class SessionsService {
       method: 'GET',
       url: '/v1/player/sessions/request/{requestId}',
       path: {
-        requestId: requestId,
+        'requestId': requestId,
       },
     });
   }
-
   /**
    * @param entityId
    * @param chainId
@@ -90,14 +84,13 @@ export class SessionsService {
       method: 'GET',
       url: '/v1/player/sessions/users/{entityId}/active',
       path: {
-        entityId: entityId,
+        'entityId': entityId,
       },
       query: {
-        chainId: chainId,
+        'chainId': chainId,
       },
     });
   }
-
   /**
    * @deprecated
    * @param entityId
@@ -115,15 +108,14 @@ export class SessionsService {
       method: 'GET',
       url: '/v1/player/sessions/users/{entityId}/{accountAddress}/active',
       path: {
-        entityId: entityId,
-        accountAddress: accountAddress,
+        'entityId': entityId,
+        'accountAddress': accountAddress,
       },
       query: {
-        chainId: chainId,
+        'chainId': chainId,
       },
     });
   }
-
   /**
    * @param entityId
    * @param accountAddress
@@ -140,11 +132,11 @@ export class SessionsService {
       method: 'GET',
       url: '/v2/player/sessions/users/{entityId}/{accountAddress}/active',
       path: {
-        entityId: entityId,
-        accountAddress: accountAddress,
+        'entityId': entityId,
+        'accountAddress': accountAddress,
       },
       query: {
-        chainId: chainId,
+        'chainId': chainId,
       },
     });
   }

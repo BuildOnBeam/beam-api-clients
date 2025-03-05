@@ -1,11 +1,10 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
 import type { BaseHttpRequest } from './core/BaseHttpRequest';
-import { NodeHttpRequest } from './core/NodeHttpRequest';
 import type { OpenAPIConfig } from './core/OpenAPI';
-
+import { NodeHttpRequest } from './core/NodeHttpRequest';
 import { ActivityService } from './services/ActivityService';
 import { AssetsV2Service } from './services/AssetsV2Service';
 import { ChainService } from './services/ChainService';
@@ -20,9 +19,7 @@ import { ReportingService } from './services/ReportingService';
 import { StatsService } from './services/StatsService';
 import { TradingService } from './services/TradingService';
 import { TransactionsV2Service } from './services/TransactionsV2Service';
-
 type HttpRequestConstructor = new (config: OpenAPIConfig) => BaseHttpRequest;
-
 export class ApiClient {
   public readonly activity: ActivityService;
   public readonly assetsV2: AssetsV2Service;
@@ -38,13 +35,8 @@ export class ApiClient {
   public readonly stats: StatsService;
   public readonly trading: TradingService;
   public readonly transactionsV2: TransactionsV2Service;
-
   public readonly request: BaseHttpRequest;
-
-  constructor(
-    config?: Partial<OpenAPIConfig>,
-    HttpRequest: HttpRequestConstructor = NodeHttpRequest,
-  ) {
+  constructor(config?: Partial<OpenAPIConfig>, HttpRequest: HttpRequestConstructor = NodeHttpRequest) {
     this.request = new HttpRequest({
       BASE: config?.BASE ?? '',
       VERSION: config?.VERSION ?? '1.0.0',
@@ -56,7 +48,6 @@ export class ApiClient {
       HEADERS: config?.HEADERS,
       ENCODE_PATH: config?.ENCODE_PATH,
     });
-
     this.activity = new ActivityService(this.request);
     this.assetsV2 = new AssetsV2Service(this.request);
     this.chain = new ChainService(this.request);
@@ -73,3 +64,4 @@ export class ApiClient {
     this.transactionsV2 = new TransactionsV2Service(this.request);
   }
 }
+

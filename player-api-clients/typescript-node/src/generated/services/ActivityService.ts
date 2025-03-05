@@ -1,4 +1,4 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -6,13 +6,10 @@ import type { CommonActivityResponse } from '../models/CommonActivityResponse';
 import type { CommonAssetActivityRequestInput } from '../models/CommonAssetActivityRequestInput';
 import type { CommonContractActivityRequestInput } from '../models/CommonContractActivityRequestInput';
 import type { CommonUserActivityRequestInput } from '../models/CommonUserActivityRequestInput';
-
-import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 import type { CancelablePromise } from '../core/CancelablePromise';
-
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class ActivityService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
-
   /**
    * Get user activity
    * @param entityId
@@ -28,13 +25,12 @@ export class ActivityService {
       method: 'POST',
       url: '/v1/player/activity/users/{entityId}',
       path: {
-        entityId: entityId,
+        'entityId': entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
-
   /**
    * Get contract activity
    * @param assetAddress
@@ -50,13 +46,12 @@ export class ActivityService {
       method: 'POST',
       url: '/v1/player/activity/assets/{assetAddress}',
       path: {
-        assetAddress: assetAddress,
+        'assetAddress': assetAddress,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
-
   /**
    * Get asset activity
    * @param assetAddress
@@ -74,8 +69,8 @@ export class ActivityService {
       method: 'POST',
       url: '/v1/player/activity/assets/{assetAddress}/asset/{assetId}',
       path: {
-        assetAddress: assetAddress,
-        assetId: assetId,
+        'assetAddress': assetAddress,
+        'assetId': assetId,
       },
       body: requestBody,
       mediaType: 'application/json',

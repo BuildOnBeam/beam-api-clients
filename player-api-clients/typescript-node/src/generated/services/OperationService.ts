@@ -1,16 +1,13 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
 import type { ConfirmOperationRequest } from '../models/ConfirmOperationRequest';
 import type { PlayerOperationResponse } from '../models/PlayerOperationResponse';
-
-import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 import type { CancelablePromise } from '../core/CancelablePromise';
-
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class OperationService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
-
   /**
    * Returns operation data for given id. Used by Game SDKs to get transaction results.
    * @param opId
@@ -24,11 +21,10 @@ export class OperationService {
       method: 'GET',
       url: '/v1/player/operation/{opId}',
       path: {
-        opId: opId,
+        'opId': opId,
       },
     });
   }
-
   /**
    * Updates operation result for given id
    * @param opId
@@ -44,13 +40,12 @@ export class OperationService {
       method: 'PATCH',
       url: '/v1/player/operation/{opId}',
       path: {
-        opId: opId,
+        'opId': opId,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
-
   /**
    * Delete an operation
    * @param opId
@@ -64,11 +59,10 @@ export class OperationService {
       method: 'DELETE',
       url: '/v1/player/operation/{opId}',
       path: {
-        opId: opId,
+        'opId': opId,
       },
     });
   }
-
   /**
    * Executes operation for given id
    * @param opId
@@ -82,7 +76,7 @@ export class OperationService {
       method: 'POST',
       url: '/v1/player/operation/{opId}/execute',
       path: {
-        opId: opId,
+        'opId': opId,
       },
     });
   }

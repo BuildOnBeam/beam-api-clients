@@ -1,8 +1,7 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 export type SellAssetRequestInput = {
   assetAddress: string;
   assetId: string;
@@ -30,7 +29,6 @@ export type SellAssetRequestInput = {
    */
   authProvider?: SellAssetRequestInput.authProvider | null;
 };
-
 export namespace SellAssetRequestInput {
   export enum sellType {
     FIXED_PRICE = 'FixedPrice',
@@ -38,7 +36,6 @@ export namespace SellAssetRequestInput {
     ASCENDING_AUCTION = 'AscendingAuction',
     NOT_FOR_SALE = 'NotForSale',
   }
-
   export enum currency {
     BEAM = 'BEAM',
     SOPH = 'SOPH',
@@ -47,7 +44,6 @@ export namespace SellAssetRequestInput {
     RAT = 'RAT',
     USDC = 'USDC',
   }
-
   /**
    * Operation processing type. If Execute is used, Operation will be executed automatically right after User signs it. If you prefer to have more control, use SignOnly then Process it using ProcessOperation.
    */
@@ -55,7 +51,6 @@ export namespace SellAssetRequestInput {
     SIGN_ONLY = 'SignOnly',
     EXECUTE = 'Execute',
   }
-
   /**
    * Auth Provider for the user to use. If it's Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI.
    */
@@ -66,3 +61,4 @@ export namespace SellAssetRequestInput {
     APPLE = 'Apple',
   }
 }
+

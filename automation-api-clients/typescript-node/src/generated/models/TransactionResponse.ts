@@ -1,8 +1,7 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 export type TransactionResponse = {
   id: string;
   createdAt: string;
@@ -14,7 +13,7 @@ export type TransactionResponse = {
       value?: string;
       contract?: string;
       functionName?: string;
-      functionArgs?: any[];
+      functionArgs?: Array<any>;
     }> | null;
     hash?: string | null;
   };
@@ -35,7 +34,7 @@ export type TransactionResponse = {
       removed: boolean;
       address: string;
       data: string;
-      topics: string[];
+      topics: Array<string>;
       transactionHash: string;
       logIndex: number;
       orphaned?: boolean | null;
@@ -62,15 +61,14 @@ export type TransactionResponse = {
   explorerUrl: string;
   success: boolean;
 };
-
 export namespace TransactionResponse {
   export enum status {
     PENDING = 'pending',
     SUCCESS = 'success',
   }
-
   export enum type {
     CUSTODIAL = 'custodial',
     SELF_CUSTODIAL = 'self-custodial',
   }
 }
+

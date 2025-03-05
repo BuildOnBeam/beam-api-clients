@@ -1,8 +1,7 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 export type GetTransactionResponse = {
   id: string;
   createdAt: string;
@@ -14,7 +13,7 @@ export type GetTransactionResponse = {
       value?: string;
       contract?: string;
       functionName?: string;
-      functionArgs?: any[];
+      functionArgs?: Array<any>;
     }> | null;
     message?: string | null;
   };
@@ -35,7 +34,7 @@ export type GetTransactionResponse = {
       removed: boolean;
       address: string;
       data: string;
-      topics: string[];
+      topics: Array<string>;
       transactionHash: string;
       logIndex: number;
       orphaned?: boolean | null;
@@ -59,3 +58,4 @@ export type GetTransactionResponse = {
     };
   };
 };
+
