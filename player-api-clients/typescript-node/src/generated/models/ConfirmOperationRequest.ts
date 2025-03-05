@@ -22,4 +22,3 @@ export namespace ConfirmOperationRequest {
     ERROR = 'Error',
   }
 }
-

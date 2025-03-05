@@ -21,7 +21,7 @@ export class OperationService {
       method: 'GET',
       url: '/v1/player/operation/{opId}',
       path: {
-        'opId': opId,
+        opId: opId,
       },
     });
   }
@@ -40,7 +40,7 @@ export class OperationService {
       method: 'PATCH',
       url: '/v1/player/operation/{opId}',
       path: {
-        'opId': opId,
+        opId: opId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -59,7 +59,7 @@ export class OperationService {
       method: 'DELETE',
       url: '/v1/player/operation/{opId}',
       path: {
-        'opId': opId,
+        opId: opId,
       },
     });
   }
@@ -76,7 +76,7 @@ export class OperationService {
       method: 'POST',
       url: '/v1/player/operation/{opId}/execute',
       path: {
-        'opId': opId,
+        opId: opId,
       },
     });
   }

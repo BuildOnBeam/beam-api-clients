@@ -9,4 +9,3 @@ export type BuyAssetRequestInputV2 = {
   policyId?: string | null;
   chainId?: number;
 };
-

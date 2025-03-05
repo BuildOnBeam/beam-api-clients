@@ -9,4 +9,3 @@ export type GetChainCurrenciesResponse = {
     address: string;
   }>;
 };
-

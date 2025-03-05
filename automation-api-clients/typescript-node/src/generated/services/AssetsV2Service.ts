@@ -32,7 +32,7 @@ export class AssetsV2Service {
       method: 'POST',
       url: '/v2/assets/profiles/{entityId}',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -53,10 +53,10 @@ export class AssetsV2Service {
       method: 'GET',
       url: '/v2/assets/profiles/{entityId}/currencies',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       query: {
-        'chainId': chainId,
+        chainId: chainId,
       },
     });
   }
@@ -75,10 +75,10 @@ export class AssetsV2Service {
       method: 'GET',
       url: '/v2/assets/profiles/{entityId}/native',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       query: {
-        'chainId': chainId,
+        chainId: chainId,
       },
     });
   }
@@ -97,7 +97,7 @@ export class AssetsV2Service {
       method: 'POST',
       url: '/v2/assets/profiles/{entityId}/transfer-asset',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -118,7 +118,7 @@ export class AssetsV2Service {
       method: 'POST',
       url: '/v2/assets/profiles/{entityId}/transfer-token',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -139,7 +139,7 @@ export class AssetsV2Service {
       method: 'POST',
       url: '/v2/assets/profiles/{entityId}/transfer-native',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -160,7 +160,7 @@ export class AssetsV2Service {
       method: 'POST',
       url: '/v2/assets/{assetAddress}',
       path: {
-        'assetAddress': assetAddress,
+        assetAddress: assetAddress,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -187,13 +187,13 @@ export class AssetsV2Service {
       method: 'GET',
       url: '/v2/assets/{assetAddress}/{assetId}',
       path: {
-        'assetAddress': assetAddress,
-        'assetId': assetId,
+        assetAddress: assetAddress,
+        assetId: assetId,
       },
       query: {
-        'chainId': chainId,
-        'entityId': entityId,
-        'owners': owners,
+        chainId: chainId,
+        entityId: entityId,
+        owners: owners,
       },
     });
   }

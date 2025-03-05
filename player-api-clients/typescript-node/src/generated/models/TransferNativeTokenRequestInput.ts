@@ -37,4 +37,3 @@ export namespace TransferNativeTokenRequestInput {
     APPLE = 'Apple',
   }
 }
-

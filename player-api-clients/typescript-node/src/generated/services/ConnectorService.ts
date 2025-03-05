@@ -36,7 +36,7 @@ export class ConnectorService {
       method: 'GET',
       url: '/v1/connection/request/{requestId}',
       path: {
-        'requestId': requestId,
+        requestId: requestId,
       },
     });
   }

@@ -34,4 +34,3 @@ export namespace RevokeSessionRequestInput {
     APPLE = 'Apple',
   }
 }
-

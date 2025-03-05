@@ -22,4 +22,3 @@ export type GetProfileResponse = {
     userId: string | null;
   }>;
 };
-

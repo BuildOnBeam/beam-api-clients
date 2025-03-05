@@ -12,4 +12,3 @@ export type TransferTokenRequestInputV2 = {
   policyId?: string | null;
   chainId?: number;
 };
-

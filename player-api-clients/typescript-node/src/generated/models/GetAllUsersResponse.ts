@@ -25,4 +25,3 @@ export type GetAllUsersResponse = {
     offset?: number;
   };
 };
-

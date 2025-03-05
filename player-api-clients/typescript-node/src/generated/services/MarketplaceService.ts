@@ -49,7 +49,7 @@ export class MarketplaceService {
       method: 'POST',
       url: '/v1/player/marketplace/users/{entityId}',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -70,7 +70,7 @@ export class MarketplaceService {
       method: 'POST',
       url: '/v1/player/marketplace/users/{entityId}/listing',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -93,8 +93,8 @@ export class MarketplaceService {
       method: 'POST',
       url: '/v1/player/marketplace/users/{entityId}/listing/{orderId}',
       path: {
-        'entityId': entityId,
-        'orderId': orderId,
+        entityId: entityId,
+        orderId: orderId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -119,11 +119,11 @@ export class MarketplaceService {
       method: 'DELETE',
       url: '/v1/player/marketplace/users/{entityId}/listing/{orderId}',
       path: {
-        'entityId': entityId,
-        'orderId': orderId,
+        entityId: entityId,
+        orderId: orderId,
       },
       query: {
-        'chainId': chainId,
+        chainId: chainId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -144,7 +144,7 @@ export class MarketplaceService {
       method: 'POST',
       url: '/v1/player/marketplace/users/{entityId}/offers',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -167,11 +167,11 @@ export class MarketplaceService {
       method: 'GET',
       url: '/v1/player/marketplace/users/{entityId}/offers',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       query: {
-        'chainId': chainId,
-        'continuation': continuation,
+        chainId: chainId,
+        continuation: continuation,
       },
     });
   }
@@ -196,13 +196,13 @@ export class MarketplaceService {
       method: 'GET',
       url: '/v1/player/marketplace/users/{entityId}/offers/asset/{assetAddress}/{assetId}',
       path: {
-        'entityId': entityId,
-        'assetAddress': assetAddress,
-        'assetId': assetId,
+        entityId: entityId,
+        assetAddress: assetAddress,
+        assetId: assetId,
       },
       query: {
-        'chainId': chainId,
-        'continuation': continuation,
+        chainId: chainId,
+        continuation: continuation,
       },
     });
   }
@@ -223,8 +223,8 @@ export class MarketplaceService {
       method: 'POST',
       url: '/v1/player/marketplace/users/{entityId}/offers/{offerId}/accept',
       path: {
-        'entityId': entityId,
-        'offerId': offerId,
+        entityId: entityId,
+        offerId: offerId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -247,8 +247,8 @@ export class MarketplaceService {
       method: 'DELETE',
       url: '/v1/player/marketplace/users/{entityId}/offers/{offerId}',
       path: {
-        'entityId': entityId,
-        'offerId': offerId,
+        entityId: entityId,
+        offerId: offerId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -273,12 +273,12 @@ export class MarketplaceService {
       method: 'GET',
       url: '/v1/player/marketplace/offers/asset/{assetAddress}/{assetId}',
       path: {
-        'assetAddress': assetAddress,
-        'assetId': assetId,
+        assetAddress: assetAddress,
+        assetId: assetId,
       },
       query: {
-        'chainId': chainId,
-        'continuation': continuation,
+        chainId: chainId,
+        continuation: continuation,
       },
     });
   }
@@ -295,7 +295,7 @@ export class MarketplaceService {
       method: 'GET',
       url: '/v1/player/marketplace/chain-currencies/{chainId}',
       path: {
-        'chainId': chainId,
+        chainId: chainId,
       },
     });
   }

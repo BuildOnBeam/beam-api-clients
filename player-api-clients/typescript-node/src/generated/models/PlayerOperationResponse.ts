@@ -13,7 +13,22 @@ export type PlayerOperationResponse = {
   userId: string;
   chainId: number;
   actions: Array<{
-    type: 'FiatOnRamp' | 'Sign' | 'SessionRevoke' | 'MarketplaceCreateOffer' | 'MarketplaceCancelOffer' | 'MarketplaceAcceptOffer' | 'MarketplaceBuyAsset' | 'MarketplaceListAsset' | 'MarketplaceCancelListing' | 'ExchangeConvert' | 'ExchangeWrap' | 'ExchangeUnwrap' | 'TransferNFTs' | 'TransferToken' | 'CustomTransaction';
+    type:
+      | 'FiatOnRamp'
+      | 'Sign'
+      | 'SessionRevoke'
+      | 'MarketplaceCreateOffer'
+      | 'MarketplaceCancelOffer'
+      | 'MarketplaceAcceptOffer'
+      | 'MarketplaceBuyAsset'
+      | 'MarketplaceListAsset'
+      | 'MarketplaceCancelListing'
+      | 'ExchangeConvert'
+      | 'ExchangeWrap'
+      | 'ExchangeUnwrap'
+      | 'TransferNFTs'
+      | 'TransferToken'
+      | 'CustomTransaction';
     id: string;
     index: number;
     operationId: string | null;
@@ -45,7 +60,11 @@ export type PlayerOperationResponse = {
     sponsored: boolean;
     actionId: string | null;
     hash?: string | null;
-    type: 'OpenfortTransaction' | 'OpenfortReservoirOrder' | 'OpenfortRevokeSession' | null;
+    type:
+      | 'OpenfortTransaction'
+      | 'OpenfortReservoirOrder'
+      | 'OpenfortRevokeSession'
+      | null;
     externalId: string | null;
     signature: string | null;
     transactionHash: string | null;
@@ -73,4 +92,3 @@ export namespace PlayerOperationResponse {
     APPLE = 'Apple',
   }
 }
-

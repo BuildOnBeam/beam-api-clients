@@ -34,4 +34,3 @@ export type GetGasUsageResponse = {
     profilesCount: number;
   };
 };
-

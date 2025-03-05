@@ -50,7 +50,7 @@ export class PolicyService {
       method: 'DELETE',
       url: '/v1/policies/{policyId}',
       path: {
-        'policyId': policyId,
+        policyId: policyId,
       },
     });
   }

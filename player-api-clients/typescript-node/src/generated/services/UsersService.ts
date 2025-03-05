@@ -17,15 +17,15 @@ export class UsersService {
    * @throws ApiError
    */
   public getAllUsers(
-    limit: number = 10,
-    offset: number = 0,
+    limit = 10,
+    offset = 0,
   ): CancelablePromise<GetAllUsersResponse> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v1/player/users',
       query: {
-        'limit': limit,
-        'offset': offset,
+        limit: limit,
+        offset: offset,
       },
     });
   }
@@ -35,14 +35,12 @@ export class UsersService {
    * @returns GetUserResponse
    * @throws ApiError
    */
-  public getUser(
-    entityId: string,
-  ): CancelablePromise<GetUserResponse> {
+  public getUser(entityId: string): CancelablePromise<GetUserResponse> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v1/player/users/{entityId}',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
     });
   }
@@ -61,7 +59,7 @@ export class UsersService {
       method: 'PATCH',
       url: '/v1/player/users/{entityId}',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -73,14 +71,12 @@ export class UsersService {
    * @returns GetUserResponse
    * @throws ApiError
    */
-  public unlinkUser(
-    entityId: string,
-  ): CancelablePromise<GetUserResponse> {
+  public unlinkUser(entityId: string): CancelablePromise<GetUserResponse> {
     return this.httpRequest.request({
       method: 'DELETE',
       url: '/v1/player/users/{entityId}',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
     });
   }

@@ -29,4 +29,3 @@ export type GetAllProfilesResponse = {
     offset?: number;
   };
 };
-

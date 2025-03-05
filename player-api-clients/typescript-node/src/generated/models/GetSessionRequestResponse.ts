@@ -18,4 +18,3 @@ export namespace GetSessionRequestResponse {
     ERROR = 'Error',
   }
 }
-

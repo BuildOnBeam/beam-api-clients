@@ -12,4 +12,3 @@ export type BeamErrorResponse = {
   message?: string;
   traceId?: string;
 };
-

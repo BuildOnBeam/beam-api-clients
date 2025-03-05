@@ -44,4 +44,3 @@ export namespace CreateAssetOfferRequestInput {
     APPLE = 'Apple',
   }
 }
-

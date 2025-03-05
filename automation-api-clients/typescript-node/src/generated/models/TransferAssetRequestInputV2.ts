@@ -15,4 +15,3 @@ export type TransferAssetRequestInputV2 = {
   policyId?: string | null;
   chainId?: number;
 };
-

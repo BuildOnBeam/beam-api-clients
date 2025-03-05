@@ -28,7 +28,7 @@ export class SessionsService {
       method: 'POST',
       url: '/v1/player/sessions/users/{entityId}/request',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -48,7 +48,7 @@ export class SessionsService {
       method: 'POST',
       url: '/v1/player/sessions/users/{entityId}/revoke',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -66,7 +66,7 @@ export class SessionsService {
       method: 'GET',
       url: '/v1/player/sessions/request/{requestId}',
       path: {
-        'requestId': requestId,
+        requestId: requestId,
       },
     });
   }
@@ -84,10 +84,10 @@ export class SessionsService {
       method: 'GET',
       url: '/v1/player/sessions/users/{entityId}/active',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       query: {
-        'chainId': chainId,
+        chainId: chainId,
       },
     });
   }
@@ -108,11 +108,11 @@ export class SessionsService {
       method: 'GET',
       url: '/v1/player/sessions/users/{entityId}/{accountAddress}/active',
       path: {
-        'entityId': entityId,
-        'accountAddress': accountAddress,
+        entityId: entityId,
+        accountAddress: accountAddress,
       },
       query: {
-        'chainId': chainId,
+        chainId: chainId,
       },
     });
   }
@@ -132,11 +132,11 @@ export class SessionsService {
       method: 'GET',
       url: '/v2/player/sessions/users/{entityId}/{accountAddress}/active',
       path: {
-        'entityId': entityId,
-        'accountAddress': accountAddress,
+        entityId: entityId,
+        accountAddress: accountAddress,
       },
       query: {
-        'chainId': chainId,
+        chainId: chainId,
       },
     });
   }

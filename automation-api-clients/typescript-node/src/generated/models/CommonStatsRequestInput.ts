@@ -9,4 +9,3 @@ export type CommonStatsRequestInput = {
   }> | null;
   chainId?: number;
 };
-

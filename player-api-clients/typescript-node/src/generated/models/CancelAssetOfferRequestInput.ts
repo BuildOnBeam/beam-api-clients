@@ -34,4 +34,3 @@ export namespace CancelAssetOfferRequestInput {
     APPLE = 'Apple',
   }
 }
-

@@ -9,4 +9,3 @@ export type CancelAssetOfferRequestInputV2 = {
   policyId?: string | null;
   chainId?: number;
 };
-

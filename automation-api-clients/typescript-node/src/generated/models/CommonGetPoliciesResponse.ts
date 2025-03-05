@@ -11,4 +11,3 @@ export type CommonGetPoliciesResponse = {
     depositorId: string | null;
   }>;
 };
-

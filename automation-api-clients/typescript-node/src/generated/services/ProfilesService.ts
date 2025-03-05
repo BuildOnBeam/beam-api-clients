@@ -40,15 +40,15 @@ export class ProfilesService {
    * @throws ApiError
    */
   public getAllProfiles(
-    limit: number = 10,
-    offset: number = 0,
+    limit = 10,
+    offset = 0,
   ): CancelablePromise<GetAllProfilesResponse> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v1/profiles',
       query: {
-        'limit': limit,
-        'offset': offset,
+        limit: limit,
+        offset: offset,
       },
     });
   }
@@ -58,14 +58,12 @@ export class ProfilesService {
    * @returns GetProfileResponse
    * @throws ApiError
    */
-  public getProfile(
-    entityId: string,
-  ): CancelablePromise<GetProfileResponse> {
+  public getProfile(entityId: string): CancelablePromise<GetProfileResponse> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v1/profiles/{entityId}',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
     });
   }
@@ -84,7 +82,7 @@ export class ProfilesService {
       method: 'PATCH',
       url: '/v1/profiles/{entityId}',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -106,7 +104,7 @@ export class ProfilesService {
       method: 'POST',
       url: '/v1/profiles/{entityId}/create-connection-request',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -128,7 +126,7 @@ export class ProfilesService {
       method: 'POST',
       url: '/v1/profiles/{entityId}/create-sign-in-request',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',

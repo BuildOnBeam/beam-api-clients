@@ -32,7 +32,10 @@ export class ApiClient {
   public readonly transactions: TransactionsService;
   public readonly users: UsersService;
   public readonly request: BaseHttpRequest;
-  constructor(config?: Partial<OpenAPIConfig>, HttpRequest: HttpRequestConstructor = FetchHttpRequest) {
+  constructor(
+    config?: Partial<OpenAPIConfig>,
+    HttpRequest: HttpRequestConstructor = FetchHttpRequest,
+  ) {
     this.request = new HttpRequest({
       BASE: config?.BASE ?? '',
       VERSION: config?.VERSION ?? '1.0.0',
@@ -58,4 +61,3 @@ export class ApiClient {
     this.users = new UsersService(this.request);
   }
 }
-

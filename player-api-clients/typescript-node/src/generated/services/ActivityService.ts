@@ -25,7 +25,7 @@ export class ActivityService {
       method: 'POST',
       url: '/v1/player/activity/users/{entityId}',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -46,7 +46,7 @@ export class ActivityService {
       method: 'POST',
       url: '/v1/player/activity/assets/{assetAddress}',
       path: {
-        'assetAddress': assetAddress,
+        assetAddress: assetAddress,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -69,8 +69,8 @@ export class ActivityService {
       method: 'POST',
       url: '/v1/player/activity/assets/{assetAddress}/asset/{assetId}',
       path: {
-        'assetAddress': assetAddress,
-        'assetId': assetId,
+        assetAddress: assetAddress,
+        assetId: assetId,
       },
       body: requestBody,
       mediaType: 'application/json',

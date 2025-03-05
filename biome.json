@@ -1,13 +1,16 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "files": {
+    "ignoreUnknown": true,
     "ignore": [
       "pnpm-lock.yaml",
       "./automation-api-clients/typescript-node/src/generated/core/request.ts",
-      "./player-api-clients/typescript-node/src/generated/core/request.ts",
+      "./automation-api-clients/typescript-node/src/generated/core/CancelablePromise.ts",
       "./automation-api-clients/typescript-node/src/generated/core/NodeHttpRequest.ts",
-      "./player-api-clients/typescript-node/src/generated/core/NodeHttpRequest.ts",
       "./automation-api-clients/csharp/*",
+      "./player-api-clients/typescript-node/src/generated/core/request.ts",
+      "./player-api-clients/typescript-node/src/generated/core/CancelablePromise.ts",
+      "./player-api-clients/typescript-node/src/generated/core/NodeHttpRequest.ts",
       "./player-api-clients/csharp/*"
     ]
   },
@@ -24,36 +27,30 @@
       "complexity": {
         "noForEach": "off",
         "noBannedTypes": "off",
-        "useLiteralKeys": "off"
-      },
-      "correctness": {
-        "useExhaustiveDependencies": "error",
-        "noUnusedVariables": "off"
-      },
-      "nursery": {
-        "useGroupedTypeImport": "off"
+        "noExtraBooleanCast": "off"
       },
       "performance": {
-        "noAccumulatingSpread": "off",
-        "noDelete": "off"
+        "noAccumulatingSpread": "off"
       },
       "style": {
-        "noNonNullAssertion": "off",
-        "useShorthandArrayType": "error"
+        "useImportType": "off",
+        "noNonNullAssertion": "off"
       },
       "suspicious": {
-        "noPrototypeBuiltins": "off",
-        "noArrayIndexKey": "off",
         "noExplicitAny": "off",
         "noRedeclare": "off",
         "noConsoleLog": "error"
+      },
+      "correctness": {
+        "noUnusedImports": "error",
+        "noUnusedVariables": "off"
       }
     }
   },
   "javascript": {
     "formatter": {
       "quoteStyle": "single",
-      "trailingComma": "all",
+      "trailingCommas": "all",
       "semicolons": "always"
     },
     "parser": {
@@ -61,7 +58,7 @@
     }
   },
   "organizeImports": {
-    "enabled": true
+    "enabled": false
   },
   "vcs": {
     "enabled": true,

@@ -9,4 +9,3 @@ export type GetActiveSessionResponse = {
   endTime: string;
   sessionAddress: string;
 };
-

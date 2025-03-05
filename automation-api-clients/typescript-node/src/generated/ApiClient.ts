@@ -36,7 +36,10 @@ export class ApiClient {
   public readonly trading: TradingService;
   public readonly transactionsV2: TransactionsV2Service;
   public readonly request: BaseHttpRequest;
-  constructor(config?: Partial<OpenAPIConfig>, HttpRequest: HttpRequestConstructor = FetchHttpRequest) {
+  constructor(
+    config?: Partial<OpenAPIConfig>,
+    HttpRequest: HttpRequestConstructor = FetchHttpRequest,
+  ) {
     this.request = new HttpRequest({
       BASE: config?.BASE ?? '',
       VERSION: config?.VERSION ?? '1.0.0',
@@ -64,4 +67,3 @@ export class ApiClient {
     this.transactionsV2 = new TransactionsV2Service(this.request);
   }
 }
-

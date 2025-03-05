@@ -5,4 +5,3 @@
 export type GenerateSignInCodeResponse = {
   challenge: string;
 };
-

@@ -48,4 +48,3 @@ export type GetTransactionsResponse = {
     offset?: number;
   };
 };
-

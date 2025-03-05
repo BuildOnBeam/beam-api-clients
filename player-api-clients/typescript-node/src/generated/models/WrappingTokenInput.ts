@@ -35,4 +35,3 @@ export namespace WrappingTokenInput {
     APPLE = 'Apple',
   }
 }
-

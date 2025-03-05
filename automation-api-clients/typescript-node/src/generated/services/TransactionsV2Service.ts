@@ -17,15 +17,15 @@ export class TransactionsV2Service {
    * @throws ApiError
    */
   public getTransactionsV2(
-    limit: number = 10,
-    offset: number = 0,
+    limit = 10,
+    offset = 0,
   ): CancelablePromise<GetTransactionsResponseV2> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v2/transactions',
       query: {
-        'limit': limit,
-        'offset': offset,
+        limit: limit,
+        offset: offset,
       },
     });
   }
@@ -42,7 +42,7 @@ export class TransactionsV2Service {
       method: 'GET',
       url: '/v2/transactions/{transactionId}',
       path: {
-        'transactionId': transactionId,
+        transactionId: transactionId,
       },
     });
   }
@@ -56,18 +56,18 @@ export class TransactionsV2Service {
    */
   public getProfileTransactionsV2(
     entityId: string,
-    limit: number = 10,
-    offset: number = 0,
+    limit = 10,
+    offset = 0,
   ): CancelablePromise<GetTransactionsResponseV2> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v2/transactions/profiles/{entityId}',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       query: {
-        'limit': limit,
-        'offset': offset,
+        limit: limit,
+        offset: offset,
       },
     });
   }
@@ -86,7 +86,7 @@ export class TransactionsV2Service {
       method: 'POST',
       url: '/v2/transactions/profiles/{entityId}',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',

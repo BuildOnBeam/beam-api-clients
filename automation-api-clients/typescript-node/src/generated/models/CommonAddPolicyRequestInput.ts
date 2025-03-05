@@ -14,4 +14,3 @@ export namespace CommonAddPolicyRequestInput {
     DYNAMIC = 'Dynamic',
   }
 }
-

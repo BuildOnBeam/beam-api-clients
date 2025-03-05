@@ -20,4 +20,3 @@ export namespace CreateAssetOfferRequestInputV2 {
     USDC = 'USDC',
   }
 }
-

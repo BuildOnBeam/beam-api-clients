@@ -21,4 +21,3 @@ export namespace GetAssetsForProfileBodyInputV2 {
     LAST_APPRAISAL_VALUE = 'lastAppraisalValue',
   }
 }
-

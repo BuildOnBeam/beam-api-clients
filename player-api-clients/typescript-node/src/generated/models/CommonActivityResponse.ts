@@ -20,8 +20,15 @@ export type CommonActivityResponse = {
     order?: {
       id?: string | null;
     } | null;
-    type?: 'ask' | 'ask_cancel' | 'bid' | 'bid_cancel' | 'sale' | 'mint' | 'transfer' | null;
+    type?:
+      | 'ask'
+      | 'ask_cancel'
+      | 'bid'
+      | 'bid_cancel'
+      | 'sale'
+      | 'mint'
+      | 'transfer'
+      | null;
   }>;
   continuation?: string | null;
 };
-

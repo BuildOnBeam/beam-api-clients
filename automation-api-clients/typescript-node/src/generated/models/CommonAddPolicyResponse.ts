@@ -16,4 +16,3 @@ export namespace CommonAddPolicyResponse {
     DYNAMIC = 'Dynamic',
   }
 }
-

@@ -7,4 +7,3 @@ export type CancelAssetListingRequestInputV2 = {
   sponsor?: boolean;
   policyId?: string | null;
 };
-

@@ -34,4 +34,3 @@ export namespace GetAssetResponseV2 {
     EXTREMELY_RARE = 'ExtremelyRare',
   }
 }
-

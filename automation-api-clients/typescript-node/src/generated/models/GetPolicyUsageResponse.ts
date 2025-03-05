@@ -29,4 +29,3 @@ export namespace GetPolicyUsageResponse {
     ACCOUNT_FUNCTIONS = 'AccountFunctions',
   }
 }
-

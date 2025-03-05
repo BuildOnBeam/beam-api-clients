@@ -11,4 +11,3 @@ export type GetActiveSessionResponseV2 = {
     sessionAddress: string;
   } | null;
 };
-

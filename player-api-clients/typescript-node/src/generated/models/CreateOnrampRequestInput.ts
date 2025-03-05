@@ -28,4 +28,3 @@ export namespace CreateOnrampRequestInput {
     APPLE = 'Apple',
   }
 }
-

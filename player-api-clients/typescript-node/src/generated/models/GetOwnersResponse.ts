@@ -13,4 +13,3 @@ export type GetOwnersResponse = {
     offset?: number;
   };
 };
-

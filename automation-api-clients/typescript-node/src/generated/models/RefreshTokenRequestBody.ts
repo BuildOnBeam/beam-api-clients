@@ -7,4 +7,3 @@ export type RefreshTokenRequestBody = {
   tokenId: string;
   chainId?: number;
 };
-

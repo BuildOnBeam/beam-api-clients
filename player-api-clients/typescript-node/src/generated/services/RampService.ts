@@ -22,7 +22,7 @@ export class RampService {
       method: 'POST',
       url: '/v1/player/ramp/on/{entityId}',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',

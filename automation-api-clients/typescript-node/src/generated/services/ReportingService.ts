@@ -33,7 +33,7 @@ export class ReportingService {
       method: 'GET',
       url: '/v1/reporting/gas/{chainId}',
       path: {
-        'chainId': chainId,
+        chainId: chainId,
       },
     });
   }
@@ -50,7 +50,7 @@ export class ReportingService {
       method: 'GET',
       url: '/v1/reporting/gas/policies/{policyId}',
       path: {
-        'policyId': policyId,
+        policyId: policyId,
       },
     });
   }

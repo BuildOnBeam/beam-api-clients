@@ -5,4 +5,3 @@
 export type GenerateLinkCodeRequestInput = {
   callbackUrl?: string | null;
 };
-

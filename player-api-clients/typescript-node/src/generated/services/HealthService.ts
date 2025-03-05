@@ -20,7 +20,7 @@ export class HealthService {
       method: 'GET',
       url: '/v1/health/services',
       errors: {
-        503: `The Health Check is not successful`,
+        503: 'The Health Check is not successful',
       },
     });
   }

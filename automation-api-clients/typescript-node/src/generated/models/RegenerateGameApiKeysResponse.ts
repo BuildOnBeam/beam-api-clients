@@ -4,7 +4,16 @@
 /* eslint-disable */
 export type RegenerateGameApiKeysResponse = {
   pegiRating: RegenerateGameApiKeysResponse.pegiRating | null;
-  pegiContent: Array<'BadLanguage' | 'Discrimination' | 'Drugs' | 'Fear' | 'Gambling' | 'Sex' | 'Violence' | 'InGamePurchases'>;
+  pegiContent: Array<
+    | 'BadLanguage'
+    | 'Discrimination'
+    | 'Drugs'
+    | 'Fear'
+    | 'Gambling'
+    | 'Sex'
+    | 'Violence'
+    | 'InGamePurchases'
+  >;
   id: string;
   createdAt: string;
   updatedAt: string;
@@ -33,4 +42,3 @@ export namespace RegenerateGameApiKeysResponse {
     EIGHTEEN = 'Eighteen',
   }
 }
-

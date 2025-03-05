@@ -15,4 +15,3 @@ export namespace GetConnectionRequestResponse {
     ERROR = 'Error',
   }
 }
-

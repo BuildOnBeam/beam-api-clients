@@ -31,4 +31,3 @@ export namespace GetAssetsForContractBodyInputV2 {
     MINTED_AT = 'mintedAt',
   }
 }
-

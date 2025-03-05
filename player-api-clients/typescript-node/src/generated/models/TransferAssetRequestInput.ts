@@ -41,4 +41,3 @@ export namespace TransferAssetRequestInput {
     APPLE = 'Apple',
   }
 }
-

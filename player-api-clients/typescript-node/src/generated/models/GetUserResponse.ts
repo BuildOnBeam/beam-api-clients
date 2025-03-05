@@ -20,4 +20,3 @@ export type GetUserResponse = {
     entityId: string;
   }>;
 };
-

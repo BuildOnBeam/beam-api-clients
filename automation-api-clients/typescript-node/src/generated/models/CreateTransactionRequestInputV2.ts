@@ -14,4 +14,3 @@ export type CreateTransactionRequestInputV2 = {
   policyId?: string | null;
   chainId?: number;
 };
-

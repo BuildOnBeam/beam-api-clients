@@ -37,4 +37,3 @@ export namespace SellAssetRequestInputV2 {
     USDC = 'USDC',
   }
 }
-

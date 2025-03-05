@@ -27,4 +27,3 @@ export namespace GetListedAssetsBodyInputV2 {
     DESC = 'desc',
   }
 }
-

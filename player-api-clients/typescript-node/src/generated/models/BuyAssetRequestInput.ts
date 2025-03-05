@@ -35,4 +35,3 @@ export namespace BuyAssetRequestInput {
     APPLE = 'Apple',
   }
 }
-

@@ -61,4 +61,3 @@ export namespace SellAssetRequestInput {
     APPLE = 'Apple',
   }
 }
-

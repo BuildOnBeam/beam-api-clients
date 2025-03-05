@@ -18,15 +18,15 @@ export class TransactionsService {
    * @throws ApiError
    */
   public getTransactions(
-    limit: number = 10,
-    offset: number = 0,
+    limit = 10,
+    offset = 0,
   ): CancelablePromise<GetTransactionsResponse> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v1/player/transactions',
       query: {
-        'limit': limit,
-        'offset': offset,
+        limit: limit,
+        offset: offset,
       },
     });
   }
@@ -43,7 +43,7 @@ export class TransactionsService {
       method: 'GET',
       url: '/v1/player/transactions/{transactionId}',
       path: {
-        'transactionId': transactionId,
+        transactionId: transactionId,
       },
     });
   }
@@ -57,18 +57,18 @@ export class TransactionsService {
    */
   public getUserTransactions(
     entityId: string,
-    limit: number = 10,
-    offset: number = 0,
+    limit = 10,
+    offset = 0,
   ): CancelablePromise<GetTransactionsResponse> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v1/player/transactions/users/{entityId}',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       query: {
-        'limit': limit,
-        'offset': offset,
+        limit: limit,
+        offset: offset,
       },
     });
   }
@@ -87,7 +87,7 @@ export class TransactionsService {
       method: 'POST',
       url: '/v1/player/transactions/users/{entityId}',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',

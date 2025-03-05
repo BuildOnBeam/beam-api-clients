@@ -6,4 +6,3 @@ export type RefreshContractRequestBody = {
   assetAddress: string;
   chainId?: number;
 };
-

@@ -7,4 +7,3 @@ export type MigrateRequestInput = {
   userEntityId: string;
   chainId?: number;
 };
-

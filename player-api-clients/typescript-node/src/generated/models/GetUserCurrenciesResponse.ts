@@ -13,4 +13,3 @@ export type GetUserCurrenciesResponse = {
     balance: string;
   }>;
 };
-

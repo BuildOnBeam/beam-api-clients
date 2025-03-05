@@ -9,4 +9,3 @@ export type WrappingTokenInput = {
   policyId?: string | null;
   chainId?: number;
 };
-

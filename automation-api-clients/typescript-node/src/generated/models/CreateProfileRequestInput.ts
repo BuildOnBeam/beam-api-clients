@@ -6,4 +6,3 @@ export type CreateProfileRequestInput = {
   entityId: string;
   chainId?: number;
 };
-

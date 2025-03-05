@@ -30,10 +30,10 @@ export class ExchangeService {
       method: 'GET',
       url: '/v1/exchange/quote/input',
       query: {
-        'tokenIn': tokenIn,
-        'tokenOut': tokenOut,
-        'amountOut': amountOut,
-        'chainId': chainId,
+        tokenIn: tokenIn,
+        tokenOut: tokenOut,
+        amountOut: amountOut,
+        chainId: chainId,
       },
     });
   }
@@ -56,10 +56,10 @@ export class ExchangeService {
       method: 'GET',
       url: '/v1/exchange/quote/output',
       query: {
-        'tokenIn': tokenIn,
-        'tokenOut': tokenOut,
-        'amountIn': amountIn,
-        'chainId': chainId,
+        tokenIn: tokenIn,
+        tokenOut: tokenOut,
+        amountIn: amountIn,
+        chainId: chainId,
       },
     });
   }
@@ -78,7 +78,7 @@ export class ExchangeService {
       method: 'POST',
       url: '/v1/exchange/profiles/{entityId}/convert/input',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -99,7 +99,7 @@ export class ExchangeService {
       method: 'POST',
       url: '/v1/exchange/profiles/{entityId}/convert/output',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -120,7 +120,7 @@ export class ExchangeService {
       method: 'POST',
       url: '/v1/exchange/profiles/{entityId}/native/wrap',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -141,7 +141,7 @@ export class ExchangeService {
       method: 'POST',
       url: '/v1/exchange/profiles/{entityId}/native/unwrap',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',

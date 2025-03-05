@@ -5,4 +5,3 @@
 export type CreateOfferResponseV2 = {
   offerId: string;
 };
-

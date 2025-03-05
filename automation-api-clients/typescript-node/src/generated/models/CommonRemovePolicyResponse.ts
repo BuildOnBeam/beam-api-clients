@@ -5,4 +5,3 @@
 export type CommonRemovePolicyResponse = {
   success: boolean;
 };
-

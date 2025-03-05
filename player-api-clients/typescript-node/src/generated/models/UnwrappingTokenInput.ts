@@ -35,4 +35,3 @@ export namespace UnwrappingTokenInput {
     APPLE = 'Apple',
   }
 }
-

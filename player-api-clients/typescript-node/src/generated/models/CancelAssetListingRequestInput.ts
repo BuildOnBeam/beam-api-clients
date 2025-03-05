@@ -33,4 +33,3 @@ export namespace CancelAssetListingRequestInput {
     APPLE = 'Apple',
   }
 }
-

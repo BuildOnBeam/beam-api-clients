@@ -23,7 +23,7 @@ export class StatsService {
       method: 'POST',
       url: '/v1/player/stats/{assetAddress}',
       path: {
-        'assetAddress': assetAddress,
+        assetAddress: assetAddress,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -46,8 +46,8 @@ export class StatsService {
       method: 'POST',
       url: '/v1/player/stats/{assetAddress}/assets/{assetId}',
       path: {
-        'assetAddress': assetAddress,
-        'assetId': assetId,
+        assetAddress: assetAddress,
+        assetId: assetId,
       },
       body: requestBody,
       mediaType: 'application/json',

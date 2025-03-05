@@ -40,4 +40,3 @@ export type GetAssetListingsResponseV2 = {
   }>;
   continuation?: string | null;
 };
-

@@ -22,4 +22,3 @@ export namespace GenerateSessionUrlRequestInput {
     APPLE = 'Apple',
   }
 }
-

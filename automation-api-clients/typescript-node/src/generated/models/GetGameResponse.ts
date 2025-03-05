@@ -4,7 +4,16 @@
 /* eslint-disable */
 export type GetGameResponse = {
   pegiRating: GetGameResponse.pegiRating | null;
-  pegiContent: Array<'BadLanguage' | 'Discrimination' | 'Drugs' | 'Fear' | 'Gambling' | 'Sex' | 'Violence' | 'InGamePurchases'>;
+  pegiContent: Array<
+    | 'BadLanguage'
+    | 'Discrimination'
+    | 'Drugs'
+    | 'Fear'
+    | 'Gambling'
+    | 'Sex'
+    | 'Violence'
+    | 'InGamePurchases'
+  >;
   id: string;
   createdAt: string;
   updatedAt: string;
@@ -75,4 +84,3 @@ export namespace GetGameResponse {
     EIGHTEEN = 'Eighteen',
   }
 }
-

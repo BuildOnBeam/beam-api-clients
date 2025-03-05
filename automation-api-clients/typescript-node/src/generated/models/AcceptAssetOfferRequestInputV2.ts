@@ -10,4 +10,3 @@ export type AcceptAssetOfferRequestInputV2 = {
   policyId?: string | null;
   chainId?: number;
 };
-

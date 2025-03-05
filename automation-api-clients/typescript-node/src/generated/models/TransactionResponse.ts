@@ -71,4 +71,3 @@ export namespace TransactionResponse {
     SELF_CUSTODIAL = 'self-custodial',
   }
 }
-

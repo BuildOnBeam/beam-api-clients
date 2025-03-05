@@ -10,7 +10,13 @@ export type GetAssetsForContractResponse = {
     assetAddress: string;
     assetId: string;
     supply: number;
-    rarity?: 'Common' | 'Uncommon' | 'Rare' | 'VeryRare' | 'ExtremelyRare' | null;
+    rarity?:
+      | 'Common'
+      | 'Uncommon'
+      | 'Rare'
+      | 'VeryRare'
+      | 'ExtremelyRare'
+      | null;
     rarityScore?: number | null;
     updatedAt?: string | null;
     mintedAt?: string | null;
@@ -25,4 +31,3 @@ export type GetAssetsForContractResponse = {
   }>;
   continuation?: string | null;
 };
-

@@ -20,4 +20,3 @@ export namespace GetOwnerAssetsBodyInput {
     LAST_APPRAISAL_VALUE = 'lastAppraisalValue',
   }
 }
-

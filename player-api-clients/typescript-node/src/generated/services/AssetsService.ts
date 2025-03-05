@@ -36,7 +36,7 @@ export class AssetsService {
       method: 'POST',
       url: '/v1/player/assets/users/{entityId}',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -57,10 +57,10 @@ export class AssetsService {
       method: 'GET',
       url: '/v1/player/assets/users/{entityId}/currencies',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       query: {
-        'chainId': chainId,
+        chainId: chainId,
       },
     });
   }
@@ -79,10 +79,10 @@ export class AssetsService {
       method: 'GET',
       url: '/v1/player/assets/users/{entityId}/native',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       query: {
-        'chainId': chainId,
+        chainId: chainId,
       },
     });
   }
@@ -101,7 +101,7 @@ export class AssetsService {
       method: 'POST',
       url: '/v1/player/assets/users/{entityId}/transfer-asset',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -122,7 +122,7 @@ export class AssetsService {
       method: 'POST',
       url: '/v1/player/assets/users/{entityId}/transfer-token',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -143,7 +143,7 @@ export class AssetsService {
       method: 'POST',
       url: '/v1/player/assets/users/{entityId}/transfer-native',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -164,7 +164,7 @@ export class AssetsService {
       method: 'POST',
       url: '/v1/player/assets/{assetAddress}/assets',
       path: {
-        'assetAddress': assetAddress,
+        assetAddress: assetAddress,
       },
       body: requestBody,
       mediaType: 'application/json',
@@ -191,13 +191,13 @@ export class AssetsService {
       method: 'GET',
       url: '/v1/player/assets/{assetAddress}/assets/{assetId}',
       path: {
-        'assetAddress': assetAddress,
-        'assetId': assetId,
+        assetAddress: assetAddress,
+        assetId: assetId,
       },
       query: {
-        'chainId': chainId,
-        'entityId': entityId,
-        'owners': owners,
+        chainId: chainId,
+        entityId: entityId,
+        owners: owners,
       },
     });
   }
@@ -215,10 +215,10 @@ export class AssetsService {
       method: 'GET',
       url: '/v1/player/assets/{assetAddress}/attributes',
       path: {
-        'assetAddress': assetAddress,
+        assetAddress: assetAddress,
       },
       query: {
-        'chainId': chainId,
+        chainId: chainId,
       },
     });
   }
@@ -233,19 +233,19 @@ export class AssetsService {
   public getOwners(
     assetAddress: string,
     chainId: number,
-    limit: number = 10,
-    offset: number = 0,
+    limit = 10,
+    offset = 0,
   ): CancelablePromise<GetOwnersResponse> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v1/player/assets/{assetAddress}/owners',
       path: {
-        'assetAddress': assetAddress,
+        assetAddress: assetAddress,
       },
       query: {
-        'chainId': chainId,
-        'limit': limit,
-        'offset': offset,
+        chainId: chainId,
+        limit: limit,
+        offset: offset,
       },
     });
   }
@@ -265,8 +265,8 @@ export class AssetsService {
       method: 'POST',
       url: '/v1/player/assets/{assetAddress}/owners/{ownerAddress}/assets',
       path: {
-        'assetAddress': assetAddress,
-        'ownerAddress': ownerAddress,
+        assetAddress: assetAddress,
+        ownerAddress: ownerAddress,
       },
       body: requestBody,
       mediaType: 'application/json',
