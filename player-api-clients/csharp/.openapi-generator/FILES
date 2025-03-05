@@ -23,6 +23,8 @@ src/BeamPlayerClient/Client/ApiResponseEventArgs.cs
 src/BeamPlayerClient/Client/ApiResponse`1.cs
 src/BeamPlayerClient/Client/ClientUtils.cs
 src/BeamPlayerClient/Client/CookieContainer.cs
+src/BeamPlayerClient/Client/DateOnlyJsonConverter.cs
+src/BeamPlayerClient/Client/DateOnlyNullableJsonConverter.cs
 src/BeamPlayerClient/Client/DateTimeJsonConverter.cs
 src/BeamPlayerClient/Client/DateTimeNullableJsonConverter.cs
 src/BeamPlayerClient/Client/ExceptionEventArgs.cs

@@ -25,6 +25,8 @@ src/BeamAutomationClient/Client/ApiResponseEventArgs.cs
 src/BeamAutomationClient/Client/ApiResponse`1.cs
 src/BeamAutomationClient/Client/ClientUtils.cs
 src/BeamAutomationClient/Client/CookieContainer.cs
+src/BeamAutomationClient/Client/DateOnlyJsonConverter.cs
+src/BeamAutomationClient/Client/DateOnlyNullableJsonConverter.cs
 src/BeamAutomationClient/Client/DateTimeJsonConverter.cs
 src/BeamAutomationClient/Client/DateTimeNullableJsonConverter.cs
 src/BeamAutomationClient/Client/ExceptionEventArgs.cs
