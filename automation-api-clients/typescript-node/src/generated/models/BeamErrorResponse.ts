@@ -1,15 +1,15 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 export type BeamErrorResponse = {
   path: string;
   timestamp: string;
   status: number;
   error?: string;
-  validation?: any[];
+  validation?: Array<any>;
   type?: string;
   message?: string;
   traceId?: string;
 };
+

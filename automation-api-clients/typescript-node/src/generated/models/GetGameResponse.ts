@@ -1,20 +1,10 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 export type GetGameResponse = {
   pegiRating: GetGameResponse.pegiRating | null;
-  pegiContent: Array<
-    | 'BadLanguage'
-    | 'Discrimination'
-    | 'Drugs'
-    | 'Fear'
-    | 'Gambling'
-    | 'Sex'
-    | 'Violence'
-    | 'InGamePurchases'
-  >;
+  pegiContent: Array<'BadLanguage' | 'Discrimination' | 'Drugs' | 'Fear' | 'Gambling' | 'Sex' | 'Violence' | 'InGamePurchases'>;
   id: string;
   createdAt: string;
   updatedAt: string;
@@ -24,7 +14,7 @@ export type GetGameResponse = {
   logoImageUrl: string | null;
   backgroundImageUrl: string | null;
   androidCallbackDeepLink: string | null;
-  chainIds: number[];
+  chainIds: Array<number>;
   depositor?: {
     id: string;
     createdAt: string;
@@ -76,7 +66,6 @@ export type GetGameResponse = {
     depositorId: string | null;
   }>;
 };
-
 export namespace GetGameResponse {
   export enum pegiRating {
     THREE = 'Three',
@@ -86,3 +75,4 @@ export namespace GetGameResponse {
     EIGHTEEN = 'Eighteen',
   }
 }
+

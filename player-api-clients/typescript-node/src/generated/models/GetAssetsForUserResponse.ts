@@ -1,8 +1,7 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 export type GetAssetsForUserResponse = {
   data: Array<{
     name: string;
@@ -11,13 +10,7 @@ export type GetAssetsForUserResponse = {
     assetAddress: string;
     assetId: string;
     supply: number;
-    rarity?:
-      | 'Common'
-      | 'Uncommon'
-      | 'Rare'
-      | 'VeryRare'
-      | 'ExtremelyRare'
-      | null;
+    rarity?: 'Common' | 'Uncommon' | 'Rare' | 'VeryRare' | 'ExtremelyRare' | null;
     rarityScore?: number | null;
     updatedAt?: string | null;
     mintedAt?: string | null;
@@ -33,3 +26,4 @@ export type GetAssetsForUserResponse = {
   }>;
   continuation?: string | null;
 };
+

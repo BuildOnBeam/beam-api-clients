@@ -1,8 +1,9 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
 export class CancelError extends Error {
+
   constructor(message: string) {
     super(message);
     this.name = 'CancelError';
@@ -34,8 +35,8 @@ export class CancelablePromise<T> implements Promise<T> {
     executor: (
       resolve: (value: T | PromiseLike<T>) => void,
       reject: (reason?: any) => void,
-      onCancel: OnCancel,
-    ) => void,
+      onCancel: OnCancel
+    ) => void
   ) {
     this.#isResolved = false;
     this.#isRejected = false;
@@ -50,7 +51,7 @@ export class CancelablePromise<T> implements Promise<T> {
           return;
         }
         this.#isResolved = true;
-        this.#resolve?.(value);
+        if (this.#resolve) this.#resolve(value);
       };
 
       const onReject = (reason?: any): void => {
@@ -58,7 +59,7 @@ export class CancelablePromise<T> implements Promise<T> {
           return;
         }
         this.#isRejected = true;
-        this.#reject?.(reason);
+        if (this.#reject) this.#reject(reason);
       };
 
       const onCancel = (cancelHandler: () => void): void => {
@@ -85,18 +86,18 @@ export class CancelablePromise<T> implements Promise<T> {
   }
 
   get [Symbol.toStringTag]() {
-    return 'Cancellable Promise';
+    return "Cancellable Promise";
   }
 
   public then<TResult1 = T, TResult2 = never>(
     onFulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | null,
-    onRejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | null,
+    onRejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | null
   ): Promise<TResult1 | TResult2> {
     return this.#promise.then(onFulfilled, onRejected);
   }
 
   public catch<TResult = never>(
-    onRejected?: ((reason: any) => TResult | PromiseLike<TResult>) | null,
+    onRejected?: ((reason: any) => TResult | PromiseLike<TResult>) | null
   ): Promise<T | TResult> {
     return this.#promise.catch(onRejected);
   }
@@ -121,7 +122,7 @@ export class CancelablePromise<T> implements Promise<T> {
       }
     }
     this.#cancelHandlers.length = 0;
-    this.#reject?.(new CancelError('Request aborted'));
+    if (this.#reject) this.#reject(new CancelError('Request aborted'));
   }
 
   public get isCancelled(): boolean {

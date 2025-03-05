@@ -1,8 +1,7 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 export type ConfirmOperationRequest = {
   status: ConfirmOperationRequest.status;
   transactions?: Array<{
@@ -14,7 +13,6 @@ export type ConfirmOperationRequest = {
     signature: string;
   }> | null;
 };
-
 export namespace ConfirmOperationRequest {
   export enum status {
     PENDING = 'Pending',
@@ -24,3 +22,4 @@ export namespace ConfirmOperationRequest {
     ERROR = 'Error',
   }
 }
+

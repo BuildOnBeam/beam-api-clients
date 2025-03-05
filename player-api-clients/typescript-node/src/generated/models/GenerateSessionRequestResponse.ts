@@ -1,8 +1,7 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 export type GenerateSessionRequestResponse = {
   status: GenerateSessionRequestResponse.status;
   id: string;
@@ -13,7 +12,6 @@ export type GenerateSessionRequestResponse = {
   address: string;
   url: string;
 };
-
 export namespace GenerateSessionRequestResponse {
   export enum status {
     PENDING = 'Pending',
@@ -21,3 +19,4 @@ export namespace GenerateSessionRequestResponse {
     ERROR = 'Error',
   }
 }
+

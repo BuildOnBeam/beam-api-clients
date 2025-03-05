@@ -1,8 +1,7 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 export type RevokeSessionRequestInput = {
   address: string;
   sponsor?: boolean;
@@ -17,7 +16,6 @@ export type RevokeSessionRequestInput = {
    */
   authProvider?: RevokeSessionRequestInput.authProvider | null;
 };
-
 export namespace RevokeSessionRequestInput {
   /**
    * Operation processing type. If Execute is used, Operation will be executed automatically right after User signs it. If you prefer to have more control, use SignOnly then Process it using ProcessOperation.
@@ -26,7 +24,6 @@ export namespace RevokeSessionRequestInput {
     SIGN_ONLY = 'SignOnly',
     EXECUTE = 'Execute',
   }
-
   /**
    * Auth Provider for the user to use. If it's Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI.
    */
@@ -37,3 +34,4 @@ export namespace RevokeSessionRequestInput {
     APPLE = 'Apple',
   }
 }
+

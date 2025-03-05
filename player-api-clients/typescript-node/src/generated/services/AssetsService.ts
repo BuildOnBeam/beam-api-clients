@@ -1,4 +1,4 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -17,13 +17,10 @@ import type { PlayerOperationResponse } from '../models/PlayerOperationResponse'
 import type { TransferAssetRequestInput } from '../models/TransferAssetRequestInput';
 import type { TransferNativeTokenRequestInput } from '../models/TransferNativeTokenRequestInput';
 import type { TransferTokenRequestInput } from '../models/TransferTokenRequestInput';
-
-import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 import type { CancelablePromise } from '../core/CancelablePromise';
-
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class AssetsService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
-
   /**
    * Get all the assets of a profile (NFT assets, e.g. ERC721 / ERC1155)
    * @param entityId
@@ -39,13 +36,12 @@ export class AssetsService {
       method: 'POST',
       url: '/v1/player/assets/users/{entityId}',
       path: {
-        entityId: entityId,
+        'entityId': entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
-
   /**
    * Get all the currencies owned by an account (ERC20)
    * @param entityId
@@ -61,14 +57,13 @@ export class AssetsService {
       method: 'GET',
       url: '/v1/player/assets/users/{entityId}/currencies',
       path: {
-        entityId: entityId,
+        'entityId': entityId,
       },
       query: {
-        chainId: chainId,
+        'chainId': chainId,
       },
     });
   }
-
   /**
    * Get the native token balance
    * @param entityId
@@ -84,14 +79,13 @@ export class AssetsService {
       method: 'GET',
       url: '/v1/player/assets/users/{entityId}/native',
       path: {
-        entityId: entityId,
+        'entityId': entityId,
       },
       query: {
-        chainId: chainId,
+        'chainId': chainId,
       },
     });
   }
-
   /**
    * Transfer an asset (NFT assets, ERC721 / ERC1155)
    * @param entityId
@@ -107,13 +101,12 @@ export class AssetsService {
       method: 'POST',
       url: '/v1/player/assets/users/{entityId}/transfer-asset',
       path: {
-        entityId: entityId,
+        'entityId': entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
-
   /**
    * Transfer a token (token assets, ERC20)
    * @param entityId
@@ -129,13 +122,12 @@ export class AssetsService {
       method: 'POST',
       url: '/v1/player/assets/users/{entityId}/transfer-token',
       path: {
-        entityId: entityId,
+        'entityId': entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
-
   /**
    * Transfer the native token
    * @param entityId
@@ -151,13 +143,12 @@ export class AssetsService {
       method: 'POST',
       url: '/v1/player/assets/users/{entityId}/transfer-native',
       path: {
-        entityId: entityId,
+        'entityId': entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
-
   /**
    * Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155)
    * @param assetAddress
@@ -173,13 +164,12 @@ export class AssetsService {
       method: 'POST',
       url: '/v1/player/assets/{assetAddress}/assets',
       path: {
-        assetAddress: assetAddress,
+        'assetAddress': assetAddress,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
-
   /**
    * Get a single NFT (e.g. ERC721 / ERC1155)
    * @param assetAddress
@@ -201,17 +191,16 @@ export class AssetsService {
       method: 'GET',
       url: '/v1/player/assets/{assetAddress}/assets/{assetId}',
       path: {
-        assetAddress: assetAddress,
-        assetId: assetId,
+        'assetAddress': assetAddress,
+        'assetId': assetId,
       },
       query: {
-        chainId: chainId,
-        entityId: entityId,
-        owners: owners,
+        'chainId': chainId,
+        'entityId': entityId,
+        'owners': owners,
       },
     });
   }
-
   /**
    * @param assetAddress
    * @param chainId
@@ -226,14 +215,13 @@ export class AssetsService {
       method: 'GET',
       url: '/v1/player/assets/{assetAddress}/attributes',
       path: {
-        assetAddress: assetAddress,
+        'assetAddress': assetAddress,
       },
       query: {
-        chainId: chainId,
+        'chainId': chainId,
       },
     });
   }
-
   /**
    * @param assetAddress
    * @param chainId
@@ -245,23 +233,22 @@ export class AssetsService {
   public getOwners(
     assetAddress: string,
     chainId: number,
-    limit = 10,
-    offset = 0,
+    limit: number = 10,
+    offset: number = 0,
   ): CancelablePromise<GetOwnersResponse> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v1/player/assets/{assetAddress}/owners',
       path: {
-        assetAddress: assetAddress,
+        'assetAddress': assetAddress,
       },
       query: {
-        chainId: chainId,
-        limit: limit,
-        offset: offset,
+        'chainId': chainId,
+        'limit': limit,
+        'offset': offset,
       },
     });
   }
-
   /**
    * @param assetAddress
    * @param ownerAddress
@@ -278,8 +265,8 @@ export class AssetsService {
       method: 'POST',
       url: '/v1/player/assets/{assetAddress}/owners/{ownerAddress}/assets',
       path: {
-        assetAddress: assetAddress,
-        ownerAddress: ownerAddress,
+        'assetAddress': assetAddress,
+        'ownerAddress': ownerAddress,
       },
       body: requestBody,
       mediaType: 'application/json',

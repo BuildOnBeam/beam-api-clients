@@ -1,8 +1,7 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 export type PlayerOperationResponse = {
   status: PlayerOperationResponse.status;
   processing: PlayerOperationResponse.processing;
@@ -14,22 +13,7 @@ export type PlayerOperationResponse = {
   userId: string;
   chainId: number;
   actions: Array<{
-    type:
-      | 'FiatOnRamp'
-      | 'Sign'
-      | 'SessionRevoke'
-      | 'MarketplaceCreateOffer'
-      | 'MarketplaceCancelOffer'
-      | 'MarketplaceAcceptOffer'
-      | 'MarketplaceBuyAsset'
-      | 'MarketplaceListAsset'
-      | 'MarketplaceCancelListing'
-      | 'ExchangeConvert'
-      | 'ExchangeWrap'
-      | 'ExchangeUnwrap'
-      | 'TransferNFTs'
-      | 'TransferToken'
-      | 'CustomTransaction';
+    type: 'FiatOnRamp' | 'Sign' | 'SessionRevoke' | 'MarketplaceCreateOffer' | 'MarketplaceCancelOffer' | 'MarketplaceAcceptOffer' | 'MarketplaceBuyAsset' | 'MarketplaceListAsset' | 'MarketplaceCancelListing' | 'ExchangeConvert' | 'ExchangeWrap' | 'ExchangeUnwrap' | 'TransferNFTs' | 'TransferToken' | 'CustomTransaction';
     id: string;
     index: number;
     operationId: string | null;
@@ -61,11 +45,7 @@ export type PlayerOperationResponse = {
     sponsored: boolean;
     actionId: string | null;
     hash?: string | null;
-    type:
-      | 'OpenfortTransaction'
-      | 'OpenfortReservoirOrder'
-      | 'OpenfortRevokeSession'
-      | null;
+    type: 'OpenfortTransaction' | 'OpenfortReservoirOrder' | 'OpenfortRevokeSession' | null;
     externalId: string | null;
     signature: string | null;
     transactionHash: string | null;
@@ -74,7 +54,6 @@ export type PlayerOperationResponse = {
   }>;
   url: string;
 };
-
 export namespace PlayerOperationResponse {
   export enum status {
     PENDING = 'Pending',
@@ -83,12 +62,10 @@ export namespace PlayerOperationResponse {
     EXECUTED = 'Executed',
     ERROR = 'Error',
   }
-
   export enum processing {
     SIGN_ONLY = 'SignOnly',
     EXECUTE = 'Execute',
   }
-
   export enum authProvider {
     ANY = 'Any',
     GOOGLE = 'Google',
@@ -96,3 +73,4 @@ export namespace PlayerOperationResponse {
     APPLE = 'Apple',
   }
 }
+

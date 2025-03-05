@@ -1,4 +1,4 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -12,13 +12,10 @@ import type { GetAllProfilesResponse } from '../models/GetAllProfilesResponse';
 import type { GetProfileResponse } from '../models/GetProfileResponse';
 import type { UpdateProfileRequestInput } from '../models/UpdateProfileRequestInput';
 import type { UpdateProfileResponse } from '../models/UpdateProfileResponse';
-
-import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 import type { CancelablePromise } from '../core/CancelablePromise';
-
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class ProfilesService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
-
   /**
    * Creating a profile
    * @param requestBody
@@ -35,7 +32,6 @@ export class ProfilesService {
       mediaType: 'application/json',
     });
   }
-
   /**
    * Getting all profiles
    * @param limit
@@ -44,35 +40,35 @@ export class ProfilesService {
    * @throws ApiError
    */
   public getAllProfiles(
-    limit = 10,
-    offset = 0,
+    limit: number = 10,
+    offset: number = 0,
   ): CancelablePromise<GetAllProfilesResponse> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v1/profiles',
       query: {
-        limit: limit,
-        offset: offset,
+        'limit': limit,
+        'offset': offset,
       },
     });
   }
-
   /**
    * Getting information on a profile
    * @param entityId
    * @returns GetProfileResponse
    * @throws ApiError
    */
-  public getProfile(entityId: string): CancelablePromise<GetProfileResponse> {
+  public getProfile(
+    entityId: string,
+  ): CancelablePromise<GetProfileResponse> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v1/profiles/{entityId}',
       path: {
-        entityId: entityId,
+        'entityId': entityId,
       },
     });
   }
-
   /**
    * Update a profile
    * @param entityId
@@ -88,13 +84,12 @@ export class ProfilesService {
       method: 'PATCH',
       url: '/v1/profiles/{entityId}',
       path: {
-        entityId: entityId,
+        'entityId': entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
-
   /**
    * @deprecated
    * Generates a challenge which can be encoded in a QR code / app link for the user to take control of the profile
@@ -111,13 +106,12 @@ export class ProfilesService {
       method: 'POST',
       url: '/v1/profiles/{entityId}/create-connection-request',
       path: {
-        entityId: entityId,
+        'entityId': entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
-
   /**
    * @deprecated
    * Generates a challenge which can be encoded in a QR code / app link for the user to sign in to the game
@@ -134,7 +128,7 @@ export class ProfilesService {
       method: 'POST',
       url: '/v1/profiles/{entityId}/create-sign-in-request',
       path: {
-        entityId: entityId,
+        'entityId': entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
