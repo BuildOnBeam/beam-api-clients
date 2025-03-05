@@ -4,7 +4,7 @@
 /* eslint-disable */
 import type { BaseHttpRequest } from './core/BaseHttpRequest';
 import type { OpenAPIConfig } from './core/OpenAPI';
-import { NodeHttpRequest } from './core/NodeHttpRequest';
+import { FetchHttpRequest } from './core/FetchHttpRequest';
 import { ActivityService } from './services/ActivityService';
 import { AssetsV2Service } from './services/AssetsV2Service';
 import { ChainService } from './services/ChainService';
@@ -36,7 +36,7 @@ export class ApiClient {
   public readonly trading: TradingService;
   public readonly transactionsV2: TransactionsV2Service;
   public readonly request: BaseHttpRequest;
-  constructor(config?: Partial<OpenAPIConfig>, HttpRequest: HttpRequestConstructor = NodeHttpRequest) {
+  constructor(config?: Partial<OpenAPIConfig>, HttpRequest: HttpRequestConstructor = FetchHttpRequest) {
     this.request = new HttpRequest({
       BASE: config?.BASE ?? '',
       VERSION: config?.VERSION ?? '1.0.0',
