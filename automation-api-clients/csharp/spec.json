@@ -3746,6 +3746,72 @@
           "Migration"
         ]
       }
+    },
+    "/v1/contract/{contractAddress}/read": {
+      "post": {
+        "operationId": "readContract",
+        "parameters": [
+          {
+            "name": "contractAddress",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationReadContractRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationReadContractResonse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ],
+        "summary": "Calls a readable contract function",
+        "tags": [
+          "Contract"
+        ]
+      }
     }
   },
   "info": {
@@ -7519,6 +7585,37 @@
         "required": [
           "success"
         ]
+      },
+      "AutomationReadContractRequest": {
+        "type": "object",
+        "properties": {
+          "chainId": {
+            "default": 13337,
+            "type": "integer",
+            "format": "int64"
+          },
+          "functionName": {
+            "type": "string"
+          },
+          "functionArguments": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "functionName",
+          "functionArguments"
+        ]
+      },
+      "AutomationReadContractResonse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "nullable": true
+          }
+        }
       }
     }
   }

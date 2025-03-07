@@ -49,6 +49,8 @@ export * from './GetQuoteResponse';
 export * from './GetTransactionsResponseV2';
 export * from './MigrateRequestInput';
 export * from './MigrateResponse';
+export * from './ReadContractRequest';
+export * from './ReadContractResonse';
 export * from './RefreshContractRequestBody';
 export * from './RefreshTokenRequestBody';
 export * from './RegenerateGameApiKeysResponse';

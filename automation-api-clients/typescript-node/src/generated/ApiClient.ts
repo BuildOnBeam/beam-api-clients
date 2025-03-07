@@ -8,6 +8,7 @@ import { FetchHttpRequest } from './core/FetchHttpRequest';
 import { ActivityService } from './services/ActivityService';
 import { AssetsV2Service } from './services/AssetsV2Service';
 import { ChainService } from './services/ChainService';
+import { ContractService } from './services/ContractService';
 import { ExchangeService } from './services/ExchangeService';
 import { GameService } from './services/GameService';
 import { HealthService } from './services/HealthService';
@@ -24,6 +25,7 @@ export class ApiClient {
   public readonly activity: ActivityService;
   public readonly assetsV2: AssetsV2Service;
   public readonly chain: ChainService;
+  public readonly contract: ContractService;
   public readonly exchange: ExchangeService;
   public readonly game: GameService;
   public readonly health: HealthService;
@@ -54,6 +56,7 @@ export class ApiClient {
     this.activity = new ActivityService(this.request);
     this.assetsV2 = new AssetsV2Service(this.request);
     this.chain = new ChainService(this.request);
+    this.contract = new ContractService(this.request);
     this.exchange = new ExchangeService(this.request);
     this.game = new GameService(this.request);
     this.health = new HealthService(this.request);

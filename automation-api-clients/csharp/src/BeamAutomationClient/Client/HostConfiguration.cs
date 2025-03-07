@@ -120,6 +120,8 @@ namespace BeamAutomationClient.Client
             _jsonOptions.Converters.Add(new AutomationGetTransactionsResponseV2DataInnerJsonConverter());
             _jsonOptions.Converters.Add(new AutomationMigrateRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new AutomationMigrateResponseJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationReadContractRequestJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationReadContractResonseJsonConverter());
             _jsonOptions.Converters.Add(new AutomationRefreshContractRequestBodyJsonConverter());
             _jsonOptions.Converters.Add(new AutomationRefreshTokenRequestBodyJsonConverter());
             _jsonOptions.Converters.Add(new AutomationRegenerateGameApiKeysResponseJsonConverter());
@@ -157,6 +159,8 @@ namespace BeamAutomationClient.Client
             _services.AddTransient<IAutomationAssetsV2Api, AutomationAssetsV2Api>();
             _services.AddSingleton<AutomationChainApiEvents>();
             _services.AddTransient<IAutomationChainApi, AutomationChainApi>();
+            _services.AddSingleton<AutomationContractApiEvents>();
+            _services.AddTransient<IAutomationContractApi, AutomationContractApi>();
             _services.AddSingleton<AutomationExchangeApiEvents>();
             _services.AddTransient<IAutomationExchangeApi, AutomationExchangeApi>();
             _services.AddSingleton<AutomationGameApiEvents>();
@@ -199,6 +203,7 @@ namespace BeamAutomationClient.Client
             builders.Add(_services.AddHttpClient<IAutomationActivityApi, AutomationActivityApi>(client));
             builders.Add(_services.AddHttpClient<IAutomationAssetsV2Api, AutomationAssetsV2Api>(client));
             builders.Add(_services.AddHttpClient<IAutomationChainApi, AutomationChainApi>(client));
+            builders.Add(_services.AddHttpClient<IAutomationContractApi, AutomationContractApi>(client));
             builders.Add(_services.AddHttpClient<IAutomationExchangeApi, AutomationExchangeApi>(client));
             builders.Add(_services.AddHttpClient<IAutomationGameApi, AutomationGameApi>(client));
             builders.Add(_services.AddHttpClient<IAutomationHealthApi, AutomationHealthApi>(client));

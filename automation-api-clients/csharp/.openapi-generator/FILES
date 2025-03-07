@@ -6,6 +6,7 @@ src/BeamAutomationClient.Test/README.md
 src/BeamAutomationClient/Api/ActivityApi.cs
 src/BeamAutomationClient/Api/AssetsV2Api.cs
 src/BeamAutomationClient/Api/ChainApi.cs
+src/BeamAutomationClient/Api/ContractApi.cs
 src/BeamAutomationClient/Api/ExchangeApi.cs
 src/BeamAutomationClient/Api/GameApi.cs
 src/BeamAutomationClient/Api/HealthApi.cs
@@ -122,6 +123,8 @@ src/BeamAutomationClient/Model/AutomationGetTransactionsResponseV2.cs
 src/BeamAutomationClient/Model/AutomationGetTransactionsResponseV2DataInner.cs
 src/BeamAutomationClient/Model/AutomationMigrateRequestInput.cs
 src/BeamAutomationClient/Model/AutomationMigrateResponse.cs
+src/BeamAutomationClient/Model/AutomationReadContractRequest.cs
+src/BeamAutomationClient/Model/AutomationReadContractResonse.cs
 src/BeamAutomationClient/Model/AutomationRefreshContractRequestBody.cs
 src/BeamAutomationClient/Model/AutomationRefreshTokenRequestBody.cs
 src/BeamAutomationClient/Model/AutomationRegenerateGameApiKeysResponse.cs
