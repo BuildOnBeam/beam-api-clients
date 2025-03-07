@@ -5187,6 +5187,9 @@
                 },
                 "abi": {
                   "nullable": true
+                },
+                "hasCustomAbi": {
+                  "type": "boolean"
                 }
               },
               "required": [
@@ -5199,7 +5202,8 @@
                 "name",
                 "chainId",
                 "gameId",
-                "abi"
+                "abi",
+                "hasCustomAbi"
               ]
             }
           },

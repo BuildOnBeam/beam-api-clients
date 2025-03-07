@@ -38,11 +38,12 @@ namespace BeamAutomationClient.Model
         /// <param name="externalId">externalId</param>
         /// <param name="address">address</param>
         /// <param name="chainId">chainId</param>
+        /// <param name="hasCustomAbi">hasCustomAbi</param>
         /// <param name="name">name</param>
         /// <param name="gameId">gameId</param>
         /// <param name="abi">abi</param>
         [JsonConstructor]
-        public AutomationGetGameResponseContractsInner(TypeEnum type, string id, DateTime createdAt, DateTime updatedAt, string externalId, string address, int chainId, string name = default, string gameId = default, Object abi = default)
+        public AutomationGetGameResponseContractsInner(TypeEnum type, string id, DateTime createdAt, DateTime updatedAt, string externalId, string address, int chainId, bool hasCustomAbi, string name = default, string gameId = default, Object abi = default)
         {
             Type = type;
             Id = id;
@@ -51,6 +52,7 @@ namespace BeamAutomationClient.Model
             ExternalId = externalId;
             Address = address;
             ChainId = chainId;
+            HasCustomAbi = hasCustomAbi;
             Name = name;
             GameId = gameId;
             Abi = abi;
@@ -227,6 +229,12 @@ namespace BeamAutomationClient.Model
         public int ChainId { get; set; }
 
         /// <summary>
+        /// Gets or Sets HasCustomAbi
+        /// </summary>
+        [JsonPropertyName("hasCustomAbi")]
+        public bool HasCustomAbi { get; set; }
+
+        /// <summary>
         /// Gets or Sets Name
         /// </summary>
         [JsonPropertyName("name")]
@@ -259,6 +267,7 @@ namespace BeamAutomationClient.Model
             sb.Append("  ExternalId: ").Append(ExternalId).Append("\n");
             sb.Append("  Address: ").Append(Address).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
+            sb.Append("  HasCustomAbi: ").Append(HasCustomAbi).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  GameId: ").Append(GameId).Append("\n");
             sb.Append("  Abi: ").Append(Abi).Append("\n");
@@ -316,6 +325,7 @@ namespace BeamAutomationClient.Model
             Option<string> externalId = default;
             Option<string> address = default;
             Option<int?> chainId = default;
+            Option<bool?> hasCustomAbi = default;
             Option<string> name = default;
             Option<string> gameId = default;
             Option<Object> abi = default;
@@ -361,6 +371,10 @@ namespace BeamAutomationClient.Model
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 chainId = new Option<int?>(utf8JsonReader.GetInt32());
                             break;
+                        case "hasCustomAbi":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                hasCustomAbi = new Option<bool?>(utf8JsonReader.GetBoolean());
+                            break;
                         case "name":
                             name = new Option<string>(utf8JsonReader.GetString());
                             break;
@@ -398,6 +412,9 @@ namespace BeamAutomationClient.Model
             if (!chainId.IsSet)
                 throw new ArgumentException("Property is required for class AutomationGetGameResponseContractsInner.", nameof(chainId));
 
+            if (!hasCustomAbi.IsSet)
+                throw new ArgumentException("Property is required for class AutomationGetGameResponseContractsInner.", nameof(hasCustomAbi));
+
             if (!name.IsSet)
                 throw new ArgumentException("Property is required for class AutomationGetGameResponseContractsInner.", nameof(name));
 
@@ -428,7 +445,10 @@ namespace BeamAutomationClient.Model
             if (chainId.IsSet && chainId.Value == null)
                 throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class AutomationGetGameResponseContractsInner.");
 
-            return new AutomationGetGameResponseContractsInner(type.Value.Value, id.Value, createdAt.Value.Value, updatedAt.Value.Value, externalId.Value, address.Value, chainId.Value.Value, name.Value, gameId.Value, abi.Value);
+            if (hasCustomAbi.IsSet && hasCustomAbi.Value == null)
+                throw new ArgumentNullException(nameof(hasCustomAbi), "Property is not nullable for class AutomationGetGameResponseContractsInner.");
+
+            return new AutomationGetGameResponseContractsInner(type.Value.Value, id.Value, createdAt.Value.Value, updatedAt.Value.Value, externalId.Value, address.Value, chainId.Value.Value, hasCustomAbi.Value.Value, name.Value, gameId.Value, abi.Value);
         }
 
         /// <summary>
@@ -478,6 +498,8 @@ namespace BeamAutomationClient.Model
             writer.WriteString("address", automationGetGameResponseContractsInner.Address);
 
             writer.WriteNumber("chainId", automationGetGameResponseContractsInner.ChainId);
+
+            writer.WriteBoolean("hasCustomAbi", automationGetGameResponseContractsInner.HasCustomAbi);
 
             if (automationGetGameResponseContractsInner.Name != null)
             {

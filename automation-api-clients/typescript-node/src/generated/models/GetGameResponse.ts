@@ -57,6 +57,7 @@ export type GetGameResponse = {
     chainId: number;
     gameId: string | null;
     abi: any;
+    hasCustomAbi: boolean;
   }>;
   policies: Array<{
     model: 'ContractFunctions' | 'AccountFunctions';
