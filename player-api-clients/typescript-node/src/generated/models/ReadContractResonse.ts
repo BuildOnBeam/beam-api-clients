@@ -2,8 +2,6 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type ReadContractRequest = {
-  chainId?: number;
-  functionName: string;
-  functionArgs: Array<string>;
+export type ReadContractResonse = {
+  result?: any;
 };

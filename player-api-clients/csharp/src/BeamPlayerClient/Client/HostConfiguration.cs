@@ -127,6 +127,8 @@ namespace BeamPlayerClient.Client
             _jsonOptions.Converters.Add(new PlayerOperationActionTransactionJsonConverter());
             _jsonOptions.Converters.Add(new PlayerPlayerOperationResponseJsonConverter());
             _jsonOptions.Converters.Add(new PlayerPlayerOperationResponseTransactionsInnerJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerReadContractRequestJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerReadContractResonseJsonConverter());
             _jsonOptions.Converters.Add(new PlayerRefreshContractRequestBodyJsonConverter());
             _jsonOptions.Converters.Add(new PlayerRefreshTokenRequestBodyJsonConverter());
             _jsonOptions.Converters.Add(new PlayerRevokeSessionRequestInputJsonConverter());
@@ -147,6 +149,8 @@ namespace BeamPlayerClient.Client
             _services.AddTransient<IPlayerAssetsApi, PlayerAssetsApi>();
             _services.AddSingleton<PlayerConnectorApiEvents>();
             _services.AddTransient<IPlayerConnectorApi, PlayerConnectorApi>();
+            _services.AddSingleton<PlayerContractApiEvents>();
+            _services.AddTransient<IPlayerContractApi, PlayerContractApi>();
             _services.AddSingleton<PlayerExchangeApiEvents>();
             _services.AddTransient<IPlayerExchangeApi, PlayerExchangeApi>();
             _services.AddSingleton<PlayerHealthApiEvents>();
@@ -185,6 +189,7 @@ namespace BeamPlayerClient.Client
             builders.Add(_services.AddHttpClient<IPlayerActivityApi, PlayerActivityApi>(client));
             builders.Add(_services.AddHttpClient<IPlayerAssetsApi, PlayerAssetsApi>(client));
             builders.Add(_services.AddHttpClient<IPlayerConnectorApi, PlayerConnectorApi>(client));
+            builders.Add(_services.AddHttpClient<IPlayerContractApi, PlayerContractApi>(client));
             builders.Add(_services.AddHttpClient<IPlayerExchangeApi, PlayerExchangeApi>(client));
             builders.Add(_services.AddHttpClient<IPlayerHealthApi, PlayerHealthApi>(client));
             builders.Add(_services.AddHttpClient<IPlayerMarketplaceApi, PlayerMarketplaceApi>(client));

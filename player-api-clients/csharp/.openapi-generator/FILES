@@ -6,6 +6,7 @@ src/BeamPlayerClient.Test/README.md
 src/BeamPlayerClient/Api/ActivityApi.cs
 src/BeamPlayerClient/Api/AssetsApi.cs
 src/BeamPlayerClient/Api/ConnectorApi.cs
+src/BeamPlayerClient/Api/ContractApi.cs
 src/BeamPlayerClient/Api/ExchangeApi.cs
 src/BeamPlayerClient/Api/HealthApi.cs
 src/BeamPlayerClient/Api/IApi.cs
@@ -127,6 +128,8 @@ src/BeamPlayerClient/Model/PlayerOperationActionSignature.cs
 src/BeamPlayerClient/Model/PlayerOperationActionTransaction.cs
 src/BeamPlayerClient/Model/PlayerPlayerOperationResponse.cs
 src/BeamPlayerClient/Model/PlayerPlayerOperationResponseTransactionsInner.cs
+src/BeamPlayerClient/Model/PlayerReadContractRequest.cs
+src/BeamPlayerClient/Model/PlayerReadContractResonse.cs
 src/BeamPlayerClient/Model/PlayerRefreshContractRequestBody.cs
 src/BeamPlayerClient/Model/PlayerRefreshTokenRequestBody.cs
 src/BeamPlayerClient/Model/PlayerRevokeSessionRequestInput.cs

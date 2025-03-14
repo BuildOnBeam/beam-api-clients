@@ -4002,6 +4002,72 @@
           "Ramp"
         ]
       }
+    },
+    "/v1/contract/{contractAddress}/read": {
+      "post": {
+        "operationId": "readContract",
+        "parameters": [
+          {
+            "name": "contractAddress",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlayerReadContractRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerReadContractResonse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ],
+        "summary": "Calls a readable contract function",
+        "tags": [
+          "Contract"
+        ]
+      }
     }
   },
   "info": {
@@ -4042,6 +4108,10 @@
     {
       "name": "Stats",
       "description": "Retrieve stats for the assets in your game"
+    },
+    {
+      "name": "Contract",
+      "description": "Interact with your Contracts"
     }
   ],
   "servers": [],
@@ -7566,6 +7636,37 @@
             ],
             "nullable": true,
             "description": "Auth Provider for the user to use. If it's Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI."
+          }
+        }
+      },
+      "PlayerReadContractRequest": {
+        "type": "object",
+        "properties": {
+          "chainId": {
+            "default": 13337,
+            "type": "integer",
+            "format": "int64"
+          },
+          "functionName": {
+            "type": "string"
+          },
+          "functionArgs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "functionName",
+          "functionArgs"
+        ]
+      },
+      "PlayerReadContractResonse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "nullable": true
           }
         }
       }

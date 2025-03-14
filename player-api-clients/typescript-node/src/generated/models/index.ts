@@ -47,6 +47,8 @@ export * from './GetUserCurrenciesResponse';
 export * from './GetUserNativeCurrencyResponse';
 export * from './GetUserResponse';
 export * from './PlayerOperationResponse';
+export * from './ReadContractRequest';
+export * from './ReadContractResonse';
 export * from './RefreshContractRequestBody';
 export * from './RefreshTokenRequestBody';
 export * from './RevokeSessionRequestInput';

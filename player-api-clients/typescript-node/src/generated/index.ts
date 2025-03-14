@@ -55,6 +55,8 @@ export type { GetUserCurrenciesResponse } from './models/GetUserCurrenciesRespon
 export type { GetUserNativeCurrencyResponse } from './models/GetUserNativeCurrencyResponse';
 export type { GetUserResponse } from './models/GetUserResponse';
 export { PlayerOperationResponse } from './models/PlayerOperationResponse';
+export type { ReadContractRequest } from './models/ReadContractRequest';
+export type { ReadContractResonse } from './models/ReadContractResonse';
 export type { RefreshContractRequestBody } from './models/RefreshContractRequestBody';
 export type { RefreshTokenRequestBody } from './models/RefreshTokenRequestBody';
 export { RevokeSessionRequestInput } from './models/RevokeSessionRequestInput';
@@ -69,6 +71,7 @@ export { WrappingTokenInput } from './models/WrappingTokenInput';
 export { ActivityService } from './services/ActivityService';
 export { AssetsService } from './services/AssetsService';
 export { ConnectorService } from './services/ConnectorService';
+export { ContractService } from './services/ContractService';
 export { ExchangeService } from './services/ExchangeService';
 export { HealthService } from './services/HealthService';
 export { MarketplaceService } from './services/MarketplaceService';

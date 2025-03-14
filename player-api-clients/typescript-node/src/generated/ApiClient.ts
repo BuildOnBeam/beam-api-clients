@@ -8,6 +8,7 @@ import { FetchHttpRequest } from './core/FetchHttpRequest';
 import { ActivityService } from './services/ActivityService';
 import { AssetsService } from './services/AssetsService';
 import { ConnectorService } from './services/ConnectorService';
+import { ContractService } from './services/ContractService';
 import { ExchangeService } from './services/ExchangeService';
 import { HealthService } from './services/HealthService';
 import { MarketplaceService } from './services/MarketplaceService';
@@ -22,6 +23,7 @@ export class ApiClient {
   public readonly activity: ActivityService;
   public readonly assets: AssetsService;
   public readonly connector: ConnectorService;
+  public readonly contract: ContractService;
   public readonly exchange: ExchangeService;
   public readonly health: HealthService;
   public readonly marketplace: MarketplaceService;
@@ -50,6 +52,7 @@ export class ApiClient {
     this.activity = new ActivityService(this.request);
     this.assets = new AssetsService(this.request);
     this.connector = new ConnectorService(this.request);
+    this.contract = new ContractService(this.request);
     this.exchange = new ExchangeService(this.request);
     this.health = new HealthService(this.request);
     this.marketplace = new MarketplaceService(this.request);

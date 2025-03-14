@@ -3868,6 +3868,10 @@
     {
       "name": "Activity",
       "description": "Retrieve activity for the profiles and tokens in your game"
+    },
+    {
+      "name": "Contract",
+      "description": "Interact with your Contracts"
     }
   ],
   "servers": [],
@@ -7597,7 +7601,7 @@
           "functionName": {
             "type": "string"
           },
-          "functionArguments": {
+          "functionArgs": {
             "type": "array",
             "items": {
               "type": "string"
@@ -7606,7 +7610,7 @@
         },
         "required": [
           "functionName",
-          "functionArguments"
+          "functionArgs"
         ]
       },
       "AutomationReadContractResonse": {
