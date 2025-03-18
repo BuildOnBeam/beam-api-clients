@@ -34,7 +34,7 @@ namespace BeamAutomationClient.Model
         /// <param name="contractAddress">contractAddress</param>
         /// <param name="functionName">functionName</param>
         /// <param name="functionArgs">functionArgs</param>
-        /// <param name="value">value</param>
+        /// <param name="value">The value intended to be sent with the transaction. Optional.</param>
         [JsonConstructor]
         public AutomationCreateTransactionRequestInputV2InteractionsInner(string contractAddress, string functionName, Option<List<Object>> functionArgs = default, Option<string> value = default)
         {
@@ -80,8 +80,9 @@ namespace BeamAutomationClient.Model
         public Option<string> ValueOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Value
+        /// The value intended to be sent with the transaction. Optional.
         /// </summary>
+        /// <value>The value intended to be sent with the transaction. Optional.</value>
         [JsonPropertyName("value")]
         public string Value { get { return this.ValueOption; } set { this.ValueOption = new(value); } }
 
@@ -188,9 +189,6 @@ namespace BeamAutomationClient.Model
             if (functionArgs.IsSet && functionArgs.Value == null)
                 throw new ArgumentNullException(nameof(functionArgs), "Property is not nullable for class AutomationCreateTransactionRequestInputV2InteractionsInner.");
 
-            if (value.IsSet && value.Value == null)
-                throw new ArgumentNullException(nameof(value), "Property is not nullable for class AutomationCreateTransactionRequestInputV2InteractionsInner.");
-
             return new AutomationCreateTransactionRequestInputV2InteractionsInner(contractAddress.Value, functionName.Value, functionArgs, value);
         }
 
@@ -227,9 +225,6 @@ namespace BeamAutomationClient.Model
             if (automationCreateTransactionRequestInputV2InteractionsInner.FunctionArgsOption.IsSet && automationCreateTransactionRequestInputV2InteractionsInner.FunctionArgs == null)
                 throw new ArgumentNullException(nameof(automationCreateTransactionRequestInputV2InteractionsInner.FunctionArgs), "Property is required for class AutomationCreateTransactionRequestInputV2InteractionsInner.");
 
-            if (automationCreateTransactionRequestInputV2InteractionsInner.ValueOption.IsSet && automationCreateTransactionRequestInputV2InteractionsInner.Value == null)
-                throw new ArgumentNullException(nameof(automationCreateTransactionRequestInputV2InteractionsInner.Value), "Property is required for class AutomationCreateTransactionRequestInputV2InteractionsInner.");
-
             writer.WriteString("contractAddress", automationCreateTransactionRequestInputV2InteractionsInner.ContractAddress);
 
             writer.WriteString("functionName", automationCreateTransactionRequestInputV2InteractionsInner.FunctionName);
@@ -241,7 +236,15 @@ namespace BeamAutomationClient.Model
             }
             if (automationCreateTransactionRequestInputV2InteractionsInner.ValueOption.IsSet)
             {
-                writer.WriteString("value", automationCreateTransactionRequestInputV2InteractionsInner.Value);
+                if (automationCreateTransactionRequestInputV2InteractionsInner.ValueOption.Value != null)
+                {
+                    writer.WriteString("value", automationCreateTransactionRequestInputV2InteractionsInner.Value);
+                }
+                else
+                {
+                    writer.WriteNull("value");
+                }
+
             }
         }
     }

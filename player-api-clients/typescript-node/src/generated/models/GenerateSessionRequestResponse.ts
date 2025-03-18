@@ -10,6 +10,7 @@ export type GenerateSessionRequestResponse = {
   chainId: number;
   openfortId: string | null;
   address: string;
+  contracts: Array<string>;
   url: string;
 };
 export namespace GenerateSessionRequestResponse {

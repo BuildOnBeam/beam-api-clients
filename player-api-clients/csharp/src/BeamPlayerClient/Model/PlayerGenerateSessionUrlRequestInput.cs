@@ -34,13 +34,15 @@ namespace BeamPlayerClient.Model
         /// <param name="address">address</param>
         /// <param name="suggestedExpiry">suggestedExpiry</param>
         /// <param name="authProvider">Auth Provider for the user to use. If it&#39;s Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI. (default to AuthProviderEnum.Any)</param>
+        /// <param name="contracts">List of contract addresses to be used in the session</param>
         /// <param name="chainId">chainId (default to 13337)</param>
         [JsonConstructor]
-        public PlayerGenerateSessionUrlRequestInput(string address, Option<DateTime?> suggestedExpiry = default, Option<AuthProviderEnum?> authProvider = default, Option<long?> chainId = default)
+        public PlayerGenerateSessionUrlRequestInput(string address, Option<DateTime?> suggestedExpiry = default, Option<AuthProviderEnum?> authProvider = default, Option<List<string>> contracts = default, Option<long?> chainId = default)
         {
             Address = address;
             SuggestedExpiryOption = suggestedExpiry;
             AuthProviderOption = authProvider;
+            ContractsOption = contracts;
             ChainIdOption = chainId;
             OnCreated();
         }
@@ -179,6 +181,20 @@ namespace BeamPlayerClient.Model
         public DateTime? SuggestedExpiry { get { return this.SuggestedExpiryOption; } set { this.SuggestedExpiryOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of Contracts
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<string>> ContractsOption { get; private set; }
+
+        /// <summary>
+        /// List of contract addresses to be used in the session
+        /// </summary>
+        /// <value>List of contract addresses to be used in the session</value>
+        [JsonPropertyName("contracts")]
+        public List<string> Contracts { get { return this.ContractsOption; } set { this.ContractsOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of ChainId
         /// </summary>
         [JsonIgnore]
@@ -202,6 +218,7 @@ namespace BeamPlayerClient.Model
             sb.Append("  Address: ").Append(Address).Append("\n");
             sb.Append("  SuggestedExpiry: ").Append(SuggestedExpiry).Append("\n");
             sb.Append("  AuthProvider: ").Append(AuthProvider).Append("\n");
+            sb.Append("  Contracts: ").Append(Contracts).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -248,6 +265,7 @@ namespace BeamPlayerClient.Model
             Option<string> address = default;
             Option<DateTime?> suggestedExpiry = default;
             Option<PlayerGenerateSessionUrlRequestInput.AuthProviderEnum?> authProvider = default;
+            Option<List<string>> contracts = default;
             Option<long?> chainId = default;
 
             while (utf8JsonReader.Read())
@@ -277,6 +295,10 @@ namespace BeamPlayerClient.Model
                             if (authProviderRawValue != null)
                                 authProvider = new Option<PlayerGenerateSessionUrlRequestInput.AuthProviderEnum?>(PlayerGenerateSessionUrlRequestInput.AuthProviderEnumFromStringOrDefault(authProviderRawValue));
                             break;
+                        case "contracts":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                contracts = new Option<List<string>>(JsonSerializer.Deserialize<List<string>>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 chainId = new Option<long?>(utf8JsonReader.GetInt64());
@@ -296,7 +318,7 @@ namespace BeamPlayerClient.Model
             if (chainId.IsSet && chainId.Value == null)
                 throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class PlayerGenerateSessionUrlRequestInput.");
 
-            return new PlayerGenerateSessionUrlRequestInput(address.Value, suggestedExpiry, authProvider, chainId);
+            return new PlayerGenerateSessionUrlRequestInput(address.Value, suggestedExpiry, authProvider, contracts, chainId);
         }
 
         /// <summary>
@@ -347,6 +369,14 @@ namespace BeamPlayerClient.Model
             else
                 writer.WriteNull("authProvider");
 
+            if (playerGenerateSessionUrlRequestInput.ContractsOption.IsSet)
+                if (playerGenerateSessionUrlRequestInput.ContractsOption.Value != null)
+                {
+                    writer.WritePropertyName("contracts");
+                    JsonSerializer.Serialize(writer, playerGenerateSessionUrlRequestInput.Contracts, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("contracts");
             if (playerGenerateSessionUrlRequestInput.ChainIdOption.IsSet)
             {
                 writer.WriteNumber("chainId", playerGenerateSessionUrlRequestInput.ChainIdOption.Value.Value);

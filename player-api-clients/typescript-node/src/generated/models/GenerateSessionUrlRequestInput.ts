@@ -9,6 +9,10 @@ export type GenerateSessionUrlRequestInput = {
    * Auth Provider for the user to use. If it's Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI.
    */
   authProvider?: GenerateSessionUrlRequestInput.authProvider | null;
+  /**
+   * List of contract addresses to be used in the session
+   */
+  contracts?: Array<string> | null;
   chainId?: number;
 };
 export namespace GenerateSessionUrlRequestInput {

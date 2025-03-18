@@ -10,6 +10,7 @@ export type GetSessionRequestResponse = {
   chainId: number;
   openfortId: string | null;
   address: string;
+  contracts: Array<string>;
 };
 export namespace GetSessionRequestResponse {
   export enum status {

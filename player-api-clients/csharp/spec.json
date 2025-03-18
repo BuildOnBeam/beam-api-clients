@@ -6983,6 +6983,14 @@
             "nullable": true,
             "description": "Auth Provider for the user to use. If it's Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI."
           },
+          "contracts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "description": "List of contract addresses to be used in the session"
+          },
           "chainId": {
             "default": 13337,
             "type": "integer",
@@ -7028,6 +7036,12 @@
           "address": {
             "type": "string"
           },
+          "contracts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
           "url": {
             "type": "string",
             "format": "uri"
@@ -7041,6 +7055,7 @@
           "chainId",
           "openfortId",
           "address",
+          "contracts",
           "url"
         ]
       },
@@ -7125,6 +7140,12 @@
           },
           "address": {
             "type": "string"
+          },
+          "contracts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         },
         "required": [
@@ -7134,7 +7155,8 @@
           "updatedAt",
           "chainId",
           "openfortId",
-          "address"
+          "address",
+          "contracts"
         ]
       },
       "PlayerGetActiveSessionsResponse": {

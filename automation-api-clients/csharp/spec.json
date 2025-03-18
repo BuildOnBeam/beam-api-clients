@@ -4856,7 +4856,9 @@
                   "items": {}
                 },
                 "value": {
-                  "type": "string"
+                  "type": "string",
+                  "nullable": true,
+                  "description": "The value intended to be sent with the transaction. Optional."
                 }
               },
               "required": [

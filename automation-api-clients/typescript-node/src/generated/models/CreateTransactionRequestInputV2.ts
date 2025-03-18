@@ -7,7 +7,10 @@ export type CreateTransactionRequestInputV2 = {
     contractAddress: string;
     functionName: string;
     functionArgs?: Array<any>;
-    value?: string;
+    /**
+     * The value intended to be sent with the transaction. Optional.
+     */
+    value?: string | null;
   }>;
   optimistic?: boolean;
   sponsor?: boolean;
