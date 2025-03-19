@@ -23,6 +23,7 @@ export type GetGameResponse = {
   logoImageUrl: string | null;
   backgroundImageUrl: string | null;
   androidCallbackDeepLink: string | null;
+  connectionsWebhookUrl: string | null;
   chainIds: Array<number>;
   depositor?: {
     id: string;

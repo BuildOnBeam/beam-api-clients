@@ -44,8 +44,9 @@ namespace BeamAutomationClient.Model
         /// <param name="logoImageUrl">logoImageUrl</param>
         /// <param name="backgroundImageUrl">backgroundImageUrl</param>
         /// <param name="androidCallbackDeepLink">androidCallbackDeepLink</param>
+        /// <param name="connectionsWebhookUrl">connectionsWebhookUrl</param>
         [JsonConstructor]
-        public AutomationRegenerateGameApiKeysResponse(List<AutomationRegenerateGameApiKeysResponse.PegiContentEnum> pegiContent, string id, DateTime createdAt, DateTime updatedAt, string name, List<int> chainIds, List<AutomationRegenerateGameApiKeysResponseApiKeysInner> apiKeys, PegiRatingEnum? pegiRating = default, string description = default, string coverImageUrl = default, string logoImageUrl = default, string backgroundImageUrl = default, string androidCallbackDeepLink = default)
+        public AutomationRegenerateGameApiKeysResponse(List<AutomationRegenerateGameApiKeysResponse.PegiContentEnum> pegiContent, string id, DateTime createdAt, DateTime updatedAt, string name, List<int> chainIds, List<AutomationRegenerateGameApiKeysResponseApiKeysInner> apiKeys, PegiRatingEnum? pegiRating = default, string description = default, string coverImageUrl = default, string logoImageUrl = default, string backgroundImageUrl = default, string androidCallbackDeepLink = default, string connectionsWebhookUrl = default)
         {
             PegiContent = pegiContent;
             Id = id;
@@ -60,6 +61,7 @@ namespace BeamAutomationClient.Model
             LogoImageUrl = logoImageUrl;
             BackgroundImageUrl = backgroundImageUrl;
             AndroidCallbackDeepLink = androidCallbackDeepLink;
+            ConnectionsWebhookUrl = connectionsWebhookUrl;
             OnCreated();
         }
 
@@ -408,6 +410,12 @@ namespace BeamAutomationClient.Model
         public string AndroidCallbackDeepLink { get; set; }
 
         /// <summary>
+        /// Gets or Sets ConnectionsWebhookUrl
+        /// </summary>
+        [JsonPropertyName("connectionsWebhookUrl")]
+        public string ConnectionsWebhookUrl { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -428,6 +436,7 @@ namespace BeamAutomationClient.Model
             sb.Append("  LogoImageUrl: ").Append(LogoImageUrl).Append("\n");
             sb.Append("  BackgroundImageUrl: ").Append(BackgroundImageUrl).Append("\n");
             sb.Append("  AndroidCallbackDeepLink: ").Append(AndroidCallbackDeepLink).Append("\n");
+            sb.Append("  ConnectionsWebhookUrl: ").Append(ConnectionsWebhookUrl).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -488,6 +497,7 @@ namespace BeamAutomationClient.Model
             Option<string> logoImageUrl = default;
             Option<string> backgroundImageUrl = default;
             Option<string> androidCallbackDeepLink = default;
+            Option<string> connectionsWebhookUrl = default;
 
             while (utf8JsonReader.Read())
             {
@@ -550,6 +560,9 @@ namespace BeamAutomationClient.Model
                         case "androidCallbackDeepLink":
                             androidCallbackDeepLink = new Option<string>(utf8JsonReader.GetString());
                             break;
+                        case "connectionsWebhookUrl":
+                            connectionsWebhookUrl = new Option<string>(utf8JsonReader.GetString());
+                            break;
                         default:
                             break;
                     }
@@ -595,6 +608,9 @@ namespace BeamAutomationClient.Model
             if (!androidCallbackDeepLink.IsSet)
                 throw new ArgumentException("Property is required for class AutomationRegenerateGameApiKeysResponse.", nameof(androidCallbackDeepLink));
 
+            if (!connectionsWebhookUrl.IsSet)
+                throw new ArgumentException("Property is required for class AutomationRegenerateGameApiKeysResponse.", nameof(connectionsWebhookUrl));
+
             if (pegiContent.IsSet && pegiContent.Value == null)
                 throw new ArgumentNullException(nameof(pegiContent), "Property is not nullable for class AutomationRegenerateGameApiKeysResponse.");
 
@@ -616,7 +632,7 @@ namespace BeamAutomationClient.Model
             if (apiKeys.IsSet && apiKeys.Value == null)
                 throw new ArgumentNullException(nameof(apiKeys), "Property is not nullable for class AutomationRegenerateGameApiKeysResponse.");
 
-            return new AutomationRegenerateGameApiKeysResponse(pegiContent.Value, id.Value, createdAt.Value.Value, updatedAt.Value.Value, name.Value, chainIds.Value, apiKeys.Value, pegiRating.Value, description.Value, coverImageUrl.Value, logoImageUrl.Value, backgroundImageUrl.Value, androidCallbackDeepLink.Value);
+            return new AutomationRegenerateGameApiKeysResponse(pegiContent.Value, id.Value, createdAt.Value.Value, updatedAt.Value.Value, name.Value, chainIds.Value, apiKeys.Value, pegiRating.Value, description.Value, coverImageUrl.Value, logoImageUrl.Value, backgroundImageUrl.Value, androidCallbackDeepLink.Value, connectionsWebhookUrl.Value);
         }
 
         /// <summary>
@@ -721,6 +737,15 @@ namespace BeamAutomationClient.Model
             else
             {
                 writer.WriteNull("androidCallbackDeepLink");
+            }
+
+            if (automationRegenerateGameApiKeysResponse.ConnectionsWebhookUrl != null)
+            {
+                writer.WriteString("connectionsWebhookUrl", automationRegenerateGameApiKeysResponse.ConnectionsWebhookUrl);
+            }
+            else
+            {
+                writer.WriteNull("connectionsWebhookUrl");
             }
         }
     }

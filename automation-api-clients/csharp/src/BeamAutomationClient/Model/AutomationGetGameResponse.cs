@@ -46,9 +46,10 @@ namespace BeamAutomationClient.Model
         /// <param name="logoImageUrl">logoImageUrl</param>
         /// <param name="backgroundImageUrl">backgroundImageUrl</param>
         /// <param name="androidCallbackDeepLink">androidCallbackDeepLink</param>
+        /// <param name="connectionsWebhookUrl">connectionsWebhookUrl</param>
         /// <param name="depositor">depositor</param>
         [JsonConstructor]
-        public AutomationGetGameResponse(List<AutomationGetGameResponse.PegiContentEnum> pegiContent, string id, DateTime createdAt, DateTime updatedAt, string name, List<int> chainIds, List<AutomationGetGameResponseDevelopersInner> developers, List<AutomationGetGameResponseContractsInner> contracts, List<AutomationGetGameResponsePoliciesInner> policies, PegiRatingEnum? pegiRating = default, string description = default, string coverImageUrl = default, string logoImageUrl = default, string backgroundImageUrl = default, string androidCallbackDeepLink = default, Option<AutomationGetGameResponseDepositor> depositor = default)
+        public AutomationGetGameResponse(List<AutomationGetGameResponse.PegiContentEnum> pegiContent, string id, DateTime createdAt, DateTime updatedAt, string name, List<int> chainIds, List<AutomationGetGameResponseDevelopersInner> developers, List<AutomationGetGameResponseContractsInner> contracts, List<AutomationGetGameResponsePoliciesInner> policies, PegiRatingEnum? pegiRating = default, string description = default, string coverImageUrl = default, string logoImageUrl = default, string backgroundImageUrl = default, string androidCallbackDeepLink = default, string connectionsWebhookUrl = default, Option<AutomationGetGameResponseDepositor> depositor = default)
         {
             PegiContent = pegiContent;
             Id = id;
@@ -65,6 +66,7 @@ namespace BeamAutomationClient.Model
             LogoImageUrl = logoImageUrl;
             BackgroundImageUrl = backgroundImageUrl;
             AndroidCallbackDeepLink = androidCallbackDeepLink;
+            ConnectionsWebhookUrl = connectionsWebhookUrl;
             DepositorOption = depositor;
             OnCreated();
         }
@@ -426,6 +428,12 @@ namespace BeamAutomationClient.Model
         public string AndroidCallbackDeepLink { get; set; }
 
         /// <summary>
+        /// Gets or Sets ConnectionsWebhookUrl
+        /// </summary>
+        [JsonPropertyName("connectionsWebhookUrl")]
+        public string ConnectionsWebhookUrl { get; set; }
+
+        /// <summary>
         /// Used to track the state of Depositor
         /// </summary>
         [JsonIgnore]
@@ -461,6 +469,7 @@ namespace BeamAutomationClient.Model
             sb.Append("  LogoImageUrl: ").Append(LogoImageUrl).Append("\n");
             sb.Append("  BackgroundImageUrl: ").Append(BackgroundImageUrl).Append("\n");
             sb.Append("  AndroidCallbackDeepLink: ").Append(AndroidCallbackDeepLink).Append("\n");
+            sb.Append("  ConnectionsWebhookUrl: ").Append(ConnectionsWebhookUrl).Append("\n");
             sb.Append("  Depositor: ").Append(Depositor).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -524,6 +533,7 @@ namespace BeamAutomationClient.Model
             Option<string> logoImageUrl = default;
             Option<string> backgroundImageUrl = default;
             Option<string> androidCallbackDeepLink = default;
+            Option<string> connectionsWebhookUrl = default;
             Option<AutomationGetGameResponseDepositor> depositor = default;
 
             while (utf8JsonReader.Read())
@@ -595,6 +605,9 @@ namespace BeamAutomationClient.Model
                         case "androidCallbackDeepLink":
                             androidCallbackDeepLink = new Option<string>(utf8JsonReader.GetString());
                             break;
+                        case "connectionsWebhookUrl":
+                            connectionsWebhookUrl = new Option<string>(utf8JsonReader.GetString());
+                            break;
                         case "depositor":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 depositor = new Option<AutomationGetGameResponseDepositor>(JsonSerializer.Deserialize<AutomationGetGameResponseDepositor>(ref utf8JsonReader, jsonSerializerOptions));
@@ -650,6 +663,9 @@ namespace BeamAutomationClient.Model
             if (!androidCallbackDeepLink.IsSet)
                 throw new ArgumentException("Property is required for class AutomationGetGameResponse.", nameof(androidCallbackDeepLink));
 
+            if (!connectionsWebhookUrl.IsSet)
+                throw new ArgumentException("Property is required for class AutomationGetGameResponse.", nameof(connectionsWebhookUrl));
+
             if (pegiContent.IsSet && pegiContent.Value == null)
                 throw new ArgumentNullException(nameof(pegiContent), "Property is not nullable for class AutomationGetGameResponse.");
 
@@ -677,7 +693,7 @@ namespace BeamAutomationClient.Model
             if (policies.IsSet && policies.Value == null)
                 throw new ArgumentNullException(nameof(policies), "Property is not nullable for class AutomationGetGameResponse.");
 
-            return new AutomationGetGameResponse(pegiContent.Value, id.Value, createdAt.Value.Value, updatedAt.Value.Value, name.Value, chainIds.Value, developers.Value, contracts.Value, policies.Value, pegiRating.Value, description.Value, coverImageUrl.Value, logoImageUrl.Value, backgroundImageUrl.Value, androidCallbackDeepLink.Value, depositor);
+            return new AutomationGetGameResponse(pegiContent.Value, id.Value, createdAt.Value.Value, updatedAt.Value.Value, name.Value, chainIds.Value, developers.Value, contracts.Value, policies.Value, pegiRating.Value, description.Value, coverImageUrl.Value, logoImageUrl.Value, backgroundImageUrl.Value, androidCallbackDeepLink.Value, connectionsWebhookUrl.Value, depositor);
         }
 
         /// <summary>
@@ -792,6 +808,15 @@ namespace BeamAutomationClient.Model
             else
             {
                 writer.WriteNull("androidCallbackDeepLink");
+            }
+
+            if (automationGetGameResponse.ConnectionsWebhookUrl != null)
+            {
+                writer.WriteString("connectionsWebhookUrl", automationGetGameResponse.ConnectionsWebhookUrl);
+            }
+            else
+            {
+                writer.WriteNull("connectionsWebhookUrl");
             }
 
             if (automationGetGameResponse.DepositorOption.IsSet)

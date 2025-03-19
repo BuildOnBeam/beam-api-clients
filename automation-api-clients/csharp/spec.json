@@ -5100,6 +5100,10 @@
             "type": "string",
             "nullable": true
           },
+          "connectionsWebhookUrl": {
+            "type": "string",
+            "nullable": true
+          },
           "chainIds": {
             "type": "array",
             "items": {
@@ -5377,6 +5381,7 @@
           "logoImageUrl",
           "backgroundImageUrl",
           "androidCallbackDeepLink",
+          "connectionsWebhookUrl",
           "chainIds",
           "developers",
           "contracts",
@@ -5448,6 +5453,10 @@
             "type": "string",
             "nullable": true
           },
+          "connectionsWebhookUrl": {
+            "type": "string",
+            "nullable": true
+          },
           "chainIds": {
             "type": "array",
             "items": {
@@ -5509,6 +5518,7 @@
           "logoImageUrl",
           "backgroundImageUrl",
           "androidCallbackDeepLink",
+          "connectionsWebhookUrl",
           "chainIds",
           "apiKeys"
         ]
