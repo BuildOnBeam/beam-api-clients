@@ -3076,6 +3076,7 @@
     },
     "/v1/player/sessions/users/{entityId}/request": {
       "post": {
+        "deprecated": true,
         "operationId": "createSessionRequest",
         "parameters": [
           {
@@ -3137,7 +3138,8 @@
         "summary": "",
         "tags": [
           "Sessions"
-        ]
+        ],
+        "x-sunset": "2025-07-01"
       }
     },
     "/v1/player/sessions/users/{entityId}/revoke": {
@@ -3400,6 +3402,63 @@
           "Sessions"
         ],
         "x-sunset": "2025-03-01"
+      }
+    },
+    "/v2/player/sessions/request": {
+      "post": {
+        "operationId": "createSessionRequestV2",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlayerGenerateSessionUrlRequestInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerGenerateSessionRequestResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ],
+        "summary": "",
+        "tags": [
+          "Sessions"
+        ]
       }
     },
     "/v2/player/sessions/users/{entityId}/{accountAddress}/active": {
@@ -6966,6 +7025,12 @@
           "address": {
             "type": "string"
           },
+          "entityId": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 250,
+            "nullable": true
+          },
           "suggestedExpiry": {
             "type": "string",
             "format": "date-time",
@@ -7012,6 +7077,15 @@
               "Error"
             ]
           },
+          "authProvider": {
+            "type": "string",
+            "enum": [
+              "Any",
+              "Google",
+              "Discord",
+              "Apple"
+            ]
+          },
           "id": {
             "type": "string",
             "format": "cuid"
@@ -7024,6 +7098,13 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
+          },
+          "entityId": {
+            "type": "string",
+            "nullable": true
+          },
+          "gameId": {
+            "type": "string"
           },
           "chainId": {
             "type": "integer",
@@ -7049,9 +7130,12 @@
         },
         "required": [
           "status",
+          "authProvider",
           "id",
           "createdAt",
           "updatedAt",
+          "entityId",
+          "gameId",
           "chainId",
           "openfortId",
           "address",
@@ -7117,6 +7201,15 @@
               "Error"
             ]
           },
+          "authProvider": {
+            "type": "string",
+            "enum": [
+              "Any",
+              "Google",
+              "Discord",
+              "Apple"
+            ]
+          },
           "id": {
             "type": "string",
             "format": "cuid"
@@ -7129,6 +7222,13 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
+          },
+          "entityId": {
+            "type": "string",
+            "nullable": true
+          },
+          "gameId": {
+            "type": "string"
           },
           "chainId": {
             "type": "integer",
@@ -7150,9 +7250,12 @@
         },
         "required": [
           "status",
+          "authProvider",
           "id",
           "createdAt",
           "updatedAt",
+          "entityId",
+          "gameId",
           "chainId",
           "openfortId",
           "address",
@@ -7269,7 +7372,8 @@
           "entityId": {
             "type": "string",
             "minLength": 3,
-            "maxLength": 250
+            "maxLength": 250,
+            "nullable": true
           },
           "authProvider": {
             "default": "Any",
@@ -7282,16 +7386,8 @@
             ],
             "nullable": true,
             "description": "Auth Provider for the user to use. If it's Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI."
-          },
-          "chainId": {
-            "default": 13337,
-            "type": "integer",
-            "format": "int64"
           }
-        },
-        "required": [
-          "entityId"
-        ]
+        }
       },
       "PlayerCreateConnectionRequestResponse": {
         "type": "object",
@@ -7302,6 +7398,15 @@
               "Pending",
               "Connected",
               "Error"
+            ]
+          },
+          "authProvider": {
+            "type": "string",
+            "enum": [
+              "Any",
+              "Google",
+              "Discord",
+              "Apple"
             ]
           },
           "id": {
@@ -7317,6 +7422,13 @@
             "format": "date-time",
             "nullable": true
           },
+          "entityId": {
+            "type": "string",
+            "nullable": true
+          },
+          "gameId": {
+            "type": "string"
+          },
           "url": {
             "type": "string",
             "format": "uri"
@@ -7324,9 +7436,12 @@
         },
         "required": [
           "status",
+          "authProvider",
           "id",
           "createdAt",
           "updatedAt",
+          "entityId",
+          "gameId",
           "url"
         ]
       },
@@ -7341,6 +7456,15 @@
               "Error"
             ]
           },
+          "authProvider": {
+            "type": "string",
+            "enum": [
+              "Any",
+              "Google",
+              "Discord",
+              "Apple"
+            ]
+          },
           "id": {
             "type": "string",
             "format": "cuid"
@@ -7353,13 +7477,23 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
+          },
+          "entityId": {
+            "type": "string",
+            "nullable": true
+          },
+          "gameId": {
+            "type": "string"
           }
         },
         "required": [
           "status",
+          "authProvider",
           "id",
           "createdAt",
-          "updatedAt"
+          "updatedAt",
+          "entityId",
+          "gameId"
         ]
       },
       "PlayerCommonStatsRequestInput": {

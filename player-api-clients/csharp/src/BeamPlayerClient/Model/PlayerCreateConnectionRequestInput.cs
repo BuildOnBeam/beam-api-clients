@@ -33,13 +33,11 @@ namespace BeamPlayerClient.Model
         /// </summary>
         /// <param name="entityId">entityId</param>
         /// <param name="authProvider">Auth Provider for the user to use. If it&#39;s Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI. (default to AuthProviderEnum.Any)</param>
-        /// <param name="chainId">chainId (default to 13337)</param>
         [JsonConstructor]
-        public PlayerCreateConnectionRequestInput(string entityId, Option<AuthProviderEnum?> authProvider = default, Option<long?> chainId = default)
+        public PlayerCreateConnectionRequestInput(Option<string> entityId = default, Option<AuthProviderEnum?> authProvider = default)
         {
-            EntityId = entityId;
+            EntityIdOption = entityId;
             AuthProviderOption = authProvider;
-            ChainIdOption = chainId;
             OnCreated();
         }
 
@@ -158,23 +156,17 @@ namespace BeamPlayerClient.Model
         public AuthProviderEnum? AuthProvider { get { return this.AuthProviderOption; } set { this.AuthProviderOption = new(value); } }
 
         /// <summary>
-        /// Gets or Sets EntityId
-        /// </summary>
-        [JsonPropertyName("entityId")]
-        public string EntityId { get; set; }
-
-        /// <summary>
-        /// Used to track the state of ChainId
+        /// Used to track the state of EntityId
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<long?> ChainIdOption { get; private set; }
+        public Option<string> EntityIdOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets ChainId
+        /// Gets or Sets EntityId
         /// </summary>
-        [JsonPropertyName("chainId")]
-        public long? ChainId { get { return this.ChainIdOption; } set { this.ChainIdOption = new(value); } }
+        [JsonPropertyName("entityId")]
+        public string EntityId { get { return this.EntityIdOption; } set { this.EntityIdOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -186,7 +178,6 @@ namespace BeamPlayerClient.Model
             sb.Append("class PlayerCreateConnectionRequestInput {\n");
             sb.Append("  EntityId: ").Append(EntityId).Append("\n");
             sb.Append("  AuthProvider: ").Append(AuthProvider).Append("\n");
-            sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -238,7 +229,6 @@ namespace BeamPlayerClient.Model
 
             Option<string> entityId = default;
             Option<PlayerCreateConnectionRequestInput.AuthProviderEnum?> authProvider = default;
-            Option<long?> chainId = default;
 
             while (utf8JsonReader.Read())
             {
@@ -263,26 +253,13 @@ namespace BeamPlayerClient.Model
                             if (authProviderRawValue != null)
                                 authProvider = new Option<PlayerCreateConnectionRequestInput.AuthProviderEnum?>(PlayerCreateConnectionRequestInput.AuthProviderEnumFromStringOrDefault(authProviderRawValue));
                             break;
-                        case "chainId":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                chainId = new Option<long?>(utf8JsonReader.GetInt64());
-                            break;
                         default:
                             break;
                     }
                 }
             }
 
-            if (!entityId.IsSet)
-                throw new ArgumentException("Property is required for class PlayerCreateConnectionRequestInput.", nameof(entityId));
-
-            if (entityId.IsSet && entityId.Value == null)
-                throw new ArgumentNullException(nameof(entityId), "Property is not nullable for class PlayerCreateConnectionRequestInput.");
-
-            if (chainId.IsSet && chainId.Value == null)
-                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class PlayerCreateConnectionRequestInput.");
-
-            return new PlayerCreateConnectionRequestInput(entityId.Value, authProvider, chainId);
+            return new PlayerCreateConnectionRequestInput(entityId, authProvider);
         }
 
         /// <summary>
@@ -309,21 +286,24 @@ namespace BeamPlayerClient.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, PlayerCreateConnectionRequestInput playerCreateConnectionRequestInput, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (playerCreateConnectionRequestInput.EntityId == null)
-                throw new ArgumentNullException(nameof(playerCreateConnectionRequestInput.EntityId), "Property is required for class PlayerCreateConnectionRequestInput.");
+            if (playerCreateConnectionRequestInput.EntityIdOption.IsSet)
+            {
+                if (playerCreateConnectionRequestInput.EntityIdOption.Value != null)
+                {
+                    writer.WriteString("entityId", playerCreateConnectionRequestInput.EntityId);
+                }
+                else
+                {
+                    writer.WriteNull("entityId");
+                }
 
-            writer.WriteString("entityId", playerCreateConnectionRequestInput.EntityId);
+            }
 
             var authProviderRawValue = PlayerCreateConnectionRequestInput.AuthProviderEnumToJsonValue(playerCreateConnectionRequestInput.AuthProviderOption.Value.Value);
             if (authProviderRawValue != null)
                 writer.WriteString("authProvider", authProviderRawValue);
             else
                 writer.WriteNull("authProvider");
-
-            if (playerCreateConnectionRequestInput.ChainIdOption.IsSet)
-            {
-                writer.WriteNumber("chainId", playerCreateConnectionRequestInput.ChainIdOption.Value.Value);
-            }
         }
     }
 }

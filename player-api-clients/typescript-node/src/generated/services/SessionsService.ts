@@ -15,6 +15,7 @@ import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class SessionsService {
   constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
+   * @deprecated
    * @param entityId
    * @param requestBody
    * @returns GenerateSessionRequestResponse
@@ -114,6 +115,21 @@ export class SessionsService {
       query: {
         chainId: chainId,
       },
+    });
+  }
+  /**
+   * @param requestBody
+   * @returns GenerateSessionRequestResponse
+   * @throws ApiError
+   */
+  public createSessionRequestV2(
+    requestBody: GenerateSessionUrlRequestInput,
+  ): CancelablePromise<GenerateSessionRequestResponse> {
+    return this.httpRequest.request({
+      method: 'POST',
+      url: '/v2/player/sessions/request',
+      body: requestBody,
+      mediaType: 'application/json',
     });
   }
   /**

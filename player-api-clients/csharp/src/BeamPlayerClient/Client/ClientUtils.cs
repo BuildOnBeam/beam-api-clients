@@ -175,6 +175,8 @@ namespace BeamPlayerClient.Client
                 return PlayerCreateConnectionRequestInput.AuthProviderEnumToJsonValue(playerCreateConnectionRequestInputAuthProviderEnum);
             if (obj is PlayerCreateConnectionRequestResponse.StatusEnum playerCreateConnectionRequestResponseStatusEnum)
                 return PlayerCreateConnectionRequestResponse.StatusEnumToJsonValue(playerCreateConnectionRequestResponseStatusEnum);
+            if (obj is PlayerCreateConnectionRequestResponse.AuthProviderEnum playerCreateConnectionRequestResponseAuthProviderEnum)
+                return PlayerCreateConnectionRequestResponse.AuthProviderEnumToJsonValue(playerCreateConnectionRequestResponseAuthProviderEnum);
             if (obj is PlayerCreateOnrampRequestInput.TokenEnum playerCreateOnrampRequestInputTokenEnum)
                 return PlayerCreateOnrampRequestInput.TokenEnumToJsonValue(playerCreateOnrampRequestInputTokenEnum);
             if (obj is PlayerCreateOnrampRequestInput.AuthProviderEnum playerCreateOnrampRequestInputAuthProviderEnum)
@@ -185,6 +187,8 @@ namespace BeamPlayerClient.Client
                 return PlayerCreateTransactionRequestInput.AuthProviderEnumToJsonValue(playerCreateTransactionRequestInputAuthProviderEnum);
             if (obj is PlayerGenerateSessionRequestResponse.StatusEnum playerGenerateSessionRequestResponseStatusEnum)
                 return PlayerGenerateSessionRequestResponse.StatusEnumToJsonValue(playerGenerateSessionRequestResponseStatusEnum);
+            if (obj is PlayerGenerateSessionRequestResponse.AuthProviderEnum playerGenerateSessionRequestResponseAuthProviderEnum)
+                return PlayerGenerateSessionRequestResponse.AuthProviderEnumToJsonValue(playerGenerateSessionRequestResponseAuthProviderEnum);
             if (obj is PlayerGenerateSessionUrlRequestInput.AuthProviderEnum playerGenerateSessionUrlRequestInputAuthProviderEnum)
                 return PlayerGenerateSessionUrlRequestInput.AuthProviderEnumToJsonValue(playerGenerateSessionUrlRequestInputAuthProviderEnum);
             if (obj is PlayerGetAssetListingsResponseDataInner.StatusEnum playerGetAssetListingsResponseDataInnerStatusEnum)
@@ -211,6 +215,8 @@ namespace BeamPlayerClient.Client
                 return PlayerGetChainCurrenciesResponseDataInner.SymbolEnumToJsonValue(playerGetChainCurrenciesResponseDataInnerSymbolEnum);
             if (obj is PlayerGetConnectionRequestResponse.StatusEnum playerGetConnectionRequestResponseStatusEnum)
                 return PlayerGetConnectionRequestResponse.StatusEnumToJsonValue(playerGetConnectionRequestResponseStatusEnum);
+            if (obj is PlayerGetConnectionRequestResponse.AuthProviderEnum playerGetConnectionRequestResponseAuthProviderEnum)
+                return PlayerGetConnectionRequestResponse.AuthProviderEnumToJsonValue(playerGetConnectionRequestResponseAuthProviderEnum);
             if (obj is PlayerGetListedAssetsBodyInput.SortByEnum playerGetListedAssetsBodyInputSortByEnum)
                 return PlayerGetListedAssetsBodyInput.SortByEnumToJsonValue(playerGetListedAssetsBodyInputSortByEnum);
             if (obj is PlayerGetListedAssetsBodyInput.SortDirectionEnum playerGetListedAssetsBodyInputSortDirectionEnum)
@@ -221,6 +227,8 @@ namespace BeamPlayerClient.Client
                 return PlayerGetOwnerAssetsBodyInput.SortByEnumToJsonValue(playerGetOwnerAssetsBodyInputSortByEnum);
             if (obj is PlayerGetSessionRequestResponse.StatusEnum playerGetSessionRequestResponseStatusEnum)
                 return PlayerGetSessionRequestResponse.StatusEnumToJsonValue(playerGetSessionRequestResponseStatusEnum);
+            if (obj is PlayerGetSessionRequestResponse.AuthProviderEnum playerGetSessionRequestResponseAuthProviderEnum)
+                return PlayerGetSessionRequestResponse.AuthProviderEnumToJsonValue(playerGetSessionRequestResponseAuthProviderEnum);
             if (obj is PlayerOperationAction.TypeEnum playerOperationActionTypeEnum)
                 return PlayerOperationAction.TypeEnumToJsonValue(playerOperationActionTypeEnum);
             if (obj is PlayerOperationActionSignature.TypeEnum playerOperationActionSignatureTypeEnum)

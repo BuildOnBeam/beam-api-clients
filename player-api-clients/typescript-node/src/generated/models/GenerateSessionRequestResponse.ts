@@ -4,9 +4,12 @@
 /* eslint-disable */
 export type GenerateSessionRequestResponse = {
   status: GenerateSessionRequestResponse.status;
+  authProvider: GenerateSessionRequestResponse.authProvider;
   id: string;
   createdAt: string;
   updatedAt: string | null;
+  entityId: string | null;
+  gameId: string;
   chainId: number;
   openfortId: string | null;
   address: string;
@@ -18,5 +21,11 @@ export namespace GenerateSessionRequestResponse {
     PENDING = 'Pending',
     ACCEPTED = 'Accepted',
     ERROR = 'Error',
+  }
+  export enum authProvider {
+    ANY = 'Any',
+    GOOGLE = 'Google',
+    DISCORD = 'Discord',
+    APPLE = 'Apple',
   }
 }

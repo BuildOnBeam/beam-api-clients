@@ -32,25 +32,31 @@ namespace BeamPlayerClient.Model
         /// Initializes a new instance of the <see cref="PlayerGenerateSessionRequestResponse" /> class.
         /// </summary>
         /// <param name="status">status</param>
+        /// <param name="authProvider">authProvider</param>
         /// <param name="id">id</param>
         /// <param name="createdAt">createdAt</param>
+        /// <param name="gameId">gameId</param>
         /// <param name="chainId">chainId</param>
         /// <param name="address">address</param>
         /// <param name="contracts">contracts</param>
         /// <param name="url">url</param>
         /// <param name="updatedAt">updatedAt</param>
+        /// <param name="entityId">entityId</param>
         /// <param name="openfortId">openfortId</param>
         [JsonConstructor]
-        public PlayerGenerateSessionRequestResponse(StatusEnum status, string id, DateTime createdAt, long chainId, string address, List<string> contracts, string url, DateTime? updatedAt = default, string openfortId = default)
+        public PlayerGenerateSessionRequestResponse(StatusEnum status, AuthProviderEnum authProvider, string id, DateTime createdAt, string gameId, long chainId, string address, List<string> contracts, string url, DateTime? updatedAt = default, string entityId = default, string openfortId = default)
         {
             Status = status;
+            AuthProvider = authProvider;
             Id = id;
             CreatedAt = createdAt;
+            GameId = gameId;
             ChainId = chainId;
             Address = address;
             Contracts = contracts;
             Url = url;
             UpdatedAt = updatedAt;
+            EntityId = entityId;
             OpenfortId = openfortId;
             OnCreated();
         }
@@ -147,6 +153,109 @@ namespace BeamPlayerClient.Model
         public StatusEnum Status { get; set; }
 
         /// <summary>
+        /// Defines AuthProvider
+        /// </summary>
+        public enum AuthProviderEnum
+        {
+            /// <summary>
+            /// Enum Any for value: Any
+            /// </summary>
+            Any = 1,
+
+            /// <summary>
+            /// Enum Google for value: Google
+            /// </summary>
+            Google = 2,
+
+            /// <summary>
+            /// Enum Discord for value: Discord
+            /// </summary>
+            Discord = 3,
+
+            /// <summary>
+            /// Enum Apple for value: Apple
+            /// </summary>
+            Apple = 4
+        }
+
+        /// <summary>
+        /// Returns a <see cref="AuthProviderEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static AuthProviderEnum AuthProviderEnumFromString(string value)
+        {
+            if (value.Equals("Any"))
+                return AuthProviderEnum.Any;
+
+            if (value.Equals("Google"))
+                return AuthProviderEnum.Google;
+
+            if (value.Equals("Discord"))
+                return AuthProviderEnum.Discord;
+
+            if (value.Equals("Apple"))
+                return AuthProviderEnum.Apple;
+
+            throw new NotImplementedException($"Could not convert value to type AuthProviderEnum: '{value}'");
+        }
+
+        /// <summary>
+        /// Returns a <see cref="AuthProviderEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static AuthProviderEnum? AuthProviderEnumFromStringOrDefault(string value)
+        {
+            if (value.Equals("Any"))
+                return AuthProviderEnum.Any;
+
+            if (value.Equals("Google"))
+                return AuthProviderEnum.Google;
+
+            if (value.Equals("Discord"))
+                return AuthProviderEnum.Discord;
+
+            if (value.Equals("Apple"))
+                return AuthProviderEnum.Apple;
+
+            return null;
+        }
+
+        /// <summary>
+        /// Converts the <see cref="AuthProviderEnum"/> to the json value
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static string AuthProviderEnumToJsonValue(AuthProviderEnum value)
+        {
+            if (value == null)
+                return null;
+
+            if (value == AuthProviderEnum.Any)
+                return "Any";
+
+            if (value == AuthProviderEnum.Google)
+                return "Google";
+
+            if (value == AuthProviderEnum.Discord)
+                return "Discord";
+
+            if (value == AuthProviderEnum.Apple)
+                return "Apple";
+
+            throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Gets or Sets AuthProvider
+        /// </summary>
+        [JsonPropertyName("authProvider")]
+        public AuthProviderEnum AuthProvider { get; set; }
+
+        /// <summary>
         /// Gets or Sets Id
         /// </summary>
         [JsonPropertyName("id")]
@@ -157,6 +266,12 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [JsonPropertyName("createdAt")]
         public DateTime CreatedAt { get; set; }
+
+        /// <summary>
+        /// Gets or Sets GameId
+        /// </summary>
+        [JsonPropertyName("gameId")]
+        public string GameId { get; set; }
 
         /// <summary>
         /// Gets or Sets ChainId
@@ -189,6 +304,12 @@ namespace BeamPlayerClient.Model
         public DateTime? UpdatedAt { get; set; }
 
         /// <summary>
+        /// Gets or Sets EntityId
+        /// </summary>
+        [JsonPropertyName("entityId")]
+        public string EntityId { get; set; }
+
+        /// <summary>
         /// Gets or Sets OpenfortId
         /// </summary>
         [JsonPropertyName("openfortId")]
@@ -203,13 +324,16 @@ namespace BeamPlayerClient.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class PlayerGenerateSessionRequestResponse {\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
+            sb.Append("  AuthProvider: ").Append(AuthProvider).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
+            sb.Append("  GameId: ").Append(GameId).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  Address: ").Append(Address).Append("\n");
             sb.Append("  Contracts: ").Append(Contracts).Append("\n");
             sb.Append("  Url: ").Append(Url).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
+            sb.Append("  EntityId: ").Append(EntityId).Append("\n");
             sb.Append("  OpenfortId: ").Append(OpenfortId).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -259,13 +383,16 @@ namespace BeamPlayerClient.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<PlayerGenerateSessionRequestResponse.StatusEnum?> status = default;
+            Option<PlayerGenerateSessionRequestResponse.AuthProviderEnum?> authProvider = default;
             Option<string> id = default;
             Option<DateTime?> createdAt = default;
+            Option<string> gameId = default;
             Option<long?> chainId = default;
             Option<string> address = default;
             Option<List<string>> contracts = default;
             Option<string> url = default;
             Option<DateTime?> updatedAt = default;
+            Option<string> entityId = default;
             Option<string> openfortId = default;
 
             while (utf8JsonReader.Read())
@@ -288,12 +415,20 @@ namespace BeamPlayerClient.Model
                             if (statusRawValue != null)
                                 status = new Option<PlayerGenerateSessionRequestResponse.StatusEnum?>(PlayerGenerateSessionRequestResponse.StatusEnumFromStringOrDefault(statusRawValue));
                             break;
+                        case "authProvider":
+                            string authProviderRawValue = utf8JsonReader.GetString();
+                            if (authProviderRawValue != null)
+                                authProvider = new Option<PlayerGenerateSessionRequestResponse.AuthProviderEnum?>(PlayerGenerateSessionRequestResponse.AuthProviderEnumFromStringOrDefault(authProviderRawValue));
+                            break;
                         case "id":
                             id = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "createdAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 createdAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "gameId":
+                            gameId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "chainId":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
@@ -313,6 +448,9 @@ namespace BeamPlayerClient.Model
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 updatedAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime?>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
+                        case "entityId":
+                            entityId = new Option<string>(utf8JsonReader.GetString());
+                            break;
                         case "openfortId":
                             openfortId = new Option<string>(utf8JsonReader.GetString());
                             break;
@@ -325,11 +463,17 @@ namespace BeamPlayerClient.Model
             if (!status.IsSet)
                 throw new ArgumentException("Property is required for class PlayerGenerateSessionRequestResponse.", nameof(status));
 
+            if (!authProvider.IsSet)
+                throw new ArgumentException("Property is required for class PlayerGenerateSessionRequestResponse.", nameof(authProvider));
+
             if (!id.IsSet)
                 throw new ArgumentException("Property is required for class PlayerGenerateSessionRequestResponse.", nameof(id));
 
             if (!createdAt.IsSet)
                 throw new ArgumentException("Property is required for class PlayerGenerateSessionRequestResponse.", nameof(createdAt));
+
+            if (!gameId.IsSet)
+                throw new ArgumentException("Property is required for class PlayerGenerateSessionRequestResponse.", nameof(gameId));
 
             if (!chainId.IsSet)
                 throw new ArgumentException("Property is required for class PlayerGenerateSessionRequestResponse.", nameof(chainId));
@@ -346,17 +490,26 @@ namespace BeamPlayerClient.Model
             if (!updatedAt.IsSet)
                 throw new ArgumentException("Property is required for class PlayerGenerateSessionRequestResponse.", nameof(updatedAt));
 
+            if (!entityId.IsSet)
+                throw new ArgumentException("Property is required for class PlayerGenerateSessionRequestResponse.", nameof(entityId));
+
             if (!openfortId.IsSet)
                 throw new ArgumentException("Property is required for class PlayerGenerateSessionRequestResponse.", nameof(openfortId));
 
             if (status.IsSet && status.Value == null)
                 throw new ArgumentNullException(nameof(status), "Property is not nullable for class PlayerGenerateSessionRequestResponse.");
 
+            if (authProvider.IsSet && authProvider.Value == null)
+                throw new ArgumentNullException(nameof(authProvider), "Property is not nullable for class PlayerGenerateSessionRequestResponse.");
+
             if (id.IsSet && id.Value == null)
                 throw new ArgumentNullException(nameof(id), "Property is not nullable for class PlayerGenerateSessionRequestResponse.");
 
             if (createdAt.IsSet && createdAt.Value == null)
                 throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class PlayerGenerateSessionRequestResponse.");
+
+            if (gameId.IsSet && gameId.Value == null)
+                throw new ArgumentNullException(nameof(gameId), "Property is not nullable for class PlayerGenerateSessionRequestResponse.");
 
             if (chainId.IsSet && chainId.Value == null)
                 throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class PlayerGenerateSessionRequestResponse.");
@@ -370,7 +523,7 @@ namespace BeamPlayerClient.Model
             if (url.IsSet && url.Value == null)
                 throw new ArgumentNullException(nameof(url), "Property is not nullable for class PlayerGenerateSessionRequestResponse.");
 
-            return new PlayerGenerateSessionRequestResponse(status.Value.Value, id.Value, createdAt.Value.Value, chainId.Value.Value, address.Value, contracts.Value, url.Value, updatedAt.Value, openfortId.Value);
+            return new PlayerGenerateSessionRequestResponse(status.Value.Value, authProvider.Value.Value, id.Value, createdAt.Value.Value, gameId.Value, chainId.Value.Value, address.Value, contracts.Value, url.Value, updatedAt.Value, entityId.Value, openfortId.Value);
         }
 
         /// <summary>
@@ -400,6 +553,9 @@ namespace BeamPlayerClient.Model
             if (playerGenerateSessionRequestResponse.Id == null)
                 throw new ArgumentNullException(nameof(playerGenerateSessionRequestResponse.Id), "Property is required for class PlayerGenerateSessionRequestResponse.");
 
+            if (playerGenerateSessionRequestResponse.GameId == null)
+                throw new ArgumentNullException(nameof(playerGenerateSessionRequestResponse.GameId), "Property is required for class PlayerGenerateSessionRequestResponse.");
+
             if (playerGenerateSessionRequestResponse.Address == null)
                 throw new ArgumentNullException(nameof(playerGenerateSessionRequestResponse.Address), "Property is required for class PlayerGenerateSessionRequestResponse.");
 
@@ -412,9 +568,14 @@ namespace BeamPlayerClient.Model
             var statusRawValue = PlayerGenerateSessionRequestResponse.StatusEnumToJsonValue(playerGenerateSessionRequestResponse.Status);
             if (statusRawValue != null)
                 writer.WriteString("status", statusRawValue);
+            var authProviderRawValue = PlayerGenerateSessionRequestResponse.AuthProviderEnumToJsonValue(playerGenerateSessionRequestResponse.AuthProvider);
+            if (authProviderRawValue != null)
+                writer.WriteString("authProvider", authProviderRawValue);
             writer.WriteString("id", playerGenerateSessionRequestResponse.Id);
 
             writer.WriteString("createdAt", playerGenerateSessionRequestResponse.CreatedAt.ToString(CreatedAtFormat));
+
+            writer.WriteString("gameId", playerGenerateSessionRequestResponse.GameId);
 
             writer.WriteNumber("chainId", playerGenerateSessionRequestResponse.ChainId);
 
@@ -431,6 +592,15 @@ namespace BeamPlayerClient.Model
             else
             {
                 writer.WriteNull("updatedAt");
+            }
+
+            if (playerGenerateSessionRequestResponse.EntityId != null)
+            {
+                writer.WriteString("entityId", playerGenerateSessionRequestResponse.EntityId);
+            }
+            else
+            {
+                writer.WriteNull("entityId");
             }
 
             if (playerGenerateSessionRequestResponse.OpenfortId != null)

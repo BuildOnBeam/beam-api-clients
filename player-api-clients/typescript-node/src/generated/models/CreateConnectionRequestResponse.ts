@@ -4,9 +4,12 @@
 /* eslint-disable */
 export type CreateConnectionRequestResponse = {
   status: CreateConnectionRequestResponse.status;
+  authProvider: CreateConnectionRequestResponse.authProvider;
   id: string;
   createdAt: string;
   updatedAt: string | null;
+  entityId: string | null;
+  gameId: string;
   url: string;
 };
 export namespace CreateConnectionRequestResponse {
@@ -14,5 +17,11 @@ export namespace CreateConnectionRequestResponse {
     PENDING = 'Pending',
     CONNECTED = 'Connected',
     ERROR = 'Error',
+  }
+  export enum authProvider {
+    ANY = 'Any',
+    GOOGLE = 'Google',
+    DISCORD = 'Discord',
+    APPLE = 'Apple',
   }
 }

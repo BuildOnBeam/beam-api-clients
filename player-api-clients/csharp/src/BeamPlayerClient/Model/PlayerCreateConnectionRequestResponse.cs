@@ -32,18 +32,24 @@ namespace BeamPlayerClient.Model
         /// Initializes a new instance of the <see cref="PlayerCreateConnectionRequestResponse" /> class.
         /// </summary>
         /// <param name="status">status</param>
+        /// <param name="authProvider">authProvider</param>
         /// <param name="id">id</param>
         /// <param name="createdAt">createdAt</param>
+        /// <param name="gameId">gameId</param>
         /// <param name="url">url</param>
         /// <param name="updatedAt">updatedAt</param>
+        /// <param name="entityId">entityId</param>
         [JsonConstructor]
-        public PlayerCreateConnectionRequestResponse(StatusEnum status, string id, DateTime createdAt, string url, DateTime? updatedAt = default)
+        public PlayerCreateConnectionRequestResponse(StatusEnum status, AuthProviderEnum authProvider, string id, DateTime createdAt, string gameId, string url, DateTime? updatedAt = default, string entityId = default)
         {
             Status = status;
+            AuthProvider = authProvider;
             Id = id;
             CreatedAt = createdAt;
+            GameId = gameId;
             Url = url;
             UpdatedAt = updatedAt;
+            EntityId = entityId;
             OnCreated();
         }
 
@@ -139,6 +145,109 @@ namespace BeamPlayerClient.Model
         public StatusEnum Status { get; set; }
 
         /// <summary>
+        /// Defines AuthProvider
+        /// </summary>
+        public enum AuthProviderEnum
+        {
+            /// <summary>
+            /// Enum Any for value: Any
+            /// </summary>
+            Any = 1,
+
+            /// <summary>
+            /// Enum Google for value: Google
+            /// </summary>
+            Google = 2,
+
+            /// <summary>
+            /// Enum Discord for value: Discord
+            /// </summary>
+            Discord = 3,
+
+            /// <summary>
+            /// Enum Apple for value: Apple
+            /// </summary>
+            Apple = 4
+        }
+
+        /// <summary>
+        /// Returns a <see cref="AuthProviderEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static AuthProviderEnum AuthProviderEnumFromString(string value)
+        {
+            if (value.Equals("Any"))
+                return AuthProviderEnum.Any;
+
+            if (value.Equals("Google"))
+                return AuthProviderEnum.Google;
+
+            if (value.Equals("Discord"))
+                return AuthProviderEnum.Discord;
+
+            if (value.Equals("Apple"))
+                return AuthProviderEnum.Apple;
+
+            throw new NotImplementedException($"Could not convert value to type AuthProviderEnum: '{value}'");
+        }
+
+        /// <summary>
+        /// Returns a <see cref="AuthProviderEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static AuthProviderEnum? AuthProviderEnumFromStringOrDefault(string value)
+        {
+            if (value.Equals("Any"))
+                return AuthProviderEnum.Any;
+
+            if (value.Equals("Google"))
+                return AuthProviderEnum.Google;
+
+            if (value.Equals("Discord"))
+                return AuthProviderEnum.Discord;
+
+            if (value.Equals("Apple"))
+                return AuthProviderEnum.Apple;
+
+            return null;
+        }
+
+        /// <summary>
+        /// Converts the <see cref="AuthProviderEnum"/> to the json value
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static string AuthProviderEnumToJsonValue(AuthProviderEnum value)
+        {
+            if (value == null)
+                return null;
+
+            if (value == AuthProviderEnum.Any)
+                return "Any";
+
+            if (value == AuthProviderEnum.Google)
+                return "Google";
+
+            if (value == AuthProviderEnum.Discord)
+                return "Discord";
+
+            if (value == AuthProviderEnum.Apple)
+                return "Apple";
+
+            throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Gets or Sets AuthProvider
+        /// </summary>
+        [JsonPropertyName("authProvider")]
+        public AuthProviderEnum AuthProvider { get; set; }
+
+        /// <summary>
         /// Gets or Sets Id
         /// </summary>
         [JsonPropertyName("id")]
@@ -149,6 +258,12 @@ namespace BeamPlayerClient.Model
         /// </summary>
         [JsonPropertyName("createdAt")]
         public DateTime CreatedAt { get; set; }
+
+        /// <summary>
+        /// Gets or Sets GameId
+        /// </summary>
+        [JsonPropertyName("gameId")]
+        public string GameId { get; set; }
 
         /// <summary>
         /// Gets or Sets Url
@@ -163,6 +278,12 @@ namespace BeamPlayerClient.Model
         public DateTime? UpdatedAt { get; set; }
 
         /// <summary>
+        /// Gets or Sets EntityId
+        /// </summary>
+        [JsonPropertyName("entityId")]
+        public string EntityId { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -171,10 +292,13 @@ namespace BeamPlayerClient.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class PlayerCreateConnectionRequestResponse {\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
+            sb.Append("  AuthProvider: ").Append(AuthProvider).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
+            sb.Append("  GameId: ").Append(GameId).Append("\n");
             sb.Append("  Url: ").Append(Url).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
+            sb.Append("  EntityId: ").Append(EntityId).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -223,10 +347,13 @@ namespace BeamPlayerClient.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<PlayerCreateConnectionRequestResponse.StatusEnum?> status = default;
+            Option<PlayerCreateConnectionRequestResponse.AuthProviderEnum?> authProvider = default;
             Option<string> id = default;
             Option<DateTime?> createdAt = default;
+            Option<string> gameId = default;
             Option<string> url = default;
             Option<DateTime?> updatedAt = default;
+            Option<string> entityId = default;
 
             while (utf8JsonReader.Read())
             {
@@ -248,6 +375,11 @@ namespace BeamPlayerClient.Model
                             if (statusRawValue != null)
                                 status = new Option<PlayerCreateConnectionRequestResponse.StatusEnum?>(PlayerCreateConnectionRequestResponse.StatusEnumFromStringOrDefault(statusRawValue));
                             break;
+                        case "authProvider":
+                            string authProviderRawValue = utf8JsonReader.GetString();
+                            if (authProviderRawValue != null)
+                                authProvider = new Option<PlayerCreateConnectionRequestResponse.AuthProviderEnum?>(PlayerCreateConnectionRequestResponse.AuthProviderEnumFromStringOrDefault(authProviderRawValue));
+                            break;
                         case "id":
                             id = new Option<string>(utf8JsonReader.GetString());
                             break;
@@ -255,12 +387,18 @@ namespace BeamPlayerClient.Model
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 createdAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
+                        case "gameId":
+                            gameId = new Option<string>(utf8JsonReader.GetString());
+                            break;
                         case "url":
                             url = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "updatedAt":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 updatedAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime?>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "entityId":
+                            entityId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -271,11 +409,17 @@ namespace BeamPlayerClient.Model
             if (!status.IsSet)
                 throw new ArgumentException("Property is required for class PlayerCreateConnectionRequestResponse.", nameof(status));
 
+            if (!authProvider.IsSet)
+                throw new ArgumentException("Property is required for class PlayerCreateConnectionRequestResponse.", nameof(authProvider));
+
             if (!id.IsSet)
                 throw new ArgumentException("Property is required for class PlayerCreateConnectionRequestResponse.", nameof(id));
 
             if (!createdAt.IsSet)
                 throw new ArgumentException("Property is required for class PlayerCreateConnectionRequestResponse.", nameof(createdAt));
+
+            if (!gameId.IsSet)
+                throw new ArgumentException("Property is required for class PlayerCreateConnectionRequestResponse.", nameof(gameId));
 
             if (!url.IsSet)
                 throw new ArgumentException("Property is required for class PlayerCreateConnectionRequestResponse.", nameof(url));
@@ -283,8 +427,14 @@ namespace BeamPlayerClient.Model
             if (!updatedAt.IsSet)
                 throw new ArgumentException("Property is required for class PlayerCreateConnectionRequestResponse.", nameof(updatedAt));
 
+            if (!entityId.IsSet)
+                throw new ArgumentException("Property is required for class PlayerCreateConnectionRequestResponse.", nameof(entityId));
+
             if (status.IsSet && status.Value == null)
                 throw new ArgumentNullException(nameof(status), "Property is not nullable for class PlayerCreateConnectionRequestResponse.");
+
+            if (authProvider.IsSet && authProvider.Value == null)
+                throw new ArgumentNullException(nameof(authProvider), "Property is not nullable for class PlayerCreateConnectionRequestResponse.");
 
             if (id.IsSet && id.Value == null)
                 throw new ArgumentNullException(nameof(id), "Property is not nullable for class PlayerCreateConnectionRequestResponse.");
@@ -292,10 +442,13 @@ namespace BeamPlayerClient.Model
             if (createdAt.IsSet && createdAt.Value == null)
                 throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class PlayerCreateConnectionRequestResponse.");
 
+            if (gameId.IsSet && gameId.Value == null)
+                throw new ArgumentNullException(nameof(gameId), "Property is not nullable for class PlayerCreateConnectionRequestResponse.");
+
             if (url.IsSet && url.Value == null)
                 throw new ArgumentNullException(nameof(url), "Property is not nullable for class PlayerCreateConnectionRequestResponse.");
 
-            return new PlayerCreateConnectionRequestResponse(status.Value.Value, id.Value, createdAt.Value.Value, url.Value, updatedAt.Value);
+            return new PlayerCreateConnectionRequestResponse(status.Value.Value, authProvider.Value.Value, id.Value, createdAt.Value.Value, gameId.Value, url.Value, updatedAt.Value, entityId.Value);
         }
 
         /// <summary>
@@ -325,15 +478,23 @@ namespace BeamPlayerClient.Model
             if (playerCreateConnectionRequestResponse.Id == null)
                 throw new ArgumentNullException(nameof(playerCreateConnectionRequestResponse.Id), "Property is required for class PlayerCreateConnectionRequestResponse.");
 
+            if (playerCreateConnectionRequestResponse.GameId == null)
+                throw new ArgumentNullException(nameof(playerCreateConnectionRequestResponse.GameId), "Property is required for class PlayerCreateConnectionRequestResponse.");
+
             if (playerCreateConnectionRequestResponse.Url == null)
                 throw new ArgumentNullException(nameof(playerCreateConnectionRequestResponse.Url), "Property is required for class PlayerCreateConnectionRequestResponse.");
 
             var statusRawValue = PlayerCreateConnectionRequestResponse.StatusEnumToJsonValue(playerCreateConnectionRequestResponse.Status);
             if (statusRawValue != null)
                 writer.WriteString("status", statusRawValue);
+            var authProviderRawValue = PlayerCreateConnectionRequestResponse.AuthProviderEnumToJsonValue(playerCreateConnectionRequestResponse.AuthProvider);
+            if (authProviderRawValue != null)
+                writer.WriteString("authProvider", authProviderRawValue);
             writer.WriteString("id", playerCreateConnectionRequestResponse.Id);
 
             writer.WriteString("createdAt", playerCreateConnectionRequestResponse.CreatedAt.ToString(CreatedAtFormat));
+
+            writer.WriteString("gameId", playerCreateConnectionRequestResponse.GameId);
 
             writer.WriteString("url", playerCreateConnectionRequestResponse.Url);
 
@@ -344,6 +505,15 @@ namespace BeamPlayerClient.Model
             else
             {
                 writer.WriteNull("updatedAt");
+            }
+
+            if (playerCreateConnectionRequestResponse.EntityId != null)
+            {
+                writer.WriteString("entityId", playerCreateConnectionRequestResponse.EntityId);
+            }
+            else
+            {
+                writer.WriteNull("entityId");
             }
         }
     }

@@ -32,14 +32,16 @@ namespace BeamPlayerClient.Model
         /// Initializes a new instance of the <see cref="PlayerGenerateSessionUrlRequestInput" /> class.
         /// </summary>
         /// <param name="address">address</param>
+        /// <param name="entityId">entityId</param>
         /// <param name="suggestedExpiry">suggestedExpiry</param>
         /// <param name="authProvider">Auth Provider for the user to use. If it&#39;s Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI. (default to AuthProviderEnum.Any)</param>
         /// <param name="contracts">List of contract addresses to be used in the session</param>
         /// <param name="chainId">chainId (default to 13337)</param>
         [JsonConstructor]
-        public PlayerGenerateSessionUrlRequestInput(string address, Option<DateTime?> suggestedExpiry = default, Option<AuthProviderEnum?> authProvider = default, Option<List<string>> contracts = default, Option<long?> chainId = default)
+        public PlayerGenerateSessionUrlRequestInput(string address, Option<string> entityId = default, Option<DateTime?> suggestedExpiry = default, Option<AuthProviderEnum?> authProvider = default, Option<List<string>> contracts = default, Option<long?> chainId = default)
         {
             Address = address;
+            EntityIdOption = entityId;
             SuggestedExpiryOption = suggestedExpiry;
             AuthProviderOption = authProvider;
             ContractsOption = contracts;
@@ -168,6 +170,19 @@ namespace BeamPlayerClient.Model
         public string Address { get; set; }
 
         /// <summary>
+        /// Used to track the state of EntityId
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> EntityIdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets EntityId
+        /// </summary>
+        [JsonPropertyName("entityId")]
+        public string EntityId { get { return this.EntityIdOption; } set { this.EntityIdOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of SuggestedExpiry
         /// </summary>
         [JsonIgnore]
@@ -216,6 +231,7 @@ namespace BeamPlayerClient.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class PlayerGenerateSessionUrlRequestInput {\n");
             sb.Append("  Address: ").Append(Address).Append("\n");
+            sb.Append("  EntityId: ").Append(EntityId).Append("\n");
             sb.Append("  SuggestedExpiry: ").Append(SuggestedExpiry).Append("\n");
             sb.Append("  AuthProvider: ").Append(AuthProvider).Append("\n");
             sb.Append("  Contracts: ").Append(Contracts).Append("\n");
@@ -231,6 +247,18 @@ namespace BeamPlayerClient.Model
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // EntityId (string) maxLength
+            if (this.EntityId != null && this.EntityId.Length > 250)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for EntityId, length must be less than 250.", new [] { "EntityId" });
+            }
+
+            // EntityId (string) minLength
+            if (this.EntityId != null && this.EntityId.Length < 3)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for EntityId, length must be greater than 3.", new [] { "EntityId" });
+            }
+
             yield break;
         }
     }
@@ -263,6 +291,7 @@ namespace BeamPlayerClient.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<string> address = default;
+            Option<string> entityId = default;
             Option<DateTime?> suggestedExpiry = default;
             Option<PlayerGenerateSessionUrlRequestInput.AuthProviderEnum?> authProvider = default;
             Option<List<string>> contracts = default;
@@ -285,6 +314,9 @@ namespace BeamPlayerClient.Model
                     {
                         case "address":
                             address = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "entityId":
+                            entityId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "suggestedExpiry":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
@@ -318,7 +350,7 @@ namespace BeamPlayerClient.Model
             if (chainId.IsSet && chainId.Value == null)
                 throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class PlayerGenerateSessionUrlRequestInput.");
 
-            return new PlayerGenerateSessionUrlRequestInput(address.Value, suggestedExpiry, authProvider, contracts, chainId);
+            return new PlayerGenerateSessionUrlRequestInput(address.Value, entityId, suggestedExpiry, authProvider, contracts, chainId);
         }
 
         /// <summary>
@@ -349,6 +381,19 @@ namespace BeamPlayerClient.Model
                 throw new ArgumentNullException(nameof(playerGenerateSessionUrlRequestInput.Address), "Property is required for class PlayerGenerateSessionUrlRequestInput.");
 
             writer.WriteString("address", playerGenerateSessionUrlRequestInput.Address);
+
+            if (playerGenerateSessionUrlRequestInput.EntityIdOption.IsSet)
+            {
+                if (playerGenerateSessionUrlRequestInput.EntityIdOption.Value != null)
+                {
+                    writer.WriteString("entityId", playerGenerateSessionUrlRequestInput.EntityId);
+                }
+                else
+                {
+                    writer.WriteNull("entityId");
+                }
+
+            }
 
             if (playerGenerateSessionUrlRequestInput.SuggestedExpiryOption.IsSet)
             {
