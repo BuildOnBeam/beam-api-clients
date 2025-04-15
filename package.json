@@ -5,13 +5,11 @@
     "get:oas:csharp:automation": "node get-and-modify-oas-for-csharp.js 'https://api.testnet.onbeam.com/api/automation-json' 'Automation' './automation-api-clients/csharp/spec.json'",
     "generate": "pnpm generate:player:csharp && pnpm generate:automation:csharp && pnpm generate:automation:node && pnpm generate:player:node",
     "generate:automation:csharp": "rm -rf ./automation-api-clients/csharp/src/BeamAutomationClient/Api && rm -rf ./automation-api-clients/csharp/src/BeamAutomationClient/Model && pnpm get:oas:csharp:automation && openapi-generator-cli generate",
-    "generate:automation:node": "pnpm --filter @onbeam/automation-api-client generate && pnpm validate:lint:fix",
+    "generate:automation:node": "pnpm --filter @onbeam/automation-api-client generate && pnpm validate:fix:all",
     "generate:player:csharp": "rm -rf ./player-api-clients/csharp/src/BeamPlayerClient/Api && rm -rf ./player-api-clients/csharp/src/BeamPlayerClient/Model && pnpm get:oas:csharp:player && openapi-generator-cli generate",
-    "generate:player:node": "pnpm --filter @onbeam/player-api-client generate && pnpm validate:lint:fix",
-    "validate:format": "biome format .",
-    "validate:format:fix": "pnpm validate:format --write",
-    "validate:lint": "biome check .",
-    "validate:lint:fix": "pnpm validate:lint --write",
+    "generate:player:node": "pnpm --filter @onbeam/player-api-client generate && pnpm validate:fix:all",
+    "validate:fix": "biome check . --write --unsafe",
+    "validate:fix:all": "biome check . --write --unsafe",
     "validate:ci": "biome ci ."
   },
   "keywords": [],
@@ -19,7 +17,7 @@
   "license": "ISC",
   "devDependencies": {
     "@actions/core": "^1.10.1",
-    "@biomejs/biome": "^1.8.3",
+    "@biomejs/biome": "^1.9.4",
     "@openapitools/openapi-generator-cli": "^2.7.0"
   },
   "packageManager": "pnpm@9.14.4",
