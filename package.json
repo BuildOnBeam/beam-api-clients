@@ -11,7 +11,7 @@
     "validate:format": "biome format .",
     "validate:format:fix": "pnpm validate:format --write",
     "validate:lint": "biome check .",
-    "validate:lint:fix": "pnpm validate:lint --apply-unsafe",
+    "validate:lint:fix": "pnpm validate:lint --write",
     "validate:ci": "biome ci ."
   },
   "keywords": [],
