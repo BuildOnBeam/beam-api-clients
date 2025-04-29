@@ -1,8 +1,8 @@
 {
   "name": "@onbeam/api-clients",
   "scripts": {
-    "get:oas:csharp:player": "node get-and-modify-oas-for-csharp.js 'https://api.testnet.onbeam.com/api/player-json' 'Player' './player-api-clients/csharp/spec.json'",
-    "get:oas:csharp:automation": "node get-and-modify-oas-for-csharp.js 'https://api.testnet.onbeam.com/api/automation-json' 'Automation' './automation-api-clients/csharp/spec.json'",
+    "get:oas:csharp:player": "node get-and-modify-oas-for-csharp.js 'https://api.beta.onbeam.com/api/player-json' 'Player' './player-api-clients/csharp/spec.json'",
+    "get:oas:csharp:automation": "node get-and-modify-oas-for-csharp.js 'https://api.beta.onbeam.com/api/automation-json' 'Automation' './automation-api-clients/csharp/spec.json'",
     "generate": "pnpm generate:player:csharp && pnpm generate:automation:csharp && pnpm generate:automation:node && pnpm generate:player:node",
     "generate:automation:csharp": "rm -rf ./automation-api-clients/csharp/src/BeamAutomationClient/Api && rm -rf ./automation-api-clients/csharp/src/BeamAutomationClient/Model && pnpm get:oas:csharp:automation && openapi-generator-cli generate",
     "generate:automation:node": "pnpm --filter @onbeam/automation-api-client generate && pnpm validate:fix:all",
