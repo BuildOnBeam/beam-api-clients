@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export type CreateOnrampRequestInput = {
+  platform?: CreateOnrampRequestInput.platform;
   token?: CreateOnrampRequestInput.token;
   tokenAmount?: string;
   fiatAmount?: string;
@@ -15,8 +16,13 @@ export type CreateOnrampRequestInput = {
   authProvider?: CreateOnrampRequestInput.authProvider | null;
 };
 export namespace CreateOnrampRequestInput {
+  export enum platform {
+    THIRDWEB = 'thirdweb',
+    TRANSAK = 'transak',
+  }
   export enum token {
     BEAM = 'BEAM',
+    FP = 'FP',
   }
   /**
    * Auth Provider for the user to use. If it's Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI.

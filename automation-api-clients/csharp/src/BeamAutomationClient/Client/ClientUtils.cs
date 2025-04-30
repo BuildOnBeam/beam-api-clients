@@ -135,6 +135,8 @@ namespace BeamAutomationClient.Client
                 return boolean
                     ? "true"
                     : "false";
+            if (obj is AutomationAddContractResponse.TypeEnum automationAddContractResponseTypeEnum)
+                return AutomationAddContractResponse.TypeEnumToJsonValue(automationAddContractResponseTypeEnum);
             if (obj is AutomationCommonActivityResponseDataInner.TypeEnum automationCommonActivityResponseDataInnerTypeEnum)
                 return AutomationCommonActivityResponseDataInner.TypeEnumToJsonValue(automationCommonActivityResponseDataInnerTypeEnum);
             if (obj is AutomationCommonAddPolicyRequestInput.RateTypeEnum automationCommonAddPolicyRequestInputRateTypeEnum)
@@ -151,6 +153,8 @@ namespace BeamAutomationClient.Client
                 return AutomationCommonUserActivityRequestInput.TypesEnumToJsonValue(automationCommonUserActivityRequestInputTypesEnum);
             if (obj is AutomationCreateAssetOfferRequestInputV2.CurrencyEnum automationCreateAssetOfferRequestInputV2CurrencyEnum)
                 return AutomationCreateAssetOfferRequestInputV2.CurrencyEnumToJsonValue(automationCreateAssetOfferRequestInputV2CurrencyEnum);
+            if (obj is AutomationGameContractsResponse.TypeEnum automationGameContractsResponseTypeEnum)
+                return AutomationGameContractsResponse.TypeEnumToJsonValue(automationGameContractsResponseTypeEnum);
             if (obj is AutomationGetAllGasUsageResponseChainsInnerPoliciesInnerPolicy.ModelEnum automationGetAllGasUsageResponseChainsInnerPoliciesInnerPolicyModelEnum)
                 return AutomationGetAllGasUsageResponseChainsInnerPoliciesInnerPolicy.ModelEnumToJsonValue(automationGetAllGasUsageResponseChainsInnerPoliciesInnerPolicyModelEnum);
             if (obj is AutomationGetAssetListingsResponseV2DataInner.StatusEnum automationGetAssetListingsResponseV2DataInnerStatusEnum)
@@ -191,6 +195,8 @@ namespace BeamAutomationClient.Client
                 return AutomationGetListedAssetsBodyInputV2.SortByEnumToJsonValue(automationGetListedAssetsBodyInputV2SortByEnum);
             if (obj is AutomationGetListedAssetsBodyInputV2.SortDirectionEnum automationGetListedAssetsBodyInputV2SortDirectionEnum)
                 return AutomationGetListedAssetsBodyInputV2.SortDirectionEnumToJsonValue(automationGetListedAssetsBodyInputV2SortDirectionEnum);
+            if (obj is AutomationGetVerificationStatusResponse.StatusEnum automationGetVerificationStatusResponseStatusEnum)
+                return AutomationGetVerificationStatusResponse.StatusEnumToJsonValue(automationGetVerificationStatusResponseStatusEnum);
             if (obj is AutomationRegenerateGameApiKeysResponse.PegiContentEnum automationRegenerateGameApiKeysResponsePegiContentEnum)
                 return AutomationRegenerateGameApiKeysResponse.PegiContentEnumToJsonValue(automationRegenerateGameApiKeysResponsePegiContentEnum);
             if (obj is AutomationRegenerateGameApiKeysResponse.PegiRatingEnum automationRegenerateGameApiKeysResponsePegiRatingEnum)

@@ -39,6 +39,8 @@ namespace BeamAutomationClient.Client
             _jsonOptions.Converters.Add(new DateTimeJsonConverter());
             _jsonOptions.Converters.Add(new DateTimeNullableJsonConverter());
             _jsonOptions.Converters.Add(new AutomationAcceptAssetOfferRequestInputV2JsonConverter());
+            _jsonOptions.Converters.Add(new AutomationAddContractRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationAddContractResponseJsonConverter());
             _jsonOptions.Converters.Add(new AutomationBeamErrorResponseJsonConverter());
             _jsonOptions.Converters.Add(new AutomationBuyAssetRequestInputV2JsonConverter());
             _jsonOptions.Converters.Add(new AutomationCancelAssetListingRequestInputV2JsonConverter());
@@ -68,6 +70,7 @@ namespace BeamAutomationClient.Client
             _jsonOptions.Converters.Add(new AutomationCreateProfileResponseWalletsInnerJsonConverter());
             _jsonOptions.Converters.Add(new AutomationCreateTransactionRequestInputV2JsonConverter());
             _jsonOptions.Converters.Add(new AutomationCreateTransactionRequestInputV2InteractionsInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGameContractsResponseJsonConverter());
             _jsonOptions.Converters.Add(new AutomationGenerateLinkCodeRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new AutomationGenerateLinkCodeResponseJsonConverter());
             _jsonOptions.Converters.Add(new AutomationGenerateSignInCodeRequestInputJsonConverter());
@@ -118,6 +121,8 @@ namespace BeamAutomationClient.Client
             _jsonOptions.Converters.Add(new AutomationGetQuoteResponseJsonConverter());
             _jsonOptions.Converters.Add(new AutomationGetTransactionsResponseV2JsonConverter());
             _jsonOptions.Converters.Add(new AutomationGetTransactionsResponseV2DataInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetVerificationStatusRequestInputJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationGetVerificationStatusResponseJsonConverter());
             _jsonOptions.Converters.Add(new AutomationMigrateRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new AutomationMigrateResponseJsonConverter());
             _jsonOptions.Converters.Add(new AutomationReadContractRequestJsonConverter());
@@ -126,6 +131,7 @@ namespace BeamAutomationClient.Client
             _jsonOptions.Converters.Add(new AutomationRefreshTokenRequestBodyJsonConverter());
             _jsonOptions.Converters.Add(new AutomationRegenerateGameApiKeysResponseJsonConverter());
             _jsonOptions.Converters.Add(new AutomationRegenerateGameApiKeysResponseApiKeysInnerJsonConverter());
+            _jsonOptions.Converters.Add(new AutomationRemoveContractResponseJsonConverter());
             _jsonOptions.Converters.Add(new AutomationSellAssetRequestInputV2JsonConverter());
             _jsonOptions.Converters.Add(new AutomationSellAssetResponseV2JsonConverter());
             _jsonOptions.Converters.Add(new AutomationTradeTokensRequestInputJsonConverter());

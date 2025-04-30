@@ -861,6 +861,239 @@
         ]
       }
     },
+    "/v1/contract/get-verification-status": {
+      "post": {
+        "operationId": "getVerificationStatus",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationGetVerificationStatusRequestInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Contract verification status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationGetVerificationStatusResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ],
+        "summary": "Get the verification status of a contract",
+        "tags": [
+          "Contract"
+        ]
+      }
+    },
+    "/v1/contract": {
+      "get": {
+        "operationId": "getGameContracts",
+        "parameters": [
+          {
+            "name": "includeAbis",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "List of Contracts added to your Game",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationGameContractsResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ],
+        "summary": "Get a list of Contracts added to your Game",
+        "tags": [
+          "Contract"
+        ]
+      },
+      "post": {
+        "operationId": "addContractToGame",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationAddContractRequestInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The contract was successfully added to the game",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationAddContractResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ],
+        "summary": "Add a new contract to the game",
+        "tags": [
+          "Contract"
+        ]
+      }
+    },
+    "/v1/contract/{address}/{chainId}": {
+      "delete": {
+        "operationId": "removeContractFromGame",
+        "parameters": [
+          {
+            "name": "chainId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The contract was successfully deleted from the game",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationRemoveContractResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationBeamErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ],
+        "summary": "Delete a contract from a game",
+        "tags": [
+          "Contract"
+        ]
+      }
+    },
     "/v1/exchange/quote/input": {
       "get": {
         "operationId": "getQuoteForInput",
@@ -4902,6 +5135,183 @@
         },
         "required": [
           "estimatedGas"
+        ]
+      },
+      "AutomationGetVerificationStatusRequestInput": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "chainId": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "address",
+          "chainId"
+        ]
+      },
+      "AutomationGetVerificationStatusResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "verified",
+              "unverified"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "AutomationGameContractsResponse": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "ERC20",
+              "ERC721",
+              "ERC1155",
+              "CUSTOM",
+              "SEAPORT",
+              "UNISWAPV2"
+            ]
+          },
+          "address": {
+            "type": "string"
+          },
+          "chainId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "abi": {
+            "nullable": true
+          },
+          "hasCustomAbi": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "type",
+          "address",
+          "chainId",
+          "name",
+          "hasCustomAbi",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "AutomationAddContractRequestInput": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "chainId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "abi": {
+            "nullable": true,
+            "description": "The ABI of the contract. If not provided, one will be taken from Block Explorer Verification Source."
+          }
+        },
+        "required": [
+          "address",
+          "chainId",
+          "name"
+        ]
+      },
+      "AutomationAddContractResponse": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "ERC20",
+              "ERC721",
+              "ERC1155",
+              "CUSTOM",
+              "SEAPORT",
+              "UNISWAPV2"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "format": "cuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "externalId": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "chainId": {
+            "type": "integer"
+          },
+          "gameId": {
+            "type": "string",
+            "nullable": true
+          },
+          "abi": {
+            "nullable": true
+          },
+          "hasCustomAbi": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "type",
+          "id",
+          "createdAt",
+          "updatedAt",
+          "externalId",
+          "address",
+          "name",
+          "chainId",
+          "gameId",
+          "abi",
+          "hasCustomAbi"
+        ]
+      },
+      "AutomationRemoveContractResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "success"
         ]
       },
       "AutomationGetQuoteResponse": {

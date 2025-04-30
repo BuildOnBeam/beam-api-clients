@@ -31,6 +31,7 @@ namespace BeamPlayerClient.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="PlayerCreateOnrampRequestInput" /> class.
         /// </summary>
+        /// <param name="platform">platform (default to PlatformEnum.Transak)</param>
         /// <param name="token">token (default to TokenEnum.BEAM)</param>
         /// <param name="tokenAmount">tokenAmount</param>
         /// <param name="fiatAmount">fiatAmount</param>
@@ -39,8 +40,9 @@ namespace BeamPlayerClient.Model
         /// <param name="chainId">chainId (default to 13337)</param>
         /// <param name="authProvider">Auth Provider for the user to use. If it&#39;s Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI. (default to AuthProviderEnum.Any)</param>
         [JsonConstructor]
-        public PlayerCreateOnrampRequestInput(Option<TokenEnum?> token = default, Option<string> tokenAmount = default, Option<string> fiatAmount = default, Option<string> paymentCurrency = default, Option<bool?> canChangeAmount = default, Option<long?> chainId = default, Option<AuthProviderEnum?> authProvider = default)
+        public PlayerCreateOnrampRequestInput(Option<PlatformEnum?> platform = default, Option<TokenEnum?> token = default, Option<string> tokenAmount = default, Option<string> fiatAmount = default, Option<string> paymentCurrency = default, Option<bool?> canChangeAmount = default, Option<long?> chainId = default, Option<AuthProviderEnum?> authProvider = default)
         {
+            PlatformOption = platform;
             TokenOption = token;
             TokenAmountOption = tokenAmount;
             FiatAmountOption = fiatAmount;
@@ -54,6 +56,88 @@ namespace BeamPlayerClient.Model
         partial void OnCreated();
 
         /// <summary>
+        /// Defines Platform
+        /// </summary>
+        public enum PlatformEnum
+        {
+            /// <summary>
+            /// Enum Thirdweb for value: thirdweb
+            /// </summary>
+            Thirdweb = 1,
+
+            /// <summary>
+            /// Enum Transak for value: transak
+            /// </summary>
+            Transak = 2
+        }
+
+        /// <summary>
+        /// Returns a <see cref="PlatformEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static PlatformEnum PlatformEnumFromString(string value)
+        {
+            if (value.Equals("thirdweb"))
+                return PlatformEnum.Thirdweb;
+
+            if (value.Equals("transak"))
+                return PlatformEnum.Transak;
+
+            throw new NotImplementedException($"Could not convert value to type PlatformEnum: '{value}'");
+        }
+
+        /// <summary>
+        /// Returns a <see cref="PlatformEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static PlatformEnum? PlatformEnumFromStringOrDefault(string value)
+        {
+            if (value.Equals("thirdweb"))
+                return PlatformEnum.Thirdweb;
+
+            if (value.Equals("transak"))
+                return PlatformEnum.Transak;
+
+            return null;
+        }
+
+        /// <summary>
+        /// Converts the <see cref="PlatformEnum"/> to the json value
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static string PlatformEnumToJsonValue(PlatformEnum? value)
+        {
+            if (value == null)
+                return null;
+
+            if (value == PlatformEnum.Thirdweb)
+                return "thirdweb";
+
+            if (value == PlatformEnum.Transak)
+                return "transak";
+
+            throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Used to track the state of Platform
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<PlatformEnum?> PlatformOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Platform
+        /// </summary>
+        [JsonPropertyName("platform")]
+        public PlatformEnum? Platform { get { return this.PlatformOption; } set { this.PlatformOption = new(value); } }
+
+        /// <summary>
         /// Defines Token
         /// </summary>
         public enum TokenEnum
@@ -61,7 +145,12 @@ namespace BeamPlayerClient.Model
             /// <summary>
             /// Enum BEAM for value: BEAM
             /// </summary>
-            BEAM = 1
+            BEAM = 1,
+
+            /// <summary>
+            /// Enum FP for value: FP
+            /// </summary>
+            FP = 2
         }
 
         /// <summary>
@@ -75,6 +164,9 @@ namespace BeamPlayerClient.Model
             if (value.Equals("BEAM"))
                 return TokenEnum.BEAM;
 
+            if (value.Equals("FP"))
+                return TokenEnum.FP;
+
             throw new NotImplementedException($"Could not convert value to type TokenEnum: '{value}'");
         }
 
@@ -87,6 +179,9 @@ namespace BeamPlayerClient.Model
         {
             if (value.Equals("BEAM"))
                 return TokenEnum.BEAM;
+
+            if (value.Equals("FP"))
+                return TokenEnum.FP;
 
             return null;
         }
@@ -104,6 +199,9 @@ namespace BeamPlayerClient.Model
 
             if (value == TokenEnum.BEAM)
                 return "BEAM";
+
+            if (value == TokenEnum.FP)
+                return "FP";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }
@@ -306,6 +404,7 @@ namespace BeamPlayerClient.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class PlayerCreateOnrampRequestInput {\n");
+            sb.Append("  Platform: ").Append(Platform).Append("\n");
             sb.Append("  Token: ").Append(Token).Append("\n");
             sb.Append("  TokenAmount: ").Append(TokenAmount).Append("\n");
             sb.Append("  FiatAmount: ").Append(FiatAmount).Append("\n");
@@ -350,6 +449,7 @@ namespace BeamPlayerClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
+            Option<PlayerCreateOnrampRequestInput.PlatformEnum?> platform = default;
             Option<PlayerCreateOnrampRequestInput.TokenEnum?> token = default;
             Option<string> tokenAmount = default;
             Option<string> fiatAmount = default;
@@ -373,6 +473,11 @@ namespace BeamPlayerClient.Model
 
                     switch (localVarJsonPropertyName)
                     {
+                        case "platform":
+                            string platformRawValue = utf8JsonReader.GetString();
+                            if (platformRawValue != null)
+                                platform = new Option<PlayerCreateOnrampRequestInput.PlatformEnum?>(PlayerCreateOnrampRequestInput.PlatformEnumFromStringOrDefault(platformRawValue));
+                            break;
                         case "token":
                             string tokenRawValue = utf8JsonReader.GetString();
                             if (tokenRawValue != null)
@@ -406,6 +511,9 @@ namespace BeamPlayerClient.Model
                 }
             }
 
+            if (platform.IsSet && platform.Value == null)
+                throw new ArgumentNullException(nameof(platform), "Property is not nullable for class PlayerCreateOnrampRequestInput.");
+
             if (token.IsSet && token.Value == null)
                 throw new ArgumentNullException(nameof(token), "Property is not nullable for class PlayerCreateOnrampRequestInput.");
 
@@ -424,7 +532,7 @@ namespace BeamPlayerClient.Model
             if (chainId.IsSet && chainId.Value == null)
                 throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class PlayerCreateOnrampRequestInput.");
 
-            return new PlayerCreateOnrampRequestInput(token, tokenAmount, fiatAmount, paymentCurrency, canChangeAmount, chainId, authProvider);
+            return new PlayerCreateOnrampRequestInput(platform, token, tokenAmount, fiatAmount, paymentCurrency, canChangeAmount, chainId, authProvider);
         }
 
         /// <summary>
@@ -460,6 +568,9 @@ namespace BeamPlayerClient.Model
             if (playerCreateOnrampRequestInput.PaymentCurrencyOption.IsSet && playerCreateOnrampRequestInput.PaymentCurrency == null)
                 throw new ArgumentNullException(nameof(playerCreateOnrampRequestInput.PaymentCurrency), "Property is required for class PlayerCreateOnrampRequestInput.");
 
+            var platformRawValue = PlayerCreateOnrampRequestInput.PlatformEnumToJsonValue(playerCreateOnrampRequestInput.PlatformOption.Value);
+            if (platformRawValue != null)
+                writer.WriteString("platform", platformRawValue);
             var tokenRawValue = PlayerCreateOnrampRequestInput.TokenEnumToJsonValue(playerCreateOnrampRequestInput.TokenOption.Value);
             if (tokenRawValue != null)
                 writer.WriteString("token", tokenRawValue);

@@ -3,6 +3,8 @@
  */
 
 export * from './AcceptAssetOfferRequestInputV2';
+export * from './AddContractRequestInput';
+export * from './AddContractResponse';
 export * from './BeamErrorResponse';
 export * from './BuyAssetRequestInputV2';
 export * from './CancelAssetListingRequestInputV2';
@@ -23,6 +25,7 @@ export * from './CreateOfferResponseV2';
 export * from './CreateProfileRequestInput';
 export * from './CreateProfileResponse';
 export * from './CreateTransactionRequestInputV2';
+export * from './GameContractsResponse';
 export * from './GenerateLinkCodeRequestInput';
 export * from './GenerateLinkCodeResponse';
 export * from './GenerateSignInCodeRequestInput';
@@ -47,6 +50,8 @@ export * from './GetProfileNativeCurrencyResponseV2';
 export * from './GetProfileResponse';
 export * from './GetQuoteResponse';
 export * from './GetTransactionsResponseV2';
+export * from './GetVerificationStatusRequestInput';
+export * from './GetVerificationStatusResponse';
 export * from './MigrateRequestInput';
 export * from './MigrateResponse';
 export * from './ReadContractRequest';
@@ -54,6 +59,7 @@ export * from './ReadContractResonse';
 export * from './RefreshContractRequestBody';
 export * from './RefreshTokenRequestBody';
 export * from './RegenerateGameApiKeysResponse';
+export * from './RemoveContractResponse';
 export * from './SellAssetRequestInputV2';
 export * from './SellAssetResponseV2';
 export * from './TradeTokensRequestInput';

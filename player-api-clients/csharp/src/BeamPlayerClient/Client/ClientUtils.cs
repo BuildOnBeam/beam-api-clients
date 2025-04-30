@@ -177,6 +177,8 @@ namespace BeamPlayerClient.Client
                 return PlayerCreateConnectionRequestResponse.StatusEnumToJsonValue(playerCreateConnectionRequestResponseStatusEnum);
             if (obj is PlayerCreateConnectionRequestResponse.AuthProviderEnum playerCreateConnectionRequestResponseAuthProviderEnum)
                 return PlayerCreateConnectionRequestResponse.AuthProviderEnumToJsonValue(playerCreateConnectionRequestResponseAuthProviderEnum);
+            if (obj is PlayerCreateOnrampRequestInput.PlatformEnum playerCreateOnrampRequestInputPlatformEnum)
+                return PlayerCreateOnrampRequestInput.PlatformEnumToJsonValue(playerCreateOnrampRequestInputPlatformEnum);
             if (obj is PlayerCreateOnrampRequestInput.TokenEnum playerCreateOnrampRequestInputTokenEnum)
                 return PlayerCreateOnrampRequestInput.TokenEnumToJsonValue(playerCreateOnrampRequestInputTokenEnum);
             if (obj is PlayerCreateOnrampRequestInput.AuthProviderEnum playerCreateOnrampRequestInputAuthProviderEnum)

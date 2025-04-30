@@ -7755,11 +7755,20 @@
       "PlayerCreateOnrampRequestInput": {
         "type": "object",
         "properties": {
+          "platform": {
+            "default": "transak",
+            "type": "string",
+            "enum": [
+              "thirdweb",
+              "transak"
+            ]
+          },
           "token": {
             "default": "BEAM",
             "type": "string",
             "enum": [
-              "BEAM"
+              "BEAM",
+              "FP"
             ]
           },
           "tokenAmount": {
