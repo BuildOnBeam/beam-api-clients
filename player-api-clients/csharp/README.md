@@ -1,7 +1,7 @@
 # Beam for C#
 
 [![license](https://img.shields.io/badge/License-GPLv3-blue)](./LICENSE)
-[![nuget](https://img.shields.io/nuget/v/Beam)](https://www.nuget.org/packages/Beam)
+[![nuget](https://img.shields.io/nuget/v/Beam)](https://www.nuget.org/packages/BeamPlayerClient)
 ![npm](https://img.shields.io/npm/v/%40onbeam%2Fnode)
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/Merit-Circle/beam-sdk/publish.yml)
 
