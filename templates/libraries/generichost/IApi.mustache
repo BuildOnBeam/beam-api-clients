@@ -1,15 +1,21 @@
 using System.Net.Http;
+using {{packageName}}.{{clientPackage}};
 
 namespace {{packageName}}.{{apiPackage}}
 {
     /// <summary>
     /// Any Api client
     /// </summary>
-    {{>visibility}} interface {{interfacePrefix}}Api
+    {{>visibility}} interface {{interfacePrefix}}{{classPrefix}}Api
     {
         /// <summary>
         /// The HttpClient
         /// </summary>
         HttpClient HttpClient { get; }
+
+        /// <summary>
+        /// A token provider of type <see cref="ApiKeyProvider"/>
+        /// </summary>
+        TokenProvider<{{classPrefix}}ApiKeyToken> ApiKeyProvider { get; }
     }
 }

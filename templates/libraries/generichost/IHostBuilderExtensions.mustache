@@ -22,9 +22,26 @@ namespace {{packageName}}.Extensions
         /// <param name="builder"></param>
         public static IHostBuilder Configure{{apiName}}(this IHostBuilder builder)
         {
-            builder.ConfigureServices((context, services) => 
+            builder.ConfigureServices((context, services) =>
             {
-                HostConfiguration config = new HostConfiguration(services);
+                {{classPrefix}}HostConfiguration config = new {{classPrefix}}HostConfiguration(services);
+
+                IServiceCollectionExtensions.Add{{apiName}}(services, config);
+            });
+
+            return builder;
+        }
+
+                /// <summary>
+        /// Add the api to your host builder.
+        /// </summary>
+        /// <param name="builder"></param>
+        [Obsolete("Use Configure{{apiName}}")]
+        public static IHostBuilder ConfigureApi(this IHostBuilder builder)
+        {
+            builder.ConfigureServices((context, services) =>
+            {
+                {{classPrefix}}HostConfiguration config = new {{classPrefix}}HostConfiguration(services);
 
                 IServiceCollectionExtensions.Add{{apiName}}(services, config);
             });
@@ -38,11 +55,31 @@ namespace {{packageName}}.Extensions
         /// </summary>
         /// <param name="builder"></param>
         /// <param name="options"></param>
-        public static IHostBuilder Configure{{apiName}}(this IHostBuilder builder, Action<HostBuilderContext, IServiceCollection, HostConfiguration> options)
+        [Obsolete("Use Configure{{apiName}}")]
+        public static IHostBuilder ConfigureApi(this IHostBuilder builder, Action<HostBuilderContext, IServiceCollection, {{classPrefix}}HostConfiguration> options)
         {
-            builder.ConfigureServices((context, services) => 
+            builder.ConfigureServices((context, services) =>
             {
-                HostConfiguration config = new HostConfiguration(services);
+                {{classPrefix}}HostConfiguration config = new {{classPrefix}}HostConfiguration(services);
+
+                options(context, services, config);
+
+                IServiceCollectionExtensions.Add{{apiName}}(services, config);
+            });
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Add the api to your host builder.
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="options"></param>
+        public static IHostBuilder Configure{{apiName}}(this IHostBuilder builder, Action<HostBuilderContext, IServiceCollection, {{classPrefix}}HostConfiguration> options)
+        {
+            builder.ConfigureServices((context, services) =>
+            {
+                {{classPrefix}}HostConfiguration config = new {{classPrefix}}HostConfiguration(services);
 
                 options(context, services, config);
 

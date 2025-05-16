@@ -82,7 +82,7 @@ namespace {{packageName}}.Client
         /// <param name="path">Path</param>
         /// <param name="requestOptions">Request options</param>
         /// <returns>Http signed headers</returns>
-        public Dictionary<string, string> GetHttpSignedHeader(string basePath,string method, string path, RequestOptions requestOptions)
+        internal Dictionary<string, string> GetHttpSignedHeader(string basePath,string method, string path, RequestOptions requestOptions)
         {
             const string HEADER_REQUEST_TARGET = "(request-target)";
             //The time when the HTTP signature expires. The API server should reject HTTP requests
@@ -102,13 +102,14 @@ namespace {{packageName}}.Client
             const string HEADER_AUTHORIZATION = "Authorization";
 
             //Read the api key from the file
-            if(File.Exists(KeyFilePath))
+            if(string.IsNullOrEmpty(this.KeyString))
             {
                 this.KeyString = ReadApiKeyFromFile(KeyFilePath);
             }
-            else if(string.IsNullOrEmpty(KeyString))
+
+            if(string.IsNullOrEmpty(KeyString))
             {
-                throw new Exception("No API key has been provided. Supply it using either KeyFilePath or KeyString");
+                throw new Exception("No API key has been provided.");
             }
 
             //Hash table to store singed headers
@@ -133,18 +134,16 @@ namespace {{packageName}}.Client
             foreach (var parameter in requestOptions.QueryParameters)
             {
 #if (NETCOREAPP)
-                string framework = RuntimeInformation.FrameworkDescription;
-                string key = framework.StartsWith(".NET 9")?parameter.Key:HttpUtility.UrlEncode(parameter.Key);
                 if (parameter.Value.Count > 1)
                 { // array
                     foreach (var value in parameter.Value)
                     {
-                        httpValues.Add(key + "[]", value);
+                        httpValues.Add(HttpUtility.UrlEncode(parameter.Key) + "[]", value);
                     }
                 }
                 else
                 {
-                    httpValues.Add(key, parameter.Value[0]);
+                    httpValues.Add(HttpUtility.UrlEncode(parameter.Key), parameter.Value[0]);
                 }
 #else
                 if (parameter.Value.Count > 1)
@@ -318,10 +317,6 @@ namespace {{packageName}}.Client
 
         private string GetRSASignature(byte[] stringToSign)
         {
-            if (string.IsNullOrEmpty(KeyString))
-            {
-                throw new Exception("No API key has been provided.");
-            }
             RSA rsa = GetRSAProviderFromPemFile(KeyString, KeyPassPhrase);
             if (SigningAlgorithm == "RSASSA-PSS")
             {
@@ -347,10 +342,8 @@ namespace {{packageName}}.Client
         private string GetECDSASignature(byte[] dataToSign)
         {
             {{#net60OrLater}}
-            if (!File.Exists(KeyFilePath) && string.IsNullOrEmpty(KeyString))
-            {
-                throw new Exception("No API key has been provided.");
-            }
+            if (!File.Exists(KeyFilePath))
+                throw new Exception("key file path does not exist.");
 
             var keyStr = KeyString;
             const string ecKeyHeader = "-----BEGIN EC PRIVATE KEY-----";
@@ -391,7 +384,7 @@ namespace {{packageName}}.Client
         }
 
         /// <summary>
-        /// Convert ANS1 format to DER format. Not recommended to use because it generate invalid signature occasionally.
+        /// Convert ANS1 format to DER format. Not recommended to use because it generate inavlid signature occationally.
         /// </summary>
         /// <param name="signedBytes"></param>
         /// <returns></returns>
@@ -450,11 +443,6 @@ namespace {{packageName}}.Client
 
         private  RSACryptoServiceProvider GetRSAProviderFromPemFile(string keyString, SecureString keyPassPhrase = null)
         {
-            if (string.IsNullOrEmpty(KeyString))
-            {
-                throw new Exception("No API key has been provided.");
-            }
-
             const string pempubheader = "-----BEGIN PUBLIC KEY-----";
             const string pempubfooter = "-----END PUBLIC KEY-----";
             bool isPrivateKeyFile = true;
@@ -500,7 +488,7 @@ namespace {{packageName}}.Client
                 binkey = Convert.FromBase64String(pvkstr);
                 return binkey;
             }
-            catch (global::System.FormatException)
+            catch (System.FormatException)
             {
                 StringReader str = new StringReader(pvkstr);
 
@@ -530,7 +518,7 @@ namespace {{packageName}}.Client
                 {   //should have b64 encrypted RSA key now
                     binkey = Convert.FromBase64String(encryptedstr);
                 }
-                catch (global::System.FormatException)
+                catch (System.FormatException)
                 {   //data is not in base64 format
                     return null;
                 }

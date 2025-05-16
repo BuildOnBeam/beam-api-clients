@@ -80,11 +80,9 @@
             return ({{>EnumValueDataType}}) value;
             {{/isString}}
             {{#isString}}
-            {{#isNullable}}
             if (value == null)
                 return null;
 
-            {{/isNullable}}
             {{#allowableValues}}
             {{#enumVars}}
             if (value == {{datatypeWithEnum}}{{^datatypeWithEnum}}{{classname}}{{/datatypeWithEnum}}.{{name}})
