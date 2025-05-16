@@ -1,7 +1,8 @@
-/* generated using openapi-typescript-codegen -- do not edit */
+/* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+
 export type GetAssetsForContractBodyInputV2 = {
   continuation?: string | null;
   chainId?: number;
@@ -18,11 +19,14 @@ export type GetAssetsForContractBodyInputV2 = {
   sortBy?: GetAssetsForContractBodyInputV2.sortBy;
   limit?: number;
 };
+
 export namespace GetAssetsForContractBodyInputV2 {
+
   export enum sortDirection {
     ASC = 'asc',
     DESC = 'desc',
   }
+
   export enum sortBy {
     FLOOR_ASK_PRICE = 'floorAskPrice',
     TOKEN_ID = 'tokenId',
@@ -30,4 +34,7 @@ export namespace GetAssetsForContractBodyInputV2 {
     UPDATED_AT = 'updatedAt',
     MINTED_AT = 'mintedAt',
   }
+
+
 }
+

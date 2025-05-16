@@ -1,4 +1,4 @@
-/* generated using openapi-typescript-codegen -- do not edit */
+/* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -13,10 +13,14 @@ import type { TransactionResponse } from '../models/TransactionResponse';
 import type { TransferAssetRequestInputV2 } from '../models/TransferAssetRequestInputV2';
 import type { TransferNativeTokenRequestInputV2 } from '../models/TransferNativeTokenRequestInputV2';
 import type { TransferTokenRequestInputV2 } from '../models/TransferTokenRequestInputV2';
+
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+
 export class AssetsV2Service {
+
   constructor(public readonly httpRequest: BaseHttpRequest) {}
+
   /**
    * Get all the assets of a profile (NFT assets, e.g. ERC721 / ERC1155)
    * @param entityId
@@ -32,12 +36,13 @@ export class AssetsV2Service {
       method: 'POST',
       url: '/v2/assets/profiles/{entityId}',
       path: {
-        entityId: entityId,
+        'entityId': entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
+
   /**
    * Get all the currencies owned by an account (ERC20)
    * @param entityId
@@ -53,13 +58,14 @@ export class AssetsV2Service {
       method: 'GET',
       url: '/v2/assets/profiles/{entityId}/currencies',
       path: {
-        entityId: entityId,
+        'entityId': entityId,
       },
       query: {
-        chainId: chainId,
+        'chainId': chainId,
       },
     });
   }
+
   /**
    * Get the native token balance
    * @param entityId
@@ -75,13 +81,14 @@ export class AssetsV2Service {
       method: 'GET',
       url: '/v2/assets/profiles/{entityId}/native',
       path: {
-        entityId: entityId,
+        'entityId': entityId,
       },
       query: {
-        chainId: chainId,
+        'chainId': chainId,
       },
     });
   }
+
   /**
    * Transfer an asset (NFT assets, ERC721 / ERC1155)
    * @param entityId
@@ -97,12 +104,13 @@ export class AssetsV2Service {
       method: 'POST',
       url: '/v2/assets/profiles/{entityId}/transfer-asset',
       path: {
-        entityId: entityId,
+        'entityId': entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
+
   /**
    * Transfer a token (token assets, ERC20)
    * @param entityId
@@ -118,12 +126,13 @@ export class AssetsV2Service {
       method: 'POST',
       url: '/v2/assets/profiles/{entityId}/transfer-token',
       path: {
-        entityId: entityId,
+        'entityId': entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
+
   /**
    * Transfer the native token
    * @param entityId
@@ -139,12 +148,13 @@ export class AssetsV2Service {
       method: 'POST',
       url: '/v2/assets/profiles/{entityId}/transfer-native',
       path: {
-        entityId: entityId,
+        'entityId': entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
+
   /**
    * Get all the assets of contract (NFT assets, e.g. ERC721 / ERC1155)
    * @param assetAddress
@@ -160,12 +170,13 @@ export class AssetsV2Service {
       method: 'POST',
       url: '/v2/assets/{assetAddress}',
       path: {
-        assetAddress: assetAddress,
+        'assetAddress': assetAddress,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
+
   /**
    * Get a single NFT (e.g. ERC721 / ERC1155)
    * @param assetAddress
@@ -187,14 +198,15 @@ export class AssetsV2Service {
       method: 'GET',
       url: '/v2/assets/{assetAddress}/{assetId}',
       path: {
-        assetAddress: assetAddress,
-        assetId: assetId,
+        'assetAddress': assetAddress,
+        'assetId': assetId,
       },
       query: {
-        chainId: chainId,
-        entityId: entityId,
-        owners: owners,
+        'chainId': chainId,
+        'entityId': entityId,
+        'owners': owners,
       },
     });
   }
+
 }

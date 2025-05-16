@@ -1,7 +1,8 @@
-/* generated using openapi-typescript-codegen -- do not edit */
+/* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+
 export type TransactionResponse = {
   id: string;
   createdAt: string;
@@ -61,13 +62,19 @@ export type TransactionResponse = {
   explorerUrl: string;
   success: boolean;
 };
+
 export namespace TransactionResponse {
+
   export enum status {
     PENDING = 'pending',
     SUCCESS = 'success',
   }
+
   export enum type {
     CUSTODIAL = 'custodial',
     SELF_CUSTODIAL = 'self-custodial',
   }
+
+
 }
+

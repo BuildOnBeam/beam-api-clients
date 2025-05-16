@@ -1,7 +1,8 @@
-/* generated using openapi-typescript-codegen -- do not edit */
+/* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+
 export type ConvertTokenRequestInput = {
   tokenIn: string;
   tokenOut: string;
@@ -14,3 +15,4 @@ export type ConvertTokenRequestInput = {
   policyId?: string | null;
   chainId?: number;
 };
+

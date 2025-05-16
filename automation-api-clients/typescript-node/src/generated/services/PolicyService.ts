@@ -1,4 +1,4 @@
-/* generated using openapi-typescript-codegen -- do not edit */
+/* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -6,10 +6,14 @@ import type { CommonAddPolicyRequestInput } from '../models/CommonAddPolicyReque
 import type { CommonAddPolicyResponse } from '../models/CommonAddPolicyResponse';
 import type { CommonGetPoliciesResponse } from '../models/CommonGetPoliciesResponse';
 import type { CommonRemovePolicyResponse } from '../models/CommonRemovePolicyResponse';
+
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+
 export class PolicyService {
+
   constructor(public readonly httpRequest: BaseHttpRequest) {}
+
   /**
    * Add a new policy to sponsor web3 actions
    * @param requestBody
@@ -26,6 +30,7 @@ export class PolicyService {
       mediaType: 'application/json',
     });
   }
+
   /**
    * Get a list of policies
    * @returns CommonGetPoliciesResponse
@@ -37,6 +42,7 @@ export class PolicyService {
       url: '/v1/policies',
     });
   }
+
   /**
    * Removing a policy that sponsors web3 actions
    * @param policyId
@@ -50,8 +56,9 @@ export class PolicyService {
       method: 'DELETE',
       url: '/v1/policies/{policyId}',
       path: {
-        policyId: policyId,
+        'policyId': policyId,
       },
     });
   }
+
 }

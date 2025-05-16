@@ -1,4 +1,4 @@
-/* generated using openapi-typescript-codegen -- do not edit */
+/* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -6,10 +6,14 @@ import type { CommonActivityResponse } from '../models/CommonActivityResponse';
 import type { CommonAssetActivityRequestInput } from '../models/CommonAssetActivityRequestInput';
 import type { CommonContractActivityRequestInput } from '../models/CommonContractActivityRequestInput';
 import type { CommonUserActivityRequestInput } from '../models/CommonUserActivityRequestInput';
+
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+
 export class ActivityService {
+
   constructor(public readonly httpRequest: BaseHttpRequest) {}
+
   /**
    * Get profile activity
    * @param entityId
@@ -25,12 +29,13 @@ export class ActivityService {
       method: 'POST',
       url: '/v1/automation/activity/profiles/{entityId}',
       path: {
-        entityId: entityId,
+        'entityId': entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
+
   /**
    * Get contract activity
    * @param assetAddress
@@ -46,12 +51,13 @@ export class ActivityService {
       method: 'POST',
       url: '/v1/automation/activity/assets/{assetAddress}',
       path: {
-        assetAddress: assetAddress,
+        'assetAddress': assetAddress,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
+
   /**
    * Get asset activity
    * @param assetAddress
@@ -69,11 +75,12 @@ export class ActivityService {
       method: 'POST',
       url: '/v1/automation/activity/assets/{assetAddress}/asset/{assetId}',
       path: {
-        assetAddress: assetAddress,
-        assetId: assetId,
+        'assetAddress': assetAddress,
+        'assetId': assetId,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
+
 }

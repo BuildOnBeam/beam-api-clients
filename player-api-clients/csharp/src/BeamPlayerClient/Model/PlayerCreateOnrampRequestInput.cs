@@ -58,17 +58,18 @@ namespace BeamPlayerClient.Model
         /// <summary>
         /// Defines Platform
         /// </summary>
+        [JsonConverter(typeof(PlatformEnumJsonConverter))]
         public enum PlatformEnum
         {
             /// <summary>
-            /// Enum Thirdweb for value: thirdweb
-            /// </summary>
-            Thirdweb = 1,
-
-            /// <summary>
             /// Enum Transak for value: transak
             /// </summary>
-            Transak = 2
+            Transak = 1,
+
+            /// <summary>
+            /// Enum Thirdweb for value: thirdweb
+            /// </summary>
+            Thirdweb = 2
         }
 
         /// <summary>
@@ -79,11 +80,11 @@ namespace BeamPlayerClient.Model
         /// <exception cref="NotImplementedException"></exception>
         public static PlatformEnum PlatformEnumFromString(string value)
         {
-            if (value.Equals("thirdweb"))
-                return PlatformEnum.Thirdweb;
-
             if (value.Equals("transak"))
                 return PlatformEnum.Transak;
+
+            if (value.Equals("thirdweb"))
+                return PlatformEnum.Thirdweb;
 
             throw new NotImplementedException($"Could not convert value to type PlatformEnum: '{value}'");
         }
@@ -95,11 +96,11 @@ namespace BeamPlayerClient.Model
         /// <returns></returns>
         public static PlatformEnum? PlatformEnumFromStringOrDefault(string value)
         {
-            if (value.Equals("thirdweb"))
-                return PlatformEnum.Thirdweb;
-
             if (value.Equals("transak"))
                 return PlatformEnum.Transak;
+
+            if (value.Equals("thirdweb"))
+                return PlatformEnum.Thirdweb;
 
             return null;
         }
@@ -115,13 +116,107 @@ namespace BeamPlayerClient.Model
             if (value == null)
                 return null;
 
-            if (value == PlatformEnum.Thirdweb)
-                return "thirdweb";
-
             if (value == PlatformEnum.Transak)
                 return "transak";
 
+            if (value == PlatformEnum.Thirdweb)
+                return "thirdweb";
+
             throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Converts <see cref="PlatformEnum"/> to and from the JSON value
+        /// </summary>
+        public static class PlatformEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="PlatformEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static PlatformEnum FromString(string value)
+            {
+                    if (value.Equals("transak"))
+                    return PlatformEnum.Transak;
+
+                    if (value.Equals("thirdweb"))
+                    return PlatformEnum.Thirdweb;
+
+            throw new NotImplementedException($"Could not convert value to type PlatformEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="PlatformEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static PlatformEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("transak"))
+                    return PlatformEnum.Transak;
+
+                    if (value.Equals("thirdweb"))
+                    return PlatformEnum.Thirdweb;
+
+            return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="PlatformEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(PlatformEnum value)
+            {
+                        if (value == PlatformEnum.Transak)
+                        return "transak";
+
+                        if (value == PlatformEnum.Thirdweb)
+                        return "thirdweb";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="PlatformEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class PlatformEnumJsonConverter : JsonConverter<PlatformEnum>
+        {
+            /// <summary>
+            /// Returns a PlatformEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override PlatformEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string rawValue = reader.GetString();
+
+                PlatformEnum? result = rawValue == null
+                ? null
+                : PlatformEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the PlatformEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="platformEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, PlatformEnum platformEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(PlatformEnumValueConverter.ToJsonValue(platformEnum));
+            }
         }
 
         /// <summary>
@@ -140,6 +235,7 @@ namespace BeamPlayerClient.Model
         /// <summary>
         /// Defines Token
         /// </summary>
+        [JsonConverter(typeof(TokenEnumJsonConverter))]
         public enum TokenEnum
         {
             /// <summary>
@@ -207,6 +303,100 @@ namespace BeamPlayerClient.Model
         }
 
         /// <summary>
+        /// Converts <see cref="TokenEnum"/> to and from the JSON value
+        /// </summary>
+        public static class TokenEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="TokenEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static TokenEnum FromString(string value)
+            {
+                    if (value.Equals("BEAM"))
+                    return TokenEnum.BEAM;
+
+                    if (value.Equals("FP"))
+                    return TokenEnum.FP;
+
+            throw new NotImplementedException($"Could not convert value to type TokenEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="TokenEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static TokenEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("BEAM"))
+                    return TokenEnum.BEAM;
+
+                    if (value.Equals("FP"))
+                    return TokenEnum.FP;
+
+            return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="TokenEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(TokenEnum value)
+            {
+                        if (value == TokenEnum.BEAM)
+                        return "BEAM";
+
+                        if (value == TokenEnum.FP)
+                        return "FP";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="TokenEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class TokenEnumJsonConverter : JsonConverter<TokenEnum>
+        {
+            /// <summary>
+            /// Returns a TokenEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override TokenEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string rawValue = reader.GetString();
+
+                TokenEnum? result = rawValue == null
+                ? null
+                : TokenEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the TokenEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="tokenEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, TokenEnum tokenEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(TokenEnumValueConverter.ToJsonValue(tokenEnum));
+            }
+        }
+
+        /// <summary>
         /// Used to track the state of Token
         /// </summary>
         [JsonIgnore]
@@ -223,6 +413,7 @@ namespace BeamPlayerClient.Model
         /// Auth Provider for the user to use. If it&#39;s Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI.
         /// </summary>
         /// <value>Auth Provider for the user to use. If it&#39;s Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI.</value>
+        [JsonConverter(typeof(AuthProviderEnumJsonConverter))]
         public enum AuthProviderEnum
         {
             /// <summary>
@@ -315,6 +506,118 @@ namespace BeamPlayerClient.Model
                 return "Apple";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Converts <see cref="AuthProviderEnum"/> to and from the JSON value
+        /// </summary>
+        public static class AuthProviderEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="AuthProviderEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static AuthProviderEnum FromString(string value)
+            {
+                    if (value.Equals("Any"))
+                    return AuthProviderEnum.Any;
+
+                    if (value.Equals("Google"))
+                    return AuthProviderEnum.Google;
+
+                    if (value.Equals("Discord"))
+                    return AuthProviderEnum.Discord;
+
+                    if (value.Equals("Apple"))
+                    return AuthProviderEnum.Apple;
+
+            throw new NotImplementedException($"Could not convert value to type AuthProviderEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="AuthProviderEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static AuthProviderEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("Any"))
+                    return AuthProviderEnum.Any;
+
+                    if (value.Equals("Google"))
+                    return AuthProviderEnum.Google;
+
+                    if (value.Equals("Discord"))
+                    return AuthProviderEnum.Discord;
+
+                    if (value.Equals("Apple"))
+                    return AuthProviderEnum.Apple;
+
+            return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="AuthProviderEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(AuthProviderEnum value)
+            {
+                        if (value == AuthProviderEnum.Any)
+                        return "Any";
+
+                        if (value == AuthProviderEnum.Google)
+                        return "Google";
+
+                        if (value == AuthProviderEnum.Discord)
+                        return "Discord";
+
+                        if (value == AuthProviderEnum.Apple)
+                        return "Apple";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="AuthProviderEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class AuthProviderEnumJsonConverter : JsonConverter<AuthProviderEnum>
+        {
+            /// <summary>
+            /// Returns a AuthProviderEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override AuthProviderEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string rawValue = reader.GetString();
+
+                AuthProviderEnum? result = rawValue == null
+                ? null
+                : AuthProviderEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the AuthProviderEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="authProviderEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, AuthProviderEnum authProviderEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(AuthProviderEnumValueConverter.ToJsonValue(authProviderEnum));
+            }
         }
 
         /// <summary>

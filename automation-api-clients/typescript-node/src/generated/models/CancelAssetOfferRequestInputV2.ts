@@ -1,7 +1,8 @@
-/* generated using openapi-typescript-codegen -- do not edit */
+/* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+
 export type CancelAssetOfferRequestInputV2 = {
   optimistic?: boolean;
   offerId: string;
@@ -9,3 +10,4 @@ export type CancelAssetOfferRequestInputV2 = {
   policyId?: string | null;
   chainId?: number;
 };
+

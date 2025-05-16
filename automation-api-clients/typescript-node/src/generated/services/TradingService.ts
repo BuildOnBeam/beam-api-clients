@@ -1,13 +1,17 @@
-/* generated using openapi-typescript-codegen -- do not edit */
+/* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
 import type { TradeTokensRequestInput } from '../models/TradeTokensRequestInput';
 import type { TransactionResponse } from '../models/TransactionResponse';
+
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+
 export class TradingService {
+
   constructor(public readonly httpRequest: BaseHttpRequest) {}
+
   /**
    * @param requestBody
    * @returns TransactionResponse
@@ -23,4 +27,5 @@ export class TradingService {
       mediaType: 'application/json',
     });
   }
+
 }

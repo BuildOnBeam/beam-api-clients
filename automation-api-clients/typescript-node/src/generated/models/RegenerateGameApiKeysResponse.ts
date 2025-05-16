@@ -1,19 +1,11 @@
-/* generated using openapi-typescript-codegen -- do not edit */
+/* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+
 export type RegenerateGameApiKeysResponse = {
   pegiRating: RegenerateGameApiKeysResponse.pegiRating | null;
-  pegiContent: Array<
-    | 'BadLanguage'
-    | 'Discrimination'
-    | 'Drugs'
-    | 'Fear'
-    | 'Gambling'
-    | 'Sex'
-    | 'Violence'
-    | 'InGamePurchases'
-  >;
+  pegiContent: Array<'BadLanguage' | 'Discrimination' | 'Drugs' | 'Fear' | 'Gambling' | 'Sex' | 'Violence' | 'InGamePurchases'>;
   id: string;
   createdAt: string;
   updatedAt: string;
@@ -34,7 +26,9 @@ export type RegenerateGameApiKeysResponse = {
     gameId: string;
   }>;
 };
+
 export namespace RegenerateGameApiKeysResponse {
+
   export enum pegiRating {
     THREE = 'Three',
     SEVEN = 'Seven',
@@ -42,4 +36,7 @@ export namespace RegenerateGameApiKeysResponse {
     SIXTEEN = 'Sixteen',
     EIGHTEEN = 'Eighteen',
   }
+
+
 }
+

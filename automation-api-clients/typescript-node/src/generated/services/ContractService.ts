@@ -1,4 +1,4 @@
-/* generated using openapi-typescript-codegen -- do not edit */
+/* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -10,10 +10,14 @@ import type { GetVerificationStatusResponse } from '../models/GetVerificationSta
 import type { ReadContractRequest } from '../models/ReadContractRequest';
 import type { ReadContractResonse } from '../models/ReadContractResonse';
 import type { RemoveContractResponse } from '../models/RemoveContractResponse';
+
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
+
 export class ContractService {
+
   constructor(public readonly httpRequest: BaseHttpRequest) {}
+
   /**
    * Get the verification status of a contract
    * @param requestBody
@@ -30,6 +34,7 @@ export class ContractService {
       mediaType: 'application/json',
     });
   }
+
   /**
    * Get a list of Contracts added to your Game
    * @param includeAbis
@@ -43,10 +48,11 @@ export class ContractService {
       method: 'GET',
       url: '/v1/contract',
       query: {
-        includeAbis: includeAbis,
+        'includeAbis': includeAbis,
       },
     });
   }
+
   /**
    * Add a new contract to the game
    * @param requestBody
@@ -63,6 +69,7 @@ export class ContractService {
       mediaType: 'application/json',
     });
   }
+
   /**
    * Delete a contract from a game
    * @param chainId
@@ -78,11 +85,12 @@ export class ContractService {
       method: 'DELETE',
       url: '/v1/contract/{address}/{chainId}',
       path: {
-        chainId: chainId,
-        address: address,
+        'chainId': chainId,
+        'address': address,
       },
     });
   }
+
   /**
    * Calls a readable contract function
    * @param contractAddress
@@ -98,10 +106,11 @@ export class ContractService {
       method: 'POST',
       url: '/v1/contract/{contractAddress}/read',
       path: {
-        contractAddress: contractAddress,
+        'contractAddress': contractAddress,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
+
 }

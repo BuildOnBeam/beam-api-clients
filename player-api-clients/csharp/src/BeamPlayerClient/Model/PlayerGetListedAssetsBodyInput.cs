@@ -54,6 +54,7 @@ namespace BeamPlayerClient.Model
         /// <summary>
         /// Defines SortBy
         /// </summary>
+        [JsonConverter(typeof(SortByEnumJsonConverter))]
         public enum SortByEnum
         {
             /// <summary>
@@ -135,6 +136,109 @@ namespace BeamPlayerClient.Model
         }
 
         /// <summary>
+        /// Converts <see cref="SortByEnum"/> to and from the JSON value
+        /// </summary>
+        public static class SortByEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="SortByEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static SortByEnum FromString(string value)
+            {
+                    if (value.Equals("createdAt"))
+                    return SortByEnum.CreatedAt;
+
+                    if (value.Equals("updatedAt"))
+                    return SortByEnum.UpdatedAt;
+
+                    if (value.Equals("price"))
+                    return SortByEnum.Price;
+
+            throw new NotImplementedException($"Could not convert value to type SortByEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="SortByEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static SortByEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("createdAt"))
+                    return SortByEnum.CreatedAt;
+
+                    if (value.Equals("updatedAt"))
+                    return SortByEnum.UpdatedAt;
+
+                    if (value.Equals("price"))
+                    return SortByEnum.Price;
+
+            return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="SortByEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(SortByEnum value)
+            {
+                        if (value == SortByEnum.CreatedAt)
+                        return "createdAt";
+
+                        if (value == SortByEnum.UpdatedAt)
+                        return "updatedAt";
+
+                        if (value == SortByEnum.Price)
+                        return "price";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="SortByEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class SortByEnumJsonConverter : JsonConverter<SortByEnum>
+        {
+            /// <summary>
+            /// Returns a SortByEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override SortByEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string rawValue = reader.GetString();
+
+                SortByEnum? result = rawValue == null
+                ? null
+                : SortByEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the SortByEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="sortByEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, SortByEnum sortByEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(SortByEnumValueConverter.ToJsonValue(sortByEnum));
+            }
+        }
+
+        /// <summary>
         /// Used to track the state of SortBy
         /// </summary>
         [JsonIgnore]
@@ -151,6 +255,7 @@ namespace BeamPlayerClient.Model
         /// If using &#x60;createdAt&#x60; for sorting, only &#x60;desc&#x60; is allowed.
         /// </summary>
         /// <value>If using &#x60;createdAt&#x60; for sorting, only &#x60;desc&#x60; is allowed.</value>
+        [JsonConverter(typeof(SortDirectionEnumJsonConverter))]
         public enum SortDirectionEnum
         {
             /// <summary>
@@ -215,6 +320,100 @@ namespace BeamPlayerClient.Model
                 return "desc";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Converts <see cref="SortDirectionEnum"/> to and from the JSON value
+        /// </summary>
+        public static class SortDirectionEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="SortDirectionEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static SortDirectionEnum FromString(string value)
+            {
+                    if (value.Equals("asc"))
+                    return SortDirectionEnum.Asc;
+
+                    if (value.Equals("desc"))
+                    return SortDirectionEnum.Desc;
+
+            throw new NotImplementedException($"Could not convert value to type SortDirectionEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="SortDirectionEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static SortDirectionEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("asc"))
+                    return SortDirectionEnum.Asc;
+
+                    if (value.Equals("desc"))
+                    return SortDirectionEnum.Desc;
+
+            return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="SortDirectionEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(SortDirectionEnum value)
+            {
+                        if (value == SortDirectionEnum.Asc)
+                        return "asc";
+
+                        if (value == SortDirectionEnum.Desc)
+                        return "desc";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="SortDirectionEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class SortDirectionEnumJsonConverter : JsonConverter<SortDirectionEnum>
+        {
+            /// <summary>
+            /// Returns a SortDirectionEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override SortDirectionEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string rawValue = reader.GetString();
+
+                SortDirectionEnum? result = rawValue == null
+                ? null
+                : SortDirectionEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the SortDirectionEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="sortDirectionEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, SortDirectionEnum sortDirectionEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(SortDirectionEnumValueConverter.ToJsonValue(sortDirectionEnum));
+            }
         }
 
         /// <summary>

@@ -48,6 +48,7 @@ namespace BeamPlayerClient.Model
         /// <summary>
         /// Defines Kind
         /// </summary>
+        [JsonConverter(typeof(KindEnumJsonConverter))]
         public enum KindEnum
         {
             /// <summary>
@@ -140,6 +141,118 @@ namespace BeamPlayerClient.Model
                 return "range";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Converts <see cref="KindEnum"/> to and from the JSON value
+        /// </summary>
+        public static class KindEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="KindEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static KindEnum FromString(string value)
+            {
+                    if (value.Equals("string"))
+                    return KindEnum.String;
+
+                    if (value.Equals("number"))
+                    return KindEnum.Number;
+
+                    if (value.Equals("date"))
+                    return KindEnum.Date;
+
+                    if (value.Equals("range"))
+                    return KindEnum.Range;
+
+            throw new NotImplementedException($"Could not convert value to type KindEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="KindEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static KindEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("string"))
+                    return KindEnum.String;
+
+                    if (value.Equals("number"))
+                    return KindEnum.Number;
+
+                    if (value.Equals("date"))
+                    return KindEnum.Date;
+
+                    if (value.Equals("range"))
+                    return KindEnum.Range;
+
+            return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="KindEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(KindEnum value)
+            {
+                        if (value == KindEnum.String)
+                        return "string";
+
+                        if (value == KindEnum.Number)
+                        return "number";
+
+                        if (value == KindEnum.Date)
+                        return "date";
+
+                        if (value == KindEnum.Range)
+                        return "range";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="KindEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class KindEnumJsonConverter : JsonConverter<KindEnum>
+        {
+            /// <summary>
+            /// Returns a KindEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override KindEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string rawValue = reader.GetString();
+
+                KindEnum? result = rawValue == null
+                ? null
+                : KindEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the KindEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="kindEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, KindEnum kindEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(KindEnumValueConverter.ToJsonValue(kindEnum));
+            }
         }
 
         /// <summary>

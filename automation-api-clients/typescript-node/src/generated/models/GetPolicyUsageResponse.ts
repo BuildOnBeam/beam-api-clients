@@ -1,7 +1,8 @@
-/* generated using openapi-typescript-codegen -- do not edit */
+/* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+
 export type GetPolicyUsageResponse = {
   totalTransactionFeeInUSD: string;
   totalTransactionFee: string;
@@ -23,9 +24,14 @@ export type GetPolicyUsageResponse = {
     end: number;
   }>;
 };
+
 export namespace GetPolicyUsageResponse {
+
   export enum model {
     CONTRACT_FUNCTIONS = 'ContractFunctions',
     ACCOUNT_FUNCTIONS = 'AccountFunctions',
   }
+
+
 }
+

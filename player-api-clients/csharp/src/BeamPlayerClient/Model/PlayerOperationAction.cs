@@ -56,6 +56,7 @@ namespace BeamPlayerClient.Model
         /// <summary>
         /// Defines Type
         /// </summary>
+        [JsonConverter(typeof(TypeEnumJsonConverter))]
         public enum TypeEnum
         {
             /// <summary>
@@ -302,6 +303,217 @@ namespace BeamPlayerClient.Model
                 return "CustomTransaction";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Converts <see cref="TypeEnum"/> to and from the JSON value
+        /// </summary>
+        public static class TypeEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="TypeEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static TypeEnum FromString(string value)
+            {
+                    if (value.Equals("FiatOnRamp"))
+                    return TypeEnum.FiatOnRamp;
+
+                    if (value.Equals("Sign"))
+                    return TypeEnum.Sign;
+
+                    if (value.Equals("SessionRevoke"))
+                    return TypeEnum.SessionRevoke;
+
+                    if (value.Equals("MarketplaceCreateOffer"))
+                    return TypeEnum.MarketplaceCreateOffer;
+
+                    if (value.Equals("MarketplaceCancelOffer"))
+                    return TypeEnum.MarketplaceCancelOffer;
+
+                    if (value.Equals("MarketplaceAcceptOffer"))
+                    return TypeEnum.MarketplaceAcceptOffer;
+
+                    if (value.Equals("MarketplaceBuyAsset"))
+                    return TypeEnum.MarketplaceBuyAsset;
+
+                    if (value.Equals("MarketplaceListAsset"))
+                    return TypeEnum.MarketplaceListAsset;
+
+                    if (value.Equals("MarketplaceCancelListing"))
+                    return TypeEnum.MarketplaceCancelListing;
+
+                    if (value.Equals("ExchangeConvert"))
+                    return TypeEnum.ExchangeConvert;
+
+                    if (value.Equals("ExchangeWrap"))
+                    return TypeEnum.ExchangeWrap;
+
+                    if (value.Equals("ExchangeUnwrap"))
+                    return TypeEnum.ExchangeUnwrap;
+
+                    if (value.Equals("TransferNFTs"))
+                    return TypeEnum.TransferNFTs;
+
+                    if (value.Equals("TransferToken"))
+                    return TypeEnum.TransferToken;
+
+                    if (value.Equals("CustomTransaction"))
+                    return TypeEnum.CustomTransaction;
+
+            throw new NotImplementedException($"Could not convert value to type TypeEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="TypeEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static TypeEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("FiatOnRamp"))
+                    return TypeEnum.FiatOnRamp;
+
+                    if (value.Equals("Sign"))
+                    return TypeEnum.Sign;
+
+                    if (value.Equals("SessionRevoke"))
+                    return TypeEnum.SessionRevoke;
+
+                    if (value.Equals("MarketplaceCreateOffer"))
+                    return TypeEnum.MarketplaceCreateOffer;
+
+                    if (value.Equals("MarketplaceCancelOffer"))
+                    return TypeEnum.MarketplaceCancelOffer;
+
+                    if (value.Equals("MarketplaceAcceptOffer"))
+                    return TypeEnum.MarketplaceAcceptOffer;
+
+                    if (value.Equals("MarketplaceBuyAsset"))
+                    return TypeEnum.MarketplaceBuyAsset;
+
+                    if (value.Equals("MarketplaceListAsset"))
+                    return TypeEnum.MarketplaceListAsset;
+
+                    if (value.Equals("MarketplaceCancelListing"))
+                    return TypeEnum.MarketplaceCancelListing;
+
+                    if (value.Equals("ExchangeConvert"))
+                    return TypeEnum.ExchangeConvert;
+
+                    if (value.Equals("ExchangeWrap"))
+                    return TypeEnum.ExchangeWrap;
+
+                    if (value.Equals("ExchangeUnwrap"))
+                    return TypeEnum.ExchangeUnwrap;
+
+                    if (value.Equals("TransferNFTs"))
+                    return TypeEnum.TransferNFTs;
+
+                    if (value.Equals("TransferToken"))
+                    return TypeEnum.TransferToken;
+
+                    if (value.Equals("CustomTransaction"))
+                    return TypeEnum.CustomTransaction;
+
+            return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="TypeEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(TypeEnum value)
+            {
+                        if (value == TypeEnum.FiatOnRamp)
+                        return "FiatOnRamp";
+
+                        if (value == TypeEnum.Sign)
+                        return "Sign";
+
+                        if (value == TypeEnum.SessionRevoke)
+                        return "SessionRevoke";
+
+                        if (value == TypeEnum.MarketplaceCreateOffer)
+                        return "MarketplaceCreateOffer";
+
+                        if (value == TypeEnum.MarketplaceCancelOffer)
+                        return "MarketplaceCancelOffer";
+
+                        if (value == TypeEnum.MarketplaceAcceptOffer)
+                        return "MarketplaceAcceptOffer";
+
+                        if (value == TypeEnum.MarketplaceBuyAsset)
+                        return "MarketplaceBuyAsset";
+
+                        if (value == TypeEnum.MarketplaceListAsset)
+                        return "MarketplaceListAsset";
+
+                        if (value == TypeEnum.MarketplaceCancelListing)
+                        return "MarketplaceCancelListing";
+
+                        if (value == TypeEnum.ExchangeConvert)
+                        return "ExchangeConvert";
+
+                        if (value == TypeEnum.ExchangeWrap)
+                        return "ExchangeWrap";
+
+                        if (value == TypeEnum.ExchangeUnwrap)
+                        return "ExchangeUnwrap";
+
+                        if (value == TypeEnum.TransferNFTs)
+                        return "TransferNFTs";
+
+                        if (value == TypeEnum.TransferToken)
+                        return "TransferToken";
+
+                        if (value == TypeEnum.CustomTransaction)
+                        return "CustomTransaction";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="TypeEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class TypeEnumJsonConverter : JsonConverter<TypeEnum>
+        {
+            /// <summary>
+            /// Returns a TypeEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override TypeEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string rawValue = reader.GetString();
+
+                TypeEnum? result = rawValue == null
+                ? null
+                : TypeEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the TypeEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="typeEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, TypeEnum typeEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(TypeEnumValueConverter.ToJsonValue(typeEnum));
+            }
         }
 
         /// <summary>

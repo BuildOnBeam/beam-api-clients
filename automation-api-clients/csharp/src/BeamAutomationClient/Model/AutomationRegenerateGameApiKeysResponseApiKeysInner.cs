@@ -54,6 +54,7 @@ namespace BeamAutomationClient.Model
         /// <summary>
         /// Defines Type
         /// </summary>
+        [JsonConverter(typeof(TypeEnumJsonConverter))]
         public enum TypeEnum
         {
             /// <summary>
@@ -132,6 +133,109 @@ namespace BeamAutomationClient.Model
                 return "Secret";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Converts <see cref="TypeEnum"/> to and from the JSON value
+        /// </summary>
+        public static class TypeEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="TypeEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static TypeEnum FromString(string value)
+            {
+                    if (value.Equals("Regenerate"))
+                    return TypeEnum.Regenerate;
+
+                    if (value.Equals("Publishable"))
+                    return TypeEnum.Publishable;
+
+                    if (value.Equals("Secret"))
+                    return TypeEnum.Secret;
+
+            throw new NotImplementedException($"Could not convert value to type TypeEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="TypeEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static TypeEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("Regenerate"))
+                    return TypeEnum.Regenerate;
+
+                    if (value.Equals("Publishable"))
+                    return TypeEnum.Publishable;
+
+                    if (value.Equals("Secret"))
+                    return TypeEnum.Secret;
+
+            return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="TypeEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(TypeEnum value)
+            {
+                        if (value == TypeEnum.Regenerate)
+                        return "Regenerate";
+
+                        if (value == TypeEnum.Publishable)
+                        return "Publishable";
+
+                        if (value == TypeEnum.Secret)
+                        return "Secret";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="TypeEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class TypeEnumJsonConverter : JsonConverter<TypeEnum>
+        {
+            /// <summary>
+            /// Returns a TypeEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override TypeEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string rawValue = reader.GetString();
+
+                TypeEnum? result = rawValue == null
+                ? null
+                : TypeEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the TypeEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="typeEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, TypeEnum typeEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(TypeEnumValueConverter.ToJsonValue(typeEnum));
+            }
         }
 
         /// <summary>

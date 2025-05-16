@@ -68,6 +68,7 @@ namespace BeamAutomationClient.Model
         /// <summary>
         /// Defines Status
         /// </summary>
+        [JsonConverter(typeof(StatusEnumJsonConverter))]
         public enum StatusEnum
         {
             /// <summary>
@@ -135,6 +136,100 @@ namespace BeamAutomationClient.Model
         }
 
         /// <summary>
+        /// Converts <see cref="StatusEnum"/> to and from the JSON value
+        /// </summary>
+        public static class StatusEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="StatusEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static StatusEnum FromString(string value)
+            {
+                    if (value.Equals("pending"))
+                    return StatusEnum.Pending;
+
+                    if (value.Equals("success"))
+                    return StatusEnum.Success;
+
+            throw new NotImplementedException($"Could not convert value to type StatusEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="StatusEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static StatusEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("pending"))
+                    return StatusEnum.Pending;
+
+                    if (value.Equals("success"))
+                    return StatusEnum.Success;
+
+            return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="StatusEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(StatusEnum value)
+            {
+                        if (value == StatusEnum.Pending)
+                        return "pending";
+
+                        if (value == StatusEnum.Success)
+                        return "success";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="StatusEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class StatusEnumJsonConverter : JsonConverter<StatusEnum>
+        {
+            /// <summary>
+            /// Returns a StatusEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override StatusEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string rawValue = reader.GetString();
+
+                StatusEnum? result = rawValue == null
+                ? null
+                : StatusEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the StatusEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="statusEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, StatusEnum statusEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(StatusEnumValueConverter.ToJsonValue(statusEnum));
+            }
+        }
+
+        /// <summary>
         /// Gets or Sets Status
         /// </summary>
         [JsonPropertyName("status")]
@@ -143,6 +238,7 @@ namespace BeamAutomationClient.Model
         /// <summary>
         /// Defines Type
         /// </summary>
+        [JsonConverter(typeof(TypeEnumJsonConverter))]
         public enum TypeEnum
         {
             /// <summary>
@@ -207,6 +303,100 @@ namespace BeamAutomationClient.Model
                 return "self-custodial";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Converts <see cref="TypeEnum"/> to and from the JSON value
+        /// </summary>
+        public static class TypeEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="TypeEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static TypeEnum FromString(string value)
+            {
+                    if (value.Equals("custodial"))
+                    return TypeEnum.Custodial;
+
+                    if (value.Equals("self-custodial"))
+                    return TypeEnum.SelfCustodial;
+
+            throw new NotImplementedException($"Could not convert value to type TypeEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="TypeEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static TypeEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("custodial"))
+                    return TypeEnum.Custodial;
+
+                    if (value.Equals("self-custodial"))
+                    return TypeEnum.SelfCustodial;
+
+            return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="TypeEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(TypeEnum value)
+            {
+                        if (value == TypeEnum.Custodial)
+                        return "custodial";
+
+                        if (value == TypeEnum.SelfCustodial)
+                        return "self-custodial";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="TypeEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class TypeEnumJsonConverter : JsonConverter<TypeEnum>
+        {
+            /// <summary>
+            /// Returns a TypeEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override TypeEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string rawValue = reader.GetString();
+
+                TypeEnum? result = rawValue == null
+                ? null
+                : TypeEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the TypeEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="typeEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, TypeEnum typeEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(TypeEnumValueConverter.ToJsonValue(typeEnum));
+            }
         }
 
         /// <summary>

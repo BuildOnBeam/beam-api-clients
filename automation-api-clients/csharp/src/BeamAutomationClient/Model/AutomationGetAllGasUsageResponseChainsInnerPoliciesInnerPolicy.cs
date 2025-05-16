@@ -50,6 +50,7 @@ namespace BeamAutomationClient.Model
         /// <summary>
         /// Defines Model
         /// </summary>
+        [JsonConverter(typeof(ModelEnumJsonConverter))]
         public enum ModelEnum
         {
             /// <summary>
@@ -114,6 +115,100 @@ namespace BeamAutomationClient.Model
                 return "AccountFunctions";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Converts <see cref="ModelEnum"/> to and from the JSON value
+        /// </summary>
+        public static class ModelEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="ModelEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static ModelEnum FromString(string value)
+            {
+                    if (value.Equals("ContractFunctions"))
+                    return ModelEnum.ContractFunctions;
+
+                    if (value.Equals("AccountFunctions"))
+                    return ModelEnum.AccountFunctions;
+
+            throw new NotImplementedException($"Could not convert value to type ModelEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="ModelEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static ModelEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("ContractFunctions"))
+                    return ModelEnum.ContractFunctions;
+
+                    if (value.Equals("AccountFunctions"))
+                    return ModelEnum.AccountFunctions;
+
+            return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="ModelEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(ModelEnum value)
+            {
+                        if (value == ModelEnum.ContractFunctions)
+                        return "ContractFunctions";
+
+                        if (value == ModelEnum.AccountFunctions)
+                        return "AccountFunctions";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="ModelEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class ModelEnumJsonConverter : JsonConverter<ModelEnum>
+        {
+            /// <summary>
+            /// Returns a ModelEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override ModelEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string rawValue = reader.GetString();
+
+                ModelEnum? result = rawValue == null
+                ? null
+                : ModelEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the ModelEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="modelEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, ModelEnum modelEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(ModelEnumValueConverter.ToJsonValue(modelEnum));
+            }
         }
 
         /// <summary>

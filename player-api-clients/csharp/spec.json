@@ -7759,8 +7759,8 @@
             "default": "transak",
             "type": "string",
             "enum": [
-              "thirdweb",
-              "transak"
+              "transak",
+              "thirdweb"
             ]
           },
           "token": {

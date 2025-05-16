@@ -52,6 +52,7 @@ namespace BeamAutomationClient.Model
         /// <summary>
         /// Defines RateType
         /// </summary>
+        [JsonConverter(typeof(RateTypeEnumJsonConverter))]
         public enum RateTypeEnum
         {
             /// <summary>
@@ -116,6 +117,100 @@ namespace BeamAutomationClient.Model
                 return "Dynamic";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Converts <see cref="RateTypeEnum"/> to and from the JSON value
+        /// </summary>
+        public static class RateTypeEnumValueConverter
+        {
+            /// <summary>
+            /// Parses a given value to <see cref="RateTypeEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static RateTypeEnum FromString(string value)
+            {
+                    if (value.Equals("Fixed"))
+                    return RateTypeEnum.Fixed;
+
+                    if (value.Equals("Dynamic"))
+                    return RateTypeEnum.Dynamic;
+
+            throw new NotImplementedException($"Could not convert value to type RateTypeEnum: '{value}'");
+            }
+
+            /// <summary>
+            /// Parses a given value to <see cref="RateTypeEnum"/>
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            public static RateTypeEnum? FromStringOrDefault(string value)
+            {
+                    if (value.Equals("Fixed"))
+                    return RateTypeEnum.Fixed;
+
+                    if (value.Equals("Dynamic"))
+                    return RateTypeEnum.Dynamic;
+
+            return null;
+            }
+
+            /// <summary>
+            /// Converts the <see cref="RateTypeEnum"/> to the json value
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            /// <exception cref="NotImplementedException"></exception>
+            public static string ToJsonValue(RateTypeEnum value)
+            {
+                        if (value == RateTypeEnum.Fixed)
+                        return "Fixed";
+
+                        if (value == RateTypeEnum.Dynamic)
+                        return "Dynamic";
+
+                throw new NotImplementedException($"Value could not be handled: '{value}'");
+            }
+        }
+
+        /// <summary>
+        /// A Json converter for type <see cref="RateTypeEnum"/>
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        public class RateTypeEnumJsonConverter : JsonConverter<RateTypeEnum>
+        {
+            /// <summary>
+            /// Returns a RateTypeEnum from the Json object
+            /// </summary>
+            /// <param name="reader"></param>
+            /// <param name="typeToConvert"></param>
+            /// <param name="options"></param>
+            /// <returns></returns>
+            public override RateTypeEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                string rawValue = reader.GetString();
+
+                RateTypeEnum? result = rawValue == null
+                ? null
+                : RateTypeEnumValueConverter.FromStringOrDefault(rawValue);
+
+                if (result != null)
+                return result.Value;
+
+                throw new JsonException();
+            }
+
+            /// <summary>
+            /// Writes the RateTypeEnum to the json writer
+            /// </summary>
+            /// <param name="writer"></param>
+            /// <param name="rateTypeEnum"></param>
+            /// <param name="options"></param>
+            public override void Write(Utf8JsonWriter writer, RateTypeEnum rateTypeEnum, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue(RateTypeEnumValueConverter.ToJsonValue(rateTypeEnum));
+            }
         }
 
         /// <summary>
