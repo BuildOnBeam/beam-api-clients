@@ -17,8 +17,8 @@ export type CreateOnrampRequestInput = {
 };
 export namespace CreateOnrampRequestInput {
   export enum platform {
-    THIRDWEB = 'thirdweb',
     TRANSAK = 'transak',
+    THIRDWEB = 'thirdweb',
   }
   export enum token {
     BEAM = 'BEAM',

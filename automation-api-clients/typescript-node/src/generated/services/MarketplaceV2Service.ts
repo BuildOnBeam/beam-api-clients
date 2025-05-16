@@ -1,4 +1,4 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -16,14 +16,10 @@ import type { RefreshTokenRequestBody } from '../models/RefreshTokenRequestBody'
 import type { SellAssetRequestInputV2 } from '../models/SellAssetRequestInputV2';
 import type { SellAssetResponseV2 } from '../models/SellAssetResponseV2';
 import type { TransactionResponse } from '../models/TransactionResponse';
-
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
-
 export class MarketplaceV2Service {
-
   constructor(public readonly httpRequest: BaseHttpRequest) {}
-
   /**
    * Get all listed assets for a game (NFT assets, e.g. ERC721 / ERC1155)
    * @param requestBody
@@ -40,7 +36,6 @@ export class MarketplaceV2Service {
       mediaType: 'application/json',
     });
   }
-
   /**
    * Get all the assets listed by a profile (NFT assets, e.g. ERC721 / ERC1155)
    * @param entityId
@@ -56,13 +51,12 @@ export class MarketplaceV2Service {
       method: 'POST',
       url: '/v2/marketplace/profiles/{entityId}',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
-
   /**
    * List an asset for sale
    * @param entityId
@@ -78,13 +72,12 @@ export class MarketplaceV2Service {
       method: 'POST',
       url: '/v2/marketplace/profiles/{entityId}/listing',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
-
   /**
    * Buy listed asset
    * @param entityId
@@ -102,14 +95,13 @@ export class MarketplaceV2Service {
       method: 'POST',
       url: '/v2/marketplace/profiles/{entityId}/listing/{orderId}',
       path: {
-        'entityId': entityId,
-        'orderId': orderId,
+        entityId: entityId,
+        orderId: orderId,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
-
   /**
    * Cancel asset listing
    * @param entityId
@@ -129,17 +121,16 @@ export class MarketplaceV2Service {
       method: 'DELETE',
       url: '/v2/marketplace/profiles/{entityId}/listing/{orderId}',
       path: {
-        'entityId': entityId,
-        'orderId': orderId,
+        entityId: entityId,
+        orderId: orderId,
       },
       query: {
-        'chainId': chainId,
+        chainId: chainId,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
-
   /**
    * Make an offer for an asset
    * @param entityId
@@ -155,13 +146,12 @@ export class MarketplaceV2Service {
       method: 'POST',
       url: '/v2/marketplace/profiles/{entityId}/offers',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
-
   /**
    * Get all offers that a profile created
    * @param entityId
@@ -179,15 +169,14 @@ export class MarketplaceV2Service {
       method: 'GET',
       url: '/v2/marketplace/profiles/{entityId}/offers',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       query: {
-        'chainId': chainId,
-        'continuation': continuation,
+        chainId: chainId,
+        continuation: continuation,
       },
     });
   }
-
   /**
    * Get all asset offers that player created
    * @param entityId
@@ -209,17 +198,16 @@ export class MarketplaceV2Service {
       method: 'GET',
       url: '/v2/marketplace/profiles/{entityId}/offers/asset/{assetAddress}/{assetId}',
       path: {
-        'entityId': entityId,
-        'assetAddress': assetAddress,
-        'assetId': assetId,
+        entityId: entityId,
+        assetAddress: assetAddress,
+        assetId: assetId,
       },
       query: {
-        'chainId': chainId,
-        'continuation': continuation,
+        chainId: chainId,
+        continuation: continuation,
       },
     });
   }
-
   /**
    * Accept an offer for an asset
    * @param entityId
@@ -237,14 +225,13 @@ export class MarketplaceV2Service {
       method: 'POST',
       url: '/v2/marketplace/profiles/{entityId}/offers/{offerId}/accept',
       path: {
-        'entityId': entityId,
-        'offerId': offerId,
+        entityId: entityId,
+        offerId: offerId,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
-
   /**
    * Cancel an offer for an asset
    * @param entityId
@@ -262,14 +249,13 @@ export class MarketplaceV2Service {
       method: 'DELETE',
       url: '/v2/marketplace/profiles/{entityId}/offers/{offerId}',
       path: {
-        'entityId': entityId,
-        'offerId': offerId,
+        entityId: entityId,
+        offerId: offerId,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
-
   /**
    * Get all offers for an asset
    * @param assetAddress
@@ -289,16 +275,15 @@ export class MarketplaceV2Service {
       method: 'GET',
       url: '/v2/marketplace/offers/asset/{assetAddress}/{assetId}',
       path: {
-        'assetAddress': assetAddress,
-        'assetId': assetId,
+        assetAddress: assetAddress,
+        assetId: assetId,
       },
       query: {
-        'chainId': chainId,
-        'continuation': continuation,
+        chainId: chainId,
+        continuation: continuation,
       },
     });
   }
-
   /**
    * Get available currencies for given chain
    * @param chainId
@@ -312,11 +297,10 @@ export class MarketplaceV2Service {
       method: 'GET',
       url: '/v2/marketplace/chain-currencies/{chainId}',
       path: {
-        'chainId': chainId,
+        chainId: chainId,
       },
     });
   }
-
   /**
    * Schedule a token refresh in the indexer
    * @param requestBody
@@ -333,7 +317,6 @@ export class MarketplaceV2Service {
       mediaType: 'application/json',
     });
   }
-
   /**
    * Schedule a contract refresh in the indexer
    * @param requestBody
@@ -350,5 +333,4 @@ export class MarketplaceV2Service {
       mediaType: 'application/json',
     });
   }
-
 }

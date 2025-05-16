@@ -1,17 +1,13 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
 import type { MigrateRequestInput } from '../models/MigrateRequestInput';
 import type { MigrateResponse } from '../models/MigrateResponse';
-
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
-
 export class MigrationService {
-
   constructor(public readonly httpRequest: BaseHttpRequest) {}
-
   /**
    * Migrate all the native token, ERC20 tokens and NFTs registered for your game from an Automation API profile to a Player API user
    * @param requestBody
@@ -28,5 +24,4 @@ export class MigrationService {
       mediaType: 'application/json',
     });
   }
-
 }

@@ -1,35 +1,28 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
 import type { CreateTransactionRequestInputV2 } from '../models/CreateTransactionRequestInputV2';
 import type { GetChainResponse } from '../models/GetChainResponse';
 import type { GetEstimateResponse } from '../models/GetEstimateResponse';
-
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
-
 export class ChainService {
-
   constructor(public readonly httpRequest: BaseHttpRequest) {}
-
   /**
    * @param chainId
    * @returns GetChainResponse
    * @throws ApiError
    */
-  public chain(
-    chainId?: number,
-  ): CancelablePromise<GetChainResponse> {
+  public chain(chainId?: number): CancelablePromise<GetChainResponse> {
     return this.httpRequest.request({
       method: 'GET',
       url: '/v1/chain',
       query: {
-        'chainId': chainId,
+        chainId: chainId,
       },
     });
   }
-
   /**
    * Estimate gas fee for a transaction on behalf of a profile
    * @param entityId
@@ -45,11 +38,10 @@ export class ChainService {
       method: 'POST',
       url: '/v1/chain/estimate/profiles/{entityId}/transaction',
       path: {
-        'entityId': entityId,
+        entityId: entityId,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
-
 }

@@ -1,4 +1,4 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -12,7 +12,11 @@ export class ApiError extends Error {
   public readonly body: any;
   public readonly request: ApiRequestOptions;
 
-  constructor(request: ApiRequestOptions, response: ApiResult, message: string) {
+  constructor(
+    request: ApiRequestOptions,
+    response: ApiResult,
+    message: string,
+  ) {
     super(message);
 
     this.name = 'ApiError';

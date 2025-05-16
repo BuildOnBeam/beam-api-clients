@@ -1,17 +1,13 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
 import type { CommonStatsRequestInput } from '../models/CommonStatsRequestInput';
 import type { CommonStatsResponse } from '../models/CommonStatsResponse';
-
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
-
 export class StatsService {
-
   constructor(public readonly httpRequest: BaseHttpRequest) {}
-
   /**
    * Get contract stats
    * @param assetAddress
@@ -27,13 +23,12 @@ export class StatsService {
       method: 'POST',
       url: '/v1/automation/stats/{assetAddress}',
       path: {
-        'assetAddress': assetAddress,
+        assetAddress: assetAddress,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
-
   /**
    * Get asset stats
    * @param assetAddress
@@ -51,12 +46,11 @@ export class StatsService {
       method: 'POST',
       url: '/v1/automation/stats/{assetAddress}/assets/{assetId}',
       path: {
-        'assetAddress': assetAddress,
-        'assetId': assetId,
+        assetAddress: assetAddress,
+        assetId: assetId,
       },
       body: requestBody,
       mediaType: 'application/json',
     });
   }
-
 }

@@ -1,8 +1,7 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 export type AddContractResponse = {
   type: AddContractResponse.type;
   id: string;
@@ -16,9 +15,7 @@ export type AddContractResponse = {
   abi: any;
   hasCustomAbi: boolean;
 };
-
 export namespace AddContractResponse {
-
   export enum type {
     ERC20 = 'ERC20',
     ERC721 = 'ERC721',
@@ -27,7 +24,4 @@ export namespace AddContractResponse {
     SEAPORT = 'SEAPORT',
     UNISWAPV2 = 'UNISWAPV2',
   }
-
-
 }
-

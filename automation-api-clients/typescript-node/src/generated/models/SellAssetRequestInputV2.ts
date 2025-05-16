@@ -1,8 +1,7 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 export type SellAssetRequestInputV2 = {
   assetAddress: string;
   assetId: string;
@@ -22,16 +21,13 @@ export type SellAssetRequestInputV2 = {
   policyId?: string | null;
   chainId?: number;
 };
-
 export namespace SellAssetRequestInputV2 {
-
   export enum sellType {
     FIXED_PRICE = 'FixedPrice',
     DESCENDING_AUCTION = 'DescendingAuction',
     ASCENDING_AUCTION = 'AscendingAuction',
     NOT_FOR_SALE = 'NotForSale',
   }
-
   export enum currency {
     BEAM = 'BEAM',
     SOPH = 'SOPH',
@@ -40,7 +36,4 @@ export namespace SellAssetRequestInputV2 {
     RAT = 'RAT',
     USDC = 'USDC',
   }
-
-
 }
-

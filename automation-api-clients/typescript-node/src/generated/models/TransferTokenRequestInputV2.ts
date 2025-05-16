@@ -1,8 +1,7 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 export type TransferTokenRequestInputV2 = {
   receiverEntityId?: string;
   receiverWalletAddress?: string;
@@ -13,4 +12,3 @@ export type TransferTokenRequestInputV2 = {
   policyId?: string | null;
   chainId?: number;
 };
-

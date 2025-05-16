@@ -1,8 +1,7 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 export type AddContractRequestInput = {
   address: string;
   chainId: number;
@@ -12,4 +11,3 @@ export type AddContractRequestInput = {
    */
   abi?: any;
 };
-
