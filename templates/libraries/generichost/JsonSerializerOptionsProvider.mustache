@@ -11,7 +11,7 @@ namespace {{packageName}}.{{clientPackage}}
     /// <summary>
     /// Provides the JsonSerializerOptions
     /// </summary>
-    {{>visibility}} class {{classPrefix}}JsonSerializerOptionsProvider
+    {{>visibility}} class JsonSerializerOptionsProvider
     {
         /// <summary>
         /// the JsonSerializerOptions
@@ -21,7 +21,7 @@ namespace {{packageName}}.{{clientPackage}}
         /// <summary>
         /// Instantiates a JsonSerializerOptionsProvider
         /// </summary>
-        public {{classPrefix}}JsonSerializerOptionsProvider(JsonSerializerOptions options)
+        public JsonSerializerOptionsProvider(JsonSerializerOptions options)
         {
             Options = options;
         }

@@ -514,9 +514,8 @@
 
             {{/isNullable}}
             {{^isNullable}}
-            var {{#lambda.camelcase_sanitize_param}}{{name}}{{/lambda.camelcase_sanitize_param}}RawValue = {{classname}}.{{{datatypeWithEnum}}}ToJsonValue({{#lambda.camelcase_sanitize_param}}{{classname}}{{/lambda.camelcase_sanitize_param}}.{{name}}{{^required}}Option.Value{{/required}}{{#required}}{{#isNullable}}{{nrt!}}.Value{{/isNullable}}{{/required}});
-            if ({{#lambda.camelcase_sanitize_param}}{{name}}{{/lambda.camelcase_sanitize_param}}RawValue != null)
-                writer.WriteString("{{baseName}}", {{#lambda.camelcase_sanitize_param}}{{name}}{{/lambda.camelcase_sanitize_param}}RawValue);
+            var {{#lambda.camelcase_sanitize_param}}{{name}}{{/lambda.camelcase_sanitize_param}}RawValue = {{classname}}.{{{datatypeWithEnum}}}ToJsonValue({{#lambda.camelcase_sanitize_param}}{{classname}}{{/lambda.camelcase_sanitize_param}}.{{name}}{{^required}}Option.Value{{#vendorExtensions.x-is-value-type}}{{nrt!}}.Value{{/vendorExtensions.x-is-value-type}}{{/required}}{{#required}}{{#isNullable}}{{nrt!}}.Value{{/isNullable}}{{/required}});
+            writer.WriteString("{{baseName}}", {{#lambda.camelcase_sanitize_param}}{{name}}{{/lambda.camelcase_sanitize_param}}RawValue);
             {{/isNullable}}
             {{/isInnerEnum}}
             {{^isInnerEnum}}

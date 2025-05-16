@@ -11,14 +11,18 @@ using System.Text.Json.Serialization;
 using System.Net.Http;
 using Microsoft.Extensions.DependencyInjection;
 using {{packageName}}.{{apiPackage}};
+{{#models}}
+{{#-first}}
 using {{packageName}}.{{modelPackage}};
+{{/-first}}
+{{/models}}
 
 namespace {{packageName}}.{{clientPackage}}
 {
     /// <summary>
     /// Provides hosting configuration for {{packageName}}
     /// </summary>
-    {{>visibility}} class {{classPrefix}}HostConfiguration
+    {{>visibility}} class HostConfiguration
     {
         private readonly IServiceCollection _services;
         private readonly JsonSerializerOptions _jsonOptions = new JsonSerializerOptions();
@@ -26,26 +30,31 @@ namespace {{packageName}}.{{clientPackage}}
         internal bool HttpClientsAdded { get; private set; }
 
         /// <summary>
-        /// Instantiates the class
+        /// Instantiates the class 
         /// </summary>
         /// <param name="services"></param>
-        public {{classPrefix}}HostConfiguration(IServiceCollection services)
+        public HostConfiguration(IServiceCollection services)
         {
             _services = services;
+            _jsonOptions.Converters.Add(new JsonStringEnumConverter());
             _jsonOptions.Converters.Add(new DateTimeJsonConverter());
             _jsonOptions.Converters.Add(new DateTimeNullableJsonConverter());
+            {{#supportsDateOnly}}
+            _jsonOptions.Converters.Add(new DateOnlyJsonConverter());
+            _jsonOptions.Converters.Add(new DateOnlyNullableJsonConverter());
+            {{/supportsDateOnly}}
             {{#models}}
             {{#model}}
             {{#isEnum}}
-            _jsonOptions.Converters.Add(new {{datatypeWithEnum}}{{^datatypeWithEnum}}{{classPrefix}}{{classname}}{{/datatypeWithEnum}}JsonConverter());
-            _jsonOptions.Converters.Add(new {{datatypeWithEnum}}{{^datatypeWithEnum}}{{classPrefix}}{{classname}}{{/datatypeWithEnum}}NullableJsonConverter());
+            _jsonOptions.Converters.Add(new {{datatypeWithEnum}}{{^datatypeWithEnum}}{{classname}}{{/datatypeWithEnum}}JsonConverter());
+            _jsonOptions.Converters.Add(new {{datatypeWithEnum}}{{^datatypeWithEnum}}{{classname}}{{/datatypeWithEnum}}NullableJsonConverter());
             {{/isEnum}}
             {{^isEnum}}
             _jsonOptions.Converters.Add(new {{classname}}JsonConverter());
             {{/isEnum}}
             {{/model}}
             {{/models}}
-            {{classPrefix}}JsonSerializerOptionsProvider jsonSerializerOptionsProvider = new{{^net60OrLater}} {{classPrefix}}JsonSerializerOptionsProvider{{/net60OrLater}}(_jsonOptions);
+            JsonSerializerOptionsProvider jsonSerializerOptionsProvider = new{{^net60OrLater}} JsonSerializerOptionsProvider{{/net60OrLater}}(_jsonOptions);
             _services.AddSingleton(jsonSerializerOptionsProvider);
             {{#useSourceGeneration}}
 
@@ -71,8 +80,8 @@ namespace {{packageName}}.{{clientPackage}}
 
             {{/useSourceGeneration}}
             _services.AddSingleton<IApiFactory, ApiFactory>();{{#apiInfo}}{{#apis}}
-            _services.AddSingleton<{{classPrefix}}{{classname}}Events>();
-            _services.AddTransient<{{interfacePrefix}}{{classPrefix}}{{classname}}, {{classPrefix}}{{classname}}>();{{/apis}}{{/apiInfo}}
+            _services.AddSingleton<{{classname}}Events>();
+            _services.AddTransient<{{interfacePrefix}}{{classname}}, {{classname}}>();{{/apis}}{{/apiInfo}}
         }
 
         /// <summary>
@@ -81,7 +90,7 @@ namespace {{packageName}}.{{clientPackage}}
         /// <param name="client"></param>
         /// <param name="builder"></param>
         /// <returns></returns>
-        public {{classPrefix}}HostConfiguration Add{{apiName}}HttpClients
+        public HostConfiguration Add{{apiName}}HttpClients
         (
             Action<HttpClient>{{nrt?}} client = null, Action<IHttpClientBuilder>{{nrt?}} builder = null)
         {
@@ -90,7 +99,7 @@ namespace {{packageName}}.{{clientPackage}}
 
             List<IHttpClientBuilder> builders = new List<IHttpClientBuilder>();
 
-            {{#apiInfo}}{{#apis}}builders.Add(_services.AddHttpClient<{{interfacePrefix}}{{classPrefix}}{{classname}}, {{classPrefix}}{{classname}}>(client));
+            {{#apiInfo}}{{#apis}}builders.Add(_services.AddHttpClient<{{interfacePrefix}}{{classname}}, {{classname}}>(client));
             {{/apis}}{{/apiInfo}}
             if (builder != null)
                 foreach (IHttpClientBuilder instance in builders)
@@ -106,7 +115,7 @@ namespace {{packageName}}.{{clientPackage}}
         /// </summary>
         /// <param name="options"></param>
         /// <returns></returns>
-        public {{classPrefix}}HostConfiguration ConfigureJsonOptions(Action<JsonSerializerOptions> options)
+        public HostConfiguration ConfigureJsonOptions(Action<JsonSerializerOptions> options)
         {
             options(_jsonOptions);
 
@@ -119,7 +128,7 @@ namespace {{packageName}}.{{clientPackage}}
         /// <typeparam name="TTokenBase"></typeparam>
         /// <param name="token"></param>
         /// <returns></returns>
-        public {{classPrefix}}HostConfiguration AddTokens<TTokenBase>(TTokenBase token) where TTokenBase : TokenBase
+        public HostConfiguration AddTokens<TTokenBase>(TTokenBase token) where TTokenBase : TokenBase
         {
             return AddTokens(new TTokenBase[]{ token });
         }
@@ -130,7 +139,7 @@ namespace {{packageName}}.{{clientPackage}}
         /// <typeparam name="TTokenBase"></typeparam>
         /// <param name="tokens"></param>
         /// <returns></returns>
-        public {{classPrefix}}HostConfiguration AddTokens<TTokenBase>(IEnumerable<TTokenBase> tokens) where TTokenBase : TokenBase
+        public HostConfiguration AddTokens<TTokenBase>(IEnumerable<TTokenBase> tokens) where TTokenBase : TokenBase
         {
             TokenContainer<TTokenBase> container = new TokenContainer<TTokenBase>(tokens);
             _services.AddSingleton(services => container);
@@ -144,7 +153,7 @@ namespace {{packageName}}.{{clientPackage}}
         /// <typeparam name="TTokenProvider"></typeparam>
         /// <typeparam name="TTokenBase"></typeparam>
         /// <returns></returns>
-        public {{classPrefix}}HostConfiguration UseProvider<TTokenProvider, TTokenBase>()
+        public HostConfiguration UseProvider<TTokenProvider, TTokenBase>() 
             where TTokenProvider : TokenProvider<TTokenBase>
             where TTokenBase : TokenBase
         {

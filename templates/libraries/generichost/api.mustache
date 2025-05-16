@@ -39,12 +39,12 @@ namespace {{packageName}}.{{apiPackage}}
     /// Represents a collection of functions to interact with the API endpoints
     /// This class is registered as transient.
     /// </summary>
-    {{>visibility}} interface {{interfacePrefix}}{{classPrefix}}{{classname}} : {{interfacePrefix}}{{classPrefix}}Api
+    {{>visibility}} interface {{interfacePrefix}}{{classname}} : IApi
     {
         /// <summary>
         /// The class containing the events
         /// </summary>
-        {{classPrefix}}{{classname}}Events Events { get; }
+        {{classname}}Events Events { get; }
 
         {{#operation}}
         /// <summary>
@@ -122,7 +122,7 @@ namespace {{packageName}}.{{apiPackage}}
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    {{>visibility}} class {{classPrefix}}{{classname}}Events
+    {{>visibility}} class {{classname}}Events
     {
         {{#lambda.trimTrailingWithNewLine}}
         {{#operation}}
@@ -136,7 +136,7 @@ namespace {{packageName}}.{{apiPackage}}
         /// </summary>
         public event EventHandler<ExceptionEventArgs>{{nrt?}} OnError{{operationId}};
 
-        internal void ExecuteOn{{operationId}}({{#vendorExtensions.x-duplicates}}{{.}}{{/vendorExtensions.x-duplicates}}{{^vendorExtensions.x-duplicates}}{{classPrefix}}{{classname}}{{/vendorExtensions.x-duplicates}}.{{operationId}}ApiResponse apiResponse)
+        internal void ExecuteOn{{operationId}}({{#vendorExtensions.x-duplicates}}{{.}}{{/vendorExtensions.x-duplicates}}{{^vendorExtensions.x-duplicates}}{{classname}}{{/vendorExtensions.x-duplicates}}.{{operationId}}ApiResponse apiResponse)
         {
             On{{operationId}}?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -153,7 +153,7 @@ namespace {{packageName}}.{{apiPackage}}
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    {{>visibility}} sealed partial class {{classPrefix}}{{classname}} : {{interfacePrefix}}{{classPrefix}}{{classname}}
+    {{>visibility}} sealed partial class {{classname}} : {{interfacePrefix}}{{classname}}
     {
         private JsonSerializerOptions _jsonSerializerOptions;
 
@@ -165,7 +165,7 @@ namespace {{packageName}}.{{apiPackage}}
         /// <summary>
         /// The logger
         /// </summary>
-        public ILogger<{{classPrefix}}{{classname}}> Logger { get; }
+        public ILogger<{{classname}}> Logger { get; }
 
         /// <summary>
         /// The HttpClient
@@ -175,12 +175,12 @@ namespace {{packageName}}.{{apiPackage}}
         /// <summary>
         /// The class containing the events
         /// </summary>
-        public {{classPrefix}}{{classname}}Events Events { get; }{{#hasApiKeyMethods}}
+        public {{classname}}Events Events { get; }{{#hasApiKeyMethods}}
 
         /// <summary>
         /// A token provider of type <see cref="ApiKeyProvider"/>
         /// </summary>
-        public TokenProvider<{{classPrefix}}ApiKeyToken> ApiKeyProvider { get; }{{/hasApiKeyMethods}}{{#hasHttpBearerMethods}}
+        public TokenProvider<ApiKeyToken> ApiKeyProvider { get; }{{/hasApiKeyMethods}}{{#hasHttpBearerMethods}}
 
         /// <summary>
         /// A token provider of type <see cref="BearerToken"/>
@@ -216,11 +216,11 @@ namespace {{packageName}}.{{apiPackage}}
         {{/lambda.unique}}
         {{/net80OrLater}}
         /// <summary>
-        /// Initializes a new instance of the <see cref="{{classPrefix}}{{classname}}"/> class.
+        /// Initializes a new instance of the <see cref="{{classname}}"/> class.
         /// </summary>
         /// <returns></returns>
-        public {{classPrefix}}{{classname}}(ILogger<{{classPrefix}}{{classname}}> logger, ILoggerFactory loggerFactory, HttpClient httpClient, {{classPrefix}}JsonSerializerOptionsProvider jsonSerializerOptionsProvider, {{classPrefix}}{{classname}}Events {{#lambda.camelcase_sanitize_param}}{{classPrefix}}{{classname}}Events{{/lambda.camelcase_sanitize_param}}{{#hasApiKeyMethods}},
-            TokenProvider<{{classPrefix}}ApiKeyToken> apiKeyProvider{{/hasApiKeyMethods}}{{#hasHttpBearerMethods}},
+        public {{classname}}(ILogger<{{classname}}> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, {{classname}}Events {{#lambda.camelcase_sanitize_param}}{{classname}}Events{{/lambda.camelcase_sanitize_param}}{{#hasApiKeyMethods}},
+            TokenProvider<ApiKeyToken> apiKeyProvider{{/hasApiKeyMethods}}{{#hasHttpBearerMethods}},
             TokenProvider<BearerToken> bearerTokenProvider{{/hasHttpBearerMethods}}{{#hasHttpBasicMethods}},
             TokenProvider<BasicToken> basicTokenProvider{{/hasHttpBasicMethods}}{{#hasHttpSignatureMethods}},
             TokenProvider<HttpSignatureToken> httpSignatureTokenProvider{{/hasHttpSignatureMethods}}{{#hasOAuthMethods}},
@@ -229,9 +229,9 @@ namespace {{packageName}}.{{apiPackage}}
         {
             _jsonSerializerOptions = jsonSerializerOptionsProvider.Options;
             LoggerFactory = loggerFactory;
-            Logger = LoggerFactory.CreateLogger<{{classPrefix}}{{classname}}>();
+            Logger = LoggerFactory.CreateLogger<{{classname}}>();
             HttpClient = httpClient;
-            Events = {{#lambda.camelcase_sanitize_param}}{{classPrefix}}{{classname}}Events{{/lambda.camelcase_sanitize_param}};{{#hasApiKeyMethods}}
+            Events = {{#lambda.camelcase_sanitize_param}}{{classname}}Events{{/lambda.camelcase_sanitize_param}};{{#hasApiKeyMethods}}
             ApiKeyProvider = apiKeyProvider;{{/hasApiKeyMethods}}{{#hasHttpBearerMethods}}
             BearerTokenProvider = bearerTokenProvider;{{/hasHttpBearerMethods}}{{#hasHttpBasicMethods}}
             BasicTokenProvider = basicTokenProvider;{{/hasHttpBasicMethods}}{{#hasHttpSignatureMethods}}
@@ -514,7 +514,7 @@ namespace {{packageName}}.{{apiPackage}}
                     {{/-first}}
                     {{#isApiKey}}
                     {{^isKeyInCookie}}
-                    {{classPrefix}}ApiKeyToken apiKeyTokenLocalVar{{-index}} = ({{classPrefix}}ApiKeyToken) await ApiKeyProvider.GetAsync("{{keyParamName}}", cancellationToken).ConfigureAwait(false);
+                    ApiKeyToken apiKeyTokenLocalVar{{-index}} = (ApiKeyToken) await ApiKeyProvider.GetAsync("{{keyParamName}}", cancellationToken).ConfigureAwait(false);
                     tokenBaseLocalVars.Add(apiKeyTokenLocalVar{{-index}});
                     {{#isKeyInHeader}}
                     apiKeyTokenLocalVar{{-index}}.UseInHeader(httpRequestMessageLocalVar);

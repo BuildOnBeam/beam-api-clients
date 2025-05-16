@@ -7,20 +7,20 @@ namespace {{packageName}}.{{clientPackage}}
     /// <summary>
     /// An IApiFactory interface
     /// </summary>
-    {{>visibility}} interface {{interfacePrefix}}ApiFactory
+    {{>visibility}} interface IApiFactory
     {
         /// <summary>
-        /// A method to create an {{interfacePrefix}}Api of type IResult
+        /// A method to create an IApi of type IResult
         /// </summary>
         /// <typeparam name="IResult"></typeparam>
         /// <returns></returns>
-        IResult Create<IResult>() where IResult : {{interfacePrefix}}{{classPrefix}}Api;
+        IResult Create<IResult>() where IResult : IApi;
     }
 
     /// <summary>
     /// An ApiFactory
     /// </summary>
-    {{>visibility}} class ApiFactory : {{interfacePrefix}}ApiFactory
+    {{>visibility}} class ApiFactory : IApiFactory
     {
         /// <summary>
         /// The service provider
@@ -41,7 +41,7 @@ namespace {{packageName}}.{{clientPackage}}
         /// </summary>
         /// <typeparam name="IResult"></typeparam>
         /// <returns></returns>
-        public IResult Create<IResult>() where IResult : {{interfacePrefix}}{{classPrefix}}Api
+        public IResult Create<IResult>() where IResult : IApi
         {
             return Services.GetRequiredService<IResult>();
         }
