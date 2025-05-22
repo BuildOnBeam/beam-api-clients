@@ -59,7 +59,7 @@ namespace BeamPlayerClient.Client
             _jsonOptions.Converters.Add(new PlayerCommonStatsResponseCountJsonConverter());
             _jsonOptions.Converters.Add(new PlayerCommonUserActivityRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new PlayerConfirmOperationRequestJsonConverter());
-            _jsonOptions.Converters.Add(new PlayerConfirmOperationRequestTransactionsInnerJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerConfirmOperationRequestActionsInnerJsonConverter());
             _jsonOptions.Converters.Add(new PlayerConvertTokenRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new PlayerCreateAssetOfferRequestInputJsonConverter());
             _jsonOptions.Converters.Add(new PlayerCreateConnectionRequestInputJsonConverter());
@@ -99,6 +99,10 @@ namespace BeamPlayerClient.Client
             _jsonOptions.Converters.Add(new PlayerGetChainCurrenciesResponseDataInnerJsonConverter());
             _jsonOptions.Converters.Add(new PlayerGetConnectionRequestResponseJsonConverter());
             _jsonOptions.Converters.Add(new PlayerGetListedAssetsBodyInputJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetOnRampQuoteResponseJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetOnRampQuoteResponseQuoteJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetOnRampQuoteResponseQuoteInputJsonConverter());
+            _jsonOptions.Converters.Add(new PlayerGetOnRampQuoteResponseQuoteOutputJsonConverter());
             _jsonOptions.Converters.Add(new PlayerGetOwnerAssetsBodyInputJsonConverter());
             _jsonOptions.Converters.Add(new PlayerGetOwnerAssetsResponseJsonConverter());
             _jsonOptions.Converters.Add(new PlayerGetOwnersResponseJsonConverter());
@@ -126,7 +130,6 @@ namespace BeamPlayerClient.Client
             _jsonOptions.Converters.Add(new PlayerOperationActionSignatureJsonConverter());
             _jsonOptions.Converters.Add(new PlayerOperationActionTransactionJsonConverter());
             _jsonOptions.Converters.Add(new PlayerPlayerOperationResponseJsonConverter());
-            _jsonOptions.Converters.Add(new PlayerPlayerOperationResponseTransactionsInnerJsonConverter());
             _jsonOptions.Converters.Add(new PlayerReadContractRequestJsonConverter());
             _jsonOptions.Converters.Add(new PlayerReadContractResonseJsonConverter());
             _jsonOptions.Converters.Add(new PlayerRefreshContractRequestBodyJsonConverter());

@@ -32,13 +32,11 @@ namespace BeamPlayerClient.Model
         /// Initializes a new instance of the <see cref="PlayerConfirmOperationRequest" /> class.
         /// </summary>
         /// <param name="status">status</param>
-        /// <param name="transactions">transactions</param>
         /// <param name="actions">actions</param>
         [JsonConstructor]
-        public PlayerConfirmOperationRequest(StatusEnum status, Option<List<PlayerConfirmOperationRequestTransactionsInner>> transactions = default, Option<List<PlayerConfirmOperationRequestTransactionsInner>> actions = default)
+        public PlayerConfirmOperationRequest(StatusEnum status, Option<List<PlayerConfirmOperationRequestActionsInner>> actions = default)
         {
             Status = status;
-            TransactionsOption = transactions;
             ActionsOption = actions;
             OnCreated();
         }
@@ -285,30 +283,17 @@ namespace BeamPlayerClient.Model
         public StatusEnum Status { get; set; }
 
         /// <summary>
-        /// Used to track the state of Transactions
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<List<PlayerConfirmOperationRequestTransactionsInner>> TransactionsOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets Transactions
-        /// </summary>
-        [JsonPropertyName("transactions")]
-        public List<PlayerConfirmOperationRequestTransactionsInner> Transactions { get { return this.TransactionsOption; } set { this.TransactionsOption = new(value); } }
-
-        /// <summary>
         /// Used to track the state of Actions
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<List<PlayerConfirmOperationRequestTransactionsInner>> ActionsOption { get; private set; }
+        public Option<List<PlayerConfirmOperationRequestActionsInner>> ActionsOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Actions
         /// </summary>
         [JsonPropertyName("actions")]
-        public List<PlayerConfirmOperationRequestTransactionsInner> Actions { get { return this.ActionsOption; } set { this.ActionsOption = new(value); } }
+        public List<PlayerConfirmOperationRequestActionsInner> Actions { get { return this.ActionsOption; } set { this.ActionsOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -319,7 +304,6 @@ namespace BeamPlayerClient.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class PlayerConfirmOperationRequest {\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
-            sb.Append("  Transactions: ").Append(Transactions).Append("\n");
             sb.Append("  Actions: ").Append(Actions).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -359,8 +343,7 @@ namespace BeamPlayerClient.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<PlayerConfirmOperationRequest.StatusEnum?> status = default;
-            Option<List<PlayerConfirmOperationRequestTransactionsInner>> transactions = default;
-            Option<List<PlayerConfirmOperationRequestTransactionsInner>> actions = default;
+            Option<List<PlayerConfirmOperationRequestActionsInner>> actions = default;
 
             while (utf8JsonReader.Read())
             {
@@ -382,13 +365,9 @@ namespace BeamPlayerClient.Model
                             if (statusRawValue != null)
                                 status = new Option<PlayerConfirmOperationRequest.StatusEnum?>(PlayerConfirmOperationRequest.StatusEnumFromStringOrDefault(statusRawValue));
                             break;
-                        case "transactions":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                transactions = new Option<List<PlayerConfirmOperationRequestTransactionsInner>>(JsonSerializer.Deserialize<List<PlayerConfirmOperationRequestTransactionsInner>>(ref utf8JsonReader, jsonSerializerOptions));
-                            break;
                         case "actions":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                actions = new Option<List<PlayerConfirmOperationRequestTransactionsInner>>(JsonSerializer.Deserialize<List<PlayerConfirmOperationRequestTransactionsInner>>(ref utf8JsonReader, jsonSerializerOptions));
+                                actions = new Option<List<PlayerConfirmOperationRequestActionsInner>>(JsonSerializer.Deserialize<List<PlayerConfirmOperationRequestActionsInner>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -402,7 +381,7 @@ namespace BeamPlayerClient.Model
             if (status.IsSet && status.Value == null)
                 throw new ArgumentNullException(nameof(status), "Property is not nullable for class PlayerConfirmOperationRequest.");
 
-            return new PlayerConfirmOperationRequest(status.Value.Value, transactions, actions);
+            return new PlayerConfirmOperationRequest(status.Value.Value, actions);
         }
 
         /// <summary>
@@ -432,14 +411,6 @@ namespace BeamPlayerClient.Model
             var statusRawValue = PlayerConfirmOperationRequest.StatusEnumToJsonValue(playerConfirmOperationRequest.Status);
             if (statusRawValue != null)
                 writer.WriteString("status", statusRawValue);
-            if (playerConfirmOperationRequest.TransactionsOption.IsSet)
-                if (playerConfirmOperationRequest.TransactionsOption.Value != null)
-                {
-                    writer.WritePropertyName("transactions");
-                    JsonSerializer.Serialize(writer, playerConfirmOperationRequest.Transactions, jsonSerializerOptions);
-                }
-                else
-                    writer.WriteNull("transactions");
             if (playerConfirmOperationRequest.ActionsOption.IsSet)
                 if (playerConfirmOperationRequest.ActionsOption.Value != null)
                 {

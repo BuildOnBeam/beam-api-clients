@@ -57,12 +57,61 @@ namespace BeamPlayerClient.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateOnrampRequestApiResponse"/>&gt;</returns>
         Task<ICreateOnrampRequestApiResponse> CreateOnrampRequestOrDefaultAsync(string entityId, PlayerCreateOnrampRequestInput playerCreateOnrampRequestInput, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="playerCreateOnrampRequestInput"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetOnRampQuoteApiResponse"/>&gt;</returns>
+        Task<IGetOnRampQuoteApiResponse> GetOnRampQuoteAsync(string entityId, PlayerCreateOnrampRequestInput playerCreateOnrampRequestInput, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="entityId"></param>
+        /// <param name="playerCreateOnrampRequestInput"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetOnRampQuoteApiResponse"/>&gt;</returns>
+        Task<IGetOnRampQuoteApiResponse> GetOnRampQuoteOrDefaultAsync(string entityId, PlayerCreateOnrampRequestInput playerCreateOnrampRequestInput, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
     /// The <see cref="ICreateOnrampRequestApiResponse"/>
     /// </summary>
     public interface ICreateOnrampRequestApiResponse : BeamPlayerClient.Client.IApiResponse, ICreated<BeamPlayerClient.Model.PlayerPlayerOperationResponse>, IHttpStatusCode4XX<BeamPlayerClient.Model.PlayerBeamErrorResponse>, IHttpStatusCode5XX<BeamPlayerClient.Model.PlayerBeamErrorResponse>
+    {
+        /// <summary>
+        /// Returns true if the response is 201 Created
+        /// </summary>
+        /// <returns></returns>
+        bool IsCreated { get; }
+
+        /// <summary>
+        /// Returns true if the response is 4XX HttpStatusCode4XX
+        /// </summary>
+        /// <returns></returns>
+        bool IsHttpStatusCode4XX { get; }
+
+        /// <summary>
+        /// Returns true if the response is 5XX HttpStatusCode5XX
+        /// </summary>
+        /// <returns></returns>
+        bool IsHttpStatusCode5XX { get; }
+    }
+
+    /// <summary>
+    /// The <see cref="IGetOnRampQuoteApiResponse"/>
+    /// </summary>
+    public interface IGetOnRampQuoteApiResponse : BeamPlayerClient.Client.IApiResponse, ICreated<BeamPlayerClient.Model.PlayerGetOnRampQuoteResponse>, IHttpStatusCode4XX<BeamPlayerClient.Model.PlayerBeamErrorResponse>, IHttpStatusCode5XX<BeamPlayerClient.Model.PlayerBeamErrorResponse>
     {
         /// <summary>
         /// Returns true if the response is 201 Created
@@ -106,6 +155,26 @@ namespace BeamPlayerClient.Api
         internal void ExecuteOnErrorCreateOnrampRequest(Exception exception)
         {
             OnErrorCreateOnrampRequest?.Invoke(this, new ExceptionEventArgs(exception));
+        }
+
+        /// <summary>
+        /// The event raised after the server response
+        /// </summary>
+        public event EventHandler<ApiResponseEventArgs> OnGetOnRampQuote;
+
+        /// <summary>
+        /// The event raised after an error querying the server
+        /// </summary>
+        public event EventHandler<ExceptionEventArgs> OnErrorGetOnRampQuote;
+
+        internal void ExecuteOnGetOnRampQuote(PlayerRampApi.GetOnRampQuoteApiResponse apiResponse)
+        {
+            OnGetOnRampQuote?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+        }
+
+        internal void ExecuteOnErrorGetOnRampQuote(Exception exception)
+        {
+            OnErrorGetOnRampQuote?.Invoke(this, new ExceptionEventArgs(exception));
         }
     }
 
@@ -381,6 +450,346 @@ namespace BeamPlayerClient.Api
             /// <param name="result"></param>
             /// <returns></returns>
             public bool TryCreated([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerPlayerOperationResponse result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Created();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)201);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX HttpStatusCode4XX
+            /// </summary>
+            /// <returns></returns>
+            public bool IsHttpStatusCode4XX
+            {
+                get
+                {
+                    int statusCode = (int)StatusCode;
+                    return 400 >= statusCode && 499 <= statusCode;
+                }
+            }
+
+            /// <summary>
+            /// Deserializes the response if the response is 4XX HttpStatusCode4XX
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse HttpStatusCode4XX()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsHttpStatusCode4XX
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX HttpStatusCode4XX and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryHttpStatusCode4XX([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse result)
+            {
+                result = null;
+
+                try
+                {
+                    result = HttpStatusCode4XX();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)4);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX HttpStatusCode5XX
+            /// </summary>
+            /// <returns></returns>
+            public bool IsHttpStatusCode5XX
+            {
+                get
+                {
+                    int statusCode = (int)StatusCode;
+                    return 500 >= statusCode && 599 <= statusCode;
+                }
+            }
+
+            /// <summary>
+            /// Deserializes the response if the response is 5XX HttpStatusCode5XX
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse HttpStatusCode5XX()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsHttpStatusCode5XX
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX HttpStatusCode5XX and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryHttpStatusCode5XX([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse result)
+            {
+                result = null;
+
+                try
+                {
+                    result = HttpStatusCode5XX();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)5);
+                }
+
+                return result != null;
+            }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
+        }
+
+        partial void FormatGetOnRampQuote(ref string entityId, PlayerCreateOnrampRequestInput playerCreateOnrampRequestInput);
+
+        /// <summary>
+        /// Validates the request parameters
+        /// </summary>
+        /// <param name="entityId"></param>
+        /// <param name="playerCreateOnrampRequestInput"></param>
+        /// <returns></returns>
+        private void ValidateGetOnRampQuote(string entityId, PlayerCreateOnrampRequestInput playerCreateOnrampRequestInput)
+        {
+            if (entityId == null)
+                throw new ArgumentNullException(nameof(entityId));
+
+            if (playerCreateOnrampRequestInput == null)
+                throw new ArgumentNullException(nameof(playerCreateOnrampRequestInput));
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="entityId"></param>
+        /// <param name="playerCreateOnrampRequestInput"></param>
+        private void AfterGetOnRampQuoteDefaultImplementation(IGetOnRampQuoteApiResponse apiResponseLocalVar, string entityId, PlayerCreateOnrampRequestInput playerCreateOnrampRequestInput)
+        {
+            bool suppressDefaultLog = false;
+            AfterGetOnRampQuote(ref suppressDefaultLog, apiResponseLocalVar, entityId, playerCreateOnrampRequestInput);
+            if (!suppressDefaultLog)
+                Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="entityId"></param>
+        /// <param name="playerCreateOnrampRequestInput"></param>
+        partial void AfterGetOnRampQuote(ref bool suppressDefaultLog, IGetOnRampQuoteApiResponse apiResponseLocalVar, string entityId, PlayerCreateOnrampRequestInput playerCreateOnrampRequestInput);
+
+        /// <summary>
+        /// Logs exceptions that occur while retrieving the server response
+        /// </summary>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="entityId"></param>
+        /// <param name="playerCreateOnrampRequestInput"></param>
+        private void OnErrorGetOnRampQuoteDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string entityId, PlayerCreateOnrampRequestInput playerCreateOnrampRequestInput)
+        {
+            bool suppressDefaultLogLocalVar = false;
+            OnErrorGetOnRampQuote(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, entityId, playerCreateOnrampRequestInput);
+            if (!suppressDefaultLogLocalVar)
+                Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
+        }
+
+        /// <summary>
+        /// A partial method that gives developers a way to provide customized exception handling
+        /// </summary>
+        /// <param name="suppressDefaultLogLocalVar"></param>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="entityId"></param>
+        /// <param name="playerCreateOnrampRequestInput"></param>
+        partial void OnErrorGetOnRampQuote(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string entityId, PlayerCreateOnrampRequestInput playerCreateOnrampRequestInput);
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <param name="entityId"></param>
+        /// <param name="playerCreateOnrampRequestInput"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetOnRampQuoteApiResponse"/>&gt;</returns>
+        public async Task<IGetOnRampQuoteApiResponse> GetOnRampQuoteOrDefaultAsync(string entityId, PlayerCreateOnrampRequestInput playerCreateOnrampRequestInput, System.Threading.CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await GetOnRampQuoteAsync(entityId, playerCreateOnrampRequestInput, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="playerCreateOnrampRequestInput"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetOnRampQuoteApiResponse"/>&gt;</returns>
+        public async Task<IGetOnRampQuoteApiResponse> GetOnRampQuoteAsync(string entityId, PlayerCreateOnrampRequestInput playerCreateOnrampRequestInput, System.Threading.CancellationToken cancellationToken = default)
+        {
+            UriBuilder uriBuilderLocalVar = new UriBuilder();
+
+            try
+            {
+                ValidateGetOnRampQuote(entityId, playerCreateOnrampRequestInput);
+
+                FormatGetOnRampQuote(ref entityId, playerCreateOnrampRequestInput);
+
+                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
+                {
+                    uriBuilderLocalVar.Host = HttpClient.BaseAddress.Host;
+                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
+                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
+                    uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/player/ramp/quote/on/{entityId}";
+                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
+
+                    httpRequestMessageLocalVar.Content = (playerCreateOnrampRequestInput as object) is System.IO.Stream stream
+                        ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(playerCreateOnrampRequestInput, _jsonSerializerOptions));
+
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    PlayerApiKeyToken apiKeyTokenLocalVar1 = (PlayerApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
+                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    string[] contentTypes = new string[] {
+                        "application/json"
+                    };
+
+                    string contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
+
+                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
+                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
+
+                    string[] acceptLocalVars = new string[] {
+                        "application/json"
+                    };
+
+                    string acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+
+                    if (acceptLocalVar != null)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+
+                    httpRequestMessageLocalVar.Method = HttpMethod.Post;
+
+                    DateTime requestedAtLocalVar = DateTime.UtcNow;
+
+                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
+                    {
+                        string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+
+                        ILogger<GetOnRampQuoteApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<GetOnRampQuoteApiResponse>();
+
+                        GetOnRampQuoteApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/player/ramp/quote/on/{entityId}", requestedAtLocalVar, _jsonSerializerOptions);
+
+                        AfterGetOnRampQuoteDefaultImplementation(apiResponseLocalVar, entityId, playerCreateOnrampRequestInput);
+
+                        Events.ExecuteOnGetOnRampQuote(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
+
+                        return apiResponseLocalVar;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                OnErrorGetOnRampQuoteDefaultImplementation(e, "/v1/player/ramp/quote/on/{entityId}", uriBuilderLocalVar.Path, entityId, playerCreateOnrampRequestInput);
+                Events.ExecuteOnErrorGetOnRampQuote(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="GetOnRampQuoteApiResponse"/>
+        /// </summary>
+        public partial class GetOnRampQuoteApiResponse : BeamPlayerClient.Client.ApiResponse, IGetOnRampQuoteApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<GetOnRampQuoteApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="GetOnRampQuoteApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public GetOnRampQuoteApiResponse(ILogger<GetOnRampQuoteApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(global::System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 201 Created
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCreated => 201 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 201 Created
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerGetOnRampQuoteResponse Created()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCreated
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerGetOnRampQuoteResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 201 Created and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCreated([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerGetOnRampQuoteResponse result)
             {
                 result = null;
 

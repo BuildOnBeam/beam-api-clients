@@ -44,6 +44,7 @@ export type { GetAttributesResponse } from './models/GetAttributesResponse';
 export type { GetChainCurrenciesResponse } from './models/GetChainCurrenciesResponse';
 export { GetConnectionRequestResponse } from './models/GetConnectionRequestResponse';
 export { GetListedAssetsBodyInput } from './models/GetListedAssetsBodyInput';
+export type { GetOnRampQuoteResponse } from './models/GetOnRampQuoteResponse';
 export { GetOwnerAssetsBodyInput } from './models/GetOwnerAssetsBodyInput';
 export type { GetOwnerAssetsResponse } from './models/GetOwnerAssetsResponse';
 export type { GetOwnersResponse } from './models/GetOwnersResponse';

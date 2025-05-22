@@ -4062,6 +4062,75 @@
         ]
       }
     },
+    "/v1/player/ramp/quote/on/{entityId}": {
+      "post": {
+        "operationId": "getOnRampQuote",
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlayerCreateOnrampRequestInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerGetOnRampQuoteResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "beam-api-key": []
+          },
+          {
+            "beam-api-key": []
+          }
+        ],
+        "summary": "",
+        "tags": [
+          "Ramp"
+        ]
+      }
+    },
     "/v1/contract/{contractAddress}/read": {
       "post": {
         "operationId": "readContract",
@@ -4726,85 +4795,6 @@
               "title": "PlayerOperationAction"
             }
           },
-          "transactions": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string",
-                  "enum": [
-                    "Pending",
-                    "Signed",
-                    "Rejected",
-                    "Executed",
-                    "Error"
-                  ]
-                },
-                "id": {
-                  "type": "string",
-                  "format": "cuid"
-                },
-                "openfortId": {
-                  "type": "string",
-                  "nullable": true
-                },
-                "sponsored": {
-                  "type": "boolean"
-                },
-                "actionId": {
-                  "type": "string",
-                  "nullable": true
-                },
-                "hash": {
-                  "type": "string",
-                  "nullable": true
-                },
-                "type": {
-                  "type": "string",
-                  "enum": [
-                    "OpenfortTransaction",
-                    "OpenfortReservoirOrder",
-                    "OpenfortRevokeSession"
-                  ],
-                  "nullable": true
-                },
-                "externalId": {
-                  "type": "string",
-                  "nullable": true
-                },
-                "signature": {
-                  "type": "string",
-                  "nullable": true
-                },
-                "transactionHash": {
-                  "type": "string",
-                  "nullable": true
-                },
-                "operationId": {
-                  "type": "string",
-                  "format": "cuid",
-                  "nullable": true
-                },
-                "data": {
-                  "nullable": true
-                }
-              },
-              "required": [
-                "status",
-                "id",
-                "openfortId",
-                "sponsored",
-                "actionId",
-                "type",
-                "externalId",
-                "signature",
-                "transactionHash",
-                "operationId"
-              ]
-            },
-            "deprecated": true
-          },
           "url": {
             "type": "string",
             "format": "uri"
@@ -4821,7 +4811,6 @@
           "userId",
           "chainId",
           "actions",
-          "transactions",
           "url"
         ]
       },
@@ -6782,25 +6771,6 @@
               "Error"
             ]
           },
-          "transactions": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "signature": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "id",
-                "signature"
-              ]
-            },
-            "nullable": true
-          },
           "actions": {
             "type": "array",
             "items": {
@@ -7803,6 +7773,53 @@
             "description": "Auth Provider for the user to use. If it's Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI."
           }
         }
+      },
+      "PlayerGetOnRampQuoteResponse": {
+        "type": "object",
+        "properties": {
+          "quote": {
+            "type": "object",
+            "properties": {
+              "input": {
+                "type": "object",
+                "properties": {
+                  "paymentCurrency": {
+                    "type": "string"
+                  },
+                  "fiatAmount": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "paymentCurrency",
+                  "fiatAmount"
+                ]
+              },
+              "output": {
+                "type": "object",
+                "properties": {
+                  "tokenAdress": {
+                    "type": "string"
+                  },
+                  "tokenAmount": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "tokenAdress",
+                  "tokenAmount"
+                ]
+              }
+            },
+            "required": [
+              "input",
+              "output"
+            ]
+          }
+        },
+        "required": [
+          "quote"
+        ]
       },
       "PlayerReadContractRequest": {
         "type": "object",

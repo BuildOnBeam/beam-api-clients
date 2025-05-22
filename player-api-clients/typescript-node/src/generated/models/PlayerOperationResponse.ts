@@ -50,27 +50,6 @@ export type PlayerOperationResponse = {
       hash: string | null;
     } | null;
   }>;
-  /**
-   * @deprecated
-   */
-  transactions: Array<{
-    status: 'Pending' | 'Signed' | 'Rejected' | 'Executed' | 'Error';
-    id: string;
-    openfortId: string | null;
-    sponsored: boolean;
-    actionId: string | null;
-    hash?: string | null;
-    type:
-      | 'OpenfortTransaction'
-      | 'OpenfortReservoirOrder'
-      | 'OpenfortRevokeSession'
-      | null;
-    externalId: string | null;
-    signature: string | null;
-    transactionHash: string | null;
-    operationId: string | null;
-    data?: any;
-  }>;
   url: string;
 };
 export namespace PlayerOperationResponse {

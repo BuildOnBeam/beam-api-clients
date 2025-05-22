@@ -40,11 +40,10 @@ namespace BeamPlayerClient.Model
         /// <param name="userId">userId</param>
         /// <param name="chainId">chainId</param>
         /// <param name="actions">actions</param>
-        /// <param name="transactions">transactions</param>
         /// <param name="url">url</param>
         /// <param name="updatedAt">updatedAt</param>
         [JsonConstructor]
-        public PlayerPlayerOperationResponse(StatusEnum status, ProcessingEnum processing, AuthProviderEnum authProvider, string id, DateTime createdAt, string gameId, string userId, long chainId, List<PlayerOperationAction> actions, List<PlayerPlayerOperationResponseTransactionsInner> transactions, string url, DateTime? updatedAt = default)
+        public PlayerPlayerOperationResponse(StatusEnum status, ProcessingEnum processing, AuthProviderEnum authProvider, string id, DateTime createdAt, string gameId, string userId, long chainId, List<PlayerOperationAction> actions, string url, DateTime? updatedAt = default)
         {
             Status = status;
             Processing = processing;
@@ -55,7 +54,6 @@ namespace BeamPlayerClient.Model
             UserId = userId;
             ChainId = chainId;
             Actions = actions;
-            Transactions = transactions;
             Url = url;
             UpdatedAt = updatedAt;
             OnCreated();
@@ -725,13 +723,6 @@ namespace BeamPlayerClient.Model
         public List<PlayerOperationAction> Actions { get; set; }
 
         /// <summary>
-        /// Gets or Sets Transactions
-        /// </summary>
-        [JsonPropertyName("transactions")]
-        [Obsolete]
-        public List<PlayerPlayerOperationResponseTransactionsInner> Transactions { get; set; }
-
-        /// <summary>
         /// Gets or Sets Url
         /// </summary>
         [JsonPropertyName("url")]
@@ -760,7 +751,6 @@ namespace BeamPlayerClient.Model
             sb.Append("  UserId: ").Append(UserId).Append("\n");
             sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("  Actions: ").Append(Actions).Append("\n");
-            sb.Append("  Transactions: ").Append(Transactions).Append("\n");
             sb.Append("  Url: ").Append(Url).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
             sb.Append("}\n");
@@ -819,7 +809,6 @@ namespace BeamPlayerClient.Model
             Option<string> userId = default;
             Option<long?> chainId = default;
             Option<List<PlayerOperationAction>> actions = default;
-            Option<List<PlayerPlayerOperationResponseTransactionsInner>> transactions = default;
             Option<string> url = default;
             Option<DateTime?> updatedAt = default;
 
@@ -874,10 +863,6 @@ namespace BeamPlayerClient.Model
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 actions = new Option<List<PlayerOperationAction>>(JsonSerializer.Deserialize<List<PlayerOperationAction>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
-                        case "transactions":
-                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
-                                transactions = new Option<List<PlayerPlayerOperationResponseTransactionsInner>>(JsonSerializer.Deserialize<List<PlayerPlayerOperationResponseTransactionsInner>>(ref utf8JsonReader, jsonSerializerOptions));
-                            break;
                         case "url":
                             url = new Option<string>(utf8JsonReader.GetString());
                             break;
@@ -918,9 +903,6 @@ namespace BeamPlayerClient.Model
             if (!actions.IsSet)
                 throw new ArgumentException("Property is required for class PlayerPlayerOperationResponse.", nameof(actions));
 
-            if (!transactions.IsSet)
-                throw new ArgumentException("Property is required for class PlayerPlayerOperationResponse.", nameof(transactions));
-
             if (!url.IsSet)
                 throw new ArgumentException("Property is required for class PlayerPlayerOperationResponse.", nameof(url));
 
@@ -954,13 +936,10 @@ namespace BeamPlayerClient.Model
             if (actions.IsSet && actions.Value == null)
                 throw new ArgumentNullException(nameof(actions), "Property is not nullable for class PlayerPlayerOperationResponse.");
 
-            if (transactions.IsSet && transactions.Value == null)
-                throw new ArgumentNullException(nameof(transactions), "Property is not nullable for class PlayerPlayerOperationResponse.");
-
             if (url.IsSet && url.Value == null)
                 throw new ArgumentNullException(nameof(url), "Property is not nullable for class PlayerPlayerOperationResponse.");
 
-            return new PlayerPlayerOperationResponse(status.Value.Value, processing.Value.Value, authProvider.Value.Value, id.Value, createdAt.Value.Value, gameId.Value, userId.Value, chainId.Value.Value, actions.Value, transactions.Value, url.Value, updatedAt.Value);
+            return new PlayerPlayerOperationResponse(status.Value.Value, processing.Value.Value, authProvider.Value.Value, id.Value, createdAt.Value.Value, gameId.Value, userId.Value, chainId.Value.Value, actions.Value, url.Value, updatedAt.Value);
         }
 
         /// <summary>
@@ -999,9 +978,6 @@ namespace BeamPlayerClient.Model
             if (playerPlayerOperationResponse.Actions == null)
                 throw new ArgumentNullException(nameof(playerPlayerOperationResponse.Actions), "Property is required for class PlayerPlayerOperationResponse.");
 
-            if (playerPlayerOperationResponse.Transactions == null)
-                throw new ArgumentNullException(nameof(playerPlayerOperationResponse.Transactions), "Property is required for class PlayerPlayerOperationResponse.");
-
             if (playerPlayerOperationResponse.Url == null)
                 throw new ArgumentNullException(nameof(playerPlayerOperationResponse.Url), "Property is required for class PlayerPlayerOperationResponse.");
 
@@ -1026,8 +1002,6 @@ namespace BeamPlayerClient.Model
 
             writer.WritePropertyName("actions");
             JsonSerializer.Serialize(writer, playerPlayerOperationResponse.Actions, jsonSerializerOptions);
-            writer.WritePropertyName("transactions");
-            JsonSerializer.Serialize(writer, playerPlayerOperationResponse.Transactions, jsonSerializerOptions);
             writer.WriteString("url", playerPlayerOperationResponse.Url);
 
             if (playerPlayerOperationResponse.UpdatedAt != null)

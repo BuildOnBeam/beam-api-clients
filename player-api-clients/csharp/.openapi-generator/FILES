@@ -60,7 +60,7 @@ src/BeamPlayerClient/Model/PlayerCommonStatsResponse.cs
 src/BeamPlayerClient/Model/PlayerCommonStatsResponseCount.cs
 src/BeamPlayerClient/Model/PlayerCommonUserActivityRequestInput.cs
 src/BeamPlayerClient/Model/PlayerConfirmOperationRequest.cs
-src/BeamPlayerClient/Model/PlayerConfirmOperationRequestTransactionsInner.cs
+src/BeamPlayerClient/Model/PlayerConfirmOperationRequestActionsInner.cs
 src/BeamPlayerClient/Model/PlayerConvertTokenRequestInput.cs
 src/BeamPlayerClient/Model/PlayerCreateAssetOfferRequestInput.cs
 src/BeamPlayerClient/Model/PlayerCreateConnectionRequestInput.cs
@@ -100,6 +100,10 @@ src/BeamPlayerClient/Model/PlayerGetChainCurrenciesResponse.cs
 src/BeamPlayerClient/Model/PlayerGetChainCurrenciesResponseDataInner.cs
 src/BeamPlayerClient/Model/PlayerGetConnectionRequestResponse.cs
 src/BeamPlayerClient/Model/PlayerGetListedAssetsBodyInput.cs
+src/BeamPlayerClient/Model/PlayerGetOnRampQuoteResponse.cs
+src/BeamPlayerClient/Model/PlayerGetOnRampQuoteResponseQuote.cs
+src/BeamPlayerClient/Model/PlayerGetOnRampQuoteResponseQuoteInput.cs
+src/BeamPlayerClient/Model/PlayerGetOnRampQuoteResponseQuoteOutput.cs
 src/BeamPlayerClient/Model/PlayerGetOwnerAssetsBodyInput.cs
 src/BeamPlayerClient/Model/PlayerGetOwnerAssetsResponse.cs
 src/BeamPlayerClient/Model/PlayerGetOwnersResponse.cs
@@ -127,7 +131,6 @@ src/BeamPlayerClient/Model/PlayerOperationAction.cs
 src/BeamPlayerClient/Model/PlayerOperationActionSignature.cs
 src/BeamPlayerClient/Model/PlayerOperationActionTransaction.cs
 src/BeamPlayerClient/Model/PlayerPlayerOperationResponse.cs
-src/BeamPlayerClient/Model/PlayerPlayerOperationResponseTransactionsInner.cs
 src/BeamPlayerClient/Model/PlayerReadContractRequest.cs
 src/BeamPlayerClient/Model/PlayerReadContractResonse.cs
 src/BeamPlayerClient/Model/PlayerRefreshContractRequestBody.cs

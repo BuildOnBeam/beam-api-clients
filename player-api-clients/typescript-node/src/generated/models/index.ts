@@ -36,6 +36,7 @@ export * from './GetAttributesResponse';
 export * from './GetChainCurrenciesResponse';
 export * from './GetConnectionRequestResponse';
 export * from './GetListedAssetsBodyInput';
+export * from './GetOnRampQuoteResponse';
 export * from './GetOwnerAssetsBodyInput';
 export * from './GetOwnerAssetsResponse';
 export * from './GetOwnersResponse';

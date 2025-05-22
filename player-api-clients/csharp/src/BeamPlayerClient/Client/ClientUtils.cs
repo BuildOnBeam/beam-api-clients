@@ -243,10 +243,6 @@ namespace BeamPlayerClient.Client
                 return PlayerPlayerOperationResponse.ProcessingEnumToJsonValue(playerPlayerOperationResponseProcessingEnum);
             if (obj is PlayerPlayerOperationResponse.AuthProviderEnum playerPlayerOperationResponseAuthProviderEnum)
                 return PlayerPlayerOperationResponse.AuthProviderEnumToJsonValue(playerPlayerOperationResponseAuthProviderEnum);
-            if (obj is PlayerPlayerOperationResponseTransactionsInner.StatusEnum playerPlayerOperationResponseTransactionsInnerStatusEnum)
-                return PlayerPlayerOperationResponseTransactionsInner.StatusEnumToJsonValue(playerPlayerOperationResponseTransactionsInnerStatusEnum);
-            if (obj is PlayerPlayerOperationResponseTransactionsInner.TypeEnum playerPlayerOperationResponseTransactionsInnerTypeEnum)
-                return PlayerPlayerOperationResponseTransactionsInner.TypeEnumToJsonValue(playerPlayerOperationResponseTransactionsInnerTypeEnum);
             if (obj is PlayerRevokeSessionRequestInput.OperationProcessingEnum playerRevokeSessionRequestInputOperationProcessingEnum)
                 return PlayerRevokeSessionRequestInput.OperationProcessingEnumToJsonValue(playerRevokeSessionRequestInputOperationProcessingEnum);
             if (obj is PlayerRevokeSessionRequestInput.AuthProviderEnum playerRevokeSessionRequestInputAuthProviderEnum)
