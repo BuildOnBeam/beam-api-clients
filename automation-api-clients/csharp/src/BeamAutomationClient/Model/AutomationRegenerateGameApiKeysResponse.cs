@@ -45,8 +45,9 @@ namespace BeamAutomationClient.Model
         /// <param name="backgroundImageUrl">backgroundImageUrl</param>
         /// <param name="androidCallbackDeepLink">androidCallbackDeepLink</param>
         /// <param name="connectionsWebhookUrl">connectionsWebhookUrl</param>
+        /// <param name="eventTrackingUrl">eventTrackingUrl</param>
         [JsonConstructor]
-        public AutomationRegenerateGameApiKeysResponse(List<AutomationRegenerateGameApiKeysResponse.PegiContentEnum> pegiContent, string id, DateTime createdAt, DateTime updatedAt, string name, List<int> chainIds, List<AutomationRegenerateGameApiKeysResponseApiKeysInner> apiKeys, PegiRatingEnum? pegiRating = default, string description = default, string coverImageUrl = default, string logoImageUrl = default, string backgroundImageUrl = default, string androidCallbackDeepLink = default, string connectionsWebhookUrl = default)
+        public AutomationRegenerateGameApiKeysResponse(List<AutomationRegenerateGameApiKeysResponse.PegiContentEnum> pegiContent, string id, DateTime createdAt, DateTime updatedAt, string name, List<int> chainIds, List<AutomationRegenerateGameApiKeysResponseApiKeysInner> apiKeys, PegiRatingEnum? pegiRating = default, string description = default, string coverImageUrl = default, string logoImageUrl = default, string backgroundImageUrl = default, string androidCallbackDeepLink = default, string connectionsWebhookUrl = default, string eventTrackingUrl = default)
         {
             PegiContent = pegiContent;
             Id = id;
@@ -62,6 +63,7 @@ namespace BeamAutomationClient.Model
             BackgroundImageUrl = backgroundImageUrl;
             AndroidCallbackDeepLink = androidCallbackDeepLink;
             ConnectionsWebhookUrl = connectionsWebhookUrl;
+            EventTrackingUrl = eventTrackingUrl;
             OnCreated();
         }
 
@@ -687,6 +689,12 @@ namespace BeamAutomationClient.Model
         public string ConnectionsWebhookUrl { get; set; }
 
         /// <summary>
+        /// Gets or Sets EventTrackingUrl
+        /// </summary>
+        [JsonPropertyName("eventTrackingUrl")]
+        public string EventTrackingUrl { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -708,6 +716,7 @@ namespace BeamAutomationClient.Model
             sb.Append("  BackgroundImageUrl: ").Append(BackgroundImageUrl).Append("\n");
             sb.Append("  AndroidCallbackDeepLink: ").Append(AndroidCallbackDeepLink).Append("\n");
             sb.Append("  ConnectionsWebhookUrl: ").Append(ConnectionsWebhookUrl).Append("\n");
+            sb.Append("  EventTrackingUrl: ").Append(EventTrackingUrl).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -769,6 +778,7 @@ namespace BeamAutomationClient.Model
             Option<string> backgroundImageUrl = default;
             Option<string> androidCallbackDeepLink = default;
             Option<string> connectionsWebhookUrl = default;
+            Option<string> eventTrackingUrl = default;
 
             while (utf8JsonReader.Read())
             {
@@ -834,6 +844,9 @@ namespace BeamAutomationClient.Model
                         case "connectionsWebhookUrl":
                             connectionsWebhookUrl = new Option<string>(utf8JsonReader.GetString());
                             break;
+                        case "eventTrackingUrl":
+                            eventTrackingUrl = new Option<string>(utf8JsonReader.GetString());
+                            break;
                         default:
                             break;
                     }
@@ -882,6 +895,9 @@ namespace BeamAutomationClient.Model
             if (!connectionsWebhookUrl.IsSet)
                 throw new ArgumentException("Property is required for class AutomationRegenerateGameApiKeysResponse.", nameof(connectionsWebhookUrl));
 
+            if (!eventTrackingUrl.IsSet)
+                throw new ArgumentException("Property is required for class AutomationRegenerateGameApiKeysResponse.", nameof(eventTrackingUrl));
+
             if (pegiContent.IsSet && pegiContent.Value == null)
                 throw new ArgumentNullException(nameof(pegiContent), "Property is not nullable for class AutomationRegenerateGameApiKeysResponse.");
 
@@ -903,7 +919,7 @@ namespace BeamAutomationClient.Model
             if (apiKeys.IsSet && apiKeys.Value == null)
                 throw new ArgumentNullException(nameof(apiKeys), "Property is not nullable for class AutomationRegenerateGameApiKeysResponse.");
 
-            return new AutomationRegenerateGameApiKeysResponse(pegiContent.Value, id.Value, createdAt.Value.Value, updatedAt.Value.Value, name.Value, chainIds.Value, apiKeys.Value, pegiRating.Value, description.Value, coverImageUrl.Value, logoImageUrl.Value, backgroundImageUrl.Value, androidCallbackDeepLink.Value, connectionsWebhookUrl.Value);
+            return new AutomationRegenerateGameApiKeysResponse(pegiContent.Value, id.Value, createdAt.Value.Value, updatedAt.Value.Value, name.Value, chainIds.Value, apiKeys.Value, pegiRating.Value, description.Value, coverImageUrl.Value, logoImageUrl.Value, backgroundImageUrl.Value, androidCallbackDeepLink.Value, connectionsWebhookUrl.Value, eventTrackingUrl.Value);
         }
 
         /// <summary>
@@ -1017,6 +1033,15 @@ namespace BeamAutomationClient.Model
             else
             {
                 writer.WriteNull("connectionsWebhookUrl");
+            }
+
+            if (automationRegenerateGameApiKeysResponse.EventTrackingUrl != null)
+            {
+                writer.WriteString("eventTrackingUrl", automationRegenerateGameApiKeysResponse.EventTrackingUrl);
+            }
+            else
+            {
+                writer.WriteNull("eventTrackingUrl");
             }
         }
     }

@@ -4795,6 +4795,85 @@
               "title": "PlayerOperationAction"
             }
           },
+          "transactions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "Pending",
+                    "Signed",
+                    "Rejected",
+                    "Executed",
+                    "Error"
+                  ]
+                },
+                "id": {
+                  "type": "string",
+                  "format": "cuid"
+                },
+                "openfortId": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "sponsored": {
+                  "type": "boolean"
+                },
+                "actionId": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "hash": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "OpenfortTransaction",
+                    "OpenfortReservoirOrder",
+                    "OpenfortRevokeSession"
+                  ],
+                  "nullable": true
+                },
+                "externalId": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "signature": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "transactionHash": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "operationId": {
+                  "type": "string",
+                  "format": "cuid",
+                  "nullable": true
+                },
+                "data": {
+                  "nullable": true
+                }
+              },
+              "required": [
+                "status",
+                "id",
+                "openfortId",
+                "sponsored",
+                "actionId",
+                "type",
+                "externalId",
+                "signature",
+                "transactionHash",
+                "operationId"
+              ]
+            },
+            "deprecated": true
+          },
           "url": {
             "type": "string",
             "format": "uri"
@@ -4811,6 +4890,7 @@
           "userId",
           "chainId",
           "actions",
+          "transactions",
           "url"
         ]
       },
@@ -6770,6 +6850,25 @@
               "Executed",
               "Error"
             ]
+          },
+          "transactions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "signature": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "signature"
+              ]
+            },
+            "nullable": true
           },
           "actions": {
             "type": "array",

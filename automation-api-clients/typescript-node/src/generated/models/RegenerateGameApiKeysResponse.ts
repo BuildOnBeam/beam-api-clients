@@ -24,6 +24,7 @@ export type RegenerateGameApiKeysResponse = {
   backgroundImageUrl: string | null;
   androidCallbackDeepLink: string | null;
   connectionsWebhookUrl: string | null;
+  eventTrackingUrl: string | null;
   chainIds: Array<number>;
   apiKeys: Array<{
     type: 'Regenerate' | 'Publishable' | 'Secret';

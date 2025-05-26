@@ -47,9 +47,10 @@ namespace BeamAutomationClient.Model
         /// <param name="backgroundImageUrl">backgroundImageUrl</param>
         /// <param name="androidCallbackDeepLink">androidCallbackDeepLink</param>
         /// <param name="connectionsWebhookUrl">connectionsWebhookUrl</param>
+        /// <param name="eventTrackingUrl">eventTrackingUrl</param>
         /// <param name="depositor">depositor</param>
         [JsonConstructor]
-        public AutomationGetGameResponse(List<AutomationGetGameResponse.PegiContentEnum> pegiContent, string id, DateTime createdAt, DateTime updatedAt, string name, List<int> chainIds, List<AutomationGetGameResponseDevelopersInner> developers, List<AutomationGetGameResponseContractsInner> contracts, List<AutomationGetGameResponsePoliciesInner> policies, PegiRatingEnum? pegiRating = default, string description = default, string coverImageUrl = default, string logoImageUrl = default, string backgroundImageUrl = default, string androidCallbackDeepLink = default, string connectionsWebhookUrl = default, Option<AutomationGetGameResponseDepositor> depositor = default)
+        public AutomationGetGameResponse(List<AutomationGetGameResponse.PegiContentEnum> pegiContent, string id, DateTime createdAt, DateTime updatedAt, string name, List<int> chainIds, List<AutomationGetGameResponseDevelopersInner> developers, List<AutomationGetGameResponseContractsInner> contracts, List<AutomationGetGameResponsePoliciesInner> policies, PegiRatingEnum? pegiRating = default, string description = default, string coverImageUrl = default, string logoImageUrl = default, string backgroundImageUrl = default, string androidCallbackDeepLink = default, string connectionsWebhookUrl = default, string eventTrackingUrl = default, Option<AutomationGetGameResponseDepositor> depositor = default)
         {
             PegiContent = pegiContent;
             Id = id;
@@ -67,6 +68,7 @@ namespace BeamAutomationClient.Model
             BackgroundImageUrl = backgroundImageUrl;
             AndroidCallbackDeepLink = androidCallbackDeepLink;
             ConnectionsWebhookUrl = connectionsWebhookUrl;
+            EventTrackingUrl = eventTrackingUrl;
             DepositorOption = depositor;
             OnCreated();
         }
@@ -705,6 +707,12 @@ namespace BeamAutomationClient.Model
         public string ConnectionsWebhookUrl { get; set; }
 
         /// <summary>
+        /// Gets or Sets EventTrackingUrl
+        /// </summary>
+        [JsonPropertyName("eventTrackingUrl")]
+        public string EventTrackingUrl { get; set; }
+
+        /// <summary>
         /// Used to track the state of Depositor
         /// </summary>
         [JsonIgnore]
@@ -741,6 +749,7 @@ namespace BeamAutomationClient.Model
             sb.Append("  BackgroundImageUrl: ").Append(BackgroundImageUrl).Append("\n");
             sb.Append("  AndroidCallbackDeepLink: ").Append(AndroidCallbackDeepLink).Append("\n");
             sb.Append("  ConnectionsWebhookUrl: ").Append(ConnectionsWebhookUrl).Append("\n");
+            sb.Append("  EventTrackingUrl: ").Append(EventTrackingUrl).Append("\n");
             sb.Append("  Depositor: ").Append(Depositor).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -805,6 +814,7 @@ namespace BeamAutomationClient.Model
             Option<string> backgroundImageUrl = default;
             Option<string> androidCallbackDeepLink = default;
             Option<string> connectionsWebhookUrl = default;
+            Option<string> eventTrackingUrl = default;
             Option<AutomationGetGameResponseDepositor> depositor = default;
 
             while (utf8JsonReader.Read())
@@ -879,6 +889,9 @@ namespace BeamAutomationClient.Model
                         case "connectionsWebhookUrl":
                             connectionsWebhookUrl = new Option<string>(utf8JsonReader.GetString());
                             break;
+                        case "eventTrackingUrl":
+                            eventTrackingUrl = new Option<string>(utf8JsonReader.GetString());
+                            break;
                         case "depositor":
                             if (utf8JsonReader.TokenType != JsonTokenType.Null)
                                 depositor = new Option<AutomationGetGameResponseDepositor>(JsonSerializer.Deserialize<AutomationGetGameResponseDepositor>(ref utf8JsonReader, jsonSerializerOptions));
@@ -937,6 +950,9 @@ namespace BeamAutomationClient.Model
             if (!connectionsWebhookUrl.IsSet)
                 throw new ArgumentException("Property is required for class AutomationGetGameResponse.", nameof(connectionsWebhookUrl));
 
+            if (!eventTrackingUrl.IsSet)
+                throw new ArgumentException("Property is required for class AutomationGetGameResponse.", nameof(eventTrackingUrl));
+
             if (pegiContent.IsSet && pegiContent.Value == null)
                 throw new ArgumentNullException(nameof(pegiContent), "Property is not nullable for class AutomationGetGameResponse.");
 
@@ -964,7 +980,7 @@ namespace BeamAutomationClient.Model
             if (policies.IsSet && policies.Value == null)
                 throw new ArgumentNullException(nameof(policies), "Property is not nullable for class AutomationGetGameResponse.");
 
-            return new AutomationGetGameResponse(pegiContent.Value, id.Value, createdAt.Value.Value, updatedAt.Value.Value, name.Value, chainIds.Value, developers.Value, contracts.Value, policies.Value, pegiRating.Value, description.Value, coverImageUrl.Value, logoImageUrl.Value, backgroundImageUrl.Value, androidCallbackDeepLink.Value, connectionsWebhookUrl.Value, depositor);
+            return new AutomationGetGameResponse(pegiContent.Value, id.Value, createdAt.Value.Value, updatedAt.Value.Value, name.Value, chainIds.Value, developers.Value, contracts.Value, policies.Value, pegiRating.Value, description.Value, coverImageUrl.Value, logoImageUrl.Value, backgroundImageUrl.Value, androidCallbackDeepLink.Value, connectionsWebhookUrl.Value, eventTrackingUrl.Value, depositor);
         }
 
         /// <summary>
@@ -1088,6 +1104,15 @@ namespace BeamAutomationClient.Model
             else
             {
                 writer.WriteNull("connectionsWebhookUrl");
+            }
+
+            if (automationGetGameResponse.EventTrackingUrl != null)
+            {
+                writer.WriteString("eventTrackingUrl", automationGetGameResponse.EventTrackingUrl);
+            }
+            else
+            {
+                writer.WriteNull("eventTrackingUrl");
             }
 
             if (automationGetGameResponse.DepositorOption.IsSet)
