@@ -63,6 +63,7 @@ export type { RefreshTokenRequestBody } from './models/RefreshTokenRequestBody';
 export { RevokeSessionRequestInput } from './models/RevokeSessionRequestInput';
 export { SellAssetRequestInput } from './models/SellAssetRequestInput';
 export { TransferAssetRequestInput } from './models/TransferAssetRequestInput';
+export { TransferMultipleNativeTokensRequestInput } from './models/TransferMultipleNativeTokensRequestInput';
 export { TransferNativeTokenRequestInput } from './models/TransferNativeTokenRequestInput';
 export { TransferTokenRequestInput } from './models/TransferTokenRequestInput';
 export { UnwrappingTokenInput } from './models/UnwrappingTokenInput';

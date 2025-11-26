@@ -24,17 +24,17 @@ using BeamPlayerClient.Client;
 namespace BeamPlayerClient.Model
 {
     /// <summary>
-    /// PlayerConfirmOperationRequestTransactionsInner
+    /// PlayerConfirmOperationRequestActionsInner
     /// </summary>
-    public partial class PlayerConfirmOperationRequestTransactionsInner : IValidatableObject
+    public partial class PlayerConfirmOperationRequestActionsInner : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PlayerConfirmOperationRequestTransactionsInner" /> class.
+        /// Initializes a new instance of the <see cref="PlayerConfirmOperationRequestActionsInner" /> class.
         /// </summary>
         /// <param name="id">id</param>
         /// <param name="signature">signature</param>
         [JsonConstructor]
-        public PlayerConfirmOperationRequestTransactionsInner(string id, string signature)
+        public PlayerConfirmOperationRequestActionsInner(string id, string signature)
         {
             Id = id;
             Signature = signature;
@@ -62,7 +62,7 @@ namespace BeamPlayerClient.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class PlayerConfirmOperationRequestTransactionsInner {\n");
+            sb.Append("class PlayerConfirmOperationRequestActionsInner {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Signature: ").Append(Signature).Append("\n");
             sb.Append("}\n");
@@ -81,19 +81,19 @@ namespace BeamPlayerClient.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="PlayerConfirmOperationRequestTransactionsInner" />
+    /// A Json converter for type <see cref="PlayerConfirmOperationRequestActionsInner" />
     /// </summary>
-    public class PlayerConfirmOperationRequestTransactionsInnerJsonConverter : JsonConverter<PlayerConfirmOperationRequestTransactionsInner>
+    public class PlayerConfirmOperationRequestActionsInnerJsonConverter : JsonConverter<PlayerConfirmOperationRequestActionsInner>
     {
         /// <summary>
-        /// Deserializes json to <see cref="PlayerConfirmOperationRequestTransactionsInner" />
+        /// Deserializes json to <see cref="PlayerConfirmOperationRequestActionsInner" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override PlayerConfirmOperationRequestTransactionsInner Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override PlayerConfirmOperationRequestActionsInner Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -133,53 +133,53 @@ namespace BeamPlayerClient.Model
             }
 
             if (!id.IsSet)
-                throw new ArgumentException("Property is required for class PlayerConfirmOperationRequestTransactionsInner.", nameof(id));
+                throw new ArgumentException("Property is required for class PlayerConfirmOperationRequestActionsInner.", nameof(id));
 
             if (!signature.IsSet)
-                throw new ArgumentException("Property is required for class PlayerConfirmOperationRequestTransactionsInner.", nameof(signature));
+                throw new ArgumentException("Property is required for class PlayerConfirmOperationRequestActionsInner.", nameof(signature));
 
             if (id.IsSet && id.Value == null)
-                throw new ArgumentNullException(nameof(id), "Property is not nullable for class PlayerConfirmOperationRequestTransactionsInner.");
+                throw new ArgumentNullException(nameof(id), "Property is not nullable for class PlayerConfirmOperationRequestActionsInner.");
 
             if (signature.IsSet && signature.Value == null)
-                throw new ArgumentNullException(nameof(signature), "Property is not nullable for class PlayerConfirmOperationRequestTransactionsInner.");
+                throw new ArgumentNullException(nameof(signature), "Property is not nullable for class PlayerConfirmOperationRequestActionsInner.");
 
-            return new PlayerConfirmOperationRequestTransactionsInner(id.Value, signature.Value);
+            return new PlayerConfirmOperationRequestActionsInner(id.Value, signature.Value);
         }
 
         /// <summary>
-        /// Serializes a <see cref="PlayerConfirmOperationRequestTransactionsInner" />
+        /// Serializes a <see cref="PlayerConfirmOperationRequestActionsInner" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="playerConfirmOperationRequestTransactionsInner"></param>
+        /// <param name="playerConfirmOperationRequestActionsInner"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, PlayerConfirmOperationRequestTransactionsInner playerConfirmOperationRequestTransactionsInner, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, PlayerConfirmOperationRequestActionsInner playerConfirmOperationRequestActionsInner, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, playerConfirmOperationRequestTransactionsInner, jsonSerializerOptions);
+            WriteProperties(writer, playerConfirmOperationRequestActionsInner, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="PlayerConfirmOperationRequestTransactionsInner" />
+        /// Serializes the properties of <see cref="PlayerConfirmOperationRequestActionsInner" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="playerConfirmOperationRequestTransactionsInner"></param>
+        /// <param name="playerConfirmOperationRequestActionsInner"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, PlayerConfirmOperationRequestTransactionsInner playerConfirmOperationRequestTransactionsInner, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, PlayerConfirmOperationRequestActionsInner playerConfirmOperationRequestActionsInner, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (playerConfirmOperationRequestTransactionsInner.Id == null)
-                throw new ArgumentNullException(nameof(playerConfirmOperationRequestTransactionsInner.Id), "Property is required for class PlayerConfirmOperationRequestTransactionsInner.");
+            if (playerConfirmOperationRequestActionsInner.Id == null)
+                throw new ArgumentNullException(nameof(playerConfirmOperationRequestActionsInner.Id), "Property is required for class PlayerConfirmOperationRequestActionsInner.");
 
-            if (playerConfirmOperationRequestTransactionsInner.Signature == null)
-                throw new ArgumentNullException(nameof(playerConfirmOperationRequestTransactionsInner.Signature), "Property is required for class PlayerConfirmOperationRequestTransactionsInner.");
+            if (playerConfirmOperationRequestActionsInner.Signature == null)
+                throw new ArgumentNullException(nameof(playerConfirmOperationRequestActionsInner.Signature), "Property is required for class PlayerConfirmOperationRequestActionsInner.");
 
-            writer.WriteString("id", playerConfirmOperationRequestTransactionsInner.Id);
+            writer.WriteString("id", playerConfirmOperationRequestActionsInner.Id);
 
-            writer.WriteString("signature", playerConfirmOperationRequestTransactionsInner.Signature);
+            writer.WriteString("signature", playerConfirmOperationRequestActionsInner.Signature);
         }
     }
 }

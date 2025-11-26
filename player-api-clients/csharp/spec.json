@@ -583,6 +583,72 @@
         ]
       }
     },
+    "/v1/player/assets/users/{entityId}/transfer-multiple-native": {
+      "post": {
+        "operationId": "TransferMultipleNativeTokens",
+        "parameters": [
+          {
+            "name": "entityId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlayerTransferMultipleNativeTokensRequestInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerPlayerOperationResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlayerBeamErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "beam-api-key": []
+          }
+        ],
+        "summary": "Transfer the native token to multiple recipients",
+        "tags": [
+          "Assets"
+        ]
+      }
+    },
     "/v1/player/assets/{assetAddress}/assets": {
       "post": {
         "operationId": "getAssetsForContract",
@@ -4795,88 +4861,15 @@
               "title": "PlayerOperationAction"
             }
           },
-          "transactions": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string",
-                  "enum": [
-                    "Pending",
-                    "Signed",
-                    "Rejected",
-                    "Executed",
-                    "Error"
-                  ]
-                },
-                "id": {
-                  "type": "string",
-                  "format": "cuid"
-                },
-                "openfortId": {
-                  "type": "string",
-                  "nullable": true
-                },
-                "sponsored": {
-                  "type": "boolean"
-                },
-                "actionId": {
-                  "type": "string",
-                  "nullable": true
-                },
-                "hash": {
-                  "type": "string",
-                  "nullable": true
-                },
-                "type": {
-                  "type": "string",
-                  "enum": [
-                    "OpenfortTransaction",
-                    "OpenfortReservoirOrder",
-                    "OpenfortRevokeSession"
-                  ],
-                  "nullable": true
-                },
-                "externalId": {
-                  "type": "string",
-                  "nullable": true
-                },
-                "signature": {
-                  "type": "string",
-                  "nullable": true
-                },
-                "transactionHash": {
-                  "type": "string",
-                  "nullable": true
-                },
-                "operationId": {
-                  "type": "string",
-                  "format": "cuid",
-                  "nullable": true
-                },
-                "data": {
-                  "nullable": true
-                }
-              },
-              "required": [
-                "status",
-                "id",
-                "openfortId",
-                "sponsored",
-                "actionId",
-                "type",
-                "externalId",
-                "signature",
-                "transactionHash",
-                "operationId"
-              ]
-            },
-            "deprecated": true
-          },
           "url": {
             "type": "string",
             "format": "uri"
+          },
+          "transactions": {
+            "type": "array",
+            "items": {},
+            "deprecated": true,
+            "description": "Legacy transactions property. Please deprecate the usage and move to the OperationResponse.Actions[] array instead."
           }
         },
         "required": [
@@ -4890,8 +4883,8 @@
           "userId",
           "chainId",
           "actions",
-          "transactions",
-          "url"
+          "url",
+          "transactions"
         ]
       },
       "PlayerTransferTokenRequestInput": {
@@ -5010,6 +5003,74 @@
         },
         "required": [
           "amountToTransfer"
+        ]
+      },
+      "PlayerTransferMultipleNativeTokensRequestInput": {
+        "type": "object",
+        "properties": {
+          "transfers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "receiverEntityId": {
+                  "type": "string"
+                },
+                "receiverWalletAddress": {
+                  "type": "string"
+                },
+                "amountToTransfer": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "amountToTransfer"
+              ]
+            }
+          },
+          "optimistic": {
+            "default": false,
+            "type": "boolean"
+          },
+          "sponsor": {
+            "default": true,
+            "type": "boolean"
+          },
+          "policyId": {
+            "default": null,
+            "type": "string",
+            "format": "cuid",
+            "nullable": true
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "integer",
+            "format": "int64"
+          },
+          "operationProcessing": {
+            "default": "Execute",
+            "type": "string",
+            "enum": [
+              "SignOnly",
+              "Execute"
+            ],
+            "description": "Operation processing type. If Execute is used, Operation will be executed automatically right after User signs it. If you prefer to have more control, use SignOnly then Process it using ProcessOperation."
+          },
+          "authProvider": {
+            "default": "Any",
+            "type": "string",
+            "enum": [
+              "Any",
+              "Google",
+              "Discord",
+              "Apple"
+            ],
+            "nullable": true,
+            "description": "Auth Provider for the user to use. If it's Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI."
+          }
+        },
+        "required": [
+          "transfers"
         ]
       },
       "PlayerGetAssetsForContractBodyInput": {
@@ -6851,25 +6912,6 @@
               "Error"
             ]
           },
-          "transactions": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "signature": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "id",
-                "signature"
-              ]
-            },
-            "nullable": true
-          },
           "actions": {
             "type": "array",
             "items": {
@@ -7455,6 +7497,11 @@
             ],
             "nullable": true,
             "description": "Auth Provider for the user to use. If it's Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI."
+          },
+          "chainId": {
+            "default": 13337,
+            "type": "integer",
+            "format": "int64"
           }
         }
       },
@@ -7703,6 +7750,10 @@
                     "id": {
                       "type": "string",
                       "nullable": true
+                    },
+                    "quantity": {
+                      "type": "number",
+                      "nullable": true
                     }
                   }
                 },
@@ -7897,7 +7948,7 @@
               "output": {
                 "type": "object",
                 "properties": {
-                  "tokenAdress": {
+                  "tokenSymbol": {
                     "type": "string"
                   },
                   "tokenAmount": {
@@ -7905,7 +7956,7 @@
                   }
                 },
                 "required": [
-                  "tokenAdress",
+                  "tokenSymbol",
                   "tokenAmount"
                 ]
               }

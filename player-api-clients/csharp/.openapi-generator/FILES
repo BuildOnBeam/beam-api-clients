@@ -60,7 +60,7 @@ src/BeamPlayerClient/Model/PlayerCommonStatsResponse.cs
 src/BeamPlayerClient/Model/PlayerCommonStatsResponseCount.cs
 src/BeamPlayerClient/Model/PlayerCommonUserActivityRequestInput.cs
 src/BeamPlayerClient/Model/PlayerConfirmOperationRequest.cs
-src/BeamPlayerClient/Model/PlayerConfirmOperationRequestTransactionsInner.cs
+src/BeamPlayerClient/Model/PlayerConfirmOperationRequestActionsInner.cs
 src/BeamPlayerClient/Model/PlayerConvertTokenRequestInput.cs
 src/BeamPlayerClient/Model/PlayerCreateAssetOfferRequestInput.cs
 src/BeamPlayerClient/Model/PlayerCreateConnectionRequestInput.cs
@@ -131,7 +131,6 @@ src/BeamPlayerClient/Model/PlayerOperationAction.cs
 src/BeamPlayerClient/Model/PlayerOperationActionSignature.cs
 src/BeamPlayerClient/Model/PlayerOperationActionTransaction.cs
 src/BeamPlayerClient/Model/PlayerPlayerOperationResponse.cs
-src/BeamPlayerClient/Model/PlayerPlayerOperationResponseTransactionsInner.cs
 src/BeamPlayerClient/Model/PlayerReadContractRequest.cs
 src/BeamPlayerClient/Model/PlayerReadContractResonse.cs
 src/BeamPlayerClient/Model/PlayerRefreshContractRequestBody.cs
@@ -140,6 +139,8 @@ src/BeamPlayerClient/Model/PlayerRevokeSessionRequestInput.cs
 src/BeamPlayerClient/Model/PlayerSellAssetRequestInput.cs
 src/BeamPlayerClient/Model/PlayerTransferAssetRequestInput.cs
 src/BeamPlayerClient/Model/PlayerTransferAssetRequestInputAssetsInner.cs
+src/BeamPlayerClient/Model/PlayerTransferMultipleNativeTokensRequestInput.cs
+src/BeamPlayerClient/Model/PlayerTransferMultipleNativeTokensRequestInputTransfersInner.cs
 src/BeamPlayerClient/Model/PlayerTransferNativeTokenRequestInput.cs
 src/BeamPlayerClient/Model/PlayerTransferTokenRequestInput.cs
 src/BeamPlayerClient/Model/PlayerUnwrappingTokenInput.cs

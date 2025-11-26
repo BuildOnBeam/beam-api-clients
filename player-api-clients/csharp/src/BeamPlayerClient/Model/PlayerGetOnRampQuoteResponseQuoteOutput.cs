@@ -31,12 +31,12 @@ namespace BeamPlayerClient.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="PlayerGetOnRampQuoteResponseQuoteOutput" /> class.
         /// </summary>
-        /// <param name="tokenAdress">tokenAdress</param>
+        /// <param name="tokenSymbol">tokenSymbol</param>
         /// <param name="tokenAmount">tokenAmount</param>
         [JsonConstructor]
-        public PlayerGetOnRampQuoteResponseQuoteOutput(string tokenAdress, string tokenAmount)
+        public PlayerGetOnRampQuoteResponseQuoteOutput(string tokenSymbol, string tokenAmount)
         {
-            TokenAdress = tokenAdress;
+            TokenSymbol = tokenSymbol;
             TokenAmount = tokenAmount;
             OnCreated();
         }
@@ -44,10 +44,10 @@ namespace BeamPlayerClient.Model
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets TokenAdress
+        /// Gets or Sets TokenSymbol
         /// </summary>
-        [JsonPropertyName("tokenAdress")]
-        public string TokenAdress { get; set; }
+        [JsonPropertyName("tokenSymbol")]
+        public string TokenSymbol { get; set; }
 
         /// <summary>
         /// Gets or Sets TokenAmount
@@ -63,7 +63,7 @@ namespace BeamPlayerClient.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class PlayerGetOnRampQuoteResponseQuoteOutput {\n");
-            sb.Append("  TokenAdress: ").Append(TokenAdress).Append("\n");
+            sb.Append("  TokenSymbol: ").Append(TokenSymbol).Append("\n");
             sb.Append("  TokenAmount: ").Append(TokenAmount).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -102,7 +102,7 @@ namespace BeamPlayerClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<string> tokenAdress = default;
+            Option<string> tokenSymbol = default;
             Option<string> tokenAmount = default;
 
             while (utf8JsonReader.Read())
@@ -120,8 +120,8 @@ namespace BeamPlayerClient.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "tokenAdress":
-                            tokenAdress = new Option<string>(utf8JsonReader.GetString());
+                        case "tokenSymbol":
+                            tokenSymbol = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "tokenAmount":
                             tokenAmount = new Option<string>(utf8JsonReader.GetString());
@@ -132,19 +132,19 @@ namespace BeamPlayerClient.Model
                 }
             }
 
-            if (!tokenAdress.IsSet)
-                throw new ArgumentException("Property is required for class PlayerGetOnRampQuoteResponseQuoteOutput.", nameof(tokenAdress));
+            if (!tokenSymbol.IsSet)
+                throw new ArgumentException("Property is required for class PlayerGetOnRampQuoteResponseQuoteOutput.", nameof(tokenSymbol));
 
             if (!tokenAmount.IsSet)
                 throw new ArgumentException("Property is required for class PlayerGetOnRampQuoteResponseQuoteOutput.", nameof(tokenAmount));
 
-            if (tokenAdress.IsSet && tokenAdress.Value == null)
-                throw new ArgumentNullException(nameof(tokenAdress), "Property is not nullable for class PlayerGetOnRampQuoteResponseQuoteOutput.");
+            if (tokenSymbol.IsSet && tokenSymbol.Value == null)
+                throw new ArgumentNullException(nameof(tokenSymbol), "Property is not nullable for class PlayerGetOnRampQuoteResponseQuoteOutput.");
 
             if (tokenAmount.IsSet && tokenAmount.Value == null)
                 throw new ArgumentNullException(nameof(tokenAmount), "Property is not nullable for class PlayerGetOnRampQuoteResponseQuoteOutput.");
 
-            return new PlayerGetOnRampQuoteResponseQuoteOutput(tokenAdress.Value, tokenAmount.Value);
+            return new PlayerGetOnRampQuoteResponseQuoteOutput(tokenSymbol.Value, tokenAmount.Value);
         }
 
         /// <summary>
@@ -171,13 +171,13 @@ namespace BeamPlayerClient.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, PlayerGetOnRampQuoteResponseQuoteOutput playerGetOnRampQuoteResponseQuoteOutput, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (playerGetOnRampQuoteResponseQuoteOutput.TokenAdress == null)
-                throw new ArgumentNullException(nameof(playerGetOnRampQuoteResponseQuoteOutput.TokenAdress), "Property is required for class PlayerGetOnRampQuoteResponseQuoteOutput.");
+            if (playerGetOnRampQuoteResponseQuoteOutput.TokenSymbol == null)
+                throw new ArgumentNullException(nameof(playerGetOnRampQuoteResponseQuoteOutput.TokenSymbol), "Property is required for class PlayerGetOnRampQuoteResponseQuoteOutput.");
 
             if (playerGetOnRampQuoteResponseQuoteOutput.TokenAmount == null)
                 throw new ArgumentNullException(nameof(playerGetOnRampQuoteResponseQuoteOutput.TokenAmount), "Property is required for class PlayerGetOnRampQuoteResponseQuoteOutput.");
 
-            writer.WriteString("tokenAdress", playerGetOnRampQuoteResponseQuoteOutput.TokenAdress);
+            writer.WriteString("tokenSymbol", playerGetOnRampQuoteResponseQuoteOutput.TokenSymbol);
 
             writer.WriteString("tokenAmount", playerGetOnRampQuoteResponseQuoteOutput.TokenAmount);
         }

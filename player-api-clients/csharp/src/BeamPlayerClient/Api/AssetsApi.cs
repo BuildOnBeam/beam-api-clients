@@ -271,6 +271,31 @@ namespace BeamPlayerClient.Api
         Task<ITransferAssetApiResponse> TransferAssetOrDefaultAsync(string entityId, PlayerTransferAssetRequestInput playerTransferAssetRequestInput, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Transfer the native token to multiple recipients
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="playerTransferMultipleNativeTokensRequestInput"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="ITransferMultipleNativeTokensApiResponse"/>&gt;</returns>
+        Task<ITransferMultipleNativeTokensApiResponse> TransferMultipleNativeTokensAsync(string entityId, PlayerTransferMultipleNativeTokensRequestInput playerTransferMultipleNativeTokensRequestInput, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Transfer the native token to multiple recipients
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="entityId"></param>
+        /// <param name="playerTransferMultipleNativeTokensRequestInput"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="ITransferMultipleNativeTokensApiResponse"/>&gt;</returns>
+        Task<ITransferMultipleNativeTokensApiResponse> TransferMultipleNativeTokensOrDefaultAsync(string entityId, PlayerTransferMultipleNativeTokensRequestInput playerTransferMultipleNativeTokensRequestInput, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Transfer the native token
         /// </summary>
         /// <remarks>
@@ -538,6 +563,30 @@ namespace BeamPlayerClient.Api
     }
 
     /// <summary>
+    /// The <see cref="ITransferMultipleNativeTokensApiResponse"/>
+    /// </summary>
+    public interface ITransferMultipleNativeTokensApiResponse : BeamPlayerClient.Client.IApiResponse, ICreated<BeamPlayerClient.Model.PlayerPlayerOperationResponse>, IHttpStatusCode4XX<BeamPlayerClient.Model.PlayerBeamErrorResponse>, IHttpStatusCode5XX<BeamPlayerClient.Model.PlayerBeamErrorResponse>
+    {
+        /// <summary>
+        /// Returns true if the response is 201 Created
+        /// </summary>
+        /// <returns></returns>
+        bool IsCreated { get; }
+
+        /// <summary>
+        /// Returns true if the response is 4XX HttpStatusCode4XX
+        /// </summary>
+        /// <returns></returns>
+        bool IsHttpStatusCode4XX { get; }
+
+        /// <summary>
+        /// Returns true if the response is 5XX HttpStatusCode5XX
+        /// </summary>
+        /// <returns></returns>
+        bool IsHttpStatusCode5XX { get; }
+    }
+
+    /// <summary>
     /// The <see cref="ITransferNativeTokenApiResponse"/>
     /// </summary>
     public interface ITransferNativeTokenApiResponse : BeamPlayerClient.Client.IApiResponse, ICreated<BeamPlayerClient.Model.PlayerPlayerOperationResponse>, IHttpStatusCode4XX<BeamPlayerClient.Model.PlayerBeamErrorResponse>, IHttpStatusCode5XX<BeamPlayerClient.Model.PlayerBeamErrorResponse>
@@ -768,6 +817,26 @@ namespace BeamPlayerClient.Api
         internal void ExecuteOnErrorTransferAsset(Exception exception)
         {
             OnErrorTransferAsset?.Invoke(this, new ExceptionEventArgs(exception));
+        }
+
+        /// <summary>
+        /// The event raised after the server response
+        /// </summary>
+        public event EventHandler<ApiResponseEventArgs> OnTransferMultipleNativeTokens;
+
+        /// <summary>
+        /// The event raised after an error querying the server
+        /// </summary>
+        public event EventHandler<ExceptionEventArgs> OnErrorTransferMultipleNativeTokens;
+
+        internal void ExecuteOnTransferMultipleNativeTokens(PlayerAssetsApi.TransferMultipleNativeTokensApiResponse apiResponse)
+        {
+            OnTransferMultipleNativeTokens?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+        }
+
+        internal void ExecuteOnErrorTransferMultipleNativeTokens(Exception exception)
+        {
+            OnErrorTransferMultipleNativeTokens?.Invoke(this, new ExceptionEventArgs(exception));
         }
 
         /// <summary>
@@ -3782,6 +3851,346 @@ namespace BeamPlayerClient.Api
             /// <param name="requestedAt"></param>
             /// <param name="jsonSerializerOptions"></param>
             public TransferAssetApiResponse(ILogger<TransferAssetApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(global::System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 201 Created
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCreated => 201 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 201 Created
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerPlayerOperationResponse Created()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCreated
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerPlayerOperationResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 201 Created and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCreated([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerPlayerOperationResponse result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Created();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)201);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX HttpStatusCode4XX
+            /// </summary>
+            /// <returns></returns>
+            public bool IsHttpStatusCode4XX
+            {
+                get
+                {
+                    int statusCode = (int)StatusCode;
+                    return 400 >= statusCode && 499 <= statusCode;
+                }
+            }
+
+            /// <summary>
+            /// Deserializes the response if the response is 4XX HttpStatusCode4XX
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse HttpStatusCode4XX()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsHttpStatusCode4XX
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 4XX HttpStatusCode4XX and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryHttpStatusCode4XX([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse result)
+            {
+                result = null;
+
+                try
+                {
+                    result = HttpStatusCode4XX();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)4);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX HttpStatusCode5XX
+            /// </summary>
+            /// <returns></returns>
+            public bool IsHttpStatusCode5XX
+            {
+                get
+                {
+                    int statusCode = (int)StatusCode;
+                    return 500 >= statusCode && 599 <= statusCode;
+                }
+            }
+
+            /// <summary>
+            /// Deserializes the response if the response is 5XX HttpStatusCode5XX
+            /// </summary>
+            /// <returns></returns>
+            public BeamPlayerClient.Model.PlayerBeamErrorResponse HttpStatusCode5XX()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsHttpStatusCode5XX
+                    ? System.Text.Json.JsonSerializer.Deserialize<BeamPlayerClient.Model.PlayerBeamErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 5XX HttpStatusCode5XX and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryHttpStatusCode5XX([NotNullWhen(true)]out BeamPlayerClient.Model.PlayerBeamErrorResponse result)
+            {
+                result = null;
+
+                try
+                {
+                    result = HttpStatusCode5XX();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)5);
+                }
+
+                return result != null;
+            }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
+        }
+
+        partial void FormatTransferMultipleNativeTokens(ref string entityId, PlayerTransferMultipleNativeTokensRequestInput playerTransferMultipleNativeTokensRequestInput);
+
+        /// <summary>
+        /// Validates the request parameters
+        /// </summary>
+        /// <param name="entityId"></param>
+        /// <param name="playerTransferMultipleNativeTokensRequestInput"></param>
+        /// <returns></returns>
+        private void ValidateTransferMultipleNativeTokens(string entityId, PlayerTransferMultipleNativeTokensRequestInput playerTransferMultipleNativeTokensRequestInput)
+        {
+            if (entityId == null)
+                throw new ArgumentNullException(nameof(entityId));
+
+            if (playerTransferMultipleNativeTokensRequestInput == null)
+                throw new ArgumentNullException(nameof(playerTransferMultipleNativeTokensRequestInput));
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="entityId"></param>
+        /// <param name="playerTransferMultipleNativeTokensRequestInput"></param>
+        private void AfterTransferMultipleNativeTokensDefaultImplementation(ITransferMultipleNativeTokensApiResponse apiResponseLocalVar, string entityId, PlayerTransferMultipleNativeTokensRequestInput playerTransferMultipleNativeTokensRequestInput)
+        {
+            bool suppressDefaultLog = false;
+            AfterTransferMultipleNativeTokens(ref suppressDefaultLog, apiResponseLocalVar, entityId, playerTransferMultipleNativeTokensRequestInput);
+            if (!suppressDefaultLog)
+                Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="entityId"></param>
+        /// <param name="playerTransferMultipleNativeTokensRequestInput"></param>
+        partial void AfterTransferMultipleNativeTokens(ref bool suppressDefaultLog, ITransferMultipleNativeTokensApiResponse apiResponseLocalVar, string entityId, PlayerTransferMultipleNativeTokensRequestInput playerTransferMultipleNativeTokensRequestInput);
+
+        /// <summary>
+        /// Logs exceptions that occur while retrieving the server response
+        /// </summary>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="entityId"></param>
+        /// <param name="playerTransferMultipleNativeTokensRequestInput"></param>
+        private void OnErrorTransferMultipleNativeTokensDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string entityId, PlayerTransferMultipleNativeTokensRequestInput playerTransferMultipleNativeTokensRequestInput)
+        {
+            bool suppressDefaultLogLocalVar = false;
+            OnErrorTransferMultipleNativeTokens(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, entityId, playerTransferMultipleNativeTokensRequestInput);
+            if (!suppressDefaultLogLocalVar)
+                Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
+        }
+
+        /// <summary>
+        /// A partial method that gives developers a way to provide customized exception handling
+        /// </summary>
+        /// <param name="suppressDefaultLogLocalVar"></param>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="entityId"></param>
+        /// <param name="playerTransferMultipleNativeTokensRequestInput"></param>
+        partial void OnErrorTransferMultipleNativeTokens(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string entityId, PlayerTransferMultipleNativeTokensRequestInput playerTransferMultipleNativeTokensRequestInput);
+
+        /// <summary>
+        /// Transfer the native token to multiple recipients 
+        /// </summary>
+        /// <param name="entityId"></param>
+        /// <param name="playerTransferMultipleNativeTokensRequestInput"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="ITransferMultipleNativeTokensApiResponse"/>&gt;</returns>
+        public async Task<ITransferMultipleNativeTokensApiResponse> TransferMultipleNativeTokensOrDefaultAsync(string entityId, PlayerTransferMultipleNativeTokensRequestInput playerTransferMultipleNativeTokensRequestInput, System.Threading.CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await TransferMultipleNativeTokensAsync(entityId, playerTransferMultipleNativeTokensRequestInput, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Transfer the native token to multiple recipients 
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="entityId"></param>
+        /// <param name="playerTransferMultipleNativeTokensRequestInput"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="ITransferMultipleNativeTokensApiResponse"/>&gt;</returns>
+        public async Task<ITransferMultipleNativeTokensApiResponse> TransferMultipleNativeTokensAsync(string entityId, PlayerTransferMultipleNativeTokensRequestInput playerTransferMultipleNativeTokensRequestInput, System.Threading.CancellationToken cancellationToken = default)
+        {
+            UriBuilder uriBuilderLocalVar = new UriBuilder();
+
+            try
+            {
+                ValidateTransferMultipleNativeTokens(entityId, playerTransferMultipleNativeTokensRequestInput);
+
+                FormatTransferMultipleNativeTokens(ref entityId, playerTransferMultipleNativeTokensRequestInput);
+
+                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
+                {
+                    uriBuilderLocalVar.Host = HttpClient.BaseAddress.Host;
+                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
+                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
+                    uriBuilderLocalVar.Path = ClientUtils.CONTEXT_PATH + "/v1/player/assets/users/{entityId}/transfer-multiple-native";
+                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BentityId%7D", Uri.EscapeDataString(entityId.ToString()));
+
+                    httpRequestMessageLocalVar.Content = (playerTransferMultipleNativeTokensRequestInput as object) is System.IO.Stream stream
+                        ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(playerTransferMultipleNativeTokensRequestInput, _jsonSerializerOptions));
+
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    PlayerApiKeyToken apiKeyTokenLocalVar1 = (PlayerApiKeyToken) await ApiKeyProvider.GetAsync("x-api-key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
+                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    string[] contentTypes = new string[] {
+                        "application/json"
+                    };
+
+                    string contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
+
+                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
+                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
+
+                    string[] acceptLocalVars = new string[] {
+                        "application/json"
+                    };
+
+                    string acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+
+                    if (acceptLocalVar != null)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+
+                    httpRequestMessageLocalVar.Method = HttpMethod.Post;
+
+                    DateTime requestedAtLocalVar = DateTime.UtcNow;
+
+                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
+                    {
+                        string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+
+                        ILogger<TransferMultipleNativeTokensApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<TransferMultipleNativeTokensApiResponse>();
+
+                        TransferMultipleNativeTokensApiResponse apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/v1/player/assets/users/{entityId}/transfer-multiple-native", requestedAtLocalVar, _jsonSerializerOptions);
+
+                        AfterTransferMultipleNativeTokensDefaultImplementation(apiResponseLocalVar, entityId, playerTransferMultipleNativeTokensRequestInput);
+
+                        Events.ExecuteOnTransferMultipleNativeTokens(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
+
+                        return apiResponseLocalVar;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                OnErrorTransferMultipleNativeTokensDefaultImplementation(e, "/v1/player/assets/users/{entityId}/transfer-multiple-native", uriBuilderLocalVar.Path, entityId, playerTransferMultipleNativeTokensRequestInput);
+                Events.ExecuteOnErrorTransferMultipleNativeTokens(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="TransferMultipleNativeTokensApiResponse"/>
+        /// </summary>
+        public partial class TransferMultipleNativeTokensApiResponse : BeamPlayerClient.Client.ApiResponse, ITransferMultipleNativeTokensApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<TransferMultipleNativeTokensApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="TransferMultipleNativeTokensApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public TransferMultipleNativeTokensApiResponse(ILogger<TransferMultipleNativeTokensApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
             {
                 Logger = logger;
                 OnCreated(httpRequestMessage, httpResponseMessage);

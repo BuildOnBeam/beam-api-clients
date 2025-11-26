@@ -15,6 +15,7 @@ import type { GetUserCurrenciesResponse } from '../models/GetUserCurrenciesRespo
 import type { GetUserNativeCurrencyResponse } from '../models/GetUserNativeCurrencyResponse';
 import type { PlayerOperationResponse } from '../models/PlayerOperationResponse';
 import type { TransferAssetRequestInput } from '../models/TransferAssetRequestInput';
+import type { TransferMultipleNativeTokensRequestInput } from '../models/TransferMultipleNativeTokensRequestInput';
 import type { TransferNativeTokenRequestInput } from '../models/TransferNativeTokenRequestInput';
 import type { TransferTokenRequestInput } from '../models/TransferTokenRequestInput';
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -142,6 +143,27 @@ export class AssetsService {
     return this.httpRequest.request({
       method: 'POST',
       url: '/v1/player/assets/users/{entityId}/transfer-native',
+      path: {
+        entityId: entityId,
+      },
+      body: requestBody,
+      mediaType: 'application/json',
+    });
+  }
+  /**
+   * Transfer the native token to multiple recipients
+   * @param entityId
+   * @param requestBody
+   * @returns PlayerOperationResponse
+   * @throws ApiError
+   */
+  public transferMultipleNativeTokens(
+    entityId: string,
+    requestBody: TransferMultipleNativeTokensRequestInput,
+  ): CancelablePromise<PlayerOperationResponse> {
+    return this.httpRequest.request({
+      method: 'POST',
+      url: '/v1/player/assets/users/{entityId}/transfer-multiple-native',
       path: {
         entityId: entityId,
       },

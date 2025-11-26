@@ -7873,6 +7873,10 @@
                     "id": {
                       "type": "string",
                       "nullable": true
+                    },
+                    "quantity": {
+                      "type": "number",
+                      "nullable": true
                     }
                   }
                 },

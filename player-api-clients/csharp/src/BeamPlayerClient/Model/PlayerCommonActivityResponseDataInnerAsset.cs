@@ -32,10 +32,12 @@ namespace BeamPlayerClient.Model
         /// Initializes a new instance of the <see cref="PlayerCommonActivityResponseDataInnerAsset" /> class.
         /// </summary>
         /// <param name="id">id</param>
+        /// <param name="quantity">quantity</param>
         [JsonConstructor]
-        public PlayerCommonActivityResponseDataInnerAsset(Option<string> id = default)
+        public PlayerCommonActivityResponseDataInnerAsset(Option<string> id = default, Option<decimal?> quantity = default)
         {
             IdOption = id;
+            QuantityOption = quantity;
             OnCreated();
         }
 
@@ -55,6 +57,19 @@ namespace BeamPlayerClient.Model
         public string Id { get { return this.IdOption; } set { this.IdOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of Quantity
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<decimal?> QuantityOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Quantity
+        /// </summary>
+        [JsonPropertyName("quantity")]
+        public decimal? Quantity { get { return this.QuantityOption; } set { this.QuantityOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -63,6 +78,7 @@ namespace BeamPlayerClient.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class PlayerCommonActivityResponseDataInnerAsset {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
+            sb.Append("  Quantity: ").Append(Quantity).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -101,6 +117,7 @@ namespace BeamPlayerClient.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<string> id = default;
+            Option<decimal?> quantity = default;
 
             while (utf8JsonReader.Read())
             {
@@ -120,13 +137,17 @@ namespace BeamPlayerClient.Model
                         case "id":
                             id = new Option<string>(utf8JsonReader.GetString());
                             break;
+                        case "quantity":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                quantity = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                            break;
                         default:
                             break;
                     }
                 }
             }
 
-            return new PlayerCommonActivityResponseDataInnerAsset(id);
+            return new PlayerCommonActivityResponseDataInnerAsset(id, quantity);
         }
 
         /// <summary>
@@ -162,6 +183,19 @@ namespace BeamPlayerClient.Model
                 else
                 {
                     writer.WriteNull("id");
+                }
+
+            }
+
+            if (playerCommonActivityResponseDataInnerAsset.QuantityOption.IsSet)
+            {
+                if (playerCommonActivityResponseDataInnerAsset.QuantityOption.Value != null)
+                {
+                    writer.WriteNumber("quantity", playerCommonActivityResponseDataInnerAsset.QuantityOption.Value.Value);
+                }
+                else
+                {
+                    writer.WriteNull("quantity");
                 }
 
             }

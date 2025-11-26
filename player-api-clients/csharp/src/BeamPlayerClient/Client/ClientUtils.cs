@@ -243,10 +243,6 @@ namespace BeamPlayerClient.Client
                 return PlayerPlayerOperationResponse.ProcessingEnumToJsonValue(playerPlayerOperationResponseProcessingEnum);
             if (obj is PlayerPlayerOperationResponse.AuthProviderEnum playerPlayerOperationResponseAuthProviderEnum)
                 return PlayerPlayerOperationResponse.AuthProviderEnumToJsonValue(playerPlayerOperationResponseAuthProviderEnum);
-            if (obj is PlayerPlayerOperationResponseTransactionsInner.StatusEnum playerPlayerOperationResponseTransactionsInnerStatusEnum)
-                return PlayerPlayerOperationResponseTransactionsInner.StatusEnumToJsonValue(playerPlayerOperationResponseTransactionsInnerStatusEnum);
-            if (obj is PlayerPlayerOperationResponseTransactionsInner.TypeEnum playerPlayerOperationResponseTransactionsInnerTypeEnum)
-                return PlayerPlayerOperationResponseTransactionsInner.TypeEnumToJsonValue(playerPlayerOperationResponseTransactionsInnerTypeEnum);
             if (obj is PlayerRevokeSessionRequestInput.OperationProcessingEnum playerRevokeSessionRequestInputOperationProcessingEnum)
                 return PlayerRevokeSessionRequestInput.OperationProcessingEnumToJsonValue(playerRevokeSessionRequestInputOperationProcessingEnum);
             if (obj is PlayerRevokeSessionRequestInput.AuthProviderEnum playerRevokeSessionRequestInputAuthProviderEnum)
@@ -263,6 +259,10 @@ namespace BeamPlayerClient.Client
                 return PlayerTransferAssetRequestInput.OperationProcessingEnumToJsonValue(playerTransferAssetRequestInputOperationProcessingEnum);
             if (obj is PlayerTransferAssetRequestInput.AuthProviderEnum playerTransferAssetRequestInputAuthProviderEnum)
                 return PlayerTransferAssetRequestInput.AuthProviderEnumToJsonValue(playerTransferAssetRequestInputAuthProviderEnum);
+            if (obj is PlayerTransferMultipleNativeTokensRequestInput.OperationProcessingEnum playerTransferMultipleNativeTokensRequestInputOperationProcessingEnum)
+                return PlayerTransferMultipleNativeTokensRequestInput.OperationProcessingEnumToJsonValue(playerTransferMultipleNativeTokensRequestInputOperationProcessingEnum);
+            if (obj is PlayerTransferMultipleNativeTokensRequestInput.AuthProviderEnum playerTransferMultipleNativeTokensRequestInputAuthProviderEnum)
+                return PlayerTransferMultipleNativeTokensRequestInput.AuthProviderEnumToJsonValue(playerTransferMultipleNativeTokensRequestInputAuthProviderEnum);
             if (obj is PlayerTransferNativeTokenRequestInput.OperationProcessingEnum playerTransferNativeTokenRequestInputOperationProcessingEnum)
                 return PlayerTransferNativeTokenRequestInput.OperationProcessingEnumToJsonValue(playerTransferNativeTokenRequestInputOperationProcessingEnum);
             if (obj is PlayerTransferNativeTokenRequestInput.AuthProviderEnum playerTransferNativeTokenRequestInputAuthProviderEnum)

@@ -50,28 +50,12 @@ export type PlayerOperationResponse = {
       hash: string | null;
     } | null;
   }>;
+  url: string;
   /**
+   * Legacy transactions property. Please deprecate the usage and move to the OperationResponse.Actions[] array instead.
    * @deprecated
    */
-  transactions: Array<{
-    status: 'Pending' | 'Signed' | 'Rejected' | 'Executed' | 'Error';
-    id: string;
-    openfortId: string | null;
-    sponsored: boolean;
-    actionId: string | null;
-    hash?: string | null;
-    type:
-      | 'OpenfortTransaction'
-      | 'OpenfortReservoirOrder'
-      | 'OpenfortRevokeSession'
-      | null;
-    externalId: string | null;
-    signature: string | null;
-    transactionHash: string | null;
-    operationId: string | null;
-    data?: any;
-  }>;
-  url: string;
+  transactions: Array<any>;
 };
 export namespace PlayerOperationResponse {
   export enum status {

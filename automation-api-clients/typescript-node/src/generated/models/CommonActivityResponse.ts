@@ -16,6 +16,7 @@ export type CommonActivityResponse = {
     };
     asset: {
       id?: string | null;
+      quantity?: number | null;
     };
     order?: {
       id?: string | null;

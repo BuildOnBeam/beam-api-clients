@@ -55,6 +55,7 @@ export * from './RefreshTokenRequestBody';
 export * from './RevokeSessionRequestInput';
 export * from './SellAssetRequestInput';
 export * from './TransferAssetRequestInput';
+export * from './TransferMultipleNativeTokensRequestInput';
 export * from './TransferNativeTokenRequestInput';
 export * from './TransferTokenRequestInput';
 export * from './UnwrappingTokenInput';

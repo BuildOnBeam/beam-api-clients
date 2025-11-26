@@ -33,11 +33,13 @@ namespace BeamPlayerClient.Model
         /// </summary>
         /// <param name="entityId">entityId</param>
         /// <param name="authProvider">Auth Provider for the user to use. If it&#39;s Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI. (default to AuthProviderEnum.Any)</param>
+        /// <param name="chainId">chainId (default to 13337)</param>
         [JsonConstructor]
-        public PlayerCreateConnectionRequestInput(Option<string> entityId = default, Option<AuthProviderEnum?> authProvider = default)
+        public PlayerCreateConnectionRequestInput(Option<string> entityId = default, Option<AuthProviderEnum?> authProvider = default, Option<long?> chainId = default)
         {
             EntityIdOption = entityId;
             AuthProviderOption = authProvider;
+            ChainIdOption = chainId;
             OnCreated();
         }
 
@@ -282,6 +284,19 @@ namespace BeamPlayerClient.Model
         public string EntityId { get { return this.EntityIdOption; } set { this.EntityIdOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of ChainId
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<long?> ChainIdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ChainId
+        /// </summary>
+        [JsonPropertyName("chainId")]
+        public long? ChainId { get { return this.ChainIdOption; } set { this.ChainIdOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -291,6 +306,7 @@ namespace BeamPlayerClient.Model
             sb.Append("class PlayerCreateConnectionRequestInput {\n");
             sb.Append("  EntityId: ").Append(EntityId).Append("\n");
             sb.Append("  AuthProvider: ").Append(AuthProvider).Append("\n");
+            sb.Append("  ChainId: ").Append(ChainId).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -342,6 +358,7 @@ namespace BeamPlayerClient.Model
 
             Option<string> entityId = default;
             Option<PlayerCreateConnectionRequestInput.AuthProviderEnum?> authProvider = default;
+            Option<long?> chainId = default;
 
             while (utf8JsonReader.Read())
             {
@@ -366,13 +383,20 @@ namespace BeamPlayerClient.Model
                             if (authProviderRawValue != null)
                                 authProvider = new Option<PlayerCreateConnectionRequestInput.AuthProviderEnum?>(PlayerCreateConnectionRequestInput.AuthProviderEnumFromStringOrDefault(authProviderRawValue));
                             break;
+                        case "chainId":
+                            if (utf8JsonReader.TokenType != JsonTokenType.Null)
+                                chainId = new Option<long?>(utf8JsonReader.GetInt64());
+                            break;
                         default:
                             break;
                     }
                 }
             }
 
-            return new PlayerCreateConnectionRequestInput(entityId, authProvider);
+            if (chainId.IsSet && chainId.Value == null)
+                throw new ArgumentNullException(nameof(chainId), "Property is not nullable for class PlayerCreateConnectionRequestInput.");
+
+            return new PlayerCreateConnectionRequestInput(entityId, authProvider, chainId);
         }
 
         /// <summary>
@@ -417,6 +441,11 @@ namespace BeamPlayerClient.Model
                 writer.WriteString("authProvider", authProviderRawValue);
             else
                 writer.WriteNull("authProvider");
+
+            if (playerCreateConnectionRequestInput.ChainIdOption.IsSet)
+            {
+                writer.WriteNumber("chainId", playerCreateConnectionRequestInput.ChainIdOption.Value.Value);
+            }
         }
     }
 }

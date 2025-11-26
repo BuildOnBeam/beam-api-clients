@@ -4,10 +4,6 @@
 /* eslint-disable */
 export type ConfirmOperationRequest = {
   status: ConfirmOperationRequest.status;
-  transactions?: Array<{
-    id: string;
-    signature: string;
-  }> | null;
   actions?: Array<{
     id: string;
     signature: string;

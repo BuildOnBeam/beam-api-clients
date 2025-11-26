@@ -9,7 +9,7 @@ export type GetOnRampQuoteResponse = {
       fiatAmount: string;
     };
     output: {
-      tokenAdress: string;
+      tokenSymbol: string;
       tokenAmount: string;
     };
   };

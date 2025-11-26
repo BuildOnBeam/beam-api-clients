@@ -8,6 +8,7 @@ export type CreateConnectionRequestInput = {
    * Auth Provider for the user to use. If it's Any, user will be able to choose his preferred login method. Useful when you want to present social login choice in your UI.
    */
   authProvider?: CreateConnectionRequestInput.authProvider | null;
+  chainId?: number;
 };
 export namespace CreateConnectionRequestInput {
   /**
